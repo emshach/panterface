@@ -25,7 +25,7 @@ SECRET_KEY = 'dqp%l_+ot3wz-l=jhh*iy-0@sdr5$9ziuiz!$e+u0!e@b&1@za'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [ 'app.sandbox0.com' ]
 
 
 # Application definition

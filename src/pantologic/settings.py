@@ -30,6 +30,7 @@ ALLOWED_HOSTS = [ 'app.sandbox0.com' ]
 # Application definition
 
 INSTALLED_APPS = [
+    'aries',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -116,7 +117,6 @@ INSTALLED_APPS = [
     # # 'allauth.socialaccount.providers.weixin',
     # 'allauth.socialaccount.providers.windowslive',
     # # 'allauth.socialaccount.providers.xing',
-    'aries',
     'intrepid',
 ]
 

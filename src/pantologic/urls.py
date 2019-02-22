@@ -19,5 +19,6 @@ from django.contrib import admin
 urlpatterns = [
     url( r'^intrepid/', include( 'intrepid.urls' )),
     url( r'^api-auth/', include( 'rest_framework.urls' )),
-    url( r'^admin/', admin.site.urls ),
+    # url( r'^accounts/', include( 'allauth.urls' )),
+    url( r'^admin/',    admin.site.urls ),
 ]

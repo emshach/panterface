@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django_filters',
     'crispy_forms',
-    'guardian',
+    # 'guardian',
     'rest_framework',
     # 'allauth',
     # 'allauth.social',
@@ -187,7 +187,7 @@ AUTH_PASSWORD_VALIDATORS = [
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend', # default
     # 'allauth.account.auth_backends.AuthenticationBackend',
-    'guardian.backends.ObjectPermissionBackend',
+    # 'guardian.backends.ObjectPermissionBackend',
 ]
 
 

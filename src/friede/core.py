@@ -24,7 +24,7 @@ def setupshell( env=None ):
     "make (and select) the default shell"
     if not env:
         env = getenv()
-    shell = Shell.create(
+    shell = Shell.objects.create(
         name='shells.mayflower',
         templates='friede/mayflower'
     )
@@ -35,7 +35,7 @@ def setuptheme( shell=None ):
     "make (and select) the default theme for the current shell"
     if not shell:
         shell = Shells().mayflower.get()
-    theme = Theme.create(
+    theme = Theme.objects.create(
         name='themes.acamar',
         templates='friede/mayflower/acamar'
     )

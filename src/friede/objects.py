@@ -52,20 +52,21 @@ class Selector( object ):
             return self
         new = []
         for item in self.root:
-            if isinstance( item, Registry ) and item._container:
+            if type( item ) is Registry and item._container:
                 item = item._container
-            if isinstance( item, Container ):
-                "then try get entries with this name"
-                try:
-                    node = item._container_entries.get( name=attr )
-                    new.append( node )
-                except ObjectDoesNotExist:
-                    pass
-                try:
-                    node = getattr( item, self.entries ).get( name=attr)
-                    new.append( node )
-                except ObjectDoesNotExist:
-                    pass
+            if not isinstance( item, Container ):
+                continue
+            "then try get entries with this name"
+            try:
+                node = item._container_entries.get( name=attr )
+                new.append( node )
+            except ObjectDoesNotExist:
+                pass
+            try:
+                node = getattr( item, self.entries ).get( name=attr)
+                new.append( node )
+            except ObjectDoesNotExist:
+                pass
         return Selector( new, type=self.type, field=self.field, entries=self.entries )
 
     def __call__( self, *args ):

@@ -20,7 +20,7 @@ class Selector( object ):
         elif hasattr( self.type, '_name' ):
             self.field = self.type._name
         else:
-            self.field = "_%s" % _snake( self.type.__name__ )
+            self.field = "_%s" % _snake_case( self.type.__name__ )
         if entries:
             self.entries = entries
         else:

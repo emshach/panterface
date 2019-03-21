@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 from .models import ( Registry, Container, Widget, Block, Screen, Shell,
                       Theme, Slot, App, Location, Link, Reference, Setting )
-
+from django.core.exceptions import ObjectDoesNotExist
 
 class Selector( object ):
     def __init__( self, root, type=Container, field=None, entries=None ):
@@ -54,12 +54,12 @@ class Selector( object ):
                 try:
                     node = item._container_entries.get( name=attr )
                     new.append( node )
-                except ContainerEntry.DoesNotExist:
+                except ObjectDoesNotExist:
                     pass
                 try:
                     node = getattr( item, self.entries ).get( name=attr)
                     new.append( node )
-                except ContainerEntry.DoesNotExist:
+                except ObjectDoesNotExist:
                     pass
         return Selector( new, type=self.type, field=self.field, entries=self.entries )
 

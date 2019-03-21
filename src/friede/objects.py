@@ -3,6 +3,11 @@ from __future__ import unicode_literals
 from .models import ( Registry, Container, Widget, Block, Screen, Shell,
                       Theme, Slot, App, Location, Link, Reference, Setting )
 from django.core.exceptions import ObjectDoesNotExist
+import re
+
+def _snake_case( str ):
+    return re.sub(r'(((?<=[a-z])[A-Z])|([A-Z](?![A-Z]|$)))', r'_\1', str )\
+             .lower().strip('_')
 
 class Selector( object ):
     def __init__( self, root, type=Container, field=None, entries=None ):
@@ -15,7 +20,7 @@ class Selector( object ):
         elif hasattr( self.type, '_name' ):
             self.field = self.type._name
         else:
-            self.field = "_%s" % self.type.__name__
+            self.field = "_%s" % _snake( self.type.__name__ )
         if entries:
             self.entries = entries
         else:

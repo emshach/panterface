@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     # 'guardian',
     'rest_framework',
+    'friede',
     # 'allauth',
     # 'allauth.social',
     # # 'allauth.socialaccount.providers.agave',

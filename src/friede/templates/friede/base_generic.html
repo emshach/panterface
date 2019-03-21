@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html{{ attrs.top }}>
+  <head>
+    <title>{{ page_title_full }}</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <!-- Add additional CSS in static file -->
+    {% block head %}{% endblock %}
+  </head>
+  <body{{ attrs.body }}>
+    {% block header %}{% endblock %}
+    {% block page_title %}<h1{{ attrs.page_title }}>{{ page_title }}</h1>
+    {% endblock %}
+    {% block body %}{% endblock %}
+    {% block footer %}{% endblock %}
+  </body>
+</html>

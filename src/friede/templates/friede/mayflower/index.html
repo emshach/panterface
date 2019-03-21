@@ -1,0 +1,12 @@
+{% extend "friede/base_generic" %}
+{% block head %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'friede/css/mayflower/styles.css' %}"/>
+    {% block styles %}{% endblock %}
+    <script type="text/javascript" src="{% static 'friede/js/mayflower/scripts.js' %}"/>
+    {% block scripts %}{% endblock %}
+    <script type="text/javascript" src="{% static 'friede/js/mayflower/main.js' %}"/>
+{% endblock %}
+{% block body %}
+    <div id="app"/>
+{% endblock %}

@@ -300,62 +300,67 @@ class Setting( Base ):
     data     = JSONField( default=dict )
 
 
-class ContainerEntry( Base ):
+class Entry( Base ):
+    class Meta:
+        unique_together = ( 'registry', 'name' )
+        abstract = True
+
+class ContainerEntry( Entry ):
     registry = M.ForeignKey( Registry, M.CASCADE, related_name='_container_entries' )
     container = M.ForeignKey( Container, M.CASCADE, related_name='_entries' )
 
 
-class WidgetEntry( Base ):
+class WidgetEntry( Entry ):
     registry = M.ForeignKey( Registry, M.CASCADE, related_name='_widget_entries' )
     widget = M.ForeignKey( Widget, M.CASCADE, related_name='_entries' )
 
 
-class BlockEntry( Base ):
+class BlockEntry( Entry ):
     registry = M.ForeignKey( Registry, M.CASCADE, related_name='_block_entries' )
     block = M.ForeignKey( Block, M.CASCADE, related_name='_entries' )
 
 
-class ScreenEntry( Base ):
+class ScreenEntry( Entry ):
     registry = M.ForeignKey( Registry, M.CASCADE, related_name='_screen_entries' )
     screen = M.ForeignKey( Screen, M.CASCADE, related_name='_entries' )
 
 
-class ShellEntry( Base ):
+class ShellEntry( Entry ):
     registry = M.ForeignKey( Registry, M.CASCADE, related_name='_shell_entries' )
     shell = M.ForeignKey( Shell, M.CASCADE, related_name='_entries' )
 
 
-class ThemeEntry( Base ):
+class ThemeEntry( Entry ):
     registry = M.ForeignKey( Registry, M.CASCADE, related_name='_theme_entries' )
     theme = M.ForeignKey( Theme, M.CASCADE, related_name='_entries' )
 
 
-class SlotEntry( Base ):
+class SlotEntry( Entry ):
     registry = M.ForeignKey( Registry, M.CASCADE, related_name='_slot_entries' )
     slot = M.ForeignKey( Slot, M.CASCADE, related_name='_entries' )
 
 
-class AppEntry( Base ):
+class AppEntry( Entry ):
     registry = M.ForeignKey( Registry, M.CASCADE, related_name='_app_entries' )
     app = M.ForeignKey( App, M.CASCADE, related_name='_entries' )
 
 
-class LocationEntry( Base ):
+class LocationEntry( Entry ):
     registry = M.ForeignKey( Registry, M.CASCADE, related_name='_location_entries' )
     location = M.ForeignKey( Location, M.CASCADE, related_name='_entries' )
 
 
-class LinkEntry( Base ):
+class LinkEntry( Entry ):
     registry = M.ForeignKey( Registry, M.CASCADE, related_name='_link_entries' )
     link = M.ForeignKey( Link, M.CASCADE, related_name='_entries' )
 
 
-class ReferenceEntry( Base ):
+class ReferenceEntry( Entry ):
     registry = M.ForeignKey( Registry, M.CASCADE, related_name='_reference_entries' )
     reference = M.ForeignKey( Reference, M.CASCADE, related_name='_entries' )
 
 
-class SettingEntry( Base ):
+class SettingEntry( Entry ):
     registry = M.ForeignKey( Registry, M.CASCADE, related_name='_setting_entries' )
     setting = M.ForeignKey( Setting, M.CASCADE, related_name='_entries' )
 

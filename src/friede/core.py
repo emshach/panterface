@@ -30,6 +30,7 @@ def setupshell( env=None ):
     )
     env.addshell( 'current', shell )
     setuptheme( shell )
+    return shell
 
 def setuptheme( shell=None ):
     "make (and select) the default theme for the current shell"
@@ -40,3 +41,4 @@ def setuptheme( shell=None ):
         templates='friede/mayflower/acamar'
     )
     shell.addtheme( 'current', theme )
+    return theme

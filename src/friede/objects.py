@@ -51,12 +51,16 @@ class Selector( object ):
                 item = item._container
             if isinstance( item, Container ):
                 "then try get entries with this name"
-                node = item._container_entries.get( name=attr )
-                if node is not None:
+                try:
+                    node = item._container_entries.get( name=attr )
                     new.append( node )
-                node = getattr( item, self.entries ).get( name=attr)
-                if node is not None:
+                except ContainerEntry.DoesNotExist:
+                    pass
+                try:
+                    node = getattr( item, self.entries ).get( name=attr)
                     new.append( node )
+                except ContainerEntry.DoesNotExist:
+                    pass
         return Selector( new, type=self.type, field=self.field, entries=self.entries )
 
     def __call__( self, *args ):

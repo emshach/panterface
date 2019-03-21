@@ -105,41 +105,41 @@ class Registry( Base ):
     R = Reference
     X = Setting
 
-    def addcontainer( name, container ):
-        ContainerEntry.create( registry=self, name=name, container=container )
+    def addcontainer( self, name, container ):
+        ContainerEntry.objects.create( registry=self, name=name, container=container )
 
-    def addwidget( name, widget ):
-        WidgetEntry.create( registry=self, name=name, widget=widget )
+    def addwidget( self, name, widget ):
+        WidgetEntry.objects.create( registry=self, name=name, widget=widget )
 
-    def addblock( name, block ):
-        BlockEntry.create( registry=self, name=name, block=block )
+    def addblock( self, name, block ):
+        BlockEntry.objects.create( registry=self, name=name, block=block )
 
-    def addscreen( name, screen ):
-        ScreenEntry.create( registry=self, name=name, screen=screen )
+    def addscreen( self, name, screen ):
+        ScreenEntry.objects.create( registry=self, name=name, screen=screen )
 
-    def addshell( name, shell ):
-        ShellEntry.create( registry=self, name=name, shell=shell )
+    def addshell( self, name, shell ):
+        ShellEntry.objects.create( registry=self, name=name, shell=shell )
 
-    def addtheme( name, theme ):
-        ThemeEntry.create( registry=self, name=name, theme=theme )
+    def addtheme( self, name, theme ):
+        ThemeEntry.objects.create( registry=self, name=name, theme=theme )
 
-    def addslot( name, slot ):
-        SlotEntry.create( registry=self, name=name, slot=slot )
+    def addslot( self, name, slot ):
+        SlotEntry.objects.create( registry=self, name=name, slot=slot )
 
-    def addapp( name, app ):
-        AppEntry.create( registry=self, name=name, app=app )
+    def addapp( self, name, app ):
+        AppEntry.objects.create( registry=self, name=name, app=app )
 
-    def addlocation( name, location ):
-        LocationEntry.create( registry=self, name=name, location=location )
+    def addlocation( self, name, location ):
+        LocationEntry.objects.create( registry=self, name=name, location=location )
 
-    def addlink( name, link ):
-        LinkEntry.create( registry=self, name=name, link=link )
+    def addlink( self, name, link ):
+        LinkEntry.objects.create( registry=self, name=name, link=link )
 
-    def addreference( name, reference ):
-        ReferenceEntry.create( registry=self, name=name, reference=reference )
+    def addreference( self, name, reference ):
+        ReferenceEntry.objects.create( registry=self, name=name, reference=reference )
 
-    def addsetting( name, setting ):
-        SettingEntry.create( registry=self, name=name, setting=setting )
+    def addsetting( self, name, setting ):
+        SettingEntry.objects.create( registry=self, name=name, setting=setting )
 
 
 class Container( Registry ):

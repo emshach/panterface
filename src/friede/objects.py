@@ -51,7 +51,7 @@ class Selector( object ):
                 item = item._container
             if isinstance( item, Container ):
                 "then try get entries with this name"
-                node = item.container_entries.get( name=attr )
+                node = item._container_entries.get( name=attr )
                 if node is not None:
                     new.append( node )
                 node = getattr( item, self.entries ).get( name=attr)

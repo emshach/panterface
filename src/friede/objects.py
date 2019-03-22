@@ -54,12 +54,12 @@ class Selector( object ):
                 continue
             "then try get entries with this name"
             try:
-                node = item._container_entries.get( name=attr )
+                node = item._container_entries.get( name=attr ).entry
                 new.append( node )
             except ObjectDoesNotExist:
                 pass
             try:
-                node = getattr( item, self.entries ).get( name=attr)
+                node = getattr( item, self.entries ).get( name=attr).entry
                 new.append( node )
             except ObjectDoesNotExist:
                 pass

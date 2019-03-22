@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 from .objects import Settings, Shells, getenv, getregistries, getshell
 from .models import Setting, Shell, Theme, ShellEntry, ThemeEntry
+from django.core.exceptions import ObjectDoesNotExist
 
 def setup():
     "make new settings"
@@ -36,9 +37,13 @@ def setuptheme( shell=None ):
     "make (and select) the default theme for the current shell"
     if not shell:
         shell = Shells().mayflower.get()
-    theme = Theme.objects.create(
-        name='themes.acamar',
-        templates='friede/mayflower/acamar'
-    )
+    theme = None
+    try:
+        theme = Theme.objects.get( path='themes.acamar' )
+    except ObjectDoesNotExist:
+        theme = Theme.objects.create(
+            name='themes.acamar',
+            templates='friede/mayflower/acamar'
+        )
     shell.addtheme( 'current', theme )
     return theme

@@ -50,7 +50,7 @@ class Selector( object ):
         for item in self.root:
             if type( item ) is Registry and item._container:
                 item = item._container
-            if not isinstance( item, Container ):
+            if not isinstance( item, Registry ): # TODO: fingers crossed
                 continue
             "then try get entries with this name"
             try:

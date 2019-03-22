@@ -25,10 +25,14 @@ def setupshell( env=None ):
     "make (and select) the default shell"
     if not env:
         env = getenv()
-    shell = Shell.objects.create(
-        path='shells.mayflower',
-        templates='friede/mayflower'
-    )
+    shell = None
+    try:
+        shell = Shell.objects.get( path='shells.mayflower' )
+    except:
+        shell = Shell.objects.create(
+            path='shells.mayflower',
+            templates='friede/mayflower'
+        )
     env.addshell( 'current', shell )
     setuptheme( shell )
     return shell

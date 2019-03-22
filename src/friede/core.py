@@ -25,7 +25,7 @@ def setupshell( env=None ):
     if not env:
         env = getenv()
     shell = Shell.objects.create(
-        name='shells.mayflower',
+        path='shells.mayflower',
         templates='friede/mayflower'
     )
     env.addshell( 'current', shell )

@@ -43,6 +43,8 @@ export default {
     .cli {
       background: black;
       font-family: monospace;
+      padding: 4px;
+      height: auto;
     }
   }
 </style>

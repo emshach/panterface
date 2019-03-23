@@ -92,7 +92,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "9bd45a54cefd3c79bab7";
+/******/ 	var hotCurrentHash = "6b54ff734af3be2f1934";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -4077,7 +4077,7 @@ exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader
 
 
 // module
-exports.push([module.i, ".prompt[data-v-28ecad94] {\n  width: 100%;\n}\n.prompt .cli[data-v-28ecad94] {\n    background: black;\n    font-family: monospace;\n}\n", "", {"version":3,"sources":["/home/rain/projects/web/pantologic/src/friede/src/js/mayflower-vue/src/components/Prompt.vue"],"names":[],"mappings":"AAwCA;EACE,YAAW;CAAA;AADb;IAGI,kBAAiB;IACjB,uBAAsB;CAAA","file":"Prompt.vue?vue&type=style&index=0&id=28ecad94&scoped=true&lang=scss&","sourcesContent":["\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n.prompt {\n  width: 100%;\n  .cli {\n    background: black;\n    font-family: monospace;\n  }\n}\n"],"sourceRoot":""}]);
+exports.push([module.i, ".prompt[data-v-28ecad94] {\n  width: 100%;\n}\n.prompt .cli[data-v-28ecad94] {\n    background: black;\n    font-family: monospace;\n    padding: 4px;\n    height: auto;\n}\n", "", {"version":3,"sources":["/home/rain/projects/web/pantologic/src/friede/src/js/mayflower-vue/src/components/Prompt.vue"],"names":[],"mappings":"AAwCA;EACE,YAAW;CAAA;AADb;IAGI,kBAAiB;IACjB,uBAAsB;IACtB,aAAY;IACZ,aAAY;CAAA","file":"Prompt.vue?vue&type=style&index=0&id=28ecad94&scoped=true&lang=scss&","sourcesContent":["\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n.prompt {\n  width: 100%;\n  .cli {\n    background: black;\n    font-family: monospace;\n    padding: 4px;\n    height: auto;\n  }\n}\n"],"sourceRoot":""}]);
 
 // exports
 

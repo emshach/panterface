@@ -92,7 +92,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "7f0a40d995adc94bea37";
+/******/ 	var hotCurrentHash = "c9b122bb1c5251f6a39b";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -4080,7 +4080,7 @@ exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader
 
 
 // module
-exports.push([module.i, ".mf-prompt {\n  width: 100%;\n}\n.mf-prompt .breadcrumb {\n    margin: 0;\n    padding: 4px;\n    font-weigt: bold;\n    color: white;\n    text-shadow: 0 0 1px black;\n}\n.mf-prompt .breadcrumb a {\n      color: white;\n}\n.mf-prompt .cli {\n    background: black;\n    font-family: monospace;\n    padding: 4px;\n    height: auto;\n}\n", "", {"version":3,"sources":["/home/rain/projects/web/pantologic/src/friede/src/js/mayflower-vue/src/components/Prompt.vue"],"names":[],"mappings":"AAwCA;EACE,YAAW;CAAA;AADb;IAGI,UAAS;IACT,aAAY;IACZ,iBAAgB;IAChB,aAAY;IACZ,2BAA0B;CAAA;AAP9B;MASM,aAAY;CAAA;AATlB;IAaI,kBAAiB;IACjB,uBAAsB;IACtB,aAAY;IACZ,aAAY;CAAA","file":"Prompt.vue?vue&type=style&index=0&lang=scss&","sourcesContent":["\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n.mf-prompt {\n  width: 100%;\n  .breadcrumb {\n    margin: 0;\n    padding: 4px;\n    font-weigt: bold;\n    color: white;\n    text-shadow: 0 0 1px black;\n    a {\n      color: white;\n    }\n  }\n  .cli {\n    background: black;\n    font-family: monospace;\n    padding: 4px;\n    height: auto;\n  }\n}\n"],"sourceRoot":""}]);
+exports.push([module.i, ".mf-prompt {\n  width: 100%;\n}\n.mf-prompt .breadcrumb {\n    margin: 0;\n    padding: 4px;\n    font-weigt: bold;\n    color: white;\n    text-shadow: 0 0 1px black;\n}\n.mf-prompt .breadcrumb a {\n      color: white;\n}\n.mf-prompt .cli {\n    background: black;\n    font-family: monospace;\n    padding: 4px;\n    height: auto;\n    border: 1px solid skyblue;\n    border-bottom-width: 0;\n    border-right-width: 0;\n    border-top-left-radius: 4px;\n    -webkit-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.25);\n            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.25);\n}\n.mf-prompt .cli:focus {\n      background: rgba(0, 0, 0, 0.8);\n}\n", "", {"version":3,"sources":["/home/rain/projects/web/pantologic/src/friede/src/js/mayflower-vue/src/components/Prompt.vue"],"names":[],"mappings":"AAsCA;EACE,YAAW;CAAA;AADb;IAGI,UAAS;IACT,aAAY;IACZ,iBAAgB;IAChB,aAAY;IACZ,2BAA0B;CAAA;AAP9B;MASM,aAAY;CAAA;AATlB;IAaI,kBAAiB;IACjB,uBAAsB;IACtB,aAAY;IACZ,aAAY;IACZ,0BAAyB;IACzB,uBAAsB;IACtB,sBAAqB;IACrB,4BAA2B;IAC3B,wDAA4C;YAA5C,gDAA4C;CAAA;AArBhD;MAuBM,+BAA2B;CAAA","file":"Prompt.vue?vue&type=style&index=0&lang=scss&","sourcesContent":["\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n.mf-prompt {\n  width: 100%;\n  .breadcrumb {\n    margin: 0;\n    padding: 4px;\n    font-weigt: bold;\n    color: white;\n    text-shadow: 0 0 1px black;\n    a {\n      color: white;\n    }\n  }\n  .cli {\n    background: black;\n    font-family: monospace;\n    padding: 4px;\n    height: auto;\n    border: 1px solid skyblue;\n    border-bottom-width: 0;\n    border-right-width: 0;\n    border-top-left-radius: 4px;\n    box-shadow: inset 0 2px 4px rgba(0,0,0,0.25);\n    &:focus {\n      background: rgba(0,0,0,0.8);\n    }\n  }\n}\n"],"sourceRoot":""}]);
 
 // exports
 

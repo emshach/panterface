@@ -10,5 +10,9 @@ module.exports = {
     sourceMap: true
   },
 
-  lintOnSave: undefined
+  lintOnSave: undefined,
+
+  configureWebpack: {
+    devtool: 'source-map'
+  }
 }

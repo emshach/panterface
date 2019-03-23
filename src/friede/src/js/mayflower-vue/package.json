@@ -40,15 +40,20 @@
       "node": true
     },
     "extends": [
-      "plugin:vue/essential",
+      "plugin:vue/strongly-recommended",
       "@vue/standard"
     ],
-    "rules": {},
     "parserOptions": {
       "parser": "babel-eslint"
     },
     "globals": {
       "UIkit": true
+    },
+    "rules": {
+      "vue/max-attributes-per-line": "off",
+      "space-in-parens": "off",
+      "space-before-function-paren": "off",
+      "semi": "off"
     }
   },
   "postcss": {

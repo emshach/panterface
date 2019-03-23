@@ -1,14 +1,17 @@
 <template lang="html">
-<form id="prompt" @submit.prevent="submit" class="uk-flex uk-wrap-around">
-  <Breadcrumb/>
-  <input id="cli" name="cli" class="uk-input uk-flex-1" v-model="cli" @input="input" />
-</form>
+  <form id="prompt" @submit.prevent="submit" class="uk-flex uk-wrap-around">
+    <Breadcrumb />
+    <input id="cli" name="cli" class="uk-input uk-flex-1"
+           v-model="cli" @input="input" />
+  </form>
 </template>
 
 <script lang="js">
-export default  {
-  name: 'prompt',
+import Breadcrumb from '@/components/Breadcrumb.vue'
+export default {
+  name: 'Prompt',
   props: [],
+  components: { Breadcrumb },
   mounted() {
 
   },
@@ -25,7 +28,7 @@ export default  {
   },
   computed: {
 
-  },
+  }
 }
 </script>
 

@@ -5,14 +5,14 @@
       <router-link to="/about">About</router-link>
     </div>
     <router-view/>
-    <Prompt/>
+    <Prompt />
   </div>
 </template>
 
 <script lang="js">
 import Prompt from '@/components/Prompt.vue'
 export default {
-  name: 'app',
+  name: 'App',
   components: {
     Prompt
   }

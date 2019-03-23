@@ -1,21 +1,21 @@
 <template lang="html">
-<vk-breadcrumb>
-  <vk-breadcrumb-item
-    v-for="( item, index ) in breadcrumb"
-    :key="index"
-    :href="item.href"
-    :target="item.target"
-    :></vk-breadcrumb-item>
-</vk-breadcrumb>
+  <vk-breadcrumb>
+    <vk-breadcrumb-item
+      v-for="( item, index ) in breadcrumb"
+      :key="index"
+      :href="item.href"
+      :target="item.target" />
+  </vk-breadcrumb>
 </template>
 
 <script lang="js">
 import { Breadcrumb, BreadcrumbItem } from 'vuikit/lib/breadcrumb';
-export default  {
-  name: 'breadcrumb',
+export default {
+  name: 'Breadcrumb',
   props: [],
+  components: { Breadcrumb, BreadcrumbItem },
   mounted() {
-    
+
   },
   data() {
     return {

@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="dashboard">
-    <thing for="thing, index" bin="things" :key="index" :is="thing"></thing>
+    <thing v-for="( thing, index ) in things" :key="index" :is="thing"/>
   </div>
 </template>
 
@@ -9,30 +9,31 @@ export default {
   name: 'Dashboard',
   props: {
     src: {
-      type: String | Object,
+      type: [ String, Object ],
       default: ''
     },
     elements: {
       type: Array,
       default: () => []
     }
-  }
+  },
   data() {
     return {
       results: []
-    };
+    }
   },
   mounted() {
-    // TODO: 
+    // TODO: get dashboard elements
   },
   computed: {
-    things: {
-      if ( this.results and this.results.length )
+    things() {
+      if ( this.results && this.results.length ) {
         return this.results;
-      else if ( this.elements and this.elements.length )
+      } else if ( this.elements && this.elements.length ) {
         return this.elements;
-      else
+      } else {
         return []
+      }
     }
   }
 }
@@ -54,4 +55,3 @@ a {
   color: #42b983;
 }
 </style>
-

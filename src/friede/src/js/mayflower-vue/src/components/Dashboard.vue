@@ -9,7 +9,7 @@ export default {
   name: 'Dashboard',
   props: {
     src: {
-      type: String | Object
+      type: String | Object,
       default: ''
     },
     elements: {

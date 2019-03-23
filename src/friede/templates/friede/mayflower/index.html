@@ -5,8 +5,10 @@
     {% block styles %}{% endblock %}
     <script type="text/javascript" src="{% static 'friede/mayflower/js/init.js' %}"></script>
     {% block scripts %}{% endblock %}
-    <script type="text/javascript" src="{% static 'friede/mayflower/js/main.js' %}"></script>
 {% endblock %}
 {% block body %}
     <div id="app"/>
+{% endblock %}
+{% block footer %}
+    <script type="text/javascript" src="{% static 'friede/mayflower/js/main.js' %}"></script>
 {% endblock %}

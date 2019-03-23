@@ -37,7 +37,7 @@ router.register( r'users', UserViewSet )
 
 urlpatterns = [
     url( r'^intrepid/', include( 'intrepid.urls' )),
-    url( r'^api', include( router.urls )),
+    url( r'^api/', include( router.urls )),
     url( r'^api-auth/', include( 'rest_framework.urls', namespace='rest_framework' )),
     # url( r'^accounts/', include( 'allauth.urls' )),
     url( r'^admin/',    admin.site.urls ),

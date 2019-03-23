@@ -1,1 +1,0 @@
-../../../src/js/mayflower-vue/dist/app.js

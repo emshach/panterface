@@ -46,6 +46,9 @@ export default {
       font-weigt: bold;
       color: white;
       text-shadow: 0 0 1px black;
+      a {
+        color: white;
+      }
     }
     .cli {
       background: black;

@@ -49,15 +49,16 @@ export default {
       }
     }
     .cli {
-      background: black;
+      background: rgba(0,0,0,0.5);
       font-family: monospace;
-      padding: 4px;
+      padding: 4px 10px;
       height: auto;
       border: 1px solid skyblue;
       border-bottom-width: 0;
       border-right-width: 0;
       border-top-left-radius: 4px;
       box-shadow: inset 0 2px 4px rgba(0,0,0,0.25);
+      font-size: 14px;
       &:focus {
         background: rgba(0,0,0,0.8);
       }

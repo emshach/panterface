@@ -42,7 +42,7 @@ export default {
     font-weight: bold;
     color: #2c3e50;
     padding: 4px 8px;
-    text-shadow: 0 1 2px rgba(0,0,0,0.5);
+    text-shadow: 0 0 1px black;
     text-decoration: none !important;
     border-radius: 2px;
       text-shadow: 0 0 1px lightskyblue;

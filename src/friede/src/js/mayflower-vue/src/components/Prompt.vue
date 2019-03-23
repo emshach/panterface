@@ -1,7 +1,7 @@
 <template lang="html">
-  <form id="prompt" @submit.prevent="submit" class="uk-flex uk-wrap-around">
+  <form id="prompt" @submit.prevent="submit" class="prompt uk-flex uk-wrap-around">
     <Breadcrumb />
-    <input id="cli" name="cli" class="uk-input uk-flex-1"
+    <input name="cli" class="cli uk-input uk-flex-1"
            v-model="cli" @input="input" />
   </form>
 </template>
@@ -34,6 +34,9 @@ export default {
 
 <style scoped lang="scss">
   .prompt {
-
+    width: 100%;
+    .cli {
+      background: black;
+    }
   }
 </style>

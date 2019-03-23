@@ -13,3 +13,11 @@
 
 // 4. Import UIkit.
 @import "~uikit/src/scss/uikit.scss";
+html {
+  background: cornflowerblue;
+}
+#prompt {
+  position: fixed;
+  bottom: 0;
+  background: transparent;
+}

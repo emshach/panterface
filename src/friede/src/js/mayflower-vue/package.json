@@ -53,7 +53,9 @@
       "vue/max-attributes-per-line": "off",
       "space-in-parens": "off",
       "space-before-function-paren": "off",
-      "semi": "off"
+      "semi": "off",
+      "vue/html-closing-bracket-newline": "off",
+      "vue/singleline-html-element-content-newline": "off"
     }
   },
   "postcss": {

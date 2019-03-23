@@ -1,10 +1,10 @@
 <template lang="html">
   <vk-breadcrumb>
     <vk-breadcrumb-item
-      v-for="( item, index ) in breadcrumb"
+      v-for="( item, index ) in items"
       :key="index"
       :href="item.href"
-      :target="item.target" />
+      :target="item.target">{{ item.title }}</vk-breadcrumb-item>
   </vk-breadcrumb>
 </template>
 
@@ -13,7 +13,7 @@ import { Breadcrumb, BreadcrumbItem } from 'vuikit/lib/breadcrumb';
 export default {
   name: 'Breadcrumb',
   props: {
-    breadcrumb: {
+    items: {
       type: Array,
       default: () => []
     }

@@ -1,6 +1,6 @@
 <template lang="html">
   <form id="prompt" @submit.prevent="submit" class="prompt uk-flex uk-wrap-around">
-    <Breadcrumb />
+    <Breadcrumb :items="breadcrumb" />
     <input name="cli" class="cli uk-input uk-flex-1"
            v-model="cli" @input="input" />
   </form>
@@ -10,7 +10,12 @@
 import Breadcrumb from '@/components/Breadcrumb.vue'
 export default {
   name: 'Prompt',
-  props: [],
+  props: {
+    breadcrumb: {
+      type: Array,
+      default: () => []
+    }
+  },
   components: { Breadcrumb },
   mounted() {
 
@@ -37,6 +42,7 @@ export default {
     width: 100%;
     .cli {
       background: black;
+      font-family: monospace;
     }
   }
 </style>

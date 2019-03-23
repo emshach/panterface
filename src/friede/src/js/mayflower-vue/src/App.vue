@@ -4,8 +4,8 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
     </div>
-    <router-view/>
-    <Prompt />
+    <router-view />
+    <Prompt :breadcrumb="breadcrumb" />
   </div>
 </template>
 
@@ -15,6 +15,11 @@ export default {
   name: 'App',
   components: {
     Prompt
+  },
+  data() {
+    return {
+      breadcrumb: [{ href: '/', title: 'Home' }]
+    };
   }
 }
 </script>

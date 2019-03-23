@@ -92,7 +92,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "21b5cd0632ca3cfed5b0";
+/******/ 	var hotCurrentHash = "9bd45a54cefd3c79bab7";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -930,6 +930,14 @@ __webpack_require__.r(__webpack_exports__);
   name: 'App',
   components: {
     Prompt: _components_Prompt_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  data: function data() {
+    return {
+      breadcrumb: [{
+        href: '/',
+        title: 'Home'
+      }]
+    };
   }
 });
 
@@ -949,7 +957,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Breadcrumb',
   props: {
-    breadcrumb: {
+    items: {
       type: Array,
       default: function _default() {
         return [];
@@ -1028,7 +1036,14 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Prompt',
-  props: [],
+  props: {
+    breadcrumb: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
+    }
+  },
   components: {
     Breadcrumb: _components_Breadcrumb_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
@@ -1097,7 +1112,7 @@ var render = function() {
         1
       ),
       _c("router-view"),
-      _c("Prompt")
+      _c("Prompt", { attrs: { breadcrumb: _vm.breadcrumb } })
     ],
     1
   )
@@ -1126,11 +1141,12 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "vk-breadcrumb",
-    _vm._l(_vm.breadcrumb, function(item, index) {
-      return _c("vk-breadcrumb-item", {
-        key: index,
-        attrs: { href: item.href, target: item.target }
-      })
+    _vm._l(_vm.items, function(item, index) {
+      return _c(
+        "vk-breadcrumb-item",
+        { key: index, attrs: { href: item.href, target: item.target } },
+        [_vm._v(_vm._s(item.title))]
+      )
     }),
     1
   )
@@ -1201,7 +1217,7 @@ var render = function() {
       }
     },
     [
-      _c("Breadcrumb"),
+      _c("Breadcrumb", { attrs: { items: _vm.breadcrumb } }),
       _c("input", {
         directives: [
           {
@@ -4004,7 +4020,7 @@ exports = module.exports = __webpack_require__(/*! ../node_modules/css-loader/li
 
 
 // module
-exports.push([module.i, "#app[data-v-7ba5bd90] {\n  font-family: 'Avenir', Helvetica, Arial, sans-serif;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  text-align: center;\n  color: #2c3e50;\n}\n#nav[data-v-7ba5bd90] {\n  padding: 30px;\n}\n#nav a[data-v-7ba5bd90] {\n    font-weight: bold;\n    color: #2c3e50;\n}\n#nav a.router-link-exact-active[data-v-7ba5bd90] {\n      color: #42b983;\n}\n", "", {"version":3,"sources":["/home/rain/projects/web/pantologic/src/friede/src/js/mayflower-vue/src/App.vue"],"names":[],"mappings":"AAsBA;EACE,oDAAmD;EACnD,oCAAmC;EACnC,mCAAkC;EAClC,mBAAkB;EAClB,eAAc;CAAA;AAEhB;EACE,cAAa;CAAA;AADf;IAGI,kBAAiB;IACjB,eAAc;CAAA;AAJlB;MAMM,eAAc;CAAA","file":"App.vue?vue&type=style&index=0&id=7ba5bd90&scoped=true&lang=scss&","sourcesContent":["\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n#app {\n  font-family: 'Avenir', Helvetica, Arial, sans-serif;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  text-align: center;\n  color: #2c3e50;\n}\n#nav {\n  padding: 30px;\n  a {\n    font-weight: bold;\n    color: #2c3e50;\n    &.router-link-exact-active {\n      color: #42b983;\n    }\n  }\n}\n"],"sourceRoot":""}]);
+exports.push([module.i, "#app[data-v-7ba5bd90] {\n  font-family: 'Avenir', Helvetica, Arial, sans-serif;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  text-align: center;\n  color: #2c3e50;\n}\n#nav[data-v-7ba5bd90] {\n  padding: 30px;\n}\n#nav a[data-v-7ba5bd90] {\n    font-weight: bold;\n    color: #2c3e50;\n}\n#nav a.router-link-exact-active[data-v-7ba5bd90] {\n      color: #42b983;\n}\n", "", {"version":3,"sources":["/home/rain/projects/web/pantologic/src/friede/src/js/mayflower-vue/src/App.vue"],"names":[],"mappings":"AA2BA;EACE,oDAAmD;EACnD,oCAAmC;EACnC,mCAAkC;EAClC,mBAAkB;EAClB,eAAc;CAAA;AAEhB;EACE,cAAa;CAAA;AADf;IAGI,kBAAiB;IACjB,eAAc;CAAA;AAJlB;MAMM,eAAc;CAAA","file":"App.vue?vue&type=style&index=0&id=7ba5bd90&scoped=true&lang=scss&","sourcesContent":["\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n#app {\n  font-family: 'Avenir', Helvetica, Arial, sans-serif;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  text-align: center;\n  color: #2c3e50;\n}\n#nav {\n  padding: 30px;\n  a {\n    font-weight: bold;\n    color: #2c3e50;\n    &.router-link-exact-active {\n      color: #42b983;\n    }\n  }\n}\n"],"sourceRoot":""}]);
 
 // exports
 
@@ -4061,7 +4077,7 @@ exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader
 
 
 // module
-exports.push([module.i, ".prompt[data-v-28ecad94] {\n  width: 100%;\n}\n.prompt .cli[data-v-28ecad94] {\n    background: black;\n}\n", "", {"version":3,"sources":["/home/rain/projects/web/pantologic/src/friede/src/js/mayflower-vue/src/components/Prompt.vue"],"names":[],"mappings":"AAmCA;EACE,YAAW;CAAA;AADb;IAGI,kBAAiB;CAAA","file":"Prompt.vue?vue&type=style&index=0&id=28ecad94&scoped=true&lang=scss&","sourcesContent":["\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n.prompt {\n  width: 100%;\n  .cli {\n    background: black;\n  }\n}\n"],"sourceRoot":""}]);
+exports.push([module.i, ".prompt[data-v-28ecad94] {\n  width: 100%;\n}\n.prompt .cli[data-v-28ecad94] {\n    background: black;\n    font-family: monospace;\n}\n", "", {"version":3,"sources":["/home/rain/projects/web/pantologic/src/friede/src/js/mayflower-vue/src/components/Prompt.vue"],"names":[],"mappings":"AAwCA;EACE,YAAW;CAAA;AADb;IAGI,kBAAiB;IACjB,uBAAsB;CAAA","file":"Prompt.vue?vue&type=style&index=0&id=28ecad94&scoped=true&lang=scss&","sourcesContent":["\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n.prompt {\n  width: 100%;\n  .cli {\n    background: black;\n    font-family: monospace;\n  }\n}\n"],"sourceRoot":""}]);
 
 // exports
 

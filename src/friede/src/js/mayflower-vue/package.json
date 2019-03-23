@@ -9,9 +9,13 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
-    "vue": "^2.6.6",
+    "@vuikit/icons": "^0.8.1",
+    "@vuikit/theme": "^0.8.1",
+    "uikit": "^3.0.2",
+    "vue": "^2.6.10",
     "vue-router": "^3.0.1",
-    "vuex": "^3.0.1"
+    "vuex": "^3.0.1",
+    "vuikit": "^0.8.10"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.5.0",
@@ -26,7 +30,8 @@
     "eslint-plugin-vue": "^5.0.0",
     "node-sass": "^4.9.0",
     "sass-loader": "^7.1.0",
-    "vue-template-compiler": "^2.5.21"
+    "vue-cli-plugin-uikit": "^1.0.15",
+    "vue-template-compiler": "^2.6.10"
   },
   "eslintConfig": {
     "root": true,
@@ -40,6 +45,9 @@
     "rules": {},
     "parserOptions": {
       "parser": "babel-eslint"
+    },
+    "globals": {
+      "UIkit": true
     }
   },
   "postcss": {

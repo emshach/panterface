@@ -1,14 +1,25 @@
-<template>
+<template lang="html">
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
     </div>
     <router-view/>
+    <Prompt/>
   </div>
 </template>
 
-<style lang="scss">
+<script lang="js">
+import Prompt from '@/components/Prompt.vue'
+export default {
+  name: 'app',
+  components: {
+    Prompt
+  }
+}
+</script>
+
+<style scoped lang="scss">
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

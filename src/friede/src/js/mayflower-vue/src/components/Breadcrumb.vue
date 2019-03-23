@@ -13,7 +13,10 @@ import { Breadcrumb, BreadcrumbItem } from 'vuikit/lib/breadcrumb';
 export default {
   name: 'Breadcrumb',
   props: [],
-  components: { Breadcrumb, BreadcrumbItem },
+  components: {
+    'vk-breadcrumb': Breadcrumb,
+    'vk-breadcrumb-item': BreadcrumbItem
+  },
   mounted() {
 
   },

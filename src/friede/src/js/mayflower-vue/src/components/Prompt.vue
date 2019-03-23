@@ -41,11 +41,22 @@ export default {
     .breadcrumb {
       margin: 0;
       padding: 4px;
-      font-weigt: bold;
       color: white;
       text-shadow: 0 0 1px black;
-      a {
-        color: white;
+      li {
+        font-weight: bold;
+        &:before {
+          color: lightskyblue !important;
+          margin: 0 4px !important;
+          display: inline !important;
+        }
+        a {
+          color: white;
+          padding: 1px 4px;
+          &:hover {
+            background: rgba(255,255,255,0.25);
+          }
+        }
       }
     }
     .cli {

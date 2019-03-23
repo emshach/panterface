@@ -1,7 +1,7 @@
 <template lang="html">
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
+      <router-link to="/">Home</router-link>
       <router-link to="/about">About</router-link>
     </div>
     <router-view />
@@ -18,7 +18,7 @@ export default {
   },
   data() {
     return {
-      breadcrumb: [{ href: '/', title: 'Home' }]
+      breadcrumb: [{ href: '/', title: '/' }]
     };
   }
 }
@@ -33,12 +33,25 @@ export default {
   color: #2c3e50;
 }
 #nav {
-  padding: 30px;
+  margin: 4px;
+  padding: 0;
+  position: fixed;
+  top: 0;
+  right: 0;
   a {
     font-weight: bold;
     color: #2c3e50;
+    padding: 4px 8px;
+    text-shadow: 0 1 2px rgba(0,0,0,0.5);
+    text-decoration: none !important;
+    border-radius: 2px;
+      text-shadow: 0 0 1px lightskyblue;
     &.router-link-exact-active {
-      color: #42b983;
+      color: white;
+      text-shadow: 0 1 1px black;
+    }
+    &:hover {
+      background: rgba(255,255,255,0.25);
     }
   }
 }

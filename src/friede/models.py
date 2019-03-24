@@ -27,7 +27,7 @@ class Base( Model ):
     def getcontext( self ):
         return self
 
-class Path( Model ):
+class PathMixin( Model ):
     class Meta:
         abstract = True
     path = M.CharField( max_length=255 )
@@ -52,7 +52,7 @@ class Path( Model ):
                 self.path = "%s.%s" % ( self.parent.path, self.name )
             else:
                 self.path = self.name
-        super( Path, self ).save( *args, **kwargs )
+        super( PathMixin, self ).save( *args, **kwargs )
         if not self.parent:
             return
         if self._entries.filter( registry=self.parent ).count():
@@ -63,7 +63,7 @@ class Path( Model ):
             name=self.name
         )
 
-class Registry( Base, Path ):
+class Registry( Base, PathMixin ):
     format = JSONField( default=list )
     default = JSONField( default=list )
     parent = M.ForeignKey( 'self', M.CASCADE, null=True, related_name='_elements' )
@@ -246,19 +246,19 @@ class App( Registry ):
                                   related_name='_apps' )
 
 
-class Location( Base, Path ):
+class Location( Base, PathMixin ):
     registry = M.ManyToManyField( Registry, blank=True, through='LocationEntry',
                                   related_name='_locations' )
 
 
-class Link( Base, Path ):
+class Link( Base, PathMixin ):
     registry = M.ManyToManyField( Registry, blank=True, through='LinkEntry',
                                   related_name='links' )
     location = M.ForeignKey( Location, M.SET_NULL, null=True, blank=True,
                              related_name='_links' )
 
 
-class Reference( Base, Path ):
+class Reference( Base, PathMixin ):
     registry = M.ManyToManyField( Registry, blank=True, through='ReferenceEntry',
                                   related_name='_references' )
     target = M.CharField( max_length=255 )
@@ -268,7 +268,7 @@ class Reference( Base, Path ):
     # TODO: trycatch
 
 
-class Setting( Base, Path ):
+class Setting( Base, PathMixin ):
     class Types:
         BOOLEAN             = 'BooleanField'
         CHAR                = 'CharField'

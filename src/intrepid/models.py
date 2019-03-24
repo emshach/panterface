@@ -213,6 +213,7 @@ class Currency( Base ):
     # resources = M.ManyToManyField( Resource, blank=True, related_name='currencies' )
     notes     = M.ManyToManyField( Note, blank=True, related_name='currencies' )
 
+
 class Account( Noted ):
     amount   = M.DecimalField( max_digits=16, decimal_places=2, default=0 )
     opened   = M.DateField( default=date.today )
@@ -231,7 +232,7 @@ class Pool( Noted ):
                                    related_name='pools' )
 
 
-class Allotment( Model ):
+class Allotment( Noted ):
     amount  = M.DecimalField( max_digits=16, decimal_places=2 )
     # relations
     account = M.ForeignKey( Account, M.PROTECT, related_name='allotments' )
@@ -315,6 +316,7 @@ class Source( External ):
     gain            = M.DecimalField( max_digits=16, decimal_places=2, default=0 )
     destination     = M.ForeignKey( Income, M.PROTECT, related_name='sources' )
 
+
 class Liability( Source ):
     value = M.DecimalField( max_digits=16, decimal_places=2, default=0 )
 
@@ -351,7 +353,7 @@ class Receipt( Noted ):
     # TODO: limit_to
 
 
-class Deposit( Model ):
+class Deposit( Noted ):
     amount  = M.DecimalField( max_digits=16, decimal_places=2 )
     # relations
     account = M.ForeignKey( Account, M.PROTECT, related_name='deposits' )

@@ -26,6 +26,7 @@ export default {
   },
   methods: {
     submit() {
+      this.$emit( 'update', this.cli )
     },
     input() {
     }

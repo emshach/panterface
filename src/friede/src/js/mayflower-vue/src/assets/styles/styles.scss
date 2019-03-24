@@ -16,6 +16,8 @@
 html {
   background: rgb(28,246,205);
   background: linear-gradient(180deg, rgba(28,246,205,1) 0%, rgba(0,212,255,1) 100%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 #prompt {
   position: fixed;

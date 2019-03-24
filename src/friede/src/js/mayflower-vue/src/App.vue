@@ -54,10 +54,10 @@ export default {
     text-shadow: 0 0 1px black;
     text-decoration: none !important;
     border-radius: 2px;
-      text-shadow: 0 0 1px lightskyblue;
+    text-shadow: 0 0 1px lightskyblue;
     &.router-link-exact-active {
       color: white;
-      text-shadow: 0 1 1px black;
+      text-shadow: 0 0 1px black;
     }
     &:hover {
       background: rgba(255,255,255,0.25);

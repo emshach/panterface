@@ -14,7 +14,8 @@
 // 4. Import UIkit.
 @import "~uikit/src/scss/uikit.scss";
 html {
-  background: cornflowerblue;
+  background: rgb(28,246,205);
+  background: linear-gradient(180deg, rgba(28,246,205,1) 0%, rgba(0,212,255,1) 100%);
 }
 #prompt {
   position: fixed;

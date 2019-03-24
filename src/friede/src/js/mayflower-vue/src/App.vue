@@ -5,7 +5,7 @@
       <router-link to="/about">About</router-link>
     </div>
     <router-view />
-    <Prompt :breadcrumb="breadcrumb" />
+    <Prompt :breadcrumb="breadcrumb" @update="promptInput" />
   </div>
 </template>
 
@@ -20,6 +20,15 @@ export default {
     return {
       breadcrumb: [{ href: '/', title: '/' }]
     };
+  },
+  methods: {
+    promptInput( value ) {
+      if ( !value ) {
+        return;
+      }
+      this.breadcrumb = value.split( /\s+/ )
+         .map( x => ({ href: x, title: x }));
+    }
   }
 }
 </script>

@@ -7,23 +7,22 @@ class NoteSerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Note
         fields = ( 'url', 'id', 'name', 'title', 'description', 'active',
-                   'valid', 'notes', 'noted' )
+                   'valid', 'notes' )
 
 
 class ResourceSerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Resource
         fields = ( 'name', 'title', 'description', 'active', 'valid',
-                   'definition', 'url', 'id', 'upload', 'parent', 'resources',
-                   'notes', 'attached_to' )
+                   'definition', 'url', 'id', 'upload', 'parent', 'notes',
+                   'attached_to' )
 
 
 class ProductSerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Product
         fields = ( 'name', 'title', 'description', 'active', 'valid',
-                   'definition', 'url', 'id', 'parent', 'products', 'notes',
-                   'attached_to' )
+                   'definition', 'url', 'id', 'parent', 'notes', 'attached_to' )
 
 
 class GoalSerializer( serializers.HyperlinkedModelSerializer ):
@@ -89,7 +88,7 @@ class TaskSerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Task
         fields = ( 'url', 'id', 'name', 'title', 'description', 'active',
-                   'valid', 'parent', 'subtasks', 'project', 'step', 'notes' )
+                   'valid', 'parent', 'project', 'step', 'notes' )
 
 
 class ActionSerializer( serializers.HyperlinkedModelSerializer ):
@@ -118,8 +117,8 @@ class PoolSerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Pool
         fields = ( 'url', 'id', 'name', 'title', 'description', 'active',
-                   'valid', 'size', 'available', 'parent', 'partitions',
-                   'accounts', 'allotments', 'notes' )
+                   'valid', 'size', 'available', 'parent', 'accounts',
+                   'allotments', 'notes' )
 
 
 class AllotmentSerializer( serializers.HyperlinkedModelSerializer ):
@@ -148,8 +147,7 @@ class ExpenseSerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Expense
         fields = ( 'url', 'id', 'name', 'title', 'description', 'active',
-                   'valid', 'stable', 'amount', 'source', 'notes',
-                   'destinations' )
+                   'valid', 'stable', 'amount', 'source', 'notes' )
 
 # class ExternalSerializer( serializers.HyperlinkedModelSerializer ):
 #     class Meta:
@@ -306,7 +304,7 @@ class TeamSerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Team
         fields = ( 'url', 'id', 'name', 'title', 'description', 'active',
-                   'valid', 'parent', 'groups', 'notes' )
+                   'valid', 'parent', 'notes' )
 
 
 class PositionSerializer( serializers.HyperlinkedModelSerializer ):
@@ -348,8 +346,7 @@ class TaxonomySerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Taxonomy
         fields = ( 'url', 'id', 'name', 'title', 'description', 'active',
-                   'valid', 'hierarhichal', 'exclusive', 'parent', 'children',
-                   'notes' )
+                   'valid', 'hierarhichal', 'exclusive', 'parent', 'notes' )
 
 
 class TermSerializer( serializers.HyperlinkedModelSerializer ):

@@ -60,7 +60,8 @@ export default {
       text-shadow: 0 0 1px black;
     }
     &:hover {
-      background: rgba(255,255,255,0.25);
+      /* background: rgba(255,255,255,0.25); */
+      box-shadow: 0 -20px 30px #ffffa3;
     }
   }
 }

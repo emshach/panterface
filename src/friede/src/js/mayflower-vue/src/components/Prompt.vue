@@ -75,10 +75,10 @@ export default {
       &:focus {
         background: rgba(0,0,0,0.8);
       }
-      textarea.cli {
-        line-height: normal;
-        padding: 8px 10px;
-      }
+    }
+    textarea.cli {
+      line-height: normal;
+      padding: 8px 10px;
     }
   }
 </style>

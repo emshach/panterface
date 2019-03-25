@@ -13,11 +13,10 @@
 
 // 4. Import UIkit.
 @import "~uikit/src/scss/uikit.scss";
-html {
-  background: #01c4d8;
-  background: linear-gradient(180deg, #00eec6 0%, #01c4d8 100%);
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+html, body {
+  position: relatative;
+  width: 100%;
+  height: 100%;
 }
 #prompt {
   position: fixed;

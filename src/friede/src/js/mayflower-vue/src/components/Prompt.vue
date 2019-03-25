@@ -1,7 +1,7 @@
 <template lang="html">
   <form id="prompt" @submit.prevent="submit" class="mf-prompt uk-flex uk-wrap-around">
     <Breadcrumb class="breadcrumb" :items="breadcrumb" />
-    <input name="cli" class="cli uk-input uk-flex-1"
+    <textarea name="cli" class="cli uk-input uk-flex-1" rows="1"
            v-model="cli" @input="input" />
   </form>
 </template>

@@ -1,3 +1,9 @@
+html {
+  background: #01c4d8;
+  background: linear-gradient(180deg, #00eec6 0%, #01c4d8 100%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
 #prompt .cli {
   color: limegreen;
 }

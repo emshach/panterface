@@ -59,11 +59,13 @@ class PathMixin( Model ):
             return
         if self._entries.filter( registry=self.parent ).count():
             return
-        self._entries.model.objects.create(
+        entry, created = self._entries.model.objects.get_or_create(
             registry=self.parent,
-            entry=self,
-            name=self.name
-        )
+            name=self.name,
+            defaults=dict( entry=self ))
+        if not created:
+            entry.entry = self
+            entry.save()
 
 
 class SizeMixin( Model ):

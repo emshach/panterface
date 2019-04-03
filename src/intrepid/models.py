@@ -156,8 +156,6 @@ class Target( Noted ):
 class Strategy( Base ):
     # relations
     objective = M.ForeignKey( Objective, M.PROTECT, related_name='stategies' )
-    # resources = M.ManyToManyField( Resource, blank=True, related_name='strategies' )
-    # products  = M.ManyToManyField( Product, blank=True, related_name='strategies' )
     notes     = M.ManyToManyField( Note, blank=True, related_name='strategies' )
 
 
@@ -210,7 +208,6 @@ class Action( Noted, DatePlanMixin ):
 class Currency( Base ):
     rate      = M.FloatField( default=1 )
     # relations
-    # resources = M.ManyToManyField( Resource, blank=True, related_name='currencies' )
     notes     = M.ManyToManyField( Note, blank=True, related_name='currencies' )
 
 
@@ -290,11 +287,11 @@ class Sink( External ):
 
 
 class Asset( Sink ):
-    sink_ptr     = M.OneToOneField( Sink, M.CASCADE, parent_link=True,
+    sink_ptr      = M.OneToOneField( Sink, M.CASCADE, parent_link=True,
                                     related_name='asset' )
-    value        = M.DecimalField( max_digits=16, decimal_places=2, default=0 )
-    intended_own = M.DateTimeField()
-    actual_own   = M.DateTimeField( blank=True )
+    value         = M.DecimalField( max_digits=16, decimal_places=2, default=0 )
+    intended_own  = M.DateTimeField()
+    effective_own = M.DateTimeField( blank=True )
 
 
 class Donation( Sink ):
@@ -429,8 +426,6 @@ class Role( Noted ):
 class Responsibility( Base ):
     # relations
     roles     = M.ManyToManyField( Role, blank=True, related_name='responsibilities' )
-    # resources = M.ManyToManyField( Resource, related_name='responsibilities' )
-    # products  = M.ManyToManyField( Product, related_name='responsibilities' )
     notes     = M.ManyToManyField( Product, blank=True,
                                    related_name='responsibilities' )
 
@@ -438,8 +433,6 @@ class Responsibility( Base ):
 class Capacity( Base ):
     # relations
     roles     = M.ManyToManyField( Role, blank=True, related_name='capacities' )
-    # resources = M.ManyToManyField( Resource, related_name='capacities' )
-    # products  = M.ManyToManyField( Product, related_name='capacities' )
     notes     = M.ManyToManyField( Note, blank=True, related_name='capacities' )
 
 
@@ -457,13 +450,11 @@ class User( Noted ):
 ### Taxonomy
 
 class Taxonomy( Base ):
-    hierarhichal = M.BooleanField()
-    exclusive    = M.BooleanField()
+    hierarchichal = M.BooleanField()
+    exclusive     = M.BooleanField()
     # relations
-    parent       = M.ForeignKey( 'self', M.CASCADE, related_name='children' )
-    # resources    = M.ManyToManyField( Resource, related_name='taxonomies' )
-    # products     = M.ManyToManyField( Product, related_name='taxonomies' )
-    notes        = M.ManyToManyField( Note, blank=True, related_name='taxonomies' )
+    parent        = M.ForeignKey( 'self', M.CASCADE, related_name='children' )
+    notes         = M.ManyToManyField( Note, blank=True, related_name='taxonomies' )
 
 
 class Term( Noted ):

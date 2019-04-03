@@ -3,12 +3,15 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render
 from .objects import getregistries, getenv
-from .core import setup, setupshell, setuptheme
+from .core import setup, setupshell, setuptheme, setupmenus
 
 # Create your views here.
 def index( request ):
     env = getenv()
     # # get the shell
+    menus = env.C.menus()
+    if not menus:
+        menus = setupmenus()
     shell = env.H.current()
     if not shell:
         shell = setupshell( env )
@@ -20,6 +23,7 @@ def index( request ):
     context = dict(
         shell=shell,
         theme=theme,
+        menus=menus,
     )
     for registry in getregistries():
         context[ registry.name ] = registry

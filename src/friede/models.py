@@ -22,7 +22,7 @@ class Base( Model ):
     active       = M.BooleanField( default=True )
 
     def __str__( self ):
-        return self.name or self.title
+        return self.path or self.name or self.title
 
     def getcontext( self ):
         return self
@@ -42,7 +42,8 @@ class PathMixin( Model ):
             path = self.path.split('.')
             if len( path ) > 1:
                 self.name = path.pop()
-                self.parent, created = Container.objects.get_or_create( path='.'.join( path  ))
+                self.parent, created = Container.objects.get_or_create(
+                    path='.'.join( path  ))
             else:
                 self.parent = None
                 self.name = path[0]
@@ -62,6 +63,27 @@ class PathMixin( Model ):
             entry=self,
             name=self.name
         )
+
+
+class SizeMixin( Model ):
+    class Meta:
+        abstract = True
+    min_x = M.PositiveSmallIntegerField( blank=True )
+    max_x = M.PositiveSmallIntegerField( blank=True )
+    min_y = M.PositiveSmallIntegerField( blank=True )
+    max_y = M.PositiveSmallIntegerField( blank=True )
+
+
+class DataMixin( Model ):
+    class Meta:
+        abstract = True
+    data = JSONField( default=dict )
+
+
+class ExtendsMixin( Model ):
+    class Meta:
+        abstract = True
+    extends = M.ForeignKey( 'self', M.PROTECT, related_name="exdended_by" )
 
 class Registry( Base, PathMixin ):
     format = JSONField( default=list )
@@ -185,28 +207,28 @@ class Container( Registry ):
                                   related_name='_containers' )
 
 
-class Widget( Registry ):
+class Widget( Registry, ExtendsMixin, SizeMixin, DataMixin ):
     registry_ptr  = M.OneToOneField( Registry, M.CASCADE, parent_link=True,
                                      related_name='_widget' )
     registry = M.ManyToManyField( Registry, blank=True, through='WidgetEntry',
                                   related_name='_widgets' )
 
 
-class Block( Registry ):
+class Block( Registry, ExtendsMixin, SizeMixin, DataMixin ):
     registry_ptr  = M.OneToOneField( Registry, M.CASCADE, parent_link=True,
                                      related_name='_block' )
     registry = M.ManyToManyField( Registry, blank=True, through='BlockEntry',
                                   related_name='_blocks' )
 
 
-class Screen( Registry ):
+class Screen( Registry, ExtendsMixin, SizeMixin, DataMixin ):
     registry_ptr  = M.OneToOneField( Registry, M.CASCADE, parent_link=True,
                                      related_name='_screen' )
     registry = M.ManyToManyField( Registry, blank=True, through='ScreenEntry',
                                   related_name='_screens' )
 
 
-class Shell( Registry ):
+class Shell( Registry, ExtendsMixin ):
     registry_ptr  = M.OneToOneField( Registry, M.CASCADE, parent_link=True,
                                      related_name='_shell' )
     registry = M.ManyToManyField( Registry, blank=True, through='ShellEntry',
@@ -219,7 +241,7 @@ class Shell( Registry ):
         return "%s/%s" % ( self.templates, self.template )
 
 
-class Theme( Registry ):
+class Theme( Registry, ExtendsMixin ):
     registry_ptr  = M.OneToOneField( Registry, M.CASCADE, parent_link=True,
                                      related_name='_theme' )
     registry = M.ManyToManyField( Registry, blank=True, through='ThemeEntry',
@@ -239,16 +261,21 @@ class Slot( Registry ):
                                   related_name='_slots' )
 
 
-class App( Registry ):
+class App( Registry, DataMixin ):
     registry_ptr  = M.OneToOneField( Registry, M.CASCADE, parent_link=True,
                                      related_name='_app' )
-    registry = M.ManyToManyField( Registry, blank=True, through='AppEntry',
-                                  related_name='_apps' )
+    registry      = M.ManyToManyField( Registry, blank=True, through='AppEntry',
+                                       related_name='_apps' )
+    module        = M.CharField( max_length=128 )
+    rest          = M.CharField( max_length=32 )
+    version       = M.CharField( max_length=32 )
 
 
 class Location( Base, PathMixin ):
     registry = M.ManyToManyField( Registry, blank=True, through='LocationEntry',
                                   related_name='_locations' )
+    href = M.CharField( max_length=255, default='#' )
+    redirect_to = M.ManyToManyField( 'self', blank=True, related_name='redirect_from' )
 
 
 class Link( Base, PathMixin ):
@@ -268,7 +295,7 @@ class Reference( Base, PathMixin ):
     # TODO: trycatch
 
 
-class Setting( Base, PathMixin ):
+class Setting( Base, PathMixin, DataMixin ):
     class Types:
         BOOLEAN             = 'BooleanField'
         CHAR                = 'CharField'
@@ -333,30 +360,33 @@ class Setting( Base, PathMixin ):
                                   related_name='_settings' )
     type     = M.CharField( max_length=32, choices=Types.ALL, default=Types.CHAR )
     default  = JSONField( default=dict )
-    data     = JSONField( default=dict )
 
+
+def _get_entry_position( self ):
+    pass
 
 class Entry( Base ):
     class Meta:
         unique_together = ( 'registry', 'name' )
         abstract = True
+    position = M.PositiveSmallIntegerField( default=_get_entry_position )
 
 class ContainerEntry( Entry ):
     registry = M.ForeignKey( Registry, M.CASCADE, related_name='_container_entries' )
     entry = M.ForeignKey( Container, M.CASCADE, related_name='_entries' )
 
 
-class WidgetEntry( Entry ):
+class WidgetEntry( Entry, DataMixin ):
     registry = M.ForeignKey( Registry, M.CASCADE, related_name='_widget_entries' )
     entry = M.ForeignKey( Widget, M.CASCADE, related_name='_entries' )
 
 
-class BlockEntry( Entry ):
+class BlockEntry( Entry, DataMixin ):
     registry = M.ForeignKey( Registry, M.CASCADE, related_name='_block_entries' )
     entry = M.ForeignKey( Block, M.CASCADE, related_name='_entries' )
 
 
-class ScreenEntry( Entry ):
+class ScreenEntry( Entry, DataMixin ):
     registry = M.ForeignKey( Registry, M.CASCADE, related_name='_screen_entries' )
     entry = M.ForeignKey( Screen, M.CASCADE, related_name='_entries' )
 

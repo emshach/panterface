@@ -190,13 +190,6 @@ class RentalSerializer( serializers.HyperlinkedModelSerializer ):
                    'valid', 'cost', 'expense', 'period', 'notes' )
 
 
-class SourceSerializer( serializers.HyperlinkedModelSerializer ):
-    class Meta:
-        model = Source
-        fields = ( 'url', 'id', 'name', 'title', 'description', 'active',
-                   'valid', 'gain', 'destination', 'notes' )
-
-
 class LiabilitySerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Liability

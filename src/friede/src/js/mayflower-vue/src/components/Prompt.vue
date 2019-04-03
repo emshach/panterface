@@ -1,8 +1,12 @@
 <template lang="html">
-  <form id="prompt" @submit.prevent="submit" class="mf-prompt uk-flex uk-wrap-around">
-    <Breadcrumb class="breadcrumb" :items="breadcrumb" />
-    <textarea name="cli" class="cli uk-input uk-flex-1" rows="1"
-           v-model="cli" @input="input" />
+  <form id="prompt" class="mf-prompt uk-flex uk-wrap-around"
+        @submit.prevent="submit">
+    <switchboard />
+    <breadcrumb class="breadcrumb" :items="breadcrumb" />
+    <textarea v-if="multiline" name="cli" class="cli uk-input uk-flex-1"
+              rows="1"  v-model="cli" @input="input" />
+    <input v-else name="cli" class="cli uk-input uk-flex-1" v-model="cli"
+           @input="input" />
   </form>
 </template>
 
@@ -14,6 +18,10 @@ export default {
     breadcrumb: {
       type: Array,
       default: () => []
+    },
+    multiline: {
+      type: Boolean,
+      default: true
     }
   },
   components: { Breadcrumb },

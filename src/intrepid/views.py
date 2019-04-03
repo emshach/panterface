@@ -204,11 +204,6 @@ class RentalViewSet( viewsets.ModelViewSet ):
     serializer_class = RentalSerializer
 
 
-class SourceViewSet( viewsets.ModelViewSet ):
-    queryset = Source.objects.all()
-    serializer_class = SourceSerializer
-
-
 class LiabilityViewSet( viewsets.ModelViewSet ):
     queryset = Liability.objects.all()
     serializer_class = LiabilitySerializer

@@ -1,5 +1,5 @@
 <template lang="html">
-  <Dashboard />
+  <dashboard />
 </template>
 
 <script lang="js">

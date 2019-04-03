@@ -4,8 +4,11 @@
       <router-link to="/">Home</router-link>
       <router-link to="/about">About</router-link>
     </div>
-    <router-view />
-    <Prompt :breadcrumb="breadcrumb" @update="promptInput" />
+    <transition name="fade-fast" mode="out-in">
+      <search-results-page v-if="searching" />
+      <router-view v-else />
+    </transition>
+    <prompt :breadcrumb="breadcrumb" @update="promptInput" />
   </div>
 </template>
 
@@ -18,6 +21,7 @@ export default {
   },
   data() {
     return {
+      searching: false,         // TODO: 
       breadcrumb: [{ href: '/', title: '/' }]
     };
   },

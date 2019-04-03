@@ -338,24 +338,28 @@ def updateapp( app, data, upto=None ):
                     if not top.get( 'path', None ):
                         top[ 'path' ] = path[0]
                     search, updates = split_dict( top, 'name', 'path' )
+                    relations = {}
                     for key, value in updates.items():
                         if not isinstance( value, basestring ):
                             continue
                         field = model[0]._meta.get_field( key )
                         if field.is_relation:
+                            updates.pop( key )
                             try:
                                 related = field.related_model.objects.get( path=value )
                             except ObjectDoesNotExist:
                                 print >> sys.stderr, "got no", field.related_model,\
                                     'path', value
                                 raise
-                            updates[ key ] = related
+                            relations[ key ] = related
                     if not obj or type( obj ) is not model[0]:
                         obj, new = model[0].objects.get_or_create(
                             defaults=updates, **search )
                     if not new:
                         for key, value in updates.items():
                             setattr( obj, key, value )
+                    for key, value in relations.items():
+                        setattr( obj, key, value )
                     print 'created', obj.__dict__
                     obj.save()
                 elif callable( top ):

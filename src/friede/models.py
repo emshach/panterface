@@ -278,7 +278,8 @@ class Location( Base, PathMixin ):
     registries = M.ManyToManyField( Registry, blank=True, through='LocationEntry',
                                   related_name='_locations' )
     href = M.CharField( max_length=255, default='#' )
-    redirect_to = M.OneToOneField( 'self', blank=True, related_name='redirect_from' )
+    redirect_to = M.OneToOneField( 'self', blank=True, null=True,
+                                   related_name='redirect_from' )
 
 
 class Link( Base, PathMixin ):

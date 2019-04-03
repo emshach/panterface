@@ -273,6 +273,8 @@ class App( Registry, DataMixin ):
 
 
 class Location( Base, PathMixin ):
+    parent = M.ForeignKey( Registry, M.CASCADE, null=True,
+                           related_name='_location_elements' )
     registries = M.ManyToManyField( Registry, blank=True, through='LocationEntry',
                                   related_name='_locations' )
     href = M.CharField( max_length=255, default='#' )
@@ -280,6 +282,8 @@ class Location( Base, PathMixin ):
 
 
 class Link( Base, PathMixin ):
+    parent = M.ForeignKey( Registry, M.CASCADE, null=True,
+                           related_name='_link_elements' )
     registries = M.ManyToManyField( Registry, blank=True, through='LinkEntry',
                                   related_name='links' )
     location = M.ForeignKey( Location, M.SET_NULL, null=True, blank=True,
@@ -287,6 +291,8 @@ class Link( Base, PathMixin ):
 
 
 class Reference( Base, PathMixin ):
+    parent = M.ForeignKey( Registry, M.CASCADE, null=True,
+                           related_name='_registry_elements' )
     registries = M.ManyToManyField( Registry, blank=True, through='ReferenceEntry',
                                   related_name='_references' )
     target = M.CharField( max_length=255 )
@@ -357,6 +363,8 @@ class Setting( Base, PathMixin, DataMixin ):
             ( MODEL,               'Model Choice' ),
             ( MODELS,              'Multiple Model Choice' ),
         )
+    parent = M.ForeignKey( Registry, M.CASCADE, null=True,
+                           related_name='_setting_elements' )
     registries = M.ManyToManyField( Registry, blank=True, through='SettingEntry',
                                   related_name='_settings' )
     type     = M.CharField( max_length=32, choices=Types.ALL, default=Types.CHAR )

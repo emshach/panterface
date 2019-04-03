@@ -293,6 +293,7 @@ def updateapp( app, data, upto=None ):
                 cr.popleft()
 
             while stack:
+                print 'top=', top
                 obj = cr[0]
                 new = None
                 top = stack.pop()

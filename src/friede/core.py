@@ -270,10 +270,9 @@ def updateapp( app, data, upto=None ):
         with transaction.atomic():
             max_version = v
             version = version_parse(v)
-            print app_version, '<', version, '=', app_version < version
-            if app_version < version :
+            if app_version >= version :
                 continue
-            if upto and version > upto :
+            if upto and version >= upto :
                 break
             transaction.on_commit( update_version )
             print 'tree=', tree

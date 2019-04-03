@@ -304,8 +304,9 @@ def updateapp( app, data, upto=None ):
                         tag = top[0]
                         if tag == 'from relations' :
                             try:
-                               stack.append(
-                                   shortcuts[ registry[0] ]( app, *( top[1:] )))
+                                bundle = shortcuts[ registry[0] ]( app, *( top[1:] ))
+                                print 'bundle=', bundle
+                                stack.append( bundle )
                             except KeyError as e:
                                 print >> sys.stderr, e
                                 pass

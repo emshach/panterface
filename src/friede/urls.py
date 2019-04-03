@@ -3,6 +3,7 @@ from . import views
 from .core import installapp
 from .models import App
 from importlib import import_module
+from rest_framework import routers
 
 app_name = 'friede'
 urlpatterns = []

@@ -6,6 +6,7 @@ from .util import split_dict
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import transaction
 from importlib import import_module
+from collections import deque
 
 def setup():
     "make new settings"

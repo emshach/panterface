@@ -122,7 +122,7 @@ def installapp( name, module, title, description, icon='', rest=True,
 def mklocations( app, objects, relations ):
     actions = 'list view new edit report delete'.split()
     return (( 'list', tuple(
-        (( relations[o][ 'plural' ], dict(
+        (( '.' + relations[o][ 'plural' ], dict(
             title="list {}".format( relations[o][ 'plural' ]).title(),
             href="/list/{}".format( relations[o][ 'plural' ]))),
          ( o, dict(
@@ -132,7 +132,7 @@ def mklocations( app, objects, relations ):
             tuple (
                 ( action,
                   tuple (
-                      ( y, dict( title="{} {}".format( action, y ).title(),
+                      ( '.'+ y, dict( title="{} {}".format( action, y ).title(),
                                  href="/{}/{}".format( action, y )))
                           for w in (((o, o), ( o, relations[o][ 'plural' ]))
                                     for o in objects )
@@ -153,14 +153,14 @@ def mklocations( app, objects, relations ):
                           href="/add/new/{}".format(o) ))
                           for o in objects if relations[o][ 'has' ])),
                 tuple(
-                    ( y, dict(
+                    ( '.' + y, dict(
                         title="add to {}".format(y).title(),
                         href="/add/to/{}".format(y) ))
                         for w in (((o, o), ( o, relations[o][ 'plural' ]))
                                   for o in objects if relations[o][ 'has' ])
                         for x, y in w )),
               tuple(
-                  ( y, dict(
+                  ( '.' + y, dict(
                       title="add {}".format(y).title(),
                       href="/add/{}".format(y) ))
                       for w in (((o, o), ( o, relations[o][ 'plural' ]))
@@ -169,27 +169,27 @@ def mklocations( app, objects, relations ):
             ( 'remove',
               ( 'from',
                 tuple(
-                    ( y, dict(
+                    ( '.' + y, dict(
                         title="remove from {}".format(y).title(),
                         href="/remove/from/{}".format(y) ))
                         for w in ((( o, o ), ( o, relations[o][ 'plural' ]))
                                   for o in objects if relations[o][ 'has' ])
                         for x, y in w )),
               tuple(
-                  ( y, dict(
+                  ( '.' + y, dict(
                       title="remove {}".format(y).title(),
                       href="/remove/{}".format(y) ))
                       for w in (((o, o), ( o, relations[o][ 'plural' ]))
                                 for o in objects if relations[o][ 'in' ])
                       for x, y in w )),
             tuple(
-                ( name, tuple(
+                ( '.' + name, tuple(
                     ( action, "{}.{}".format( action, name ))
                         for action in actions ))
                     for pair in (( o, relations[o][ 'plural' ] ) for o in objects )
                     for name in pair ),
             tuple (
-                ( y,
+                ( '.' + y,
                   ( 'add',
                     dict(
                         title="add {}".format(y).title(),

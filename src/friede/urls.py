@@ -1,7 +1,7 @@
 from django.conf.urls import url
 from . import views
 from .core import installapp
-from .models import App
+from .models import App, Setting
 from importlib import import_module
 from rest_framework import routers
 

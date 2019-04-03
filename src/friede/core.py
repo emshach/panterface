@@ -346,6 +346,7 @@ def updateapp( app, data, upto=None ):
                         if field.is_relation:
                             updates.pop( key )
                             try:
+                                print 'derefing', field
                                 related = field.related_model.objects.get( path=value )
                             except ObjectDoesNotExist:
                                 print >> sys.stderr, "got no", field.related_model,\

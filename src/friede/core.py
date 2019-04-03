@@ -354,6 +354,7 @@ def updateapp( app, data, upto=None ):
                     if not new:
                         for key, value in updates.items():
                             setattr( obj, key, value )
-                        obj.save()
+                    print 'created', obj.__dict__
+                    obj.save()
                 elif callable( top ):
                     top()

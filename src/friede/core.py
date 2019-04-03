@@ -10,20 +10,20 @@ from collections import deque
 from packaging.version import parse as version_parse
 import sys
 
-types = dict(
-    containers=Container,
-    widgets=Widget,
-    blocks=Block,
-    screens=Screen,
-    shells=Shell,
-    themes=Theme,
-    slots=Slot,
-    apps=App,
-    locations=Location,
-    links=Link,
-    references=Reference,
-    settings=Setting
-)
+types = {
+    'containers' : Container,
+    'widgets'    : Widget,
+    'blocks'     : Block,
+    'screens'    : Screen,
+    'shells'     : Shell,
+    'themes'     : Theme,
+    'slots'      : Slot,
+    'apps'       : App,
+    'locations'  : Location,
+    'links'      : Link,
+    'references' : Reference,
+    'settings'   : Setting
+}
 
 def setup():
     "make new settings"
@@ -248,10 +248,10 @@ def mksettings( app, objects, relations ):
                             relations[o][ 'model' ])
             for o in objects ))
 
-shortcuts = dict(
-    locations=mklocations,
-    settings=mksettings
-)
+shortcuts = {
+    'locations': mklocations,
+    'settings': mksettings
+}
 
 def updateapp( app, data, upto=None ):
     app_version = version_parse( app.version )

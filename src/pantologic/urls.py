@@ -16,13 +16,11 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from django.contrib.auth import get_user_model
-from intrepid.urls import router
 
 urlpatterns = [
-    url( r'^intrepid/', include( 'intrepid.urls' )),
-    url( r'^api/intrepid/', include( router.urls )),
     url( r'^api-auth/', include( 'rest_framework.urls', namespace='rest_framework' )),
     # url( r'^accounts/', include( 'allauth.urls' )),
     url( r'^admin/',    admin.site.urls ),
     url( r'^.*', include( 'friede.urls' )),
+    url( r'^intrepid/', include( 'intrepid.urls' )),
 ]

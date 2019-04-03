@@ -203,9 +203,9 @@ configurable shells and themes''',
         ),
     ))
 
-
-apps = App.objects.filter( active=True ).all()
-for app in apps:
+if False:
+  apps = App.objects.filter( active=True ).all()
+  for app in apps:
     name = app.name
     module = app.module
     rest = app.rest

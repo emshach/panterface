@@ -83,7 +83,7 @@ class DataMixin( Model ):
 class ExtendsMixin( Model ):
     class Meta:
         abstract = True
-    extends = M.ForeignKey( 'self', M.PROTECT, related_name="exdended_by" )
+    extends = M.ForeignKey( 'self', M.PROTECT, null=True, related_name="exdended_by" )
 
 class Registry( Base, PathMixin ):
     format = JSONField( default=list )
@@ -267,8 +267,8 @@ class App( Registry, DataMixin ):
     registry      = M.ManyToManyField( Registry, blank=True, through='AppEntry',
                                        related_name='_apps' )
     module        = M.CharField( max_length=128 )
-    rest          = M.CharField( max_length=32 )
-    version       = M.CharField( max_length=32 )
+    rest          = M.CharField( max_length=32, default=True )
+    version       = M.CharField( max_length=32, default='0.0.0' )
 
 
 class Location( Base, PathMixin ):

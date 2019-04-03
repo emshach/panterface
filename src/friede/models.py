@@ -69,9 +69,9 @@ class SizeMixin( Model ):
     class Meta:
         abstract = True
     min_x = M.PositiveSmallIntegerField( default=1 )
-    max_x = M.PositiveSmallIntegerField( blank=True )
+    max_x = M.PositiveSmallIntegerField( blank=True, null=True )
     min_y = M.PositiveSmallIntegerField( default=1 )
-    max_y = M.PositiveSmallIntegerField( blank=True )
+    max_y = M.PositiveSmallIntegerField( blank=True, null=True )
 
 
 class DataMixin( Model ):

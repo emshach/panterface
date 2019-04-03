@@ -362,8 +362,8 @@ class Setting( Base, PathMixin, DataMixin ):
     default  = JSONField( default=dict )
 
 
-def _get_entry_position( self ):
-    pass
+def _get_entry_position():
+    return 0
 
 class Entry( Base ):
     class Meta:

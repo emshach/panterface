@@ -275,6 +275,7 @@ def updateapp( app, data, upto=None ):
             if upto and version > upto :
                 break
             transaction.on_commit( update_version )
+            print 'tree=', tree
             stack = deque([ tree ])
             path = deque([''])
             model = deque([ Container ])

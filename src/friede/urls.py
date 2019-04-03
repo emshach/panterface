@@ -104,7 +104,7 @@ app, new = installapp(
     title='Project Friede',
     description='''App platform with utilities for REST API setup and
 configurable shells and themes''',
-    api=router,
+    router=router,
     data=(
         ( '0.1.0',
           ( 'locations',

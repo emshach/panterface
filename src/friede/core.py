@@ -84,7 +84,7 @@ def setuptheme( shell=None ):
 
 @transaction.atomic
 def installapp( path, module, title, description, icon='', rest=True,
-                active=True, version=None, data=None ):
+                active=True, version=None, router=None, data=None ):
     from .models import App
     if not path.startswith( 'apps.' ):
         path = 'apps.' + path

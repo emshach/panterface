@@ -8,6 +8,7 @@ from django.db import transaction
 from importlib import import_module
 from collections import deque
 from packaging.version import parse as version_parse
+import sys
 
 types = dict(
     containers=Container,
@@ -305,8 +306,8 @@ def updateapp( app, data, upto=None ):
                             try:
                                stack.append(
                                    shortcuts[ registry[0] ]( app, *( top[1:] )))
-                            except KeyError:
-                                # TODO: maybe warn
+                            except KeyError as e:
+                                print >> sys.stderr, e
                                 pass
                         elif tag in types:
                             stack.append( popmodel )

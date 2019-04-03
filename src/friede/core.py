@@ -262,7 +262,9 @@ def updateapp( app, data, upto=None ):
             app.version = max_version
             app.save()
 
-    for v, tree, in data:
+    for tree in data:
+        v = tree[0]
+        tree = tree[1:]
         with transaction.atomic():
             max_version = v
             version = version_parse(v)

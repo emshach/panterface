@@ -301,6 +301,8 @@ def updateapp( app, data, upto=None ):
                 top = stack.pop()
                 # print 'top=', top
                 if isinstance( top, tuple ):
+                    if not len( top ):
+                        continue
                     if isinstance( top[0], basestring ):
                         tag = top[0]
                         print 'tag=', tag

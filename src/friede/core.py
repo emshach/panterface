@@ -7,6 +7,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.db import transaction
 from importlib import import_module
 from collections import deque
+from packaging import version
 
 def setup():
     "make new settings"
@@ -251,10 +252,10 @@ shortcuts = dict(
 )
 
 def updateapp( app, data, upto=None ):
-    app_version = Version( app.version )
+    app_version = version.parse( app.version )
     max_version = None
     if upto:
-        upto = Version( upto )
+        upto = version.parse( upto )
 
     def update_version():
         if max_version :
@@ -264,7 +265,7 @@ def updateapp( app, data, upto=None ):
     for v, tree, in data:
         with transaction.atomic():
             max_version = v
-            version = Version(v)
+            version = version.parse(v)
             if app_version < version :
                 continue
             if upto and version > upto :

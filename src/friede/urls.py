@@ -98,7 +98,7 @@ relations = dict(
     },
 )
 actions = 'list view new edit report delete'.split()
-if false:
+if False:
   app, new = installapp(
     name='friede',
     module='friede',

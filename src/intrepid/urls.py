@@ -829,7 +829,8 @@ Also includes goal-setting, strategizing, and teamwork tools.''',
                 # ( '', ),
               ),
             # ( '', ),
-            )))
+            ),
+        ))
 
 except ImportError:
     pass

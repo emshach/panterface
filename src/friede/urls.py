@@ -202,7 +202,7 @@ configurable shells and themes''',
                     component='ListModelPage'
                 ))),
           ),
-        )))
+        ), ))
 
 
 apps = App.objects.filter( active=True ).all()

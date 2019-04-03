@@ -305,6 +305,7 @@ def updateapp( app, data, upto=None ):
                         print 'tag==from relations', tag == 'from relations'
                         if tag == 'from relations' :
                             try:
+                                print 'shortcut=', shortcuts[ registry[0] ]
                                 bundle = shortcuts[ registry[0] ]( app, *( top[1:] ))
                                 print 'bundle=', bundle
                                 stack.append( bundle )

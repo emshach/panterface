@@ -35,6 +35,7 @@ class PathMixin( Model ):
     # override save
     def save( self, *args, **kwargs ):
         created = False
+        container = None
         if not self.path and self.name and '.' in self.name:
             self.path = self.name
         if self.path:
@@ -43,13 +44,13 @@ class PathMixin( Model ):
             if len( path ) > 1:
                 self.name = path.pop()
                 self.parent, created = Container.objects.get_or_create(
-                    path='.'.join( path  ))
+                    path='.'.join( path[ :-1 ]))
             else:
                 self.parent = None
                 self.name = path[0]
         elif self.name:
             "make path if we have parent"
-            if self.parent:
+            if getattr( self, 'parent', getattr( self, 'registry', None )):
                 self.path = "%s.%s" % ( self.parent.path, self.name )
             else:
                 self.path = self.name
@@ -203,35 +204,35 @@ class Registry( Base, PathMixin ):
 class Container( Registry ):
     registry_ptr  = M.OneToOneField( Registry, M.CASCADE, parent_link=True,
                                      related_name='_container' )
-    registry = M.ManyToManyField( Registry, blank=True, through='ContainerEntry',
+    registries = M.ManyToManyField( Registry, blank=True, through='ContainerEntry',
                                   related_name='_containers' )
 
 
 class Widget( Registry, ExtendsMixin, SizeMixin, DataMixin ):
     registry_ptr  = M.OneToOneField( Registry, M.CASCADE, parent_link=True,
                                      related_name='_widget' )
-    registry = M.ManyToManyField( Registry, blank=True, through='WidgetEntry',
+    registries = M.ManyToManyField( Registry, blank=True, through='WidgetEntry',
                                   related_name='_widgets' )
 
 
 class Block( Registry, ExtendsMixin, SizeMixin, DataMixin ):
     registry_ptr  = M.OneToOneField( Registry, M.CASCADE, parent_link=True,
                                      related_name='_block' )
-    registry = M.ManyToManyField( Registry, blank=True, through='BlockEntry',
+    registries = M.ManyToManyField( Registry, blank=True, through='BlockEntry',
                                   related_name='_blocks' )
 
 
 class Screen( Registry, ExtendsMixin, SizeMixin, DataMixin ):
     registry_ptr  = M.OneToOneField( Registry, M.CASCADE, parent_link=True,
                                      related_name='_screen' )
-    registry = M.ManyToManyField( Registry, blank=True, through='ScreenEntry',
+    registries = M.ManyToManyField( Registry, blank=True, through='ScreenEntry',
                                   related_name='_screens' )
 
 
 class Shell( Registry, ExtendsMixin ):
     registry_ptr  = M.OneToOneField( Registry, M.CASCADE, parent_link=True,
                                      related_name='_shell' )
-    registry = M.ManyToManyField( Registry, blank=True, through='ShellEntry',
+    registries = M.ManyToManyField( Registry, blank=True, through='ShellEntry',
                                   related_name='_shells' )
     templates = M.CharField( max_length=255 ) # TODO: default
     template = M.CharField( max_length=255, default='index.html' )
@@ -244,7 +245,7 @@ class Shell( Registry, ExtendsMixin ):
 class Theme( Registry, ExtendsMixin ):
     registry_ptr  = M.OneToOneField( Registry, M.CASCADE, parent_link=True,
                                      related_name='_theme' )
-    registry = M.ManyToManyField( Registry, blank=True, through='ThemeEntry',
+    registries = M.ManyToManyField( Registry, blank=True, through='ThemeEntry',
                                   related_name='_themes' )
     templates = M.CharField( max_length=255 ) # TODO: default
     template = M.CharField( max_length=255, default='index.html' )
@@ -257,14 +258,14 @@ class Theme( Registry, ExtendsMixin ):
 class Slot( Registry ):
     registry_ptr  = M.OneToOneField( Registry, M.CASCADE, parent_link=True,
                                      related_name='_slot' )
-    registry = M.ManyToManyField( Registry, blank=True, through='SlotEntry',
+    registries = M.ManyToManyField( Registry, blank=True, through='SlotEntry',
                                   related_name='_slots' )
 
 
 class App( Registry, DataMixin ):
     registry_ptr  = M.OneToOneField( Registry, M.CASCADE, parent_link=True,
                                      related_name='_app' )
-    registry      = M.ManyToManyField( Registry, blank=True, through='AppEntry',
+    registries      = M.ManyToManyField( Registry, blank=True, through='AppEntry',
                                        related_name='_apps' )
     module        = M.CharField( max_length=128 )
     rest          = M.CharField( max_length=32, default=True )
@@ -272,21 +273,21 @@ class App( Registry, DataMixin ):
 
 
 class Location( Base, PathMixin ):
-    registry = M.ManyToManyField( Registry, blank=True, through='LocationEntry',
+    registries = M.ManyToManyField( Registry, blank=True, through='LocationEntry',
                                   related_name='_locations' )
     href = M.CharField( max_length=255, default='#' )
     redirect_to = M.ManyToManyField( 'self', blank=True, related_name='redirect_from' )
 
 
 class Link( Base, PathMixin ):
-    registry = M.ManyToManyField( Registry, blank=True, through='LinkEntry',
+    registries = M.ManyToManyField( Registry, blank=True, through='LinkEntry',
                                   related_name='links' )
     location = M.ForeignKey( Location, M.SET_NULL, null=True, blank=True,
                              related_name='_links' )
 
 
 class Reference( Base, PathMixin ):
-    registry = M.ManyToManyField( Registry, blank=True, through='ReferenceEntry',
+    registries = M.ManyToManyField( Registry, blank=True, through='ReferenceEntry',
                                   related_name='_references' )
     target = M.CharField( max_length=255 )
 
@@ -356,7 +357,7 @@ class Setting( Base, PathMixin, DataMixin ):
             ( MODEL,               'Model Choice' ),
             ( MODELS,              'Multiple Model Choice' ),
         )
-    registry = M.ManyToManyField( Registry, blank=True, through='SettingEntry',
+    registries = M.ManyToManyField( Registry, blank=True, through='SettingEntry',
                                   related_name='_settings' )
     type     = M.CharField( max_length=32, choices=Types.ALL, default=Types.CHAR )
     default  = JSONField( default=dict )

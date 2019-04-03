@@ -344,7 +344,8 @@ try:
         },
     )
     actions = 'list view new edit report delete'.split()
-    app, new = installapp(
+    if False:
+      app, new = installapp(
         name='intrepid',
         module='intrepid',
         title='Project Intrepid',

@@ -7,7 +7,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.db import transaction
 from importlib import import_module
 from collections import deque
-from packaging import version.parse as version_parse
+from packaging.version import parse as version_parse
 
 def setup():
     "make new settings"

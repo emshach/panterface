@@ -293,10 +293,10 @@ def updateapp( app, data, upto=None ):
                 cr.popleft()
 
             while stack:
-                print 'top=', top
                 obj = cr[0]
                 new = None
                 top = stack.pop()
+                print 'top=', top
                 if isinstance( top, tuple ):
                     if isinstance( top[0], basestring ):
                         tag = top[0]

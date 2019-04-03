@@ -322,7 +322,7 @@ def updateapp( app, data, upto=None ):
                             if path[0]:
                                 "then this may add to the elemnts of the current object"
                             else:
-                                obj = Container.objects.get( path=tag )
+                                obj = Container.objects.get_or_create( path=tag )
                                 stack.append( popcr )
                                 cr.appendleft( obj )
                         else:

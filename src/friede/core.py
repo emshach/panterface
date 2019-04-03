@@ -335,6 +335,8 @@ def updateapp( app, data, upto=None ):
                         # flatten tuples
                         stack.extend( top[ ::-1 ])
                 elif isinstance( top, dict ):
+                    if not get( top, 'path', None ):
+                        top[ 'path' ] = path[0]
                     search, updates = split_dict( top, 'name', 'path' )
                     for key, value in updates.items():
                         if not isinstance( value, basestring ):

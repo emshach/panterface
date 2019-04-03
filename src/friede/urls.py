@@ -1,7 +1,7 @@
 from django.conf.urls import url
 from . import views
 from .core import installapp
-from .model import App
+from .models import App
 from importlib import import_module
 
 app_name = 'friede'

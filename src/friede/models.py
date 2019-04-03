@@ -68,9 +68,9 @@ class PathMixin( Model ):
 class SizeMixin( Model ):
     class Meta:
         abstract = True
-    min_x = M.PositiveSmallIntegerField( blank=True )
+    min_x = M.PositiveSmallIntegerField( default=1 )
     max_x = M.PositiveSmallIntegerField( blank=True )
-    min_y = M.PositiveSmallIntegerField( blank=True )
+    min_y = M.PositiveSmallIntegerField( default=1 )
     max_y = M.PositiveSmallIntegerField( blank=True )
 
 

@@ -325,6 +325,7 @@ def updateapp( app, data, upto=None ):
                                 obj = Container.objects.get_or_create( path=tag )
                                 stack.append( popcr )
                                 cr.appendleft( obj )
+                            stack.extend( top[1:][ ::-1 ])
                         else:
                             if tag.startswith('.'):
                                 tag = tag[1:]
@@ -332,6 +333,7 @@ def updateapp( app, data, upto=None ):
                             path.appendleft(( "{}.{}" if path[0] else "{}{}" ).format(
                                 path[0], tag ))
                             cr.appendleft( None )
+                            stack.extend( top[1:][ ::-1 ])
                     else:
                         # flatten tuples
                         stack.extend( top[ ::-1 ])

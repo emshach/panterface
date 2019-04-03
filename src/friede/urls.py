@@ -181,7 +181,7 @@ configurable shells and themes''',
             ( 'group', dict(
                 data=dict(
                     component='FormGroup'
-                )))
+                ))),
             ( 'section', dict(
                 data=dict(
                     component='FormSection'

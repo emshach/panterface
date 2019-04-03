@@ -353,6 +353,7 @@ def updateapp( app, data, upto=None ):
                                     'path', value
                                 raise
                             relations[ key ] = related
+                            # TODO; account for multiple ordinality
                     if not obj or type( obj ) is not model[0]:
                         obj, new = model[0].objects.get_or_create(
                             defaults=updates, **search )

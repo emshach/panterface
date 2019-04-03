@@ -10,20 +10,20 @@ from collections import deque
 from packaging.version import parse as version_parse
 import sys
 
-types = {
-    'containers' : Container,
-    'widgets'    : Widget,
-    'blocks'     : Block,
-    'screens'    : Screen,
-    'shells'     : Shell,
-    'themes'     : Theme,
-    'slots'      : Slot,
-    'apps'       : App,
-    'locations'  : Location,
-    'links'      : Link,
-    'references' : Reference,
-    'settings'   : Setting
-}
+types = dict(
+    containers=Container,
+    widgets=Widget,
+    blocks=Block,
+    screens=Screen,
+    shells=Shell,
+    themes=Theme,
+    slots=Slot,
+    apps=App,
+    locations=Location,
+    links=Link,
+    references=Reference,
+    settings=Setting
+)
 
 def setup():
     "make new settings"
@@ -248,10 +248,10 @@ def mksettings( app, objects, relations ):
                             relations[o][ 'model' ])
             for o in objects ))
 
-shortcuts = {
-    'locations': mklocations,
-    'settings': mksettings
-}
+shortcuts = dict(
+    locations=mklocations,
+    settings=mksettings
+)
 
 def updateapp( app, data, upto=None ):
     app_version = version_parse( app.version )
@@ -298,10 +298,11 @@ def updateapp( app, data, upto=None ):
                 obj = cr[0]
                 new = None
                 top = stack.pop()
-                print 'top=', top
+                # print 'top=', top
                 if isinstance( top, tuple ):
                     if isinstance( top[0], basestring ):
                         tag = top[0]
+                        print 'tag=', tag
                         print 'tag==from relations', tag == 'from relations'
                         if tag == 'from relations' :
                             try:
@@ -313,6 +314,7 @@ def updateapp( app, data, upto=None ):
                                 print >> sys.stderr, e
                                 pass
                         elif tag in types:
+                            print 'tag in types'
                             stack.append( popmodel )
                             model.appendleft( types[ tag ])
                             registry.appendleft( tag )

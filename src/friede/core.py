@@ -302,7 +302,8 @@ def updateapp( app, data, upto=None ):
                         tag = top[0]
                         if tag == 'from relations' :
                             try:
-                                shortcuts[ registry[0] ]( app, *( top[1:] ))
+                               stack.app_version(
+                                   shortcuts[ registry[0] ]( app, *( top[1:] )))
                             except KeyError:
                                 # TODO: maybe warn
                                 pass

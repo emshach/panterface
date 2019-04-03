@@ -112,95 +112,95 @@ configurable shells and themes''',
             ( 'apps',    dict( title='Apps',       href='/apps'    )),
             ( 'about',   dict( title='About Us',   href='/about'   )),
             ( 'contact', dict( title='Contact Us', href='/contact' )),
-            ( 'from relations', objects, relations ))),
-        ( 'settings',
-          ( 'from relations', objects, relations ),
-          ( 'sys', dict( title='System' ),
-            ( 'ui', dict( title='User Interface' ),
-              ( 'shell', dict(
-                  type=Setting.Types.MODEL,
-                  data=dict(
-                      options='friede.Shell'
-                  ))),
-              ( 'theme', dict(
-                  type=Setting.Types.MODEL,
-                  data=dict(
-                      options='friede.Theme',
-                      filter=( 'in', '$current_shell' )
-                  )))))),
-        ( 'links', ),
-        ( 'widgets',
-          ( 'dashboard', dict (
-              data=dict(
-                  component='DashboardWidget'
-              ))),
-          ( 'inline', dict(
-              data=dict(
-                  component='InlineWidget'
-              )
-          )),
-          ( 'adaptive', dict(
-              data=dict(
-                  component='AdaptiveWidget'
-              ))),
-          ( 'view.from.model', dict(
-              extends='adaptive',
-              data=dict(
-                  component='ViewModelWidget'
-              ))),
-          ( 'new.from.model', dict(
-              extends='adaptive',
-              data=dict(
-                  component='NewModelWidget'
-              ))),
-          ( 'edit.from.model', dict(
-              extends='adaptive',
-              data=dict(
-                  component='EditModelWidget'
-              ))),
-          ( 'report.from.model', dict(
-              extends='adaptive',
-              data=dict(
-                  component='ReportModelWidget'
-              ))),
-          ( 'delete.from.model', dict(
-              extends='adaptive',
-              data=dict(
-                  component='ReportModelWidget'
-              ))),
-          tuple(
-              ( action,
-                tuple(( o, dict(
-                    extends="{}.from.model".format( action ),
+            ( 'from relations', objects, relations )),
+          ( 'settings',
+            ( 'from relations', objects, relations ),
+            ( 'sys', dict( title='System' ),
+              ( 'ui', dict( title='User Interface' ),
+                ( 'shell', dict(
+                    type=Setting.Types.MODEL,
                     data=dict(
-                        model="intrepid.{}".format( relations[o][ 'model' ]))
-                )) for o in objects ))
+                        options='friede.Shell'
+                    ))),
+                ( 'theme', dict(
+                    type=Setting.Types.MODEL,
+                    data=dict(
+                        options='friede.Theme',
+                        filter=( 'in', '$current_shell' )
+                    )))))),
+          ( 'links', ),
+          ( 'widgets',
+            ( 'dashboard', dict (
+                data=dict(
+                    component='DashboardWidget'
+                ))),
+            ( 'inline', dict(
+                data=dict(
+                    component='InlineWidget'
+                )
+            )),
+            ( 'adaptive', dict(
+                data=dict(
+                    component='AdaptiveWidget'
+                ))),
+            ( 'view.from.model', dict(
+                extends='adaptive',
+                data=dict(
+                    component='ViewModelWidget'
+                ))),
+            ( 'new.from.model', dict(
+                extends='adaptive',
+                data=dict(
+                    component='NewModelWidget'
+                ))),
+            ( 'edit.from.model', dict(
+                extends='adaptive',
+                data=dict(
+                    component='EditModelWidget'
+                ))),
+            ( 'report.from.model', dict(
+                extends='adaptive',
+                data=dict(
+                    component='ReportModelWidget'
+                ))),
+            ( 'delete.from.model', dict(
+                extends='adaptive',
+                data=dict(
+                    component='ReportModelWidget'
+                ))),
+            tuple(
+                ( action,
+                  tuple(( o, dict(
+                      extends="{}.from.model".format( action ),
+                      data=dict(
+                          model="intrepid.{}".format( relations[o][ 'model' ]))
+                  )) for o in objects ))
               for action in actions[1:] )),
-        ( 'blocks',
-          ( 'form',
-            ( 'group', dict(
+          ( 'blocks',
+            ( 'form',
+              ( 'group', dict(
+                  data=dict(
+                      component='FormGroup'
+                  ))),
+              ( 'section', dict(
+                  data=dict(
+                      component='FormSection'
+                  ))),
+              ( 'calendar', dict(
+                  data=dict(
+                      component='FormCalendar',
+                  ))))),
+          ( 'screens',
+            ( 'form.single', dict(
                 data=dict(
-                    component='FormGroup'
+                    component='FormPage'
                 ))),
-            ( 'section', dict(
+            ( 'list.from.model', dict(
                 data=dict(
-                    component='FormSection'
+                    component='ListModelPage'
                 ))),
-            ( 'calendar', dict(
-                data=dict(
-                    component='FormCalendar',
-                ))))),
-        ( 'screens',
-          ( 'form.single', dict(
-              data=dict(
-                  component='FormPage'
-              ))),
-          ( 'list.from.model', dict(
-              data=dict(
-                  component='ListModelPage'
-              ))),
-        ),
-    ))
+          ),
+        )))
 
 
 apps = App.objects.filter( active=True ).all()

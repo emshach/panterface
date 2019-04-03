@@ -9,6 +9,21 @@ from importlib import import_module
 from collections import deque
 from packaging.version import parse as version_parse
 
+types = dict(
+    containers=Container,
+    widgets=Widget,
+    blocks=Block,
+    screens=Screen,
+    shells=Shell,
+    themes=Theme,
+    slots=Slot,
+    apps=App,
+    locations=Location,
+    links=Link,
+    references=Reference,
+    settings=Setting
+)
+
 def setup():
     "make new settings"
     # settings = Settings()
@@ -103,20 +118,6 @@ def installapp( name, module, title, description, icon='', rest=True,
         updateapp( app, data, upto=version )
     return app, new
 
-types = dict(
-    containers=Container,
-    widgets=Widget,
-    blocks=Block,
-    screens=Screen,
-    shells=Shell,
-    themes=Theme,
-    slots=Slot,
-    apps=App,
-    locations=Location,
-    links=Link,
-    references=Reference,
-    settings=Setting
-)
 def mklocations( app, objects, relations ):
     actions = 'list view new edit report delete'.split()
     return (( 'list', tuple(

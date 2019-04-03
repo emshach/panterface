@@ -244,8 +244,8 @@ def mksettings( app, objects, relations ):
     return (
         "views.list.fields.{}".format( path ),
         tuple(
-            getsimplefields( app, name, relations[o][ 'plural' ],
-                            relations[o][ 'model' ])
+            getsimplefields( app, o, relations[o][ 'plural' ],
+                             relations[o][ 'model' ])
             for o in objects ))
 
 shortcuts = dict(

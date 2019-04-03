@@ -112,52 +112,9 @@ configurable shells and themes''',
             ( 'apps',    dict( title='Apps',       href='/apps'    )),
             ( 'about',   dict( title='About Us',   href='/about'   )),
             ( 'contact', dict( title='Contact Us', href='/contact' )),
-            tuple (
-                ( y, actions,
-                  ( 'add', ( 'to', relations[x][ 'has' ]),
-                    relations[x][ 'in' ]),
-                  ( 'remove', ( 'from', relations[x][ 'has' ]),
-                    relations[x][ 'in' ]))
-                for w in (((o, o), ( o, relations[o][ 'plural' ]))
-                          for o in objects )
-                for x, y in w ),
-            ( 'list', tuple(
-                ( o, dict( to="{}.list".format(x) )) for o in objects )),
-            tuple(
-                ( action, tuple(
-                    ( name, "{}.{}".format( name, action ))
-                    for pair in (( relations[o][ 'singular' ], o )
-                                 for o in objects )
-                    for name in pair ))
-                for action in actions[1:] ),
-            ( 'add',
-              ( 'new', objects ),
-              ( 'to',
-                ( 'new', objects),
-                tuple(
-                    ( y, dict( to="{}.add.to".format(y) ))
-                    for w in (((o, o), ( o, relations[o][ 'plural' ]))
-                              for o in objects )
-                    for x, y in w )),
-              tuple(
-                  ( y, dict( to="{}.add".format(y) ))
-                  for w in (((o, o), ( o, relations[o][ 'plural' ]))
-                            for o in objects )
-                  for x, y in w )),
-            ( 'remove',
-              ( 'from',
-                tuple(
-                    ( y, dict( to="{}.remove.from".format(y) ))
-                    for w in (((o, o), ( o, relations[o][ 'plural' ]))
-                              for o in objects )
-                    for x, y in w )),
-              tuple(
-                  ( y, dict( to="{}.remove".format(y) ))
-                  for w in (((o, o), ( o, relations[o][ 'plural' ]))
-                            for o in objects )
-                  for x, y in w )),
-          )),
+            ( 'from relations', objects, relations ))),
         ( 'settings',
+          ( 'from relations', objects, relations ),
           ( 'sys', dict( title='System' ),
             ( 'ui', dict( title='User Interface' ),
               ( 'shell', dict(

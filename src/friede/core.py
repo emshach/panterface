@@ -302,6 +302,7 @@ def updateapp( app, data, upto=None ):
                 if isinstance( top, tuple ):
                     if isinstance( top[0], basestring ):
                         tag = top[0]
+                        print 'tag==from relations', tag == 'from relations'
                         if tag == 'from relations' :
                             try:
                                 bundle = shortcuts[ registry[0] ]( app, *( top[1:] ))

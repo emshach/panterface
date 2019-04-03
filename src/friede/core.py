@@ -341,7 +341,12 @@ def updateapp( app, data, upto=None ):
                             continue
                         field = model[0]._meta.get_field( key )
                         if field.is_relation:
-                            related = field.related_model.objects.get( path=value )
+                            try:
+                                related = field.related_model.objects.get( path=value )
+                            except ObjectDoesNotExist:
+                                print >> sys.stderr, "got no", field.related_model,\
+                                    'path', value
+                                raise
                             updates[ key ] = related
                     if not obj or type( obj ) is not model[0]:
                         obj, new = model[0].objects.get_or_create(

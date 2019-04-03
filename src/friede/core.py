@@ -304,10 +304,8 @@ def updateapp( app, data, upto=None ):
                     if isinstance( top[0], basestring ):
                         tag = top[0]
                         print 'tag=', tag
-                        print 'tag==from relations', tag == 'from relations'
                         if tag == 'from relations' :
                             try:
-                                print 'shortcut=', shortcuts[ registry[0] ]
                                 bundle = shortcuts[ registry[0] ]( app, *( top[1:] ))
                                 print 'bundle=', bundle
                                 stack.append( bundle )
@@ -315,7 +313,6 @@ def updateapp( app, data, upto=None ):
                                 print >> sys.stderr, e
                                 pass
                         elif tag in types:
-                            print 'tag in types'
                             stack.append( popmodel )
                             model.appendleft( types[ tag ])
                             registry.appendleft( tag )
@@ -347,8 +344,8 @@ def updateapp( app, data, upto=None ):
                             related = field.related_model.objects.get( path=value )
                             updates[ key ] = related
                     if not obj or type( obj ) is not model[0]:
-                        obj, new = model[0].get_or_create( defaults=updates,
-                                                           **search )
+                        obj, new = model[0].objects.get_or_create(
+                            defaults=updates, **search )
                     if not new:
                         for key, value in updates.items():
                             setattr( obj, key, value )

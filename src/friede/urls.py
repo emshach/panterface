@@ -111,7 +111,7 @@ configurable shells and themes''',
         ( '0.1.0',
           ( 'locations',
             ( 'home',    dict( title='Home',       href='/'        )),
-            ( '.apps',    dict( title='Apps',       href='/apps'    )),
+            ( '.apps',   dict( title='Apps',       href='/apps'    )),
             ( 'about',   dict( title='About Us',   href='/about'   )),
             ( 'contact', dict( title='Contact Us', href='/contact' )),
             ( 'from relations', objects, relations )),
@@ -146,34 +146,34 @@ configurable shells and themes''',
                     component='AdaptiveWidget'
                 ))),
             ( 'view.from.model', dict(
-                extends='adaptive',
+                extends='widgets.adaptive',
                 data=dict(
                     component='ViewModelWidget'
                 ))),
             ( 'new.from.model', dict(
-                extends='adaptive',
+                extends='widgets.adaptive',
                 data=dict(
                     component='NewModelWidget'
                 ))),
             ( 'edit.from.model', dict(
-                extends='adaptive',
+                extends='widgets.adaptive',
                 data=dict(
                     component='EditModelWidget'
                 ))),
             ( 'report.from.model', dict(
-                extends='adaptive',
+                extends='widgets.adaptive',
                 data=dict(
                     component='ReportModelWidget'
                 ))),
             ( 'delete.from.model', dict(
-                extends='adaptive',
+                extends='widgets.adaptive',
                 data=dict(
                     component='ReportModelWidget'
                 ))),
             tuple(
                 ( action,
                   tuple(( o, dict(
-                      extends="{}.from.model".format( action ),
+                      extends="widgets.{}.from.model".format( action ),
                       data=dict(
                           model="intrepid.{}".format( relations[o][ 'model' ]))
                   )) for o in objects ))

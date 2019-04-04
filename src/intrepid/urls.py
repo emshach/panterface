@@ -361,7 +361,7 @@ Also includes goal-setting, strategizing, and teamwork tools.''',
                 tuple(
                     ( action,
                       tuple(( o, dict(
-                          extends="{}.from.model".format( action ),
+                          extends="widgets.{}.from.model".format( action ),
                           data=dict(
                               model="intrepid.{}".format( relations[o][ 'model' ]))
                       )) for o in objects ))
@@ -369,14 +369,14 @@ Also includes goal-setting, strategizing, and teamwork tools.''',
               ( 'blocks',
                 ( 'form',
                   ( 'basic', dict(
-                      extends='form.section',
+                      extends='blocks.form.section',
                       data=dict( fields='active name title description'.split() ))),
                   ( 'extra',
                     ( 'resources', dict(
-                        extends='form.section',
+                        extends='blocks.form.section',
                         data=dict( fields='url upload parent attached_to'.split() ))),
                     ( 'goal', dict(
-                        extends='form.section'
+                        extends='blocks.form.section'
                     )),
                     # ( 'objective', ),
                     # ( 'target', ),
@@ -423,16 +423,16 @@ Also includes goal-setting, strategizing, and teamwork tools.''',
                 )
                   ( 'relations',
                     ( 'note', dict(
-                        extends='form.section',
+                        extends='blocks.form.section',
                         data=dict( fields='notes'.split() ))),
                     ( 'resource', dict(
-                        extends='form.section',
+                        extends='blocks.form.section',
                         data=dict( fields='resources notes'.split() ))),
                     ( 'product', dict(
-                        extends='form.section',
+                        extends='blocks.form.section',
                         data=dict( fields='products notes'.split() ))),
                     ( 'goal', dict(
-                        extends='form.section',
+                        extends='blocks.form.section',
                         data=dict( fields='''intended_start intended_end actual_start
                                          actual_end'''.split() )
                     )),
@@ -480,7 +480,7 @@ Also includes goal-setting, strategizing, and teamwork tools.''',
                     # ( 'term', ),
               ),
                   ( 'infographic', dict(
-                      extends='form.calendar',
+                      extends='blocks.form.calendar',
                       data=dict(
                           dates=[
                               dict( model='intrepid.Goal',
@@ -493,33 +493,33 @@ Also includes goal-setting, strategizing, and teamwork tools.''',
                 ( 'list',
                   tuple(
                       ( o, dict(
-                          extends='list.from.model',
+                          extends='screens.list.from.model',
                           model=relations[o][ 'model' ]))
                     for o in objects)),
                 ( 'new',
                   ( 'note', dict(
-                      extends='form.single',
+                      extends='screens.form.single',
                       block_entries=
                       ( 'slot',
                         dict( block='form.basic' ),
                         dict( block='form.relations.note' ))
                   )),
                   ( 'resource', dict(
-                      extends='form.single',
+                      extends='screens.form.single',
                       block_entries=
                       ( 'slot',
                         dict( block='form.basic' ),
                         dict( block='form.extra.resource' ),
                         dict( block='form.relations.resource' )))),
                   ( 'product', dict(
-                      extends='form.single',
+                      extends='screens.form.single',
                       block_entries=
                       ( 'slot',
                         dict( block='form.basic' ),
                         dict( block='form.extra.product' ),
                         dict( block='form.relations.product' )))),
                   ( 'goal', dict(
-                      extends='form.single',
+                      extends='screens.form.single',
                       block_entries=
                       ( 'slot',
                         dict( block='form.basic' ),

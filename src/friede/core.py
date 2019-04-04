@@ -127,7 +127,7 @@ def mklocations( app, objects, relations ):
             href="/list/{}".format( relations[o][ 'plural' ]))),
          ( o, dict(
              title="list {}".format( relations[o][ 'plural' ]).title(),
-             redirect_to="list.{}".format( relations[o][ 'plural' ]))))
+             redirect_to="locations.list.{}".format( relations[o][ 'plural' ]))))
                     for o in objects )),
             tuple (
                 ( action,
@@ -193,12 +193,12 @@ def mklocations( app, objects, relations ):
                   ( 'add',
                     dict(
                         title="add {}".format(y).title(),
-                        redirect_to="add.{}".format(y)
+                        redirect_to="locations.add.{}".format(y)
                     )),
                   ( 'remove',
                     dict(
                         title="remove {}".format(y).title(),
-                        redirect_to="remove.{}".format(y) )))
+                        redirect_to="locations.remove.{}".format(y) )))
                     for w in (((o, o), ( o, relations[o][ 'plural' ]))
                               for o in objects if relations[o][ 'has' ])
                     for x, y in w ),
@@ -206,11 +206,11 @@ def mklocations( app, objects, relations ):
                 (( "{}.add.to".format(y),
                    dict(
                        title="add to {}".format(y).title(),
-                       redirect_to="add.to.{}".format(y) )),
+                       redirect_to="locations.add.to.{}".format(y) )),
                  ( "{}.remove.from".format(y),
                    dict(
                        title="remove from {}".format(y).title(),
-                       redirect_to="remove.from.{}".format(y) )))
+                       redirect_to="locations.remove.from.{}".format(y) )))
                     for w in (((o, o), ( o, relations[o][ 'plural' ]))
                               for o in objects if relations[o][ 'in' ])
                     for x, y in w ))

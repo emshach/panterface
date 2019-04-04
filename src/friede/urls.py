@@ -217,7 +217,8 @@ try:
                 if rest:
                     router = urls.router
                     match = r'^api/%s/' % name
-                    urlpatterns.append( url( match, include( router.urls )))
+                    urlpatterns.append(
+                        url( match, include( router.urls, namespace='' )))
             except ImportError, AttributeError:
                 continue
 except Exception:

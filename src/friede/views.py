@@ -5,6 +5,7 @@ from django.shortcuts import render
 from .objects import getregistries, getenv
 from .core import setup, setupshell, setuptheme, setupmenus
 from rest_framework import viewsets
+from .models import *
 from .serializers import *
 
 ### route views

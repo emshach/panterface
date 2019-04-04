@@ -44,10 +44,7 @@ class PathMixin( Model ):
             if len( path ) > 1:
                 self.name = path.pop()
                 self.parent, created = Container.objects.get_or_create(
-                    path='.'.join( path[ :-1 ]))
-            elif len( path ):
-                self.parent, created = Container.objects.get_or_create(
-                    path=path[0] )
+                    path='.'.join( path ))
             else:
                 self.parent = None
                 self.name = path[0]

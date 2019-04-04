@@ -10,18 +10,18 @@ from rest_framework import routers
 app_name = 'friede'
 urlpatterns = []
 router = routers.DefaultRouter()
-router.register( r'containers', views.ContainerViewSet )
-router.register( r'widgets',    views.WidgetViewSet    )
-router.register( r'blocks',     views.BlockViewSet     )
-router.register( r'screens',    views.ScreenViewSet    )
-router.register( r'shells',     views.ShellViewSet     )
-router.register( r'themes',     views.ThemeViewSet     )
-router.register( r'slots',      views.SlotViewSet      )
-router.register( r'apps',       views.AppViewSet       )
-router.register( r'locations',  views.LocationViewSet  )
-router.register( r'links',      views.LinkViewSet      )
-router.register( r'references', views.ReferenceViewSet )
-router.register( r'settings',   views.SettingViewSet   )
+router.register( r'friede/containers', views.ContainerViewSet )
+router.register( r'friede/widgets',    views.WidgetViewSet    )
+router.register( r'friede/blocks',     views.BlockViewSet     )
+router.register( r'friede/screens',    views.ScreenViewSet    )
+router.register( r'friede/shells',     views.ShellViewSet     )
+router.register( r'friede/themes',     views.ThemeViewSet     )
+router.register( r'friede/slots',      views.SlotViewSet      )
+router.register( r'friede/apps',       views.AppViewSet       )
+router.register( r'friede/locations',  views.LocationViewSet  )
+router.register( r'friede/links',      views.LinkViewSet      )
+router.register( r'friede/references', views.ReferenceViewSet )
+router.register( r'friede/settings',   views.SettingViewSet   )
 
 objects = '''container widget block screen shell theme slot app location link
              reference setting'''.split()
@@ -204,20 +204,21 @@ configurable shells and themes''',
           ),
         ), ))
 
-
-apps = App.objects.filter( active=True ).all()
-for app in apps:
-    name = app.name
-    module = app.module
-    rest = app.rest
-    if module:
-        try:
-            urls = import_module( "%s.%s" % ( module, 'urls' ))
-            if rest:
-                router = urls.router
-                match = r'^api/%s/' % name
-                urlpatterns.append( url( match, include( router.urls )))
-        except ImportError, AttributeError:
-            continue
+try:
+    apps = App.objects.filter( active=True ).all()
+    for app in apps:
+        name = app.name
+        module = app.module
+        rest = app.rest
+        if module:
+            try:
+                urls = import_module( "%s.%s" % ( module, 'urls' ))
+                if rest:
+                    router = urls.router
+                    urlpatterns.append( url( r'^api/', include( router.urls )))
+            except ImportError, AttributeError:
+                continue
+except Exception:
+    pass
 
 urlpatterns.append( url( r'^.*$', views.index, name='index' ))

@@ -102,22 +102,25 @@ def setuptheme( shell=None ):
 @transaction.atomic
 def installapp( name, module, title, description, icon='', rest=True,
                 active=True, version=None, router=None, data=None ):
-    from .models import App
-    path = name
-    if not path.startswith( 'apps.' ):
-        path = 'apps.' + path
-    app, new = App.objects.get_or_create( path=path, defaults=dict(
-        title=title,
-        module=module,
-        description=description,
-        icon=icon,
-        rest=rest,
-        active=active,
-        version='0.0.0',
-    ))
-    if data:
-        updateapp( app, data, upto=version )
-    return app, new
+    try:
+        from .models import App
+        path = name
+        if not path.startswith( 'apps.' ):
+            path = 'apps.' + path
+        app, new = App.objects.get_or_create( path=path, defaults=dict(
+            title=title,
+            module=module,
+            description=description,
+            icon=icon,
+            rest=rest,
+            active=active,
+            version='0.0.0',
+        ))
+        if data:
+            updateapp( app, data, upto=version )
+        return app, new
+    except Exception:
+        return None, None
 
 def mklocations( app, objects, relations ):
     actions = 'list view new edit report delete'.split()

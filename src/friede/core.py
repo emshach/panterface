@@ -46,26 +46,35 @@ def setupmenus( env=None ):
     "make the default menu entries"
     if not env:
         env = getenv()
-    menus = None
-    try:
-        menus = Contaianer.objects.get( path='links.menu' )
-    except:
-        menus = Container.objects.create( path='links.menu' )
-        Link.objects.bulk_create([
-            Link( path='links.menu.nav.home',
-                  title='Home',
-                  location=Location.objects.get( path='locations.home' )),
-            Link( path='links.menu.nav.apps',
-                  title='Apps',
-                  location=Location.objects.get( path='locations.apps' )),
-            Link( path='links.menu.nav.about',
-                  title='About Us',
-                  location=Location.objects.get( path='locations.about' )),
-            Link( path='links.menu.nav.contact',
-                  title='Contact Us',
-                  location=Location.objects.get( path='locations.contact' ))
-        ])
-    env.addcontainer( 'menus', menus )
+    menus, created = Container.objects.get_or_create(
+        path='links.menu', defaults=dict(
+            title='Menus',
+            description='Collection of all Menu Objects' ))
+
+    nav = Container.objects.get_or_create(
+        path='links.menu.nav', defaults=dict(
+            title='Nav Menu',
+            description='Main Site Navigation Menu'
+        ))
+    Link.objects.get_or_create(
+        path='links.menu.nav.home', defaults=dict(
+            title='Home',
+            location=Location.objects.get( path='locations.home' )))
+    Link.objects.get_or_create(
+        path='links.menu.nav.apps', defaults=dict(
+            title='Apps',
+            location=Location.objects.get( path='locations.apps' )))
+    Link.objects.get_or_create(
+        path='links.menu.nav.about', defaults=dict(
+            title='About Us',
+            location=Location.objects.get( path='locations.about' )))
+    Link.objects.get_or_create(
+        path='links.menu.nav.contact', defaults=dict(
+            title='Contact Us',
+            location=Location.objects.get( path='locations.contact' )))
+
+    if created:
+        env.addcontainer( 'menus', menus )
     return menus
 
 def setupshell( env=None ):

@@ -322,8 +322,9 @@ def updateapp( app, data, upto=None ):
                                 "then this may add to the elemnts of the current object"
                             else:
                                 obj = Container.objects.get_or_create( path=tag )
-                                stack.append( popcr )
+                                stack.extend(( poppath, popcr ))
                                 cr.appendleft( obj )
+                                path.appendleft( tag )
                             stack.extend( top[1:][ ::-1 ])
                         else:
                             if tag.startswith('.'):

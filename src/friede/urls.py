@@ -224,4 +224,4 @@ try:
 except Exception:
     pass
 
-urlpatterns.append( url( r'^.*/$', views.index, name='index' ))
+urlpatterns.append( url( r'^.*', views.index, name='index' ))

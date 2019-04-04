@@ -79,7 +79,7 @@ class AppSerializer( serializers.HyperlinkedModelSerializer ):
         fields = ( 'url', 'id', 'name', 'title', 'description', 'active', 'icon',
                    'path',
                    'data',
-                   'modulee', 'rest', 'version',
+                   'module', 'rest', 'version',
         )
 
 

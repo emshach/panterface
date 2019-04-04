@@ -100,7 +100,8 @@ relations = dict(
     },
 )
 actions = 'list view new edit report delete'.split()
-app, new = installapp(
+if False:
+  app, new = installapp(
     name='friede',
     module='friede',
     title='Project Friede',
@@ -206,7 +207,8 @@ configurable shells and themes''',
 
 
 apps = App.objects.filter( active=True ).all()
-for app in apps:
+if False:
+  for app in apps:
     name = app.name
     module = app.module
     rest = app.rest

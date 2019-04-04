@@ -7,7 +7,7 @@ from .models import App, Setting
 from importlib import import_module
 from rest_framework import routers
 
-app_name = 'friede'
+NAME = 'friede'
 urlpatterns = []
 router = routers.DefaultRouter()
 router.register( r'containers', views.ContainerViewSet )
@@ -206,7 +206,7 @@ configurable shells and themes''',
         ), ))
 
 try:
-    apps = App.objects.filter( active=True ).exclude( name=app_name ).all()
+    apps = App.objects.filter( active=True ).exclude( name=NAME ).all()
     for app in apps:
         name = app.name
         module = app.module

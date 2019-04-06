@@ -218,7 +218,7 @@ class Registry( Base, PathMixin ):
                 else:
                     out[ x.name ] = data[ x.name ]
             if data:
-                out[ "$%ss" % s ] = data
+                out[ "$%ss" % f ] = data
         return out
 
 class Container( Registry ):

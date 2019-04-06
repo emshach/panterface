@@ -16,8 +16,8 @@ def index( request ):
     # # get the shell
     menus = env.C.menus()
     if not menus:
-        menus = json.dumps( setupmenus() )
-    menudata = menus.to_dict()
+        menus = setupmenus()
+    menudata = json.dumps( menus.to_dict() )
     shell = env.H.current()
     if not shell:
         shell = setupshell( env )

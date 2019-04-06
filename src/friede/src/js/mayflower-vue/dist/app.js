@@ -92,7 +92,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "475f0b7ab645614a0b1b";
+/******/ 	var hotCurrentHash = "11ff60e94bc55b70311a";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -935,7 +935,7 @@ __webpack_require__.r(__webpack_exports__);
     Prompt: _components_Prompt_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   mounted: function mounted() {
-    this.menus = Friede.menus.nav.$links;
+    this.menus = Friede.menus;
   },
   data: function data() {
     return {
@@ -1159,7 +1159,7 @@ var render = function() {
       _c(
         "div",
         { attrs: { id: "nav" } },
-        _vm._l(_vm.menus.nav, function(link, key) {
+        _vm._l(_vm.menus.nav.$links, function(link, key) {
           return _c(
             "router-link",
             { key: key, attrs: { to: link.location.$href } },

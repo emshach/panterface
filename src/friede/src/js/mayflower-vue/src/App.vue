@@ -2,7 +2,7 @@
   <div id="app">
     <div id="nav">
       <router-link
-        v-for="( link, key ) in menus.nav" :key=key
+        v-for="( link, key ) in menus.nav.$links" :key=key
         :to="link.location.$href">{{ link.$title || link.location.$title }}</router-link>
     </div>
     <transition name="fade-fast" mode="out-in">
@@ -21,7 +21,7 @@ export default {
     Prompt
   },
   mounted() {
-    this.menus = Friede.menus.nav.$links
+    this.menus = Friede.menus
   },
   data() {
     return {

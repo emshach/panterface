@@ -205,31 +205,20 @@ class Registry( Base, PathMixin ):
     def to_dict( self ):
         out = {
             'default'     : self.default,
-            'format'      : self.format,
-            '$containers' : { x.name: x.entry.to_dict()
-                              for x in self._container_entries.all() },
-            '$widgets'    : { x.name: x.entry.to_dict()
-                              for x in self._widget_entries.all() },
-            '$blocks'     : { x.name: x.entry.to_dict()
-                              for x in self._block_entries.all() },
-            '$screens'    : { x.name: x.entry.to_dict()
-                              for x in self._screen_entries.all() },
-            '$shells'     : { x.name: x.entry.to_dict()
-                              for x in self._shell_entries.all() },
-            '$themes'     : { x.name: x.entry.to_dict()
-                              for x in self._theme_entries.all() },
-            '$slots'      : { x.name: x.entry.to_dict()
-                              for x in self._slot_entries.all() },
-            '$apps'       : { x.name: x.entry.to_dict()
-                              for x in self._app_entries.all() },
-            '$locations'  : { x.name: x.entry.to_dict()
-                              for x in self._location_entries.all() },
-            '$links'      : { x.name: x.entry.to_dict()
-                              for x in self._link_entries.all() },
-            '$references' : { x.name: x.entry.to_dict()
-                              for x in self._reference_entries.all() },
-            '$settings'   : { x.name: x.entry.to_dict()
-                              for x in self._setting_entries.all() },
+            'format'      : self.format
+            }
+
+        for f in '''container widget block screen shell theme slot app location
+                    link reference setting'''.split():
+            data = {}
+            for x in getattr( self, "_%s_entries" % f ).all():
+                data[ x.name ]
+                if x.name in out:
+                    del out[ x.name ]
+                else:
+                    out[ x.name ] = x.entry.to_dict()
+            if data:
+                out[ "$%ss" % s ] = data
         }
         return out
 

@@ -17,7 +17,7 @@ def index( request ):
     menus = env.C.menus()
     if not menus:
         menus = setupmenus()
-    menudata = list( menus ) + [ menus.registry_ptr ]
+    menudata = [ menus, menus.registry_ptr ]
     menudata = serializers.serialize( 'json', menudata )
     shell = env.H.current()
     if not shell:

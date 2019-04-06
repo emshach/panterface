@@ -212,11 +212,11 @@ class Registry( Base, PathMixin ):
                     link reference setting'''.split():
             data = {}
             for x in getattr( self, "_%s_entries" % f ).all():
-                data[ x.name ]
+                data[ x.name ] = x.entry.to_dict()
                 if x.name in out:
                     del out[ x.name ]
                 else:
-                    out[ x.name ] = x.entry.to_dict()
+                    out[ x.name ] = data[ x.name ]
             if data:
                 out[ "$%ss" % s ] = data
         return out

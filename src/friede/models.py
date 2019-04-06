@@ -329,6 +329,12 @@ class Link( Base, PathMixin ):
     location = M.ForeignKey( Location, M.SET_NULL, null=True, blank=True,
                              related_name='_links' )
 
+    def to_dict( self ):
+        return {
+            'path': self.path,
+            'location': self.location.to_dict()
+        }
+
 
 class Reference( Base, PathMixin ):
     parent = M.ForeignKey( Registry, M.CASCADE, null=True,

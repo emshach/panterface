@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django.core import serializers
 from django.shortcuts import render
 from .objects import getregistries, getenv
 from .core import setup, setupshell, setuptheme, setupmenus
@@ -16,6 +17,8 @@ def index( request ):
     menus = env.C.menus()
     if not menus:
         menus = setupmenus()
+    menudata = list( menus ) + [ menus.registry_ptr ]
+    menudata = serializers.serialize( 'json', menudata )
     shell = env.H.current()
     if not shell:
         shell = setupshell( env )
@@ -27,7 +30,7 @@ def index( request ):
     context = dict(
         shell=shell,
         theme=theme,
-        menus=menus,
+        menus=menudata,
     )
     for registry in getregistries():
         context[ registry.name ] = registry

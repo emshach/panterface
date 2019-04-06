@@ -25,7 +25,7 @@ export default {
       default: true
     }
   },
-  components: { Switchboard, Breadcrumb},
+  components: { Switchboard, Breadcrumb },
   mounted() {
   },
   data() {

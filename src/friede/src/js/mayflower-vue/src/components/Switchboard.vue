@@ -1,9 +1,6 @@
 <template lang="html">
-
   <section class="switchboard">
-    <h1>switchboard Component</h1>
   </section>
-
 </template>
 
 <script lang="js">
@@ -29,6 +26,6 @@
 
 <style scoped lang="scss">
   .switchboard {
-
+    display: none
   }
 </style>

@@ -202,6 +202,36 @@ class Registry( Base, PathMixin ):
     def addsetting( self, name, setting ):
         SettingEntry.objects.create( registry=self, name=name, entry=setting )
 
+    def to_dict( self ):
+        out = {
+            'default'     : self.default,
+            'format'      : self.format,
+            '$containers' : { x.name: x.entry.to_dict()
+                              for x in self._container_entries.objects.all() },
+            '$widgets'    : { x.name: x.entry.to_dict()
+                              for x in self._widget_entries.objects.all() },
+            '$blocks'     : { x.name: x.entry.to_dict()
+                              for x in self._block_entries.objects.all() },
+            '$screens'    : { x.name: x.entry.to_dict()
+                              for x in self._screen_entries.objects.all() },
+            '$shells'     : { x.name: x.entry.to_dict()
+                              for x in self._shell_entries.objects.all() },
+            '$themes'     : { x.name: x.entry.to_dict()
+                              for x in self._theme_entries.objects.all() },
+            '$slots'      : { x.name: x.entry.to_dict()
+                              for x in self._slot_entries.objects.all() },
+            '$apps'       : { x.name: x.entry.to_dict()
+                              for x in self._app_entries.objects.all() },
+            '$locations'  : { x.name: x.entry.to_dict()
+                              for x in self._location_entries.objects.all() },
+            '$links'      : { x.name: x.entry.to_dict()
+                              for x in self._link_entries.objects.all() },
+            '$references' : { x.name: x.entry.to_dict()
+                              for x in self._reference_entries.objects.all() },
+            '$settings'   : { x.name: x.entry.to_dict()
+                              for x in self._setting_entries.objects.all() },
+        }
+        return out
 
 class Container( Registry ):
     registry_ptr  = M.OneToOneField( Registry, M.CASCADE, parent_link=True,
@@ -282,6 +312,13 @@ class Location( Base, PathMixin ):
     href = M.CharField( max_length=255, default='#' )
     redirect_to = M.OneToOneField( 'self', blank=True, null=True,
                                    related_name='redirect_from' )
+
+    def to_dict( self ):
+        return {
+            'path': self.path,
+            'href': self.href,
+            'redirect_to': self.redirect_to
+        }
 
 
 class Link( Base, PathMixin ):

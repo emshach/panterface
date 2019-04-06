@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.core import serializers as dj_serializers
 from django.shortcuts import render
 from .objects import getregistries, getenv
 from .core import setup, setupshell, setuptheme, setupmenus
 from rest_framework import viewsets
 from .models import *
 from .serializers import *
+import json
 
 ### route views
 
@@ -16,9 +16,8 @@ def index( request ):
     # # get the shell
     menus = env.C.menus()
     if not menus:
-        menus = setupmenus()
-    menudata = [ menus, menus.registry_ptr ]
-    menudata = dj_serializers.serialize( 'json', menudata )
+        menus = json.dumps( setupmenus() )
+    menudata = menus.to_dict()
     shell = env.H.current()
     if not shell:
         shell = setupshell( env )

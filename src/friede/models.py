@@ -34,7 +34,7 @@ class Base( Model ):
             '$title'       : self.title,
             '$description' : self.description,
         }
-        if hasattr( self, path ):
+        if hasattr( self, 'path' ):
             out[ '$path' ] = self.path
         return out
 

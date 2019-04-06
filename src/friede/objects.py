@@ -58,11 +58,12 @@ class Selector( object ):
                 new.append( node )
             except ObjectDoesNotExist:
                 pass
-            try:
-                node = getattr( item, self.entries ).get( name=attr).entry
-                new.append( node )
-            except ObjectDoesNotExist:
-                pass
+            if self.type is not Container:
+                try:
+                    node = getattr( item, self.entries ).get( name=attr).entry
+                    new.append( node )
+                except ObjectDoesNotExist:
+                    pass
         return Selector( new, type=self.type, field=self.field, entries=self.entries )
 
     def __call__( self, *args ):

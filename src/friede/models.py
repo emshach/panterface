@@ -203,12 +203,19 @@ class Registry( Base, PathMixin ):
         SettingEntry.objects.create( registry=self, name=name, entry=setting )
 
     def to_dict( self ):
+        if not self.active:
+            return
         out = {
-            'default'     : self.default,
-            'format'      : self.format
+            '$name'        : self.name,
+            '$title'       : self.title,
+            '$description' : self.description,
+            '$default'     : self.default,
+            '$format'      : self.format,
             }
 
-        for f in '''container widget block screen shell theme slot app location
+        for x in self._container_entries.all():
+            out[ x.name ] = x.entry.to_dict()
+        for f in '''widget block screen shell theme slot app location
                     link reference setting'''.split():
             data = {}
             for x in getattr( self, "_%s_entries" % f ).all():

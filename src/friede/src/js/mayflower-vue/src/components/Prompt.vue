@@ -11,6 +11,7 @@
 </template>
 
 <script lang="js">
+import Switchboard from '@/components/Switchboard.vue'
 import Breadcrumb from '@/components/Breadcrumb.vue'
 export default {
   name: 'Prompt',
@@ -24,7 +25,7 @@ export default {
       default: true
     }
   },
-  components: { Breadcrumb },
+  components: { Switchboard, Breadcrumb},
   mounted() {
   },
   data() {

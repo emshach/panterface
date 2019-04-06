@@ -207,29 +207,29 @@ class Registry( Base, PathMixin ):
             'default'     : self.default,
             'format'      : self.format,
             '$containers' : { x.name: x.entry.to_dict()
-                              for x in self._container_entries.objects.all() },
+                              for x in self._container_entries },
             '$widgets'    : { x.name: x.entry.to_dict()
-                              for x in self._widget_entries.objects.all() },
+                              for x in self._widget_entries },
             '$blocks'     : { x.name: x.entry.to_dict()
-                              for x in self._block_entries.objects.all() },
+                              for x in self._block_entries },
             '$screens'    : { x.name: x.entry.to_dict()
-                              for x in self._screen_entries.objects.all() },
+                              for x in self._screen_entries },
             '$shells'     : { x.name: x.entry.to_dict()
-                              for x in self._shell_entries.objects.all() },
+                              for x in self._shell_entries },
             '$themes'     : { x.name: x.entry.to_dict()
-                              for x in self._theme_entries.objects.all() },
+                              for x in self._theme_entries },
             '$slots'      : { x.name: x.entry.to_dict()
-                              for x in self._slot_entries.objects.all() },
+                              for x in self._slot_entries },
             '$apps'       : { x.name: x.entry.to_dict()
-                              for x in self._app_entries.objects.all() },
+                              for x in self._app_entries },
             '$locations'  : { x.name: x.entry.to_dict()
-                              for x in self._location_entries.objects.all() },
+                              for x in self._location_entries },
             '$links'      : { x.name: x.entry.to_dict()
-                              for x in self._link_entries.objects.all() },
+                              for x in self._link_entries },
             '$references' : { x.name: x.entry.to_dict()
-                              for x in self._reference_entries.objects.all() },
+                              for x in self._reference_entries },
             '$settings'   : { x.name: x.entry.to_dict()
-                              for x in self._setting_entries.objects.all() },
+                              for x in self._setting_entries },
         }
         return out
 

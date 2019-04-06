@@ -216,7 +216,8 @@ class Registry( Base, PathMixin ):
     def to_dict( self ):
         if not self.active:
             return
-        out = super( Registry, self ).to_dict().update({
+        out = super( Registry, self ).to_dict()
+        out.update({
             '$default'     : self.default,
             '$format'      : self.format,
         })
@@ -313,11 +314,13 @@ class Location( Base, PathMixin ):
                                    related_name='redirect_from' )
 
     def to_dict( self ):
-        return super( Location, self).to_dict().update({
+        out = super( Location, self).to_dict()
+        out.update({
             '$path': self.path,
             'href': self.href,
             'redirect_to': self.redirect_to
         })
+        return out
 
 
 class Link( Base, PathMixin ):
@@ -329,10 +332,12 @@ class Link( Base, PathMixin ):
                              related_name='_links' )
 
     def to_dict( self ):
-        return super( Link, self).to_dict().update({
+        out = super( Link, self).to_dict()
+        out.update({
             '$path': self.path,
             'location': self.location.to_dict()
         })
+        return out
 
 
 class Reference( Base, PathMixin ):

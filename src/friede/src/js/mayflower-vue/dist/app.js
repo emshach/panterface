@@ -92,7 +92,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "8f2e72020c98b16af0f3";
+/******/ 	var hotCurrentHash = "2e0cb5cada595bc3d5b1";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -934,8 +934,14 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     Prompt: _components_Prompt_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
+  mounted: function mounted() {
+    this.menus = Friede.menus.nav.$links;
+  },
   data: function data() {
     return {
+      menus: {},
+      searching: false,
+      // TODO: 
       breadcrumb: [{
         href: '/',
         title: '/'
@@ -1059,6 +1065,10 @@ __webpack_require__.r(__webpack_exports__);
       default: function _default() {
         return [];
       }
+    },
+    multiline: {
+      type: Boolean,
+      default: true
     }
   },
   components: {
@@ -1124,14 +1134,22 @@ var render = function() {
       _c(
         "div",
         { attrs: { id: "nav" } },
-        [
-          _c("router-link", { attrs: { to: "/" } }, [_vm._v("Home")]),
-          _c("router-link", { attrs: { to: "/about" } }, [_vm._v("About")])
-        ],
+        _vm._l(_vm.menus.nav, function(link, key) {
+          return _c(
+            "router-link",
+            { key: key, attrs: { to: link.location.$href } },
+            [_vm._v(_vm._s(link.$title || link.location.$title))]
+          )
+        }),
         1
       ),
-      _c("router-view"),
-      _c("Prompt", {
+      _c(
+        "transition",
+        { attrs: { name: "fade-fast", mode: "out-in" } },
+        [_vm.searching ? _c("search-results-page") : _c("router-view")],
+        1
+      ),
+      _c("prompt", {
         attrs: { breadcrumb: _vm.breadcrumb },
         on: { update: _vm.promptInput }
       })
@@ -1239,34 +1257,60 @@ var render = function() {
       }
     },
     [
-      _c("Breadcrumb", {
+      _c("switchboard"),
+      _c("breadcrumb", {
         staticClass: "breadcrumb",
         attrs: { items: _vm.breadcrumb }
       }),
-      _c("textarea", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.cli,
-            expression: "cli"
-          }
-        ],
-        staticClass: "cli uk-input uk-flex-1",
-        attrs: { name: "cli", rows: "1" },
-        domProps: { value: _vm.cli },
-        on: {
-          input: [
-            function($event) {
-              if ($event.target.composing) {
-                return
+      _vm.multiline
+        ? _c("textarea", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.cli,
+                expression: "cli"
               }
-              _vm.cli = $event.target.value
-            },
-            _vm.input
-          ]
-        }
-      })
+            ],
+            staticClass: "cli uk-input uk-flex-1",
+            attrs: { name: "cli", rows: "1" },
+            domProps: { value: _vm.cli },
+            on: {
+              input: [
+                function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.cli = $event.target.value
+                },
+                _vm.input
+              ]
+            }
+          })
+        : _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.cli,
+                expression: "cli"
+              }
+            ],
+            staticClass: "cli uk-input uk-flex-1",
+            attrs: { name: "cli" },
+            domProps: { value: _vm.cli },
+            on: {
+              input: [
+                function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.cli = $event.target.value
+                },
+                _vm.input
+              ]
+            }
+          })
     ],
     1
   )
@@ -1293,7 +1337,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("Dashboard")
+  return _c("dashboard")
 }
 var staticRenderFns = []
 render._withStripped = true

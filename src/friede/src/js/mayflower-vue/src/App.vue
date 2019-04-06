@@ -1,8 +1,9 @@
 <template lang="html">
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link>
-      <router-link to="/about">About</router-link>
+      <router-link
+        v-for="( link, key ) in menus.nav" :key=key
+        :to="link.location.$href">{{ link.$title || link.location.$title }}</router-link>
     </div>
     <transition name="fade-fast" mode="out-in">
       <search-results-page v-if="searching" />
@@ -19,8 +20,12 @@ export default {
   components: {
     Prompt
   },
+  mounted() {
+    this.menus = Friede.menus.nav.$links
+  },
   data() {
     return {
+      menus: {},
       searching: false,         // TODO: 
       breadcrumb: [{ href: '/', title: '/' }]
     };

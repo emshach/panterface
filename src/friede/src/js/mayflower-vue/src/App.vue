@@ -20,12 +20,9 @@ export default {
   components: {
     Prompt
   },
-  mounted() {
-    this.menus = Friede.menus
-  },
   data() {
     return {
-      menus: {},
+      menus: Friede.menus,
       searching: false,         // TODO: 
       breadcrumb: [{ href: '/', title: '/' }]
     };

@@ -27,6 +27,14 @@ class Base( Model ):
     def getcontext( self ):
         return self
 
+    def to_dict( self ):
+        return {
+            '$name'        : self.name,
+            '$path'        : self.path,
+            '$title'       : self.title,
+            '$description' : self.description,
+        }
+
 class PathMixin( Model ):
     class Meta:
         abstract = True
@@ -205,13 +213,10 @@ class Registry( Base, PathMixin ):
     def to_dict( self ):
         if not self.active:
             return
-        out = {
-            '$name'        : self.name,
-            '$title'       : self.title,
-            '$description' : self.description,
+        out = super( Registry, self ).to_dict().update({
             '$default'     : self.default,
             '$format'      : self.format,
-            }
+        })
 
         for x in self._container_entries.all():
             out[ x.name ] = x.entry.to_dict()
@@ -220,10 +225,6 @@ class Registry( Base, PathMixin ):
             data = {}
             for x in getattr( self, "_%s_entries" % f ).all():
                 data[ x.name ] = x.entry.to_dict()
-                if x.name in out:
-                    del out[ x.name ]
-                else:
-                    out[ x.name ] = data[ x.name ]
             if data:
                 out[ "$%ss" % f ] = data
         return out
@@ -309,11 +310,11 @@ class Location( Base, PathMixin ):
                                    related_name='redirect_from' )
 
     def to_dict( self ):
-        return {
-            'path': self.path,
+        return super( Location, self).to_dict().update({
+            '$path': self.path,
             'href': self.href,
             'redirect_to': self.redirect_to
-        }
+        })
 
 
 class Link( Base, PathMixin ):
@@ -325,10 +326,10 @@ class Link( Base, PathMixin ):
                              related_name='_links' )
 
     def to_dict( self ):
-        return {
-            'path': self.path,
+        return super( Link, self).to_dict().update({
+            '$path': self.path,
             'location': self.location.to_dict()
-        }
+        })
 
 
 class Reference( Base, PathMixin ):

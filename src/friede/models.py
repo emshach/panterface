@@ -219,7 +219,6 @@ class Registry( Base, PathMixin ):
                     out[ x.name ] = x.entry.to_dict()
             if data:
                 out[ "$%ss" % s ] = data
-        }
         return out
 
 class Container( Registry ):

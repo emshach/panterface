@@ -28,12 +28,15 @@ class Base( Model ):
         return self
 
     def to_dict( self ):
-        return {
+        out = {
             '$name'        : self.name,
             '$path'        : self.path,
             '$title'       : self.title,
             '$description' : self.description,
         }
+        if hasattr( self, path ):
+            out[ '$path' ] = self.path
+        return out
 
 class PathMixin( Model ):
     class Meta:

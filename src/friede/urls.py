@@ -34,7 +34,7 @@ except Exception:
     # pass                        # TODO: handle
     raise
 urlpatterns.append( url( r'^api/', views.api_root ))
-urlpatterns.extend([ url( r'^api/%s' % k, include( v.urls , namespace='friede' ),
+urlpatterns.extend([ url( r"^api/%s" % k, include( v.urls , namespace='friede' ),
                           name=k )
                      for k, v in routes.items() ])
 urlpatterns.append( url( r'^.*', views.index, name='index' ))

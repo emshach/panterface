@@ -306,77 +306,83 @@ def updateapp( app, data, upto=None ):
             def popcr():
                 cr.popleft()
 
-            while stack:
-                obj = cr[0]
-                new = None
-                top = stack.pop()
-                # print 'top=', top
-                if isinstance( top, tuple ):
-                    if not len( top ):
-                        continue
-                    if isinstance( top[0], basestring ):
-                        tag = top[0]
-                        print 'tag=', tag
-                        if tag == 'from relations' :
-                            try:
-                                bundle = shortcuts[ registry[0] ]( app, *( top[1:] ))
-                                print 'bundle=', bundle
-                                stack.append( bundle )
-                            except KeyError as e:
-                                print >> sys.stderr, e
-                                pass
-                        elif tag in types:
-                            stack.append( popmodel )
-                            model.appendleft( types[ tag ])
-                            registry.appendleft( tag )
-                            if path[0]:
-                                "then this may add to the elemnts of the current object"
-                            else:
-                                obj = Container.objects.get_or_create( path=tag )
-                                stack.extend(( poppath, popcr ))
-                                cr.appendleft( obj )
-                                path.appendleft( tag )
-                            stack.extend( top[1:][ ::-1 ])
-                        else:
-                            if tag.startswith('.'):
-                                tag = tag[1:]
-                            stack.extend(( poppath, popcr ))
-                            path.appendleft(( "{}.{}" if path[0] else "{}{}" ).format(
-                                path[0], tag ))
-                            cr.appendleft( None )
-                            stack.extend( top[1:][ ::-1 ])
-                    else:
-                        # flatten tuples
-                        stack.extend( top[ ::-1 ])
-                elif isinstance( top, dict ):
-                    if not top.get( 'path', None ):
-                        top[ 'path' ] = path[0]
-                    search, updates = split_dict( top, 'name', 'path' )
-                    relations = {}
-                    for key, value in updates.items():
-                        if not isinstance( value, basestring ):
+            try:
+                while stack:
+                    obj = cr[0]
+                    new = None
+                    top = stack.pop()
+                    # print 'top=', top
+                    if isinstance( top, tuple ):
+                        if not len( top ):
                             continue
-                        field = model[0]._meta.get_field( key )
-                        if field.is_relation:
-                            updates.pop( key )
-                            try:
-                                print 'derefing', field
-                                related = field.related_model.objects.get( path=value )
-                            except field.related_model.DoesNotExist:
-                                print >> sys.stderr, "got no", field.related_model,\
-                                    'path', value
-                                raise
-                            relations[ key ] = related
-                            # TODO; account for multiple ordinality
-                    if not obj or type( obj ) is not model[0]:
-                        obj, new = model[0].objects.get_or_create(
-                            defaults=updates, **search )
-                    if not new:
+                        if isinstance( top[0], basestring ):
+                            tag = top[0]
+                            print 'tag=', tag
+                            if tag == 'from relations' :
+                                try:
+                                    bundle = shortcuts[ registry[0] ]( app, *( top[1:] ))
+                                    print 'bundle=', bundle
+                                    stack.append( bundle )
+                                except KeyError as e:
+                                    print >> sys.stderr, e
+                                    pass
+                            elif tag in types:
+                                stack.append( popmodel )
+                                model.appendleft( types[ tag ])
+                                registry.appendleft( tag )
+                                if path[0]:
+                                    "then this may add to the elemnts of the current object"
+                                else:
+                                    obj = Container.objects.get_or_create( path=tag )
+                                    stack.extend(( poppath, popcr ))
+                                    cr.appendleft( obj )
+                                    path.appendleft( tag )
+                                stack.extend( top[1:][ ::-1 ])
+                            else:
+                                if tag.startswith('.'):
+                                    tag = tag[1:]
+                                stack.extend(( poppath, popcr ))
+                                path.appendleft(
+                                    ( "{}.{}" if path[0] else "{}{}" ).format(
+                                        path[0], tag ))
+                                cr.appendleft( None )
+                                stack.extend( top[1:][ ::-1 ])
+                        else:
+                            # flatten tuples
+                            stack.extend( top[ ::-1 ])
+                    elif isinstance( top, dict ):
+                        if not top.get( 'path', None ):
+                            top[ 'path' ] = path[0]
+                        search, updates = split_dict( top, 'name', 'path' )
+                        relations = {}
                         for key, value in updates.items():
+                            if not isinstance( value, basestring ):
+                                continue
+                            field = model[0]._meta.get_field( key )
+                            if field.is_relation:
+                                updates.pop( key )
+                                try:
+                                    print 'derefing', field
+                                    related = field.related_model.objects.get(
+                                        path=value )
+                                except field.related_model.DoesNotExist:
+                                    print >> sys.stderr, "got no", field.related_model,\
+                                        'path', value
+                                    raise
+                                relations[ key ] = related
+                                # TODO; account for multiple ordinality
+                        if not obj or type( obj ) is not model[0]:
+                            obj, new = model[0].objects.get_or_create(
+                                defaults=updates, **search )
+                        if not new:
+                            for key, value in updates.items():
+                                setattr( obj, key, value )
+                        for key, value in relations.items():
                             setattr( obj, key, value )
-                    for key, value in relations.items():
-                        setattr( obj, key, value )
-                    print 'created', obj.__dict__
-                    obj.save()
-                elif callable( top ):
-                    top()
+                        print 'created', obj.__dict__
+                        obj.save()
+                    elif callable( top ):
+                        top()
+            except Exception as e:
+                print >> sys.stderr, "got exception", type(e), e
+                raise

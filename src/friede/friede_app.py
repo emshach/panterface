@@ -3,10 +3,11 @@ from __future__ import unicode_literals
 from . import views
 from .core import installapp
 from .models import App, Setting
+from .views import routes as view_routes
 from importlib import import_module
 from rest_framework import routers
 from rest_framework import relations
-from rest_framework_nested import routers as nrouters
+from collections import OrderedDict
 
 original_reverse = relations.reverse
 
@@ -97,7 +98,7 @@ relations = dict(
 )
 actions = 'list view new edit report delete'.split()
 router = routers.DefaultRouter()
-routes = {}
+routes = OrderedDict()
 
 def register( router, routes, module ):
     name = module.app_name
@@ -105,9 +106,8 @@ def register( router, routes, module ):
     try:
         myrouter = routes[ name ]
     except KeyError:
-        myrouter = routes[ name ] = nrouters.NestedSimpleRouter(
-            router, name, lookup=name )
-
+        myrouter = routes[ name ] = routers.DefaultRouter( name, lookup=name )
+        view_routes[ name ] = name
 
     def _register( prefix, viewset ):
         myrouter.register( prefix , viewset )

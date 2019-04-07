@@ -100,15 +100,20 @@ actions = 'list view new edit report delete'.split()
 router = routers.DefaultRouter()
 routes = OrderedDict()
 
+class NamedDefaultRouter( routers.DefaultRouter ):
+    def __init__( self, name, *args, **kwargs ):
+        self.root_view_name = "api-root-%s" % name
+        super( NamedDefaultRouter, self ).__init__( *args, **kwargs )
+
 def register( router, routes, module ):
     name = module.app_name
     myrouter = None
     try:
         myrouter = routes[ name ]
     except KeyError:
-        myrouter = routes[ name ] = routers.DefaultRouter()
+        myrouter = routes[ name ] = NamedDefaultRouter( name )
         view_routes[ name ] = "api-root-%s" % name
-        myrouter.root_view_name = "api-root-%s" % name
+        # myrouter.root_view_name = "api-root-%s" % name
 
     def _register( prefix, viewset ):
         myrouter.register( prefix , viewset )

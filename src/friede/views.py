@@ -46,7 +46,7 @@ def index( request ):
 @permission_classes(( permissions.AllowAny, ))
 def api_root( request, format=None ):
     "Root view for Friede system REST API"
-    return Response({ k: reverse( "friede:%s" % ( ns, v ), format=None )
+    return Response({ k: reverse( "friede:%s" % v, format=None )
                       # TODO: should find a way to code namespace
                       for k, v in routes.items() })
 

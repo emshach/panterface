@@ -302,7 +302,6 @@ def install():
         description='''Time, task and finance management system
 
 Also includes goal-setting, strategizing, and teamwork tools.''',
-        api=router,
         data=(
             ( '0.1.0',
               ( 'locations', ( 'from relations', objects, relations )),

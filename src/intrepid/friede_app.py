@@ -370,7 +370,7 @@ Also includes goal-setting, strategizing, and teamwork tools.''',
                     # ( 'user', ),
                     # ( 'taxonomy', ),
                     # ( 'term', ),
-                )
+                  ),
                   ( 'relations',
                     ( 'note', dict(
                         extends='blocks.form.section',

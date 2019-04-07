@@ -107,7 +107,7 @@ def register( router, routes, module ):
         myrouter = routes[ name ]
     except KeyError:
         myrouter = routes[ name ] = routers.DefaultRouter()
-        view_routes[ name ] = name
+        view_routes[ name ] = r'^api/%s' % name
 
     def _register( prefix, viewset ):
         myrouter.register( prefix , viewset )

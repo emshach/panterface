@@ -89,9 +89,8 @@ router = routers.DefaultRouter()
 
 def register( router, module ):
     def _register( prefix, viewset ):
-        # meta = viewset.serializer_class.Meta
         # try:
-        #     if not meta.view_name.startswith( 'friede' ):
+        #     if not view_set.view_name.startswith( 'friede' ):
         #         meta.view_name= 'friede' + meta.view_name
         # except AttributeError:
         #     meta.view_name= "friede:%(model_name)s-detail"

@@ -2,14 +2,14 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import render
-from django.urls import reverse
-from rest_framework import viewsets, permissions
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework.response import Response
 from .objects import getregistries, getenv
 from .core import setup, setupshell, setuptheme, setupmenus
 from .models import *
 from .serializers import *
+from rest_framework import viewsets, permissions
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.response import Response
+from rest_framework.reverse import reverse
 import json
 
 routes = {}
@@ -46,8 +46,9 @@ def index( request ):
 @permission_classes(( permissions.AllowAny, ))
 def api_root( request, format=None ):
     "Root view for Friede system REST API"
-    return Response({ k: reverse(v) for k, v in routes.items() })
-    # TODO: should find a way to code namespace
+    return Response({ k: reverse( "friede:%s" % v, request=request, format=None )
+                      # TODO: should find a way to code namespace
+                      for k, v in routes.items() })
 
 
 class ContainerViewSet( viewsets.ModelViewSet ):

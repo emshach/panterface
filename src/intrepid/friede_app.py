@@ -454,25 +454,28 @@ Also includes goal-setting, strategizing, and teamwork tools.''',
                           block_entries=
                           ( 'slot',
                             dict( block='form.basic' ),
-                            dict( block='form.relations.note' )))
-                  )),
+                            dict( block='form.relations.note' ))))),
                   ( 'resource', dict(
                       extends='screens.form.single',
-                      block_entries=dict(
-                          ( 'slot',
-                            dict( block='form.basic' ),
-                            dict( block='form.extra.resource' ),
-                            dict( block='form.relations.resource' ))))),
+                      # data=dict(
+                      # block_entries=
+                      # ( 'slot',
+                      #   dict( block='form.basic' ),
+                      #   dict( block='form.extra.resource' ),
+                      #   dict( block='form.relations.resource' )))
+                  )),
                   ( 'product', dict(
                       extends='screens.form.single',
-                      block_entries=dict(
+                      data=dict(
+                          block_entries=
                           ( 'slot',
                             dict( block='form.basic' ),
                             dict( block='form.extra.product' ),
                             dict( block='form.relations.product' ))))),
                   ( 'goal', dict(
                       extends='screens.form.single',
-                      block_entries=dict(
+                      data=dict(
+                          block_entries=
                           ( 'slot',
                             dict( block='form.basic' ),
                             dict( block='form.infobox.goal' ),

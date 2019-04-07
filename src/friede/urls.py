@@ -22,7 +22,7 @@ try:
         module = app
         if module:
             try:
-                friede = import_module( "%s.friede" % module )
+                friede = import_module( "%s.friede_app" % module )
                 friede.install()
                 friede.init( router=router,
                              register=register( router=router, module=friede ),

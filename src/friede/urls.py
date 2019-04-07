@@ -3,8 +3,8 @@ from __future__ import unicode_literals
 from django.conf.urls import url, include
 from django.conf import settings
 from . import views
-from . import friede
-from .friede import install, init, router, register
+from . import friede_app
+from .friede_app import install, init, router, register
 from .models import App
 from importlib import import_module
 
@@ -13,7 +13,7 @@ urlpatterns = []
 try:
     install()
     init( router=router,
-          register=register( router, friede ),
+          register=register( router, friede_app ),
           urlpatterns=urlpatterns )
     # apps = App.objects.filter( active=True ).exclude( name=app_name ).all()
     for app in settings.INSTALLED_APPS:

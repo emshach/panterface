@@ -106,7 +106,7 @@ def register( router, routes, module ):
     try:
         myrouter = routes[ name ]
     except KeyError:
-        myrouter = routes[ name ] = routers.DefaultRouter( name, lookup=name )
+        myrouter = routes[ name ] = routers.DefaultRouter()
         view_routes[ name ] = name
 
     def _register( prefix, viewset ):

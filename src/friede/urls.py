@@ -31,5 +31,5 @@ try:
 except Exception:
     # pass                        # TODO: handle
     raise
-urlpatterns.append( url( r'^api/', include(( router.urls, 'friede' ))))
+urlpatterns.append( url( r'^api/', include( router.urls )))
 urlpatterns.append( url( r'^.*', views.index, name='index' ))

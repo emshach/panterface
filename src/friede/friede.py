@@ -89,7 +89,7 @@ router = routers.DefaultRouter()
 
 def register( router, module ):
     def _register( prefix, viewset ):
-        router.register( r'%s/%s' % ( prefix,  module.app_name ), viewset )
+        router.register( r'%s/%s' % ( module.app_name, prefix ), viewset )
 
     return _register
 

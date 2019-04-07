@@ -4,7 +4,6 @@ from django.conf.urls import url, include
 from rest_framework import routers
 from collections import OrderedDict
 from . import views
-from friede import friede
 
 app_name = 'intrepid'
 

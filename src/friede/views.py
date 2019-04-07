@@ -2,12 +2,12 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import render
-from .objects import getregistries, getenv
-from .core import setup, setupshell, setuptheme, setupmenus
+from django.urls import reverse
 from rest_framework import viewsets, permissions
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
-from rest_framework.reverse import reverse
+from .objects import getregistries, getenv
+from .core import setup, setupshell, setuptheme, setupmenus
 from .models import *
 from .serializers import *
 import json

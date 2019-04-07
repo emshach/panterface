@@ -2,11 +2,11 @@
 from __future__ import unicode_literals
 from django.conf.urls import url, include
 from django.conf import settings
+from importlib import import_module
 from . import views
 from . import friede_app
 from .friede_app import install, init, router, register, routes
 from .models import App
-from importlib import import_module
 
 app_name = 'friede'
 urlpatterns = []

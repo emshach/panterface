@@ -17,15 +17,16 @@ try:
         module = app.module
         rest = app.rest
         if module:
-            try:
+            # try:
                 friede = import_module( "%s.friede" % module )
                 friede.install()
                 friede.init( router=router,
                              register=register( router=router, module=friede ),
                              urlpatterns=urlpatterns )
-            except ImportError, AttributeError:
-                continue        # TODO: maybe warn
+            # except ImportError, AttributeError:
+            #     continue        # TODO: maybe warn
 except Exception:
-    pass                        # TODO: handle
+    # pass                        # TODO: handle
+    raise
 urlpatterns.append( url( r'^api/', include( router.urls )))
 urlpatterns.append( url( r'^.*', views.index, name='index' ))

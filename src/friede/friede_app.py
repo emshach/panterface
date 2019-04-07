@@ -6,6 +6,7 @@ from .models import App, Setting
 from importlib import import_module
 from rest_framework import routers
 from rest_framework import relations
+from rest_framework_nested import routers as nrouters
 
 original_reverse = relations.reverse
 
@@ -104,7 +105,7 @@ def register( router, routes, module ):
     try:
         myrouter = routes[ name ]
     except KeyError:
-        myrouter = routes[ name ] = routers.NestedSimpleRouter(
+        myrouter = routes[ name ] = nrouters.NestedSimpleRouter(
             router, name, lookup=name )
 
 

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.conf.urls import url, include
-from django.conf import INSTALLED_APPS
+from django.conf import setttings
 from . import views
 from . import friede
 from .friede import install, init, router, register
@@ -16,7 +16,7 @@ try:
           register=register( router, friede ),
           urlpatterns=urlpatterns )
     # apps = App.objects.filter( active=True ).exclude( name=app_name ).all()
-    for app in INSTALLED_APPS:
+    for app in settings.INSTALLED_APPS:
         if app == 'friede': continue
         name = app
         module = app

@@ -27,5 +27,5 @@ try:
                 continue        # TODO: maybe warn
 except Exception:
     pass                        # TODO: handle
-urlpatterns.append( url( r'^api/friede/', include( router.urls )))
+urlpatterns.append( url( r'^api/', include( router.urls )))
 urlpatterns.append( url( r'^.*', views.index, name='index' ))

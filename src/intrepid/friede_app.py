@@ -444,38 +444,40 @@ Also includes goal-setting, strategizing, and teamwork tools.''',
                   tuple(
                       ( o, dict(
                           extends='screens.list.from.model',
-                          model=relations[o][ 'model' ]))
+                          data=dict(
+                              model=relations[o][ 'model' ])))
                     for o in objects)),
                 ( 'new',
                   ( 'note', dict(
                       extends='screens.form.single',
-                      block_entries=
-                      ( 'slot',
-                        dict( block='form.basic' ),
-                        dict( block='form.relations.note' ))
+                      data=dict(
+                          block_entries=
+                          ( 'slot',
+                            dict( block='form.basic' ),
+                            dict( block='form.relations.note' )))
                   )),
                   ( 'resource', dict(
                       extends='screens.form.single',
-                      block_entries=
-                      ( 'slot',
-                        dict( block='form.basic' ),
-                        dict( block='form.extra.resource' ),
-                        dict( block='form.relations.resource' )))),
+                      block_entries=dict(
+                          ( 'slot',
+                            dict( block='form.basic' ),
+                            dict( block='form.extra.resource' ),
+                            dict( block='form.relations.resource' ))))),
                   ( 'product', dict(
                       extends='screens.form.single',
-                      block_entries=
-                      ( 'slot',
-                        dict( block='form.basic' ),
-                        dict( block='form.extra.product' ),
-                        dict( block='form.relations.product' )))),
+                      block_entries=dict(
+                          ( 'slot',
+                            dict( block='form.basic' ),
+                            dict( block='form.extra.product' ),
+                            dict( block='form.relations.product' ))))),
                   ( 'goal', dict(
                       extends='screens.form.single',
-                      block_entries=
-                      ( 'slot',
-                        dict( block='form.basic' ),
-                        dict( block='form.infobox.goal' ),
-                        dict( block='form.extra.goal' ),
-                        dict( block='form.relations.goal' )))),
+                      block_entries=dict(
+                          ( 'slot',
+                            dict( block='form.basic' ),
+                            dict( block='form.infobox.goal' ),
+                            dict( block='form.extra.goal' ),
+                            dict( block='form.relations.goal' ))))),
                   # ( 'objective', dict(
                   #     extends='form.single',
                   #     block_entries=

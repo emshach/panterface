@@ -4,7 +4,7 @@ from django.conf.urls import url, include
 from django.conf import settings
 from . import views
 from . import friede_app
-from .friede_app import install, init, router, register
+from .friede_app import install, init, router, register, routes
 from .models import App
 from importlib import import_module
 
@@ -25,7 +25,8 @@ try:
                 friede = import_module( "%s.friede_app" % module )
                 friede.install()
                 friede.init( router=router,
-                             register=register( router=router, module=friede ),
+                             register=register(
+                                 router=router, routes=routes, module=friede ),
                              urlpatterns=urlpatterns )
             except ImportError, AttributeError:
                 continue        # TODO: maybe warn

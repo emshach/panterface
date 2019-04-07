@@ -96,6 +96,7 @@ relations = dict(
 )
 actions = 'list view new edit report delete'.split()
 router = routers.DefaultRouter()
+routes = {}
 
 def register( router, routes, module ):
     name = module.app_name

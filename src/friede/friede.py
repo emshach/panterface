@@ -5,6 +5,16 @@ from .core import installapp
 from .models import App, Setting
 from importlib import import_module
 from rest_framework import routers
+from rest_framework import relations
+
+original_reverse = relations.reverse
+
+def hack_reverse(alias, **kwargs):
+    namespace = kwargs['request'].resolver_match.namespace
+    name = "%s:%s" % (namespace, alias)
+    return original_reverse(name, **kwargs)
+
+relations.reverse = hack_reverse
 
 app_name = 'friede'
 

@@ -47,7 +47,6 @@ def index( request ):
 def api_root( request, format=None ):
     "Root view for REST API"
     ns = request.resolver_match.namespace
-    return original_reverse(name, **kwargs)
     return Response({ k: reverse( "%s:%s" % ( ns, v ), format=None )
                       for k, v in routes.items() })
 

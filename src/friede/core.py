@@ -3,7 +3,6 @@ from __future__ import unicode_literals
 from .objects import Settings, Shells, getenv, getregistries, getshell
 from .models import *
 from .util import split_dict
-from django.core.exceptions import ObjectDoesNotExist
 from django.db import transaction
 from importlib import import_module
 from collections import deque
@@ -100,7 +99,7 @@ def setuptheme( shell=None ):
     theme = None
     try:
         theme = Theme.objects.get( path='themes.acamar' )
-    except ObjectDoesNotExist:
+    except Theme.DoesNotExist:
         theme = Theme.objects.create(
             name='themes.acamar',
             templates='friede/mayflower/acamar'
@@ -363,7 +362,7 @@ def updateapp( app, data, upto=None ):
                             try:
                                 print 'derefing', field
                                 related = field.related_model.objects.get( path=value )
-                            except ObjectDoesNotExist:
+                            except field.related_model.DoesNotExist:
                                 print >> sys.stderr, "got no", field.related_model,\
                                     'path', value
                                 raise

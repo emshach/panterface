@@ -56,7 +56,7 @@ class Selector( object ):
             try:
                 node = item._container_entries.get( name=attr ).entry
                 new.append( node )
-            except ObjectDoesNotExist:
+            except ContainerEntry.DoesNotExist:
                 pass
             if self.type is not Container:
                 try:

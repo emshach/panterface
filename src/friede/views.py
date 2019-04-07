@@ -5,6 +5,9 @@ from django.shortcuts import render
 from .objects import getregistries, getenv
 from .core import setup, setupshell, setuptheme, setupmenus
 from rest_framework import viewsets
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework.reverse import reverse
 from .models import *
 from .serializers import *
 import json
@@ -36,6 +39,33 @@ def index( request ):
     return render( request, theme.home, context )
 
 ### rest api views
+
+
+
+@api_view([ 'GET' ])
+def api_root( request, format=None ):
+    out = {}
+
+    apps = App.objects.filter( active=True ).exclude( name=NAME ).all()
+    for app in apps:
+        name = app.name
+        module = app.module
+        rest = app.rest
+        if module:
+            try:
+                urls = import_module( "%s.%s" % ( module, 'urls' ))
+                
+                if rest:
+                    router = urls.router
+                    match = r'^api/%s/' % name
+                    urlpatterns.append(
+                        url( match, include( router.urls, namespace='' )))
+            except ImportError, AttributeError:
+                continue
+    return Response({
+        'users': reverse( 'user-list', request=request, format=format),
+        'snippets': reverse('snippet-list', request=request, format=format)
+    })
 
 class ContainerViewSet( viewsets.ModelViewSet ):
     queryset = Container.objects.all()

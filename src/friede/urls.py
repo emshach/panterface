@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.conf.urls import url, include
+from django.conf import INSTALLED_APPS
 from . import views
 from . import friede
 from .friede import install, init, router, register

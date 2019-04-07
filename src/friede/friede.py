@@ -95,7 +95,7 @@ relations = dict(
     },
 )
 actions = 'list view new edit report delete'.split()
-router = routers.DefaultRouter( namespace='friede' )
+router = routers.DefaultRouter()
 
 def register( router, module ):
     def _register( prefix, viewset ):

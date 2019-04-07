@@ -3,7 +3,9 @@ from __future__ import unicode_literals
 from django.conf.urls import url, include
 from rest_framework import routers
 from collections import OrderedDict
+from friede.core import installapp
 from . import views
+
 
 app_name = 'intrepid'
 

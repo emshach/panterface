@@ -3,7 +3,6 @@ from __future__ import unicode_literals
 from . import views
 from .core import installapp
 from .models import App, Setting
-from .views import NamespaceViewSet
 from importlib import import_module
 from rest_framework import routers
 from rest_framework import relations

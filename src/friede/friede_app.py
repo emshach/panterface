@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from . import views
 from .core import installapp
 from .models import App, Setting
+from .views import NamespaceViewSet
 from importlib import import_module
 from rest_framework import routers
 from rest_framework import relations
@@ -97,14 +98,18 @@ relations = dict(
 actions = 'list view new edit report delete'.split()
 router = routers.DefaultRouter()
 
-def register( router, module ):
+def register( router, routes, module ):
+    name = module.app_name
+    myrouter = None
+    try:
+        myrouter = routes[ name ]
+    except KeyError:
+        myrouter = routes[ name ] = routers.NestedSimpleRouter(
+            router, name, lookup=name )
+
+
     def _register( prefix, viewset ):
-        # try:
-        #     if not view_set.view_name.startswith( 'friede' ):
-        #         meta.view_name= 'friede' + meta.view_name
-        # except AttributeError:
-        #     meta.view_name= "friede:%(model_name)s-detail"
-        router.register( r'%s/%s' % ( module.app_name, prefix ), viewset )
+        myrouter.register( prefix , viewset )
     return _register
 
 def install():

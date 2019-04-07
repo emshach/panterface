@@ -46,7 +46,7 @@ def index( request ):
 @permission_classes(( permissions.AllowAny, ))
 def api_root( request, format=None ):
     "Root view for REST API"
-    return Response({ k: reverse( v, format=None ) for k, v in routes.items() })
+    return Response({ k: reverse( k, format=None ) for k in routes })
 
 
 class ContainerViewSet( viewsets.ModelViewSet ):

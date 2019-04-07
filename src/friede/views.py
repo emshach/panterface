@@ -4,8 +4,8 @@ from __future__ import unicode_literals
 from django.shortcuts import render
 from .objects import getregistries, getenv
 from .core import setup, setupshell, setuptheme, setupmenus
-from rest_framework import viewsets
-from rest_framework.decorators import api_view
+from rest_framework import viewsets, permissions
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 from .models import *
@@ -43,6 +43,7 @@ def index( request ):
 ### rest api views
 
 @api_view([ 'GET' ])
+@permission_classes(( permissions.AllowAny, ))
 def api_root( request, format=None ):
     "Root view for REST API"
     return Response({ k: reverse( v, format=None ) for k, v in routes.items() })

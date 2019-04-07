@@ -14,20 +14,20 @@ try:
     init( router=router,
           register=register( router, friede ),
           urlpatterns=urlpatterns )
-    apps = App.objects.filter( active=True ).exclude( name=app_name ).all()
-    for app in apps:
-        name = app.name
-        module = app.module
-        rest = app.rest
+    # apps = App.objects.filter( active=True ).exclude( name=app_name ).all()
+    for app in INSTALLED_APPS:
+        if app == 'friede': continue
+        name = app
+        module = app
         if module:
-            # try:
+            try:
                 friede = import_module( "%s.friede" % module )
                 friede.install()
                 friede.init( router=router,
                              register=register( router=router, module=friede ),
                              urlpatterns=urlpatterns )
-            # except ImportError, AttributeError:
-            #     continue        # TODO: maybe warn
+            except ImportError, AttributeError:
+                continue        # TODO: maybe warn
 except Exception:
     # pass                        # TODO: handle
     raise

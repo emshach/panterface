@@ -1,12 +1,28 @@
 <template lang="html">
-  <section class="switchboard">
-  </section>
+  <div class="switchboard">
+    <transition mode="in-out">
+      <div class="display" v-if="matches.length || locations.length">
+        <ul>
+          <li v-for="match in matches">{{ match }}</li>
+        </ul>
+      </div>
+    </transition>
+  </div>
 </template>
 
 <script lang="js">
   export default  {
     name: 'switchboard',
-    props: [],
+    props: {
+      matches: {
+        type: Array,
+        default: () => []
+      },
+      locations: {
+        type: Array,
+        default: () => []
+      }
+    },
     mounted() {
 
     },
@@ -25,7 +41,14 @@
 </script>
 
 <style scoped lang="scss">
-  .switchboard {
-    display: none
+.switchboard {
+  .display{
+    position: fixed;
+    bottom: 30px;
+    left: 10px;
+    right: 10px;
+    background: rgba(0,0,0,0.75);
+    color: white;
   }
+}
 </style>

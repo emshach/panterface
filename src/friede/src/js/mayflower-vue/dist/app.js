@@ -92,7 +92,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "514ae429ad962df1eb39";
+/******/ 	var hotCurrentHash = "569271a9d966cc85916a";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1122,7 +1122,20 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'switchboard',
-  props: [],
+  props: {
+    matches: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
+    },
+    locations: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
+    }
+  },
   mounted: function mounted() {},
   data: function data() {
     return {};
@@ -1298,7 +1311,9 @@ var render = function() {
       }
     },
     [
-      _c("switchboard"),
+      _c("switchboard", {
+        attrs: { matches: _vm.matches, locations: _vm.locations }
+      }),
       _c("breadcrumb", {
         staticClass: "breadcrumb",
         attrs: { items: _vm.breadcrumb }
@@ -1378,7 +1393,26 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("section", { staticClass: "switchboard" })
+  return _c(
+    "div",
+    { staticClass: "switchboard" },
+    [
+      _c("transition", { attrs: { mode: "in-out" } }, [
+        _vm.matches.length || _vm.locations.length
+          ? _c("div", { staticClass: "display" }, [
+              _c(
+                "ul",
+                _vm._l(_vm.matches, function(match) {
+                  return _c("li", [_vm._v(_vm._s(match))])
+                }),
+                0
+              )
+            ])
+          : _vm._e()
+      ])
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

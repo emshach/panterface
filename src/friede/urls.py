@@ -13,7 +13,7 @@ urlpatterns = []
 try:
     install()
     init( router=router,
-          register=register( router, routes, friede_app ),
+          register=registrar( router, routes, friede_app ),
           urlpatterns=urlpatterns )
     # apps = App.objects.filter( active=True ).exclude( name=app_name ).all()
     for app in settings.INSTALLED_APPS:

@@ -11,16 +11,16 @@
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   text-align: left;
 }
-.switchboard .display button[data-v-10af6d32] {
+.switchboard .display .uk-button[data-v-10af6d32] {
     text-align: left;
     text-transform: none;
     color: white;
 }
-.switchboard .display button.uk-button-default[data-v-10af6d32] {
+.switchboard .display .uk-button.uk-button-default[data-v-10af6d32] {
       background: transparent;
       border: 0 none;
 }
-.switchboard .display button.uk-button-default[data-v-10af6d32]:hover {
+.switchboard .display .uk-button.uk-button-default[data-v-10af6d32]:hover {
         background: rgba(255, 255, 255, 0.1);
 }
 

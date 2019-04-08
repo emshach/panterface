@@ -92,7 +92,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "23bb93786460f9218f9e";
+/******/ 	var hotCurrentHash = "054bd92cfe7be2be0295";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1437,13 +1437,13 @@ var render = function() {
                 "vk-grid",
                 {
                   staticClass: "display uk-child-width-1-6 uk-margin",
-                  attrs: { gutter: "small" }
+                  attrs: { gutter: "collapse" }
                 },
                 _vm._l(_vm.matches, function(match) {
                   return _c(
                     "vk-button-link",
                     {
-                      attrs: { size: "collapse" },
+                      attrs: { size: "small" },
                       nativeOn: {
                         click: function($event) {
                           $event.preventDefault()

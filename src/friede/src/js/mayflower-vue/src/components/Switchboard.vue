@@ -2,8 +2,8 @@
   <div class="switchboard">
     <transition mode="in-out">
       <vk-grid  v-if="matches.length || locations.length"
-                gutter="small" class="display uk-child-width-1-6 uk-margin">
-        <vk-button-link size="collapse" v-for="match in matches"
+                gutter="collapse" class="display uk-child-width-1-6 uk-margin">
+        <vk-button-link size="small" v-for="match in matches"
                    @click.native.prevent="select( match )">{{ match }}</vk-button-link>
       </vk-grid>
     </transition>

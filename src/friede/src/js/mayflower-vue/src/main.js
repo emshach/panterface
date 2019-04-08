@@ -11,7 +11,10 @@ UIkit.use(Icons)
 window.UIkit = UIkit
 
 Vue.config.productionTip = false
-Vue.prototype.$api = new coreapi.Client()
+const client = new coreapi.Client()
+Vue.prototype.$api = function( url ) {
+  return client.get( '/api/' + url )
+}
 
 function Mayflower( args ) {
   this.options = {

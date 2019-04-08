@@ -49,7 +49,7 @@ export default {
     },
     input() {
       _.debounce(() => {
-        this.$api.get( '/complete/' + this.cli ).then( data => {
+        this.$api( 'complete/' + this.cli ).then( data => {
           this.matches = data.matches;
           this.locations = data.locations;
         })

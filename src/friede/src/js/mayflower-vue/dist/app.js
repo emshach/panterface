@@ -92,7 +92,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "67a2ad9dcfa225eafdea";
+/******/ 	var hotCurrentHash = "ca017b71325b8e5c1824";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1104,7 +1104,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       lodash__WEBPACK_IMPORTED_MODULE_2___default.a.debounce(function () {
-        _this.$api.get('/complete/' + _this.cli).then(function (data) {
+        _this.$api('complete/' + _this.cli).then(function (data) {
           _this.matches = data.matches;
           _this.locations = data.locations;
         });
@@ -50571,7 +50571,11 @@ __webpack_require__.r(__webpack_exports__);
 uikit__WEBPACK_IMPORTED_MODULE_9___default.a.use(uikit_dist_js_uikit_icons__WEBPACK_IMPORTED_MODULE_11___default.a);
 window.UIkit = uikit__WEBPACK_IMPORTED_MODULE_9___default.a;
 vue__WEBPACK_IMPORTED_MODULE_5__["default"].config.productionTip = false;
-vue__WEBPACK_IMPORTED_MODULE_5__["default"].prototype.$api = new coreapi__WEBPACK_IMPORTED_MODULE_12___default.a.Client();
+var client = new coreapi__WEBPACK_IMPORTED_MODULE_12___default.a.Client();
+
+vue__WEBPACK_IMPORTED_MODULE_5__["default"].prototype.$api = function (url) {
+  return client.get('/api/' + url);
+};
 
 function Mayflower(args) {
   this.options = {

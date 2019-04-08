@@ -65,8 +65,7 @@ export default {
       this.$refs.input.focus();
     },
     processKey( $event ) {
-      console.log( 'keydown!', $event );
-      if ( $event.charCode === 9 )  { // TAB
+      if ( $event.keyCode === 9 )  { // TAB
         $event.preventDefault();
         if ( this.matches.length === 1 )
           this.complete( this.matches[0] + ' ' )

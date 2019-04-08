@@ -60,9 +60,10 @@ export default {
     input() {
       if ( this.cli !== this.prevCli && this.cli.indexOf( this.prevCli ) === 0 ) {
         // then just filter
-        this.matches = this.matches.filter( x => x.indexOf( this.cli ) === 0 );
+        base = this.base + this.cli.replace( this.prevCli, '' )
+        this.matches = this.matches.filter( x => x.indexOf( base ) === 0 );
         this.locations = this.locations.filter(
-          x => x.name.indexOf( this.cli ) === 0 );
+          x => x.name.indexOf( base ) === 0 );
       } else 
         this.debouncedInput();
       this.prevCli = this.cli;

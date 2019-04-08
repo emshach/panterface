@@ -318,7 +318,7 @@ class Location( Base, PathMixin ):
         out.update({
             '$path': self.path,
             'href': self.href,
-            'redirect_to': self.redirect_to
+            'redirect_to': self.redirect_to.href if self.redirect_to else None
         })
         return out
 

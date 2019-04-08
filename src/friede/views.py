@@ -57,7 +57,7 @@ def api_complete( request, path=None, format=None ):
         path = ''
     if not path.startswith('/'):
         path = '/'+path
-    locations = Location.objects.filter( href__startswith=path ).get()
+    locations = Location.objects.filter( href__startswith=path ).all()
     serializer = LocationSerializer( locations, many=True )
     return Response( serializer.data )
 

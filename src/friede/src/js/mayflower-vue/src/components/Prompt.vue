@@ -36,6 +36,7 @@ export default {
   data() {
     return {
       cli: '',
+      prevBase: '',
       base: '',
       matches: [],
       locations: [],
@@ -49,15 +50,22 @@ export default {
     getCompletions() {
       this.$api( 'complete/' + this.cli ).then( data => {
         this.base = data.base;
-        this.matches = data.matches;
-        this.locations = data.locations;
+        this.matches = data.matches.sort();
+        this.locations = data.locations.sort();
       });
     },
     debouncedInput: debounce( function() {
       this.getCompletions();
-    }, 500 ),
+    }, 250 ),
     input() {
-      this.debouncedInput();
+      if ( this.base !== this.prevBase && this.base.indexOf( this.prevBase ) === 0 ) {
+        // then just filter
+        this.matches = this.matches.filter( x => x.indexOf( this.base ) === 0 );
+        this.locations = this.locations.filter(
+          x => x.name.indexOf( this.base ) === 0 );
+      } else 
+        this.debouncedInput();
+      this.prevBase = this.base;
     },
     complete( match ) {
       this.cli = this.cli.replace( RegExp( this.base + '$' ), match );

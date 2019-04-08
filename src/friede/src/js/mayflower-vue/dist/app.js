@@ -92,7 +92,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "b74a43d6b52d0d692df3";
+/******/ 	var hotCurrentHash = "3cc0c82555c1a397da93";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1056,10 +1056,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es6_regexp_constructor__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_regexp_constructor__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var core_js_modules_es6_regexp_replace__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es6.regexp.replace */ "./node_modules/core-js/modules/es6.regexp.replace.js");
 /* harmony import */ var core_js_modules_es6_regexp_replace__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_regexp_replace__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _components_Switchboard_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/Switchboard.vue */ "./src/components/Switchboard.vue");
-/* harmony import */ var _components_Breadcrumb_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/Breadcrumb.vue */ "./src/components/Breadcrumb.vue");
-/* harmony import */ var lodash_debounce__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! lodash/debounce */ "./node_modules/lodash/debounce.js");
-/* harmony import */ var lodash_debounce__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(lodash_debounce__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var core_js_modules_es6_function_name__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es6.function.name */ "./node_modules/core-js/modules/es6.function.name.js");
+/* harmony import */ var core_js_modules_es6_function_name__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_function_name__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_es6_array_sort__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es6.array.sort */ "./node_modules/core-js/modules/es6.array.sort.js");
+/* harmony import */ var core_js_modules_es6_array_sort__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_array_sort__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _components_Switchboard_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/components/Switchboard.vue */ "./src/components/Switchboard.vue");
+/* harmony import */ var _components_Breadcrumb_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/components/Breadcrumb.vue */ "./src/components/Breadcrumb.vue");
+/* harmony import */ var lodash_debounce__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! lodash/debounce */ "./node_modules/lodash/debounce.js");
+/* harmony import */ var lodash_debounce__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(lodash_debounce__WEBPACK_IMPORTED_MODULE_6__);
+
+
 
 
 
@@ -1080,8 +1086,8 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   components: {
-    Switchboard: _components_Switchboard_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
-    Breadcrumb: _components_Breadcrumb_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
+    Switchboard: _components_Switchboard_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
+    Breadcrumb: _components_Breadcrumb_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
   },
   mounted: function mounted() {
     var _this = this;
@@ -1093,6 +1099,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       cli: '',
+      prevBase: '',
       base: '',
       matches: [],
       locations: []
@@ -1108,15 +1115,27 @@ __webpack_require__.r(__webpack_exports__);
 
       this.$api('complete/' + this.cli).then(function (data) {
         _this2.base = data.base;
-        _this2.matches = data.matches;
-        _this2.locations = data.locations;
+        _this2.matches = data.matches.sort();
+        _this2.locations = data.locations.sort();
       });
     },
-    debouncedInput: lodash_debounce__WEBPACK_IMPORTED_MODULE_4___default()(function () {
+    debouncedInput: lodash_debounce__WEBPACK_IMPORTED_MODULE_6___default()(function () {
       this.getCompletions();
-    }, 500),
+    }, 250),
     input: function input() {
-      this.debouncedInput();
+      var _this3 = this;
+
+      if (this.base !== this.prevBase && this.base.indexOf(this.prevBase) === 0) {
+        // then just filter
+        this.matches = this.matches.filter(function (x) {
+          return x.indexOf(_this3.base) === 0;
+        });
+        this.locations = this.locations.filter(function (x) {
+          return x.name.indexOf(_this3.base) === 0;
+        });
+      } else this.debouncedInput();
+
+      this.prevBase = this.base;
     },
     complete: function complete(match) {
       this.cli = this.cli.replace(RegExp(this.base + '$'), match);
@@ -3932,6 +3951,27 @@ module.exports = function (O, D) {
 
 /***/ }),
 
+/***/ "./node_modules/core-js/modules/_strict-method.js":
+/*!********************************************************!*\
+  !*** ./node_modules/core-js/modules/_strict-method.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var fails = __webpack_require__(/*! ./_fails */ "./node_modules/core-js/modules/_fails.js");
+
+module.exports = function (method, arg) {
+  return !!method && fails(function () {
+    // eslint-disable-next-line no-useless-call
+    arg ? method.call(null, function () { /* empty */ }, 1) : method.call(null);
+  });
+};
+
+
+/***/ }),
+
 /***/ "./node_modules/core-js/modules/_string-at.js":
 /*!****************************************************!*\
   !*** ./node_modules/core-js/modules/_string-at.js ***!
@@ -4277,6 +4317,68 @@ Iterators.Arguments = Iterators.Array;
 addToUnscopables('keys');
 addToUnscopables('values');
 addToUnscopables('entries');
+
+
+/***/ }),
+
+/***/ "./node_modules/core-js/modules/es6.array.sort.js":
+/*!********************************************************!*\
+  !*** ./node_modules/core-js/modules/es6.array.sort.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var $export = __webpack_require__(/*! ./_export */ "./node_modules/core-js/modules/_export.js");
+var aFunction = __webpack_require__(/*! ./_a-function */ "./node_modules/core-js/modules/_a-function.js");
+var toObject = __webpack_require__(/*! ./_to-object */ "./node_modules/core-js/modules/_to-object.js");
+var fails = __webpack_require__(/*! ./_fails */ "./node_modules/core-js/modules/_fails.js");
+var $sort = [].sort;
+var test = [1, 2, 3];
+
+$export($export.P + $export.F * (fails(function () {
+  // IE8-
+  test.sort(undefined);
+}) || !fails(function () {
+  // V8 bug
+  test.sort(null);
+  // Old WebKit
+}) || !__webpack_require__(/*! ./_strict-method */ "./node_modules/core-js/modules/_strict-method.js")($sort)), 'Array', {
+  // 22.1.3.25 Array.prototype.sort(comparefn)
+  sort: function sort(comparefn) {
+    return comparefn === undefined
+      ? $sort.call(toObject(this))
+      : $sort.call(toObject(this), aFunction(comparefn));
+  }
+});
+
+
+/***/ }),
+
+/***/ "./node_modules/core-js/modules/es6.function.name.js":
+/*!***********************************************************!*\
+  !*** ./node_modules/core-js/modules/es6.function.name.js ***!
+  \***********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var dP = __webpack_require__(/*! ./_object-dp */ "./node_modules/core-js/modules/_object-dp.js").f;
+var FProto = Function.prototype;
+var nameRE = /^\s*function ([^ (]*)/;
+var NAME = 'name';
+
+// 19.2.4.2 name
+NAME in FProto || __webpack_require__(/*! ./_descriptors */ "./node_modules/core-js/modules/_descriptors.js") && dP(FProto, NAME, {
+  configurable: true,
+  get: function () {
+    try {
+      return ('' + this).match(nameRE)[1];
+    } catch (e) {
+      return '';
+    }
+  }
+});
 
 
 /***/ }),

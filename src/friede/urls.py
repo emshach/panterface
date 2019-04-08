@@ -25,7 +25,7 @@ try:
                 friede = import_module( "%s.friede_app" % module )
                 friede.install()
                 friede.init( router=router,
-                             registrer=registrar(
+                             register=registrar(
                                  router=router, routes=routes, module=friede ),
                              urlpatterns=urlpatterns )
             except ImportError, AttributeError:

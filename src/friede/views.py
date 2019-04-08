@@ -58,7 +58,8 @@ def api_complete( request, path=None, format=None ):
     if not path.startswith('/'):
         path = '/'+path
     locations = Location.objects.filter( href__startswith=path ).all()
-    serializer = LocationSerializer( locations, many=True )
+    serializer = LocationSerializer(
+        locations, many=True, context={'request': request })
     return Response( serializer.data )
 
 class ContainerViewSet( viewsets.ModelViewSet ):

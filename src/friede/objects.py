@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from .models import ( Registry, Container, Widget, Block, Screen, Shell,
-                      Theme, Slot, App, Location, Link, Reference, Setting )
+                      Theme, Slot, App, Location, Link, Reference, Setting,
+                      ContainerEntry )
 from .util import snake_case
 from django.core.exceptions import ObjectDoesNotExist
 

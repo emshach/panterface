@@ -24,14 +24,6 @@ export default {
     multiline: {
       type: Boolean,
       default: true
-    },
-    matches: {
-      type: Array,
-      default: () => []
-    },
-    locations: {
-      type: Array,
-      default: () => []
     }
   },
   components: { Switchboard, Breadcrumb },
@@ -39,7 +31,9 @@ export default {
   },
   data() {
     return {
-      cli: ''
+      cli: '',
+      matches: [],
+      locations: [],
     }
   },
   methods: {

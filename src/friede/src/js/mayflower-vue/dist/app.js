@@ -92,7 +92,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "a11fc3c34cd87b79269d";
+/******/ 	var hotCurrentHash = "5ec944498e2ead80f4a5";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1071,18 +1071,6 @@ __webpack_require__.r(__webpack_exports__);
     multiline: {
       type: Boolean,
       default: true
-    },
-    matches: {
-      type: Array,
-      default: function _default() {
-        return [];
-      }
-    },
-    locations: {
-      type: Array,
-      default: function _default() {
-        return [];
-      }
     }
   },
   components: {
@@ -1092,7 +1080,9 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {},
   data: function data() {
     return {
-      cli: ''
+      cli: '',
+      matches: [],
+      locations: []
     };
   },
   methods: {

@@ -5,7 +5,7 @@ from django.conf import settings
 from importlib import import_module
 from . import views
 from . import friede_app
-from .friede_app import install, init, router, register, routes
+from .friede_app import install, init, router, registrar, routes
 from .models import App
 
 app_name = 'friede'
@@ -25,7 +25,7 @@ try:
                 friede = import_module( "%s.friede_app" % module )
                 friede.install()
                 friede.init( router=router,
-                             register=register(
+                             registrer=registrar(
                                  router=router, routes=routes, module=friede ),
                              urlpatterns=urlpatterns )
             except ImportError, AttributeError:
@@ -33,7 +33,10 @@ try:
 except Exception:
     # pass                        # TODO: handle
     raise
-urlpatterns.extend([ url( r"^api/%s/" % k, include( v.urls ))
-                     for k, v in routes.items() ])
-urlpatterns.append( url( r'^api/', views.api_root, name='api-root' ))
+urlpatterns += [ url( r"^api/%s/" % k, include( v.urls ))
+                 for k, v in routes.items() ]
+urlpatterns += [
+    url( r'^api/complete/(?P<path>)', views.api_complete, name='completions' ),
+    url( r'^api/', views.api_root, name='api-root' ),
+]
 urlpatterns.append( url( r'^.*', views.index, name='index' ))

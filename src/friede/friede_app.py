@@ -105,7 +105,7 @@ class NamedDefaultRouter( routers.DefaultRouter ):
         self.root_view_name = "api-root-%s" % name
         super( NamedDefaultRouter, self ).__init__( *args, **kwargs )
 
-def register( router, routes, module ):
+def registrar( router, routes, module ):
     name = module.name
     myrouter = None
     try:
@@ -115,9 +115,9 @@ def register( router, routes, module ):
         view_routes[ name ] = "api-root-%s" % name
         # myrouter.root_view_name = "api-root-%s" % name
 
-    def _register( prefix, viewset ):
+    def register( prefix, viewset ):
         myrouter.register( prefix , viewset )
-    return _register
+    return register
 
 def install():
     app, new = installapp(

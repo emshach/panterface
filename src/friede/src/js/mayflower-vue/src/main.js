@@ -5,6 +5,7 @@ import store from './store'
 import UIkit from 'uikit'
 import '@/assets/styles/styles.scss'
 import Icons from 'uikit/dist/js/uikit-icons'
+import coreapi from 'coreapi'
 
 UIkit.use(Icons)
 window.UIkit = UIkit
@@ -29,6 +30,7 @@ Mayflower.prototype.init = function () {
     this.vm = new Vue( this.options ).$mount( this.mountpoint );
 };
 
+window.corapi = coreapi;
 window.Vue = Vue;
 window.Mayflower = Mayflower;
 window.MayflowerApp = new Mayflower();

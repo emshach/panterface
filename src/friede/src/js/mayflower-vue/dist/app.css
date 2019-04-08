@@ -1,10 +1,11 @@
 .switchboard .display[data-v-10af6d32] {
   position: fixed;
-  bottom: 30px;
+  bottom: 42px;
   left: 10px;
   right: 10px;
   background: rgba(0, 0, 0, 0.75);
   color: white;
+  border-radius: 4px;
 }
 
 

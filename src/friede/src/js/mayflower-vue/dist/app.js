@@ -92,7 +92,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "569271a9d966cc85916a";
+/******/ 	var hotCurrentHash = "ae031654a5ade06a594d";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1120,6 +1120,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuikit_lib_grid__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuikit/lib/grid */ "./node_modules/vuikit/lib/grid.js");
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'switchboard',
   props: {
@@ -1135,6 +1137,9 @@ __webpack_require__.r(__webpack_exports__);
         return [];
       }
     }
+  },
+  components: {
+    'vk-grid': vuikit_lib_grid__WEBPACK_IMPORTED_MODULE_0__["Grid"]
   },
   mounted: function mounted() {},
   data: function data() {
@@ -1397,19 +1402,23 @@ var render = function() {
     "div",
     { staticClass: "switchboard" },
     [
-      _c("transition", { attrs: { mode: "in-out" } }, [
-        _vm.matches.length || _vm.locations.length
-          ? _c("div", { staticClass: "display" }, [
-              _c(
-                "ul",
+      _c(
+        "transition",
+        { attrs: { mode: "in-out" } },
+        [
+          _vm.matches.length || _vm.locations.length
+            ? _c(
+                "vk-grid",
+                { staticClass: "display", attrs: { gutter: "small" } },
                 _vm._l(_vm.matches, function(match) {
-                  return _c("li", [_vm._v(_vm._s(match))])
+                  return _c("div", [_vm._v(_vm._s(match))])
                 }),
                 0
               )
-            ])
-          : _vm._e()
-      ])
+            : _vm._e()
+        ],
+        1
+      )
     ],
     1
   )
@@ -31647,6 +31656,239 @@ var breadcrumb_Item = {
 
 /***/ }),
 
+/***/ "./node_modules/vuikit/lib/grid.js":
+/*!*****************************************!*\
+  !*** ./node_modules/vuikit/lib/grid.js ***!
+  \*****************************************/
+/*! exports provided: ElementGrid, Grid */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ElementGrid", function() { return ElementGrid; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Grid", function() { return grid; });
+/* harmony import */ var _util_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./util/vue */ "./node_modules/vuikit/lib/util/vue.js");
+/* harmony import */ var _util_class__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./util/class */ "./node_modules/vuikit/lib/util/class.js");
+/* harmony import */ var _util_lang__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./util/lang */ "./node_modules/vuikit/lib/util/lang.js");
+/* harmony import */ var _margin__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./margin */ "./node_modules/vuikit/lib/margin.js");
+/**
+ * Vuikit 0.8.10
+ * (c) 2018 Miljan Aleksic
+ * @license MIT
+**/
+
+/* Substantial part of the code is adapted from UIkit,
+  Copyright (c) 2013-2018 YOOtheme GmbH, getuikit.com */
+
+
+
+
+
+
+var ElementGrid = {
+  functional: true,
+  props: {
+    tag: {
+      type: String,
+      default: 'div'
+    },
+    divided: {
+      type: Boolean,
+      default: false
+    },
+    matched: {
+      type: Boolean,
+      default: false
+    },
+    gutter: {
+      type: String,
+      validator: function (val) { return !val || /^(small|medium|large|collapse)$/.test(val); }
+    }
+  },
+  render: function render (h, ref) {
+    var obj;
+    var props = ref.props;
+    var data = ref.data;
+    var children = ref.children;
+    var tag = props.tag;
+    var gutter = props.gutter;
+    var divided = props.divided;
+    var matched = props.matched;
+    return h(tag, Object(_util_vue__WEBPACK_IMPORTED_MODULE_0__["mergeData"])(data, {
+      class: ['uk-grid', ( obj = {
+        'uk-grid-match': matched,
+        'uk-grid-divider': divided
+      }, obj[("uk-grid-" + gutter)] = gutter, obj)]
+    }), children)
+  }
+}
+
+var grid = {
+  name: 'VkGrid',
+  directives: { VkMargin: _margin__WEBPACK_IMPORTED_MODULE_3__["default"] },
+  props: Object(_util_lang__WEBPACK_IMPORTED_MODULE_2__["assign"])({}, ElementGrid.props, {
+    margin: {
+      type: String,
+      default: 'uk-grid-margin'
+    },
+    firstColumn: {
+      type: String,
+      default: 'uk-first-column'
+    }
+  }),
+  render: function render (h) {
+    var clsStack = 'uk-grid-stack';
+    var ref = this;
+    var margin = ref.margin;
+    var firstColumn = ref.firstColumn;
+    return h(ElementGrid, {
+      props: this.$props,
+      directives: [{
+        name: 'vk-margin',
+        value: {
+          margin: margin,
+          firstColumn: firstColumn,
+          onUpdate: function (el, ref) {
+            var stacks = ref.stacks;
+            Object(_util_class__WEBPACK_IMPORTED_MODULE_1__["toggleClass"])(el, clsStack, stacks);
+          }
+        }
+      }]
+    }, this.$slots.default)
+  }
+}
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vuikit/lib/margin.js":
+/*!*******************************************!*\
+  !*** ./node_modules/vuikit/lib/margin.js ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _util_event__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./util/event */ "./node_modules/vuikit/lib/util/event.js");
+/* harmony import */ var _util_debug__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./util/debug */ "./node_modules/vuikit/lib/util/debug.js");
+/* harmony import */ var _util_env__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./util/env */ "./node_modules/vuikit/lib/util/env.js");
+/* harmony import */ var _util_filter__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./util/filter */ "./node_modules/vuikit/lib/util/filter.js");
+/* harmony import */ var _util_class__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./util/class */ "./node_modules/vuikit/lib/util/class.js");
+/* harmony import */ var _util_lang__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./util/lang */ "./node_modules/vuikit/lib/util/lang.js");
+/**
+ * Vuikit 0.8.10
+ * (c) 2018 Miljan Aleksic
+ * @license MIT
+**/
+
+/* Substantial part of the code is adapted from UIkit,
+  Copyright (c) 2013-2018 YOOtheme GmbH, getuikit.com */
+
+
+
+
+
+
+
+
+var NAMESPACE = '__vkMargin';
+var index = {
+  bind: function bind (el, binding, vnode) {
+    el[NAMESPACE] = {};
+  },
+  inserted: function inserted (el, binding, vnode) {
+    vnode.context.$nextTick(function () { return update(el, { binding: binding, vnode: vnode }); }
+    );
+    el[NAMESPACE].unbind = Object(_util_event__WEBPACK_IMPORTED_MODULE_0__["on"])(window, 'resize', function () { return update(el, { binding: binding, vnode: vnode }); }
+    );
+  },
+  componentUpdated: function componentUpdated (el, binding, vnode) {
+    vnode.context.$nextTick(function () { return update(el, { binding: binding, vnode: vnode }); }
+    );
+  },
+  unbind: function unbind (el) {
+    if (!el[NAMESPACE]) {
+      return
+    }
+    el[NAMESPACE].unbind();
+    delete el[NAMESPACE];
+  }
+}
+function update (el, ctx) {
+  var opts = getOptions(ctx);
+  var items = el.children;
+  if (!items.length || !Object(_util_filter__WEBPACK_IMPORTED_MODULE_3__["isVisible"])(el)) {
+    return
+  }
+  var data = getRows(items);
+  data.rows.forEach(function (row, i) { return row.forEach(function (el, j) {
+      Object(_util_class__WEBPACK_IMPORTED_MODULE_4__["toggleClass"])(el, opts.margin, i !== 0);
+      Object(_util_class__WEBPACK_IMPORTED_MODULE_4__["toggleClass"])(el, opts.firstColumn, j === 0);
+    }); }
+  );
+  opts.onUpdate(el, data);
+}
+function getOptions (ctx) {
+  var ref = ctx.binding;
+  var value = ref.value;
+  if ( true && value && !Object(_util_lang__WEBPACK_IMPORTED_MODULE_5__["isObject"])(value)) {
+    Object(_util_debug__WEBPACK_IMPORTED_MODULE_1__["warn"])('v-vk-magin -> Object expected as configuration', ctx.vnode.context);
+  }
+  var options = Object(_util_lang__WEBPACK_IMPORTED_MODULE_5__["assign"])({
+    onUpdate: _util_lang__WEBPACK_IMPORTED_MODULE_5__["noop"],
+    margin: 'uk-margin-small-top',
+    firstColumn: 'uk-first-column'
+  }, value);
+  return options
+}
+function getRows (items) {
+  var data = {};
+  var rows = [[]];
+  data.stacks = true;
+  for (var i = 0; i < items.length; i++) {
+    var el = items[i];
+    var dim = el.getBoundingClientRect();
+    if (!dim.height) {
+      continue
+    }
+    for (var j = rows.length - 1; j >= 0; j--) {
+      var row = rows[j];
+      if (!row[0]) {
+        row.push(el);
+        break
+      }
+      var leftDim = row[0].getBoundingClientRect();
+      if (dim.top >= Math.floor(leftDim.bottom)) {
+        rows.push([el]);
+        break
+      }
+      if (Math.floor(dim.bottom) > leftDim.top) {
+        data.stacks = false;
+        if (dim.left < leftDim.left && !_util_env__WEBPACK_IMPORTED_MODULE_2__["isRtl"]) {
+          row.unshift(el);
+          break
+        }
+        row.push(el);
+        break
+      }
+      if (j === 0) {
+        rows.unshift([el]);
+        break
+      }
+    }
+  }
+  data.rows = rows;
+  return data
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (index);
+
+
+/***/ }),
+
 /***/ "./node_modules/vuikit/lib/util/attr.js":
 /*!**********************************************!*\
   !*** ./node_modules/vuikit/lib/util/attr.js ***!
@@ -31814,6 +32056,114 @@ var supports = {};
     list = null;
   }
 })();
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vuikit/lib/util/debug.js":
+/*!***********************************************!*\
+  !*** ./node_modules/vuikit/lib/util/debug.js ***!
+  \***********************************************/
+/*! exports provided: warn, tip */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "warn", function() { return warn; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "tip", function() { return tip; });
+/**
+ * Vuikit 0.8.10
+ * (c) 2018 Miljan Aleksic
+ * @license MIT
+**/
+
+/* Substantial part of the code is adapted from UIkit,
+  Copyright (c) 2013-2018 YOOtheme GmbH, getuikit.com */
+
+function noop () {}
+var warn = noop;
+var tip = noop;
+if (true) {
+  var hasConsole = typeof console !== 'undefined';
+  var classifyRE = /(?:^|[-_])(\w)/g;
+  var classify = function (str) { return str
+    .replace(classifyRE, function (c) { return c.toUpperCase(); })
+    .replace(/[-_]/g, ''); };
+  warn = function (msg, vm) {
+    if (hasConsole) {
+      console.error("[Vuikit warn]: " + msg + (
+        vm ? generateComponentTrace(vm) : ''
+      ));
+    }
+  };
+  tip = function (msg, vm) {
+    if (hasConsole) {
+      console.warn("[Vuikit tip]: " + msg + (
+        vm ? generateComponentTrace(vm) : ''
+      ));
+    }
+  };
+  var formatComponentName = function (vm, includeFile) {
+    if (vm.$root === vm) {
+      return '<Root>'
+    }
+    var name = typeof vm === 'string'
+      ? vm
+      : typeof vm === 'function' && vm.options
+        ? vm.options.name
+        : vm._isVue
+          ? vm.$options.name || vm.$options._componentTag
+          : vm.name;
+    var file = vm._isVue && vm.$options.__file;
+    if (!name && file) {
+      var match = file.match(/([^/\\]+)\.vue$/);
+      name = match && match[1];
+    }
+    return (
+      (name ? ("<" + (classify(name)) + ">") : "<Anonymous>") +
+      (file && includeFile !== false ? (" at " + file) : '')
+    )
+  };
+  var repeat = function (str, n) {
+    var res = '';
+    while (n) {
+      if (n % 2 === 1) { res += str; }
+      if (n > 1) { str += str; }
+      n >>= 1;
+    }
+    return res
+  };
+  var generateComponentTrace = function (vm) {
+    if (vm._isVue && vm.$parent) {
+      var tree = [];
+      var currentRecursiveSequence = 0;
+      while (vm) {
+        if (tree.length > 0) {
+          var last = tree[tree.length - 1];
+          if (last.constructor === vm.constructor) {
+            currentRecursiveSequence++;
+            vm = vm.$parent;
+            continue
+          } else if (currentRecursiveSequence > 0) {
+            tree[tree.length - 1] = [last, currentRecursiveSequence];
+            currentRecursiveSequence = 0;
+          }
+        }
+        tree.push(vm);
+        vm = vm.$parent;
+      }
+      return '\n\nfound in\n\n' + tree
+        .map(function (vm, i) { return ("" + (i === 0 ? '---> ' : repeat(' ', 5 + i * 2)) + (Array.isArray(vm)
+            ? ((formatComponentName(vm[0])) + "... (" + (vm[1]) + " recursive calls)")
+            : formatComponentName(vm))); })
+        .join('\n')
+    } else {
+      return ("\n\n(found in " + (formatComponentName(vm)) + ")")
+    }
+  };
+}
 
 
 
@@ -31994,6 +32344,54 @@ function apply (node, fn) {
     node = node.nextElementSibling;
   }
 }
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vuikit/lib/util/env.js":
+/*!*********************************************!*\
+  !*** ./node_modules/vuikit/lib/util/env.js ***!
+  \*********************************************/
+/*! exports provided: isRtl, hasTouch, pointerDown, pointerMove, pointerUp, pointerEnter, pointerLeave */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isRtl", function() { return isRtl; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hasTouch", function() { return hasTouch; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pointerDown", function() { return pointerDown; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pointerMove", function() { return pointerMove; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pointerUp", function() { return pointerUp; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pointerEnter", function() { return pointerEnter; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pointerLeave", function() { return pointerLeave; });
+/* harmony import */ var _attr__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./attr */ "./node_modules/vuikit/lib/util/attr.js");
+/**
+ * Vuikit 0.8.10
+ * (c) 2018 Miljan Aleksic
+ * @license MIT
+**/
+
+/* Substantial part of the code is adapted from UIkit,
+  Copyright (c) 2013-2018 YOOtheme GmbH, getuikit.com */
+
+
+
+var doc = typeof document !== 'undefined' && document;
+var win = typeof window !== 'undefined' && window;
+var nav = typeof navigator !== 'undefined' && navigator;
+var isRtl = doc && Object(_attr__WEBPACK_IMPORTED_MODULE_0__["attr"])(document.documentElement, 'dir') === 'rtl';
+var hasTouchEvents = win && 'ontouchstart' in window;
+var hasPointerEvents = win && window.PointerEvent;
+var hasTouch = hasTouchEvents ||
+  (win && window.DocumentTouch) && (doc && document instanceof window.DocumentTouch) ||
+  nav && navigator.maxTouchPoints;
+var pointerDown = !hasTouch ? 'mousedown' : ("mousedown " + (hasTouchEvents ? 'touchstart' : 'pointerdown'));
+var pointerMove = !hasTouch ? 'mousemove' : ("mousemove " + (hasTouchEvents ? 'touchmove' : 'pointermove'));
+var pointerUp = !hasTouch ? 'mouseup' : ("mouseup " + (hasTouchEvents ? 'touchend' : 'pointerup'));
+var pointerEnter = hasTouch && hasPointerEvents ? 'pointerenter' : 'mouseenter';
+var pointerLeave = hasTouch && hasPointerEvents ? 'pointerleave' : 'mouseleave';
 
 
 

@@ -91,6 +91,7 @@ def api_complete( request, path=None, format=None ):
     serializer = LocationSerializer(
         locations, many=True, context={ 'request': request })
     return Response({
+        'base'      : base,
         'matches'   : tuple( matches ),
         'locations' : serializer.data
     })

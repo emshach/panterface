@@ -25,7 +25,6 @@ def index( request ):
     if not menus:
         menus = setupmenus()
     menus = menus.to_dict()
-    locations = as_tree( Location.objects.filter( active=True ).all(), 'href', '/' )
     shell = env.H.current()
     if not shell:
         shell = setupshell( env )
@@ -38,7 +37,6 @@ def index( request ):
         shell=shell,
         theme=theme,
         menus=json.dumps( menus ),
-        locations=json.dumps( locations ),
     )
     for registry in getregistries():
         context[ registry.name ] = registry

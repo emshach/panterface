@@ -51,6 +51,7 @@ def _normalize_lookup( lookup ):
         lookup.append([])
     if len( lookup ) < 3:
         lookup.append({})
+    return lookup
 
 @api_view([ 'GET' ])
 @permission_classes(( permissions.AllowAny, ))

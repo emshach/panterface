@@ -43,7 +43,7 @@ def index( request ):
 ### rest api views
 
 def _normalize_lookup( lookup ):
-    if isinstance( lookup, tuple, list ):
+    if isinstance( lookup, ( tuple, list )):
         lookup = list( lookup )
     else:
         lookup = [ lookup ]

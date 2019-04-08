@@ -13,7 +13,7 @@
 <script lang="js">
 import Switchboard from '@/components/Switchboard.vue'
 import Breadcrumb from '@/components/Breadcrumb.vue'
-import _ from 'lodash'
+import debounce from 'lodash/debounce'
 export default {
   name: 'Prompt',
   props: {
@@ -48,7 +48,9 @@ export default {
       this.cli = '';
     },
     input() {
-      _.debounce(() => {
+      console.log('input!');
+      debounce(() => {
+        consol.log('debounced!');
         this.$api( 'complete/' + this.cli ).then( data => {
           this.matches = data.matches;
           this.locations = data.locations;

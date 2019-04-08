@@ -12,6 +12,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 import json
+import re
 
 routes = {}
 
@@ -74,10 +75,24 @@ def api_complete( request, path=None, format=None ):
         path = ''
     if not path.startswith('/'):
         path = '/'+path
-    locations = Location.objects.filter( href__startswith=path ).all()
+    candidates = Location.objects.filter( href__startswith=path ).all()
+    completions = re.compile( r'%s([^/]*)(/?$)?' % path )
+    matches = set()
+    locations = []
+    for candidate in candidates:
+        if not candidate.href:
+            continue
+        m = completions.match( candidate.href )
+        if m:
+            matches.add( m.group(1) )
+            if m.group(2) is not None:
+                locations.append( candidate )
     serializer = LocationSerializer(
         locations, many=True, context={'request': request })
-    return Response( serializer.data )
+    return Response({
+        'matches'   : tuple( matches ),
+        'locations' : serializer.data
+    })
 
 class ContainerViewSet( viewsets.ModelViewSet ):
     queryset = Container.objects.all()

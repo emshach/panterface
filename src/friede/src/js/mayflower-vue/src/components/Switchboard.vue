@@ -3,8 +3,9 @@
     <transition mode="in-out">
       <vk-grid  v-if="matches.length || locations.length"
                 gutter="collapse" class="display uk-child-width-1-6 uk-margin">
-        <vk-button-link size="small" v-for="match in matches"
-                   @click.native.prevent="select( match )">{{ match }}</vk-button-link>
+        <vk-button-link
+          v-for="match in matches" href size="small" 
+          @click.native.prevent="select( match )">{{ match }}</vk-button-link>
       </vk-grid>
     </transition>
   </div>

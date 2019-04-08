@@ -5,9 +5,9 @@
     <breadcrumb class="breadcrumb" :items="breadcrumb" />
     <textarea v-if="multiline" name="cli" class="cli uk-input uk-flex-1"
               rows="1"  v-model="cli" @input="input" ref="input"
-              @keypress="processKey( $event )" />
+              @keydown="processKey( $event )" />
     <input v-else name="cli" class="cli uk-input uk-flex-1" v-model="cli"
-           ref="input" @input="input" @keypress="processKey( $event )" />
+           ref="input" @input="input" @keydown="processKey( $event )" />
   </form>
 </template>
 
@@ -67,7 +67,7 @@ export default {
     processKey( $event ) {
       if ( $event.charCode === 9 )  { // TAB
         $event.preventDefault();
-        if ( this.matches.length == 1 )
+        if ( this.matches.length === 1 )
           this.complete( this.matches[0] + ' ' )
         // TODO: else cycle completions
       }

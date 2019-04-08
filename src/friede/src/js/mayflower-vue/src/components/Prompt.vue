@@ -1,7 +1,7 @@
 <template lang="html">
   <form id="prompt" class="mf-prompt uk-flex uk-wrap-around"
         @submit.prevent="submit">
-    <switchboard :matches="matches" :locations="locations" @update=complete />
+    <switchboard :matches="matches" :locations="locations" @update="complete" />
     <breadcrumb class="breadcrumb" :items="breadcrumb" />
     <textarea v-if="multiline" name="cli" class="cli uk-input uk-flex-1"
               rows="1"  v-model="cli" @input="input" />

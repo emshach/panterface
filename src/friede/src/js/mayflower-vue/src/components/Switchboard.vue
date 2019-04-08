@@ -2,7 +2,7 @@
   <div class="switchboard">
     <transition mode="in-out">
       <vk-grid  v-if="matches.length || locations.length"
-                gutter="small" class="display uk-child-width-1-6">
+                gutter="small" class="display uk-child-width-1-6 uk-margin">
         <vk-button size="small" v-for="match in matches"
                    @click="select( match )">{{ match }}</vk-button>
       </vk-grid>
@@ -64,6 +64,10 @@ export default {
     button {
       text-align: left !important;
       text-transform: none !important;
+      &.uk-button-default {
+        background: transparent !important;
+        border: 0 none !important;
+      }
     }
   }
 }

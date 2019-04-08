@@ -92,7 +92,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "bcccd09dc9df66820860";
+/******/ 	var hotCurrentHash = "1cb3543334d1d8a1be2e";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1427,7 +1427,7 @@ var render = function() {
             ? _c(
                 "vk-grid",
                 {
-                  staticClass: "display uk-child-width-1-6",
+                  staticClass: "display uk-child-width-1-6 uk-margin",
                   attrs: { gutter: "small" }
                 },
                 _vm._l(_vm.matches, function(match) {

@@ -75,7 +75,7 @@ def api_complete( request, path=None, format=None ):
         path = '/'+path
     path = re.sub( r'\s+', '/', path )
     path = re.sub( r'/+', '/', path )
-    base = re.sub( '.*/', path )
+    base = re.sub( '.*/', '', path )
     candidates = Location.objects.filter( href__startswith=path ).all()
     completions = re.compile( r'%s([^/]*)(/?$)?' % path )
     matches = set()

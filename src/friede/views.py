@@ -6,6 +6,7 @@ from .objects import getregistries, getenv
 from .core import setup, setupshell, setuptheme, setupmenus
 from .models import *
 from .serializers import *
+from .util import as_tree
 from rest_framework import viewsets, permissions
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
@@ -22,7 +23,8 @@ def index( request ):
     menus = env.C.menus()
     if not menus:
         menus = setupmenus()
-    menudata = json.dumps( menus.to_dict() )
+    menus = menus.to_dict()
+    locations = as_tree( Location.objects.filter( active=True).all(), 'href', '/' )
     shell = env.H.current()
     if not shell:
         shell = setupshell( env )
@@ -34,7 +36,8 @@ def index( request ):
     context = dict(
         shell=shell,
         theme=theme,
-        menus=menudata,
+        menus=json.dumps( menus ),
+        locations=json.dumps( locations ),
     )
     for registry in getregistries():
         context[ registry.name ] = registry

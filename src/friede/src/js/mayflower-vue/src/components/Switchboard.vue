@@ -5,7 +5,7 @@
                 gutter="collapse" class="display uk-child-width-1-6 uk-margin">
         <vk-button-link
           v-for="match in matches" href size="small" 
-          @click.native.prevent="select( match )">{{ match }}</vk-button-link>
+          @click.prevent="select( match )">{{ match }}</vk-button-link>
       </vk-grid>
     </transition>
   </div>

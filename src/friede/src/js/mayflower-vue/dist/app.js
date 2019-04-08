@@ -92,7 +92,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "6224e01d13ccf7f0eaf6";
+/******/ 	var hotCurrentHash = "7a8202e19976bc973eab";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1444,7 +1444,7 @@ var render = function() {
                     "vk-button-link",
                     {
                       attrs: { href: "", size: "small" },
-                      nativeOn: {
+                      on: {
                         click: function($event) {
                           $event.preventDefault()
                           return _vm.select(match)

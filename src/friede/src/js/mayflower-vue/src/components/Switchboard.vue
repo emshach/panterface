@@ -4,7 +4,7 @@
       <vk-grid  v-if="matches.length || locations.length"
                 gutter="small" class="display uk-child-width-1-6 uk-margin">
         <vk-button size="small" v-for="match in matches"
-                   @click="select( match )">{{ match }}</vk-button>
+                   @click.native.prevent="select( match )">{{ match }}</vk-button>
       </vk-grid>
     </transition>
   </div>
@@ -65,8 +65,11 @@ export default {
       text-align: left !important;
       text-transform: none !important;
       &.uk-button-default {
-        background: transparent !important;
-        border: 0 none !important;
+        background: transparent;
+        border: 0 none;
+        &:hover {
+          background: rgba(255,255,255,0.1);
+        }
       }
     }
   }

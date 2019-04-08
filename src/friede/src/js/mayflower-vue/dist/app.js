@@ -92,7 +92,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "1cb3543334d1d8a1be2e";
+/******/ 	var hotCurrentHash = "f0e74aafd63b6efc320a";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1083,7 +1083,9 @@ __webpack_require__.r(__webpack_exports__);
     Switchboard: _components_Switchboard_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
     Breadcrumb: _components_Breadcrumb_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
-  mounted: function mounted() {},
+  mounted: function mounted() {
+    this.$refs.input.focus();
+  },
   data: function data() {
     return {
       cli: '',
@@ -1374,6 +1376,7 @@ var render = function() {
                 expression: "cli"
               }
             ],
+            ref: "input",
             staticClass: "cli uk-input uk-flex-1",
             attrs: { name: "cli" },
             domProps: { value: _vm.cli },
@@ -1435,8 +1438,9 @@ var render = function() {
                     "vk-button",
                     {
                       attrs: { size: "small" },
-                      on: {
+                      nativeOn: {
                         click: function($event) {
+                          $event.preventDefault()
                           return _vm.select(match)
                         }
                       }

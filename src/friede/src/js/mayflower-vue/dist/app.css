@@ -16,8 +16,11 @@
     text-transform: none !important;
 }
 .switchboard .display button.uk-button-default[data-v-10af6d32] {
-      background: transparent !important;
-      border: 0 none !important;
+      background: transparent;
+      border: 0 none;
+}
+.switchboard .display button.uk-button-default[data-v-10af6d32]:hover {
+        background: rgba(255, 255, 255, 0.1);
 }
 
 

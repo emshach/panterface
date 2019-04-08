@@ -4,7 +4,7 @@
     <switchboard :matches="matches" :locations="locations" @update="complete" />
     <breadcrumb class="breadcrumb" :items="breadcrumb" />
     <textarea v-if="multiline" name="cli" class="cli uk-input uk-flex-1"
-              rows="1"  v-model="cli" @input="input" />
+              rows="1"  v-model="cli" @input="input" ref="input" />
     <input v-else name="cli" class="cli uk-input uk-flex-1" v-model="cli"
            @input="input" ref="input" />
   </form>

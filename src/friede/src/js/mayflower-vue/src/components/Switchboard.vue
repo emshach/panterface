@@ -3,8 +3,8 @@
     <transition mode="in-out">
       <vk-grid  v-if="matches.length || locations.length"
                 gutter="small" class="display uk-child-width-1-6 uk-margin">
-        <vk-button size="small" v-for="match in matches"
-                   @click.native.prevent="select( match )">{{ match }}</vk-button>
+        <vk-button-link size="small" v-for="match in matches"
+                   @click.native.prevent="select( match )">{{ match }}</vk-button-link>
       </vk-grid>
     </transition>
   </div>
@@ -12,7 +12,7 @@
 
 <script lang="js">
 import { Grid } from 'vuikit/lib/grid'
-import { Button } from 'vuikit/lib/button'
+import { ButtonLink } from 'vuikit/lib/button'
 export default { 
   name: 'switchboard',
   props: {
@@ -27,7 +27,7 @@ export default {
   },
   components: {
     'vk-grid': Grid,
-    'vk-button': Button,
+    'vk-button-link': ButtonLink,
   },
   mounted() {
     

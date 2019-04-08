@@ -92,7 +92,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "5f9dc6f6944fe5059875";
+/******/ 	var hotCurrentHash = "9f0db9bda1d6abeaff4b";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1157,7 +1157,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   components: {
     'vk-grid': vuikit_lib_grid__WEBPACK_IMPORTED_MODULE_0__["Grid"],
-    'vk-button': vuikit_lib_button__WEBPACK_IMPORTED_MODULE_1__["Button"]
+    'vk-button-link': vuikit_lib_button__WEBPACK_IMPORTED_MODULE_1__["ButtonLink"]
   },
   mounted: function mounted() {},
   data: function data() {
@@ -1356,6 +1356,7 @@ var render = function() {
                 expression: "cli"
               }
             ],
+            ref: "input",
             staticClass: "cli uk-input uk-flex-1",
             attrs: { name: "cli", rows: "1" },
             domProps: { value: _vm.cli },
@@ -1439,7 +1440,7 @@ var render = function() {
                 },
                 _vm._l(_vm.matches, function(match) {
                   return _c(
-                    "vk-button",
+                    "vk-button-link",
                     {
                       attrs: { size: "small" },
                       nativeOn: {

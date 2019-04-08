@@ -92,7 +92,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "224d3871f9e3437d61af";
+/******/ 	var hotCurrentHash = "23bb93786460f9218f9e";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1165,6 +1165,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     select: function select(match) {
+      console.log('clicked!', match);
       this.$emit('update', match);
     }
   },
@@ -1442,7 +1443,7 @@ var render = function() {
                   return _c(
                     "vk-button-link",
                     {
-                      attrs: { size: "small" },
+                      attrs: { size: "collapse" },
                       nativeOn: {
                         click: function($event) {
                           $event.preventDefault()

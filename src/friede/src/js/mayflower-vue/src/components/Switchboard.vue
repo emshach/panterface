@@ -3,7 +3,7 @@
     <transition mode="in-out">
       <vk-grid  v-if="matches.length || locations.length"
                 gutter="small" class="display uk-child-width-1-6 uk-margin">
-        <vk-button-link size="small" v-for="match in matches"
+        <vk-button-link size="collapse" v-for="match in matches"
                    @click.native.prevent="select( match )">{{ match }}</vk-button-link>
       </vk-grid>
     </transition>
@@ -39,6 +39,7 @@ export default {
   },
   methods: {
     select( match ) {
+      console.log( 'clicked!', match )
       this.$emit( 'update', match )
     }
   },
@@ -62,6 +63,7 @@ export default {
     box-shadow: 0 2px 4px rgba(0,0,0,0.3);
     text-align: left;
     .uk-button {
+      padding: 0px 8px;
       text-align: left;
       text-transform: none;
       color: white;

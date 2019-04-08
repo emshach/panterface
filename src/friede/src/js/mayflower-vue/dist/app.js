@@ -92,7 +92,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "d2e843aa45049bf1cffb";
+/******/ 	var hotCurrentHash = "de9a8170b9c1d32d7217";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1124,6 +1124,8 @@ __webpack_require__.r(__webpack_exports__);
       this.$refs.input.focus();
     },
     processKey: function processKey($event) {
+      console.log('keydown!', $event.charCode);
+
       if ($event.charCode === 9) {
         // TAB
         $event.preventDefault();

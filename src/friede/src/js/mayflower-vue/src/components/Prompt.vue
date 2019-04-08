@@ -45,20 +45,23 @@ export default {
       this.$emit( 'update', this.cli );
       this.cli = '';
     },
+    getCompletions() {
+      this.$api( 'complete/' + this.cli ).then( data => {
+        this.base = data.base;
+        this.matches = data.matches;
+        this.locations = data.locations;
+      });
+    },
     debouncedInput: debounce( function() {
-      this.$nextTick(() => {
-        this.$api( 'complete/' + this.cli ).then( data => {
-          this.base = data.base;
-          this.matches = data.matches;
-          this.locations = data.locations;
-        })
-      })
+      this.getCompletions();
     }, 500 ),
     input() {
       this.debouncedInput();
     },
     complete( match ) {
       this.cli = this.cli.replace( RegExp( this.base + '$' ), match );
+      this.getCompletions();
+      this.$refs.input.focus();
     }
   },
   computed: {

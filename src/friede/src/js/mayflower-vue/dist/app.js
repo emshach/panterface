@@ -92,7 +92,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "3093fabc2c2147d2c101";
+/******/ 	var hotCurrentHash = "ec285b349b85f4da9c19";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1103,22 +1103,25 @@ __webpack_require__.r(__webpack_exports__);
       this.$emit('update', this.cli);
       this.cli = '';
     },
-    debouncedInput: lodash_debounce__WEBPACK_IMPORTED_MODULE_4___default()(function () {
+    getCompletions: function getCompletions() {
       var _this2 = this;
 
-      this.$nextTick(function () {
-        _this2.$api('complete/' + _this2.cli).then(function (data) {
-          _this2.base = data.base;
-          _this2.matches = data.matches;
-          _this2.locations = data.locations;
-        });
+      this.$api('complete/' + this.cli).then(function (data) {
+        _this2.base = data.base;
+        _this2.matches = data.matches;
+        _this2.locations = data.locations;
       });
+    },
+    debouncedInput: lodash_debounce__WEBPACK_IMPORTED_MODULE_4___default()(function () {
+      this.getCompletions();
     }, 500),
     input: function input() {
       this.debouncedInput();
     },
     complete: function complete(match) {
       this.cli = this.cli.replace(RegExp(this.base + '$'), match);
+      this.getCompletions();
+      this.$refs.input.focus();
     }
   },
   computed: {}

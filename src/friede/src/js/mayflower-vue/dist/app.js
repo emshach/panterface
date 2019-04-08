@@ -92,7 +92,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "d0596f4133c06808fc8c";
+/******/ 	var hotCurrentHash = "3e775f7a1755d64f92b2";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1099,7 +1099,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       cli: '',
-      prevBase: '',
+      prevCli: '',
       base: '',
       matches: [],
       locations: []
@@ -1125,19 +1125,17 @@ __webpack_require__.r(__webpack_exports__);
     input: function input() {
       var _this3 = this;
 
-      this.$nextTick(function () {
-        if (_this3.base !== _this3.prevBase && _this3.base.indexOf(_this3.prevBase) === 0) {
-          // then just filter
-          _this3.matches = _this3.matches.filter(function (x) {
-            return x.indexOf(_this3.base) === 0;
-          });
-          _this3.locations = _this3.locations.filter(function (x) {
-            return x.name.indexOf(_this3.base) === 0;
-          });
-        } else _this3.debouncedInput();
+      if (this.cli !== this.prevCli && this.cli.indexOf(this.prevCli) === 0) {
+        // then just filter
+        this.matches = this.matches.filter(function (x) {
+          return x.indexOf(_this3.cli) === 0;
+        });
+        this.locations = this.locations.filter(function (x) {
+          return x.name.indexOf(_this3.cli) === 0;
+        });
+      } else this.debouncedInput();
 
-        _this3.prevBase = _this3.base;
-      });
+      this.prevCli = this.cli;
     },
     complete: function complete(match) {
       this.cli = this.cli.replace(RegExp(this.base + '$'), match);

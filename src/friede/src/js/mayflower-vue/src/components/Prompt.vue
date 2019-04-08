@@ -36,7 +36,7 @@ export default {
   data() {
     return {
       cli: '',
-      prevBase: '',
+      prevCli: '',
       base: '',
       matches: [],
       locations: [],
@@ -58,16 +58,14 @@ export default {
       this.getCompletions();
     }, 250 ),
     input() {
-      this.$nextTick(() => {
-        if ( this.base !== this.prevBase && this.base.indexOf( this.prevBase ) === 0 ) {
-          // then just filter
-          this.matches = this.matches.filter( x => x.indexOf( this.base ) === 0 );
-          this.locations = this.locations.filter(
-            x => x.name.indexOf( this.base ) === 0 );
-        } else 
-          this.debouncedInput();
-        this.prevBase = this.base;
-      })
+      if ( this.cli !== this.prevCli && this.cli.indexOf( this.prevCli ) === 0 ) {
+        // then just filter
+        this.matches = this.matches.filter( x => x.indexOf( this.cli ) === 0 );
+        this.locations = this.locations.filter(
+          x => x.name.indexOf( this.cli ) === 0 );
+      } else 
+        this.debouncedInput();
+      this.prevCli = this.cli;
     },
     complete( match ) {
       this.cli = this.cli.replace( RegExp( this.base + '$' ), match );

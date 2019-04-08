@@ -92,7 +92,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "7a8202e19976bc973eab";
+/******/ 	var hotCurrentHash = "3093fabc2c2147d2c101";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1118,7 +1118,7 @@ __webpack_require__.r(__webpack_exports__);
       this.debouncedInput();
     },
     complete: function complete(match) {
-      this.cli.replace(RegExp(this.base + '$'), match);
+      this.cli = this.cli.replace(RegExp(this.base + '$'), match);
     }
   },
   computed: {}
@@ -1165,7 +1165,6 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     select: function select(match) {
-      console.log('clicked!', match);
       this.$emit('update', match);
     }
   },

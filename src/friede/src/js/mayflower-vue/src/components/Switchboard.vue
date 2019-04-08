@@ -40,7 +40,6 @@ export default {
   },
   methods: {
     select( match ) {
-      console.log( 'clicked!', match )
       this.$emit( 'update', match )
     }
   },

@@ -58,7 +58,7 @@ export default {
       this.debouncedInput();
     },
     complete( match ) {
-      this.cli.replace( RegExp( this.base + '$' ), match );
+      this.cli = this.cli.replace( RegExp( this.base + '$' ), match );
     }
   },
   computed: {

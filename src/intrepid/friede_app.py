@@ -7,7 +7,7 @@ from friede.core import installapp
 from . import views
 
 
-app_name = 'intrepid'
+name = 'intrepid'
 
 objects = '''note resource product goal objective target strategy plan phase
         step project task action currency account pool allotment allocation

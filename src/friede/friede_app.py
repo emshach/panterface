@@ -18,7 +18,7 @@ def hack_reverse(alias, **kwargs):
 
 relations.reverse = hack_reverse
 
-app_name = 'friede'
+name = 'friede'
 
 objects = '''container widget block screen shell theme slot app location link
              reference setting'''.split()
@@ -106,7 +106,7 @@ class NamedDefaultRouter( routers.DefaultRouter ):
         super( NamedDefaultRouter, self ).__init__( *args, **kwargs )
 
 def register( router, routes, module ):
-    name = module.app_name
+    name = module.name
     myrouter = None
     try:
         myrouter = routes[ name ]

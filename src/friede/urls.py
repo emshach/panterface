@@ -35,5 +35,5 @@ except Exception:
     raise
 urlpatterns.extend([ url( r"^api/%s/" % k, include( v.urls , namespace='friede' ))
                      for k, v in routes.items() ])
-urlpatterns.append( url( r'^api/', views.api_root ))
+urlpatterns.append( url( r'^api/', views.api_root, name='api-root' ))
 urlpatterns.append( url( r'^.*', views.index, name='index' ))

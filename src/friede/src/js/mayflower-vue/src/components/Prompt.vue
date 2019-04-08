@@ -43,10 +43,11 @@ export default {
     },
     debouncedInput: debounce( function() {
       console.log('debounced!');
+      this.$nextTick(() => {
       this.$api( 'complete/' + this.cli ).then( data => {
         this.matches = data.matches;
         this.locations = data.locations;
-      })
+      })})
     }, 500 ),
     input() {
       console.log('input!');

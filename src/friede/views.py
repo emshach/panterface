@@ -50,6 +50,16 @@ def api_root( request, format=None ):
                       # TODO: should find a way to code namespace
                       for k, v in routes.items() })
 
+@api_view([ 'GET' ])
+@permission_classes(( permissions.AllowAny, ))
+def api_complete( request, path=None, format=None ):
+    if not path:
+        path = ''
+    if not path.startswith('/'):
+        path = '/'+path
+    locations = Location.objects.filter( href__startswith=path ).get()
+    serializer = LocationSerializer( locations, many=True )
+    return Response( serializer.data )
 
 class ContainerViewSet( viewsets.ModelViewSet ):
     queryset = Container.objects.all()

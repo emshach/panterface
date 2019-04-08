@@ -92,7 +92,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "79305dbe77aa9f3944d8";
+/******/ 	var hotCurrentHash = "d65f8a78543c2ef7dd8b";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1123,7 +1123,7 @@ __webpack_require__.r(__webpack_exports__);
       this.getCompletions();
     }, 250),
     input: function input() {
-      if (this.cli !== this.prevCli && this.cli.indexOf(this.prevCli) === 0) {
+      if (this.matches.length && this.cli !== this.prevCli && this.cli.indexOf(this.prevCli) === 0) {
         // then just filter
         var base = this.base + this.cli.replace(this.prevCli, '');
         this.matches = this.matches.filter(function (x) {
@@ -1132,6 +1132,7 @@ __webpack_require__.r(__webpack_exports__);
         this.locations = this.locations.filter(function (x) {
           return x.name.indexOf(base) === 0;
         });
+        if (!this.matches.length) this.getCompletions();
       } else this.debouncedInput();
 
       this.prevCli = this.cli;

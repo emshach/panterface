@@ -92,7 +92,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "8d70ab2a9fe19d6c497f";
+/******/ 	var hotCurrentHash = "a11fc3c34cd87b79269d";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1056,8 +1056,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Breadcrumb_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/components/Breadcrumb.vue */ "./src/components/Breadcrumb.vue");
 /* harmony import */ var lodash_debounce__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lodash/debounce */ "./node_modules/lodash/debounce.js");
 /* harmony import */ var lodash_debounce__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash_debounce__WEBPACK_IMPORTED_MODULE_2__);
-var _this = undefined;
-
 
 
 
@@ -1103,9 +1101,10 @@ var _this = undefined;
       this.cli = '';
     },
     debouncedInput: lodash_debounce__WEBPACK_IMPORTED_MODULE_2___default()(function () {
-      console.log('debounced!');
+      var _this = this;
 
-      _this.$api('complete/' + _this.cli).then(function (data) {
+      console.log('debounced!');
+      this.$api('complete/' + this.cli).then(function (data) {
         _this.matches = data.matches;
         _this.locations = data.locations;
       });

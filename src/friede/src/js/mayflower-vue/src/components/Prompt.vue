@@ -47,7 +47,7 @@ export default {
       this.$emit( 'update', this.cli );
       this.cli = '';
     },
-    debouncedInput: debounce(() => {
+    debouncedInput: debounce( function() {
       console.log('debounced!');
       this.$api( 'complete/' + this.cli ).then( data => {
         this.matches = data.matches;

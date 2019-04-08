@@ -11,6 +11,7 @@ UIkit.use(Icons)
 window.UIkit = UIkit
 
 Vue.config.productionTip = false
+Vue.prototype.$api = new coreapi.Client()
 
 function Mayflower( args ) {
   this.options = {
@@ -30,7 +31,7 @@ Mayflower.prototype.init = function () {
     this.vm = new Vue( this.options ).$mount( this.mountpoint );
 };
 
-window.corapi = coreapi;
+window.coreapi = coreapi;
 window.Vue = Vue;
 window.Mayflower = Mayflower;
 window.MayflowerApp = new Mayflower();

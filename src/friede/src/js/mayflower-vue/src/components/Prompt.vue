@@ -13,6 +13,7 @@
 <script lang="js">
 import Switchboard from '@/components/Switchboard.vue'
 import Breadcrumb from '@/components/Breadcrumb.vue'
+import _ from 'lodash'
 export default {
   name: 'Prompt',
   props: {
@@ -23,6 +24,14 @@ export default {
     multiline: {
       type: Boolean,
       default: true
+    },
+    matches: {
+      type: Array,
+      default: () => []
+    },
+    locations: {
+      type: Array,
+      default: () => []
     }
   },
   components: { Switchboard, Breadcrumb },
@@ -39,6 +48,12 @@ export default {
       this.cli = '';
     },
     input() {
+      _.debounce(() => {
+        this.$api.get( '/complete/' + this.cli ).then( data => {
+          this.matches = data.matches;
+          this.locations = data.locations;
+        })
+      }, 500 );
     }
   },
   computed: {

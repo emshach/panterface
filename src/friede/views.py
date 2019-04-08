@@ -73,6 +73,9 @@ def api_complete( request, path=None, format=None ):
         path = ''
     if not path.startswith('/'):
         path = '/'+path
+    path = re.sub( r'\s+', '/', path )
+    path = re.sub( r'/+', '/', path )
+    base = re.sub( '.*/', path )
     candidates = Location.objects.filter( href__startswith=path ).all()
     completions = re.compile( r'%s([^/]*)(/?$)?' % path )
     matches = set()
@@ -82,11 +85,11 @@ def api_complete( request, path=None, format=None ):
             continue
         m = completions.match( candidate.href )
         if m:
-            matches.add( m.group(1) )
+            matches.add( base + m.group(1) )
             if m.group(2) is not None:
                 locations.append( candidate )
     serializer = LocationSerializer(
-        locations, many=True, context={'request': request })
+        locations, many=True, context={ 'request': request })
     return Response({
         'matches'   : tuple( matches ),
         'locations' : serializer.data

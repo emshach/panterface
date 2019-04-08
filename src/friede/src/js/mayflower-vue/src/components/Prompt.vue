@@ -1,7 +1,7 @@
 <template lang="html">
   <form id="prompt" class="mf-prompt uk-flex uk-wrap-around"
         @submit.prevent="submit">
-    <switchboard :matches="matches" :locations="locations" />
+    <switchboard :matches="matches" :locations="locations" @update=complete />
     <breadcrumb class="breadcrumb" :items="breadcrumb" />
     <textarea v-if="multiline" name="cli" class="cli uk-input uk-flex-1"
               rows="1"  v-model="cli" @input="input" />
@@ -32,6 +32,7 @@ export default {
   data() {
     return {
       cli: '',
+      base: '',
       matches: [],
       locations: [],
     }
@@ -42,16 +43,19 @@ export default {
       this.cli = '';
     },
     debouncedInput: debounce( function() {
-      console.log('debounced!');
       this.$nextTick(() => {
-      this.$api( 'complete/' + this.cli ).then( data => {
-        this.matches = data.matches;
-        this.locations = data.locations;
-      })})
+        this.$api( 'complete/' + this.cli ).then( data => {
+          this.base = data.base;
+          this.matches = data.matches;
+          this.locations = data.locations;
+        })
+      })
     }, 500 ),
     input() {
-      console.log('input!');
       this.debouncedInput();
+    },
+    complete( match ) {
+      this.cli.replace( RegExp( this.base + '$' ), match );
     }
   },
   computed: {

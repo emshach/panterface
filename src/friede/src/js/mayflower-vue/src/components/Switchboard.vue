@@ -3,7 +3,8 @@
     <transition mode="in-out">
       <vk-grid  v-if="matches.length || locations.length"
                 gutter="small" class="display uk-child-width-1-6">
-        <vk-buttno size="small" v-for="match in matches">{{ match }}</vk-buttno>
+        <vk-button size="small" v-for="match in matches"
+                   @click="select( match )">{{ match }}</vk-button>
       </vk-grid>
     </transition>
   </div>
@@ -37,7 +38,9 @@ export default {
     }
   },
   methods: {
-    
+    select( match ) {
+      this.$emit( 'update', match )
+    }
   },
   computed: {
     

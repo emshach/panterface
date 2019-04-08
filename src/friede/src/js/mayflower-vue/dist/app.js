@@ -92,7 +92,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "7e4fc6472f2b98c48bc3";
+/******/ 	var hotCurrentHash = "d82eb3c9717e096ba49b";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1122,6 +1122,13 @@ __webpack_require__.r(__webpack_exports__);
       this.cli = this.cli.replace(RegExp(this.base + '$'), match);
       this.getCompletions();
       this.$refs.input.focus();
+    },
+    processKey: function processKey($event) {
+      if ($event.charCode === 9) {
+        // TAB
+        $event.preventDefault();
+        if (this.matches.length == 1) this.complete(this.matches[0] + ' '); // TODO: else cycle completions
+      }
     }
   },
   computed: {}
@@ -1372,7 +1379,10 @@ var render = function() {
                   _vm.cli = $event.target.value
                 },
                 _vm.input
-              ]
+              ],
+              keypress: function($event) {
+                return _vm.processKey($event)
+              }
             }
           })
         : _c("input", {
@@ -1397,7 +1407,10 @@ var render = function() {
                   _vm.cli = $event.target.value
                 },
                 _vm.input
-              ]
+              ],
+              keypress: function($event) {
+                return _vm.processKey($event)
+              }
             }
           })
     ],

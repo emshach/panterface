@@ -24,7 +24,7 @@ def index( request ):
     if not menus:
         menus = setupmenus()
     menus = menus.to_dict()
-    locations = as_tree( Location.objects.filter( active=True).all(), 'href', '/' )
+    locations = as_tree( Location.objects.filter( active=True ).all(), 'href', '/' )
     shell = env.H.current()
     if not shell:
         shell = setupshell( env )

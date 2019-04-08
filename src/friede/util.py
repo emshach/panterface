@@ -26,3 +26,4 @@ def as_tree( col, field='path', sep='.' ):
                 node[x] = {}
             node = node[x]
         node['$'] = item
+    return tree

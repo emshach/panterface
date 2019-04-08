@@ -47,15 +47,16 @@ export default {
       this.$emit( 'update', this.cli );
       this.cli = '';
     },
+    debouncedInput: debounce(() => {
+      console.log('debounced!');
+      this.$api( 'complete/' + this.cli ).then( data => {
+        this.matches = data.matches;
+        this.locations = data.locations;
+      })
+    }, 500 ),
     input() {
       console.log('input!');
-      debounce(() => {
-        consol.log('debounced!');
-        this.$api( 'complete/' + this.cli ).then( data => {
-          this.matches = data.matches;
-          this.locations = data.locations;
-        })
-      }, 500 );
+      this.debouncedInput();
     }
   },
   computed: {

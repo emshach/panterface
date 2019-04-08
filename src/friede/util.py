@@ -25,5 +25,5 @@ def as_tree( col, field='path', sep='.' ):
             if x not in node:
                 node[x] = {}
             node = node[x]
-        node['$'] = item
+        node['$'] = item.to_dict()
     return tree

@@ -58,14 +58,16 @@ export default {
       this.getCompletions();
     }, 250 ),
     input() {
-      if ( this.base !== this.prevBase && this.base.indexOf( this.prevBase ) === 0 ) {
-        // then just filter
-        this.matches = this.matches.filter( x => x.indexOf( this.base ) === 0 );
-        this.locations = this.locations.filter(
-          x => x.name.indexOf( this.base ) === 0 );
-      } else 
-        this.debouncedInput();
-      this.prevBase = this.base;
+      this.$nextTick(() => {
+        if ( this.base !== this.prevBase && this.base.indexOf( this.prevBase ) === 0 ) {
+          // then just filter
+          this.matches = this.matches.filter( x => x.indexOf( this.base ) === 0 );
+          this.locations = this.locations.filter(
+            x => x.name.indexOf( this.base ) === 0 );
+        } else 
+          this.debouncedInput();
+        this.prevBase = this.base;
+      })
     },
     complete( match ) {
       this.cli = this.cli.replace( RegExp( this.base + '$' ), match );

@@ -92,7 +92,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "73e7806477dae0293157";
+/******/ 	var hotCurrentHash = "f190ecb64869c9504359";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1121,6 +1121,8 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuikit_lib_grid__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuikit/lib/grid */ "./node_modules/vuikit/lib/grid.js");
+/* harmony import */ var vuikit_lib_button__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuikit/lib/button */ "./node_modules/vuikit/lib/button.js");
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'switchboard',
@@ -1139,7 +1141,8 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   components: {
-    'vk-grid': vuikit_lib_grid__WEBPACK_IMPORTED_MODULE_0__["Grid"]
+    'vk-grid': vuikit_lib_grid__WEBPACK_IMPORTED_MODULE_0__["Grid"],
+    'vk-button': vuikit_lib_button__WEBPACK_IMPORTED_MODULE_1__["Button"]
   },
   mounted: function mounted() {},
   data: function data() {
@@ -1410,13 +1413,15 @@ var render = function() {
             ? _c(
                 "vk-grid",
                 {
-                  staticClass: "display uk-child-width-1-8m",
+                  staticClass: "display uk-child-width-1-6",
                   attrs: { gutter: "small" }
                 },
                 _vm._l(_vm.matches, function(match) {
-                  return _c("div", [_vm._v(_vm._s(match))])
+                  return _c("vk-buttno", { attrs: { size: "small" } }, [
+                    _vm._v(_vm._s(match))
+                  ])
                 }),
-                0
+                1
               )
             : _vm._e()
         ],
@@ -31652,6 +31657,130 @@ var breadcrumb_Item = {
   functional: true,
   props: ElementBreadcrumbItem.props,
   render: ElementBreadcrumbItem.render
+}
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vuikit/lib/button.js":
+/*!*******************************************!*\
+  !*** ./node_modules/vuikit/lib/button.js ***!
+  \*******************************************/
+/*! exports provided: ElementButton, ElementButtonLink, ElementButtonGroup, Button, ButtonLink, ButtonGroup */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ElementButton", function() { return ElementButton; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ElementButtonLink", function() { return ElementButtonLink; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ElementButtonGroup", function() { return ElementButtonGroup; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Button", function() { return button; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ButtonLink", function() { return buttonLink; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ButtonGroup", function() { return buttonGroup; });
+/* harmony import */ var _util_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./util/vue */ "./node_modules/vuikit/lib/util/vue.js");
+/* harmony import */ var _util_lang__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./util/lang */ "./node_modules/vuikit/lib/util/lang.js");
+/**
+ * Vuikit 0.8.10
+ * (c) 2018 Miljan Aleksic
+ * @license MIT
+**/
+
+/* Substantial part of the code is adapted from UIkit,
+  Copyright (c) 2013-2018 YOOtheme GmbH, getuikit.com */
+
+
+
+
+var props = {
+  active: {
+    type: Boolean,
+    default: false
+  },
+  size: {
+    type: String,
+    validator: function (val) { return !val || /^(small|large)$/.test(val); }
+  },
+  type: {
+    type: String,
+    validator: function (val) { return !val || /^(primary|secondary|danger|text|link)$/.test(val); }
+  }
+};
+var def = function (ref) {
+  var obj;
+  var type = ref.type;
+  var active = ref.active;
+  var size = ref.size;
+  return ({
+  class: ['uk-button', ("uk-button-" + (type || 'default')), ( obj = {
+    'uk-active': active
+  }, obj[("uk-button-" + size)] = size, obj)]
+});
+};
+
+var ElementButton = {
+  functional: true,
+  props: Object(_util_lang__WEBPACK_IMPORTED_MODULE_1__["assign"])({}, props, {
+    htmlType: {
+      type: String,
+      default: 'button'
+    }
+  }),
+  render: function render (h, ref) {
+    var props$$1 = ref.props;
+    var data = ref.data;
+    var children = ref.children;
+    var htmlType = props$$1.htmlType;
+    return h('button', Object(_util_vue__WEBPACK_IMPORTED_MODULE_0__["mergeData"])(data, def(props$$1), {
+      attrs: {
+        type: htmlType
+      }
+    }), children)
+  }
+}
+
+var ElementButtonLink = {
+  functional: true,
+  props: props,
+  render: function render (h, ref) {
+    var props$$1 = ref.props;
+    var data = ref.data;
+    var children = ref.children;
+    return h('a', Object(_util_vue__WEBPACK_IMPORTED_MODULE_0__["mergeData"])(data, def(props$$1)), children)
+  }
+}
+
+var ElementButtonGroup = {
+  functional: true,
+  render: function render (h, ref) {
+    var data = ref.data;
+    var children = ref.children;
+    return h('div', Object(_util_vue__WEBPACK_IMPORTED_MODULE_0__["mergeData"])(data, {
+      class: 'uk-button-group'
+    }), children)
+  }
+}
+
+var button = {
+  name: 'VkButton',
+  functional: true,
+  props: ElementButton.props,
+  render: ElementButton.render
+}
+
+var buttonLink = {
+  name: 'VkButtonLink',
+  functional: true,
+  props: ElementButtonLink.props,
+  render: ElementButtonLink.render
+}
+
+var buttonGroup = {
+  name: 'VkButtonGroup',
+  functional: true,
+  props: ElementButtonGroup.props,
+  render: ElementButtonGroup.render
 }
 
 

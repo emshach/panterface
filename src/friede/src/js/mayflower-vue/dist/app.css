@@ -9,6 +9,11 @@
   padding: 10px;
   -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  text-align: left;
+}
+.switchboard .display button[data-v-10af6d32] {
+    text-align: left !important;
+    text-transform: none !important;
 }
 
 

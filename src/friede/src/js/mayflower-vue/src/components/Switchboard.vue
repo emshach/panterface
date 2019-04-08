@@ -2,16 +2,17 @@
   <div class="switchboard">
     <transition mode="in-out">
       <vk-grid  v-if="matches.length || locations.length"
-                gutter="small" class="display uk-child-width-1-8m">
-        <div v-for="match in matches">{{ match }}</div>
+                gutter="small" class="display uk-child-width-1-6">
+        <vk-buttno size="small" v-for="match in matches">{{ match }}</vk-buttno>
       </vk-grid>
     </transition>
   </div>
 </template>
 
 <script lang="js">
-import { Grid } from 'vuikit/lib/grid';
-export default  {
+import { Grid } from 'vuikit/lib/grid'
+import { Button } from 'vuikit/lib/button'
+export default { 
   name: 'switchboard',
   props: {
     matches: {
@@ -25,6 +26,7 @@ export default  {
   },
   components: {
     'vk-grid': Grid,
+    'vk-button': Button,
   },
   mounted() {
     
@@ -54,7 +56,12 @@ export default  {
     color: white;
     border-radius: 4px;
     padding: 10px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.3)
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    text-align: left;
+    button {
+      text-align: left !important;
+      text-transform: none !important;
+    }
   }
 }
 </style>

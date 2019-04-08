@@ -12,8 +12,9 @@
   text-align: left;
 }
 .switchboard .display button[data-v-10af6d32] {
-    text-align: left !important;
-    text-transform: none !important;
+    text-align: left;
+    text-transform: none;
+    color: white;
 }
 .switchboard .display button.uk-button-default[data-v-10af6d32] {
       background: transparent;

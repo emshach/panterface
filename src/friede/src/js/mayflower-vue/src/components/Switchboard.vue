@@ -62,8 +62,9 @@ export default {
     box-shadow: 0 2px 4px rgba(0,0,0,0.3);
     text-align: left;
     button {
-      text-align: left !important;
-      text-transform: none !important;
+      text-align: left;
+      text-transform: none;
+      color: white;
       &.uk-button-default {
         background: transparent;
         border: 0 none;

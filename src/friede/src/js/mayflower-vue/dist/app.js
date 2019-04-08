@@ -92,7 +92,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "f0e74aafd63b6efc320a";
+/******/ 	var hotCurrentHash = "5f9dc6f6944fe5059875";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1084,7 +1084,11 @@ __webpack_require__.r(__webpack_exports__);
     Breadcrumb: _components_Breadcrumb_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
   mounted: function mounted() {
-    this.$refs.input.focus();
+    var _this = this;
+
+    this.$nextTick(function () {
+      _this.$refs.input.focus();
+    });
   },
   data: function data() {
     return {
@@ -1100,13 +1104,13 @@ __webpack_require__.r(__webpack_exports__);
       this.cli = '';
     },
     debouncedInput: lodash_debounce__WEBPACK_IMPORTED_MODULE_4___default()(function () {
-      var _this = this;
+      var _this2 = this;
 
       this.$nextTick(function () {
-        _this.$api('complete/' + _this.cli).then(function (data) {
-          _this.base = data.base;
-          _this.matches = data.matches;
-          _this.locations = data.locations;
+        _this2.$api('complete/' + _this2.cli).then(function (data) {
+          _this2.base = data.base;
+          _this2.matches = data.matches;
+          _this2.locations = data.locations;
         });
       });
     }, 500),

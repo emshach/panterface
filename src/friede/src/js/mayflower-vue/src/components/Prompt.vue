@@ -28,7 +28,9 @@ export default {
   },
   components: { Switchboard, Breadcrumb },
   mounted() {
-    this.$refs.input.focus()
+    this.$nextTick(() => {
+      this.$refs.input.focus()
+    })
   },
   data() {
     return {

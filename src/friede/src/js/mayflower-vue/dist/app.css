@@ -1,11 +1,14 @@
 .switchboard .display[data-v-10af6d32] {
   position: fixed;
   bottom: 42px;
-  left: 10px;
+  left: 24px;
   right: 10px;
   background: rgba(0, 0, 0, 0.75);
   color: white;
   border-radius: 4px;
+  padding: 10px;
+  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 

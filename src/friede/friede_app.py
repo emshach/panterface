@@ -252,19 +252,19 @@ def install():
                   ( 'home', dict(
                       title='Home',
                       icon='fontawesome.home',
-                      location=Location.objects.get( path='locations.home' ))))
+                      location='home' )))
                 ( '.apps', dict(
                     title='Apps',
                     icon='fontawesome.tablet-alt',
-                    location=Location.objects.get( path='locations.apps' )))
+                    location='apps' ))
                 ( 'about', dict(
                     title='About Us',
                     icon='fontawesome.trademark',
-                    location=Location.objects.get( path='locations.about' )))
+                    location='about' ))
                 ( 'contact', dict(
                     title='Contact Us',
                     icon='fontawesome.phone',
-                    location=Location.objects.get( path='locations.contact' )))),
+                    location='contact' ))),
               ( 'themes',
                 ( 'mayflower.acamar', dict(
                     templates='friede/mayflower/acamar',

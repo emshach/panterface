@@ -39,7 +39,7 @@ class _Base( Model ):
 class Base( _Base ):
     class Meta:
         abstract = True
-    icon         = M.ForeignKey( 'Icon', null=True, blank=True )
+    icon         = M.ForeignKey( 'Icon', blank=True, null=True )
 
 class PathMixin( Model ):
     class Meta:
@@ -100,7 +100,8 @@ class DataMixin( Model ):
 class ExtendsMixin( Model ):
     class Meta:
         abstract = True
-    extends = M.ForeignKey( 'self', M.PROTECT, null=True, related_name="exdended_by" )
+    extends = M.ForeignKey( 'self', M.PROTECT, blank=True, null=True,
+                            related_name="exdended_by" )
 
 
 class AppMixin( Model ):
@@ -109,16 +110,15 @@ class AppMixin( Model ):
     app = M.ForeignKey( 'App', M.CASCAHE )
 
 
-class IconPack( Base, PathMixin ):
+class Icon( _Base, PathMixin ):
     pass
 
-class Icon( _Base, PathMixin ):
-    pack = M.ForeignKey( IconPack, M.CASCADE, related_name="icons" )
 
 class Registry( Base, PathMixin ):
     format = JSONField( default=list )
     default = JSONField( default=list )
-    parent = M.ForeignKey( 'self', M.CASCADE, null=True, related_name='_elements' )
+    parent = M.ForeignKey( 'self', M.CASCADE, blank=True, null=True,
+                           related_name='_elements' )
 
     @property
     def Container( self ):
@@ -355,14 +355,14 @@ class App( Registry, DataMixin ):
 
 
 class Icon( _Base, PathMixin ):
-    parent = M.ForeignKey( Registry, M.CASCADE, null=True,
+    parent = M.ForeignKey( Registry, M.CASCADE, blank=True, null=True,
                            related_name='_icon_elements' )
     registries = M.ManyToManyField( Registry, blank=True, through='LocationEntry',
                                   related_name='_icons' )
 
 
 class Location( Base, PathMixin, AppMixin ):
-    parent = M.ForeignKey( Registry, M.CASCADE, null=True,
+    parent = M.ForeignKey( Registry, M.CASCADE, blank=True, null=True,
                            related_name='_location_elements' )
     registries = M.ManyToManyField( Registry, blank=True, through='LocationEntry',
                                   related_name='_locations' )
@@ -380,11 +380,11 @@ class Location( Base, PathMixin, AppMixin ):
 
 
 class Link( Base, PathMixin ):
-    parent = M.ForeignKey( Registry, M.CASCADE, null=True,
+    parent = M.ForeignKey( Registry, M.CASCADE, blank=True, null=True,
                            related_name='_link_elements' )
     registries = M.ManyToManyField( Registry, blank=True, through='LinkEntry',
                                   related_name='links' )
-    location = M.ForeignKey( Location, M.SET_NULL, null=True, blank=True,
+    location = M.ForeignKey( Location, M.SET_NULL, blank=True, null=True,
                              related_name='_links' )
 
     def to_dict( self ):
@@ -396,7 +396,7 @@ class Link( Base, PathMixin ):
 
 
 class Reference( Base, PathMixin ):
-    parent = M.ForeignKey( Registry, M.CASCADE, null=True,
+    parent = M.ForeignKey( Registry, M.CASCADE, blank=True, null=True,
                            related_name='_registry_elements' )
     registries = M.ManyToManyField( Registry, blank=True, through='ReferenceEntry',
                                   related_name='_references' )
@@ -475,7 +475,7 @@ class Setting( Base, PathMixin, DataMixin ):
             ( MODEL,               'Model Choice' ),
             ( MODELS,              'Multiple Model Choice' ),
         )
-    parent = M.ForeignKey( Registry, M.CASCADE, null=True,
+    parent = M.ForeignKey( Registry, M.CASCADE, blank=True, null=True,
                            related_name='_setting_elements' )
     registries = M.ManyToManyField( Registry, blank=True, through='SettingEntry',
                                   related_name='_settings' )

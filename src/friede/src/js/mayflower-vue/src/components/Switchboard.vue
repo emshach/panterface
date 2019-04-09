@@ -69,7 +69,6 @@ export default {
   .display{
     position: fixed;
     bottom: 18px;
-    left: 18px;
     right: 6px;
     background: rgba(0,0,0,0.75);
     color: white;

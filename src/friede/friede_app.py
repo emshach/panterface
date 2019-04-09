@@ -172,22 +172,34 @@ def install():
                         component='NewModelWidget'
                     ))),
                 ( 'edit.from.model', dict(
-                    icon='fontawesome.',
+                    icon='fontawesome.edit',
                     extends='adaptive',
                     data=dict(
                         component='EditModelWidget'
                     ))),
                 ( 'report.from.model', dict(
-                    icon='fontawesome.',
+                    icon='fontawesome.file-upload',
                     extends='adaptive',
                     data=dict(
                         component='ReportModelWidget'
                     ))),
                 ( 'delete.from.model', dict(
-                    icon='fontawesome.',
+                    icon='fontawesome.trash',
                     extends='adaptive',
                     data=dict(
-                        component='ReportModelWidget'
+                        component='ModelWidget'
+                    ))),
+                ( 'add.from.model', dict(
+                    icon='fontawesome.folder-plus',
+                    extends='adaptive',
+                    data=dict(
+                        component='AddModelWidget'
+                    ))),
+                ( 'remove.from.model', dict(
+                    icon='fontawesome.folder-minus',
+                    extends='adaptive',
+                    data=dict(
+                        component='RemoveModelWidget'
                     ))),
                 ( 'from relations', objects, relations ),),
               ( 'blocks',

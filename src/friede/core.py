@@ -419,6 +419,9 @@ def updateapp( app, data, upto=None ):
                             top[ 'path' ] = path[0]
                         search, updates = split_dict( top, 'name', 'path' )
                         relations = {}
+                        app_field = model[0]._meta.get_field( 'app' )
+                        if app_field.related_model is App:
+                            search[ 'app' ] = app
                         for key, value in updates.items():
                             if not isinstance( value, basestring ):
                                 continue
@@ -426,8 +429,6 @@ def updateapp( app, data, upto=None ):
                             if field.is_relation:
                                 rm = field.related_model
                                 updates.pop( key, None )
-                                if field.name == 'app' and rm is App:
-                                    updates[ 'app' ] = app
                                 try:
                                     print 'derefing', field
                                     if rm in registries:

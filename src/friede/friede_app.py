@@ -134,6 +134,7 @@ def registrar( router, routes, module ):
 def install():
     app, new = installapp(
         name='friede',
+        icon='fontawesome.fire-alt',
         module='friede',
         title='Project Friede',
         description='''App platform with utilities for REST API setup and

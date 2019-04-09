@@ -338,6 +338,7 @@ actions = 'list view new edit report delete'.split()
 def install():
     app, new = installapp(
         name='intrepid',
+        icon='fontawesome.gem',
         module='intrepid',
         title='Project Intrepid',
         description='''Time, task and finance management system

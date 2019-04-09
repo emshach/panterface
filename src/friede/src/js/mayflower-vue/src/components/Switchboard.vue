@@ -2,7 +2,7 @@
   <div class="switchboard">
     <transition mode="in-out">
       <vk-grid  v-if="matches.length || locations.length"
-                gutter="collapse" class="display uk-child-width-1-6 uk-margin">
+                gutter="collapse" :class="[ 'display', 'uk-margin', columnWidth ]">
         <vk-button-link
           v-for="match in matches" href size="small" 
           @click.prevent="select( match )">{{ match }}</vk-button-link>
@@ -41,10 +41,25 @@ export default {
   methods: {
     select( match ) {
       this.$emit( 'update', match )
+    },
+    getCompletionColumns() {
+      matches = this.matches.length;
+      switch( matches ) {
+      case 0:
+      case 1:
+      case 2:
+      case 3:
+      case 4:
+      case 5:
+        return matches;
+      }
+      return 6;
     }
   },
   computed: {
-    
+    columnWidth() {
+      return 'uk-child-width-1-' + this.getCompletionColumns()
+    }
   }
 }
 </script>

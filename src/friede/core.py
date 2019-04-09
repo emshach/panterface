@@ -156,8 +156,8 @@ def mklocations( app, objects, relations, actions=None ):
     return (( 'list', tuple(
         (( '.' + relations[o][ 'plural' ], dict(
             title="list {}".format( relations[o][ 'plural' ]).title(),
-            href="/list/{}".format( relations[o][ 'plural' ]))
-        ( 'widgets', ( 'card', dict( path="list.{}".format(o) )))),
+            href="/list/{}".format( relations[o][ 'plural' ])),
+           ( 'widgets', ( 'card', dict( path="list.{}".format(o) )))),
          ( o, dict(
              title="list {}".format( relations[o][ 'plural' ]).title(),
              href="/{}/list".format( relations[o][ 'plural' ]),
@@ -166,8 +166,9 @@ def mklocations( app, objects, relations, actions=None ):
             tuple (
                 ( action,
                   tuple (
-                      ( '.'+ y, dict( title="{} {}".format( action, y ).title(),
-                                 href="/{}/{}".format( action, y ))
+                      ( '.'+ y, dict(
+                          title="{} {}".format( action, y ).title(),
+                          href="/{}/{}".format( action, y )),
                         ( 'widgets', ( 'card', dict( path="{}.{}".format( action, y )))))
                           for w in (((o, o), ( o, relations[o][ 'plural' ]))
                                     for o in objects )

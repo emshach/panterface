@@ -256,7 +256,7 @@ def install():
                   ( '.apps', dict(
                       title='Apps',
                       icon='fontawesome.tablet-alt',
-                      location='apps' ))
+                      location='apps' )),
                   ( 'about', dict(
                       title='About Us',
                       icon='fontawesome.trademark',

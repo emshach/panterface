@@ -115,7 +115,7 @@ def installapp( name, module, title, description, icon='', rest=True,
         if not icon:
             icon = 'fontawesome.tablet-alt'
         if isinstance( icon, basestring ):
-            icon = Icon.objects.get_or_create( path=icon )
+            icon, new = Icon.objects.get_or_create( path=icon )
         app, new = App.objects.get_or_create( path=path, defaults=dict(
             title=title,
             module=module,

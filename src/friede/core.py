@@ -180,7 +180,7 @@ def mklocations( app, objects, relations, actions=None ):
                       ( action,
                         dict( title="{} {}".format( action, y ).title(),
                               href="/{}/{}".format( y, action ),
-                              redirect_to="/{}/{}".format( action, y )))
+                              redirect_to="{}.{}".format( action, y )))
                       for action in actions[1:] ))
                 for w in (((o, o), ( o, relations[o][ 'plural' ]))
                           for o in objects )

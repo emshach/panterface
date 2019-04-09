@@ -43,7 +43,7 @@ export default {
       this.$emit( 'update', match )
     },
     getCompletionColumns() {
-      matches = this.matches.length;
+      const matches = this.matches.length;
       switch( matches ) {
       case 0:
       case 1:

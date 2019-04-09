@@ -21,7 +21,7 @@ relations = dict(
         'icon'   : 'fontawesome.sticky-note',
         'plural' : 'notes',
         'has'    : 'note resource product'.split(),
-        'in'     : view
+        'in'     : objects
     },
     resource={
         'model'  : 'Resource',

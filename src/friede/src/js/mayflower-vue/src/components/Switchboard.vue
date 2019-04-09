@@ -3,7 +3,7 @@
     <transition mode="in-out">
       <vk-grid  v-if="matches.length || locations.length"
                 gutter="collapse" :class="[ 'display', 'uk-margin', columnWidth ]"
-                :style="{ minWidth: 100 + ( getCompletionColumns() / 6 ) + '%' }">
+                :style="{ minWidth: 100 * ( getCompletionColumns() / 6 ) + '%' }">
         <vk-button-link
           v-for="match in matches" href size="small" 
           @click.prevent="select( match )">{{ match }}</vk-button-link>

@@ -8,6 +8,7 @@ from importlib import import_module
 from collections import deque
 from packaging.version import parse as version_parse
 import sys
+import traceback
 
 types = dict(
     containers=Container,
@@ -130,6 +131,7 @@ def installapp( name, module, title, description, icon='', rest=True,
         return app, new
     except Exception as e:
         print >> sys.stderr, "got exception", type(e), e, 'in installapp'
+        traceback.print_stack()
         return None, None
 
 def mkwidgets( app, objects, relations, actions=None ):

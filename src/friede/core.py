@@ -124,8 +124,8 @@ def installapp( name, module, title, description, icon='', rest=True,
         if data:
             updateapp( app, data, upto=version )
         return app, new
-    except Exception:
-        print >> sys.stderr, "got exception", type(e), e, 'in installapp' 
+    except Exception as e:
+        print >> sys.stderr, "got exception", type(e), e, 'in installapp'
         return None, None
 
 def mkwidgets( app, objects, relations, actions=None ):

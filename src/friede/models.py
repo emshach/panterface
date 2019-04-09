@@ -363,8 +363,8 @@ class Location( Base, PathMixin, AppMixin ):
     registries = M.ManyToManyField( Registry, blank=True, through='LocationEntry',
                                   related_name='_locations' )
     href = M.CharField( max_length=255, default='#' )
-    redirect_to = M.OneToOneField( 'self', blank=True, null=True,
-                                   related_name='redirect_from' )
+    redirect_to = M.ForeignKey( 'self', blank=True, null=True,
+                                related_name='redirect_from' )
 
     def to_dict( self ):
         out = super( Location, self).to_dict()

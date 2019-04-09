@@ -92,7 +92,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "c9c85a56e48aae0c1e53";
+/******/ 	var hotCurrentHash = "81c5b2717697fadd39f2";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -10967,6 +10967,9 @@ var render = function() {
                 "vk-grid",
                 {
                   class: ["display", "uk-margin", _vm.columnWidth],
+                  style: {
+                    minWidth: 100 + _vm.getCompletionColumns() / 6 + "%"
+                  },
                   attrs: { gutter: "collapse" }
                 },
                 _vm._l(_vm.matches, function(match) {

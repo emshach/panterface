@@ -1,5 +1,5 @@
 <template lang="html">
-  <form id="prompt" class="mf-prompt uk-flex uk-wrap-around"
+  <form id="prompt" class="mf-prompt uk-flex uk-wrap-around" ref="form"
         @submit.prevent="submit">
     <switchboard :matches="matches" :locations="locations" @update="complete" />
     <breadcrumb class="breadcrumb" :items="breadcrumb" />
@@ -40,6 +40,7 @@ export default {
       base: '',
       matches: [],
       locations: [],
+      enterMeansSubmit: True,
     }
   },
   methods: {
@@ -83,6 +84,9 @@ export default {
         if ( this.matches.length === 1 )
           this.complete( this.matches[0] + ' ' )
         // TODO: else cycle completions
+      } else if( $event.keyCode === 13 && this.multiline && this.enterMeansSubmit) { 
+        $event.preventDefault();
+        this.$refs.form.submit();
       }
     }
   },

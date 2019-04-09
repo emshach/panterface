@@ -92,7 +92,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "7ec4a4fd4d9c50b0ca2a";
+/******/ 	var hotCurrentHash = "dbb73f6ce8dc855e7812";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -10611,7 +10611,7 @@ __webpack_require__.r(__webpack_exports__);
       this.prevCli = this.cli;
     },
     complete: function complete(match) {
-      this.cli = this.cli.replace(RegExp(this.base + '$'), match);
+      this.cli = this.cli.replace(RegExp(this.base + '$'), match + ' ');
       this.getCompletions();
       this.$refs.input.focus();
     },
@@ -10968,7 +10968,7 @@ var render = function() {
                 {
                   class: ["display", "uk-margin", _vm.columnWidth],
                   style: {
-                    minWidth: 100 * (_vm.getCompletionColumns() / 6) + "%"
+                    minWidth: 92 * (_vm.getCompletionColumns() / 6) + "%"
                   },
                   attrs: { gutter: "collapse" }
                 },

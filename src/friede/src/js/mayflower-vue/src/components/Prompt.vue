@@ -74,7 +74,7 @@ export default {
       this.prevCli = this.cli;
     },
     complete( match ) {
-      this.cli = this.cli.replace( RegExp( this.base + '$' ), match );
+      this.cli = this.cli.replace( RegExp( this.base + '$' ), match + ' ' );
       this.getCompletions();
       this.$refs.input.focus();
     },

@@ -206,8 +206,8 @@ def mklocations( app, objects, relations, actions=None ):
                 ( 'new',
                   tuple(
                       ( o, dict(
-                          title="add new {}".format(o).title(),
-                          href="/add/new/{}".format(o) ))
+                          title="add to new {}".format(o).title(),
+                          href="/add/to/new/{}".format(o) ))
                           for o in objects if relations[o][ 'has' ])),
                 tuple(
                     ( '.' + y, dict(
@@ -259,7 +259,7 @@ def mklocations( app, objects, relations, actions=None ):
                         href="/{}/remove".format(y),
                         redirect_to="remove.{}".format(y) )))
                     for w in (((o, o), ( o, relations[o][ 'plural' ]))
-                              for o in objects if relations[o][ 'has' ])
+                              for o in objects if relations[o][ 'in' ])
                     for x, y in w ),
             tuple (
                 (( "{}.add.to".format(y),
@@ -273,7 +273,7 @@ def mklocations( app, objects, relations, actions=None ):
                         href="/{}/remove/from".format(y),
                        redirect_to="remove.from.{}".format(y) )))
                     for w in (((o, o), ( o, relations[o][ 'plural' ]))
-                              for o in objects if relations[o][ 'in' ])
+                              for o in objects if relations[o][ 'has' ])
                     for x, y in w ))
 
 def getsimplefields( app, name, plural, model, exclude=( 'id' )):

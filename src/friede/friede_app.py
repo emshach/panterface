@@ -246,30 +246,30 @@ def install():
                   ( 'nav', dict(
                       title='Nav Menu',
                       description='Main Site Navigation Menu'
-                  ))))
+                  )))),
               ( 'links',
                 ( 'menu.nav',
                   ( 'home', dict(
                       title='Home',
                       icon='fontawesome.home',
-                      location='home' )))
-                ( '.apps', dict(
-                    title='Apps',
-                    icon='fontawesome.tablet-alt',
-                    location='apps' ))
-                ( 'about', dict(
-                    title='About Us',
-                    icon='fontawesome.trademark',
-                    location='about' ))
-                ( 'contact', dict(
-                    title='Contact Us',
-                    icon='fontawesome.phone',
-                    location='contact' ))),
+                      location='home' )),
+                  ( '.apps', dict(
+                      title='Apps',
+                      icon='fontawesome.tablet-alt',
+                      location='apps' ))
+                  ( 'about', dict(
+                      title='About Us',
+                      icon='fontawesome.trademark',
+                      location='about' )),
+                  ( 'contact', dict(
+                      title='Contact Us',
+                      icon='fontawesome.phone',
+                      location='contact' )))),
               ( 'themes',
                 ( 'mayflower.acamar', dict(
                     templates='friede/mayflower/acamar',
                     title='Acamar Theme for Mayflower Shell',
-                    description='''A soothing aquamarine theme''' )))
+                    description='''A soothing aquamarine theme''' ))),
               ( 'shells',
                 ( 'mayflower', dict(
                     title='Mayflower Shell',
@@ -277,7 +277,7 @@ def install():
 
 Uses an innovative hybrid web-app/command-line navigation system''',
                     templates='friede/mayflower' ),
-                  ( 'themes', ( 'current', dict( path='acamar' )))))
+                  ( 'themes', ( 'current', dict( path='acamar' ))))),
             ), ))
 
 def init( router, register, urlpatterns ):

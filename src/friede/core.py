@@ -25,6 +25,7 @@ types = dict(
     icons=Icon
 )
 registries = { v: k for k, v in types.items() }
+auto_create = ( Icon )
 
 def setup():
     "make new settings"
@@ -82,14 +83,11 @@ def setupshell( env=None ):
     "make (and select) the default shell"
     if not env:
         env = getenv()
-    shell = None
-    try:
-        shell = Shell.objects.get( path='shells.mayflower' )
-    except:
-        shell = Shell.objects.create(
+    shell, new = Shell.objects.get_or_create(
+        path='shells.mayflower', defaults=dict(
             path='shells.mayflower',
             templates='friede/mayflower'
-        )
+    ))
     env.addshell( 'current', shell )
     setuptheme( shell )
     return shell
@@ -98,14 +96,11 @@ def setuptheme( shell=None ):
     "make (and select) the default theme for the current shell"
     if not shell:
         shell = Shells().mayflower.get()
-    theme = None
-    try:
-        theme = Theme.objects.get( path='themes.acamar' )
-    except Theme.DoesNotExist:
-        theme = Theme.objects.create(
-            name='themes.acamar',
+    theme, new = Theme.objects.get_or_create(
+        path='themes.mayflower.acamar', defaults=dict(
+            path='themes.mayflower.acamar',
             templates='friede/mayflower/acamar'
-        )
+        ))
     shell.addtheme( 'current', theme )
     return theme
 
@@ -422,22 +417,23 @@ def updateapp( app, data, upto=None ):
                                 continue
                             field = model[0]._meta.get_field( key )
                             if field.is_relation:
+                                rm = field.related_model
                                 updates.pop( key, None )
-                                if field.name == 'app' and field.related_model is App:
+                                if field.name == 'app' and rm is App:
                                     updates[ 'app' ] = app
                                 try:
-                                    rm = field.related_model
                                     print 'derefing', field
                                     if rm in registries:
                                         if not value.startswith( registries[ rm ]+'.' ):
                                             value = "{}.{}".format(
                                                 registries[ rm ], value )
-                                    related = field.related_model.objects.get(
-                                        path=value )
-                                except field.related_model.DoesNotExist:
-                                    print >> sys.stderr, "got no", field.related_model,\
-                                        'path', value
-                                    raise
+                                    related = rm.objects.get( path=value )
+                                except rm.DoesNotExist:
+                                    if rm in auto_create:
+                                        related = rm.objects.create( path=value )
+                                    else:
+                                        print >> sys.stderr, "got no", rm, 'path', value
+                                        raise
                                 relations[ key ] = related
                                 # TODO; account for multiple ordinality
                         if not obj or type( obj ) is not model[0]:

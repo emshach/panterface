@@ -239,8 +239,47 @@ def install():
                             options='friede.Theme',
                             filter=( 'in', '$current_shell' )
                         )))))),
-              ( 'links', ),
+              ( 'containers',
+                ( 'links.menu', dict(
+                    title='Menus',
+                    description='Collection of all Menu Objects' ),
+                  ( 'nav', dict(
+                      title='Nav Menu',
+                      description='Main Site Navigation Menu'
+                  ))))
+              ( 'links',
+                ( 'menu.nav',
+                  ( 'home', dict(
+                      title='Home',
+                      icon='fontawesome.home',
+                      location=Location.objects.get( path='locations.home' ))))
+                ( '.apps', dict(
+                    title='Apps',
+                    icon='fontawesome.tablet-alt',
+                    location=Location.objects.get( path='locations.apps' )))
+                ( 'about', dict(
+                    title='About Us',
+                    icon='fontawesome.trademark',
+                    location=Location.objects.get( path='locations.about' )))
+                ( 'contact', dict(
+                    title='Contact Us',
+                    icon='fontawesome.phone',
+                    location=Location.objects.get( path='locations.contact' )))),
+              ( 'themes',
+                ( 'mayflower.acamar', dict(
+                    templates='friede/mayflower/acamar',
+                    title='Acamar Theme for Mayflower Shell',
+                    description='''A soothing aquamarine theme''' )))
+              ( 'shells',
+                ( 'mayflower', dict(
+                    title='Mayflower Shell',
+                    description='''Webapp shell based on Vue and UIKit
+
+Uses an innovative hybrid web-app/command-line navigation system''',
+                    templates='friede/mayflower' ),
+                  ( 'themes', ( 'current', dict( path='acamar' )))))
             ), ))
+
 def init( router, register, urlpatterns ):
     register( r'containers', views.ContainerViewSet )
     register( r'widgets',    views.WidgetViewSet    )

@@ -106,12 +106,8 @@ class ExtendsMixin( Model ):
 
 class AppMixin( Model ):
     class Meta:
-        abscract = True
-    app = M.ForeignKey( 'App', M.CASCAHE )
-
-
-class Icon( _Base, PathMixin ):
-    pass
+        abstract = True
+    app = M.ForeignKey( 'App', M.CASCADE )
 
 
 class Registry( Base, PathMixin ):

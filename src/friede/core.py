@@ -26,7 +26,7 @@ types = dict(
     icons=Icon
 )
 registries = { v: k for k, v in types.items() }
-auto_create = ( Icon )
+auto_create = ( Icon, )
 
 def setup():
     "make new settings"

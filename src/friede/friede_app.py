@@ -25,75 +25,87 @@ objects = '''container widget block screen shell theme slot app location link
 relations = dict(
     container={
         'model'  : 'Container',
+        'icon'   : 'fontawesome.box-open',
         'plural' : 'containers',
-        'has'    : ''.split(),
-        'in'     : ''.split()
+        'has'    : objects,
+        'in'     : objects
     },
     widget={
         'model'  : 'Widget',
+        'icon'   : 'fontawesome.toggle-on',
         'plural' : 'widgets',
-        'has'    : ''.split(),
-        'in'     : ''.split()
+        'has'    : objects,
+        'in'     : objects
     },
     block={
         'model'  : 'Block',
+        'icon'   : 'fontawesome.columns',
         'plural' : 'blocks',
-        'has'    : ''.split(),
-        'in'     : ''.split()
+        'has'    : objects,
+        'in'     : objects
     },
     screen={
         'model'  : 'Screen',
+        'icon'   : 'fontawesome.desktop',
         'plural' : 'screens',
-        'has'    : ''.split(),
-        'in'     : ''.split()
+        'has'    : objects,
+        'in'     : objects
     },
     shell={
         'model'  : 'Shell',
+        'icon'   : 'fontawesome.terminal',
         'plural' : 'shells',
-        'has'    : ''.split(),
-        'in'     : ''.split()
+        'has'    : objects,
+        'in'     : objects
     },
     theme={
         'model'  : 'Theme',
+        'icon'   : 'fontawesome.image',
         'plural' : 'themes',
-        'has'    : ''.split(),
-        'in'     : ''.split()
+        'has'    : objects,
+        'in'     : objects
     },
     slot={
         'model'  : 'Slot',
+        'icon'   : 'fontawesome.indent',
         'plural' : 'slots',
-        'has'    : ''.split(),
-        'in'     : ''.split()
+        'has'    : objects,
+        'in'     : objects
     },
     app={
         'model'  : 'App',
+        'icon'   : 'fontawesome.mobile-alt',
         'plural' : 'apps',
-        'has'    : ''.split(),
-        'in'     : ''.split()
+        'has'    : objects,
+        'in'     : objects
     },
     location={
         'model'  : 'Location',
+        'icon'   : 'fontawesome.location-arrow',
         'plural' : 'locations',
-        'has'    : ''.split(),
-        'in'     : ''.split()
+        'has'    : 'link'.split(),
+        'in'     : objects
     },
     link={
         'model'  : 'Link',
+        'icon'   : 'fontawesome.link',
         'plural' : 'links',
         'has'    : ''.split(),
-        'in'     : ''.split()
+        'in'     : objects + [ 'location' ]
     },
     reference={
         'model'  : 'Reference',
+        'icon'   : 'fontawesome.external-link-alt',
         'plural' : 'references',
         'has'    : ''.split(),
-        'in'     : ''.split()
+        'in'     : objects
     },
     setting={
         'model'  : 'Setting',
+        'icon'   : 'fontawesome.cog',
         'plural' : 'settings',
         'has'    : ''.split(),
-        'in'     : ''.split()
+        'in'     : objects
     },
 )
 actions = 'list view new edit report delete'.split()
@@ -129,6 +141,83 @@ def install():
         router=router,
         data=(
             ( '0.1.0',
+              ( 'widgets',
+                ( 'dashboard', dict (
+                    icon='fontawesome.expand',
+                    data=dict(
+                        component='DashboardWidget'
+                    ))),
+                ( 'inline', dict(
+                    icon='fontawesome.compress',
+                    data=dict(
+                        component='InlineWidget'
+                    )
+                )),
+                ( 'adaptive', dict(
+                    icon='fontawesome.plug',
+                    data=dict(
+                        component='AdaptiveWidget'
+                    ))),
+                ( 'view.from.model', dict(
+                    icon='fontawesome.eye',
+                    extends='adaptive',
+                    data=dict(
+                        component='ViewModelWidget'
+                    ))),
+                ( 'new.from.model', dict(
+                    icon='fontawesome.plus',
+                    extends='adaptive',
+                    data=dict(
+                        component='NewModelWidget'
+                    ))),
+                ( 'edit.from.model', dict(
+                    icon='fontawesome.',
+                    extends='adaptive',
+                    data=dict(
+                        component='EditModelWidget'
+                    ))),
+                ( 'report.from.model', dict(
+                    icon='fontawesome.',
+                    extends='adaptive',
+                    data=dict(
+                        component='ReportModelWidget'
+                    ))),
+                ( 'delete.from.model', dict(
+                    icon='fontawesome.',
+                    extends='adaptive',
+                    data=dict(
+                        component='ReportModelWidget'
+                    ))),
+                ( 'from relations', objects, relations ),),
+              ( 'blocks',
+                ( 'form',
+                  ( 'group', dict(
+                      icon='fontawesome.object-group',
+                      data=dict(
+                          component='FormGroup'
+                      ))),
+                  ( 'section', dict(
+                      icon='fontawesome.paragraph',
+                      data=dict(
+                          component='FormSection'
+                      ))),
+                  ( 'calendar', dict(
+                      icon='fontawesome.calendar-alt',
+                      data=dict(
+                          component='FormCalendar',
+                      ))))),
+              ( 'screens',
+                ( 'form.single', dict(
+                    icon='fontawesome.file-alt',
+                    data=dict(
+                        component='FormPage'
+                    ))),
+                ( 'list.from.model', dict(
+                    icon='fontawesome.list',
+                    data=dict(
+                        component='ListModelPage'
+                    ))),
+              ),
               ( 'locations',
                 ( 'home',    dict( title='Home',       href='/'        )),
                 ( '.apps',   dict( title='Apps',       href='/apps'    )),
@@ -151,77 +240,6 @@ def install():
                             filter=( 'in', '$current_shell' )
                         )))))),
               ( 'links', ),
-              ( 'widgets',
-                ( 'dashboard', dict (
-                    data=dict(
-                        component='DashboardWidget'
-                    ))),
-                ( 'inline', dict(
-                    data=dict(
-                        component='InlineWidget'
-                    )
-                )),
-                ( 'adaptive', dict(
-                    data=dict(
-                        component='AdaptiveWidget'
-                    ))),
-                ( 'view.from.model', dict(
-                    extends='widgets.adaptive',
-                    data=dict(
-                        component='ViewModelWidget'
-                    ))),
-                ( 'new.from.model', dict(
-                    extends='widgets.adaptive',
-                    data=dict(
-                        component='NewModelWidget'
-                    ))),
-                ( 'edit.from.model', dict(
-                    extends='widgets.adaptive',
-                    data=dict(
-                        component='EditModelWidget'
-                    ))),
-                ( 'report.from.model', dict(
-                    extends='widgets.adaptive',
-                    data=dict(
-                        component='ReportModelWidget'
-                    ))),
-                ( 'delete.from.model', dict(
-                    extends='widgets.adaptive',
-                    data=dict(
-                        component='ReportModelWidget'
-                    ))),
-                tuple(
-                    ( action,
-                      tuple(( o, dict(
-                          extends="widgets.{}.from.model".format( action ),
-                          data=dict(
-                              model="intrepid.{}".format( relations[o][ 'model' ]))
-                      )) for o in objects ))
-                  for action in actions[1:] )),
-              ( 'blocks',
-                ( 'form',
-                  ( 'group', dict(
-                      data=dict(
-                          component='FormGroup'
-                      ))),
-                  ( 'section', dict(
-                      data=dict(
-                          component='FormSection'
-                      ))),
-                  ( 'calendar', dict(
-                      data=dict(
-                          component='FormCalendar',
-                      ))))),
-              ( 'screens',
-                ( 'form.single', dict(
-                    data=dict(
-                        component='FormPage'
-                    ))),
-                ( 'list.from.model', dict(
-                    data=dict(
-                        component='ListModelPage'
-                    ))),
-              ),
             ), ))
 def init( router, register, urlpatterns ):
     register( r'containers', views.ContainerViewSet )
@@ -232,6 +250,7 @@ def init( router, register, urlpatterns ):
     register( r'themes',     views.ThemeViewSet     )
     register( r'slots',      views.SlotViewSet      )
     register( r'apps',       views.AppViewSet       )
+    register( r'icons',      views.IconViewSet  )
     register( r'locations',  views.LocationViewSet  )
     register( r'links',      views.LinkViewSet      )
     register( r'references', views.ReferenceViewSet )

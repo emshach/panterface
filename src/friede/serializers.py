@@ -83,6 +83,14 @@ class AppSerializer( serializers.HyperlinkedModelSerializer ):
         )
 
 
+class IconSerializer( serializers.HyperlinkedModelSerializer ):
+    class Meta:
+        model = Icon
+        fields = ( 'url', 'id', 'name', 'title', 'description', 'active',
+                   'path',
+        )
+
+
 class LocationSerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Location

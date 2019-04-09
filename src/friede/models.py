@@ -12,12 +12,11 @@ from django.utils.timezone import now
 Model = M.Model
 
 @python_2_unicode_compatible
-class Base( Model ):
+class _Base( Model ):
     class Meta:
         abstract = True
     name         = M.SlugField()
     title        = M.CharField( blank=True, max_length=255 )
-    icon         = M.CharField( blank=True, max_length=255 )
     description  = M.TextField( blank=True )
     active       = M.BooleanField( default=True )
 
@@ -30,13 +29,17 @@ class Base( Model ):
     def to_dict( self ):
         out = {
             '$name'        : self.name,
-            '$path'        : self.path,
             '$title'       : self.title,
             '$description' : self.description,
         }
         if hasattr( self, 'path' ):
             out[ '$path' ] = self.path
         return out
+
+class Base( _Base ):
+    class Meta:
+        abstract = True
+    icon         = M.ForeignKey( 'Icon', null=True, blank=True )
 
 class PathMixin( Model ):
     class Meta:
@@ -99,6 +102,19 @@ class ExtendsMixin( Model ):
         abstract = True
     extends = M.ForeignKey( 'self', M.PROTECT, null=True, related_name="exdended_by" )
 
+
+class AppMixin( Model ):
+    class Meta:
+        abscract = True
+    app = M.ForeignKey( 'App', M.CASCAHE )
+
+
+class IconPack( Base, PathMixin ):
+    pass
+
+class Icon( _Base, PathMixin ):
+    pack = M.ForeignKey( IconPack, M.CASCADE, related_name="icons" )
+
 class Registry( Base, PathMixin ):
     format = JSONField( default=list )
     default = JSONField( default=list )
@@ -145,6 +161,11 @@ class Registry( Base, PathMixin ):
         return Selector( self, App )
 
     @property
+    def Icon( self ):
+        from .objects import Selector
+        return Selector( self, Icon )
+
+    @property
     def Location( self ):
         from .objects import Selector
         return Selector( self, Location )
@@ -172,6 +193,7 @@ class Registry( Base, PathMixin ):
     T = Theme
     O = Slot
     A = App
+    I = Icon
     L = Location
     K = Link
     R = Reference
@@ -200,6 +222,9 @@ class Registry( Base, PathMixin ):
 
     def addapp( self, name, app ):
         AppEntry.objects.create( registry=self, name=name, entry=app )
+
+    def addicon( self, name, icon ):
+        IconEntry.objects.create( registry=self, name=name, entry=icon )
 
     def addlocation( self, name, location ):
         LocationEntry.objects.create( registry=self, name=name, entry=location )
@@ -273,6 +298,14 @@ class Shell( Registry, ExtendsMixin ):
     def home( self ):
         return "%s/%s" % ( self.templates, self.template )
 
+    def to_dict( self ):
+        out = super( Link, self).to_dict()
+        out.update({
+            '$templates' : self.templates,
+            '$template' : self.template,
+        })
+        return out
+
 
 class Theme( Registry, ExtendsMixin ):
     registry_ptr  = M.OneToOneField( Registry, M.CASCADE, parent_link=True,
@@ -285,6 +318,14 @@ class Theme( Registry, ExtendsMixin ):
     @property
     def home( self ):
         return "%s/%s" % ( self.templates, self.template )
+
+    def to_dict( self ):
+        out = super( Link, self).to_dict()
+        out.update({
+            '$templates' : self.templates,
+            '$template' : self.template,
+        })
+        return out
 
 
 class Slot( Registry ):
@@ -303,8 +344,24 @@ class App( Registry, DataMixin ):
     rest          = M.CharField( max_length=32, default=True )
     version       = M.CharField( max_length=32, default='0.0.0' )
 
+    def to_dict( self ):
+        out = super( Link, self).to_dict()
+        out.update({
+            'module'  : self.module,
+            'rest'    : self.rest,
+            'version' : self.version,
+        })
+        return out
 
-class Location( Base, PathMixin ):
+
+class Icon( _Base, PathMixin ):
+    parent = M.ForeignKey( Registry, M.CASCADE, null=True,
+                           related_name='_icon_elements' )
+    registries = M.ManyToManyField( Registry, blank=True, through='LocationEntry',
+                                  related_name='_icons' )
+
+
+class Location( Base, PathMixin, AppMixin ):
     parent = M.ForeignKey( Registry, M.CASCADE, null=True,
                            related_name='_location_elements' )
     registries = M.ManyToManyField( Registry, blank=True, through='LocationEntry',
@@ -316,9 +373,8 @@ class Location( Base, PathMixin ):
     def to_dict( self ):
         out = super( Location, self).to_dict()
         out.update({
-            '$path': self.path,
-            'href': self.href,
-            'redirect_to': self.redirect_to.href if self.redirect_to else None
+            'href'        : self.href,
+            'redirect_to' : self.redirect_to.href if self.redirect_to else None
         })
         return out
 
@@ -334,8 +390,7 @@ class Link( Base, PathMixin ):
     def to_dict( self ):
         out = super( Link, self).to_dict()
         out.update({
-            '$path': self.path,
-            'location': self.location.to_dict()
+            'location' : self.location.to_dict()
         })
         return out
 
@@ -350,6 +405,13 @@ class Reference( Base, PathMixin ):
     def resolve( self ):
         return Registry.objects.get( name=self.target )
     # TODO: trycatch
+
+    def to_dict( self ):
+        out = super( Link, self).to_dict()
+        out.update({
+            'target' : self.target
+        })
+        return out
 
 
 class Setting( Base, PathMixin, DataMixin ):
@@ -420,6 +482,14 @@ class Setting( Base, PathMixin, DataMixin ):
     type     = M.CharField( max_length=32, choices=Types.ALL, default=Types.CHAR )
     default  = JSONField( default=dict )
 
+    def to_dict( self ):
+        out = super( Setting, self).to_dict()
+        out.update({
+            '$type'    : self.type,
+            '$default' : self.default
+        })
+        return out
+
 
 def _get_entry_position():
     return 0
@@ -468,6 +538,11 @@ class SlotEntry( Entry ):
 class AppEntry( Entry ):
     registry = M.ForeignKey( Registry, M.CASCADE, related_name='_app_entries' )
     entry = M.ForeignKey( App, M.CASCADE, related_name='_entries' )
+
+
+class IconEntry( Entry ):
+    registry = M.ForeignKey( Registry, M.CASCADE, related_name='_icon_entries' )
+    entry = M.ForeignKey( Icon, M.CASCADE, related_name='_entries' )
 
 
 class LocationEntry( Entry ):

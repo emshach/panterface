@@ -82,8 +82,6 @@ class Product( Base ):
 class Noted( Base ):
     class Meta:
         abstract = True
-    # resources    = M.ManyToManyField( Resource, related_name='%(class)ss' )
-    # products     = M.ManyToManyField( Product, related_name='%(class)ss' )
     notes        = M.ManyToManyField( Note, blank=True, related_name='%(class)ss' )
 
 
@@ -153,25 +151,31 @@ class Target( Noted ):
     requires  = M.ManyToManyField( 'self', blank=True, related_name='releases' )
 
 
-class Strategy( Base ):
+class Strategy( Noted ):
+    class Meta:
+        verbose_name_plural = 'strategies'
     # relations
-    objective = M.ForeignKey( Objective, M.PROTECT, related_name='stategies' )
-    notes     = M.ManyToManyField( Note, blank=True, related_name='strategies' )
+    objective  = M.ForeignKey( Objective, M.PROTECT, related_name='stategies' )
+    notes      = M.ManyToManyField( Note, blank=True, related_name='strategies' )
+    targets    = M.ManyToManyField( Target, related_name='strategies' )
 
 
 class Plan( Noted, DatePlanMixin ):
     # relations
     strategy = M.ForeignKey( Strategy, M.PROTECT, related_name='plans' )
+    targets  = M.ManyToManyField( Target, related_name='plans' )
 
 
 class Phase( Noted, DatePlanMixin ):
     # relations
-    plan = M.ForeignKey( Plan, M.CASCADE, related_name='phases' )
+    plan    = M.ForeignKey( Plan, M.CASCADE, related_name='phases' )
+    targets = M.ManyToManyField( Target, related_name='phases' )
 
 
 class Step( Noted, DatePlanMixin ):
     # relations
-    phase = M.ForeignKey( Phase, M.CASCADE, related_name='steps' )
+    phase   = M.ForeignKey( Phase, M.CASCADE, related_name='steps' )
+    targets = M.ManyToManyField( Target, related_name='steps' )
 
 
 ### Organization
@@ -205,7 +209,9 @@ class Action( Noted, DatePlanMixin ):
 
 ### Finances
 
-class Currency( Base ):
+class Currency( Noted ):
+    class Meta:
+        verbose_name_plural = 'currencies'
     rate      = M.FloatField( default=1 )
     # relations
     notes     = M.ManyToManyField( Note, blank=True, related_name='currencies' )
@@ -423,14 +429,18 @@ class Role( Noted ):
     positions = M.ManyToManyField( Position, blank=True, related_name='roles' )
 
 
-class Responsibility( Base ):
+class Responsibility( Noted ):
+    class Meta:
+        verbose_name_plural = 'responsibilities'
     # relations
     roles     = M.ManyToManyField( Role, blank=True, related_name='responsibilities' )
     notes     = M.ManyToManyField( Product, blank=True,
                                    related_name='responsibilities' )
 
 
-class Capacity( Base ):
+class Capacity( Noted ):
+    class Meta:
+        verbose_name_plural = 'capacities'
     # relations
     roles     = M.ManyToManyField( Role, blank=True, related_name='capacities' )
     notes     = M.ManyToManyField( Note, blank=True, related_name='capacities' )
@@ -449,7 +459,9 @@ class User( Noted ):
 
 ### Taxonomy
 
-class Taxonomy( Base ):
+class Taxonomy( Noted ):
+    class Meta:
+        verbose_name_plural = 'taxonomies'
     hierarchichal = M.BooleanField()
     exclusive     = M.BooleanField()
     # relations
@@ -458,7 +470,8 @@ class Taxonomy( Base ):
 
 
 class Term( Noted ):
+    data   = JSONField( default=dict )
     # relations
     parent = M.ForeignKey( 'self', M.CASCADE, related_name='children' )
-    data   = JSONField( default=dict )
+    taxonomy = M.ForeignKey( Taxonomy, M.CASCADE, related_name='terms' )
 

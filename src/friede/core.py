@@ -21,8 +21,10 @@ types = dict(
     locations=Location,
     links=Link,
     references=Reference,
-    settings=Setting
+    settings=Setting,
+    icons=Icon
 )
+registries = { v: k for k, v in types.items() }
 
 def setup():
     "make new settings"
@@ -130,25 +132,65 @@ def installapp( name, module, title, description, icon='', rest=True,
     except Exception:
         return None, None
 
-def mklocations( app, objects, relations ):
-    actions = 'list view new edit report delete'.split()
+def mkwidgets( app, objects, relations, actions=None ):
+    mod = app.module
+    if not actions:
+        actions = 'list view new edit report delete add remove'.split()
+    return tuple(
+        ( action,
+          tuple(( o, dict(
+              icon=relations[o].get( 'icon', None ),
+              extends="{}.from.model".format( action ),
+              data=dict(
+                  model="{}.{}".format( mod, relations[o][ 'model' ]))
+          )) for o in objects ))
+        for action in actions[1:] )
+
+
+def mklocations( app, objects, relations, actions=None ):
+    if not actions:
+        actions = 'list view new edit report delete'.split()
     return (( 'list', tuple(
         (( '.' + relations[o][ 'plural' ], dict(
             title="list {}".format( relations[o][ 'plural' ]).title(),
-            href="/list/{}".format( relations[o][ 'plural' ]))),
+            href="/list/{}".format( relations[o][ 'plural' ]))
+        ( 'widgets', ( 'card', dict( path="list.{}".format(o) )))),
          ( o, dict(
              title="list {}".format( relations[o][ 'plural' ]).title(),
-             redirect_to="locations.list.{}".format( relations[o][ 'plural' ]))))
+             href="/{}/list".format( relations[o][ 'plural' ]),
+             redirect_to="list.{}".format( relations[o][ 'plural' ]))))
                     for o in objects )),
             tuple (
                 ( action,
                   tuple (
                       ( '.'+ y, dict( title="{} {}".format( action, y ).title(),
-                                 href="/{}/{}".format( action, y )))
+                                 href="/{}/{}".format( action, y ))
+                        ( 'widgets', ( 'card', dict( path="{}.{}".format( action, y )))))
                           for w in (((o, o), ( o, relations[o][ 'plural' ]))
                                     for o in objects )
                           for x, y in w ))
                     for action in actions[1:] ),
+            tuple (
+                ( '.'+ y,
+                  tuple (
+                      ( action,
+                        dict( title="{} {}".format( action, y ).title(),
+                              href="/{}/{}".format( y, action ),
+                              redirect_to="/{}/{}".format( action, y )))
+                      for action in actions[1:] ))
+                for w in (((o, o), ( o, relations[o][ 'plural' ]))
+                          for o in objects )
+                for x, y in w ),
+            tuple (
+                ( '.'+ o, dict( title="view {}".format(o).title(),
+                                href="/{}".format(o),
+                                redirect_to="view.{}".format(o) ))
+                for o in objects ),
+            tuple (
+                ( '.'+ o, dict( title="list {}".format(o).title(),
+                                href="/{}".format(o),
+                                redirect_to="list.{}".format(o) ))
+                for o in ( relations[o][ 'plural' ] for o in objects )),
             ( 'add',
               ( 'new',
                 tuple(
@@ -204,12 +246,14 @@ def mklocations( app, objects, relations ):
                   ( 'add',
                     dict(
                         title="add {}".format(y).title(),
-                        redirect_to="locations.add.{}".format(y)
+                        href="/{}/add".format(y),
+                        redirect_to="add.{}".format(y)
                     )),
                   ( 'remove',
                     dict(
                         title="remove {}".format(y).title(),
-                        redirect_to="locations.remove.{}".format(y) )))
+                        href="/{}/remove".format(y),
+                        redirect_to="remove.{}".format(y) )))
                     for w in (((o, o), ( o, relations[o][ 'plural' ]))
                               for o in objects if relations[o][ 'has' ])
                     for x, y in w ),
@@ -217,11 +261,13 @@ def mklocations( app, objects, relations ):
                 (( "{}.add.to".format(y),
                    dict(
                        title="add to {}".format(y).title(),
-                       redirect_to="locations.add.to.{}".format(y) )),
+                        href="/{}/add/to".format(y),
+                       redirect_to="add.to.{}".format(y) )),
                  ( "{}.remove.from".format(y),
                    dict(
                        title="remove from {}".format(y).title(),
-                       redirect_to="locations.remove.from.{}".format(y) )))
+                        href="/{}/remove/from".format(y),
+                       redirect_to="remove.from.{}".format(y) )))
                     for w in (((o, o), ( o, relations[o][ 'plural' ]))
                               for o in objects if relations[o][ 'in' ])
                     for x, y in w ))
@@ -260,8 +306,9 @@ def mksettings( app, objects, relations ):
             for o in objects ))
 
 shortcuts = dict(
+    widgets=mkwidgets,
     locations=mklocations,
-    settings=mksettings
+    settings=mksettings,
 )
 
 def updateapp( app, data, upto=None ):
@@ -332,6 +379,10 @@ def updateapp( app, data, upto=None ):
                                 registry.appendleft( tag )
                                 if path[0]:
                                     "then this may add to the elemnts of the current object"
+                                    if not obj:
+                                        obj = Container.objects.get_or_create(
+                                            path=path[0] )
+                                        cr[0] = obj
                                 else:
                                     obj = Container.objects.get_or_create( path=tag )
                                     stack.extend(( poppath, popcr ))
@@ -350,8 +401,19 @@ def updateapp( app, data, upto=None ):
                         else:
                             # flatten tuples
                             stack.extend( top[ ::-1 ])
+                    elif isinstance( top, list ):
+                        stack.extend( tuple( (x, {}) for x in top[ ::-1 ]))
                     elif isinstance( top, dict ):
-                        if not top.get( 'path', None ):
+                        parent = None
+                        if top.get( 'path', None ):
+                            if not top[ 'path' ].startswith( registry[0] + '.' ):
+                                top[ 'path' ] = "{}.{}".format(
+                                    registry[0], top[ 'path' ])
+                            for c in cr:
+                                if cr and type( cr ) is not Container:
+                                    parent = c
+                                    break
+                        else:
                             top[ 'path' ] = path[0]
                         search, updates = split_dict( top, 'name', 'path' )
                         relations = {}
@@ -360,9 +422,16 @@ def updateapp( app, data, upto=None ):
                                 continue
                             field = model[0]._meta.get_field( key )
                             if field.is_relation:
-                                updates.pop( key )
+                                updates.pop( key, None )
+                                if field.name == 'app' and field.related_model is App:
+                                    updates[ 'app' ] = app
                                 try:
+                                    rm = field.related_model
                                     print 'derefing', field
+                                    if rm in registries:
+                                        if not value.startswith( registries[ rm ]+'.' ):
+                                            value = "{}.{}".format(
+                                                registries[ rm ], value )
                                     related = field.related_model.objects.get(
                                         path=value )
                                 except field.related_model.DoesNotExist:
@@ -374,6 +443,11 @@ def updateapp( app, data, upto=None ):
                         if not obj or type( obj ) is not model[0]:
                             obj, new = model[0].objects.get_or_create(
                                 defaults=updates, **search )
+                        if parent:
+                            adder = getattr(
+                                parent, "get%s" % model[0]._meta.verbose_name, None )
+                            if adder:
+                                adder( path[0], obj )
                         if not new:
                             for key, value in updates.items():
                                 setattr( obj, key, value )

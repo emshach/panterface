@@ -136,6 +136,11 @@ class AppViewSet( viewsets.ModelViewSet ):
     serializer_class = AppSerializer
 
 
+class IconViewSet( viewsets.ModelViewSet ):
+    queryset = Icon.objects.all()
+    serializer_class = IconSerializer
+
+
 class LocationViewSet( viewsets.ModelViewSet ):
     queryset = Location.objects.all()
     serializer_class = LocationSerializer

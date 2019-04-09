@@ -350,16 +350,7 @@ class App( Registry, DataMixin ):
         return out
 
 
-class Icon( _Base, PathMixin ):
-    parent = M.ForeignKey( Registry, M.CASCADE, blank=True, null=True,
-                           related_name='_icon_elements' )
-    registries = M.ManyToManyField( Registry, blank=True, through='LocationEntry',
-                                  related_name='_icons' )
-
-
-class Location( Base, PathMixin, AppMixin ):
-    parent = M.ForeignKey( Registry, M.CASCADE, blank=True, null=True,
-                           related_name='_location_elements' )
+class Location( Registry, AppMixin ):
     registries = M.ManyToManyField( Registry, blank=True, through='LocationEntry',
                                   related_name='_locations' )
     href = M.CharField( max_length=255, default='#' )
@@ -369,10 +360,17 @@ class Location( Base, PathMixin, AppMixin ):
     def to_dict( self ):
         out = super( Location, self).to_dict()
         out.update({
-            'href'        : self.href,
-            'redirect_to' : self.redirect_to.href if self.redirect_to else None
+            '$href'        : self.href,
+            '$redirect_to' : self.redirect_to.href if self.redirect_to else None
         })
         return out
+
+
+class Icon( _Base, PathMixin ):
+    parent = M.ForeignKey( Registry, M.CASCADE, blank=True, null=True,
+                           related_name='_icon_elements' )
+    registries = M.ManyToManyField( Registry, blank=True, through='LocationEntry',
+                                  related_name='_icons' )
 
 
 class Link( Base, PathMixin ):

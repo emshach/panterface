@@ -40,7 +40,7 @@ export default {
       base: '',
       matches: [],
       locations: [],
-      enterMeansSubmit: True,
+      enterMeansSubmit: true,
     }
   },
   methods: {

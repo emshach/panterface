@@ -4,6 +4,7 @@ from .objects import Settings, Shells, getenv, getregistries, getshell
 from .models import *
 from .util import split_dict
 from django.db import transaction
+from django.core.exceptions import FieldDoesNotExist
 from importlib import import_module
 from collections import deque
 from packaging.version import parse as version_parse
@@ -419,9 +420,12 @@ def updateapp( app, data, upto=None ):
                             top[ 'path' ] = path[0]
                         search, updates = split_dict( top, 'name', 'path' )
                         relations = {}
-                        app_field = model[0]._meta.get_field( 'app' )
-                        if app_field.related_model is App:
-                            search[ 'app' ] = app
+                        try:
+                            app_field = model[0]._meta.get_field( 'app' )
+                            if app_field.related_model is App:
+                                search[ 'app' ] = app
+                        except FieldDoesNotExist:
+                            pass
                         for key, value in updates.items():
                             if not isinstance( value, basestring ):
                                 continue

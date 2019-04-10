@@ -111,7 +111,6 @@ class EntryViewSet( SerializerExtensionsAPIViewMixin, viewsets.ModelViewSet ):
     extensions_expand_id_only = set()
     extensions_exclude = set()
     extensions_only = set()
-    queryset = Entry.objects.all()
 
 class ContainerViewSet( viewsets.ModelViewSet ):
     queryset = Container.objects.all()

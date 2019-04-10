@@ -30,13 +30,12 @@ class F:
 
 
 class ContainerEntrySerializer( ModelSerializer ):
-    entry = ContainerSerializer()
     class Meta:
         model = ContainerEntry
         fields = F.entry
         expanded_fields = OrderedDict(
-            registry='friede.serializers.Registry',
-            entry='friede.serializers.Container'
+            registry='friede.serializers.RegistrySerializer',
+            entry='friede.serializers.ContainerSerializer'
         )
 
 class WidgetEntrySerializer( ModelSerializer ):
@@ -45,8 +44,8 @@ class WidgetEntrySerializer( ModelSerializer ):
         model = WidgetEntry
         fields = F.entry
         expanded_fields = OrderedDict(
-            registry='friede.serializers.Registry',
-            entry='friede.serializers.Widget'
+            registry='friede.serializers.RegistrySerializer',
+            entry='friede.serializers.WidgetSerializer'
         )
 
 
@@ -56,8 +55,8 @@ class BlockEntrySerializer( ModelSerializer ):
         model = BlockEntry
         fields = F.entry
         expanded_fields = OrderedDict(
-            registry='friede.serializers.Registry',
-            entry='friede.serializers.Block'
+            registry='friede.serializers.RegistrySerializer',
+            entry='friede.serializers.BlockSerializer'
         )
 
 
@@ -67,8 +66,8 @@ class ScreenEntrySerializer( ModelSerializer ):
         model = ScreenEntry
         fields = F.entry
         expanded_fields = OrderedDict(
-            registry='friede.serializers.Registry',
-            entry='friede.serializers.Screen'
+            registry='friede.serializers.RegistrySerializer',
+            entry='friede.serializers.ScreenSerializer'
         )
 
 
@@ -78,8 +77,8 @@ class ShellEntrySerializer( ModelSerializer ):
         model = ShellEntry
         fields = F.entry
         expanded_fields = OrderedDict(
-            registry='friede.serializers.Registry',
-            entry='friede.serializers.Shell'
+            registry='friede.serializers.RegistrySerializer',
+            entry='friede.serializers.ShellSerializer'
         )
 
 
@@ -89,8 +88,8 @@ class ThemeEntrySerializer( ModelSerializer ):
         model = ThemeEntry
         fields = F.entry
         expanded_fields = OrderedDict(
-            registry='friede.serializers.Registry',
-            entry='friede.serializers.Theme'
+            registry='friede.serializers.RegistrySerializer',
+            entry='friede.serializers.ThemeSerializer'
         )
 
 
@@ -100,8 +99,8 @@ class SlotEntrySerializer( ModelSerializer ):
         model = SlotEntry
         fields = F.entry
         expanded_fields = OrderedDict(
-            registry='friede.serializers.Registry',
-            entry='friede.serializers.Slot'
+            registry='friede.serializers.RegistrySerializer',
+            entry='friede.serializers.SlotSerializer'
         )
 
 
@@ -111,8 +110,8 @@ class AppEntrySerializer( ModelSerializer ):
         model = AppEntry
         fields = F.entry
         expanded_fields = OrderedDict(
-            registry='friede.serializers.Registry',
-            entry='friede.serializers.App'
+            registry='friede.serializers.RegistrySerializer',
+            entry='friede.serializers.AppSerializer'
         )
 
 
@@ -122,8 +121,8 @@ class LocationEntrySerializer( ModelSerializer ):
         model = LocationEntry
         fields = F.entry
         expanded_fields = OrderedDict(
-            registry='friede.serializers.Registry',
-            entry='friede.serializers.Location'
+            registry='friede.serializers.RegistrySerializer',
+            entry='friede.serializers.LocationSerializer'
         )
 
 
@@ -133,8 +132,8 @@ class IconEntrySerializer( ModelSerializer ):
         model = IconEntry
         fields = F.entry
         expanded_fields = OrderedDict(
-            registry='friede.serializers.Registry',
-            entry='friede.serializers.Icon'
+            registry='friede.serializers.RegistrySerializer',
+            entry='friede.serializers.IconSerializer'
         )
 
 
@@ -144,8 +143,8 @@ class LinkEntrySerializer( ModelSerializer ):
         model = LinkEntry
         fields = F.entry
         expanded_fields = OrderedDict(
-            registry='friede.serializers.Registry',
-            entry='friede.serializers.Link'
+            registry='friede.serializers.RegistrySerializer',
+            entry='friede.serializers.LinkSerializer'
         )
 
 
@@ -155,8 +154,8 @@ class ReferenceEntrySerializer( ModelSerializer ):
         model = ReferenceEntry
         fields = F.entry
         expanded_fields = OrderedDict(
-            registry='friede.serializers.Registry',
-            entry='friede.serializers.Reference'
+            registry='friede.serializers.RegistrySerializer',
+            entry='friede.serializers.ReferenceSerializer'
         )
 
 
@@ -166,8 +165,8 @@ class SettingEntrySerializer( ModelSerializer ):
         model = SettingEntry
         fields = F.entry
         expanded_fields = OrderedDict(
-            registry='friede.serializers.Registry',
-            entry='friede.serializers.Setting'
+            registry='friede.serializers.RegistrySerializer',
+            entry='friede.serializers.SettingSerializer'
         )
 
 

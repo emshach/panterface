@@ -134,84 +134,84 @@ class SettingSerializer( HyperlinkedModelSerializer ):
         )
 
 
-class ContainerEntrySerializer( ModelSerializer ):
+class ContainerEntrySerializer( HyperlinkedModelSerializer ):
     entry = ContainerSerializer()
     class Meta:
         model = ContainerEntry
         fields = ( 'name', 'entry' )
 
 
-class WidgetEntrySerializer( ModelSerializer ):
+class WidgetEntrySerializer( HyperlinkedModelSerializer ):
     entry = WidgetSerializer()
     class Meta:
         model = WidgetEntry
         fields = ( 'name', 'entry' )
 
 
-class BlockEntrySerializer( ModelSerializer ):
+class BlockEntrySerializer( HyperlinkedModelSerializer ):
     entry = BlockSerializer()
     class Meta:
         model = BlockEntry
         fields = ( 'name', 'entry' )
 
 
-class ScreenEntrySerializer( ModelSerializer ):
+class ScreenEntrySerializer( HyperlinkedModelSerializer ):
     entry = ScreenSerializer()
     class Meta:
         model = ScreenEntry
         fields = ( 'name', 'entry' )
 
 
-class ShellEntrySerializer( ModelSerializer ):
+class ShellEntrySerializer( HyperlinkedModelSerializer ):
     entry = ShellSerializer()
     class Meta:
         model = ShellEntry
         fields = ( 'name', 'entry' )
 
 
-class ThemeEntrySerializer( ModelSerializer ):
+class ThemeEntrySerializer( HyperlinkedModelSerializer ):
     entry = ThemeSerializer()
     class Meta:
         model = ThemeEntry
         fields = ( 'name', 'entry' )
 
 
-class SlotEntrySerializer( ModelSerializer ):
+class SlotEntrySerializer( HyperlinkedModelSerializer ):
     entry = SlotSerializer()
     class Meta:
         model = SlotEntry
         fields = ( 'name', 'entry' )
 
 
-class AppEntrySerializer( ModelSerializer ):
+class AppEntrySerializer( HyperlinkedModelSerializer ):
     entry = AppSerializer()
     class Meta:
         model = AppEntry
         fields = ( 'name', 'entry' )
 
 
-class LocationEntrySerializer( ModelSerializer ):
+class LocationEntrySerializer( HyperlinkedModelSerializer ):
     entry = LocationSerializer()
     class Meta:
         model = LocationEntry
         fields = ( 'name', 'entry' )
 
 
-class LinkEntrySerializer( ModelSerializer ):
+class LinkEntrySerializer( HyperlinkedModelSerializer ):
     entry = LinkSerializer()
     class Meta:
         model = LinkEntry
         fields = ( 'name', 'entry' )
 
 
-class ReferenceEntrySerializer( ModelSerializer ):
+class ReferenceEntrySerializer( HyperlinkedModelSerializer ):
     entry = ReferenceSerializer()
     class Meta:
         model = ReferenceEntry
         fields = ( 'name', 'entry' )
 
 
-class SettingEntrySerializer( ModelSerializer ):
+class SettingEntrySerializer( HyperlinkedModelSerializer ):
     entry = SettingSerializer()
     class Meta:
         model = SettingEntry

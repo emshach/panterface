@@ -350,7 +350,7 @@ class App( Registry, DataMixin ):
         return out
 
 
-class Location( Registry, AppMixin ):
+class Location( Registry, AppMixin, DataMixin ):
     registries = M.ManyToManyField( Registry, blank=True, through='LocationEntry',
                                   related_name='_locations' )
     href = M.CharField( max_length=255, default='#' )

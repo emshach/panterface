@@ -279,7 +279,7 @@ def mklocations( app, objects, relations, actions=None ):
 def getsimplefields( app, name, plural, model, exclude=( 'id' )):
     mod = None
     try:
-        mod = import_module( app.module )
+        mod = import_module( "%s.%s" % ( app.module, 'models' ))
     except ImportError:
         return ()
 
@@ -368,7 +368,6 @@ def updateapp( app, data, upto=None ):
                             continue
                         if isinstance( top[0], basestring ):
                             tag = top[0]
-                            print 'tag=', tag
                             if tag == 'from relations' :
                                 try:
                                     bundle = shortcuts[ registry[0] ]( app, *( top[1:] ))

@@ -163,19 +163,19 @@ class SettingEntrySerializer( EntrySerializer ):
 
 
 class RegistrySerializer( SerializerExtensionsMixin, HyperlinkedModelSerializer ):
-    _container_entries = ContainerEntrySerializer()
-    _widget_entries =    WidgetEntrySerializer()
-    _block_entries =     BlockEntrySerializer()
-    _screen_entries =    ScreenEntrySerializer()
-    _shell_entries =     ShellEntrySerializer()
-    _theme_entries =     ThemeEntrySerializer()
-    _slot_entries =      SlotEntrySerializer()
-    _app_entries =       AppEntrySerializer()
-    _location_entries =  LocationEntrySerializer()
-    _icon_entries =      IconEntrySerializer()
-    _link_entries =      LinkEntrySerializer()
-    _reference_entries = ReferenceEntrySerializer()
-    _setting_entries =   SettingEntrySerializer()
+    _container_entries = ContainerEntrySerializer( many=True )
+    _widget_entries =    WidgetEntrySerializer( many=True )
+    _block_entries =     BlockEntrySerializer( many=True )
+    _screen_entries =    ScreenEntrySerializer( many=True )
+    _shell_entries =     ShellEntrySerializer( many=True )
+    _theme_entries =     ThemeEntrySerializer( many=True )
+    _slot_entries =      SlotEntrySerializer( many=True )
+    _app_entries =       AppEntrySerializer( many=True )
+    _location_entries =  LocationEntrySerializer( many=True )
+    _icon_entries =      IconEntrySerializer( many=True )
+    _link_entries =      LinkEntrySerializer( many=True )
+    _reference_entries = ReferenceEntrySerializer( many=True )
+    _setting_entries =   SettingEntrySerializer( many=True )
     class Meta:
         model = Registry
         fields = F.base + F.entries

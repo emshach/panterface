@@ -161,11 +161,6 @@ class SettingViewSet( viewsets.ModelViewSet ):
     serializer_class = SettingSerializer
 
 
-class xxViewSet( viewsets.ModelViewSet ):
-    queryset = xx.objects.all()
-    serializer_class = xxSerializer
-
-
 class ContainerEntryViewSet( viewsets.ModelViewSet ):
     queryset = ContainerEntry.objects.all()
     serializer_class = ContainerEntrySerializer

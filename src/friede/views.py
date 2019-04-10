@@ -112,58 +112,58 @@ class EntryViewSet( SerializerExtensionsAPIViewMixin, viewsets.ModelViewSet ):
     extensions_exclude = set()
     extensions_only = set()
 
-class ContainerViewSet( RegistryViewSet ):
-    queryset = Container.objects.prefetch_related( *F.entries ).all()
+class ContainerViewSet( viewsets.ModelViewSet ):
+    queryset = Container.objects.select_related( 'registry_ptr' ).all()
     serializer_class = ContainerSerializer
 
 
-class WidgetViewSet( RegistryViewSet ):
-    queryset = Widget.objects.prefetch_related( *F.entries ).all()
+class WidgetViewSet( viewsets.ModelViewSet ):
+    queryset = Widget.objects.select_related( 'registry_ptr' ).all()
     serializer_class = WidgetSerializer
 
 
-class BlockViewSet( RegistryViewSet ):
-    queryset = Block.objects.prefetch_related( *F.entries ).all()
+class BlockViewSet( viewsets.ModelViewSet ):
+    queryset = Block.objects.select_related( 'registry_ptr' ).all()
     serializer_class = BlockSerializer
 
 
-class ScreenViewSet( RegistryViewSet ):
-    queryset = Screen.objects.prefetch_related( *F.entries ).all()
+class ScreenViewSet( viewsets.ModelViewSet ):
+    queryset = Screen.objects.select_related( 'registry_ptr' ).all()
     serializer_class = ScreenSerializer
 
 
-class ShellViewSet( RegistryViewSet ):
-    queryset = Shell.objects.prefetch_related( *F.entries ).all()
+class ShellViewSet( viewsets.ModelViewSet ):
+    queryset = Shell.objects.select_related( 'registry_ptr' ).all()
     serializer_class = ShellSerializer
 
 
-class ThemeViewSet( RegistryViewSet ):
-    queryset = Theme.objects.prefetch_related( *F.entries ).all()
+class ThemeViewSet( viewsets.ModelViewSet ):
+    queryset = Theme.objects.select_related( 'registry_ptr' ).all()
     serializer_class = ThemeSerializer
 
 
-class SlotViewSet( RegistryViewSet ):
-    queryset = Slot.objects.prefetch_related( *F.entries ).all()
+class SlotViewSet( viewsets.ModelViewSet ):
+    queryset = Slot.objects.select_related( 'registry_ptr' ).all()
     serializer_class = SlotSerializer
 
 
-class AppViewSet( RegistryViewSet ):
-    queryset = App.objects.prefetch_related( *F.entries ).all()
+class AppViewSet( viewsets.ModelViewSet ):
+    queryset = App.objects.select_related( 'registry_ptr' ).all()
     serializer_class = AppSerializer
 
 
 class LocationViewSet( RegistryViewSet ):
-    queryset = Location.objects.prefetch_related( *F.entries ).all()
+    queryset = Location.objects.select_related( 'registry_ptr' ).all()
     serializer_class = LocationSerializer
 
 
 class LinkViewSet( viewsets.ModelViewSet ):
-    queryset = Link.objects.all()
+    queryset = Link.objects.select_related( 'registry_ptr' ).all()
     serializer_class = LinkSerializer
 
 
 class IconViewSet( viewsets.ModelViewSet ):
-    queryset = Icon.objects.all()
+    queryset = Icon.objects.select_related( 'registry_ptr' ).all()
     serializer_class = IconSerializer
 
 

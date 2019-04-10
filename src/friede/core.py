@@ -474,8 +474,8 @@ def updateapp( app, data, upto=None ):
                             setattr( obj, key, value )
                         obj.save()
                         obj_name = getattr( obj, 'path', getattr( obj, 'name' ))
-                        if obj_name.startswith( registries[0] + '.' ):
-                            obj_name = obj_name[ (len( registries[0]) + 1): ]
+                        if obj_name.startswith( registry[0] + '.' ):
+                            obj_name = obj_name[ (len( registry[0]) + 1): ]
                         if new:
                             print 'created', app.name, obj._meta.object_name, \
                                 obj_name

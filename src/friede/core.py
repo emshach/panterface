@@ -462,7 +462,7 @@ def updateapp( app, data, upto=None ):
                                 setattr( obj, key, value )
                         for key, value in relations.items():
                             setattr( obj, key, value )
-                        print 'created', obj._meta.model, \
+                        print 'created', app.name, obj._meta.object_name, \
                             getattr( obj, 'path', getattr( obj, 'name' ))
                         obj.save()
                     elif callable( top ):

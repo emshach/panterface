@@ -147,7 +147,7 @@ def mkwidgets( app, objects, relations, actions=None ):
               data=dict(
                   model="{}.{}".format( mod, relations[o][ 'model' ]))
           )) for o in objects ))
-        for action in actions[1:] )
+        for action in actions )
 
 
 def mklocations( app, objects, relations, actions=None ):
@@ -372,7 +372,7 @@ def updateapp( app, data, upto=None ):
                             if tag == 'from relations' :
                                 try:
                                     bundle = shortcuts[ registry[0] ]( app, *( top[1:] ))
-                                    print 'bundle=', bundle
+                                    print 'bundle', path[0], '=', bundle
                                     stack.append( bundle )
                                 except KeyError as e:
                                     print >> sys.stderr, e
@@ -414,7 +414,7 @@ def updateapp( app, data, upto=None ):
                                 top[ 'path' ] = "{}.{}".format(
                                     registry[0], top[ 'path' ])
                             for c in cr:
-                                if cr and type( cr ) is not Container:
+                                if c and type(c) is not Container:
                                     parent = c
                                     break
                         else:
@@ -435,7 +435,6 @@ def updateapp( app, data, upto=None ):
                                 rm = field.related_model
                                 updates.pop( key, None )
                                 try:
-                                    print 'derefing', field
                                     if rm in registries:
                                         if not value.startswith( registries[ rm ]+'.' ):
                                             value = "{}.{}".format(
@@ -455,6 +454,7 @@ def updateapp( app, data, upto=None ):
                         if parent:
                             adder = getattr(
                                 parent, "get%s" % model[0]._meta.verbose_name, None )
+                            print 'parent=', parent, 'adder=', adder
                             if adder:
                                 adder( path[0], obj )
                         if not new:
@@ -462,7 +462,8 @@ def updateapp( app, data, upto=None ):
                                 setattr( obj, key, value )
                         for key, value in relations.items():
                             setattr( obj, key, value )
-                        print 'created', obj.__dict__
+                        print 'created', obj._meta.model, \
+                            getattr( obj, 'path', getattr( obj, 'name' ))
                         obj.save()
                     elif callable( top ):
                         top()

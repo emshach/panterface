@@ -10,7 +10,10 @@ from .models import *
 class RegistrySerializer( SerializerExtensionsMixin, HyperlinkedModelSerializer ):
     class Meta:
         model = Registry
-        fields = '__all__'
+        fields = ( 'url', 'id', 'name', 'title', 'description', 'active', 'icon',
+                   'path',
+                   '_container_entries',
+        )
 
 
 class ContainerSerializer( SerializerExtensionsMixin, HyperlinkedModelSerializer ):

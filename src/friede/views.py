@@ -98,7 +98,7 @@ def api_complete( request, path=None, format=None ):
     })
 
 class RegistryViewSet( SerializerExtensionsAPIViewMixin, viewsets.ModelViewSet ):
-    extensions_expand = set()
+    extensions_expand = set( RegistrySerializer.Meta.expanded_fields.keys() )
     extensions_expand_id_only = set()
     extensions_exclude = set()
     extensions_only = set()

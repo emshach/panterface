@@ -53,22 +53,22 @@ class RegistrySerializer( SerializerExtensionsMixin, HyperlinkedModelSerializer 
 
     def get__container_entries( self, obj ):
         entry_queryset = obj._container_entries.all()
-        ContainerEntrySerializer(
+        return ContainerEntrySerializer(
             entry_queryset, many=True, context=self.context ).data
 
     def get__widget_entries( self, obj ):
         entry_queryset = obj._widget_entries.all()
-        WidgetEntrySerializer(
+        return WidgetEntrySerializer(
             entry_queryset, many=True, context=self.context ).data
 
     def get__block_entries( self, obj ):
         entry_queryset = obj._block_entries.all()
-        BlockEntrySerializer(
+        return BlockEntrySerializer(
             entry_queryset, many=True, context=self.context ).data
 
     def get__screen_entries( self, obj ):
         entry_queryset = obj._screen_entries.all()
-        ScreenEntrySerializer(
+        return ScreenEntrySerializer(
             entry_queryset, many=True, context=self.context ).data
 
     def get__shell_entries( self, obj ):
@@ -78,42 +78,42 @@ class RegistrySerializer( SerializerExtensionsMixin, HyperlinkedModelSerializer 
 
     def get__theme_entries( self, obj ):
         entry_queryset = obj._theme_entries.all()
-        ThemeEntrySerializer(
+        return ThemeEntrySerializer(
             entry_queryset, many=True, context=self.context ).data
 
     def get__slot_entries( self, obj ):
         entry_queryset = obj._slot_entries.all()
-        SlotEntrySerializer(
+        return SlotEntrySerializer(
             entry_queryset, many=True, context=self.context ).data
 
     def get__app_entries( self, obj ):
         entry_queryset = obj._app_entries.all()
-        AppEntrySerializer(
+        return AppEntrySerializer(
             entry_queryset, many=True, context=self.context ).data
 
     def get__location_entries( self, obj ):
         entry_queryset = obj._location_entries.all()
-        LocationEntrySerializer(
+        return LocationEntrySerializer(
             entry_queryset, many=True, context=self.context ).data
 
     def get__icon_entries( self, obj ):
         entry_queryset = obj._icon_entries.all()
-        IconEntrySerializer(
+        return IconEntrySerializer(
             entry_queryset, many=True, context=self.context ).data
 
     def get__link_entries( self, obj ):
         entry_queryset = obj._link_entries.all()
-        LinkEntrySerializer(
+        return LinkEntrySerializer(
             entry_queryset, many=True, context=self.context ).data
 
     def get__reference_entries( self, obj ):
         entry_queryset = obj._reference_entries.all()
-        ReferenceEntrySerializer(
+        return ReferenceEntrySerializer(
             entry_queryset, many=True, context=self.context ).data
 
     def get__setting_entries( self, obj ):
         entry_queryset = obj._setting_entries.all()
-        SettingEntrySerializer(
+        return SettingEntrySerializer(
             entry_queryset, many=True, context=self.context ).data
 
 

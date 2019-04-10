@@ -12,15 +12,15 @@ class F:
     _base = ( 'url', 'id', 'name', 'title', 'description', 'active', 'path' )
     base = ( 'url', 'id', 'name', 'title', 'description', 'active', 'icon', 'path' )
 
-    # entries = ( '_container_entries', '_widget_entries', '_block_entries',
-    #             '_screen_entries', '_shell_entries', '_theme_entries',
-    #             '_slot_entries', '_app_entries', '_location_entries',
-    #             '_icon_entries', '_link_entries', '_reference_entries',
-    #             '_setting_entries' )
+    entries = ( '_container_entries', '_widget_entries', '_block_entries',
+                '_screen_entries', '_shell_entries', '_theme_entries',
+                '_slot_entries', '_app_entries', '_location_entries',
+                '_icon_entries', '_link_entries', '_reference_entries',
+                '_setting_entries' )
 
-    entries = ( 'containers', 'widgets', 'blocks', 'screens', 'shells',
-                'themes', 'slots', 'apps', 'locations', 'icons', 'links',
-                'references', 'settings' )
+    # entries = ( 'containers', 'widgets', 'blocks', 'screens', 'shells',
+    #             'themes', 'slots', 'apps', 'locations', 'icons', 'links',
+    #             'references', 'settings' )
 
     extends = ( 'extends', )
     size = ( 'min_x', 'min_y', 'max_x', 'max_y' )
@@ -37,69 +37,69 @@ class F:
 
 
 class RegistrySerializer( SerializerExtensionsMixin, HyperlinkedModelSerializer ):
-    containers = SerializerMethodField()
-    widgets =    SerializerMethodField()
-    blocks =     SerializerMethodField()
-    screens =    SerializerMethodField()
-    shells =     SerializerMethodField()
-    themes =     SerializerMethodField()
-    slots =      SerializerMethodField()
-    apps =       SerializerMethodField()
-    locations =  SerializerMethodField()
-    icons =      SerializerMethodField()
-    links =      SerializerMethodField()
-    references = SerializerMethodField()
-    settings =   SerializerMethodField()
+    _container_entries = SerializerMethodField()
+    _widget_entries =    SerializerMethodField()
+    _block_entries =     SerializerMethodField()
+    _screen_entries =    SerializerMethodField()
+    _shell_entries =     SerializerMethodField()
+    _theme_entries =     SerializerMethodField()
+    _slot_entries =      SerializerMethodField()
+    _app_entries =       SerializerMethodField()
+    _location_entries =  SerializerMethodField()
+    _icon_entries =      SerializerMethodField()
+    _link_entries =      SerializerMethodField()
+    _reference_entries = SerializerMethodField()
+    _setting_entries =   SerializerMethodField()
 
-    def get_containers( self, obj ):
+    def get__container_entries( self, obj ):
         entry_queryset = obj._container_entries.all()
         ContainerEntrySerializer( entry_queryset, many=True ).data
 
-    def get_widgets( self, obj ):
+    def get__widget_entries( self, obj ):
         entry_queryset = obj._widget_entries.all()
         WidgetEntrySerializer( entry_queryset, many=True ).data
 
-    def get_blocks( self, obj ):
+    def get__block_entries( self, obj ):
         entry_queryset = obj._block_entries.all()
         BlockEntrySerializer( entry_queryset, many=True ).data
 
-    def get_screens( self, obj ):
+    def get__screen_entries( self, obj ):
         entry_queryset = obj._screen_entries.all()
         ScreenEntrySerializer( entry_queryset, many=True ).data
 
-    def get_shells( self, obj ):
+    def get__shell_entries( self, obj ):
         entry_queryset = obj._shell_entries.all()
         return ShellEntrySerializer( entry_queryset, many=True ).data
 
-    def get_themes( self, obj ):
+    def get__theme_entries( self, obj ):
         entry_queryset = obj._theme_entries.all()
         ThemeEntrySerializer( entry_queryset, many=True ).data
 
-    def get_slots( self, obj ):
+    def get__slot_entries( self, obj ):
         entry_queryset = obj._slot_entries.all()
         SlotEntrySerializer( entry_queryset, many=True ).data
 
-    def get_apps( self, obj ):
+    def get__app_entries( self, obj ):
         entry_queryset = obj._app_entries.all()
         AppEntrySerializer( entry_queryset, many=True ).data
 
-    def get_locations( self, obj ):
+    def get__location_entries( self, obj ):
         entry_queryset = obj._location_entries.all()
         LocationEntrySerializer( entry_queryset, many=True ).data
 
-    def get_icons( self, obj ):
+    def get__icon_entries( self, obj ):
         entry_queryset = obj._icon_entries.all()
         IconEntrySerializer( entry_queryset, many=True ).data
 
-    def get_links( self, obj ):
+    def get__link_entries( self, obj ):
         entry_queryset = obj._link_entries.all()
         LinkEntrySerializer( entry_queryset, many=True ).data
 
-    def get_references( self, obj ):
+    def get__reference_entries( self, obj ):
         entry_queryset = obj._reference_entries.all()
         ReferenceEntrySerializer( entry_queryset, many=True ).data
 
-    def get_settings( self, obj ):
+    def get__setting_entries( self, obj ):
         entry_queryset = obj._setting_entries.all()
         SettingEntrySerializer( entry_queryset, many=True ).data
 

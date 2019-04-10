@@ -113,57 +113,57 @@ class EntryViewSet( SerializerExtensionsAPIViewMixin, viewsets.ModelViewSet ):
     extensions_only = set()
 
 class ContainerViewSet( viewsets.ModelViewSet ):
-    queryset = Container.objects.select_related( 'registry_ptr' ).all()
+    queryset = Container.objects.all()
     serializer_class = ContainerSerializer
 
 
 class WidgetViewSet( viewsets.ModelViewSet ):
-    queryset = Widget.objects.select_related( 'registry_ptr' ).all()
+    queryset = Widget.objects.all()
     serializer_class = WidgetSerializer
 
 
 class BlockViewSet( viewsets.ModelViewSet ):
-    queryset = Block.objects.select_related( 'registry_ptr' ).all()
+    queryset = Block.objects.all()
     serializer_class = BlockSerializer
 
 
 class ScreenViewSet( viewsets.ModelViewSet ):
-    queryset = Screen.objects.select_related( 'registry_ptr' ).all()
+    queryset = Screen.objects.all()
     serializer_class = ScreenSerializer
 
 
 class ShellViewSet( viewsets.ModelViewSet ):
-    queryset = Shell.objects.select_related( 'registry_ptr' ).all()
+    queryset = Shell.objects.all()
     serializer_class = ShellSerializer
 
 
 class ThemeViewSet( viewsets.ModelViewSet ):
-    queryset = Theme.objects.select_related( 'registry_ptr' ).all()
+    queryset = Theme.objects.all()
     serializer_class = ThemeSerializer
 
 
 class SlotViewSet( viewsets.ModelViewSet ):
-    queryset = Slot.objects.select_related( 'registry_ptr' ).all()
+    queryset = Slot.objects.all()
     serializer_class = SlotSerializer
 
 
 class AppViewSet( viewsets.ModelViewSet ):
-    queryset = App.objects.select_related( 'registry_ptr' ).all()
+    queryset = App.objects.all()
     serializer_class = AppSerializer
 
 
 class LocationViewSet( RegistryViewSet ):
-    queryset = Location.objects.select_related( 'registry_ptr' ).all()
+    queryset = Location.objects.all()
     serializer_class = LocationSerializer
 
 
 class LinkViewSet( viewsets.ModelViewSet ):
-    queryset = Link.objects.select_related( 'registry_ptr' ).all()
+    queryset = Link.objects.all()
     serializer_class = LinkSerializer
 
 
 class IconViewSet( viewsets.ModelViewSet ):
-    queryset = Icon.objects.select_related( 'registry_ptr' ).all()
+    queryset = Icon.objects.all()
     serializer_class = IconSerializer
 
 

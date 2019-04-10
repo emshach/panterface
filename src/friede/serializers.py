@@ -57,7 +57,7 @@ class RegistrySerializer( SerializerExtensionsMixin, HyperlinkedModelSerializer 
             entry_queryset, many=True, context=self.context ).data
 
     def get__widget_entries( self, obj ):
-        return self.context.view.__dict__ 
+        raise Exception( self.context )
         entry_queryset = obj._widget_entries.all()
         return WidgetEntrySerializer(
             entry_queryset, many=True, context=self.context ).data

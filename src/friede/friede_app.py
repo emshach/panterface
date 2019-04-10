@@ -296,7 +296,7 @@ def install():
 
 Uses an innovative hybrid web-app/command-line navigation system''',
                     templates='friede/mayflower' ),
-                  ( 'themes', ( 'current', dict( path='acamar' ))))),
+                  ( 'themes', ( 'current', dict( path='mayflower.acamar' ))))),
             ), ))
 
 def init( router, register, urlpatterns ):

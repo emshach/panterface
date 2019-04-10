@@ -373,7 +373,8 @@ def updateapp( app, data, upto=None ):
                                 try:
                                     bundle = shortcuts[ registry[0] ]( app, *( top[1:] ))
                                     print 'bundle', path[0], '=',\
-                                        pprint.pformat( bundle, indent=0, depth=2 )
+                                        pprint.pformat( bundle, indent=0, depth=3 )\
+                                        .replace( "\n", ' ' )
                                     stack.append( bundle )
                                 except KeyError as e:
                                     print >> sys.stderr, e
@@ -388,6 +389,8 @@ def updateapp( app, data, upto=None ):
                                         obj, new = Container.objects.get_or_create(
                                             path=path[0] )
                                         cr[0] = obj
+                                    stack.append( poppath )
+                                    path.appendleft('')
                                 else:
                                     obj, new = Container.objects.get_or_create(
                                         path=tag )
@@ -453,6 +456,7 @@ def updateapp( app, data, upto=None ):
                         if not obj or type( obj ) is not model[0]:
                             obj, new = model[0].objects.get_or_create(
                                 defaults=updates, **search )
+                            cr[0] = obj
                         if parent:
                             adder = getattr(
                                 parent, "get%s" % model[0]._meta.verbose_name, None )

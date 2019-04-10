@@ -113,47 +113,47 @@ class EntryViewSet( SerializerExtensionsAPIViewMixin, viewsets.ModelViewSet ):
     extensions_only = set()
 
 class ContainerViewSet( RegistryViewSet ):
-    queryset = Container.objects.select_related( *F.entries ).all()
+    queryset = Container.objects.prefetch_related( *F.entries ).all()
     serializer_class = ContainerSerializer
 
 
 class WidgetViewSet( RegistryViewSet ):
-    queryset = Widget.objects.select_related( *F.entries ).all()
+    queryset = Widget.objects.prefetch_related( *F.entries ).all()
     serializer_class = WidgetSerializer
 
 
 class BlockViewSet( RegistryViewSet ):
-    queryset = Block.objects.select_related( *F.entries ).all()
+    queryset = Block.objects.prefetch_related( *F.entries ).all()
     serializer_class = BlockSerializer
 
 
 class ScreenViewSet( RegistryViewSet ):
-    queryset = Screen.objects.select_related( *F.entries ).all()
+    queryset = Screen.objects.prefetch_related( *F.entries ).all()
     serializer_class = ScreenSerializer
 
 
 class ShellViewSet( RegistryViewSet ):
-    queryset = Shell.objects.select_related( *F.entries ).all()
+    queryset = Shell.objects.prefetch_related( *F.entries ).all()
     serializer_class = ShellSerializer
 
 
 class ThemeViewSet( RegistryViewSet ):
-    queryset = Theme.objects.select_related( *F.entries ).all()
+    queryset = Theme.objects.prefetch_related( *F.entries ).all()
     serializer_class = ThemeSerializer
 
 
 class SlotViewSet( RegistryViewSet ):
-    queryset = Slot.objects.select_related( *F.entries ).all()
+    queryset = Slot.objects.prefetch_related( *F.entries ).all()
     serializer_class = SlotSerializer
 
 
 class AppViewSet( RegistryViewSet ):
-    queryset = App.objects.select_related( *F.entries ).all()
+    queryset = App.objects.prefetch_related( *F.entries ).all()
     serializer_class = AppSerializer
 
 
 class LocationViewSet( RegistryViewSet ):
-    queryset = Location.objects.select_related( *F.entries ).all()
+    queryset = Location.objects.prefetch_related( *F.entries ).all()
     serializer_class = LocationSerializer
 
 

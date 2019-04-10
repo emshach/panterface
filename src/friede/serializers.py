@@ -229,7 +229,7 @@ for s in ( ContainerSerializer, WidgetEntrySerializer, BlockSerializer,
            AppSerializer, LocationSerializer ):
     if getattr( s.Meta, 'expanded_fields', None ) is None:
         setattr( s.Meta, 'expanded_fields', OrderedDict())
-    fields.update(
+    s.Meta.expanded_fields.update(
         containers=dict(
             serializer=ContainerEntrySerializer,
             many=True ),

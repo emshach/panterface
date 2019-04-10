@@ -95,47 +95,6 @@ class LocationSerializer( SerializerExtensionsMixin, HyperlinkedModelSerializer 
                    'path',
                    'href', 'redirect_to'
         )
-        expanded_fields = OrderedDict(
-            containers=dict(
-                serializer='friede.serializers.ContainerEntrySerializer',
-                many=True ),
-            widgets=dict(
-                serializer='friede.serializers.WidgetEntrySerializer',
-                many=True ),
-            blocks=dict(
-                serializer='friede.serializers.BlockEntrySerializer',
-                many=True ),
-            screens=dict(
-                serializer='friede.serializers.ScreenEntrySerializer',
-                many=True ),
-            shells=dict(
-                serializer='friede.serializers.ShellEntrySerializer',
-                many=True ),
-            themes=dict(
-                serializer='friede.serializers.ThemeEntrySerializer',
-                many=True ),
-            slots=dict(
-                serializer='friede.serializers.SlotEntrySerializer',
-                many=True ),
-            apps=dict(
-                serializer='friede.serializers.AppEntrySerializer',
-                many=True ),
-            locations=dict(
-                serializer='friede.serializers.LocationEntrySerializer',
-                many=True ),
-            icons=dict(
-                serializer='friede.serializers.IconEntrySerializer',
-                many=True ),
-            links=dict(
-                serializer='friede.serializers.LinkEntrySerializer',
-                many=True ),
-            references=dict(
-                serializer='friede.serializers.ReferenceEntrySerializer',
-                many=True ),
-            settings=dict(
-                serializer='friede.serializers.SettingEntrySerializer',
-                many=True ),
-        )
 
 
 class IconSerializer( HyperlinkedModelSerializer ):
@@ -267,8 +226,10 @@ class SettingEntrySerializer( ModelSerializer ):
 
 for s in ( ContainerSerializer, WidgetEntrySerializer, BlockSerializer,
            ScreenSerializer, ShellSerializer, ThemeSerializer, SlotSerializer,
-           AppSerializer ):
-    fields = dict(
+           AppSerializer, LocationSerializer ):
+    if getattr( s.Meta, 'expanded_fields', None ) is None:
+        setattr( s.Meta, 'expanded_fields', OrderedDict())
+    fields.update(
         containers=dict(
             serializer=ContainerEntrySerializer,
             many=True ),
@@ -309,8 +270,4 @@ for s in ( ContainerSerializer, WidgetEntrySerializer, BlockSerializer,
             serializer=SettingEntrySerializer,
             many=True ),
     )
-    if getattr( s.Meta, 'expanded_fields', None ) is None:
-        setattr( s.Meta, 'expanded_fields', OrderedDict( **fields ))
-    else:
-        setattr( s.Meta, 'expanded_fields', OrderedDict( **fields ))
 

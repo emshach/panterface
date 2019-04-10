@@ -97,6 +97,12 @@ def api_complete( request, path=None, format=None ):
         'locations' : serializer.data
     })
 
+class RegistryViewSet( SerializerExtensionsAPIViewMixin, viewsets.ModelViewSet ):
+    extensions_expand = set()
+    extensions_expand_id_only = set()
+    extensions_exclude = set()
+    extensions_only = set()
+
 class ContainerViewSet( viewsets.ModelViewSet ):
     queryset = Container.objects.all()
     serializer_class = ContainerSerializer
@@ -137,9 +143,10 @@ class AppViewSet( viewsets.ModelViewSet ):
     serializer_class = AppSerializer
 
 
-class LocationViewSet( viewsets.ModelViewSet ):
+class LocationViewSet( RegistryViewSet ):
     queryset = Location.objects.all()
     serializer_class = LocationSerializer
+    extensions_expand = set( LocationSerializer.Meta.expanded_fields.keys() )
 
     def get_serializer_context( self ):
         context = super(LocationViewSet, self).get_serializer_context()

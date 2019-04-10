@@ -98,7 +98,7 @@ class LocationSerializer( serializers.HyperlinkedModelSerializer ):
                    'path',
                    'href', 'redirect_to',
         )
-setattr( LocationSerializer, 'redirect_to', LocationSerializer() )
+LocationSerializer.base_fields[ 'redirect_to' ] = LocationSerializer()
 
 
 class LinkSerializer( serializers.HyperlinkedModelSerializer ):

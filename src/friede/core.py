@@ -457,20 +457,32 @@ def updateapp( app, data, upto=None ):
                             obj, new = model[0].objects.get_or_create(
                                 defaults=updates, **search )
                             cr[0] = obj
+                        updated = False
+                        attached = False
                         if parent:
                             method = "add%s" % model[0]._meta.verbose_name
                             adder = getattr( parent, method, None )
                             print 'parent= ', str( parent ), 'adder=', method, adder
                             if adder:
                                 adder( path[0], obj )
+                                attached = True
                         if not new:
                             for key, value in updates.items():
                                 setattr( obj, key, value )
+                                updated = True
                         for key, value in relations.items():
                             setattr( obj, key, value )
-                        print 'created', app.name, obj._meta.object_name, \
-                            getattr( obj, 'path', getattr( obj, 'name' ))
                         obj.save()
+                        if new:
+                            print 'created', app.name, obj._meta.object_name, \
+                                getattr( obj, 'path', getattr( obj, 'name' ))
+                        elif updated:
+                            print 'updated', app.name, obj._meta.object_name, \
+                                getattr( obj, 'path', getattr( obj, 'name' ))
+                        if attached:
+                            print 'attached',\
+                                getattr( obj, 'path', getattr( obj, 'name' )), 'to',\
+                            getattr( parent, 'path', getattr( parent, 'name' ))
                     elif callable( top ):
                         top()
             except Exception as e:

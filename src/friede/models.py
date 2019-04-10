@@ -157,14 +157,14 @@ class Registry( Base, PathMixin ):
         return Selector( self, App )
 
     @property
-    def Icon( self ):
-        from .objects import Selector
-        return Selector( self, Icon )
-
-    @property
     def Location( self ):
         from .objects import Selector
         return Selector( self, Location )
+
+    @property
+    def Icon( self ):
+        from .objects import Selector
+        return Selector( self, Icon )
 
     @property
     def Link( self ):
@@ -189,8 +189,8 @@ class Registry( Base, PathMixin ):
     T = Theme
     O = Slot
     A = App
-    I = Icon
     L = Location
+    I = Icon
     K = Link
     R = Reference
     X = Setting
@@ -219,11 +219,11 @@ class Registry( Base, PathMixin ):
     def addapp( self, name, app ):
         AppEntry.objects.create( registry=self, name=name, entry=app )
 
-    def addicon( self, name, icon ):
-        IconEntry.objects.create( registry=self, name=name, entry=icon )
-
     def addlocation( self, name, location ):
         LocationEntry.objects.create( registry=self, name=name, entry=location )
+
+    def addicon( self, name, icon ):
+        IconEntry.objects.create( registry=self, name=name, entry=icon )
 
     def addlink( self, name, link ):
         LinkEntry.objects.create( registry=self, name=name, entry=link )
@@ -534,14 +534,14 @@ class AppEntry( Entry ):
     entry = M.ForeignKey( App, M.CASCADE, related_name='_entries' )
 
 
-class IconEntry( Entry ):
-    registry = M.ForeignKey( Registry, M.CASCADE, related_name='_icon_entries' )
-    entry = M.ForeignKey( Icon, M.CASCADE, related_name='_entries' )
-
-
 class LocationEntry( Entry ):
     registry = M.ForeignKey( Registry, M.CASCADE, related_name='_location_entries' )
     entry = M.ForeignKey( Location, M.CASCADE, related_name='_entries' )
+
+
+class IconEntry( Entry ):
+    registry = M.ForeignKey( Registry, M.CASCADE, related_name='_icon_entries' )
+    entry = M.ForeignKey( Icon, M.CASCADE, related_name='_entries' )
 
 
 class LinkEntry( Entry ):

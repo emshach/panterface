@@ -165,6 +165,12 @@ def install():
                     data=dict(
                         component='ViewModelWidget'
                     ))),
+                ( 'list.from.model', dict(
+                    icon='fontawesome.list',
+                    extends='adaptive',
+                    data=dict(
+                        component='ListModelWidget'
+                    ))),
                 ( 'new.from.model', dict(
                     icon='fontawesome.plus',
                     extends='adaptive',

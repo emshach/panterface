@@ -11,11 +11,17 @@ from .models import *
 class F:
     _base = ( 'url', 'id', 'name', 'title', 'description', 'active', 'path' )
     base = ( 'url', 'id', 'name', 'title', 'description', 'active', 'icon', 'path' )
-    entries = ( '_container_entries', '_widget_entries', '_block_entries',
-                '_screen_entries', '_shell_entries', '_theme_entries', '_slot_entries',
-                '_app_entries', '_location_entries', '_icon_entries', '_link_entries',
-                '_reference_entries', '_setting_entries' )
-    # entries = tuple()
+
+    # entries = ( '_container_entries', '_widget_entries', '_block_entries',
+    #             '_screen_entries', '_shell_entries', '_theme_entries',
+    #             '_slot_entries', '_app_entries', '_location_entries',
+    #             '_icon_entries', '_link_entries', '_reference_entries',
+    #             '_setting_entries' )
+
+    entries = ( 'containers', 'widgets', 'blocks', 'screens', 'shells',
+                'themes', 'slots', 'apps', 'locations', 'icons', 'links',
+                'references', 'settings' )
+
     extends = ( 'extends', )
     size = ( 'min_x', 'min_y', 'max_x', 'max_y' )
     data = ( 'data', )
@@ -25,8 +31,9 @@ class F:
     link = ( 'location', )
     reference = ( 'target', )
     setting = ( 'type', 'default' )
-    entry = ( 'url', 'id', 'name', 'title', 'description', 'active', 'icon', 'name',
-              'entry', 'position' )
+
+    entry = ( 'url', 'id', 'name', 'title', 'description', 'active', 'icon',
+              'name', 'entry', 'position' )
 
 
 class RegistrySerializer( SerializerExtensionsMixin, HyperlinkedModelSerializer ):

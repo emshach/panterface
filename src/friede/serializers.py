@@ -37,9 +37,6 @@ class EntrySerializer( ModelSerializer ):
     def get_registry( self, instance ):
         return RegistrySerializer( instance.registry ).data
 
-    def get_entry( self, instance ):
-        return self.Meta.entry_serializer( instance.registry ).data
-
 
 class ContainerEntrySerializer( EntrySerializer ):
     class Meta:
@@ -47,7 +44,7 @@ class ContainerEntrySerializer( EntrySerializer ):
         fields = F.entry
 
     def get_entry( self, instance ):
-        return self.Meta.ContainerSerializer_serializer( instance.registry ).data
+        return ContainerSerializer_serializer( instance.registry ).data
 
 
 class WidgetEntrySerializer( EntrySerializer ):
@@ -56,7 +53,7 @@ class WidgetEntrySerializer( EntrySerializer ):
         fields = F.entry
 
     def get_entry( self, instance ):
-        return self.Meta.WidgetSerializer( instance.registry ).data
+        return WidgetSerializer( instance.registry ).data
 
 
 class BlockEntrySerializer( EntrySerializer ):
@@ -65,7 +62,7 @@ class BlockEntrySerializer( EntrySerializer ):
         fields = F.entry
 
     def get_entry( self, instance ):
-        return self.Meta.BlockSerializer( instance.registry ).data
+        return BlockSerializer( instance.registry ).data
 
 
 class ScreenEntrySerializer( EntrySerializer ):
@@ -74,7 +71,7 @@ class ScreenEntrySerializer( EntrySerializer ):
         fields = F.entry
 
     def get_entry( self, instance ):
-        return self.Meta.ScreenSerializer( instance.registry ).data
+        return ScreenSerializer( instance.registry ).data
 
 
 class ShellEntrySerializer( EntrySerializer ):
@@ -83,7 +80,7 @@ class ShellEntrySerializer( EntrySerializer ):
         fields = F.entry
 
     def get_entry( self, instance ):
-        return self.Meta.ShellSerializer( instance.registry ).data
+        return ShellSerializer( instance.registry ).data
 
 
 class ThemeEntrySerializer( EntrySerializer ):
@@ -92,7 +89,7 @@ class ThemeEntrySerializer( EntrySerializer ):
         fields = F.entry
 
     def get_entry( self, instance ):
-        return self.Meta.ThemeSerializer( instance.registry ).data
+        return ThemeSerializer( instance.registry ).data
 
 
 class SlotEntrySerializer( EntrySerializer ):
@@ -101,7 +98,7 @@ class SlotEntrySerializer( EntrySerializer ):
         fields = F.entry
 
     def get_entry( self, instance ):
-        return self.Meta.SlotSerializer( instance.registry ).data
+        return SlotSerializer( instance.registry ).data
 
 
 class AppEntrySerializer( EntrySerializer ):
@@ -110,7 +107,7 @@ class AppEntrySerializer( EntrySerializer ):
         fields = F.entry
 
     def get_entry( self, instance ):
-        return self.Meta.AppSerializer( instance.registry ).data
+        return AppSerializer( instance.registry ).data
 
 
 class LocationEntrySerializer( EntrySerializer ):
@@ -119,7 +116,7 @@ class LocationEntrySerializer( EntrySerializer ):
         fields = F.entry
 
     def get_entry( self, instance ):
-        return self.Meta.LocationSerializer( instance.registry ).data
+        return LocationSerializer( instance.registry ).data
 
 
 class IconEntrySerializer( EntrySerializer ):
@@ -128,7 +125,7 @@ class IconEntrySerializer( EntrySerializer ):
         fields = F.entry
 
     def get_entry( self, instance ):
-        return self.Meta.IconSerializer( instance.registry ).data
+        return IconSerializer( instance.registry ).data
 
 
 class LinkEntrySerializer( EntrySerializer ):
@@ -137,7 +134,7 @@ class LinkEntrySerializer( EntrySerializer ):
         fields = F.entry
 
     def get_entry( self, instance ):
-        return self.Meta.LinkSerializer( instance.registry ).data
+        return LinkSerializer( instance.registry ).data
 
 
 class ReferenceEntrySerializer( EntrySerializer ):
@@ -146,7 +143,7 @@ class ReferenceEntrySerializer( EntrySerializer ):
         fields = F.entry
 
     def get_entry( self, instance ):
-        return self.Meta.ReferenceSerializer( instance.registry ).data
+        return ReferenceSerializer( instance.registry ).data
 
 
 class SettingEntrySerializer( EntrySerializer ):
@@ -155,7 +152,7 @@ class SettingEntrySerializer( EntrySerializer ):
         fields = F.entry
 
     def get_entry( self, instance ):
-        return self.Meta.SettingSerializer( instance.registry ).data
+        return SettingSerializer( instance.registry ).data
 
 
 class RegistrySerializer( SerializerExtensionsMixin, HyperlinkedModelSerializer ):

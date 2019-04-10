@@ -52,6 +52,9 @@ class RegistrySerializer( SerializerExtensionsMixin, HyperlinkedModelSerializer 
     _setting_entries =   SerializerMethodField()
 
     def get__container_entries( self, obj ):
+        if not self.context['view'].detail:
+            return
+        return self.context['view'].detail
         entry_queryset = obj._container_entries.all()
         return ContainerEntrySerializer(
             entry_queryset, many=True, context=self.context ).data
@@ -147,55 +150,55 @@ class RegistrySerializer( SerializerExtensionsMixin, HyperlinkedModelSerializer 
         fields = F.base + F.entries
 
 
-class ContainerSerializer( HyperlinkedModelSerializer ):
+class ContainerSerializer( RegistrySerializer ):
     class Meta:
         model = Container
         fields = F.base + F.entries
 
 
-class WidgetSerializer( HyperlinkedModelSerializer ):
+class WidgetSerializer( RegistrySerializer ):
     class Meta:
         model = Widget
         fields = F.base + F.entries + F.extends + F.size + F.data
 
 
-class BlockSerializer( HyperlinkedModelSerializer ):
+class BlockSerializer( RegistrySerializer ):
     class Meta:
         model = Block
         fields = F.base + F.entries + F.extends + F.size + F.data
 
 
-class ScreenSerializer( HyperlinkedModelSerializer ):
+class ScreenSerializer( RegistrySerializer ):
     class Meta:
         model = Screen
         fields = F.base + F.entries + F.extends + F.size + F.data
 
 
-class ShellSerializer( HyperlinkedModelSerializer ):
+class ShellSerializer( RegistrySerializer ):
     class Meta:
         model = Shell
         fields = F.base + F.entries + F.extends + F.templates
 
 
-class ThemeSerializer( HyperlinkedModelSerializer ):
+class ThemeSerializer( RegistrySerializer ):
     class Meta:
         model = Theme
         fields = F.base + F.entries + F.extends + F.templates
 
 
-class SlotSerializer( HyperlinkedModelSerializer ):
+class SlotSerializer( RegistrySerializer ):
     class Meta:
         model = Slot
         fields = F.base + F.entries
 
 
-class AppSerializer( HyperlinkedModelSerializer ):
+class AppSerializer( RegistrySerializer ):
     class Meta:
         model = App
         fields = F.base + F.entries + F.data + F.app
 
 
-class LocationSerializer( HyperlinkedModelSerializer ):
+class LocationSerializer( RegistrySerializer ):
     redirect_to = RecursiveField( allow_null=True )
     class Meta:
         model = Location

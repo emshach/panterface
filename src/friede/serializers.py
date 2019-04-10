@@ -13,10 +13,7 @@ class F:
     entries = ( '_container_entries', '_widget_entries', '_block_entries',
                 '_screen_entries', '_shell_entries', '_theme_entries', '_slot_entries',
                 '_app_entries', '_location_entries', '_icon_entries', '_link_entries',
-                '_reference_entries', '_setting_entries' )\
-                + ( '_containers', '_widgets', '_blocks', '_screens', '_shells',
-                    '_themes', '_slots', '_apps', '_locations', '_icons', '_links',
-                    '_references', '_settings' )
+                '_reference_entries', '_setting_entries' )
     extends = ( 'extends', )
     size = ( 'min_x', 'min_y', 'max_x', 'max_y' )
     data = ( 'data', )

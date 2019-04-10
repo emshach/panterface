@@ -473,15 +473,17 @@ def updateapp( app, data, upto=None ):
                         for key, value in relations.items():
                             setattr( obj, key, value )
                         obj.save()
+                        obj_name = getattr( obj, 'path', getattr( obj, 'name' ))
+                        if obj_name.startswith( registries[0] + '.' ):
+                            obj_name = obj_name[ (len( registries[0]) + 1): ]
                         if new:
                             print 'created', app.name, obj._meta.object_name, \
-                                getattr( obj, 'path', getattr( obj, 'name' ))
+                                obj_name
                         elif updated:
                             print 'updated', app.name, obj._meta.object_name, \
-                                getattr( obj, 'path', getattr( obj, 'name' ))
+                                obj_name
                         if attached:
-                            print 'attached',\
-                                getattr( obj, 'path', getattr( obj, 'name' )), 'to',\
+                            print 'attached', obj_name, 'to',\
                             getattr( parent, 'path', getattr( parent, 'name' ))
                     elif callable( top ):
                         top()

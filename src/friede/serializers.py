@@ -23,6 +23,13 @@ class WidgetSerializer( serializers.HyperlinkedModelSerializer ):
         )
 
 
+class WidgetEntrySerializer( serializers.HyperlinkedModelSerializer ):
+    entry = WidgetSerializer()
+    class Meta:
+        model = WidgetEntry
+        fields = ( 'name', 'entry' )
+
+
 class BlockSerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Block
@@ -94,11 +101,13 @@ class IconSerializer( serializers.HyperlinkedModelSerializer ):
 
 class LocationSerializer( serializers.HyperlinkedModelSerializer ):
     redirect_to = RecursiveField( allow_null=True )
+    _widget_entries = WidgetEntrySerializer()
     class Meta:
         model = Location
         fields = ( 'url', 'id', 'name', 'title', 'description', 'active', 'icon',
                    'path',
                    'href', 'redirect_to',
+                   '_widget_entries'
         )
 
 

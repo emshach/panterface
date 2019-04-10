@@ -101,7 +101,7 @@ class IconSerializer( serializers.HyperlinkedModelSerializer ):
 
 class LocationSerializer( serializers.HyperlinkedModelSerializer ):
     redirect_to = RecursiveField( allow_null=True )
-    _widget_entries = serializers.ListField( entry=WidgetEntrySerializer() )
+    _widget_entries = WidgetEntrySerializer( many=True )
     class Meta:
         model = Location
         fields = ( 'url', 'id', 'name', 'title', 'description', 'active', 'icon',

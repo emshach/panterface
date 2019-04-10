@@ -39,7 +39,6 @@ class ContainerEntrySerializer( ModelSerializer ):
         )
 
 class WidgetEntrySerializer( ModelSerializer ):
-    entry = WidgetSerializer()
     class Meta:
         model = WidgetEntry
         fields = F.entry
@@ -50,7 +49,6 @@ class WidgetEntrySerializer( ModelSerializer ):
 
 
 class BlockEntrySerializer( ModelSerializer ):
-    entry = BlockSerializer()
     class Meta:
         model = BlockEntry
         fields = F.entry
@@ -61,7 +59,6 @@ class BlockEntrySerializer( ModelSerializer ):
 
 
 class ScreenEntrySerializer( ModelSerializer ):
-    entry = ScreenSerializer()
     class Meta:
         model = ScreenEntry
         fields = F.entry
@@ -72,7 +69,6 @@ class ScreenEntrySerializer( ModelSerializer ):
 
 
 class ShellEntrySerializer( ModelSerializer ):
-    entry = ShellSerializer()
     class Meta:
         model = ShellEntry
         fields = F.entry
@@ -83,7 +79,6 @@ class ShellEntrySerializer( ModelSerializer ):
 
 
 class ThemeEntrySerializer( ModelSerializer ):
-    entry = ThemeSerializer()
     class Meta:
         model = ThemeEntry
         fields = F.entry
@@ -94,7 +89,6 @@ class ThemeEntrySerializer( ModelSerializer ):
 
 
 class SlotEntrySerializer( ModelSerializer ):
-    entry = SlotSerializer()
     class Meta:
         model = SlotEntry
         fields = F.entry
@@ -105,7 +99,6 @@ class SlotEntrySerializer( ModelSerializer ):
 
 
 class AppEntrySerializer( ModelSerializer ):
-    entry = AppSerializer()
     class Meta:
         model = AppEntry
         fields = F.entry
@@ -116,7 +109,6 @@ class AppEntrySerializer( ModelSerializer ):
 
 
 class LocationEntrySerializer( ModelSerializer ):
-    entry = LocationSerializer()
     class Meta:
         model = LocationEntry
         fields = F.entry
@@ -127,7 +119,6 @@ class LocationEntrySerializer( ModelSerializer ):
 
 
 class IconEntrySerializer( ModelSerializer ):
-    entry = IconSerializer()
     class Meta:
         model = IconEntry
         fields = F.entry
@@ -138,7 +129,6 @@ class IconEntrySerializer( ModelSerializer ):
 
 
 class LinkEntrySerializer( ModelSerializer ):
-    entry = LinkSerializer()
     class Meta:
         model = LinkEntry
         fields = F.entry
@@ -149,7 +139,6 @@ class LinkEntrySerializer( ModelSerializer ):
 
 
 class ReferenceEntrySerializer( ModelSerializer ):
-    entry = ReferenceSerializer()
     class Meta:
         model = ReferenceEntry
         fields = F.entry
@@ -160,7 +149,6 @@ class ReferenceEntrySerializer( ModelSerializer ):
 
 
 class SettingEntrySerializer( ModelSerializer ):
-    entry = SettingSerializer()
     class Meta:
         model = SettingEntry
         fields = F.entry

@@ -230,43 +230,43 @@ for s in ( ContainerSerializer, WidgetEntrySerializer, BlockSerializer,
     if getattr( s.Meta, 'expanded_fields', None ) is None:
         setattr( s.Meta, 'expanded_fields', OrderedDict())
     s.Meta.expanded_fields.update(
-        containers=dict(
+        _container_entries=dict(
             serializer=ContainerEntrySerializer,
             many=True ),
-        widgets=dict(
+        _widget_entries=dict(
             serializer=WidgetEntrySerializer,
             many=True ),
-        blocks=dict(
+        _block_entries=dict(
             serializer=BlockEntrySerializer,
             many=True ),
-        screens=dict(
+        _screen_entries=dict(
             serializer=ScreenEntrySerializer,
             many=True ),
-        shells=dict(
+        _shell_entries=dict(
             serializer=ShellEntrySerializer,
             many=True ),
-        themes=dict(
+        _theme_entries=dict(
             serializer=ThemeEntrySerializer,
             many=True ),
-        slots=dict(
+        _slot_entries=dict(
             serializer=SlotEntrySerializer,
             many=True ),
-        apps=dict(
+        _app_entries=dict(
             serializer=AppEntrySerializer,
             many=True ),
-        locations=dict(
+        _location_entries=dict(
             serializer=LocationEntrySerializer,
             many=True ),
-        icons=dict(
+        _icon_entries=dict(
             serializer=IconEntrySerializer,
             many=True ),
-        links=dict(
+        _link_entries=dict(
             serializer=LinkEntrySerializer,
             many=True ),
-        references=dict(
+        _reference_entries=dict(
             serializer=ReferenceEntrySerializer,
             many=True ),
-        settings=dict(
+        _setting_entries=dict(
             serializer=SettingEntrySerializer,
             many=True ),
     )

@@ -92,6 +92,7 @@ class IconSerializer( serializers.HyperlinkedModelSerializer ):
 
 
 class LocationSerializer( serializers.HyperlinkedModelSerializer ):
+    redirect_to = LocationSerializer()
     class Meta:
         model = Location
         fields = ( 'url', 'id', 'name', 'title', 'description', 'active', 'icon',

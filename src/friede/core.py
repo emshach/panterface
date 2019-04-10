@@ -10,6 +10,7 @@ from collections import deque
 from packaging.version import parse as version_parse
 import sys
 import traceback
+import pprint
 
 types = dict(
     containers=Container,
@@ -371,7 +372,8 @@ def updateapp( app, data, upto=None ):
                             if tag == 'from relations' :
                                 try:
                                     bundle = shortcuts[ registry[0] ]( app, *( top[1:] ))
-                                    print 'bundle', path[0], '=', bundle
+                                    print 'bundle', path[0], '=',\
+                                        pprint.pformat( bundle, indent=0, depth=2 )
                                     stack.append( bundle )
                                 except KeyError as e:
                                     print >> sys.stderr, e
@@ -383,11 +385,12 @@ def updateapp( app, data, upto=None ):
                                 if path[0]:
                                     "then this may add to the elemnts of the current object"
                                     if not obj:
-                                        obj = Container.objects.get_or_create(
+                                        obj, new = Container.objects.get_or_create(
                                             path=path[0] )
                                         cr[0] = obj
                                 else:
-                                    obj = Container.objects.get_or_create( path=tag )
+                                    obj, new = Container.objects.get_or_create(
+                                        path=tag )
                                     stack.extend(( poppath, popcr ))
                                     cr.appendleft( obj )
                                     path.appendleft( tag )

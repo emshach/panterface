@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from rest_framework import serializers
+from rest_framework_recursive.fields import RecursiveField
 from .models import *
 
 class ContainerSerializer( serializers.HyperlinkedModelSerializer ):
@@ -92,13 +93,13 @@ class IconSerializer( serializers.HyperlinkedModelSerializer ):
 
 
 class LocationSerializer( serializers.HyperlinkedModelSerializer ):
+    redirect_to = RecursiveField( allow_null=True )
     class Meta:
         model = Location
         fields = ( 'url', 'id', 'name', 'title', 'description', 'active', 'icon',
                    'path',
                    'href', 'redirect_to',
         )
-LocationSerializer.base_fields[ 'redirect_to' ] = LocationSerializer()
 
 
 class LinkSerializer( serializers.HyperlinkedModelSerializer ):

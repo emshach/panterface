@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from rest_framework.serializers import ModelSerializer, HyperlinkedModelSerializer
+from rest_framework.serializers import ModelSerializer, HyperlinkedModelSerializer,\
+    HyperlinkedRelatedField
 from rest_framework_recursive.fields import RecursiveField
 from rest_framework_serializer_extensions.serializers import SerializerExtensionsMixin
 from collections import OrderedDict
@@ -10,10 +11,11 @@ from .models import *
 class F:
     _base = ( 'url', 'id', 'name', 'title', 'description', 'active', 'path' )
     base = ( 'url', 'id', 'name', 'title', 'description', 'active', 'icon', 'path' )
-    entries = ( '_container_entries', '_widget_entries', '_block_entries',
-                '_screen_entries', '_shell_entries', '_theme_entries', '_slot_entries',
-                '_app_entries', '_location_entries', '_icon_entries', '_link_entries',
-                '_reference_entries', '_setting_entries' )
+    # entries = ( '_container_entries', '_widget_entries', '_block_entries',
+    #             '_screen_entries', '_shell_entries', '_theme_entries', '_slot_entries',
+    #             '_app_entries', '_location_entries', '_icon_entries', '_link_entries',
+    #             '_reference_entries', '_setting_entries' )
+    entries = tuple()
     extends = ( 'extends', )
     size = ( 'min_x', 'min_y', 'max_x', 'max_y' )
     data = ( 'data', )
@@ -28,6 +30,58 @@ class F:
 
 
 class RegistrySerializer( SerializerExtensionsMixin, HyperlinkedModelSerializer ):
+    _container_entries = HyperlinkedRelatedField(
+        many=True,
+        queryset=ContainerEntry.objects.all(),
+        view_name='containerentry-detail')
+    _widget_entries = HyperlinkedRelatedField(
+        many=True,
+        queryset=WidgetEntry.objects.all(),
+        view_name='widgetentry-detail')
+    _block_entries = HyperlinkedRelatedField(
+        many=True,
+        queryset=BlockEntry.objects.all(),
+        view_name='blockentry-detail')
+    _screen_entries = HyperlinkedRelatedField(
+        many=True,
+        queryset=ScreenEntry.objects.all(),
+        view_name='screenentry-detail')
+    _shell_entries = HyperlinkedRelatedField(
+        many=True,
+        queryset=ShellEntry.objects.all(),
+        view_name='shellentry-detail')
+    _theme_entries = HyperlinkedRelatedField(
+        many=True,
+        queryset=ThemeEntry.objects.all(),
+        view_name='themeentry-detail')
+    _slot_entries = HyperlinkedRelatedField(
+        many=True,
+        queryset=SlotEntry.objects.all(),
+        view_name='slotentry-detail')
+    _app_entries = HyperlinkedRelatedField(
+        many=True,
+        queryset=AppEntry.objects.all(),
+        view_name='appentry-detail')
+    _location_entries = HyperlinkedRelatedField(
+        many=True,
+        queryset=LocationEntry.objects.all(),
+        view_name='locationentry-detail')
+    _icon_entries = HyperlinkedRelatedField(
+        many=True,
+        queryset=IconEntry.objects.all(),
+        view_name='iconentry-detail')
+    _link_entries = HyperlinkedRelatedField(
+        many=True,
+        queryset=LinkEntry.objects.all(),
+        view_name='linkentry-detail')
+    _reference_entries = HyperlinkedRelatedField(
+        many=True,
+        queryset=ReferenceEntry.objects.all(),
+        view_name='referenceentry-detail')
+    _setting_entries = HyperlinkedRelatedField(
+        many=True,
+        queryset=SettingEntry.objects.all(),
+        view_name='settingentry-detail')
     class Meta:
         model = Registry
         fields = F.base + F.entries

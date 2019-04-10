@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 from rest_framework import serializers
 from .models import *
 
-class ContainerSerializer( serializers.ModelSerializer ):
+class ContainerSerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Container
         fields = ( 'url', 'id', 'name', 'title', 'description', 'active', 'icon',
@@ -11,7 +11,7 @@ class ContainerSerializer( serializers.ModelSerializer ):
         )
 
 
-class WidgetSerializer( serializers.ModelSerializer ):
+class WidgetSerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Widget
         fields = ( 'url', 'id', 'name', 'title', 'description', 'active', 'icon',
@@ -22,7 +22,7 @@ class WidgetSerializer( serializers.ModelSerializer ):
         )
 
 
-class BlockSerializer( serializers.ModelSerializer ):
+class BlockSerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Block
         fields = ( 'url', 'id', 'name', 'title', 'description', 'active', 'icon',
@@ -33,7 +33,7 @@ class BlockSerializer( serializers.ModelSerializer ):
         )
 
 
-class ScreenSerializer( serializers.ModelSerializer ):
+class ScreenSerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Screen
         fields = ( 'url', 'id', 'name', 'title', 'description', 'active', 'icon',
@@ -45,7 +45,7 @@ class ScreenSerializer( serializers.ModelSerializer ):
         )
 
 
-class ShellSerializer( serializers.ModelSerializer ):
+class ShellSerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Shell
         fields = ( 'url', 'id', 'name', 'title', 'description', 'active', 'icon',
@@ -55,7 +55,7 @@ class ShellSerializer( serializers.ModelSerializer ):
         )
 
 
-class ThemeSerializer( serializers.ModelSerializer ):
+class ThemeSerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Theme
         fields = ( 'url', 'id', 'name', 'title', 'description', 'active', 'icon',
@@ -65,7 +65,7 @@ class ThemeSerializer( serializers.ModelSerializer ):
         )
 
 
-class SlotSerializer( serializers.ModelSerializer ):
+class SlotSerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Slot
         fields = ( 'url', 'id', 'name', 'title', 'description', 'active', 'icon',
@@ -73,7 +73,7 @@ class SlotSerializer( serializers.ModelSerializer ):
         )
 
 
-class AppSerializer( serializers.ModelSerializer ):
+class AppSerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = App
         fields = ( 'url', 'id', 'name', 'title', 'description', 'active', 'icon',
@@ -83,7 +83,7 @@ class AppSerializer( serializers.ModelSerializer ):
         )
 
 
-class IconSerializer( serializers.ModelSerializer ):
+class IconSerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Icon
         fields = ( 'url', 'id', 'name', 'title', 'description', 'active',
@@ -91,17 +91,17 @@ class IconSerializer( serializers.ModelSerializer ):
         )
 
 
-class LocationSerializer( serializers.ModelSerializer ):
+class LocationSerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Location
         fields = ( 'url', 'id', 'name', 'title', 'description', 'active', 'icon',
                    'path',
                    'href', 'redirect_to',
         )
-LocationSerializer.redirect_to = LocationSerializer()
+setattr( LocationSerializer, 'redirect_to', LocationSerializer() )
 
 
-class LinkSerializer( serializers.ModelSerializer ):
+class LinkSerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Link
         fields = ( 'url', 'id', 'name', 'title', 'description', 'active', 'icon',
@@ -110,7 +110,7 @@ class LinkSerializer( serializers.ModelSerializer ):
         )
 
 
-class ReferenceSerializer( serializers.ModelSerializer ):
+class ReferenceSerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Reference
         fields = ( 'url', 'id', 'name', 'title', 'description', 'active', 'icon',
@@ -119,7 +119,7 @@ class ReferenceSerializer( serializers.ModelSerializer ):
         )
 
 
-class SettingSerializer( serializers.ModelSerializer ):
+class SettingSerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Setting
         fields = ( 'url', 'id', 'name', 'title', 'description', 'active', 'icon',

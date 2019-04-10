@@ -107,7 +107,7 @@ class RegistryViewSet( viewsets.ModelViewSet ):
     serializer_class = RegistrySerializer
 
 class EntryViewSet( SerializerExtensionsAPIViewMixin, viewsets.ModelViewSet ):
-    extensions_expand = set( 'registry', 'entry' )
+    extensions_expand = set(( 'registry', 'entry' ))
     extensions_expand_id_only = set()
     extensions_exclude = set()
     extensions_only = set()

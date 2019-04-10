@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from rest_framework.serializers import HyperlinkedModelSerializer
+from rest_framework.serializers import ModelSerializer, HyperlinkedModelSerializer
 from rest_framework_recursive.fields import RecursiveField
 from rest_framework_serializer_extensions.serializers import SerializerExtensionsMixin
 from collections import OrderedDict
@@ -134,84 +134,84 @@ class SettingSerializer( HyperlinkedModelSerializer ):
         )
 
 
-class ContainerEntrySerializer( HyperlinkedModelSerializer ):
+class ContainerEntrySerializer( ModelSerializer ):
     entry = ContainerSerializer()
     class Meta:
         model = ContainerEntry
         fields = ( 'name', 'entry' )
 
 
-class WidgetEntrySerializer( HyperlinkedModelSerializer ):
+class WidgetEntrySerializer( ModelSerializer ):
     entry = WidgetSerializer()
     class Meta:
         model = WidgetEntry
         fields = ( 'name', 'entry' )
 
 
-class BlockEntrySerializer( HyperlinkedModelSerializer ):
+class BlockEntrySerializer( ModelSerializer ):
     entry = BlockSerializer()
     class Meta:
         model = BlockEntry
         fields = ( 'name', 'entry' )
 
 
-class ScreenEntrySerializer( HyperlinkedModelSerializer ):
+class ScreenEntrySerializer( ModelSerializer ):
     entry = ScreenSerializer()
     class Meta:
         model = ScreenEntry
         fields = ( 'name', 'entry' )
 
 
-class ShellEntrySerializer( HyperlinkedModelSerializer ):
+class ShellEntrySerializer( ModelSerializer ):
     entry = ShellSerializer()
     class Meta:
         model = ShellEntry
         fields = ( 'name', 'entry' )
 
 
-class ThemeEntrySerializer( HyperlinkedModelSerializer ):
+class ThemeEntrySerializer( ModelSerializer ):
     entry = ThemeSerializer()
     class Meta:
         model = ThemeEntry
         fields = ( 'name', 'entry' )
 
 
-class SlotEntrySerializer( HyperlinkedModelSerializer ):
+class SlotEntrySerializer( ModelSerializer ):
     entry = SlotSerializer()
     class Meta:
         model = SlotEntry
         fields = ( 'name', 'entry' )
 
 
-class AppEntrySerializer( HyperlinkedModelSerializer ):
+class AppEntrySerializer( ModelSerializer ):
     entry = AppSerializer()
     class Meta:
         model = AppEntry
         fields = ( 'name', 'entry' )
 
 
-class LocationEntrySerializer( HyperlinkedModelSerializer ):
+class LocationEntrySerializer( ModelSerializer ):
     entry = LocationSerializer()
     class Meta:
         model = LocationEntry
         fields = ( 'name', 'entry' )
 
 
-class LinkEntrySerializer( HyperlinkedModelSerializer ):
+class LinkEntrySerializer( ModelSerializer ):
     entry = LinkSerializer()
     class Meta:
         model = LinkEntry
         fields = ( 'name', 'entry' )
 
 
-class ReferenceEntrySerializer( HyperlinkedModelSerializer ):
+class ReferenceEntrySerializer( ModelSerializer ):
     entry = ReferenceSerializer()
     class Meta:
         model = ReferenceEntry
         fields = ( 'name', 'entry' )
 
 
-class SettingEntrySerializer( HyperlinkedModelSerializer ):
+class SettingEntrySerializer( ModelSerializer ):
     entry = SettingSerializer()
     class Meta:
         model = SettingEntry

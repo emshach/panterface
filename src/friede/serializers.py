@@ -91,10 +91,7 @@ class LocationSerializer( SerializerExtensionsMixin, HyperlinkedModelSerializer 
     redirect_to = RecursiveField( allow_null=True )
     class Meta:
         model = Location
-        fields = ( 'url', 'id', 'name', 'title', 'description', 'active', 'icon',
-                   'path',
-                   'href', 'redirect_to'
-        )
+        fields = '__all__'
 
 
 class IconSerializer( HyperlinkedModelSerializer ):

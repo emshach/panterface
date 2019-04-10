@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from rest_framework.serializers import ModelSerializer, HyperlinkedModelSerializer,\
-    HyperlinkedRelatedField
+    HyperlinkedRelatedField, HyperlinkedIdentityField
 from rest_framework_recursive.fields import RecursiveField
 from rest_framework_serializer_extensions.serializers import SerializerExtensionsMixin
 from collections import OrderedDict
@@ -30,10 +30,11 @@ class F:
 
 
 class EntrySerializer( ModelSerializer ):
-    url = ''
-
+    pass
 
 class ContainerEntrySerializer( EntrySerializer ):
+    url = HyperlinkedIdentityField( view_name='containerentry-detail',
+                                    lookup_field='registry_id' )
     class Meta:
         model = ContainerEntry
         fields = F.entry
@@ -43,6 +44,8 @@ class ContainerEntrySerializer( EntrySerializer ):
         )
 
 class WidgetEntrySerializer( EntrySerializer ):
+    url = HyperlinkedIdentityField( view_name='widgetentry-detail',
+                                    lookup_field='registry_id' )
     class Meta:
         model = WidgetEntry
         fields = F.entry
@@ -53,6 +56,8 @@ class WidgetEntrySerializer( EntrySerializer ):
 
 
 class BlockEntrySerializer( EntrySerializer ):
+    url = HyperlinkedIdentityField( view_name='blockentry-detail',
+                                    lookup_field='registry_id' )
     class Meta:
         model = BlockEntry
         fields = F.entry
@@ -63,6 +68,8 @@ class BlockEntrySerializer( EntrySerializer ):
 
 
 class ScreenEntrySerializer( EntrySerializer ):
+    url = HyperlinkedIdentityField( view_name='screenentry-detail',
+                                    lookup_field='registry_id' )
     class Meta:
         model = ScreenEntry
         fields = F.entry
@@ -73,6 +80,8 @@ class ScreenEntrySerializer( EntrySerializer ):
 
 
 class ShellEntrySerializer( EntrySerializer ):
+    url = HyperlinkedIdentityField( view_name='shellentry-detail',
+                                    lookup_field='registry_id' )
     class Meta:
         model = ShellEntry
         fields = F.entry
@@ -83,6 +92,8 @@ class ShellEntrySerializer( EntrySerializer ):
 
 
 class ThemeEntrySerializer( EntrySerializer ):
+    url = HyperlinkedIdentityField( view_name='themeentry-detail',
+                                    lookup_field='registry_id' )
     class Meta:
         model = ThemeEntry
         fields = F.entry
@@ -93,6 +104,8 @@ class ThemeEntrySerializer( EntrySerializer ):
 
 
 class SlotEntrySerializer( EntrySerializer ):
+    url = HyperlinkedIdentityField( view_name='slotentry-detail',
+                                    lookup_field='registry_id' )
     class Meta:
         model = SlotEntry
         fields = F.entry
@@ -103,6 +116,8 @@ class SlotEntrySerializer( EntrySerializer ):
 
 
 class AppEntrySerializer( EntrySerializer ):
+    url = HyperlinkedIdentityField( view_name='appentry-detail',
+                                    lookup_field='registry_id' )
     class Meta:
         model = AppEntry
         fields = F.entry
@@ -113,6 +128,8 @@ class AppEntrySerializer( EntrySerializer ):
 
 
 class LocationEntrySerializer( EntrySerializer ):
+    url = HyperlinkedIdentityField( view_name='locationentry-detail',
+                                    lookup_field='registry_id' )
     class Meta:
         model = LocationEntry
         fields = F.entry
@@ -123,6 +140,8 @@ class LocationEntrySerializer( EntrySerializer ):
 
 
 class IconEntrySerializer( EntrySerializer ):
+    url = HyperlinkedIdentityField( view_name='iconentry-detail',
+                                    lookup_field='registry_id' )
     class Meta:
         model = IconEntry
         fields = F.entry
@@ -133,6 +152,8 @@ class IconEntrySerializer( EntrySerializer ):
 
 
 class LinkEntrySerializer( EntrySerializer ):
+    url = HyperlinkedIdentityField( view_name='linkentry-detail',
+                                    lookup_field='registry_id' )
     class Meta:
         model = LinkEntry
         fields = F.entry
@@ -143,6 +164,8 @@ class LinkEntrySerializer( EntrySerializer ):
 
 
 class ReferenceEntrySerializer( EntrySerializer ):
+    url = HyperlinkedIdentityField( view_name='referenceentry-detail',
+                                    lookup_field='registry_id' )
     class Meta:
         model = ReferenceEntry
         fields = F.entry
@@ -153,6 +176,8 @@ class ReferenceEntrySerializer( EntrySerializer ):
 
 
 class SettingEntrySerializer( EntrySerializer ):
+    url = HyperlinkedIdentityField( view_name='settingentry-detail',
+                                    lookup_field='registry_id' )
     class Meta:
         model = SettingEntry
         fields = F.entry

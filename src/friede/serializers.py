@@ -29,7 +29,7 @@ class F:
     # ( 'entry', 'position' )
 
 
-class EntrySerializer( ModelSerializer ):
+class EntrySerializer( SerializerExtensionsMixin, ModelSerializer ):
     url = CharField( source='name' )
 
 
@@ -181,55 +181,55 @@ class RegistrySerializer( SerializerExtensionsMixin, HyperlinkedModelSerializer 
         fields = F.base + F.entries
 
 
-class ContainerSerializer( SerializerExtensionsMixin, HyperlinkedModelSerializer ):
+class ContainerSerializer( HyperlinkedModelSerializer ):
     class Meta:
         model = Container
         fields = F.base + F.entries
 
 
-class WidgetSerializer( SerializerExtensionsMixin, HyperlinkedModelSerializer ):
+class WidgetSerializer( HyperlinkedModelSerializer ):
     class Meta:
         model = Widget
         fields = F.base + F.entries + F.extends + F.size + F.data
 
 
-class BlockSerializer( SerializerExtensionsMixin, HyperlinkedModelSerializer ):
+class BlockSerializer( HyperlinkedModelSerializer ):
     class Meta:
         model = Block
         fields = F.base + F.entries + F.extends + F.size + F.data
 
 
-class ScreenSerializer( SerializerExtensionsMixin, HyperlinkedModelSerializer ):
+class ScreenSerializer( HyperlinkedModelSerializer ):
     class Meta:
         model = Screen
         fields = F.base + F.entries + F.extends + F.size + F.data
 
 
-class ShellSerializer( SerializerExtensionsMixin, HyperlinkedModelSerializer ):
+class ShellSerializer( HyperlinkedModelSerializer ):
     class Meta:
         model = Shell
         fields = F.base + F.entries + F.extends + F.templates
 
 
-class ThemeSerializer( SerializerExtensionsMixin, HyperlinkedModelSerializer ):
+class ThemeSerializer( HyperlinkedModelSerializer ):
     class Meta:
         model = Theme
         fields = F.base + F.entries + F.extends + F.templates
 
 
-class SlotSerializer( SerializerExtensionsMixin, HyperlinkedModelSerializer ):
+class SlotSerializer( HyperlinkedModelSerializer ):
     class Meta:
         model = Slot
         fields = F.base + F.entries
 
 
-class AppSerializer( SerializerExtensionsMixin, HyperlinkedModelSerializer ):
+class AppSerializer( HyperlinkedModelSerializer ):
     class Meta:
         model = App
         fields = F.base + F.entries + F.data + F.app
 
 
-class LocationSerializer( SerializerExtensionsMixin, HyperlinkedModelSerializer ):
+class LocationSerializer( HyperlinkedModelSerializer ):
     redirect_to = RecursiveField( allow_null=True )
     class Meta:
         model = Location

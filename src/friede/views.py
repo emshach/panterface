@@ -102,6 +102,8 @@ class RegistryViewSet( SerializerExtensionsAPIViewMixin, viewsets.ModelViewSet )
     extensions_expand_id_only = set()
     extensions_exclude = set()
     extensions_only = set()
+    queryset = Registry.objects.all()
+    serializer_class = RegistrySerializer
 
 class ContainerViewSet( viewsets.ModelViewSet ):
     queryset = Container.objects.all()

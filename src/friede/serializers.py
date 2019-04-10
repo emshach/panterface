@@ -7,6 +7,12 @@ from collections import OrderedDict
 
 from .models import *
 
+class RegistrySerializer( SerializerExtensionsMixin, HyperlinkedModelSerializer ):
+    class Meta:
+        model = Registry
+        fields = '__all__'
+
+
 class ContainerSerializer( SerializerExtensionsMixin, HyperlinkedModelSerializer ):
     class Meta:
         model = Container
@@ -221,9 +227,9 @@ class SettingEntrySerializer( ModelSerializer ):
         fields = ( 'name', 'entry' )
 
 
-for s in ( ContainerSerializer, WidgetEntrySerializer, BlockSerializer,
-           ScreenSerializer, ShellSerializer, ThemeSerializer, SlotSerializer,
-           AppSerializer, LocationSerializer ):
+for s in ( RegistrySerializer, ContainerSerializer, WidgetEntrySerializer,
+           BlockSerializer, ScreenSerializer, ShellSerializer, ThemeSerializer,
+           SlotSerializer, AppSerializer, LocationSerializer ):
     if getattr( s.Meta, 'expanded_fields', None ) is None:
         setattr( s.Meta, 'expanded_fields', OrderedDict())
     s.Meta.expanded_fields.update(

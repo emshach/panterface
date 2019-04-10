@@ -300,6 +300,7 @@ Uses an innovative hybrid web-app/command-line navigation system''',
             ), ))
 
 def init( router, register, urlpatterns ):
+    register( r'registries', views.RegistryViewSet  )
     register( r'containers', views.ContainerViewSet )
     register( r'widgets',    views.WidgetViewSet    )
     register( r'blocks',     views.BlockViewSet     )

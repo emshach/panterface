@@ -258,7 +258,7 @@ for s in ( ContainerSerializer, WidgetEntrySerializer, BlockSerializer,
             serializer=ReferenceEntrySerializer,
             many=True ),
         settings=dict(
-            serializer=SettingEntrySerialize,
+            serializer=SettingEntrySerializer,
             many=True ),
     )
 

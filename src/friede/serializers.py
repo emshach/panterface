@@ -227,9 +227,7 @@ class SettingEntrySerializer( ModelSerializer ):
 for s in ( ContainerSerializer, WidgetEntrySerializer, BlockSerializer,
            ScreenSerializer, ShellSerializer, ThemeSerializer, SlotSerializer,
            AppSerializer, LocationSerializer ):
-    if getattr( s.Meta, 'expanded_fields', None ) is None:
-        setattr( s.Meta, 'expanded_fields', OrderedDict())
-    s.Meta.expanded_fields.update(
+    fields = dict(
         containers=dict(
             serializer=ContainerEntrySerializer,
             many=True ),
@@ -270,4 +268,8 @@ for s in ( ContainerSerializer, WidgetEntrySerializer, BlockSerializer,
             serializer=SettingEntrySerializer,
             many=True ),
     )
+    if getattr( s.Meta, 'expanded_fields', None ) is None:
+        setattr( s.Meta, 'expanded_fields', OrderedDict( **fields ))
+    else:
+        setattr( s.Meta, 'expanded_fields', OrderedDict( **fields ))
 

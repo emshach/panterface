@@ -7,227 +7,199 @@ from collections import OrderedDict
 
 from .models import *
 
+class F:
+    _base = ( 'url', 'id', 'name', 'title', 'description', 'active', 'path' )
+    base = ( 'url', 'id', 'name', 'title', 'description', 'active', 'icon', 'path' )
+    entries = ( '_container_entries', '_widget_entries', '_block_entries',
+                '_screen_entries', '_shell_entries', '_theme_entries', '_slot_entries',
+                '_app_entries', '_location_entries', '_icon_entries', '_link_entries',
+                '_reference_entries', '_setting_entries' )
+    extends = ( 'extends', )
+    size = ( 'min_x', 'min_y', 'max_x', 'max_y' )
+    data = ( 'data', )
+    templates = ( 'templates', 'template' )
+    app = ( 'module', 'rest', 'version' )
+    location = ( 'href', 'redirect_to' )
+    link = ( 'location', )
+    reference = ( 'target', )
+    setting = ( 'type', 'default' )
+    entry = ( 'name', 'entry', 'position' )
+
+
 class RegistrySerializer( SerializerExtensionsMixin, HyperlinkedModelSerializer ):
     class Meta:
         model = Registry
-        fields = ( 'url', 'id', 'name', 'title', 'description', 'active', 'icon',
-                   'path',
-                   '_container_entries',
-        )
+        fields = F.base + F.entries
 
 
 class ContainerSerializer( SerializerExtensionsMixin, HyperlinkedModelSerializer ):
     class Meta:
         model = Container
-        fields = ( 'url', 'id', 'name', 'title', 'description', 'active', 'icon',
-                   'path',
-        )
+        fields = F.base + F.entries
 
 
 class WidgetSerializer( SerializerExtensionsMixin, HyperlinkedModelSerializer ):
     class Meta:
         model = Widget
-        fields = ( 'url', 'id', 'name', 'title', 'description', 'active', 'icon',
-                   'path',
-                   'extends',
-                   'min_x', 'min_y', 'max_x', 'max_y',
-                   'data',
-        )
+        fields = F.base + F.entries + F.extends + F.size + F.data
 
 
 class BlockSerializer( SerializerExtensionsMixin, HyperlinkedModelSerializer ):
     class Meta:
         model = Block
-        fields = ( 'url', 'id', 'name', 'title', 'description', 'active', 'icon',
-                   'path',
-                   'extends',
-                   'min_x', 'min_y', 'max_x', 'max_y',
-                   'data',
-        )
+        fields = F.base + F.entries + F.extends + F.size + F.data
 
 
 class ScreenSerializer( SerializerExtensionsMixin, HyperlinkedModelSerializer ):
     class Meta:
         model = Screen
-        fields = ( 'url', 'id', 'name', 'title', 'description', 'active', 'icon',
-                   'path',
-                   'extends',
-                   'min_x', 'min_y', 'max_x', 'max_y',
-                   'data',
-                   'data',
-        )
+        fields = F.base + F.entries + F.extends + F.size + F.data
 
 
 class ShellSerializer( SerializerExtensionsMixin, HyperlinkedModelSerializer ):
     class Meta:
         model = Shell
-        fields = ( 'url', 'id', 'name', 'title', 'description', 'active', 'icon',
-                   'path',
-                   'extends',
-                   'templates', 'template',
-        )
+        fields = F.base + F.entries + F.extends + F.templates + F.data
 
 
 class ThemeSerializer( SerializerExtensionsMixin, HyperlinkedModelSerializer ):
     class Meta:
         model = Theme
-        fields = ( 'url', 'id', 'name', 'title', 'description', 'active', 'icon',
-                   'path',
-                   'extends',
-                   'templates', 'template',
-        )
+        fields = F.base + F.entries + F.extends + F.templates + F.data
 
 
 class SlotSerializer( SerializerExtensionsMixin, HyperlinkedModelSerializer ):
     class Meta:
         model = Slot
-        fields = ( 'url', 'id', 'name', 'title', 'description', 'active', 'icon',
-                   'path',
-        )
+        fields = F.base + F.entries
 
 
 class AppSerializer( SerializerExtensionsMixin, HyperlinkedModelSerializer ):
     class Meta:
         model = App
-        fields = ( 'url', 'id', 'name', 'title', 'description', 'active', 'icon',
-                   'path',
-                   'data',
-                   'module', 'rest', 'version',
-        )
+        fields = F.base + F.entries + F.data + F.app
 
 
 class LocationSerializer( SerializerExtensionsMixin, HyperlinkedModelSerializer ):
     redirect_to = RecursiveField( allow_null=True )
     class Meta:
         model = Location
-        fields = '__all__'
+        fields = F.base + F.entries + F.data + F.location
 
 
 class IconSerializer( HyperlinkedModelSerializer ):
     class Meta:
         model = Icon
-        fields = ( 'url', 'id', 'name', 'title', 'description', 'active',
-                   'path',
-        )
+        fields = F._base
 
 
 class LinkSerializer( HyperlinkedModelSerializer ):
     class Meta:
         model = Link
-        fields = ( 'url', 'id', 'name', 'title', 'description', 'active', 'icon',
-                   'path',
-                   'location',
-        )
+        fields = F.base + F.entries + F.location
 
 
 class ReferenceSerializer( HyperlinkedModelSerializer ):
     class Meta:
         model = Reference
-        fields = ( 'url', 'id', 'name', 'title', 'description', 'active', 'icon',
-                   'path',
-                   'target',
-        )
+        fields = F.base + F.entries + F.reference
 
 
 class SettingSerializer( HyperlinkedModelSerializer ):
     class Meta:
         model = Setting
-        fields = ( 'url', 'id', 'name', 'title', 'description', 'active', 'icon',
-                   'path',
-                   'data',
-                   'type', 'default',
-        )
+        fields = F.base + F.data + F.setting
 
 
 class ContainerEntrySerializer( ModelSerializer ):
     entry = ContainerSerializer()
     class Meta:
         model = ContainerEntry
-        fields = ( 'name', 'entry' )
+        fields = F.base + F.entry
 
 
 class WidgetEntrySerializer( ModelSerializer ):
     entry = WidgetSerializer()
     class Meta:
         model = WidgetEntry
-        fields = ( 'name', 'entry' )
+        fields = F.base + F.entry
 
 
 class BlockEntrySerializer( ModelSerializer ):
     entry = BlockSerializer()
     class Meta:
         model = BlockEntry
-        fields = ( 'name', 'entry' )
+        fields = F.base + F.entry
 
 
 class ScreenEntrySerializer( ModelSerializer ):
     entry = ScreenSerializer()
     class Meta:
         model = ScreenEntry
-        fields = ( 'name', 'entry' )
+        fields = F.base + F.entry
 
 
 class ShellEntrySerializer( ModelSerializer ):
     entry = ShellSerializer()
     class Meta:
         model = ShellEntry
-        fields = ( 'name', 'entry' )
+        fields = F.base + F.entry
 
 
 class ThemeEntrySerializer( ModelSerializer ):
     entry = ThemeSerializer()
     class Meta:
         model = ThemeEntry
-        fields = ( 'name', 'entry' )
+        fields = F.base + F.entry
 
 
 class SlotEntrySerializer( ModelSerializer ):
     entry = SlotSerializer()
     class Meta:
         model = SlotEntry
-        fields = ( 'name', 'entry' )
+        fields = F.base + F.entry
 
 
 class AppEntrySerializer( ModelSerializer ):
     entry = AppSerializer()
     class Meta:
         model = AppEntry
-        fields = ( 'name', 'entry' )
+        fields = F.base + F.entry
 
 
 class LocationEntrySerializer( ModelSerializer ):
     entry = LocationSerializer()
     class Meta:
         model = LocationEntry
-        fields = ( 'name', 'entry' )
+        fields = F.base + F.entry
 
 
 class IconEntrySerializer( ModelSerializer ):
     entry = IconSerializer()
     class Meta:
         model = IconEntry
-        fields = ( 'name', 'entry' )
+        fields = F.base + F.entry
 
 
 class LinkEntrySerializer( ModelSerializer ):
     entry = LinkSerializer()
     class Meta:
         model = LinkEntry
-        fields = ( 'name', 'entry' )
+        fields = F.base + F.entry
 
 
 class ReferenceEntrySerializer( ModelSerializer ):
     entry = ReferenceSerializer()
     class Meta:
         model = ReferenceEntry
-        fields = ( 'name', 'entry' )
+        fields = F.base + F.entry
 
 
 class SettingEntrySerializer( ModelSerializer ):
     entry = SettingSerializer()
     class Meta:
         model = SettingEntry
-        fields = ( 'name', 'entry' )
+        fields = F.base + F.entry
 
 
 for s in ( RegistrySerializer, ContainerSerializer, WidgetEntrySerializer,

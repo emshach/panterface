@@ -60,13 +60,13 @@ class ScreenSerializer( SerializerExtensionsMixin, HyperlinkedModelSerializer ):
 class ShellSerializer( SerializerExtensionsMixin, HyperlinkedModelSerializer ):
     class Meta:
         model = Shell
-        fields = F.base + F.entries + F.extends + F.templates + F.data
+        fields = F.base + F.entries + F.extends + F.templates
 
 
 class ThemeSerializer( SerializerExtensionsMixin, HyperlinkedModelSerializer ):
     class Meta:
         model = Theme
-        fields = F.base + F.entries + F.extends + F.templates + F.data
+        fields = F.base + F.entries + F.extends + F.templates
 
 
 class SlotSerializer( SerializerExtensionsMixin, HyperlinkedModelSerializer ):

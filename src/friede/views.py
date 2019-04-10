@@ -155,12 +155,7 @@ class AppViewSet( viewsets.ModelViewSet ):
 class LocationViewSet( RegistryViewSet ):
     queryset = Location.objects.all()
     serializer_class = LocationSerializer
-    extensions_expand = set( LocationSerializer.Meta.expanded_fields.keys() )
 
-    def get_serializer_context( self ):
-        context = super(LocationViewSet, self).get_serializer_context()
-        context.update( expand = LocationSerializer.Meta.expanded_fields.keys())
-        return context
 
 class LinkViewSet( viewsets.ModelViewSet ):
     queryset = Link.objects.all()

@@ -97,13 +97,21 @@ def api_complete( request, path=None, format=None ):
         'locations' : serializer.data
     })
 
-class RegistryViewSet( SerializerExtensionsAPIViewMixin, viewsets.ModelViewSet ):
-    extensions_expand = set( RegistrySerializer.Meta.expanded_fields.keys() )
+class RegistryViewSet( viewsets.ModelViewSet ):
+# class RegistryViewSet( SerializerExtensionsAPIViewMixin, viewsets.ModelViewSet ):
+    # extensions_expand = set( RegistrySerializer.Meta.expanded_fields.keys() )
+    # extensions_expand_id_only = set()
+    # extensions_exclude = set()
+    # extensions_only = set()
+    queryset = Registry.objects.all()
+    serializer_class = RegistrySerializer
+
+class EntryViewSet( SerializerExtensionsAPIViewMixin, viewsets.ModelViewSet ):
+    extensions_expand = set( 'registry', 'entry' )
     extensions_expand_id_only = set()
     extensions_exclude = set()
     extensions_only = set()
-    queryset = Registry.objects.all()
-    serializer_class = RegistrySerializer
+    queryset = Entry.objects.all()
 
 class ContainerViewSet( viewsets.ModelViewSet ):
     queryset = Container.objects.all()
@@ -175,67 +183,67 @@ class SettingViewSet( viewsets.ModelViewSet ):
     serializer_class = SettingSerializer
 
 
-class ContainerEntryViewSet( viewsets.ModelViewSet ):
+class ContainerEntryViewSet( EntryViewSet ):
     queryset = ContainerEntry.objects.all()
     serializer_class = ContainerEntrySerializer
 
 
-class WidgetEntryViewSet( viewsets.ModelViewSet ):
+class WidgetEntryViewSet( EntryViewSet ):
     queryset = WidgetEntry.objects.all()
     serializer_class = WidgetEntrySerializer
 
 
-class BlockEntryViewSet( viewsets.ModelViewSet ):
+class BlockEntryViewSet( EntryViewSet ):
     queryset = BlockEntry.objects.all()
     serializer_class = BlockEntrySerializer
 
 
-class ScreenEntryViewSet( viewsets.ModelViewSet ):
+class ScreenEntryViewSet( EntryViewSet ):
     queryset = ScreenEntry.objects.all()
     serializer_class = ScreenEntrySerializer
 
 
-class ShellEntryViewSet( viewsets.ModelViewSet ):
+class ShellEntryViewSet( EntryViewSet ):
     queryset = ShellEntry.objects.all()
     serializer_class = ShellEntrySerializer
 
 
-class ThemeEntryViewSet( viewsets.ModelViewSet ):
+class ThemeEntryViewSet( EntryViewSet ):
     queryset = ThemeEntry.objects.all()
     serializer_class = ThemeEntrySerializer
 
 
-class SlotEntryViewSet( viewsets.ModelViewSet ):
+class SlotEntryViewSet( EntryViewSet ):
     queryset = SlotEntry.objects.all()
     serializer_class = SlotEntrySerializer
 
 
-class AppEntryViewSet( viewsets.ModelViewSet ):
+class AppEntryViewSet( EntryViewSet ):
     queryset = AppEntry.objects.all()
     serializer_class = AppEntrySerializer
 
 
-class LocationEntryViewSet( viewsets.ModelViewSet ):
+class LocationEntryViewSet( EntryViewSet ):
     queryset = LocationEntry.objects.all()
     serializer_class = LocationEntrySerializer
 
 
-class IconEntryViewSet( viewsets.ModelViewSet ):
+class IconEntryViewSet( EntryViewSet ):
     queryset = IconEntry.objects.all()
     serializer_class = IconEntrySerializer
 
 
-class LinkEntryViewSet( viewsets.ModelViewSet ):
+class LinkEntryViewSet( EntryViewSet ):
     queryset = LinkEntry.objects.all()
     serializer_class = LinkEntrySerializer
 
 
-class ReferenceEntryViewSet( viewsets.ModelViewSet ):
+class ReferenceEntryViewSet( EntryViewSet ):
     queryset = ReferenceEntry.objects.all()
     serializer_class = ReferenceEntrySerializer
 
 
-class SettingEntryViewSet( viewsets.ModelViewSet ):
+class SettingEntryViewSet( EntryViewSet ):
     queryset = SettingEntry.objects.all()
     serializer_class = SettingEntrySerializer
 

@@ -21,7 +21,7 @@ class _Base( Model ):
     active       = M.BooleanField( default=True )
 
     def __str__( self ):
-        return self.path or self.name or self.title
+        return getattr( self, 'path', None ) or self.name or self.title
 
     def getcontext( self ):
         return self

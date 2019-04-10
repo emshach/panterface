@@ -462,7 +462,6 @@ def updateapp( app, data, upto=None ):
                         if parent:
                             method = "add%s" % model[0]._meta.verbose_name
                             adder = getattr( parent, method, None )
-                            print 'parent= ', str( parent ), 'adder=', method, adder
                             if adder:
                                 adder( path[0], obj )
                                 attached = True
@@ -483,7 +482,7 @@ def updateapp( app, data, upto=None ):
                             print 'updated', app.name, obj._meta.object_name, \
                                 obj_name
                         if attached:
-                            print 'attached', obj_name, 'to',\
+                            print 'attached', obj._meta.object_name, obj_name, 'to',\
                             getattr( parent, 'path', getattr( parent, 'name' ))
                     elif callable( top ):
                         top()

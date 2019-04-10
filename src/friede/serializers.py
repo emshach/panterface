@@ -197,6 +197,13 @@ class LocationEntrySerializer( HyperlinkedModelSerializer ):
         fields = ( 'name', 'entry' )
 
 
+class IconEntrySerializer( HyperlinkedModelSerializer ):
+    entry = IconSerializer()
+    class Meta:
+        model = IconEntry
+        fields = ( 'name', 'entry' )
+
+
 class LinkEntrySerializer( HyperlinkedModelSerializer ):
     entry = LinkSerializer()
     class Meta:
@@ -250,6 +257,9 @@ for s in ( ContainerSerializer, WidgetEntrySerializer, BlockSerializer,
             many=True ),
         locations=dict(
             serializer=LocationEntrySerializer,
+            many=True ),
+        icons=dict(
+            serializer=IconEntrySerializer,
             many=True ),
         links=dict(
             serializer=LinkEntrySerializer,

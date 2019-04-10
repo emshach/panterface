@@ -458,9 +458,9 @@ def updateapp( app, data, upto=None ):
                                 defaults=updates, **search )
                             cr[0] = obj
                         if parent:
-                            adder = getattr(
-                                parent, "get%s" % model[0]._meta.verbose_name, None )
-                            print 'parent=', parent, 'adder=', adder
+                            method = "get%s" % model[0]._meta.verbose_name
+                            adder = getattr( parent, method, None )
+                            print 'parent= ', str( parent ), 'adder=', method, adder
                             if adder:
                                 adder( path[0], obj )
                         if not new:

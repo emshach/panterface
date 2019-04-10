@@ -54,7 +54,6 @@ class RegistrySerializer( SerializerExtensionsMixin, HyperlinkedModelSerializer 
     def get__container_entries( self, obj ):
         if not self.context['view'].detail:
             return
-        return self.context['view'].detail
         entry_queryset = obj._container_entries.all()
         return ContainerEntrySerializer(
             entry_queryset, many=True, context=self.context ).data
@@ -62,7 +61,6 @@ class RegistrySerializer( SerializerExtensionsMixin, HyperlinkedModelSerializer 
     def get__widget_entries( self, obj ):
         if not self.context['view'].detail:
             return
-        return self.context['view'].detail
         entry_queryset = obj._widget_entries.all()
         return WidgetEntrySerializer(
             entry_queryset, many=True, context=self.context ).data

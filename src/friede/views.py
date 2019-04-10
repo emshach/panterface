@@ -112,48 +112,48 @@ class EntryViewSet( SerializerExtensionsAPIViewMixin, viewsets.ModelViewSet ):
     extensions_exclude = set()
     extensions_only = set()
 
-class ContainerViewSet( viewsets.ModelViewSet ):
-    queryset = Container.objects.all()
+class ContainerViewSet( RegistryViewSet ):
+    queryset = Container.objects.select_related( *F.entries ).all()
     serializer_class = ContainerSerializer
 
 
-class WidgetViewSet( viewsets.ModelViewSet ):
-    queryset = Widget.objects.all()
+class WidgetViewSet( RegistryViewSet ):
+    queryset = Widget.objects.select_related( *F.entries ).all()
     serializer_class = WidgetSerializer
 
 
-class BlockViewSet( viewsets.ModelViewSet ):
-    queryset = Block.objects.all()
+class BlockViewSet( RegistryViewSet ):
+    queryset = Block.objects.select_related( *F.entries ).all()
     serializer_class = BlockSerializer
 
 
-class ScreenViewSet( viewsets.ModelViewSet ):
-    queryset = Screen.objects.all()
+class ScreenViewSet( RegistryViewSet ):
+    queryset = Screen.objects.select_related( *F.entries ).all()
     serializer_class = ScreenSerializer
 
 
-class ShellViewSet( viewsets.ModelViewSet ):
-    queryset = Shell.objects.all()
+class ShellViewSet( RegistryViewSet ):
+    queryset = Shell.objects.select_related( *F.entries ).all()
     serializer_class = ShellSerializer
 
 
-class ThemeViewSet( viewsets.ModelViewSet ):
-    queryset = Theme.objects.all()
+class ThemeViewSet( RegistryViewSet ):
+    queryset = Theme.objects.select_related( *F.entries ).all()
     serializer_class = ThemeSerializer
 
 
-class SlotViewSet( viewsets.ModelViewSet ):
-    queryset = Slot.objects.all()
+class SlotViewSet( RegistryViewSet ):
+    queryset = Slot.objects.select_related( *F.entries ).all()
     serializer_class = SlotSerializer
 
 
-class AppViewSet( viewsets.ModelViewSet ):
-    queryset = App.objects.all()
+class AppViewSet( RegistryViewSet ):
+    queryset = App.objects.select_related( *F.entries ).all()
     serializer_class = AppSerializer
 
 
 class LocationViewSet( RegistryViewSet ):
-    queryset = Location.objects.all()
+    queryset = Location.objects.select_related( *F.entries ).all()
     serializer_class = LocationSerializer
 
 

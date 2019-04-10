@@ -92,7 +92,8 @@ def setupshell( env=None ):
             templates='friede/mayflower'
     ))
     env.addshell( 'current', shell )
-    setuptheme( shell )
+    if new or not shell.T.current():
+        setuptheme( shell )
     return shell
 
 def setuptheme( shell=None ):

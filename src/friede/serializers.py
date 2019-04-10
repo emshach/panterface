@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from rest_framework.serializers import ModelSerializer, HyperlinkedModelSerializer,\
-    HyperlinkedRelatedField, HyperlinkedIdentityField, CharField
+    HyperlinkedRelatedField, HyperlinkedIdentityField, CharField, SerializerMethodField
 from rest_framework_recursive.fields import RecursiveField
 from rest_framework_serializer_extensions.serializers import SerializerExtensionsMixin
 from collections import OrderedDict
@@ -25,141 +25,137 @@ class F:
     link = ( 'location', )
     reference = ( 'target', )
     setting = ( 'type', 'default' )
-    entry = ( 'url', 'id', 'name', 'title', 'description', 'active', 'icon', 'name', )
-    # ( 'entry', 'position' )
+    entry = ( 'url', 'id', 'name', 'title', 'description', 'active', 'icon', 'name',
+              'entry', 'position' )
 
 
-class EntrySerializer( SerializerExtensionsMixin, ModelSerializer ):
+class EntrySerializer( ModelSerializer ):
     url = CharField( source='name' )
+    registry = SerializerMethodField()
+    entry = SerializerMethodField()
+
+    def get_registry( self, instance ):
+        return RegistrySerializer( instance.registry ).data
+
+    def get_entry( self, instance ):
+        return self.Meta.entry_serializer( instance.registry ).data
 
 
 class ContainerEntrySerializer( EntrySerializer ):
     class Meta:
         model = ContainerEntry
         fields = F.entry
-        expanded_fields = OrderedDict(
-            registry='friede.serializers.RegistrySerializer',
-            entry='friede.serializers.ContainerSerializer'
-        )
+
+    def get_entry( self, instance ):
+        return self.Meta.ContainerSerializer_serializer( instance.registry ).data
+
 
 class WidgetEntrySerializer( EntrySerializer ):
     class Meta:
         model = WidgetEntry
         fields = F.entry
-        expanded_fields = OrderedDict(
-            registry='friede.serializers.RegistrySerializer',
-            entry='friede.serializers.WidgetSerializer'
-        )
+
+    def get_entry( self, instance ):
+        return self.Meta.WidgetSerializer( instance.registry ).data
 
 
 class BlockEntrySerializer( EntrySerializer ):
     class Meta:
         model = BlockEntry
         fields = F.entry
-        expanded_fields = OrderedDict(
-            registry='friede.serializers.RegistrySerializer',
-            entry='friede.serializers.BlockSerializer'
-        )
+
+    def get_entry( self, instance ):
+        return self.Meta.BlockSerializer( instance.registry ).data
 
 
 class ScreenEntrySerializer( EntrySerializer ):
     class Meta:
         model = ScreenEntry
         fields = F.entry
-        expanded_fields = OrderedDict(
-            registry='friede.serializers.RegistrySerializer',
-            entry='friede.serializers.ScreenSerializer'
-        )
+
+    def get_entry( self, instance ):
+        return self.Meta.ScreenSerializer( instance.registry ).data
 
 
 class ShellEntrySerializer( EntrySerializer ):
     class Meta:
         model = ShellEntry
         fields = F.entry
-        expanded_fields = OrderedDict(
-            registry='friede.serializers.RegistrySerializer',
-            entry='friede.serializers.ShellSerializer'
-        )
+
+    def get_entry( self, instance ):
+        return self.Meta.ShellSerializer( instance.registry ).data
 
 
 class ThemeEntrySerializer( EntrySerializer ):
     class Meta:
         model = ThemeEntry
         fields = F.entry
-        expanded_fields = OrderedDict(
-            registry='friede.serializers.RegistrySerializer',
-            entry='friede.serializers.ThemeSerializer'
-        )
+
+    def get_entry( self, instance ):
+        return self.Meta.ThemeSerializer( instance.registry ).data
 
 
 class SlotEntrySerializer( EntrySerializer ):
     class Meta:
         model = SlotEntry
         fields = F.entry
-        expanded_fields = OrderedDict(
-            registry='friede.serializers.RegistrySerializer',
-            entry='friede.serializers.SlotSerializer'
-        )
+
+    def get_entry( self, instance ):
+        return self.Meta.SlotSerializer( instance.registry ).data
 
 
 class AppEntrySerializer( EntrySerializer ):
     class Meta:
         model = AppEntry
         fields = F.entry
-        expanded_fields = OrderedDict(
-            registry='friede.serializers.RegistrySerializer',
-            entry='friede.serializers.AppSerializer'
-        )
+
+    def get_entry( self, instance ):
+        return self.Meta.AppSerializer( instance.registry ).data
 
 
 class LocationEntrySerializer( EntrySerializer ):
     class Meta:
         model = LocationEntry
         fields = F.entry
-        expanded_fields = OrderedDict(
-            registry='friede.serializers.RegistrySerializer',
-            entry='friede.serializers.LocationSerializer'
-        )
+
+    def get_entry( self, instance ):
+        return self.Meta.LocationSerializer( instance.registry ).data
 
 
 class IconEntrySerializer( EntrySerializer ):
     class Meta:
         model = IconEntry
         fields = F.entry
-        expanded_fields = OrderedDict(
-            registry='friede.serializers.RegistrySerializer',
-            entry='friede.serializers.IconSerializer'
-        )
+
+    def get_entry( self, instance ):
+        return self.Meta.IconSerializer( instance.registry ).data
 
 
 class LinkEntrySerializer( EntrySerializer ):
     class Meta:
         model = LinkEntry
         fields = F.entry
-        expanded_fields = OrderedDict(
-            registry='friede.serializers.RegistrySerializer',
-            entry='friede.serializers.LinkSerializer'
-        )
+
+    def get_entry( self, instance ):
+        return self.Meta.LinkSerializer( instance.registry ).data
 
 
 class ReferenceEntrySerializer( EntrySerializer ):
     class Meta:
         model = ReferenceEntry
         fields = F.entry
-        expanded_fields = OrderedDict(
-            registry='friede.serializers.RegistrySerializer',
-            entry='friede.serializers.ReferenceSerializer'
-        )
+
+    def get_entry( self, instance ):
+        return self.Meta.ReferenceSerializer( instance.registry ).data
 
 
 class SettingEntrySerializer( EntrySerializer ):
     class Meta:
         model = SettingEntry
         fields = F.entry
-        expanded_fields = OrderedDict(
-            registry='friede.serializers.RegistrySerializer',
-            entry='friede.serializers.SettingSerializer'
-        )
+
+    def get_entry( self, instance ):
+        return self.Meta.SettingSerializer( instance.registry ).data
 
 
 class RegistrySerializer( SerializerExtensionsMixin, HyperlinkedModelSerializer ):

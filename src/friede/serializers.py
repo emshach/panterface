@@ -43,7 +43,19 @@ class ExtendsMixin( Serializer ):
     extends = RecursiveField( allow_null=True, data=None )
 
 
-class RegistrySerializer( SerializerExtensionsMixin, HyperlinkedModelSerializer ):
+class IconSerializer( HyperlinkedModelSerializer ):
+    class Meta:
+        model = Icon
+        fields = F._base
+
+
+class IconMixin( Serializer ):
+    icon = IconSerializer()
+
+
+class RegistrySerializer( SerializerExtensionsMixin,
+                          IconMixin,
+                          HyperlinkedModelSerializer ):
     _container_entries = SerializerMethodField()
     _widget_entries =    SerializerMethodField()
     _block_entries =     SerializerMethodField()
@@ -210,12 +222,6 @@ class LocationSerializer( RegistrySerializer ):
         fields = F.base + F.registry + F.entries + F.data + F.location
 
 
-class IconSerializer( HyperlinkedModelSerializer ):
-    class Meta:
-        model = Icon
-        fields = F._base
-
-
 class LinkSerializer( HyperlinkedModelSerializer ):
     class Meta:
         model = Link
@@ -234,7 +240,7 @@ class SettingSerializer( HyperlinkedModelSerializer ):
         fields = F.base + F.data + F.setting
 
 
-class EntrySerializer( ModelSerializer ):
+class EntrySerializer( ModelSerializer, IconMixin ):
     url = CharField( source='name' )
     registry = RegistrySerializer()
 

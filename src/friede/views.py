@@ -64,7 +64,7 @@ def api_root( request, format=None ):
     for k, v in routes.items():
         v = _normalize_lookup(v)
         out[k] = reverse( "friede:%s" % v[0], args=v[1], kwargs=v[2],
-                          request=request, format=None )
+                          request=request, detail=True, format=None )
     return Response( out )
 
 @api_view([ 'GET' ])

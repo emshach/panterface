@@ -1,3 +1,32 @@
+.switchboard .display[data-v-10af6d32] {
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  position: fixed;
+  bottom: 18px;
+  right: 6px;
+  max-width: 92%;
+  background: rgba(0, 0, 0, 0.75);
+  color: white;
+  border-radius: 4px;
+  padding: 10px;
+  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  text-align: left;
+}
+.switchboard .display .uk-button[data-v-10af6d32] {
+    padding: 0px 8px;
+    text-align: left;
+    text-transform: none;
+    color: white;
+}
+.switchboard .display .uk-button.uk-button-default[data-v-10af6d32] {
+      background: transparent;
+      border: 0 none;
+}
+.switchboard .display .uk-button.uk-button-default[data-v-10af6d32]:hover {
+        background: rgba(255, 255, 255, 0.1);
+}
+
 
 .mf-prompt {
   width: 100%;

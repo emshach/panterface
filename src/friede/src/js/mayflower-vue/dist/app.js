@@ -92,7 +92,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "cbd264ab22ddada64358";
+/******/ 	var hotCurrentHash = "6ef4639f1f415930f20f";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -16006,9 +16006,9 @@ module.exports = toNumber;
   !*** ./node_modules/mini-css-extract-plugin/dist/loader.js??ref--8-oneOf-1-0!./node_modules/css-loader??ref--8-oneOf-1-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--8-oneOf-1-2!./node_modules/sass-loader/lib/loader.js??ref--8-oneOf-1-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Switchboard.vue?vue&type=style&index=0&id=10af6d32&scoped=true&lang=scss& ***!
   \**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-throw new Error("Module build failed (from ./node_modules/mini-css-extract-plugin/dist/loader.js):\nModuleBuildError: Module build failed (from ./node_modules/sass-loader/lib/loader.js):\n\n    position: fixed;\n   ^\n      Invalid CSS after \"    position\": expected \"}\", was \": fixed;\"\n      in /home/rain/projects/web/pantologic/src/friede/src/js/mayflower-vue/src/components/Switchboard.vue (line 72, column 5)\n    at runLoaders (/home/rain/projects/web/pantologic/src/friede/src/js/mayflower-vue/node_modules/webpack/lib/NormalModule.js:301:20)\n    at /home/rain/projects/web/pantologic/src/friede/src/js/mayflower-vue/node_modules/loader-runner/lib/LoaderRunner.js:367:11\n    at /home/rain/projects/web/pantologic/src/friede/src/js/mayflower-vue/node_modules/loader-runner/lib/LoaderRunner.js:233:18\n    at context.callback (/home/rain/projects/web/pantologic/src/friede/src/js/mayflower-vue/node_modules/loader-runner/lib/LoaderRunner.js:111:13)\n    at Object.render [as callback] (/home/rain/projects/web/pantologic/src/friede/src/js/mayflower-vue/node_modules/sass-loader/lib/loader.js:52:13)\n    at Object.done [as callback] (/home/rain/projects/web/pantologic/src/friede/src/js/mayflower-vue/node_modules/neo-async/async.js:8077:18)\n    at options.error (/home/rain/projects/web/pantologic/src/friede/src/js/mayflower-vue/node_modules/node-sass/lib/index.js:294:32)");
+// extracted by mini-css-extract-plugin
 
 /***/ }),
 

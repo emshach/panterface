@@ -68,7 +68,7 @@ export default {
 <style scoped lang="scss">
 .switchboard {
   .display{
-    transition: 0.3s
+    transition: 0.3s;
     position: fixed;
     bottom: 18px;
     right: 6px;

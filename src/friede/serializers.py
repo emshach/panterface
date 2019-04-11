@@ -197,7 +197,7 @@ class AppSerializer( RegistrySerializer ):
 
 
 class LocationSerializer( RegistrySerializer ):
-    redirect_to = RecursiveField( allow_null=True )
+    redirect_to = RecursiveField( allow_null=True, data=None )
     class Meta:
         model = Location
         fields = F.base + F.entries + F.data + F.location

@@ -64,7 +64,7 @@ def api_root( request, format=None ):
     for k, v in routes.items():
         v = _normalize_lookup(v)
         out[k] = reverse( "friede:%s" % v[0], args=v[1], kwargs=v[2],
-                          request=request, detail=True, format=None )
+                          request=request, format=None )
     return Response( out )
 
 @api_view([ 'GET' ])
@@ -90,7 +90,7 @@ def api_complete( request, path=None, format=None ):
             if m.group(2) is not None:
                 locations.append( candidate )
     serializer = LocationSerializer(
-        locations, many=True, context={ 'request': request })
+        locations, many=True, context={ 'request': request, 'detail': True })
     return Response({
         'base'      : base,
         'matches'   : tuple( matches ),

@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from rest_framework.serializers import ModelSerializer, HyperlinkedModelSerializer,\
-    HyperlinkedRelatedField, HyperlinkedIdentityField, CharField, SerializerMethodField
+from rest_framework.serializers import (
+    Serializer, ModelSerializer, HyperlinkedModelSerializer, HyperlinkedRelatedField,
+    HyperlinkedIdentityField, CharField, SerializerMethodField
+)
 from rest_framework_recursive.fields import RecursiveField
 from rest_framework_serializer_extensions.serializers import SerializerExtensionsMixin
 from collections import OrderedDict
@@ -22,6 +24,7 @@ class F:
     #             'themes', 'slots', 'apps', 'locations', 'icons', 'links',
     #             'references', 'settings' )
 
+    registry = ( 'parent', 'format', 'default' )
     extends = ( 'extends', )
     size = ( 'min_x', 'min_y', 'max_x', 'max_y' )
     data = ( 'data', )
@@ -34,6 +37,10 @@ class F:
 
     entry = ( 'url', 'id', 'name', 'title', 'description', 'active', 'icon',
               'name', 'entry', 'position' )
+
+
+class ExtendsMixin( Serializer ):
+    extends = RecursiveField( allow_null=True, data=None )
 
 
 class RegistrySerializer( SerializerExtensionsMixin, HyperlinkedModelSerializer ):
@@ -145,62 +152,62 @@ class RegistrySerializer( SerializerExtensionsMixin, HyperlinkedModelSerializer 
 
     class Meta:
         model = Registry
-        fields = F.base + F.entries
+        fields = F.base + F.registry + F.entries
 
 
 class ContainerSerializer( RegistrySerializer ):
     class Meta:
         model = Container
-        fields = F.base + F.entries
+        fields = F.base + F.registry + F.entries
 
 
-class WidgetSerializer( RegistrySerializer ):
+class WidgetSerializer( RegistrySerializer, ExtendsMixin ):
     class Meta:
         model = Widget
-        fields = F.base + F.entries + F.extends + F.size + F.data
+        fields = F.base + F.registry + F.entries + F.extends + F.size + F.data
 
 
-class BlockSerializer( RegistrySerializer ):
+class BlockSerializer( RegistrySerializer, ExtendsMixin ):
     class Meta:
         model = Block
-        fields = F.base + F.entries + F.extends + F.size + F.data
+        fields = F.base + F.registry + F.entries + F.extends + F.size + F.data
 
 
-class ScreenSerializer( RegistrySerializer ):
+class ScreenSerializer( RegistrySerializer, ExtendsMixin ):
     class Meta:
         model = Screen
-        fields = F.base + F.entries + F.extends + F.size + F.data
+        fields = F.base + F.registry + F.entries + F.extends + F.size + F.data
 
 
-class ShellSerializer( RegistrySerializer ):
+class ShellSerializer( RegistrySerializer, ExtendsMixin ):
     class Meta:
         model = Shell
-        fields = F.base + F.entries + F.extends + F.templates
+        fields = F.base + F.registry + F.entries + F.extends + F.templates
 
 
-class ThemeSerializer( RegistrySerializer ):
+class ThemeSerializer( RegistrySerializer, ExtendsMixin ):
     class Meta:
         model = Theme
-        fields = F.base + F.entries + F.extends + F.templates
+        fields = F.base + F.registry + F.entries + F.extends + F.templates
 
 
 class SlotSerializer( RegistrySerializer ):
     class Meta:
         model = Slot
-        fields = F.base + F.entries
+        fields = F.base + F.registry + F.entries
 
 
 class AppSerializer( RegistrySerializer ):
     class Meta:
         model = App
-        fields = F.base + F.entries + F.data + F.app
+        fields = F.base + F.registry + F.entries + F.data + F.app
 
 
 class LocationSerializer( RegistrySerializer ):
     redirect_to = RecursiveField( allow_null=True, data=None )
     class Meta:
         model = Location
-        fields = F.base + F.entries + F.data + F.location
+        fields = F.base + F.registry + F.entries + F.data + F.location
 
 
 class IconSerializer( HyperlinkedModelSerializer ):

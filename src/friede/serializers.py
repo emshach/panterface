@@ -53,6 +53,116 @@ class IconMixin( Serializer ):
     icon = IconSerializer()
 
 
+class EntrySerializer( ModelSerializer, IconMixin ):
+    url = CharField( source='name' )
+    registry = RegistrySerializer()
+    entry = SerializerMethodField()
+
+
+class ContainerEntrySerializer( EntrySerializer ):
+    def get_entry( self, obj ):
+        return ContainerSerializer( obj.entry ).data
+    class Meta:
+        model = ContainerEntry
+        fields = F.entry
+
+
+class WidgetEntrySerializer( EntrySerializer ):
+    def get_entry( self, obj ):
+        return WidgetSerializer( obj.entry ).data
+    class Meta:
+        model = WidgetEntry
+        fields = F.entry
+
+
+class BlockEntrySerializer( EntrySerializer ):
+    def get_entry( self, obj ):
+        return BlockSerializer( obj.entry ).data
+    class Meta:
+        model = BlockEntry
+        fields = F.entry
+
+
+class ScreenEntrySerializer( EntrySerializer ):
+    def get_entry( self, obj ):
+        return ScreenSerializer( obj.entry ).data
+    class Meta:
+        model = ScreenEntry
+        fields = F.entry
+
+
+class ShellEntrySerializer( EntrySerializer ):
+    def get_entry( self, obj ):
+        return ShellSerializer( obj.entry ).data
+    class Meta:
+        model = ShellEntry
+        fields = F.entry
+
+
+class ThemeEntrySerializer( EntrySerializer ):
+    def get_entry( self, obj ):
+        return ThemeSerializer( obj.entry ).data
+    class Meta:
+        model = ThemeEntry
+        fields = F.entry
+
+
+class SlotEntrySerializer( EntrySerializer ):
+    def get_entry( self, obj ):
+        return SlotSerializer( obj.entry ).data
+    class Meta:
+        model = SlotEntry
+        fields = F.entry
+
+
+class AppEntrySerializer( EntrySerializer ):
+    def get_entry( self, obj ):
+        return AppSerializer( obj.entry ).data
+    class Meta:
+        model = AppEntry
+        fields = F.entry
+
+
+class LocationEntrySerializer( EntrySerializer ):
+    def get_entry( self, obj ):
+        return LocationSerializer( obj.entry ).data
+    class Meta:
+        model = LocationEntry
+        fields = F.entry
+
+
+class IconEntrySerializer( EntrySerializer ):
+    def get_entry( self, obj ):
+        return IconSerializer( obj.entry ).data
+    class Meta:
+        model = IconEntry
+        fields = F.entry
+
+
+class LinkEntrySerializer( EntrySerializer ):
+    def get_entry( self, obj ):
+        return LinkSerializer( obj.entry ).data
+    class Meta:
+        model = LinkEntry
+        fields = F.entry
+
+
+class ReferenceEntrySerializer( EntrySerializer ):
+    def get_entry( self, obj ):
+        return ReferenceSerializer( obj.entry ).data
+    class Meta:
+        model = ReferenceEntry
+        fields = F.entry
+
+
+class SettingEntrySerializer( EntrySerializer ):
+    def get_entry( self, obj ):
+        return SettingSerializer( obj.entry ).data
+    class Meta:
+        model = SettingEntry
+        fields = F.entry
+
+
 class RegistrySerializer( SerializerExtensionsMixin,
                           IconMixin,
                           HyperlinkedModelSerializer ):
@@ -62,55 +172,55 @@ class RegistrySerializer( SerializerExtensionsMixin,
         fields = F.base + F.registry + F.entries
         expandable_fields=OrderedDict(
             _container_entries=dict(
-                serializer='friede.serializers.ContainerEntrySerializer',
+                serializer=ContainerEntrySerializer,
                 id_source=False,
                 many=True ),
             _widget_entries=dict(
-                serializer='friede.serializers.WidgetEntrySerializer',
+                serializer=WidgetEntrySerializer,
                 id_source=False,
                 many=True ),
             _block_entries=dict(
-                serializer='friede.serializers.BlockEntrySerializer',
+                serializer=BlockEntrySerializer,
                 id_source=False,
                 many=True ),
             _screen_entries=dict(
-                serializer='friede.serializers.ScreenEntrySerializer',
+                serializer=ScreenEntrySerializer,
                 id_source=False,
                 many=True ),
             _shell_entries=dict(
-                serializer='friede.serializers.ShellEntrySerializer',
+                serializer=ShellEntrySerializer,
                 id_source=False,
                 many=True ),
             _theme_entries=dict(
-                serializer='friede.serializers.ThemeEntrySerializer',
+                serializer=ThemeEntrySerializer,
                 id_source=False,
                 many=True ),
             _slot_entries=dict(
-                serializer='friede.serializers.SlotEntrySerializer',
+                serializer=SlotEntrySerializer,
                 id_source=False,
                 many=True ),
             _app_entries=dict(
-                serializer='friede.serializers.AppEntrySerializer',
+                serializer=AppEntrySerializer,
                 id_source=False,
                 many=True ),
             _location_entries=dict(
-                serializer='friede.serializers.LocationEntrySerializer',
+                serializer=LocationEntrySerializer,
                 id_source=False,
                 many=True ),
             _icon_entries=dict(
-                serializer='friede.serializers.IconEntrySerializer',
+                serializer=IconEntrySerializer,
                 id_source=False,
                 many=True ),
             _link_entries=dict(
-                serializer='friede.serializers.LinkEntrySerializer',
+                serializer=LinkEntrySerializer,
                 id_source=False,
                 many=True ),
             _reference_entries=dict(
-                serializer='friede.serializers.ReferenceEntrySerializer',
+                serializer=ReferenceEntrySerializer,
                 id_source=False,
                 many=True ),
             _setting_entries=dict(
-                serializer='friede.serializers.SettingEntrySerializer',
+                serializer=SettingEntrySerializer,
                 id_source=False,
                 many=True ),
         )
@@ -292,101 +402,5 @@ class SettingSerializer( HyperlinkedModelSerializer ):
     class Meta:
         model = Setting
         fields = F.base + F.data + F.setting
-
-
-class EntrySerializer( ModelSerializer, IconMixin ):
-    url = CharField( source='name' )
-    registry = RegistrySerializer()
-
-
-class ContainerEntrySerializer( EntrySerializer ):
-    entry = ContainerSerializer()
-    class Meta:
-        model = ContainerEntry
-        fields = F.entry
-
-
-class WidgetEntrySerializer( EntrySerializer ):
-    entry = WidgetSerializer()
-    class Meta:
-        model = WidgetEntry
-        fields = F.entry
-
-
-class BlockEntrySerializer( EntrySerializer ):
-    entry = BlockSerializer()
-    class Meta:
-        model = BlockEntry
-        fields = F.entry
-
-
-class ScreenEntrySerializer( EntrySerializer ):
-    entry = ScreenSerializer()
-    class Meta:
-        model = ScreenEntry
-        fields = F.entry
-
-
-class ShellEntrySerializer( EntrySerializer ):
-    entry = ShellSerializer()
-    class Meta:
-        model = ShellEntry
-        fields = F.entry
-
-
-class ThemeEntrySerializer( EntrySerializer ):
-    entry = ThemeSerializer()
-    class Meta:
-        model = ThemeEntry
-        fields = F.entry
-
-
-class SlotEntrySerializer( EntrySerializer ):
-    entry = SlotSerializer()
-    class Meta:
-        model = SlotEntry
-        fields = F.entry
-
-
-class AppEntrySerializer( EntrySerializer ):
-    entry = AppSerializer()
-    class Meta:
-        model = AppEntry
-        fields = F.entry
-
-
-class LocationEntrySerializer( EntrySerializer ):
-    entry = LocationSerializer()
-    class Meta:
-        model = LocationEntry
-        fields = F.entry
-
-
-class IconEntrySerializer( EntrySerializer ):
-    entry = IconSerializer()
-    class Meta:
-        model = IconEntry
-        fields = F.entry
-
-
-class LinkEntrySerializer( EntrySerializer ):
-    entry = LinkSerializer()
-    class Meta:
-        model = LinkEntry
-        fields = F.entry
-
-
-class ReferenceEntrySerializer( EntrySerializer ):
-    entry = ReferenceSerializer()
-    class Meta:
-        model = ReferenceEntry
-        fields = F.entry
-
-
-class SettingEntrySerializer( EntrySerializer ):
-    entry = SettingSerializer()
-    class Meta:
-        model = SettingEntry
-        fields = F.entry
 
 

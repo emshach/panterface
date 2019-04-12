@@ -64,7 +64,7 @@ class EntrySerializer( ModelSerializer, IconMixin ):
 
 class ContainerEntrySerializer( EntrySerializer ):
     def get_entry( self, obj ):
-        return ContainerSerializer( obj.entry ).data
+        return ContainerSerializer( obj.entry, context=self.context ).data
     class Meta:
         model = ContainerEntry
         fields = F.entry
@@ -72,7 +72,7 @@ class ContainerEntrySerializer( EntrySerializer ):
 
 class WidgetEntrySerializer( EntrySerializer ):
     def get_entry( self, obj ):
-        return WidgetSerializer( obj.entry ).data
+        return WidgetSerializer( obj.entry, context=self.context ).data
     class Meta:
         model = WidgetEntry
         fields = F.entry
@@ -80,7 +80,7 @@ class WidgetEntrySerializer( EntrySerializer ):
 
 class BlockEntrySerializer( EntrySerializer ):
     def get_entry( self, obj ):
-        return BlockSerializer( obj.entry ).data
+        return BlockSerializer( obj.entry, context=self.context ).data
     class Meta:
         model = BlockEntry
         fields = F.entry
@@ -88,7 +88,7 @@ class BlockEntrySerializer( EntrySerializer ):
 
 class ScreenEntrySerializer( EntrySerializer ):
     def get_entry( self, obj ):
-        return ScreenSerializer( obj.entry ).data
+        return ScreenSerializer( obj.entry, context=self.context ).data
     class Meta:
         model = ScreenEntry
         fields = F.entry
@@ -96,7 +96,7 @@ class ScreenEntrySerializer( EntrySerializer ):
 
 class ShellEntrySerializer( EntrySerializer ):
     def get_entry( self, obj ):
-        return ShellSerializer( obj.entry ).data
+        return ShellSerializer( obj.entry, context=self.context ).data
     class Meta:
         model = ShellEntry
         fields = F.entry
@@ -104,7 +104,7 @@ class ShellEntrySerializer( EntrySerializer ):
 
 class ThemeEntrySerializer( EntrySerializer ):
     def get_entry( self, obj ):
-        return ThemeSerializer( obj.entry ).data
+        return ThemeSerializer( obj.entry, context=self.context ).data
     class Meta:
         model = ThemeEntry
         fields = F.entry
@@ -112,7 +112,7 @@ class ThemeEntrySerializer( EntrySerializer ):
 
 class SlotEntrySerializer( EntrySerializer ):
     def get_entry( self, obj ):
-        return SlotSerializer( obj.entry ).data
+        return SlotSerializer( obj.entry, context=self.context ).data
     class Meta:
         model = SlotEntry
         fields = F.entry
@@ -120,7 +120,7 @@ class SlotEntrySerializer( EntrySerializer ):
 
 class AppEntrySerializer( EntrySerializer ):
     def get_entry( self, obj ):
-        return AppSerializer( obj.entry ).data
+        return AppSerializer( obj.entry, context=self.context ).data
     class Meta:
         model = AppEntry
         fields = F.entry
@@ -128,7 +128,7 @@ class AppEntrySerializer( EntrySerializer ):
 
 class LocationEntrySerializer( EntrySerializer ):
     def get_entry( self, obj ):
-        return LocationSerializer( obj.entry ).data
+        return LocationSerializer( obj.entry, context=self.context ).data
     class Meta:
         model = LocationEntry
         fields = F.entry
@@ -136,7 +136,7 @@ class LocationEntrySerializer( EntrySerializer ):
 
 class IconEntrySerializer( EntrySerializer ):
     def get_entry( self, obj ):
-        return IconSerializer( obj.entry ).data
+        return IconSerializer( obj.entry, context=self.context ).data
     class Meta:
         model = IconEntry
         fields = F.entry
@@ -144,7 +144,7 @@ class IconEntrySerializer( EntrySerializer ):
 
 class LinkEntrySerializer( EntrySerializer ):
     def get_entry( self, obj ):
-        return LinkSerializer( obj.entry ).data
+        return LinkSerializer( obj.entry, context=self.context ).data
     class Meta:
         model = LinkEntry
         fields = F.entry
@@ -152,7 +152,7 @@ class LinkEntrySerializer( EntrySerializer ):
 
 class ReferenceEntrySerializer( EntrySerializer ):
     def get_entry( self, obj ):
-        return ReferenceSerializer( obj.entry ).data
+        return ReferenceSerializer( obj.entry, context=self.context ).data
     class Meta:
         model = ReferenceEntry
         fields = F.entry
@@ -160,7 +160,7 @@ class ReferenceEntrySerializer( EntrySerializer ):
 
 class SettingEntrySerializer( EntrySerializer ):
     def get_entry( self, obj ):
-        return SettingSerializer( obj.entry ).data
+        return SettingSerializer( obj.entry, context=self.context ).data
     class Meta:
         model = SettingEntry
         fields = F.entry
@@ -227,111 +227,6 @@ class RegistrySerializer( SerializerExtensionsMixin,
                 id_source=False,
                 many=True ),
         )
-
-    # _container_entries = SerializerMethodField()
-    # _widget_entries =    SerializerMethodField()
-    # _block_entries =     SerializerMethodField()
-    # _screen_entries =    SerializerMethodField()
-    # _shell_entries =     SerializerMethodField()
-    # _theme_entries =     SerializerMethodField()
-    # _slot_entries =      SerializerMethodField()
-    # _app_entries =       SerializerMethodField()
-    # _location_entries =  SerializerMethodField()
-    # _icon_entries =      SerializerMethodField()
-    # _link_entries =      SerializerMethodField()
-    # _reference_entries = SerializerMethodField()
-    # _setting_entries =   SerializerMethodField()
-
-    # def get__container_entries( self, obj ):
-    #     if not self.context.get( 'detail' ) and not self.context['view'].detail:
-    #         return
-    #     entry_queryset = obj._container_entries.all()
-    #     return ContainerEntrySerializer(
-    #         entry_queryset, many=True, context=self.context ).data
-
-    # def get__widget_entries( self, obj ):
-    #     if not self.context.get( 'detail' ) and not self.context['view'].detail:
-    #         return
-    #     entry_queryset = obj._widget_entries.all()
-    #     return WidgetEntrySerializer(
-    #         entry_queryset, many=True, context=self.context ).data
-
-    # def get__block_entries( self, obj ):
-    #     if not self.context.get( 'detail' ) and not self.context['view'].detail:
-    #         return
-    #     entry_queryset = obj._block_entries.all()
-    #     return BlockEntrySerializer(
-    #         entry_queryset, many=True, context=self.context ).data
-
-    # def get__screen_entries( self, obj ):
-    #     if not self.context.get( 'detail' ) and not self.context['view'].detail:
-    #         return
-    #     entry_queryset = obj._screen_entries.all()
-    #     return ScreenEntrySerializer(
-    #         entry_queryset, many=True, context=self.context ).data
-
-    # def get__shell_entries( self, obj ):
-    #     if not self.context.get( 'detail' ) and not self.context['view'].detail:
-    #         return
-    #     entry_queryset = obj._shell_entries.all()
-    #     return ShellEntrySerializer(
-    #         entry_queryset, many=True, context=self.context ).data
-
-    # def get__theme_entries( self, obj ):
-    #     if not self.context.get( 'detail' ) and not self.context['view'].detail:
-    #         return
-    #     entry_queryset = obj._theme_entries.all()
-    #     return ThemeEntrySerializer(
-    #         entry_queryset, many=True, context=self.context ).data
-
-    # def get__slot_entries( self, obj ):
-    #     if not self.context.get( 'detail' ) and not self.context['view'].detail:
-    #         return
-    #     entry_queryset = obj._slot_entries.all()
-    #     return SlotEntrySerializer(
-    #         entry_queryset, many=True, context=self.context ).data
-
-    # def get__app_entries( self, obj ):
-    #     if not self.context.get( 'detail' ) and not self.context['view'].detail:
-    #         return
-    #     entry_queryset = obj._app_entries.all()
-    #     return AppEntrySerializer(
-    #         entry_queryset, many=True, context=self.context ).data
-
-    # def get__location_entries( self, obj ):
-    #     if not self.context.get( 'detail' ) and not self.context['view'].detail:
-    #         return
-    #     entry_queryset = obj._location_entries.all()
-    #     return LocationEntrySerializer(
-    #         entry_queryset, many=True, context=self.context ).data
-
-    # def get__icon_entries( self, obj ):
-    #     if not self.context.get( 'detail' ) and not self.context['view'].detail:
-    #         return
-    #     entry_queryset = obj._icon_entries.all()
-    #     return IconEntrySerializer(
-    #         entry_queryset, many=True, context=self.context ).data
-
-    # def get__link_entries( self, obj ):
-    #     if not self.context.get( 'detail' ) and not self.context['view'].detail:
-    #         return
-    #     entry_queryset = obj._link_entries.all()
-    #     return LinkEntrySerializer(
-    #         entry_queryset, many=True, context=self.context ).data
-
-    # def get__reference_entries( self, obj ):
-    #     if not self.context.get( 'detail' ) and not self.context['view'].detail:
-    #         return
-    #     entry_queryset = obj._reference_entries.all()
-    #     return ReferenceEntrySerializer(
-    #         entry_queryset, many=True, context=self.context ).data
-
-    # def get__setting_entries( self, obj ):
-    #     if not self.context.get( 'detail' ) and not self.context['view'].detail:
-    #         return
-    #     entry_queryset = obj._setting_entries.all()
-    #     return SettingEntrySerializer(
-    #         entry_queryset, many=True, context=self.context ).data
 
 
 class ContainerSerializer( RegistrySerializer ):

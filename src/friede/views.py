@@ -78,6 +78,8 @@ def api_complete( request, path=None, format=None ):
     path = re.sub( r'/+',  '/', path )
     base = re.sub( r'.*/', '',  path )
     candidates = Location.objects.filter( href__startswith=path ).all()
+    expand = candidates[ :10 ]
+    rest = candidates[ 10: ]
     completions = re.compile( r'%s([^/]*)(/?$)?' % path )
     matches = set()
     locations = []
@@ -89,15 +91,17 @@ def api_complete( request, path=None, format=None ):
             matches.add( base + m.group(1) )
             if m.group(2) is not None:
                 locations.append( candidate )
-    serializer = LocationSerializer(
+    expanded_serializer = LocationSerializer(
         locations, many=True, context={
             'request': request,
             'detail': True,
             'expand': [ '_widget_entries' ]})
+    rest_serializer = LocationSerializer(
+        locations, many=True, context={ 'request': request })
     return Response({
         'base'      : base,
         'matches'   : tuple( matches ),
-        'locations' : serializer.data
+        'locations' : expanded_serializer.data + rest_serializer.data
     })
 
 class RegistryViewSet( SerializerExtensionsAPIViewMixin, viewsets.ModelViewSet ):

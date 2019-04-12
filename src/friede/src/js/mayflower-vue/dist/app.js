@@ -92,7 +92,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "2a8a867c6865ba4b567f";
+/******/ 	var hotCurrentHash = "acdc4d32a424e4834f11";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -10585,7 +10585,7 @@ __webpack_require__.r(__webpack_exports__);
     getCompletions: function getCompletions() {
       var _this2 = this;
 
-      this.$api('complete/' + this.cli + '?expand=_widget_entries').then(function (data) {
+      this.$api('complete/' + this.cli).then(function (data) {
         _this2.base = data.base;
         _this2.matches = data.matches.sort();
         _this2.locations = data.locations.sort();

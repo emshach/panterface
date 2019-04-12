@@ -14,12 +14,12 @@ class F:
     _base = ( 'url', 'id', 'name', 'title', 'description', 'active', 'path' )
     base = ( 'url', 'id', 'name', 'title', 'description', 'active', 'icon', 'path' )
 
-    entries = ( '_container_entries', '_widget_entries', '_block_entries',
-                '_screen_entries', '_shell_entries', '_theme_entries',
-                '_slot_entries', '_app_entries', '_location_entries',
-                '_icon_entries', '_link_entries', '_reference_entries',
-                '_setting_entries' )
-
+    # entries = ( '_container_entries', '_widget_entries', '_block_entries',
+    #             '_screen_entries', '_shell_entries', '_theme_entries',
+    #             '_slot_entries', '_app_entries', '_location_entries',
+    #             '_icon_entries', '_link_entries', '_reference_entries',
+    #             '_setting_entries' )
+    entries = ()
     # entries = ( 'containers', 'widgets', 'blocks', 'screens', 'shells',
     #             'themes', 'slots', 'apps', 'locations', 'icons', 'links',
     #             'references', 'settings' )

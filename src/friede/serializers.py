@@ -14,12 +14,12 @@ class F:
     _base = ( 'url', 'id', 'name', 'title', 'description', 'active', 'path' )
     base = ( 'url', 'id', 'name', 'title', 'description', 'active', 'icon', 'path' )
 
-    # entries = ( '_container_entries', '_widget_entries', '_block_entries',
-    #             '_screen_entries', '_shell_entries', '_theme_entries',
-    #             '_slot_entries', '_app_entries', '_location_entries',
-    #             '_icon_entries', '_link_entries', '_reference_entries',
-    #             '_setting_entries' )
-    entries = ()
+    entries = ( '_container_entries', '_widget_entries', '_block_entries',
+                '_screen_entries', '_shell_entries', '_theme_entries',
+                '_slot_entries', '_app_entries', '_location_entries',
+                '_icon_entries', '_link_entries', '_reference_entries',
+                '_setting_entries' )
+
     # entries = ( 'containers', 'widgets', 'blocks', 'screens', 'shells',
     #             'themes', 'slots', 'apps', 'locations', 'icons', 'links',
     #             'references', 'settings' )
@@ -172,7 +172,7 @@ class RegistrySerializer( SerializerExtensionsMixin,
 
     class Meta:
         model = Registry
-        fields = F.base + F.registry + F.entries
+        fields = F.base + F.registry # + F.entries
         expandable_fields=OrderedDict(
             _container_entries=dict(
                 serializer=ContainerEntrySerializer,
@@ -337,73 +337,85 @@ class RegistrySerializer( SerializerExtensionsMixin,
 class ContainerSerializer( RegistrySerializer ):
     class Meta:
         model = Container
-        fields = F.base + F.registry + F.entries
+        fields = RegistrySerializer.Meta.fields
+        expandable_fields = RegistrySerializer.Meta.expandable_fields
 
 
 class WidgetSerializer( RegistrySerializer, ExtendsMixin ):
     class Meta:
         model = Widget
-        fields = F.base + F.registry + F.entries + F.extends + F.size + F.data
+        fields = RegistrySerializer.Meta.fields + F.extends + F.size + F.data
+        expandable_fields = RegistrySerializer.Meta.expandable_fields
 
 
 class BlockSerializer( RegistrySerializer, ExtendsMixin ):
     class Meta:
         model = Block
-        fields = F.base + F.registry + F.entries + F.extends + F.size + F.data
+        fields = RegistrySerializer.Meta.fields + F.extends + F.size + F.data
+        expandable_fields = RegistrySerializer.Meta.expandable_fields
 
 
 class ScreenSerializer( RegistrySerializer, ExtendsMixin ):
     class Meta:
         model = Screen
-        fields = F.base + F.registry + F.entries + F.extends + F.size + F.data
+        fields = RegistrySerializer.Meta.fields + F.extends + F.size + F.data
+        expandable_fields = RegistrySerializer.Meta.expandable_fields
 
 
 class ShellSerializer( RegistrySerializer, ExtendsMixin ):
     class Meta:
         model = Shell
-        fields = F.base + F.registry + F.entries + F.extends + F.templates
+        fields = RegistrySerializer.Meta.fields + F.extends + F.templates
+        expandable_fields = RegistrySerializer.Meta.expandable_fields
 
 
 class ThemeSerializer( RegistrySerializer, ExtendsMixin ):
     class Meta:
         model = Theme
-        fields = F.base + F.registry + F.entries + F.extends + F.templates
+        fields = RegistrySerializer.Meta.fields + F.extends + F.templates
+        expandable_fields = RegistrySerializer.Meta.expandable_fields
 
 
 class SlotSerializer( RegistrySerializer ):
     class Meta:
         model = Slot
-        fields = F.base + F.registry + F.entries
+        fields = RegistrySerializer.Meta.fields
+        expandable_fields = RegistrySerializer.Meta.expandable_fields
 
 
 class AppSerializer( RegistrySerializer ):
     class Meta:
         model = App
-        fields = F.base + F.registry + F.entries + F.data + F.app
+        fields = RegistrySerializer.Meta.fields + F.data + F.app
+        expandable_fields = RegistrySerializer.Meta.expandable_fields
 
 
 class LocationSerializer( RegistrySerializer ):
     redirect_to = RecursiveField( allow_null=True, data=None )
     class Meta:
         model = Location
-        fields = F.base + F.registry + F.entries + F.data + F.location
+        fields = RegistrySerializer.Meta.fields + F.data + F.location
+        expandable_fields = RegistrySerializer.Meta.expandable_fields
 
 
 class LinkSerializer( HyperlinkedModelSerializer ):
     class Meta:
         model = Link
-        fields = F.base + F.entries + F.location
+        fields = F.base + F.location
+        expandable_fields = RegistrySerializer.Meta.expandable_fields
 
 
 class ReferenceSerializer( HyperlinkedModelSerializer ):
     class Meta:
         model = Reference
-        fields = F.base + F.entries + F.reference
+        fields = F.base + F.reference
+        expandable_fields = RegistrySerializer.Meta.expandable_fields
 
 
 class SettingSerializer( HyperlinkedModelSerializer ):
     class Meta:
         model = Setting
-        fields = F.base + F.data + F.setting
+        fields = F.base + F.setting
+        expandable_fields = RegistrySerializer.Meta.expandable_fields
 
 

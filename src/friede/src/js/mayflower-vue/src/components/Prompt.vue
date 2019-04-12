@@ -49,7 +49,7 @@ export default {
       this.cli = '';
     },
     getCompletions() {
-      this.$api( 'complete/' + this.cli ).then( data => {
+      this.$api( 'complete/' + this.cli + '?expand=_widget_entries' ).then( data => {
         this.base = data.base;
         this.matches = data.matches.sort();
         this.locations = data.locations.sort();

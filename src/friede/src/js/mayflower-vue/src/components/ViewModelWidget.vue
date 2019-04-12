@@ -1,29 +1,34 @@
 <template lang="html">
-
-  <section class="view-model-widget">
-    <h1>view-model-widget Component</h1>
-  </section>
-
+  <adaptive-widget class="view-model-widget view-widget model-widget">
+    <template #content>
+      <model-field-widget v-for="field in model.preview_fields" :key="field.name" />
+    </template>
+  </adaptive-widget>
 </template>
 
 <script lang="js">
-  export default  {
-    name: 'view-model-widget',
-    props: [],
-    mounted() {
-
-    },
-    data() {
-      return {
-
-      }
-    },
-    methods: {
-
-    },
-    computed: {
-
+export default  {
+  name: 'view-model-widget',
+  props: {
+    model: {
+      type: Object,
+      default: () => {}
     }
+  },
+  mounted() {
+    
+  },
+  data() {
+    return {
+      
+    }
+  },
+  methods: {
+    
+  },
+  computed: {
+    
+  }
 }
 </script>
 

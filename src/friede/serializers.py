@@ -60,111 +60,165 @@ class RegistrySerializer( SerializerExtensionsMixin,
     class Meta:
         model = Registry
         fields = F.base + F.registry + F.entries
+        expandable_fields=OrderedDict(
+            _container_entries=dict(
+                serializer='friede.serializers.ContainerEntrySerializer',
+                id_source=False,
+                many=True ),
+            _widget_entries=dict(
+                serializer='friede.serializers.WidgetEntrySerializer',
+                id_source=False,
+                many=True ),
+            _block_entries=dict(
+                serializer='friede.serializers.BlockEntrySerializer',
+                id_source=False,
+                many=True ),
+            _screen_entries=dict(
+                serializer='friede.serializers.ScreenEntrySerializer',
+                id_source=False,
+                many=True ),
+            _shell_entries=dict(
+                serializer='friede.serializers.ShellEntrySerializer',
+                id_source=False,
+                many=True ),
+            _theme_entries=dict(
+                serializer='friede.serializers.ThemeEntrySerializer',
+                id_source=False,
+                many=True ),
+            _slot_entries=dict(
+                serializer='friede.serializers.SlotEntrySerializer',
+                id_source=False,
+                many=True ),
+            _app_entries=dict(
+                serializer='friede.serializers.AppEntrySerializer',
+                id_source=False,
+                many=True ),
+            _location_entries=dict(
+                serializer='friede.serializers.LocationEntrySerializer',
+                id_source=False,
+                many=True ),
+            _icon_entries=dict(
+                serializer='friede.serializers.IconEntrySerializer',
+                id_source=False,
+                many=True ),
+            _link_entries=dict(
+                serializer='friede.serializers.LinkEntrySerializer',
+                id_source=False,
+                many=True ),
+            _reference_entries=dict(
+                serializer='friede.serializers.ReferenceEntrySerializer',
+                id_source=False,
+                many=True ),
+            _setting_entries=dict(
+                serializer='friede.serializers.SettingEntrySerializer',
+                id_source=False,
+                many=True ),
+        )
 
-    _container_entries = SerializerMethodField()
-    _widget_entries =    SerializerMethodField()
-    _block_entries =     SerializerMethodField()
-    _screen_entries =    SerializerMethodField()
-    _shell_entries =     SerializerMethodField()
-    _theme_entries =     SerializerMethodField()
-    _slot_entries =      SerializerMethodField()
-    _app_entries =       SerializerMethodField()
-    _location_entries =  SerializerMethodField()
-    _icon_entries =      SerializerMethodField()
-    _link_entries =      SerializerMethodField()
-    _reference_entries = SerializerMethodField()
-    _setting_entries =   SerializerMethodField()
+    # _container_entries = SerializerMethodField()
+    # _widget_entries =    SerializerMethodField()
+    # _block_entries =     SerializerMethodField()
+    # _screen_entries =    SerializerMethodField()
+    # _shell_entries =     SerializerMethodField()
+    # _theme_entries =     SerializerMethodField()
+    # _slot_entries =      SerializerMethodField()
+    # _app_entries =       SerializerMethodField()
+    # _location_entries =  SerializerMethodField()
+    # _icon_entries =      SerializerMethodField()
+    # _link_entries =      SerializerMethodField()
+    # _reference_entries = SerializerMethodField()
+    # _setting_entries =   SerializerMethodField()
 
-    def get__container_entries( self, obj ):
-        if not self.context.get( 'detail' ) and not self.context['view'].detail:
-            return
-        entry_queryset = obj._container_entries.all()
-        return ContainerEntrySerializer(
-            entry_queryset, many=True, context=self.context ).data
+    # def get__container_entries( self, obj ):
+    #     if not self.context.get( 'detail' ) and not self.context['view'].detail:
+    #         return
+    #     entry_queryset = obj._container_entries.all()
+    #     return ContainerEntrySerializer(
+    #         entry_queryset, many=True, context=self.context ).data
 
-    def get__widget_entries( self, obj ):
-        if not self.context.get( 'detail' ) and not self.context['view'].detail:
-            return
-        entry_queryset = obj._widget_entries.all()
-        return WidgetEntrySerializer(
-            entry_queryset, many=True, context=self.context ).data
+    # def get__widget_entries( self, obj ):
+    #     if not self.context.get( 'detail' ) and not self.context['view'].detail:
+    #         return
+    #     entry_queryset = obj._widget_entries.all()
+    #     return WidgetEntrySerializer(
+    #         entry_queryset, many=True, context=self.context ).data
 
-    def get__block_entries( self, obj ):
-        if not self.context.get( 'detail' ) and not self.context['view'].detail:
-            return
-        entry_queryset = obj._block_entries.all()
-        return BlockEntrySerializer(
-            entry_queryset, many=True, context=self.context ).data
+    # def get__block_entries( self, obj ):
+    #     if not self.context.get( 'detail' ) and not self.context['view'].detail:
+    #         return
+    #     entry_queryset = obj._block_entries.all()
+    #     return BlockEntrySerializer(
+    #         entry_queryset, many=True, context=self.context ).data
 
-    def get__screen_entries( self, obj ):
-        if not self.context.get( 'detail' ) and not self.context['view'].detail:
-            return
-        entry_queryset = obj._screen_entries.all()
-        return ScreenEntrySerializer(
-            entry_queryset, many=True, context=self.context ).data
+    # def get__screen_entries( self, obj ):
+    #     if not self.context.get( 'detail' ) and not self.context['view'].detail:
+    #         return
+    #     entry_queryset = obj._screen_entries.all()
+    #     return ScreenEntrySerializer(
+    #         entry_queryset, many=True, context=self.context ).data
 
-    def get__shell_entries( self, obj ):
-        if not self.context.get( 'detail' ) and not self.context['view'].detail:
-            return
-        entry_queryset = obj._shell_entries.all()
-        return ShellEntrySerializer(
-            entry_queryset, many=True, context=self.context ).data
+    # def get__shell_entries( self, obj ):
+    #     if not self.context.get( 'detail' ) and not self.context['view'].detail:
+    #         return
+    #     entry_queryset = obj._shell_entries.all()
+    #     return ShellEntrySerializer(
+    #         entry_queryset, many=True, context=self.context ).data
 
-    def get__theme_entries( self, obj ):
-        if not self.context.get( 'detail' ) and not self.context['view'].detail:
-            return
-        entry_queryset = obj._theme_entries.all()
-        return ThemeEntrySerializer(
-            entry_queryset, many=True, context=self.context ).data
+    # def get__theme_entries( self, obj ):
+    #     if not self.context.get( 'detail' ) and not self.context['view'].detail:
+    #         return
+    #     entry_queryset = obj._theme_entries.all()
+    #     return ThemeEntrySerializer(
+    #         entry_queryset, many=True, context=self.context ).data
 
-    def get__slot_entries( self, obj ):
-        if not self.context.get( 'detail' ) and not self.context['view'].detail:
-            return
-        entry_queryset = obj._slot_entries.all()
-        return SlotEntrySerializer(
-            entry_queryset, many=True, context=self.context ).data
+    # def get__slot_entries( self, obj ):
+    #     if not self.context.get( 'detail' ) and not self.context['view'].detail:
+    #         return
+    #     entry_queryset = obj._slot_entries.all()
+    #     return SlotEntrySerializer(
+    #         entry_queryset, many=True, context=self.context ).data
 
-    def get__app_entries( self, obj ):
-        if not self.context.get( 'detail' ) and not self.context['view'].detail:
-            return
-        entry_queryset = obj._app_entries.all()
-        return AppEntrySerializer(
-            entry_queryset, many=True, context=self.context ).data
+    # def get__app_entries( self, obj ):
+    #     if not self.context.get( 'detail' ) and not self.context['view'].detail:
+    #         return
+    #     entry_queryset = obj._app_entries.all()
+    #     return AppEntrySerializer(
+    #         entry_queryset, many=True, context=self.context ).data
 
-    def get__location_entries( self, obj ):
-        if not self.context.get( 'detail' ) and not self.context['view'].detail:
-            return
-        entry_queryset = obj._location_entries.all()
-        return LocationEntrySerializer(
-            entry_queryset, many=True, context=self.context ).data
+    # def get__location_entries( self, obj ):
+    #     if not self.context.get( 'detail' ) and not self.context['view'].detail:
+    #         return
+    #     entry_queryset = obj._location_entries.all()
+    #     return LocationEntrySerializer(
+    #         entry_queryset, many=True, context=self.context ).data
 
-    def get__icon_entries( self, obj ):
-        if not self.context.get( 'detail' ) and not self.context['view'].detail:
-            return
-        entry_queryset = obj._icon_entries.all()
-        return IconEntrySerializer(
-            entry_queryset, many=True, context=self.context ).data
+    # def get__icon_entries( self, obj ):
+    #     if not self.context.get( 'detail' ) and not self.context['view'].detail:
+    #         return
+    #     entry_queryset = obj._icon_entries.all()
+    #     return IconEntrySerializer(
+    #         entry_queryset, many=True, context=self.context ).data
 
-    def get__link_entries( self, obj ):
-        if not self.context.get( 'detail' ) and not self.context['view'].detail:
-            return
-        entry_queryset = obj._link_entries.all()
-        return LinkEntrySerializer(
-            entry_queryset, many=True, context=self.context ).data
+    # def get__link_entries( self, obj ):
+    #     if not self.context.get( 'detail' ) and not self.context['view'].detail:
+    #         return
+    #     entry_queryset = obj._link_entries.all()
+    #     return LinkEntrySerializer(
+    #         entry_queryset, many=True, context=self.context ).data
 
-    def get__reference_entries( self, obj ):
-        if not self.context.get( 'detail' ) and not self.context['view'].detail:
-            return
-        entry_queryset = obj._reference_entries.all()
-        return ReferenceEntrySerializer(
-            entry_queryset, many=True, context=self.context ).data
+    # def get__reference_entries( self, obj ):
+    #     if not self.context.get( 'detail' ) and not self.context['view'].detail:
+    #         return
+    #     entry_queryset = obj._reference_entries.all()
+    #     return ReferenceEntrySerializer(
+    #         entry_queryset, many=True, context=self.context ).data
 
-    def get__setting_entries( self, obj ):
-        if not self.context.get( 'detail' ) and not self.context['view'].detail:
-            return
-        entry_queryset = obj._setting_entries.all()
-        return SettingEntrySerializer(
-            entry_queryset, many=True, context=self.context ).data
+    # def get__setting_entries( self, obj ):
+    #     if not self.context.get( 'detail' ) and not self.context['view'].detail:
+    #         return
+    #     entry_queryset = obj._setting_entries.all()
+    #     return SettingEntrySerializer(
+    #         entry_queryset, many=True, context=self.context ).data
 
 
 class ContainerSerializer( RegistrySerializer ):

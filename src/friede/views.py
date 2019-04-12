@@ -75,10 +75,9 @@ def api_complete( request, path=None, format=None ):
     if not path.startswith('/'):
         path = '/'+path
     path = re.sub( r'\s+', '/', path )
-    path = re.sub( r'/+', '/', path )
-    base = re.sub( '.*/', '', path )
+    path = re.sub( r'/+',  '/', path )
+    base = re.sub( r'.*/', '',  path )
     candidates = Location.objects.filter( href__startswith=path ).all()
-    completions = re.compile( r'%s([^/]*)(/?$)?' % path )
     matches = set()
     locations = []
     for candidate in candidates:
@@ -90,64 +89,61 @@ def api_complete( request, path=None, format=None ):
             if m.group(2) is not None:
                 locations.append( candidate )
     serializer = LocationSerializer(
-        locations, many=True, context={ 'request': request, 'detail': True })
+        locations, many=True, context={
+            'request': request,
+            'detail': True,
+            'expand': [ '_widget_entries' ]})
     return Response({
         'base'      : base,
         'matches'   : tuple( matches ),
         'locations' : serializer.data
     })
 
-class RegistryViewSet( viewsets.ModelViewSet ):
-# class RegistryViewSet( SerializerExtensionsAPIViewMixin, viewsets.ModelViewSet ):
-    # extensions_expand = set( RegistrySerializer.Meta.expanded_fields.keys() )
-    # extensions_expand_id_only = set()
-    # extensions_exclude = set()
-    # extensions_only = set()
+class RegistryViewSet( SerializerExtensionsAPIViewMixin, viewsets.ModelViewSet ):
     queryset = Registry.objects.all()
     serializer_class = RegistrySerializer
 
-class EntryViewSet( SerializerExtensionsAPIViewMixin, viewsets.ModelViewSet ):
-    extensions_expand = set(( 'registry', 'entry' ))
-    extensions_expand_id_only = set()
-    extensions_exclude = set()
-    extensions_only = set()
 
-class ContainerViewSet( viewsets.ModelViewSet ):
+class EntryViewSet( viewsets.ModelViewSet ):
+    pass
+
+
+class ContainerViewSet( RegistryViewSet ):
     queryset = Container.objects.all()
     serializer_class = ContainerSerializer
 
 
-class WidgetViewSet( viewsets.ModelViewSet ):
+class WidgetViewSet( RegistryViewSet ):
     queryset = Widget.objects.all()
     serializer_class = WidgetSerializer
 
 
-class BlockViewSet( viewsets.ModelViewSet ):
+class BlockViewSet( RegistryViewSet ):
     queryset = Block.objects.all()
     serializer_class = BlockSerializer
 
 
-class ScreenViewSet( viewsets.ModelViewSet ):
+class ScreenViewSet( RegistryViewSet ):
     queryset = Screen.objects.all()
     serializer_class = ScreenSerializer
 
 
-class ShellViewSet( viewsets.ModelViewSet ):
+class ShellViewSet( RegistryViewSet ):
     queryset = Shell.objects.all()
     serializer_class = ShellSerializer
 
 
-class ThemeViewSet( viewsets.ModelViewSet ):
+class ThemeViewSet( RegistryViewSet ):
     queryset = Theme.objects.all()
     serializer_class = ThemeSerializer
 
 
-class SlotViewSet( viewsets.ModelViewSet ):
+class SlotViewSet( RegistryViewSet ):
     queryset = Slot.objects.all()
     serializer_class = SlotSerializer
 
 
-class AppViewSet( viewsets.ModelViewSet ):
+class AppViewSet( RegistryViewSet ):
     queryset = App.objects.all()
     serializer_class = AppSerializer
 
@@ -157,22 +153,22 @@ class LocationViewSet( RegistryViewSet ):
     serializer_class = LocationSerializer
 
 
-class LinkViewSet( viewsets.ModelViewSet ):
+class LinkViewSet( RegistryViewSet ):
     queryset = Link.objects.all()
     serializer_class = LinkSerializer
 
 
-class IconViewSet( viewsets.ModelViewSet ):
+class IconViewSet( RegistryViewSet ):
     queryset = Icon.objects.all()
     serializer_class = IconSerializer
 
 
-class ReferenceViewSet( viewsets.ModelViewSet ):
+class ReferenceViewSet( RegistryViewSet ):
     queryset = Reference.objects.all()
     serializer_class = ReferenceSerializer
 
 
-class SettingViewSet( viewsets.ModelViewSet ):
+class SettingViewSet( RegistryViewSet ):
     queryset = Setting.objects.all()
     serializer_class = SettingSerializer
 

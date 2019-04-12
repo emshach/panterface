@@ -92,12 +92,12 @@ def api_complete( request, path=None, format=None ):
             if m.group(2) is not None:
                 locations.append( candidate )
     expanded_serializer = LocationSerializer(
-        locations, many=True, context={
+        expand, many=True, context={
             'request': request,
             'detail': True,
             'expand': [ '_widget_entries' ]})
     rest_serializer = LocationSerializer(
-        locations, many=True, context={ 'request': request })
+        rest, many=True, context={ 'request': request })
     return Response({
         'base'      : base,
         'matches'   : tuple( matches ),

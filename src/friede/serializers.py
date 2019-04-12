@@ -55,7 +55,6 @@ class IconMixin( Serializer ):
 
 class EntrySerializer( ModelSerializer, IconMixin ):
     url = CharField( source='name' )
-    registry = SerializerMethodField()
     entry = SerializerMethodField()
 
     def get_entry( self, obj ):

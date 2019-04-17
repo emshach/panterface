@@ -235,7 +235,8 @@ class ContainerSerializer( RegistrySerializer ):
         expandable_fields = RegistrySerializer.Meta.expandable_fields
 
 
-class WidgetSerializer( RegistrySerializer, ExtendsMixin ):
+class WidgetSerializer( RegistrySerializer ):
+    extends = RecursiveField( allow_null=True, data=None )
     class Meta:
         model = Widget
         fields = RegistrySerializer.Meta.fields + F.extends + F.size + F.data

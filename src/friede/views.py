@@ -84,7 +84,7 @@ def api_complete( request, path=None, format=None ):
     candidates = candidates.order_by('name').all()
     expand = candidates[ :10 ]
     rest = candidates[ 10: ]
-    completions = re.compile( r'%s([^/]*)(/?$)?' % path )
+    completions = re.compile( r'%s([^/]*)(/|$)?' % path )
     matches = set()
     locations = []
     for candidate in candidates:

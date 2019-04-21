@@ -144,7 +144,8 @@ def api_models( request, model=None, format=None ):
             if not ftype: continue
         field = dict( name=f.name, type=ftype )
         if getattr( f, 'related_model', None ):
-            field[ 'related_model' ] = f.related_model
+            field[ 'related_model' ] = "%s.%s" % ( f.related_model.app_label,
+                                                   f.related_model.__name__)
         out[ 'fields' ].append( field )
 
     return Response( out )

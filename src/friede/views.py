@@ -143,7 +143,9 @@ def api_models( request, model=None, format=None ):
             ftype = form_field_mappings[ ftype ]
             if not ftype: continue
         field = dict( name=f.name, type=ftype )
-        out['fields'].append( field )
+        if getattr( f, 'related_model', None ):
+            field[ 'related_model' ] = f.related_model
+        out[ 'fields' ].append( field )
 
     return Response( out )
 

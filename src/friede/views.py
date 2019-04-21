@@ -79,8 +79,7 @@ def api_complete( request, path=None, format=None ):
     base = re.sub( r'.*/', '',  path )
     candidates = Location.objects.filter( href__startswith=path )
     if path:
-        env = getenv()
-        top = env.C.locations()
+        top = Container.objects.get( path='locations' )
         candidates = candidates.filter( parent=top )
     candidates = candidates.order_by('name').all()
     expand = candidates[ :10 ]

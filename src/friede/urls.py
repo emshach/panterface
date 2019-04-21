@@ -39,7 +39,7 @@ views.routes[ 'completions' ] = ( 'completions', [''] )
 views.routes[ 'models' ] = ( 'models', [''] )
 urlpatterns += [
     url( r'^api/complete/(?P<path>.*$)', views.api_complete, name='completions' ),
-    url( r'^api/models/(?P<model>.*$)', views.api_complete, name='models' ),
+    url( r'^api/models/(?P<model>.*$)', views.api_models, name='models' ),
     url( r'^api/', views.api_root, name='api-root' ),
 ]
 urlpatterns.append( url( r'^.*', views.index, name='index' ))

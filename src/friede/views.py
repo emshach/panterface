@@ -78,7 +78,7 @@ def api_complete( request, path=None, format=None ):
     path = re.sub( r'/+',  '/', path )
     base = re.sub( r'.*/', '',  path )
     candidates = Location.objects.filter( href__startswith=path )
-    if path:
+    if path == '/':
         top = Container.objects.get( path='locations' )
         candidates = candidates.filter( parent=top )
     candidates = candidates.order_by('name').all()

@@ -36,8 +36,10 @@ except Exception:
 urlpatterns += [ url( r"^api/%s/" % k, include( v.urls ))
                  for k, v in routes.items() ]
 views.routes[ 'completions' ] = ( 'completions', [''] )
+views.routes[ 'models' ] = ( 'models', [''] )
 urlpatterns += [
     url( r'^api/complete/(?P<path>.*$)', views.api_complete, name='completions' ),
+    url( r'^api/models/(?P<model>.*$)', views.api_complete, name='models' ),
     url( r'^api/', views.api_root, name='api-root' ),
 ]
 urlpatterns.append( url( r'^.*', views.index, name='index' ))

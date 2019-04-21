@@ -111,8 +111,8 @@ class AppMixin( Model ):
 
 
 class Registry( Base, PathMixin ):
-    format = JSONField( default=list )
-    default = JSONField( default=list )
+    format = JSONField( default=dict )
+    default = JSONField( default=dict )
     parent = M.ForeignKey( 'self', M.CASCADE, blank=True, null=True,
                            related_name='_elements' )
 

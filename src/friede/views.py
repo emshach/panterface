@@ -2,20 +2,22 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import render
-from .objects import getregistries, getenv
+from .objects import getregistries, getenv, Locations
 from .core import setup, setupshell, setuptheme, setupmenus
 from .models import *
 from .serializers import *
-from .util import as_tree
+from .util import as_tree, form_field_mappings
+from rest_framework import status
 from rest_framework import viewsets, permissions
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 from rest_framework_serializer_extensions.views import SerializerExtensionsAPIViewMixin
+from collections import OrderedDict
 import json
 import re
 
-routes = {}
+routes = OrderedDict()
 
 ### route views
 
@@ -79,8 +81,7 @@ def api_complete( request, path=None, format=None ):
     base = re.sub( r'.*/', '',  path )
     candidates = Location.objects.filter( href__startswith=path )
     if path == '/':
-        top = Container.objects.get( path='locations' )
-        candidates = candidates.filter( parent=top )
+        candidates = candidates.filter( parent=Locations()() )
     candidates = candidates.order_by('name').all()
     expand = candidates[ :10 ]
     rest = candidates[ 10: ]
@@ -107,6 +108,43 @@ def api_complete( request, path=None, format=None ):
         'matches'   : tuple( matches ),
         'locations' : expanded_serializer.data + rest_serializer.data
     })
+
+@api_view([ 'GET' ])
+@permission_classes(( permissions.AllowAny, ))
+def api_models( request, model=None, format=None ):
+    if not model:
+        return Response({})
+    mod = None
+    model = model.split('.')
+    app = ".".join( model[:-1] )
+    model = model[-1]
+    try:
+        mod = import_module( "%s.%s" % ( app, 'models' ))
+    except ImportError:
+        return Response({ 'error': "found no models in '%s'" % app },
+                        status=status.HTTP_404_NOT_FOUND )
+
+    name = model
+    model = getattr( mod, name, None )
+    if not model:
+        return Response({
+            'error': "found no model '%s' in '%s.models'" % ( name, app ) },
+                        status=status.HTTP_404_NOT_FOUND )
+
+    meta = model._meta
+    out = dict(
+        name=meta.model_name,
+        fields=[],
+    )
+    for f in meta.get_fields():
+        ftype = f.__class__.__name__
+        if ftype in form_field_mappings:
+            ftype = form_field_mappings[ ftype ]
+            if not ftype: continue
+        field = dict( name=f.name, type=ftype )
+        out['fields'].append( field )
+
+    return Response( out )
 
 class RegistryViewSet( SerializerExtensionsAPIViewMixin, viewsets.ModelViewSet ):
     queryset = Registry.objects.all()

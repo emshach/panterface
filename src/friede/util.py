@@ -27,3 +27,22 @@ def as_tree( col, field='path', sep='.' ):
             node = node[x]
         node['$'] = item.to_dict()
     return tree
+
+form_field_mappings = dict(
+    AutoField=None,
+    BigAutoField=None,
+    BigIntegerField='IntegerField',
+    CommaSeparatedIntegerField='CharField',
+    ForeignKey='ModelChoiceField',
+    GenericIPAddressField='GenericIpAddressField',
+    IPAddressField='IpAddressField',
+    JSONField='JsonField',
+    ManyToManyField='ModelMultipleChoiceField',
+    ManyToManyRel='ModelMultipleChoiceField',
+    ManyToOneRel='ModelMultipleChoiceField',
+    PositiveIntegerField='IntegerField',
+    PositiveSmallIntegerField='IntegerField',
+    SmallIntegerField='IntegerField',
+    URLField='UrlField',
+    UUIDField='UuidField',
+)

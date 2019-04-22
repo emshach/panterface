@@ -145,10 +145,10 @@ def api_models( request, model=None, format=None ):
         field = dict( name=f.name, type=ftype )
         if getattr( f, 'related_model', None ):
             m = f.related_model
-            field[ 'related_model' ] = "%s.%s" % ( m._meta.app_label, m.__name__)
+            field[ 'related' ] = "%s.%s" % ( m._meta.app_label, m.__name__)
         out[ 'fields' ].append( field )
 
-    return Response( out )
+    return Response(dict( get=request.GET, model=out ))
 
 class RegistryViewSet( SerializerExtensionsAPIViewMixin, viewsets.ModelViewSet ):
     queryset = Registry.objects.all()

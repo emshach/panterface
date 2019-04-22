@@ -110,12 +110,7 @@ def api_complete( request, path=None, format=None ):
         'locations' : expanded_serializer.data + rest_serializer.data
     })
 
-@api_view([ 'GET' ])
-@permission_classes(( permissions.AllowAny, ))
-def api_models( request, model=None, format=None ):
-    if not model:
-        return Response({})
-    mod = None
+def _get_model( name ):
     model = model.split('.')
     app = ".".join( model[:-1] )
     model = model[-1]
@@ -127,28 +122,46 @@ def api_models( request, model=None, format=None ):
 
     name = model
     model = getattr( mod, name, None )
+    return model
+
+@api_view([ 'GET' ])
+@permission_classes(( permissions.AllowAny, ))
+def api_models( request, models=None, format=None ):
     if not model:
-        return Response({
-            'error': "found no model '%s' in '%s.models'" % ( name, app ) },
-                        status=status.HTTP_404_NOT_FOUND )
+        return Response({})
+    models = models.split(',')[ ::-1 ]
+    out = {}
+    have = set( request.GET.getlist( 'have' ))
+    while models:
+        name = models.pop()
+        if not name or name in out or name in have: continue
+        model = _get_model( name )
+        if not model:
+            return Response({
+                'error': "found no model '%s' in '%s.models'" % ( name, app ) },
+                            status=status.HTTP_404_NOT_FOUND )
 
-    meta = model._meta
-    out = dict(
-        name=meta.model_name,
-        fields=[],
-    )
-    for f in meta.get_fields():
-        ftype = f.__class__.__name__
-        if ftype in form_field_mappings:
-            ftype = form_field_mappings[ ftype ]
-            if not ftype: continue
-        field = dict( name=f.name, type=ftype )
-        if getattr( f, 'related_model', None ):
-            m = f.related_model
-            field[ 'related' ] = "%s.%s" % ( m._meta.app_label, m.__name__)
-        out[ 'fields' ].append( field )
+        meta = model._meta
+        data = dict(
+            name=meta.model_name,
+            fields=[],
+        )
+        out[ name ] = data
+        for f in meta.get_fields():
+            ftype = f.__class__.__name__
+            if ftype in form_field_mappings:
+                ftype = form_field_mappings[ ftype ]
+                if not ftype: continue
+            field = dict( name=f.name, type=ftype )
+            if getattr( f, 'related_model', None ):
+                m = f.related_model
+                related = "%s.%s" % ( m._meta.app_label, m.__name__)
+                field[ 'related' ] = related
+                if related not in out and related not in have:
+                    models.append( related )
+            out[ 'fields' ].append( field )
 
-    return Response(dict( have=request.GET.getlist( 'have' ), model=out ))
+    return Response(dict( models=out ))
 
 class RegistryViewSet( SerializerExtensionsAPIViewMixin, viewsets.ModelViewSet ):
     queryset = Registry.objects.all()

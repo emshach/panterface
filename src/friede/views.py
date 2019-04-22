@@ -146,7 +146,7 @@ def api_models( request, models=None, format=None ):
             name=meta.model_name,
             fields=[],
         )
-        out[ name ] = data
+        data[ name ] = data
         for f in meta.get_fields():
             ftype = f.__class__.__name__
             if ftype in form_field_mappings:
@@ -159,7 +159,7 @@ def api_models( request, models=None, format=None ):
                 field[ 'related' ] = related
                 if related not in out and related not in have:
                     models.append( related )
-            out[ 'fields' ].append( field )
+            data[ 'fields' ].append( field )
 
     return Response(dict( models=out ))
 

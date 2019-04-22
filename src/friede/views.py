@@ -146,7 +146,7 @@ def api_models( request, models=None, format=None ):
             name=meta.model_name,
             fields=[],
         )
-        data[ name ] = data
+        out[ name ] = data
         for f in meta.get_fields():
             ftype = f.__class__.__name__
             if ftype in form_field_mappings:

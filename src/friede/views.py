@@ -111,7 +111,7 @@ def api_complete( request, path=None, format=None ):
     })
 
 def _get_model( name ):
-    model = model.split('.')
+    model = name.split('.')
     app = ".".join( model[:-1] )
     model = model[-1]
     try:

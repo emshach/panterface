@@ -127,7 +127,7 @@ def _get_model( name ):
 @api_view([ 'GET' ])
 @permission_classes(( permissions.AllowAny, ))
 def api_models( request, models=None, format=None ):
-    if not model:
+    if not models:
         return Response({})
     models = models.split(',')[ ::-1 ]
     out = {}

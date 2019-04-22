@@ -148,7 +148,7 @@ def api_models( request, model=None, format=None ):
             field[ 'related' ] = "%s.%s" % ( m._meta.app_label, m.__name__)
         out[ 'fields' ].append( field )
 
-    return Response(dict( get=request.GET, model=out ))
+    return Response(dict( have=request.GET.getlist( 'have' ), model=out ))
 
 class RegistryViewSet( SerializerExtensionsAPIViewMixin, viewsets.ModelViewSet ):
     queryset = Registry.objects.all()

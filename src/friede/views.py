@@ -157,11 +157,11 @@ def api_models( request, models=None, format=None ):
                 m = f.related_model
                 related = "%s.%s" % ( m._meta.app_label, m.__name__)
                 field[ 'related' ] = related
-                if related not in out and related not in have:
+                if 'Rel' not in ftype and related not in out and related not in have:
                     models.append( related )
             data[ 'fields' ].append( field )
 
-    return Response(dict( models=out ))
+    return Response( dict( models=out ))
 
 class RegistryViewSet( SerializerExtensionsAPIViewMixin, viewsets.ModelViewSet ):
     queryset = Registry.objects.all()

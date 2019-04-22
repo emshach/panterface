@@ -148,7 +148,8 @@ def api_models( request, models=None, format=None ):
         )
         out[ name ] = data
         for f in meta.get_fields():
-            ftype = f.__class__.__name__
+            ftype0 = f.__class__.__name__
+            ftype = ftype0
             if ftype in form_field_mappings:
                 ftype = form_field_mappings[ ftype ]
                 if not ftype: continue
@@ -157,7 +158,7 @@ def api_models( request, models=None, format=None ):
                 m = f.related_model
                 related = "%s.%s" % ( m._meta.app_label, m.__name__)
                 field[ 'related' ] = related
-                if 'Rel' not in ftype and related not in out and related not in have:
+                if 'Rel' not in ftype0 and related not in out and related not in have:
                     models.append( related )
             data[ 'fields' ].append( field )
 

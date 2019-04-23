@@ -20,92 +20,92 @@ relations.reverse = hack_reverse
 
 name = 'friede'
 
-objects = '''container widget block screen shell theme slot app location link
-             reference setting'''.split()
+registry_objects = 'container widget block screen shell theme slot app location'.split()
+objects = registry_objects + 'link reference setting'.split()
 relations = dict(
     container={
         'model'  : 'Container',
         'icon'   : 'fontawesome.box-open',
         'plural' : 'containers',
         'has'    : objects,
-        'in'     : objects
+        'in'     : registry_objects
     },
     widget={
         'model'  : 'Widget',
         'icon'   : 'fontawesome.toggle-on',
         'plural' : 'widgets',
         'has'    : objects,
-        'in'     : objects
+        'in'     : registry_objects
     },
     block={
         'model'  : 'Block',
         'icon'   : 'fontawesome.columns',
         'plural' : 'blocks',
         'has'    : objects,
-        'in'     : objects
+        'in'     : registry_objects
     },
     screen={
         'model'  : 'Screen',
         'icon'   : 'fontawesome.desktop',
         'plural' : 'screens',
         'has'    : objects,
-        'in'     : objects
+        'in'     : registry_objects
     },
     shell={
         'model'  : 'Shell',
         'icon'   : 'fontawesome.terminal',
         'plural' : 'shells',
         'has'    : objects,
-        'in'     : objects
+        'in'     : registry_objects
     },
     theme={
         'model'  : 'Theme',
         'icon'   : 'fontawesome.image',
         'plural' : 'themes',
         'has'    : objects,
-        'in'     : objects
+        'in'     : registry_objects
     },
     slot={
         'model'  : 'Slot',
         'icon'   : 'fontawesome.indent',
         'plural' : 'slots',
         'has'    : objects,
-        'in'     : objects
+        'in'     : registry_objects
     },
     app={
         'model'  : 'App',
         'icon'   : 'fontawesome.mobile-alt',
         'plural' : 'apps',
         'has'    : objects,
-        'in'     : objects
+        'in'     : registry_objects
     },
     location={
         'model'  : 'Location',
         'icon'   : 'fontawesome.location-arrow',
         'plural' : 'locations',
-        'has'    : 'link'.split(),
-        'in'     : objects
+        'has'    : objects,
+        'in'     : registry_objects
     },
     link={
         'model'  : 'Link',
         'icon'   : 'fontawesome.link',
         'plural' : 'links',
         'has'    : ''.split(),
-        'in'     : objects + [ 'location' ]
+        'in'     : registry_objects
     },
     reference={
         'model'  : 'Reference',
         'icon'   : 'fontawesome.external-link-alt',
         'plural' : 'references',
         'has'    : ''.split(),
-        'in'     : objects
+        'in'     : registry_objects
     },
     setting={
         'model'  : 'Setting',
         'icon'   : 'fontawesome.cog',
         'plural' : 'settings',
         'has'    : ''.split(),
-        'in'     : objects
+        'in'     : registry_objects
     },
 )
 actions = 'list view new edit report delete'.split()

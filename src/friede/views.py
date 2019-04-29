@@ -160,6 +160,7 @@ def api_models( request, models=None, format=None ):
                 field[ 'related' ] = related
                 if 'Rel' not in ftype0 and related not in out and related not in have:
                     models.append( related )
+            # TODO: get field groups from settings
             data[ 'fields' ].append( field )
 
     return Response( dict( models=out ))
@@ -218,24 +219,29 @@ class LocationViewSet( RegistryViewSet ):
     serializer_class = LocationSerializer
 
 
-class LinkViewSet( RegistryViewSet ):
+class LinkViewSet( viewsets.ModelViewSet ):
     queryset = Link.objects.all()
     serializer_class = LinkSerializer
 
 
-class IconViewSet( RegistryViewSet ):
+class IconViewSet( viewsets.ModelViewSet ):
     queryset = Icon.objects.all()
     serializer_class = IconSerializer
 
 
-class ReferenceViewSet( RegistryViewSet ):
+class ReferenceViewSet( viewsets.ModelViewSet ):
     queryset = Reference.objects.all()
     serializer_class = ReferenceSerializer
 
 
-class SettingViewSet( RegistryViewSet ):
+class SettingViewSet( viewsets.ModelViewSet ):
     queryset = Setting.objects.all()
     serializer_class = SettingSerializer
+
+
+class ActionViewSet( viewsets.ModelViewSet ):
+    queryset = Action.objects.all()
+    serializer_class = ActionSerializer
 
 
 class ContainerEntryViewSet( EntryViewSet ):
@@ -301,5 +307,10 @@ class ReferenceEntryViewSet( EntryViewSet ):
 class SettingEntryViewSet( EntryViewSet ):
     queryset = SettingEntry.objects.all()
     serializer_class = SettingEntrySerializer
+
+
+class ActionEntryViewSet( EntryViewSet ):
+    queryset = ActionEntry.objects.all()
+    serializer_class = ActionEntrySerializer
 
 

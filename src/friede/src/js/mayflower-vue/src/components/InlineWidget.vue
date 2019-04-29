@@ -1,29 +1,27 @@
 <template lang="html">
-
-  <section class="inline-widget">
-    <h1>inline-widget Component</h1>
-  </section>
-
+  <default-action-widget :object="object" />
 </template>
 
 <script lang="js">
-  export default  {
-    name: 'inline-widget',
-    props: [],
-    mounted() {
-
-    },
-    data() {
-      return {
-
-      }
-    },
-    methods: {
-
-    },
-    computed: {
-
+import DefaultActionWidget from '@/components/DefaultActionWidget'
+export default  {
+  name: 'InlineWidget',
+  props: [ 'object' ],
+  componeents: { DefaultActionWidget },
+  mounted() {
+    
+  },
+  data() {
+    return {
+      
     }
+  },
+  methods: {
+    
+  },
+  computed: {
+    
+  }
 }
 </script>
 

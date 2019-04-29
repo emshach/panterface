@@ -19,6 +19,9 @@
     "uikit": "^3.0.2",
     "vue": "^2.6.10",
     "vue-chunk": "^1.0.0",
+    "vue-flatpickr-component": "^8.1.2",
+    "vue-json-edit": "^1.2.0",
+    "vue-multiselect": "^2.1.4",
     "vue-router": "^3.0.3",
     "vuex": "^3.0.1",
     "vuikit": "^0.8.10"

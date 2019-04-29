@@ -1,10 +1,16 @@
 <template lang="html">
   <div class="dashboard">
-    <thing v-for="( thing, index ) in things" :key="index" :is="thing"/>
+    <slot name="title" />
+    <vk-grid gutter="small" class="uk-margin uk-child-with-1-3">
+      <widget-widget v-for="( widget, index ) in displayWidgets" :key="index"
+              :data="widget"/> 
+    </vk-grid>
   </div>
 </template>
 
 <script lang="js">
+import { Grid as VkGrid } from 'vuikit/lib/grid'
+import Widget from '@/components/WidgetWidget'
 export default {
   name: 'Dashboard',
   props: {
@@ -12,28 +18,29 @@ export default {
       type: [ String, Object ],
       default: ''
     },
-    elements: {
+    widgets: {
       type: Array,
       default: () => []
     }
   },
+  components: { VkGrid, Widget },
   data() {
     return {
-      results: []
+      results: [],
+      elements: [],
     }
   },
   mounted() {
     // TODO: get dashboard elements
   },
   computed: {
-    things() {
-      if ( this.results && this.results.length ) {
-        return this.results;
-      } else if ( this.elements && this.elements.length ) {
-        return this.elements;
-      } else {
-        return []
-      }
+    displayWidgets() {
+      if ( this.widgets && this.widgets.length )
+        return this.widgets;
+      else if ( this.src )
+        this.getWidgets()
+    },
+    getWidgets() {
     }
   }
 }

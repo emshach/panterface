@@ -12,8 +12,8 @@
 </template>
 
 <script lang="js">
-import Switchboard from '@/components/Switchboard.vue'
-import Breadcrumb from '@/components/Breadcrumb.vue'
+import Switchboard from '@/components/Switchboard'
+import Breadcrumb from '@/components/Breadcrumb'
 import debounce from 'lodash/debounce'
 export default {
   name: 'Prompt',
@@ -51,27 +51,32 @@ export default {
     getCompletions() {
       this.$api( 'complete/' + this.cli ).then( data => {
         this.base = data.base;
-        this.matches = data.matches.sort();
-        this.locations = data.locations.sort();
+        this.matches = data.matches;
+        this.locations = data.locations;
       });
     },
     debouncedInput: debounce( function() {
       this.getCompletions();
     }, 250 ),
     input() {
-      if ( this.matches.length &&
-           this.cli !== this.prevCli && this.cli.indexOf( this.prevCli ) === 0 ) {
+      const prev = this.prevCli, cli = this.cli;
+      if ( this.matches.length && cli !== prev && cli.indexOf( prev ) === 0 ) {
         // then just filter
-        var base = this.base + this.cli.replace( this.prevCli, '' );
+        var base = this.base + cli.replace( prev, '' );
         this.base = base;
-        this.matches = this.matches.filter( x => x.indexOf( base ) === 0 );
-        this.locations = this.locations.filter(
+        var matches = this.matches.filter( x => x.indexOf( base ) === 0 );
+        var locations = this.locations.filter(
           x => x.name.indexOf( base ) === 0 );
-        if (! this.matches.length )
+        if (! matches.length 
+            || locations.slice( 0, 10 ).find( x => !x._widget_entries )) {
           this.getCompletions();
+        } else {
+          this.matches = matches;
+          this.locations = locations;
+        }
       } else 
         this.debouncedInput();
-      this.prevCli = this.cli;
+      this.prevCli = cli;
     },
     complete( match ) {
       this.cli = this.cli.replace( RegExp( this.base + '$' ), match + ' ' );

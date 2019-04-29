@@ -181,6 +181,11 @@ class Registry( Base, PathMixin ):
         from .objects import Selector
         return Selector( self, Setting )
 
+    @property
+    def Action( self ):
+        from .objects import Selector
+        return Selector( self, Action )
+
     C = Container
     W = Widget
     B = Block
@@ -194,6 +199,7 @@ class Registry( Base, PathMixin ):
     K = Link
     R = Reference
     X = Setting
+    N = Action
 
     def addcontainer( self, name, container ):
         ContainerEntry.objects.create( registry=self, name=name, entry=container )
@@ -233,6 +239,9 @@ class Registry( Base, PathMixin ):
 
     def addsetting( self, name, setting ):
         SettingEntry.objects.create( registry=self, name=name, entry=setting )
+
+    def addaction( self, name, action ):
+        ActionEntry.objects.create( registry=self, name=name, entry=action )
 
     def to_dict( self ):
         if not self.active:
@@ -408,7 +417,7 @@ class Reference( Base, PathMixin ):
         return out
 
 
-class Setting( Base, PathMixin, DataMixin ):
+class Setting( Base, PathMixin, DataMixin, ExtendsMixin ):
     class Types:
         BOOLEAN             = 'BooleanField'
         CHAR                = 'CharField'
@@ -485,6 +494,13 @@ class Setting( Base, PathMixin, DataMixin ):
         return out
 
 
+class Action( Base, PathMixin, DataMixin ):
+    parent = M.ForeignKey( Registry, M.CASCADE, blank=True, null=True,
+                           related_name='_action_elements' )
+    registries = M.ManyToManyField( Registry, blank=True, through='ActionEntry',
+                                  related_name='_actions' )
+
+
 def _get_entry_position():
     return 0
 
@@ -557,5 +573,10 @@ class ReferenceEntry( Entry ):
 class SettingEntry( Entry ):
     registry = M.ForeignKey( Registry, M.CASCADE, related_name='_setting_entries' )
     entry = M.ForeignKey( Setting, M.CASCADE, related_name='_entries' )
+
+
+class ActionEntry( Entry ):
+    registry = M.ForeignKey( Registry, M.CASCADE, related_name='_action_entries' )
+    entry = M.ForeignKey( Action, M.CASCADE, related_name='_entries' )
 
 

@@ -1,27 +1,15 @@
-<template lang="html">
-  <vk-card :type="type" :padding="padding" :hover="context.hover"
-           class="widget adaptive-widget">
-    <close-button @click.prevent="close" v-if="context.closeable" />
-    <div #header><slot name="header" /></div>
-    <div #badge><slot name="badge" /></div>
-    <div #media><slot name="media" /></div>
-    <div #media-top><slot name="media-top" /></div>
-    <vk-card-title><slot name="title" /></vk-card-title>
-    <p class="uk-text-meta uk-margin-remove-top"><slot name="subtitle" /></p>
-    <slot name="content" />
-    <div #media-bottom><slot name="media-bottom" /></div>
-    <div #footer><slot name="footer" /></div>
-  </vk-card>
-</template>
+<template lang="html"></template>
 
 <script lang="js">
-import { Card, CardTitle } from 'vuikit/lib/card'
-import CloseButton from '@/src/components/CloseButton.vue'
+import DashboardWidget from '@/components/DashboardWidget'
+import InlineWidget from '@/components/InlineWidget'
+import { Widget } from '@/lib/objects'
 export default  {
-  name: 'adaptive-widget',
+  name: 'AdaptiveWidget',
+  functional: true,
   props: {
-    cardType: {
-      type: Boolean,
+    object: {
+      type: Widget,             // TODO: or Object and cast to Widget
       default: 'default'
     },
     context: {
@@ -29,32 +17,16 @@ export default  {
       default: () => []
     }
   },
-  components: {
-    'vk-card': Card,
-    'vk-card-title': CardTitle,
-    Closebutton
-  },
-  mounted() {
-    
-  },
-  data() {
-    return {
-      
+  render( h, ref ) {
+    function isInline() {
+      return true;
     }
-  },
-  methods: {
-    
-  },
-  computed: {
-    isInline() {
-      return true
-    },
-    type() {
-      return this.isInline() ? 'blank' : this.cardType
-    },
-    padding() {
-      return this.isInline() ? '' : 'small'
-    }
+    var tag = isInline() ? InlineWidget : DashboardWidget;
+    var props = ref.props
+    return h( tag, Object.assign({}, ref.data, {
+      props: Object.assign( {}, props, {
+      })
+    }));
   }
 }
 </script>

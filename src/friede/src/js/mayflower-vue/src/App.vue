@@ -14,7 +14,7 @@
 </template>
 
 <script lang="js">
-import Prompt from '@/components/Prompt.vue'
+import Prompt from '@/components/Prompt'
 export default {
   name: 'App',
   components: {

@@ -1,8 +1,11 @@
 <template lang="html">
   <div class="switchboard">
     <transition mode="in-out">
+      <dashboard :widgets="widgets" />
+    </transition>
+    <transition mode="in-out">
       <vk-grid  v-if="matches.length || locations.length"
-                gutter="collapse" :class="[ 'display', 'uk-margin', columnWidth ]"
+                gutter="collapse" :class="[ 'completions', 'uk-margin', columnWidth ]"
                 :style="{ minWidth: 92 * ( getCompletionColumns() / 6 ) + '%' }">
         <vk-button-link
           v-for="match in matches" href size="small" 
@@ -13,10 +16,11 @@
 </template>
 
 <script lang="js">
-import { Grid } from 'vuikit/lib/grid'
-import { ButtonLink } from 'vuikit/lib/button'
+import { Grid as VkGrid } from 'vuikit/lib/grid'
+import { ButtonLink as VkButtonLink } from 'vuikit/lib/button'
+import { Widget } from '@/lib/objects'
 export default { 
-  name: 'switchboard',
+  name: 'Switchboard',
   props: {
     matches: {
       type: Array,
@@ -27,10 +31,7 @@ export default {
       default: () => []
     }
   },
-  components: {
-    'vk-grid': Grid,
-    'vk-button-link': ButtonLink,
-  },
+  components: { VkGrid, VkButtonLink, Widget },
   mounted() {
     
   },
@@ -60,6 +61,23 @@ export default {
   computed: {
     columnWidth() {
       return 'uk-child-width-1-' + this.getCompletionColumns()
+    },
+    widgets() {
+      return this.locations.slice( 0, 10 ).forEach( location => {
+        var l = location, l2, widget
+        do {
+          l2 = l;
+          if ( !widget ) {
+            var w = l._widget_entries.find( x => x.name == 'card' );
+            if (w)
+              widget = Widget( w.entry );
+          }
+          l = l.redirect_to
+        } while ( true );
+        if ( widget )
+          widget.data.location = l2;
+        return widget;
+      });
     }
   }
 }
@@ -67,7 +85,9 @@ export default {
 
 <style scoped lang="scss">
 .switchboard {
-  .display{
+  .dashboard {
+  }
+  .completions{
     transition: 0.3s;
     position: fixed;
     bottom: 18px;

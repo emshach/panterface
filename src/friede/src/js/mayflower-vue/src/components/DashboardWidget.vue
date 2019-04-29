@@ -1,29 +1,27 @@
 <template lang="html">
-
-  <section class="dashboard-widget">
-    <h1>dashboard-widget Component</h1>
-  </section>
-
+  <default-action-widget :object="object" />
 </template>
 
 <script lang="js">
-  export default  {
-    name: 'dashboard-widget',
-    props: [],
-    mounted() {
-
-    },
-    data() {
-      return {
-
-      }
-    },
-    methods: {
-
-    },
-    computed: {
-
+import DefaultActionWidget from '@/components/DefaultActionWidget'
+export default  {
+  name: 'DashboardWidget',
+  props: [],
+  componeents: { DefaultActionWidget },
+  mounted() {
+    
+  },
+  data() {
+    return {
+      
     }
+  },
+  methods: {
+    
+  },
+  computed: {
+    
+  }
 }
 </script>
 

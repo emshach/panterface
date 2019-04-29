@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from .models import ( Registry, Container, Widget, Block, Screen, Shell,
-                      Theme, Slot, App, Location, Link, Reference, Setting,
+from .models import ( Registry, Container, Widget, Block, Screen, Shell, Theme,
+                      Slot, App, Location, Link, Reference, Setting, Action,
                       ContainerEntry )
 from .util import snake_case
 from django.core.exceptions import ObjectDoesNotExist
@@ -143,6 +143,11 @@ class References( CreatingSelector ):
 class Settings( CreatingSelector ):
     def __init__( self ):
         super( Settings, self ).__init__( 'settings', Setting )
+
+
+class Actions( CreatingSelector ):
+    def __init__( self ):
+        super( Actions, self ).__init__( 'actions', Action )
 
 
 def getregistries():

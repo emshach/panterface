@@ -1,4 +1,4 @@
-.switchboard .display[data-v-10af6d32] {
+.switchboard .completions[data-v-10af6d32] {
   -webkit-transition: 0.3s;
   transition: 0.3s;
   position: fixed;
@@ -13,17 +13,17 @@
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   text-align: left;
 }
-.switchboard .display .uk-button[data-v-10af6d32] {
+.switchboard .completions .uk-button[data-v-10af6d32] {
     padding: 0px 8px;
     text-align: left;
     text-transform: none;
     color: white;
 }
-.switchboard .display .uk-button.uk-button-default[data-v-10af6d32] {
+.switchboard .completions .uk-button.uk-button-default[data-v-10af6d32] {
       background: transparent;
       border: 0 none;
 }
-.switchboard .display .uk-button.uk-button-default[data-v-10af6d32]:hover {
+.switchboard .completions .uk-button.uk-button-default[data-v-10af6d32]:hover {
         background: rgba(255, 255, 255, 0.1);
 }
 
@@ -105,6 +105,7 @@
       -webkit-box-shadow: 0 -20px 30px #ffffa3;
               box-shadow: 0 -20px 30px #ffffa3;
 }
+
 
 h3[data-v-aae30ed8] {
   margin: 40px 0 0;

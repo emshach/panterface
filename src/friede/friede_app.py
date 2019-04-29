@@ -11,10 +11,10 @@ from collections import OrderedDict
 
 original_reverse = relations.reverse
 
-def hack_reverse(alias, **kwargs):
-    namespace = kwargs['request'].resolver_match.namespace
-    name = "%s:%s" % (namespace, alias)
-    return original_reverse(name, **kwargs)
+def hack_reverse( alias, **kwargs ):
+    namespace = kwargs[ 'request' ].resolver_match.namespace
+    name = "%s:%s" % ( namespace, alias )
+    return original_reverse( name, **kwargs )
 
 relations.reverse = hack_reverse
 
@@ -142,7 +142,90 @@ def install():
         router=router,
         data=(
             ( '0.1.0',
+              ( 'actions',
+                ( 'list', dict(
+                    icon='fontawesome.list',
+                    title='List Object Data in Table Form',
+                    description='''''')),
+                ( 'view', dict(
+                    icon='fontawesome.eye',
+                    title='View Object(s) in Expanded Form',
+                    description='''''')),
+                ( 'new', dict(
+                    icon='fontawesome.plus',
+                    title='Make New Object(s)',
+                    description='''''')),
+                ( 'edit', dict(
+                    icon='fontawesome.edit',
+                    title='Edit Object(s)',
+                    description='''''')),
+                ( 'report', dict(
+                    icon='fontawesome.file-upload',
+                    title='View Generated Reports Based on Object Data',
+                    description='''''')),
+                ( 'delete', dict(
+                    icon='fontawesome.trash',
+                    title='Delete Object(s)',
+                    description='''''')),
+                ( 'add', dict(
+                    icon='fontawesome.folder-plus',
+                    title='Attach Object(s) to Applicable Related Object(s)',
+                    description='''''')),
+                ( 'remove', dict(
+                    icon='fontawesome.folder-minus',
+                    title='Remove Object(s) from Related Objects(s)',
+                    description='''''')),
+              ),
               ( 'widgets',
+                ( 'help',
+                  ( 'list', dict(
+                      icon='fontawesome.list',
+                      data=dict(
+                          component='ActionHelpWidget',
+                          action='list'
+                      ))),
+                  ( 'view', dict(
+                      icon='fontawesome.eye',
+                      data=dict(
+                          component='ActionHelpWidget',
+                          action='view'
+                      ))),
+                  ( 'new', dict(
+                      icon='fontawesome.plus',
+                      data=dict(
+                          component='ActionHelpWidget',
+                          action='new'
+                      ))),
+                  ( 'edit', dict(
+                      icon='fontawesome.edit',
+                      data=dict(
+                          component='ActionHelpWidget',
+                          action='edit'
+                      ))),
+                  ( 'report', dict(
+                      icon='fontawesome.file-upload',
+                      data=dict(
+                          component='ActionHelpWidget',
+                          action='report'
+                      ))),
+                  ( 'delete', dict(
+                      icon='fontawesome.trash',
+                      data=dict(
+                          component='ActionHelpWidget',
+                          action='delete'
+                      ))),
+                  ( 'add', dict(
+                      icon='fontawesome.folder-plus',
+                      data=dict(
+                          component='ActionHelpWidget',
+                          action='add'
+                      ))),
+                  ( 'remove', dict(
+                      icon='fontawesome.folder-minus',
+                      data=dict(
+                          component='ActionHelpWidget',
+                          action='remove'
+                      )))),
                 ( 'dashboard', dict (
                     icon='fontawesome.expand',
                     data=dict(

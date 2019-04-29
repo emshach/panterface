@@ -9,7 +9,8 @@
 </template>
 
 <script lang="js">
-import { Breadcrumb, BreadcrumbItem } from 'vuikit/lib/breadcrumb';
+import { Breadcrumb as VkBreadcrumb,
+         BreadcrumbItem as VkBreadcrumbItem } from 'vuikit/lib/breadcrumb';
 export default {
   name: 'Breadcrumb',
   props: {
@@ -18,10 +19,7 @@ export default {
       default: () => []
     }
   },
-  components: {
-    'vk-breadcrumb': Breadcrumb,
-    'vk-breadcrumb-item': BreadcrumbItem
-  },
+  components: { VkBreadcrumb, VkBreadcrumbItem },
   mounted() {
 
   },

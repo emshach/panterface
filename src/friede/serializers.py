@@ -18,11 +18,11 @@ class F:
                 '_screen_entries', '_shell_entries', '_theme_entries',
                 '_slot_entries', '_app_entries', '_location_entries',
                 '_icon_entries', '_link_entries', '_reference_entries',
-                '_setting_entries' )
+                '_setting_entries', '_action_entries' )
 
     # entries = ( 'containers', 'widgets', 'blocks', 'screens', 'shells',
     #             'themes', 'slots', 'apps', 'locations', 'icons', 'links',
-    #             'references', 'settings' )
+    #             'references', 'settings', 'actions' )
 
     registry = ( 'parent', 'format', 'default' )
     extends = ( 'extends', )
@@ -34,6 +34,7 @@ class F:
     link = ( 'location', )
     reference = ( 'target', )
     setting = ( 'type', 'default' )
+    action = ()
 
     entry = ( 'url', 'id', 'name', 'title', 'description', 'active', 'icon',
               'name', 'entry', 'position' )
@@ -165,6 +166,14 @@ class SettingEntrySerializer( EntrySerializer ):
         fields = F.entry
 
 
+class ActionEntrySerializer( EntrySerializer ):
+    def get_entry( self, obj ):
+        return ActionSerializer( obj.entry, context=self.context ).data
+    class Meta:
+        model = ActionEntry
+        fields = F.entry
+
+
 class RegistrySerializer( SerializerExtensionsMixin,
                           IconMixin,
                           HyperlinkedModelSerializer ):
@@ -223,6 +232,10 @@ class RegistrySerializer( SerializerExtensionsMixin,
                 many=True ),
             _setting_entries=dict(
                 serializer=SettingEntrySerializer,
+                id_source=False,
+                many=True ),
+            _action_entries=dict(
+                serializer=ActionEntrySerializer,
                 id_source=False,
                 many=True ),
         )
@@ -311,6 +324,13 @@ class SettingSerializer( HyperlinkedModelSerializer ):
     class Meta:
         model = Setting
         fields = F.base + F.setting
+        expandable_fields = RegistrySerializer.Meta.expandable_fields
+
+
+class ActionSerializer( HyperlinkedModelSerializer ):
+    class Meta:
+        model = Action
+        fields = F.base + F.action
         expandable_fields = RegistrySerializer.Meta.expandable_fields
 
 

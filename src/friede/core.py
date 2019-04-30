@@ -221,31 +221,18 @@ def mklocations( app, objects, relations, actions=None ):
                             redirect_to="list.{}".format(y) ))
                 for x, y in ((o, relations[o][ 'plural' ]) for o in objects )),
         ( 'add',
-          # ( 'new',
-          #   tuple(
-          #       ( o, dict(
-          #           title="add new {}".format(o).title(),
-          #           href="/add/new/{}".format(o) ))
-          #               for o in objects if relations[o][ 'in' ])),
           ( 'to',
-            # ( 'new',
-            #   tuple(
-            #       ( o, dict(
-            #           title="add to new {}".format(o).title(),
-            #           href="/add/to/new/{}".format(o) ))
-            #               for o in objects if relations[o][ 'has' ])),
             tuple(
                 ( "{}.{}".format( o, x ), dict(
                     title="add to {}: {}".format( o, x ).title(),
-                    href="/add/to/{{{}.{}+}}/{{{}.{}+}}".format(
-                        app.name, o, app.name, x )))
+                    href="/add/to/{{{0}.{1}+}}/{{{0}.{2}+}}".format(
+                        app.name, o, x )))
                 for o in objects
                 for x in relations[o][ 'has' ])),
           tuple(
               ( "{}.{}".format( o, x ), dict(
                   title="add {} to {}".format( o, x ).title(),
-                  href="/add/{{{}.{}+}}/{{{}.{}+}}".format(
-                      app.name, o, app.name, x )))
+                  href="/add/{{{0}.{1}+}}/{{{0}.{2}+}}".format( app.name, o, x )))
               for o in objects
               for x in relations[o][ 'in' ])),
         ( 'remove',
@@ -253,8 +240,8 @@ def mklocations( app, objects, relations, actions=None ):
             tuple(
                 ( "{}.{}".format( o, x ), dict(
                     title="remove from {}: {}".format( o, x ).title(),
-                    href="/remove/from/{{{}.{}+}}/{{{}.{}+}}".format(
-                        app.name, o, app.name, x )))
+                    href="/remove/from/{{{0}.{1}+}}/{{{0}.{2}+}}".format(
+                        app.name, o, x )))
                 for o in objects
                 for x in relations[o][ 'has' ] )),
           tuple(
@@ -268,38 +255,38 @@ def mklocations( app, objects, relations, actions=None ):
             ( '.' + name, tuple(
                 ( action, "{}.{}".format( action, name ))
                         for action in actions ))
-                    for pair in (( o, relations[o][ 'plural' ] ) for o in objects )
-                    for name in pair ),
-        tuple (
-            ( '.' + y,
-              ( 'add',
-                dict(
-                    title="add {}".format(y).title(),
-                    href="/{}/add".format(y),
-                    redirect_to="add.{}".format(y)
-                )),
-              ( 'remove',
-                dict(
-                    title="remove {}".format(y).title(),
-                    href="/{}/remove".format(y),
-                    redirect_to="remove.{}".format(y) )))
-                    for w in (((o, o), ( o, relations[o][ 'plural' ]))
-                              for o in objects if relations[o][ 'in' ])
-                    for x, y in w ),
-        tuple (
-            (( "{}.add.to".format(y),
-               dict(
-                   title="add to {}".format(y).title(),
-                   href="/{}/add/to".format(y),
-                   redirect_to="add.to.{}".format(y) )),
-             ( "{}.remove.from".format(y),
-               dict(
-                   title="remove from {}".format(y).title(),
-                   href="/{}/remove/from".format(y),
-                   redirect_to="remove.from.{}".format(y) )))
-                    for w in (((o, o), ( o, relations[o][ 'plural' ]))
-                              for o in objects if relations[o][ 'has' ])
-                    for x, y in w ))
+                    for pair in (( o, relations[o][ 'plural' ]) for o in objects )
+            for name in pair ),
+        tuple(
+            ( '.' + o,
+              tuple(
+                  (( 'add',
+                     dict(
+                         title="add to {}: {}".format( o, x ).title(),
+                         href="/{{{0}.{1}+}}/add/{{{0}.{2}+}}".format( app.name, o, x ),
+                         redirect_to="add.to.{}.{}".format( o, x ))),
+                   ( 'remove',
+                     dict(
+                         title="remove from {}: {}".format( o, x ).title(),
+                         href="/{{{0}.{1}+}}/remove/{{{0}.{2}}}".format(
+                             app.name, o, x ),
+                         redirect_to="remove.from.{}.{}".format( o, x ))))
+                  for x in relations[o][ 'has' ]),
+              tuple(
+                  (( '.add.to.' + x,
+                     dict(
+                         title="add {} to {}".format( o, x ).title(),
+                         href="/{{{0}.{1}+}}/add/to/{{{0}.{1}+}}".format(
+                             app.name, o, x ),
+                         redirect_to="add.{}.{}".format( o, x ))),
+                   ( '.remove.from.' + x,
+                     dict(
+                         title="remove {} from {}".format( o, x ).title(),
+                         href="/{{{0}.{1}+}}/remove/from/{{{0}.{1}+}}".format(
+                             app.name, o, x ),
+                         redirect_to="remove.{}.{}".format( o, x ))))
+                  for x in relations[o][ 'in' ]))
+            for o in objects ))
 
 def getsimplefields( app, name, plural, model, exclude=( 'id' )):
     mod = None

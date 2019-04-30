@@ -57,7 +57,7 @@ def setupmenus( env=None ):
             title='Menus',
             description='Collection of all Menu Objects' ))
 
-    nav = Container.objects.get_or_create(
+    nav, navcreated = Container.objects.get_or_create(
         path='links.menu.nav', defaults=dict(
             title='Nav Menu',
             description='Main Site Navigation Menu'
@@ -218,7 +218,7 @@ def mklocations( app, objects, relations, actions=None ):
         tuple (
             ( '.'+ y, dict( title="list {}".format(y).title(),
                             href="/{{{}.{}+}}".format( app.name, x ),
-                            redirect_to="list.{}".format() ))
+                            redirect_to="list.{}".format(y) ))
                 for x, y in ((o, relations[o][ 'plural' ]) for o in objects )),
         ( 'add',
           # ( 'new',
@@ -362,7 +362,6 @@ def updateapp( app, data, upto=None ):
             if upto and version >= upto :
                 break
             transaction.on_commit( update_version )
-            print 'tree=', tree
             stack = deque([ tree ])
             path = deque([''])
             model = deque([ Container ])

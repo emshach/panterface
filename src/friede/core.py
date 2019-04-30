@@ -198,7 +198,7 @@ def mklocations( app, objects, relations, actions=None ):
                           for w in (((o, o), ( o, relations[o][ 'plural' ]))
                                     for o in objects )
                           for x, y in w ))
-                    for action in actions[1:] ),
+                    for action in actions if action not in ( 'list', 'new', 'delete' )),
         tuple (
             ( '.'+ y,
               tuple (

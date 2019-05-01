@@ -163,14 +163,14 @@ def mklocations( app, objects, relations, actions=None ):
     return (
         ( 'list.' + name,
           tuple(
-              ( '.' + rs[o][ 'plural' ], dict(
+              ( '_' + rs[o][ 'plural' ], dict(
                   title="list {}".format( rs[o][ 'plural' ]).title(),
                   href="/list/{{{}.{}*}}".format( name, o )),
                 ( 'widgets', ( 'card', dict( path="list.{}".format(o) ))))
               for o in objects )),
         ( 'new.' + name,
           tuple (
-              ( '.' + x , dict(
+              ( '_' + x , dict(
                   title="new {}".format(x).title(),
                   href="/new/{}".format(x) ),
                 ( 'widgets', ( 'card', dict( path="new.{}.{}".format( name, o )))))
@@ -178,7 +178,7 @@ def mklocations( app, objects, relations, actions=None ):
               for x in ( o, rs[o][ 'plural' ]))),
         ( 'delete.' + name,
           tuple (
-              ( '.' + o, dict(
+              ( '_' + o, dict(
                   title="delete {}".format( rs[o][ 'plural' ]).title(),
                   href="/delete/{{{}.{}*}}".format( name, o )),
                 ( 'widgets', ( 'card', dict( path="delete.{}.{}".format( name, o )))))
@@ -186,7 +186,7 @@ def mklocations( app, objects, relations, actions=None ):
         tuple (
             ( '.'.join(( action, name )),
               tuple (
-                  ( '.' + rs[o][ 'plural' ], dict(
+                  ( '_' + rs[o][ 'plural' ], dict(
                       title="{} {}".format( action, rs[o][ 'plural' ]).title(),
                       href="/{}/{{{}.{}*+}}".format( action, name, o )),
                     ( 'widgets', ( 'card', dict(
@@ -195,7 +195,7 @@ def mklocations( app, objects, relations, actions=None ):
             for action in actions if action not in ( 'list', 'new', 'delete' )),
         ( '.' + name,
           tuple (
-              ( '.'+ o, dict(
+              ( '_'+ o, dict(
                   title="view {}".format(o).title(),
                   href="/{0}/{{{0}.{1}+}}".format( name, o ),
                   redirect_to="view.{}.{}".format( name, rs[o][ 'plural' ])))
@@ -391,8 +391,8 @@ def updateapp( app, data, upto=None ):
                                     tag = tag[1:]
                                 stack.extend(( poppath, popcr ))
                                 path.appendleft(
-                                    ( "{}.{}" if path[0] else "{}{}" ).format(
-                                        path[0], tag ))
+                                    ( "{}.{}" if path[0] and not tag.startswith('_')
+                                      else "{}{}" ).format( path[0], tag ))
                                 cr.appendleft( None )
                                 stack.extend( top[1:][ ::-1 ])
                         else:

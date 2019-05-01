@@ -253,12 +253,12 @@ def mklocations( app, objects, relations, actions=None ):
                              name, o, x ))))
                   for x in rs[o][ 'has' ]),
               tuple(
-                  (( ".add.to.".format( name , x ),
+                  (( ".add.to.{}_{}".format( name, x ),
                      dict(
                          title="add {} to {}".format( o, x ).title(),
                          href="{{{0}.{1}+}}/add/to/{{{0}.{2}+}}".format( name, o, x ),
                          redirect_to="add.{0}_{1}.{0}_{2}".format( name, o, x ))),
-                   ( ".remove.from.".format( name, x ),
+                   ( ".remove.from.{}_{}".format( name, x ),
                      dict(
                          title="remove {} from {}".format( o, x ).title(),
                          href="{{{0}.{1}}}/remove/from/{{{0}.{2}}}".format( name, o, x ),

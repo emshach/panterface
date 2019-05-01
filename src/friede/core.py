@@ -146,7 +146,7 @@ def mkwidgets( app, objects, relations, actions=None ):
     return tuple(
         ( action,
           ( name,
-            tuple(( o, dict(
+            tuple(( '_' + o, dict(
                 icon=relations[o].get( 'icon', None ),
                 extends="{}.from.model".format( action ),
                 data=dict(
@@ -161,50 +161,42 @@ def mklocations( app, objects, relations, actions=None ):
     if not actions:
         actions = 'list view new edit report delete'.split()
     return (
-        ( 'list.' + name,
-          tuple(
-              ( '_' + rs[o][ 'plural' ], dict(
-                  title="list {}".format( rs[o][ 'plural' ]).title(),
-                  href="/list/{{{}.{}*}}".format( name, o )),
-                ( 'widgets', ( 'card', dict( path="list.{}".format(o) ))))
-              for o in objects )),
         ( 'new.' + name,
           tuple (
-              ( '_' + x , dict(
-                  title="new {}".format(x).title(),
-                  href="/new/{}".format(x) ),
-                ( 'widgets', ( 'card', dict( path="new.{}.{}".format( name, o )))))
-              for o in objects
-              for x in ( o, rs[o][ 'plural' ]))),
+              ( '_' + o , dict(
+                  title="new {}".format(rs[o][ 'plural' ]).title(),
+                  href="/new/{}".format(o) ),
+                ( 'widgets', ( 'card', dict( path="new.{}_{}".format( name, o )))))
+              for o in objects )),
         ( 'delete.' + name,
           tuple (
               ( '_' + o, dict(
                   title="delete {}".format( rs[o][ 'plural' ]).title(),
                   href="/delete/{{{}.{}*}}".format( name, o )),
-                ( 'widgets', ( 'card', dict( path="delete.{}.{}".format( name, o )))))
+                ( 'widgets', ( 'card', dict( path="delete.{}_{}".format( name, o )))))
               for o in objects )),
         tuple (
-            ( '.'.join(( action, name )),
+            ( "{}.{}".format( action, name ),
               tuple (
-                  ( '_' + rs[o][ 'plural' ], dict(
+                  ( '_' + o, dict(
                       title="{} {}".format( action, rs[o][ 'plural' ]).title(),
                       href="/{}/{{{}.{}*+}}".format( action, name, o )),
                     ( 'widgets', ( 'card', dict(
-                        path="{}.{}.{}".format( action, name, o )))))
+                        path="{}.{}_{}".format( action, name, o )))))
                                     for o in objects ))
-            for action in actions if action not in ( 'list', 'new', 'delete' )),
+            for action in actions if action not in ( 'new', 'delete' )),
         ( '.' + name,
           tuple (
-              ( '_'+ o, dict(
+              ( '_' + o, dict(
                   title="view {}".format(o).title(),
                   href="/{0}/{{{0}.{1}+}}".format( name, o ),
-                  redirect_to="view.{}.{}".format( name, rs[o][ 'plural' ])))
+                  redirect_to="view.{}_{}".format( name, o )))
               for o in objects ),
           tuple (
-              ( '.'+ rs[o][ 'plural' ],
+              ( '.' + rs[o][ 'plural' ],
                 dict( title="list {}".format( rs[o][ 'plural' ]).title(),
                       href="/{}/{}".format( name, rs[o][ 'plural' ] ),
-                      redirect_to="list.{}.{}".format( name, rs[o][ 'plural' ])))
+                      redirect_to="list.{}_{}".format( name, o )))
               for o in objects )),
         ( 'add',
           ( 'to',
@@ -282,7 +274,7 @@ def getsimplefields( app, name, plural, model, exclude=( 'id' )):
                              not f.is_relation
                              or f.one_to_one
                              or ( f.many_to_one and f.related_model ))))
-    return ( '.'+plural, dict(
+    return ( '.' + plural, dict(
         type=Setting.Types.MULTIPLECHOICE,
         data=dict(
             options=fields,

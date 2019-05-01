@@ -140,151 +140,127 @@ def installapp( name, module, title, description, icon='', rest=True,
 
 
 def mkwidgets( app, objects, relations, actions=None ):
-    mod = app.module
+    name = app.name
     if not actions:
         actions = 'list view new edit report delete add remove'.split()
     return tuple(
         ( action,
-          tuple(( o, dict(
-              icon=relations[o].get( 'icon', None ),
-              extends="{}.from.model".format( action ),
-              data=dict(
-                  model="{}.{}".format( mod, relations[o][ 'model' ]))
-          )) for o in objects ))
-        for action in actions )
+          ( name,
+            tuple(( o, dict(
+                icon=relations[o].get( 'icon', None ),
+                extends="{}.from.model".format( action ),
+                data=dict(
+                    model="{}.{}".format( name, o ))
+            )) for o in objects )))
+    for action in actions )
 
 
 def mklocations( app, objects, relations, actions=None ):
+    name = app.name
     if not actions:
         actions = 'list view new edit report delete'.split()
     return (
-        ( 'list', dict(
-            title='Lists',
-            href='/list' ),
-          ( 'widgets', ( 'card', dict( path='help.list' ))),
+        ( 'list.' + name,
           tuple(
-            (( '.' + relations[o][ 'plural' ], dict(
-                title="list {}".format( relations[o][ 'plural' ]).title(),
-                href="/list/{{{}.{}}}".format( app.name, o )),
-               ( 'widgets', ( 'card', dict( path="list.{}".format(o) )))),
-             ( o, dict(
-                 title="list {}".format( relations[o][ 'plural' ]).title(),
-                 href="/{}/list".format( relations[o][ 'plural' ]),
-                 redirect_to="list.{}".format( relations[o][ 'plural' ]))))
-            for o in objects )),
-        ( 'new',
+              ( '.' + relations[o][ 'plural' ], dict(
+                  title="list {}".format( relations[o][ 'plural' ]).title(),
+                  href="/list/{{{}.{}*}}".format( name, o )),
+                ( 'widgets', ( 'card', dict( path="list.{}".format(o) ))))
+              for o in objects )),
+        ( 'new.' + name,
           tuple (
-              ( '.'+ y, dict( title="new {}".format(y).title(),
-                              href="/new/{}".format(y) ),
-                ( 'widgets', ( 'card', dict( path="new.{}".format(y) ))))
-              for w in (((o, o), ( o, relations[o][ 'plural' ]))
-                        for o in objects )
-              for x, y in w )),
-        ( 'delete',
+              ( '.' + x , dict(
+                  title="new {}".format(x).title(),
+                  href="/new/{}".format(x) ),
+                ( 'widgets', ( 'card', dict( path="new.{}.{}".format( name, o )))))
+              for o in objects
+              for x in ( o, relations[o][ 'plural' ]))),
+        ( 'delete.' + name,
           tuple (
-              ( '.'+ y, dict( title="delete {}".format(y).title(),
-                              href="/delete/{{{}.{}}}".format( app.name, x ) ),
-                ( 'widgets', ( 'card', dict( path="delete.{}".format(y) ))))
-              for w in (((o, o), ( o, relations[o][ 'plural' ]))
-                        for o in objects )
-              for x, y in w )),
+              ( '.' + o, dict(
+                  title="delete {}".format( relations[o][ 'plural' ]).title(),
+                  href="/delete/{{{}.{}*}}".format( name, o )),
+                ( 'widgets', ( 'card', dict( path="delete.{}.{}".format( name, o )))))
+              for o in objects )),
         tuple (
-            ( action,
+            ( '.'.join(( action, name )),
               tuple (
-                  ( '.'+ y, dict(
-                      title="{} {}".format( action, y ).title(),
-                      href="/{}/{{{}.{}+}}".format( action, app.name, x )),
-                    ( 'widgets', ( 'card', dict( path="{}.{}".format( action, y )))))
-                          for w in (((o, o), ( o, relations[o][ 'plural' ]))
-                                    for o in objects )
-                          for x, y in w ))
-                    for action in actions if action not in ( 'list', 'new', 'delete' )),
-        tuple (
-            ( '.'+ y,
-              tuple (
-                  ( action,
-                    dict( title="{} {}".format( action, y ).title(),
-                          href="/{}/{}".format( y, action ),
-                          redirect_to="{}.{}".format( action, y )))
-                      for action in actions[1:] ))
-                for w in (((o, o), ( o, relations[o][ 'plural' ]))
-                          for o in objects )
-                for x, y in w ),
-        tuple (
-            ( '.'+ o, dict( title="view {}".format(o).title(),
-                            href="/{{{}.{}+}}".format( app.name, o),
-                            redirect_to="view.{}".format(o) ))
-                for o in objects ),
-        tuple (
-            ( '.'+ y, dict( title="list {}".format(y).title(),
-                            href="/{{{}.{}+}}".format( app.name, x ),
-                            redirect_to="list.{}".format(y) ))
-                for x, y in ((o, relations[o][ 'plural' ]) for o in objects )),
+                  ( '.' + relations[o][ 'plural' ], dict(
+                      title="{} {}".format( action, relations[o][ 'plural' ]).title(),
+                      href="/{}/{{{}.{}*+}}".format( action, name, o )),
+                    ( 'widgets', ( 'card', dict(
+                        path="{}.{}.{}".format( action, name, o )))))
+                                    for o in objects ))
+            for action in actions if action not in ( 'list', 'new', 'delete' )),
+        ( '.' + name,
+          tuple (
+              ( '.'+ o, dict( title="view {}".format(o).title(),
+                              href="/{0}/{{{0}.{1}+}}".format( name, o ),
+                              redirect_to="view.{}.{}".format( name, o )))
+              for o in objects ),
+          tuple (
+              ( '.'+ relations[o][ 'plural' ],
+                dict( title="list {}".format( relations[o][ 'plural' ]).title(),
+                      href="/{}/{}".format( name, relations[o][ 'plural' ] ),
+                      redirect_to="list.{}.{}".format( name, relations[o][ 'plural' ])))
+              for o in objects )),
         ( 'add',
           ( 'to',
             tuple(
-                ( "{}.{}".format( o, x ), dict(
+                ( "{0}_{1}.{0}_{2}".format( name, o, x ), dict(
                     title="add to {}: {}".format( o, x ).title(),
                     href="/add/to/{{{0}.{1}+}}/{{{0}.{2}+}}".format(
-                        app.name, o, x )))
+                        name, o, x )))
                 for o in objects
                 for x in relations[o][ 'has' ])),
           tuple(
-              ( "{}.{}".format( o, x ), dict(
+              ( "{0}_{1}.{0}_{2}".format( name, o, x ), dict(
                   title="add {} to {}".format( o, x ).title(),
-                  href="/add/{{{0}.{1}+}}/{{{0}.{2}+}}".format( app.name, o, x )))
+                  href="/add/{{{0}.{1}+}}/{{{0}.{2}+}}".format( name, o, x )))
               for o in objects
               for x in relations[o][ 'in' ])),
         ( 'remove',
           ( 'from',
             tuple(
-                ( "{}.{}".format( o, x ), dict(
+                ( "{0}_{1}.{0}_{2}".format( name, o, x ), dict(
                     title="remove from {}: {}".format( o, x ).title(),
-                    href="/remove/from/{{{0}.{1}+}}/{{{0}.{2}+}}".format(
-                        app.name, o, x )))
+                    href="/remove/from/{{{0}.{1}+}}/{{{0}.{2}}}".format(
+                        name, o, x )))
                 for o in objects
                 for x in relations[o][ 'has' ] )),
           tuple(
-              ( "{}.{}".format( o, x ), dict(
+              ( "{0}_{1}.{0}_{2}".format( name, o, x ), dict(
                   title="remove {} from {}".format( o, x ).title(),
                   href="/remove/{{{}.{}+}}/{{{}.{}+}}".format(
-                      app.name, o, app.name, x )))
+                      name, o, name, x )))
               for o in objects
               for x in relations[o][ 'in' ])),
         tuple(
-            ( '.' + name, tuple(
-                ( action, "{}.{}".format( action, name ))
-                        for action in actions ))
-                    for pair in (( o, relations[o][ 'plural' ]) for o in objects )
-            for name in pair ),
-        tuple(
-            ( '.' + o,
+            ( "{}_{}".format( name, o ),
               tuple(
-                  (( 'add',
+                  (( "add.{}_{}".format( name, x ),
                      dict(
                          title="add to {}: {}".format( o, x ).title(),
-                         href="/{{{0}.{1}+}}/add/{{{0}.{2}+}}".format( app.name, o, x ),
-                         redirect_to="add.to.{}.{}".format( o, x ))),
-                   ( 'remove',
+                         href="{{{0}.{1}+}}/add/{{{0}.{2}+}}".format( name, o, x ),
+                         redirect_to="add.to.{0}_{1}.{0}_{2}".format( name, o, x ))),
+                   ( "remove.{}_{}".format( name, x),
                      dict(
                          title="remove from {}: {}".format( o, x ).title(),
-                         href="/{{{0}.{1}+}}/remove/{{{0}.{2}}}".format(
-                             app.name, o, x ),
-                         redirect_to="remove.from.{}.{}".format( o, x ))))
+                         href="{{{0}.{1}+}}/remove/{{{0}.{2}}}".format( name, o, x ),
+                         redirect_to="remove.from.{0}_{1}.{0}_{2}".format(
+                             name, o, x ))))
                   for x in relations[o][ 'has' ]),
               tuple(
-                  (( '.add.to.' + x,
+                  (( ".add.to.".format( name , x ),
                      dict(
                          title="add {} to {}".format( o, x ).title(),
-                         href="/{{{0}.{1}+}}/add/to/{{{0}.{1}+}}".format(
-                             app.name, o, x ),
-                         redirect_to="add.{}.{}".format( o, x ))),
-                   ( '.remove.from.' + x,
+                         href="{{{0}.{1}+}}/add/to/{{{0}.{2}+}}".format( name, o, x ),
+                         redirect_to="add.{0}_{1}.{0}_{2}".format( name, o, x ))),
+                   ( ".remove.from.".format( name, x ),
                      dict(
                          title="remove {} from {}".format( o, x ).title(),
-                         href="/{{{0}.{1}+}}/remove/from/{{{0}.{1}+}}".format(
-                             app.name, o, x ),
-                         redirect_to="remove.{}.{}".format( o, x ))))
+                         href="{{{0}.{1}}}/remove/from/{{{0}.{2}}}".format( name, o, x ),
+                         redirect_to="remove.{0}_{1}.{0}_{2}".format( name, o, x ))))
                   for x in relations[o][ 'in' ]))
             for o in objects ))
 

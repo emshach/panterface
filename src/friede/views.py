@@ -73,7 +73,7 @@ def api_root( request, format=None ):
 @api_view([ 'GET' ])
 @permission_classes(( permissions.AllowAny, ))
 def api_complete( request, path='', format=None ):
-    path = path.split
+    path = path.split('/')
     rx = r''
     for d in path:
         rx = r"({}/)?{}".format( r, d )

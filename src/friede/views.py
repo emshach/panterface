@@ -94,13 +94,16 @@ def api_complete( request, path='', format=None ):
         m = completions.match( candidate.href )
         if m:
             g = m.group(1)
-            m2 = re.match( r'{(.*)}', g )
+            m2 = re.match( r'{([\w.]+)(\*)?(\+)?}', g )
             if m2:
-                slots[ m2.group(1)] = candidate.href
+                slots[ m2.group(1)] = dict(
+                    multiple=bool( m2.group(2)),
+                    new=bool( m2.group(3))
+                )
             else:
                 matches.add( base + g )
-        if m.group(2) is not None:
-            locations.append( candidate )
+            if m.group(2) is not None:
+                locations.append( candidate )
     expand = locations[ :1 ]
     rest = locations[ 1: ]
     expanded_serializer = LocationSerializer(

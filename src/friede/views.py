@@ -73,14 +73,14 @@ def api_root( request, format=None ):
 @api_view([ 'GET' ])
 @permission_classes(( permissions.AllowAny, ))
 def api_complete( request, path='', format=None ):
-    path = path.split('/')
+    ptree = path.split('/')
     rx = r''
-    for d in path:
+    for d in ptree:
         if d:
             rx = r"(?:{}/)?{}".format( rx, d )
     rx = r'^' + rx
-    base = path[-1]
-    if not base:
+    base = ptree[-1]
+    if path and not base:
         rx = rx + r'(?:/|$)'
     candidates = Location.objects.filter( href__regex=rx )
     candidates = candidates.order_by( 'name' ).all()
@@ -113,6 +113,7 @@ def api_complete( request, path='', format=None ):
     return Response( dict(
         debug=dict(
             path=path,
+            ptree=ptree,
             rx=rx
         ),
         base=      base,

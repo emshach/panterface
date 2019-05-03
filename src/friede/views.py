@@ -96,10 +96,13 @@ def api_complete( request, path='', format=None ):
             g = m.group(1)
             m2 = re.match( r'{([\w.]+)(\*)?(\+)?}', g )
             if m2:
-                slots[ m2.group(1)] = dict(
-                    multiple=bool( m2.group(2)),
-                    new=bool( m2.group(3))
-                )
+                slot = m2.group(1)
+                if slot not in slots:
+                    slots[ slot ] = {}
+                if m2.group(2):
+                    slots[ slot ][ 'multiple' ] = True
+                if m2.group(3):
+                    slots[ slot ][ 'new' ] = True
             else:
                 matches.add( base + g )
             if m.group(2) is not None:

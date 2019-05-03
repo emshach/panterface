@@ -148,7 +148,7 @@ def mkwidgets( app, objects, relations, actions=None ):
           ( name,
             tuple(( '_' + o, dict(
                 icon=relations[o].get( 'icon', None ),
-                extends="{}.from.model".format( action ),
+                extends="{}.from_model".format( action ),
                 data=dict(
                     model="{}.{}".format( name, o ))
             )) for o in objects )))

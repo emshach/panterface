@@ -76,7 +76,7 @@ def api_complete( request, path='', format=None ):
     path = path.split('/')
     rx = r''
     for d in path:
-        rx = r"({}/)?{}".format( r, d )
+        rx = r"({}/)?{}".format( rx, d )
     rx = r'^' + rx
     base = path[-1]
     candidates = Location.objects.filter( href__regex=rx )

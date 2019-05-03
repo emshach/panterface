@@ -242,49 +242,49 @@ def install():
                     data=dict(
                         component='AdaptiveWidget'
                     ))),
-                ( 'view.from.model', dict(
+                ( 'view.from_model', dict(
                     icon='fontawesome.eye',
                     extends='adaptive',
                     data=dict(
                         component='ViewModelWidget'
                     ))),
-                ( 'list.from.model', dict(
+                ( 'list.from_model', dict(
                     icon='fontawesome.list',
                     extends='adaptive',
                     data=dict(
                         component='ListModelWidget'
                     ))),
-                ( 'new.from.model', dict(
+                ( 'new.from_model', dict(
                     icon='fontawesome.plus',
                     extends='adaptive',
                     data=dict(
                         component='NewModelWidget'
                     ))),
-                ( 'edit.from.model', dict(
+                ( 'edit.from_model', dict(
                     icon='fontawesome.edit',
                     extends='adaptive',
                     data=dict(
                         component='EditModelWidget'
                     ))),
-                ( 'report.from.model', dict(
+                ( 'report.from_model', dict(
                     icon='fontawesome.file-upload',
                     extends='adaptive',
                     data=dict(
                         component='ReportModelWidget'
                     ))),
-                ( 'delete.from.model', dict(
+                ( 'delete.from_model', dict(
                     icon='fontawesome.trash',
                     extends='adaptive',
                     data=dict(
                         component='ModelWidget'
                     ))),
-                ( 'add.from.model', dict(
+                ( 'add.from_model', dict(
                     icon='fontawesome.folder-plus',
                     extends='adaptive',
                     data=dict(
                         component='AddModelWidget'
                     ))),
-                ( 'remove.from.model', dict(
+                ( 'remove.from_model', dict(
                     icon='fontawesome.folder-minus',
                     extends='adaptive',
                     data=dict(
@@ -314,7 +314,7 @@ def install():
                     data=dict(
                         component='FormPage'
                     ))),
-                ( 'list.from.model', dict(
+                ( 'list.from_model', dict(
                     icon='fontawesome.list',
                     data=dict(
                         component='ListModelPage'

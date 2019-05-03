@@ -108,6 +108,10 @@ def api_complete( request, path='', format=None ):
     rest_serializer = LocationSerializer(
         rest, many=True, context={ 'request': request })
     return Response( dict(
+        debug=dict(
+            path=path,
+            rx=rx
+        ),
         base=      base,
         matches=   tuple( matches ),
         slots=     slots,

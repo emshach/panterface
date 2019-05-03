@@ -72,43 +72,47 @@ def api_root( request, format=None ):
 
 @api_view([ 'GET' ])
 @permission_classes(( permissions.AllowAny, ))
-def api_complete( request, path=None, format=None ):
-    if not path:
-        path = ''
-    if not path.startswith('/'):
-        path = '/'+path
-    path = re.sub( r'\s+', '/', path )
-    path = re.sub( r'/+',  '/', path )
-    base = re.sub( r'.*/', '',  path )
-    candidates = Location.objects.filter( href__startswith=path )
-    if path == '/':
-        candidates = candidates.filter( parent=Locations()() )
-    candidates = candidates.order_by('name').all()
+def api_complete( request, path='', format=None ):
+    path = path.split
+    rx = r''
+    for d in path:
+        rx = r"({}/)?{}".format( r, d )
+    rx = r'^' + rx
+    base = path[-1]
+    candidates = Location.objects.filter( href__regex=rx )
+    candidates = candidates.order_by( 'name' ).all()
     expand = candidates[ :10 ]
     rest = candidates[ 10: ]
     completions = re.compile( r'%s([^/]*)(/|$)?' % path )
     matches = set()
+    slots = {}
     locations = []
     for candidate in candidates:
         if not candidate.href:
             continue
         m = completions.match( candidate.href )
         if m:
-            matches.add( base + m.group(1) )
-            if m.group(2) is not None:
-                locations.append( candidate )
+            g = m.group(1)
+            m2 = re.match( r'{(.*)}', g )
+            if m2:
+                slots[ m2.group(1)] = m2.group(1)
+            else:
+                matches.add( base + m.group(1) )
+                if m.group(2) is not None:
+                    locations.append( candidate )
     expanded_serializer = LocationSerializer(
-        expand, many=True, context={
-            'request': request,
-            'detail': True,
-            'expand': [ '_widget_entries' ]})
+        expand, many=True, context=dict(
+            request= request,
+            detail=  True,
+            expand=  [ '_widget_entries' ]))
     rest_serializer = LocationSerializer(
         rest, many=True, context={ 'request': request })
-    return Response({
-        'base'      : base,
-        'matches'   : tuple( matches ),
-        'locations' : expanded_serializer.data + rest_serializer.data
-    })
+    return Response( dict(
+        base=      base,
+        matches=   tuple( matches ),
+        slots=     slots,
+        locations= expanded_serializer.data + rest_serializer.data
+    ))
 
 def _get_model( name ):
     model = name.split('.')

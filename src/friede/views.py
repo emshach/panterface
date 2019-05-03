@@ -77,16 +77,14 @@ def api_complete( request, path='', format=None ):
     rx = r''
     for d in path:
         if d:
-            rx = r"({}/)?{}".format( rx, d )
+            rx = r"(?:{}/)?{}".format( rx, d )
     rx = r'^' + rx
     base = path[-1]
     if not base:
-        rx = rx + r'(/|$)'
+        rx = rx + r'(?:/|$)'
     candidates = Location.objects.filter( href__regex=rx )
     candidates = candidates.order_by( 'name' ).all()
-    expand = candidates[ :1 ]
-    rest = candidates[ 1: ]
-    completions = re.compile( r'%s([^/]*)(/|$)?' % path )
+    completions = re.compile( r'%s([^/]*)(/|$)?' % rx )
     matches = set()
     slots = {}
     locations = []
@@ -100,9 +98,11 @@ def api_complete( request, path='', format=None ):
             if m2:
                 slots[ m2.group(1)] = m2.group(1)
             else:
-                matches.add( base + m.group(1) )
+                matches.add( base + g )
                 if m.group(2) is not None:
                     locations.append( candidate )
+    expand = locations[ :1 ]
+    rest = locations[ 1: ]
     expanded_serializer = LocationSerializer(
         expand, many=True, context=dict(
             request= request,

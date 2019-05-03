@@ -80,10 +80,12 @@ def api_complete( request, path='', format=None ):
             rx = r"({}/)?{}".format( rx, d )
     rx = r'^' + rx
     base = path[-1]
+    if not base:
+        rx = rx + r'(/|$)'
     candidates = Location.objects.filter( href__regex=rx )
     candidates = candidates.order_by( 'name' ).all()
-    expand = candidates[ :10 ]
-    rest = candidates[ 10: ]
+    expand = candidates[ :1 ]
+    rest = candidates[ 1: ]
     completions = re.compile( r'%s([^/]*)(/|$)?' % path )
     matches = set()
     slots = {}

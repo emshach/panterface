@@ -189,7 +189,7 @@ def mklocations( app, objects, relations, actions=None ):
           tuple (
               ( '_' + o, dict(
                   title="view {}".format(o).title(),
-                  href="/{0}/{{{0}.{1}+}}".format( name, o ),
+                  href="{{{0}.{1}+}}".format( name, o ),
                   redirect_to="view.{}_{}".format( name, o )))
               for o in objects ),
           tuple (
@@ -231,6 +231,9 @@ def mklocations( app, objects, relations, actions=None ):
               for x in rs[o][ 'in' ])),
         tuple(
             ( "{}_{}".format( name, o ),
+              ( 'edit', dict(
+                  title="edit {}".format( rs[o][ 'plural' ]).title(),
+                  href="{{{}.{}*""+}}/edit".format( name, o ))),
               tuple(
                   (( "add.{}_{}".format( name, x ),
                      dict(

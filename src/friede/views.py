@@ -98,11 +98,18 @@ def api_complete( request, path='', format=None ):
             if m2:
                 slot = m2.group(1)
                 if slot not in slots:
-                    slots[ slot ] = {}
+                    app, model = slot.split( '.' )
+                    slots[ slot ] = dict(
+                        app=app,
+                        model=model,
+                        new=False,
+                        multiple=False,
+                        search=set(( app, model )))
                 if m2.group(2):
                     slots[ slot ][ 'multiple' ] = True
                 if m2.group(3):
                     slots[ slot ][ 'new' ] = True
+                    slots[ slot ][ 'search' ].add( 'new' )
             else:
                 matches.add( base + g )
             if m.group(2) is not None:
@@ -122,10 +129,17 @@ def api_complete( request, path='', format=None ):
             ptree=ptree,
             rx=rx
         ),
-        base=      base,
-        matches=   tuple( matches ),
-        slots=     slots,
-        locations= expanded_serializer.data + rest_serializer.data
+        base=base,
+        matches=tuple( matches ),
+        slots=[
+            dict(
+                app=s.app,
+                model=s.model,
+                new=s.new,
+                multiple=s.multiple,
+                search=list( s.search )
+            ) for s in slots.values() ],
+        locations=expanded_serializer.data + rest_serializer.data
     ))
 
 def _get_model( name ):

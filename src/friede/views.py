@@ -133,11 +133,11 @@ def api_complete( request, path='', format=None ):
         matches=tuple( matches ),
         slots=[
             dict(
-                app=s.app,
-                model=s.model,
-                new=s.new,
-                multiple=s.multiple,
-                search=list( s.search )
+                app=s[ 'app' ],
+                model=s[ 'model' ],
+                new=s[ 'new' ],
+                multiple=s[ 'multiple' ],
+                search=list( s[ 'search' ])
             ) for s in slots.values() ],
         locations=expanded_serializer.data + rest_serializer.data
     ))

@@ -3,7 +3,7 @@
 </template>
 
 <script lang="js">
-import DefaultActionWidget from '@/components/DefaultActionWidget'
+import DefaultActionWidget from '@/components/wx/DefaultActionWidget'
 export default  {
   name: 'InlineWidget',
   props: [ 'object' ],

@@ -1,7 +1,7 @@
 <template lang="html"></template>
 
 <script lang="js">
-import fields from '@/lib/fields'
+import fields from '@/components/fields'
 import { Field } from '@/lib/objects'
 export default  {
   name: 'ModelFieldWidget',

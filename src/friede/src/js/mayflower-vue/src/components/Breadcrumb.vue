@@ -1,5 +1,5 @@
 <template lang="html">
-  <vk-breadcrumb>
+  <vk-breadcrumb class="breadcrumb">
     <vk-breadcrumb-item
       v-for="( item, index ) in items"
       :key="index"

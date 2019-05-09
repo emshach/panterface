@@ -9,7 +9,7 @@
 </template>
 
 <script lang="js">
-import ModelFieldWidget from '@/components/ModelFieldWidget'
+import ModelFieldWidget from '@/components/wx/ModelFieldWidget'
 import { ModelWidgetMixin } from '@/lib/mixins'
 export default  {
   name: 'ViewModelWidget',

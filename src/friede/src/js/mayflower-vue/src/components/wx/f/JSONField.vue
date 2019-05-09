@@ -1,7 +1,7 @@
 <template lang="html">
   <div v-if="readonly" v-html="field.html" :class="fieldClasses" />
-  <textaarea v-else-if="editMode" v-model="field.wip"
-             :class="fieldClasses" @blur="commitField" />
+  <textarea v-else-if="editMode" v-model="field.wip"
+            :class="fieldClasses" @blur="commitField" />
   <div v-else v-html="field.html" @click="editField" @focus="editField"
        :class="fieldClasses" /> 
 </template>

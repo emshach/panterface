@@ -1,13 +1,23 @@
-<template lang="html">
+<template>
   <form id="prompt" class="mf-prompt uk-flex uk-wrap-around" ref="form"
         @submit.prevent="submit">
     <switchboard :matches="matches" :locations="locations" @update="complete" />
-    <breadcrumb class="breadcrumb" :items="breadcrumb" />
-    <textarea v-if="multiline" name="cli" class="cli uk-input uk-flex-1"
-              rows="1"  v-model="cli" @input="input" ref="input"
-              @keydown="processKey( $event )" />
-    <input v-else name="cli" class="cli uk-input uk-flex-1" v-model="cli"
-           ref="input" @input="input" @keydown="processKey( $event )" />
+    <div class="readline">
+      <breadcrumb class="main" :items="breadcrumb" />
+      <breadcrumb class="tmp" :items="prospect" />
+      <div v-if="searching" class="object-search">
+        <span class="object">{{ searching }}:</span>
+        <input name="filter" class="filter uk-input uk-flex-1" v-model="filter"
+               ref="filter" />
+      </div>
+      <div v-else-if="creating" class="object-create">
+        <span class="object">{{ creating }}:</span>
+        <input name="ctrl" class="filter uk-input uk-flex-1" v-model="ctrl"
+               ref="ctrl" />
+      </div>
+      <input v-else name="cli" class="cli uk-input uk-flex-1" v-model="cli"
+             ref="input" @input="input" @keydown="processKey( $event )" />
+    </div>
   </form>
 </template>
 
@@ -30,53 +40,46 @@ export default {
   components: { Switchboard, Breadcrumb },
   mounted() {
     this.$nextTick(() => {
-      this.$refs.input.focus()
+      this.$refs.input.focus();
+      this.getCompletions();
     })
   },
   data() {
     return {
-      cli: '',
-      prevCli: '',
-      base: '',
-      matches: [],
-      locations: [],
+      input: '',
+      entered: '',
+      state: 'nav',
+      filter: '',
+      ctrl: '',
+      values: {},
+      searching: null,
+      creating: null,
+      prospect:  [],
+      pathMatches: [],
+      pathSlots: [],
+      pathLocations: [],
       enterMeansSubmit: true,
     }
   },
   methods: {
     submit() {
       this.$emit( 'update', this.cli );
-      this.cli = '';
+      // TODO: based on state, push prospect, push breadcrumb
+      this.entered = '';
+      this.getCompletions();
     },
     getCompletions() {
-      this.$api( 'complete/' + this.cli ).then( data => {
-        this.base = data.base;
-        this.matches = data.matches;
-        this.locations = data.locations;
+      this.$api( 'complete', this.input ).then( data => {
+        this.pathMatches = data.matches;
+        this.pathSlots = data.slots;
+        this.pathLocations = data.locations;
       });
     },
     debouncedInput: debounce( function() {
       this.getCompletions();
     }, 250 ),
     input() {
-      const prev = this.prevCli, cli = this.cli;
-      if ( this.matches.length && cli !== prev && cli.indexOf( prev ) === 0 ) {
-        // then just filter
-        var base = this.base + cli.replace( prev, '' );
-        this.base = base;
-        var matches = this.matches.filter( x => x.indexOf( base ) === 0 );
-        var locations = this.locations.filter(
-          x => x.name.indexOf( base ) === 0 );
-        if (! matches.length 
-            || locations.slice( 0, 10 ).find( x => !x._widget_entries )) {
-          this.getCompletions();
-        } else {
-          this.matches = matches;
-          this.locations = locations;
-        }
-      } else 
-        this.debouncedInput();
-      this.prevCli = cli;
+      this.entered = this.input;
     },
     complete( match ) {
       this.cli = this.cli.replace( RegExp( this.base + '$' ), match + ' ' );
@@ -96,6 +99,26 @@ export default {
     }
   },
   computed: {
+    matches() {
+      if ( !this.entered )
+        return this.pathMatches;
+      return this.pathMatches.filter( x => x.indexOf( this.entered ) === 0 )
+    },
+    slots() {
+      if ( !this.entered )
+        return this.pathSlots;
+      return this.pathSlots.filter(
+          x => x.search.filter(
+            y => y.indexOf( filter ) > -1 ).length )
+    },
+    locations() {
+      if ( !this.entered )
+        return this.pathLocations;
+      return this.pathLocations.filter( x => x.name.indexOf( this.entered ) === 0 )
+    },
+    filters() {
+      return this.filter.split(/\s+/)
+    }
   }
 }
 </script>

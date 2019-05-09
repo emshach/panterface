@@ -13,8 +13,8 @@ window.UIkit = UIkit
 
 Vue.config.productionTip = false
 const client = new coreapi.Client()
-Vue.prototype.$api = function( url ) {
-  return client.get( '/api/' + url )
+Vue.prototype.$api = function() {
+  return client.get( '/api/' + Array.prototype.join.call( arguments, '/' ))
 }
 
 function Mayflower( args ) {

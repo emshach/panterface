@@ -10,7 +10,7 @@
 
 <script lang="js">
 import { Grid as VkGrid } from 'vuikit/lib/grid'
-import Widget from '@/components/WidgetWidget'
+import Widget from '@/components/wx/WidgetWidget'
 export default {
   name: 'Dashboard',
   props: {

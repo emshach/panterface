@@ -16,12 +16,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'BooleanField',
   mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_1__["ModelFieldMixin"]],
-  props: {
-    omject: {
-      type: _lib_objects__WEBPACK_IMPORTED_MODULE_0__["Field"],
-      required: true
-    }
-  },
+  props: {},
   mounted: function mounted() {},
   data: function data() {
     return {};
@@ -48,12 +43,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'CharField',
   mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_1__["ModelFieldMixin"]],
-  props: {
-    omject: {
-      type: _lib_objects__WEBPACK_IMPORTED_MODULE_0__["Field"],
-      required: true
-    }
-  },
+  props: {},
   mounted: function mounted() {},
   data: function data() {
     return {};
@@ -73,14 +63,19 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js");
-/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
+/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
+/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js");
+/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_2__);
+
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'choice-field',
-  props: [],
+  name: 'ChoiceField',
+  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_1__["ModelFieldMixin"]],
+  props: {},
   components: {
-    Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_0___default.a
+    Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_2___default.a
   },
   mounted: function mounted() {},
   data: function data() {
@@ -101,9 +96,14 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
+/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'combo-field',
-  props: [],
+  name: 'ComboField',
+  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_1__["ModelFieldMixin"]],
+  props: {},
   mounted: function mounted() {},
   data: function data() {
     return {};
@@ -123,9 +123,23 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue_flatpickr_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-flatpickr-component */ "./node_modules/vue-flatpickr-component/dist/vue-flatpickr.min.js");
+/* harmony import */ var vue_flatpickr_component__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_flatpickr_component__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var flatpickr_dist_flatpickr_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! flatpickr/dist/flatpickr.css */ "./node_modules/flatpickr/dist/flatpickr.css");
+/* harmony import */ var flatpickr_dist_flatpickr_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(flatpickr_dist_flatpickr_css__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
+/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
+
+
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'date-field',
-  props: [],
+  name: 'DateField',
+  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_3__["ModelFieldMixin"]],
+  props: {},
+  components: {
+    FlatPickr: vue_flatpickr_component__WEBPACK_IMPORTED_MODULE_0___default.a
+  },
   mounted: function mounted() {},
   data: function data() {
     return {};
@@ -145,9 +159,23 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue_flatpickr_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-flatpickr-component */ "./node_modules/vue-flatpickr-component/dist/vue-flatpickr.min.js");
+/* harmony import */ var vue_flatpickr_component__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_flatpickr_component__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var flatpickr_dist_flatpickr_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! flatpickr/dist/flatpickr.css */ "./node_modules/flatpickr/dist/flatpickr.css");
+/* harmony import */ var flatpickr_dist_flatpickr_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(flatpickr_dist_flatpickr_css__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
+/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
+
+
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'date-time-field',
-  props: [],
+  name: 'DateTimeField',
+  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_3__["ModelFieldMixin"]],
+  props: {},
+  components: {
+    FlatPickr: FlatPickr
+  },
   mounted: function mounted() {},
   data: function data() {
     return {};
@@ -167,9 +195,14 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
+/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'decimal-field',
-  props: [],
+  name: 'DecimalField',
+  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_1__["ModelFieldMixin"]],
+  props: {},
   mounted: function mounted() {},
   data: function data() {
     return {};
@@ -189,12 +222,24 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
+/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'duration-field',
-  props: [],
+  name: 'DurationField',
+  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_1__["ModelFieldMixin"]],
+  props: {},
+  components: {
+    Multiselect: Multiselect
+  },
   mounted: function mounted() {},
   data: function data() {
-    return {};
+    return {
+      count: 1,
+      duration: '',
+      options: _lib_mixins__WEBPACK_IMPORTED_MODULE_1__["DurationOptions"]
+    };
   },
   methods: {},
   computed: {}
@@ -211,9 +256,14 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
+/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'email-field',
-  props: [],
+  name: 'EmailField',
+  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_1__["ModelFieldMixin"]],
+  props: {},
   mounted: function mounted() {},
   data: function data() {
     return {};
@@ -233,9 +283,14 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
+/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'file-field',
-  props: [],
+  name: 'FileField',
+  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_1__["ModelFieldMixin"]],
+  props: {},
   mounted: function mounted() {},
   data: function data() {
     return {};
@@ -255,9 +310,14 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
+/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'file-path-field',
-  props: [],
+  name: 'FilePathField',
+  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_1__["ModelFieldMixin"]],
+  props: {},
   mounted: function mounted() {},
   data: function data() {
     return {};
@@ -277,9 +337,14 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
+/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'float-field',
-  props: [],
+  name: 'FloatField',
+  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_1__["ModelFieldMixin"]],
+  props: {},
   mounted: function mounted() {},
   data: function data() {
     return {};
@@ -299,9 +364,41 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
+/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'generic-ip-address-field',
-  props: [],
+  name: 'GenericIpAddressField',
+  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_1__["ModelFieldMixin"]],
+  props: {},
+  mounted: function mounted() {},
+  data: function data() {
+    return {};
+  },
+  methods: {},
+  computed: {}
+});
+
+/***/ }),
+
+/***/ "./node_modules/cache-loader/dist/cjs.js?!./node_modules/babel-loader/lib/index.js!./node_modules/cache-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./src/components/wx/f/IPAddressField.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/wx/f/IPAddressField.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
+/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'IpAddressField',
+  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_1__["ModelFieldMixin"]],
+  props: {},
   mounted: function mounted() {},
   data: function data() {
     return {};
@@ -321,9 +418,14 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
+/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'image-field',
-  props: [],
+  name: 'ImageField',
+  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_1__["ModelFieldMixin"]],
+  props: {},
   mounted: function mounted() {},
   data: function data() {
     return {};
@@ -343,9 +445,41 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
+/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'integer-field',
-  props: [],
+  name: 'IntegerField',
+  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_1__["ModelFieldMixin"]],
+  props: {},
+  mounted: function mounted() {},
+  data: function data() {
+    return {};
+  },
+  methods: {},
+  computed: {}
+});
+
+/***/ }),
+
+/***/ "./node_modules/cache-loader/dist/cjs.js?!./node_modules/babel-loader/lib/index.js!./node_modules/cache-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./src/components/wx/f/JSONField.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/wx/f/JSONField.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
+/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'JsonField',
+  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_1__["ModelFieldMixin"]],
+  props: {},
   mounted: function mounted() {},
   data: function data() {
     return {};
@@ -365,9 +499,20 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
+/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
+/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js");
+/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'model-choice-field',
-  props: [],
+  name: 'ModelChoiceField',
+  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_1__["ModelFieldMixin"]],
+  props: {},
+  components: {
+    Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_2___default.a
+  },
   mounted: function mounted() {},
   data: function data() {
     return {};
@@ -387,9 +532,20 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
+/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
+/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js");
+/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'model-multiple-choice-field',
-  props: [],
+  name: 'ModelMultipleChoiceField',
+  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_1__["ModelFieldMixin"]],
+  props: {},
+  components: {
+    Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_2___default.a
+  },
   mounted: function mounted() {},
   data: function data() {
     return {};
@@ -409,9 +565,14 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
+/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'multi-value-field',
-  props: [],
+  name: 'MultiValueField',
+  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_1__["ModelFieldMixin"]],
+  props: {},
   mounted: function mounted() {},
   data: function data() {
     return {};
@@ -431,9 +592,20 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
+/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
+/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js");
+/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'multiple-choice-field',
-  props: [],
+  name: 'MultipleChoiceField',
+  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_1__["ModelFieldMixin"]],
+  props: {},
+  components: {
+    Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_2___default.a
+  },
   mounted: function mounted() {},
   data: function data() {
     return {};
@@ -453,9 +625,14 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
+/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'null-boolean-field',
-  props: [],
+  name: 'NullBooleanField',
+  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_1__["ModelFieldMixin"]],
+  props: {},
   mounted: function mounted() {},
   data: function data() {
     return {};
@@ -475,9 +652,14 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
+/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'regex-field',
-  props: [],
+  name: 'RegexField',
+  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_1__["ModelFieldMixin"]],
+  props: {},
   mounted: function mounted() {},
   data: function data() {
     return {};
@@ -497,9 +679,14 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
+/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'slug-field',
-  props: [],
+  name: 'SlugField',
+  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_1__["ModelFieldMixin"]],
+  props: {},
   mounted: function mounted() {},
   data: function data() {
     return {};
@@ -519,9 +706,23 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue_flatpickr_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-flatpickr-component */ "./node_modules/vue-flatpickr-component/dist/vue-flatpickr.min.js");
+/* harmony import */ var vue_flatpickr_component__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_flatpickr_component__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var flatpickr_dist_flatpickr_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! flatpickr/dist/flatpickr.css */ "./node_modules/flatpickr/dist/flatpickr.css");
+/* harmony import */ var flatpickr_dist_flatpickr_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(flatpickr_dist_flatpickr_css__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
+/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
+
+
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'split-date-time-field',
-  props: [],
+  name: 'SplitDateTimeField',
+  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_3__["ModelFieldMixin"]],
+  props: {},
+  components: {
+    FlatPickr: FlatPickr
+  },
   mounted: function mounted() {},
   data: function data() {
     return {};
@@ -548,12 +749,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'TextField',
   mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_1__["ModelFieldMixin"]],
-  props: {
-    omject: {
-      type: _lib_objects__WEBPACK_IMPORTED_MODULE_0__["Field"],
-      required: true
-    }
-  },
+  props: {},
   mounted: function mounted() {},
   data: function data() {
     return {};
@@ -573,9 +769,23 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue_flatpickr_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-flatpickr-component */ "./node_modules/vue-flatpickr-component/dist/vue-flatpickr.min.js");
+/* harmony import */ var vue_flatpickr_component__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_flatpickr_component__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var flatpickr_dist_flatpickr_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! flatpickr/dist/flatpickr.css */ "./node_modules/flatpickr/dist/flatpickr.css");
+/* harmony import */ var flatpickr_dist_flatpickr_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(flatpickr_dist_flatpickr_css__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
+/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
+
+
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'time-field',
-  props: [],
+  name: 'TimeField',
+  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_3__["ModelFieldMixin"]],
+  props: {},
+  components: {
+    FlatPickr: FlatPickr
+  },
   mounted: function mounted() {},
   data: function data() {
     return {};
@@ -595,9 +805,20 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
+/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
+/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js");
+/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'typed-choice-field',
-  props: [],
+  name: 'TypedChoiceField',
+  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_1__["ModelFieldMixin"]],
+  props: {},
+  components: {
+    Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_2___default.a
+  },
   mounted: function mounted() {},
   data: function data() {
     return {};
@@ -617,9 +838,20 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
+/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
+/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js");
+/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'typed-multiple-choice-field',
-  props: [],
+  name: 'TypedMultipleChoiceField',
+  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_1__["ModelFieldMixin"]],
+  props: {},
+  components: {
+    Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_2___default.a
+  },
   mounted: function mounted() {},
   data: function data() {
     return {};
@@ -639,9 +871,14 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
+/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'url-field',
-  props: [],
+  name: 'UrlField',
+  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_1__["ModelFieldMixin"]],
+  props: {},
   mounted: function mounted() {},
   data: function data() {
     return {};
@@ -661,9 +898,14 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
+/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'uuid-field',
-  props: [],
+  name: 'UuidField',
+  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_1__["ModelFieldMixin"]],
+  props: {},
   mounted: function mounted() {},
   data: function data() {
     return {};
@@ -828,7 +1070,7 @@ var render = function() {
     : _vm.editMode
     ? _c("multiselect", {
         class: _vm.fieldClasses,
-        attrs: { type: "text", options: [] },
+        attrs: { options: [] },
         on: { blur: _vm.commitField },
         model: {
           value: _vm.field.wip,
@@ -866,18 +1108,30 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _vm.readonly
+    ? _c("div", {
+        class: _vm.fieldClasses,
+        domProps: { innerHTML: _vm._s(_vm.field.html) }
+      })
+    : _vm.editMode
+    ? _c("textaarea", {
+        class: _vm.fieldClasses,
+        on: { blur: _vm.commitField },
+        model: {
+          value: _vm.field.wip,
+          callback: function($$v) {
+            _vm.$set(_vm.field, "wip", $$v)
+          },
+          expression: "field.wip"
+        }
+      })
+    : _c("div", {
+        class: _vm.fieldClasses,
+        domProps: { innerHTML: _vm._s(_vm.field.html) },
+        on: { click: _vm.editField, focus: _vm.editField }
+      })
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("section", { staticClass: "combo-field" }, [
-      _c("h1", [_vm._v("combo-field Component")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -899,18 +1153,30 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _vm.readonly
+    ? _c("div", {
+        class: _vm.fieldClasses,
+        domProps: { innerHTML: _vm._s(_vm.field.html) }
+      })
+    : _vm.editMode
+    ? _c("flat-pickr", {
+        class: _vm.fieldClasses,
+        on: { blur: _vm.commitField },
+        model: {
+          value: _vm.field.wip,
+          callback: function($$v) {
+            _vm.$set(_vm.field, "wip", $$v)
+          },
+          expression: "field.wip"
+        }
+      })
+    : _c("div", {
+        class: _vm.fieldClasses,
+        domProps: { innerHTML: _vm._s(_vm.field.html) },
+        on: { click: _vm.editField, focus: _vm.editField }
+      })
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("section", { staticClass: "date-field" }, [
-      _c("h1", [_vm._v("date-field Component")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -932,18 +1198,30 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _vm.readonly
+    ? _c("div", {
+        class: _vm.fieldClasses,
+        domProps: { innerHTML: _vm._s(_vm.field.html) }
+      })
+    : _vm.editMode
+    ? _c("flat-pickr", {
+        class: _vm.fieldClasses,
+        on: { blur: _vm.commitField },
+        model: {
+          value: _vm.field.wip,
+          callback: function($$v) {
+            _vm.$set(_vm.field, "wip", $$v)
+          },
+          expression: "field.wip"
+        }
+      })
+    : _c("div", {
+        class: _vm.fieldClasses,
+        domProps: { innerHTML: _vm._s(_vm.field.html) },
+        on: { click: _vm.editField, focus: _vm.editField }
+      })
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("section", { staticClass: "date-time-field" }, [
-      _c("h1", [_vm._v("date-time-field Component")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -965,18 +1243,41 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _vm.readonly
+    ? _c("div", {
+        class: _vm.fieldClasses,
+        domProps: { innerHTML: _vm._s(_vm.field.html) }
+      })
+    : _vm.editMode
+    ? _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.field.wip,
+            expression: "field.wip"
+          }
+        ],
+        class: _vm.fieldClasses,
+        attrs: { type: "number" },
+        domProps: { value: _vm.field.wip },
+        on: {
+          blur: _vm.commitField,
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.$set(_vm.field, "wip", $event.target.value)
+          }
+        }
+      })
+    : _c("div", {
+        class: _vm.fieldClasses,
+        domProps: { innerHTML: _vm._s(_vm.field.html) },
+        on: { click: _vm.editField, focus: _vm.editField }
+      })
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("section", { staticClass: "decimal-field" }, [
-      _c("h1", [_vm._v("decimal-field Component")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -998,18 +1299,57 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _vm.readonly
+    ? _c("div", {
+        class: _vm.fieldClasses,
+        domProps: { innerHTML: _vm._s(_vm.field.html) }
+      })
+    : _vm.editMode
+    ? _c(
+        "div",
+        { class: _vm.fieldClasses },
+        [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.count,
+                expression: "count"
+              }
+            ],
+            attrs: { type: "number" },
+            domProps: { value: _vm.count },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.count = $event.target.value
+              }
+            }
+          }),
+          _c("multiselect", {
+            attrs: { options: _vm.options },
+            on: { blur: _vm.commitField },
+            model: {
+              value: _vm.duration,
+              callback: function($$v) {
+                _vm.duration = $$v
+              },
+              expression: "duration"
+            }
+          })
+        ],
+        1
+      )
+    : _c("div", {
+        class: _vm.fieldClasses,
+        domProps: { innerHTML: _vm._s(_vm.field.html) },
+        on: { click: _vm.editField, focus: _vm.editField }
+      })
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("section", { staticClass: "duration-field" }, [
-      _c("h1", [_vm._v("duration-field Component")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -1031,18 +1371,41 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _vm.readonly
+    ? _c("div", {
+        class: _vm.fieldClasses,
+        domProps: { innerHTML: _vm._s(_vm.field.html) }
+      })
+    : _vm.editMode
+    ? _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.field.wip,
+            expression: "field.wip"
+          }
+        ],
+        class: _vm.fieldClasses,
+        attrs: { type: "email" },
+        domProps: { value: _vm.field.wip },
+        on: {
+          blur: _vm.commitField,
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.$set(_vm.field, "wip", $event.target.value)
+          }
+        }
+      })
+    : _c("div", {
+        class: _vm.fieldClasses,
+        domProps: { innerHTML: _vm._s(_vm.field.html) },
+        on: { click: _vm.editField, focus: _vm.editField }
+      })
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("section", { staticClass: "email-field" }, [
-      _c("h1", [_vm._v("email-field Component")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -1060,23 +1423,8 @@ render._withStripped = true
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("section", { staticClass: "file-field" }, [
-      _c("h1", [_vm._v("file-field Component")])
-    ])
-  }
-]
-render._withStripped = true
+var render = function () {}
+var staticRenderFns = []
 
 
 
@@ -1097,18 +1445,41 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _vm.readonly
+    ? _c("div", {
+        class: _vm.fieldClasses,
+        domProps: { innerHTML: _vm._s(_vm.field.html) }
+      })
+    : _vm.editMode
+    ? _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.field.wip,
+            expression: "field.wip"
+          }
+        ],
+        class: _vm.fieldClasses,
+        attrs: { type: "text" },
+        domProps: { value: _vm.field.wip },
+        on: {
+          blur: _vm.commitField,
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.$set(_vm.field, "wip", $event.target.value)
+          }
+        }
+      })
+    : _c("div", {
+        class: _vm.fieldClasses,
+        domProps: { innerHTML: _vm._s(_vm.field.html) },
+        on: { click: _vm.editField, focus: _vm.editField }
+      })
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("section", { staticClass: "file-path-field" }, [
-      _c("h1", [_vm._v("file-path-field Component")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -1130,18 +1501,41 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _vm.readonly
+    ? _c("div", {
+        class: _vm.fieldClasses,
+        domProps: { innerHTML: _vm._s(_vm.field.html) }
+      })
+    : _vm.editMode
+    ? _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.field.wip,
+            expression: "field.wip"
+          }
+        ],
+        class: _vm.fieldClasses,
+        attrs: { type: "number" },
+        domProps: { value: _vm.field.wip },
+        on: {
+          blur: _vm.commitField,
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.$set(_vm.field, "wip", $event.target.value)
+          }
+        }
+      })
+    : _c("div", {
+        class: _vm.fieldClasses,
+        domProps: { innerHTML: _vm._s(_vm.field.html) },
+        on: { click: _vm.editField, focus: _vm.editField }
+      })
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("section", { staticClass: "float-field" }, [
-      _c("h1", [_vm._v("float-field Component")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -1163,18 +1557,97 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _vm.readonly
+    ? _c("div", {
+        class: _vm.fieldClasses,
+        domProps: { innerHTML: _vm._s(_vm.field.html) }
+      })
+    : _vm.editMode
+    ? _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.field.wip,
+            expression: "field.wip"
+          }
+        ],
+        class: _vm.fieldClasses,
+        attrs: { type: "text" },
+        domProps: { value: _vm.field.wip },
+        on: {
+          blur: _vm.commitField,
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.$set(_vm.field, "wip", $event.target.value)
+          }
+        }
+      })
+    : _c("div", {
+        class: _vm.fieldClasses,
+        domProps: { innerHTML: _vm._s(_vm.field.html) },
+        on: { click: _vm.editField, focus: _vm.editField }
+      })
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("section", { staticClass: "generic-ip-address-field" }, [
-      _c("h1", [_vm._v("generic-ip-address-field Component")])
-    ])
-  }
-]
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/cache-loader/dist/cjs.js?{\"cacheDirectory\":\"node_modules/.cache/vue-loader\",\"cacheIdentifier\":\"e895c554-vue-loader-template\"}!./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/cache-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./src/components/wx/f/IPAddressField.vue?vue&type=template&id=979fe2f8&scoped=true&lang=html&":
+/*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"e895c554-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/wx/f/IPAddressField.vue?vue&type=template&id=979fe2f8&scoped=true&lang=html& ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm.readonly
+    ? _c("div", {
+        class: _vm.fieldClasses,
+        domProps: { innerHTML: _vm._s(_vm.field.html) }
+      })
+    : _vm.editMode
+    ? _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.field.wip,
+            expression: "field.wip"
+          }
+        ],
+        class: _vm.fieldClasses,
+        attrs: { type: "text" },
+        domProps: { value: _vm.field.wip },
+        on: {
+          blur: _vm.commitField,
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.$set(_vm.field, "wip", $event.target.value)
+          }
+        }
+      })
+    : _c("div", {
+        class: _vm.fieldClasses,
+        domProps: { innerHTML: _vm._s(_vm.field.html) },
+        on: { click: _vm.editField, focus: _vm.editField }
+      })
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -1192,23 +1665,8 @@ render._withStripped = true
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("section", { staticClass: "image-field" }, [
-      _c("h1", [_vm._v("image-field Component")])
-    ])
-  }
-]
-render._withStripped = true
+var render = function () {}
+var staticRenderFns = []
 
 
 
@@ -1229,18 +1687,96 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _vm.readonly
+    ? _c("div", {
+        class: _vm.fieldClasses,
+        domProps: { innerHTML: _vm._s(_vm.field.html) }
+      })
+    : _vm.editMode
+    ? _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.field.wip,
+            expression: "field.wip"
+          }
+        ],
+        class: _vm.fieldClasses,
+        attrs: { type: "number" },
+        domProps: { value: _vm.field.wip },
+        on: {
+          blur: _vm.commitField,
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.$set(_vm.field, "wip", $event.target.value)
+          }
+        }
+      })
+    : _c("div", {
+        class: _vm.fieldClasses,
+        domProps: { innerHTML: _vm._s(_vm.field.html) },
+        on: { click: _vm.editField, focus: _vm.editField }
+      })
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("section", { staticClass: "integer-field" }, [
-      _c("h1", [_vm._v("integer-field Component")])
-    ])
-  }
-]
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/cache-loader/dist/cjs.js?{\"cacheDirectory\":\"node_modules/.cache/vue-loader\",\"cacheIdentifier\":\"e895c554-vue-loader-template\"}!./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/cache-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./src/components/wx/f/JSONField.vue?vue&type=template&id=6fdde8eb&scoped=true&lang=html&":
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"e895c554-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/wx/f/JSONField.vue?vue&type=template&id=6fdde8eb&scoped=true&lang=html& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm.readonly
+    ? _c("div", {
+        class: _vm.fieldClasses,
+        domProps: { innerHTML: _vm._s(_vm.field.html) }
+      })
+    : _vm.editMode
+    ? _c("textarea", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.field.wip,
+            expression: "field.wip"
+          }
+        ],
+        class: _vm.fieldClasses,
+        domProps: { value: _vm.field.wip },
+        on: {
+          blur: _vm.commitField,
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.$set(_vm.field, "wip", $event.target.value)
+          }
+        }
+      })
+    : _c("div", {
+        class: _vm.fieldClasses,
+        domProps: { innerHTML: _vm._s(_vm.field.html) },
+        on: { click: _vm.editField, focus: _vm.editField }
+      })
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -1262,18 +1798,31 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _vm.readonly
+    ? _c("div", {
+        class: _vm.fieldClasses,
+        domProps: { innerHTML: _vm._s(_vm.field.html) }
+      })
+    : _vm.editMode
+    ? _c("multiselect", {
+        class: _vm.fieldClasses,
+        attrs: { options: [] },
+        on: { blur: _vm.commitField },
+        model: {
+          value: _vm.field.wip,
+          callback: function($$v) {
+            _vm.$set(_vm.field, "wip", $$v)
+          },
+          expression: "field.wip"
+        }
+      })
+    : _c("div", {
+        class: _vm.fieldClasses,
+        domProps: { innerHTML: _vm._s(_vm.field.html) },
+        on: { click: _vm.editField, focus: _vm.editField }
+      })
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("section", { staticClass: "model-choice-field" }, [
-      _c("h1", [_vm._v("model-choice-field Component")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -1295,18 +1844,31 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _vm.readonly
+    ? _c("div", {
+        class: _vm.fieldClasses,
+        domProps: { innerHTML: _vm._s(_vm.field.html) }
+      })
+    : _vm.editMode
+    ? _c("multiselect", {
+        class: _vm.fieldClasses,
+        attrs: { options: [] },
+        on: { blur: _vm.commitField },
+        model: {
+          value: _vm.field.wip,
+          callback: function($$v) {
+            _vm.$set(_vm.field, "wip", $$v)
+          },
+          expression: "field.wip"
+        }
+      })
+    : _c("div", {
+        class: _vm.fieldClasses,
+        domProps: { innerHTML: _vm._s(_vm.field.html) },
+        on: { click: _vm.editField, focus: _vm.editField }
+      })
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("section", { staticClass: "model-multiple-choice-field" }, [
-      _c("h1", [_vm._v("model-multiple-choice-field Component")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -1328,18 +1890,27 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _vm.readonly
+    ? _c("div", {
+        class: _vm.fieldClasses,
+        domProps: { innerHTML: _vm._s(_vm.field.html) }
+      })
+    : _vm.editMode
+    ? _c(
+        "div",
+        { class: _vm.fieldClasses, on: { blur: _vm.commitField } },
+        _vm._l(_vm.field.fields, function(f) {
+          return _c("model-field-widget", { key: f.name, attrs: { field: f } })
+        }),
+        1
+      )
+    : _c("div", {
+        class: _vm.fieldClasses,
+        domProps: { innerHTML: _vm._s(_vm.field.html) },
+        on: { click: _vm.editField, focus: _vm.editField }
+      })
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("section", { staticClass: "multi-value-field" }, [
-      _c("h1", [_vm._v("multi-value-field Component")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -1361,18 +1932,31 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _vm.readonly
+    ? _c("div", {
+        class: _vm.fieldClasses,
+        domProps: { innerHTML: _vm._s(_vm.field.html) }
+      })
+    : _vm.editMode
+    ? _c("multiselect", {
+        class: _vm.fieldClasses,
+        attrs: { options: [] },
+        on: { blur: _vm.commitField },
+        model: {
+          value: _vm.field.wip,
+          callback: function($$v) {
+            _vm.$set(_vm.field, "wip", $$v)
+          },
+          expression: "field.wip"
+        }
+      })
+    : _c("div", {
+        class: _vm.fieldClasses,
+        domProps: { innerHTML: _vm._s(_vm.field.html) },
+        on: { click: _vm.editField, focus: _vm.editField }
+      })
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("section", { staticClass: "multiple-choice-field" }, [
-      _c("h1", [_vm._v("multiple-choice-field Component")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -1394,18 +1978,60 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _vm.readonly
+    ? _c("div", {
+        class: _vm.fieldClasses,
+        domProps: { innerHTML: _vm._s(_vm.field.html) }
+      })
+    : _vm.editMode
+    ? _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.field.wip,
+            expression: "field.wip"
+          }
+        ],
+        class: _vm.fieldClasses,
+        attrs: { type: "checkbox" },
+        domProps: {
+          checked: Array.isArray(_vm.field.wip)
+            ? _vm._i(_vm.field.wip, null) > -1
+            : _vm.field.wip
+        },
+        on: {
+          blur: _vm.commitField,
+          change: function($event) {
+            var $$a = _vm.field.wip,
+              $$el = $event.target,
+              $$c = $$el.checked ? true : false
+            if (Array.isArray($$a)) {
+              var $$v = null,
+                $$i = _vm._i($$a, $$v)
+              if ($$el.checked) {
+                $$i < 0 && _vm.$set(_vm.field, "wip", $$a.concat([$$v]))
+              } else {
+                $$i > -1 &&
+                  _vm.$set(
+                    _vm.field,
+                    "wip",
+                    $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                  )
+              }
+            } else {
+              _vm.$set(_vm.field, "wip", $$c)
+            }
+          }
+        }
+      })
+    : _c("div", {
+        class: _vm.fieldClasses,
+        domProps: { innerHTML: _vm._s(_vm.field.html) },
+        on: { click: _vm.editField, focus: _vm.editField }
+      })
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("section", { staticClass: "null-boolean-field" }, [
-      _c("h1", [_vm._v("null-boolean-field Component")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -1427,18 +2053,41 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _vm.readonly
+    ? _c("div", {
+        class: _vm.fieldClasses,
+        domProps: { innerHTML: _vm._s(_vm.field.html) }
+      })
+    : _vm.editMode
+    ? _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.field.wip,
+            expression: "field.wip"
+          }
+        ],
+        class: _vm.fieldClasses,
+        attrs: { type: "text" },
+        domProps: { value: _vm.field.wip },
+        on: {
+          blur: _vm.commitField,
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.$set(_vm.field, "wip", $event.target.value)
+          }
+        }
+      })
+    : _c("div", {
+        class: _vm.fieldClasses,
+        domProps: { innerHTML: _vm._s(_vm.field.html) },
+        on: { click: _vm.editField, focus: _vm.editField }
+      })
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("section", { staticClass: "regex-field" }, [
-      _c("h1", [_vm._v("regex-field Component")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -1460,18 +2109,41 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _vm.readonly
+    ? _c("div", {
+        class: _vm.fieldClasses,
+        domProps: { innerHTML: _vm._s(_vm.field.html) }
+      })
+    : _vm.editMode
+    ? _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.field.wip,
+            expression: "field.wip"
+          }
+        ],
+        class: _vm.fieldClasses,
+        attrs: { type: "text" },
+        domProps: { value: _vm.field.wip },
+        on: {
+          blur: _vm.commitField,
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.$set(_vm.field, "wip", $event.target.value)
+          }
+        }
+      })
+    : _c("div", {
+        class: _vm.fieldClasses,
+        domProps: { innerHTML: _vm._s(_vm.field.html) },
+        on: { click: _vm.editField, focus: _vm.editField }
+      })
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("section", { staticClass: "slug-field" }, [
-      _c("h1", [_vm._v("slug-field Component")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -1493,18 +2165,30 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _vm.readonly
+    ? _c("div", {
+        class: _vm.fieldClasses,
+        domProps: { innerHTML: _vm._s(_vm.field.html) }
+      })
+    : _vm.editMode
+    ? _c("flat-pickr", {
+        class: _vm.fieldClasses,
+        on: { blur: _vm.commitField },
+        model: {
+          value: _vm.field.wip,
+          callback: function($$v) {
+            _vm.$set(_vm.field, "wip", $$v)
+          },
+          expression: "field.wip"
+        }
+      })
+    : _c("div", {
+        class: _vm.fieldClasses,
+        domProps: { innerHTML: _vm._s(_vm.field.html) },
+        on: { click: _vm.editField, focus: _vm.editField }
+      })
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("section", { staticClass: "split-date-time-field" }, [
-      _c("h1", [_vm._v("split-date-time-field Component")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -1534,7 +2218,6 @@ var render = function() {
     : _vm.editMode
     ? _c("textaarea", {
         class: _vm.fieldClasses,
-        attrs: { type: "text" },
         on: { blur: _vm.commitField },
         model: {
           value: _vm.field.wip,
@@ -1572,18 +2255,30 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _vm.readonly
+    ? _c("div", {
+        class: _vm.fieldClasses,
+        domProps: { innerHTML: _vm._s(_vm.field.html) }
+      })
+    : _vm.editMode
+    ? _c("flat-pickr", {
+        class: _vm.fieldClasses,
+        on: { blur: _vm.commitField },
+        model: {
+          value: _vm.field.wip,
+          callback: function($$v) {
+            _vm.$set(_vm.field, "wip", $$v)
+          },
+          expression: "field.wip"
+        }
+      })
+    : _c("div", {
+        class: _vm.fieldClasses,
+        domProps: { innerHTML: _vm._s(_vm.field.html) },
+        on: { click: _vm.editField, focus: _vm.editField }
+      })
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("section", { staticClass: "time-field" }, [
-      _c("h1", [_vm._v("time-field Component")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -1605,18 +2300,31 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _vm.readonly
+    ? _c("div", {
+        class: _vm.fieldClasses,
+        domProps: { innerHTML: _vm._s(_vm.field.html) }
+      })
+    : _vm.editMode
+    ? _c("multiselect", {
+        class: _vm.fieldClasses,
+        attrs: { options: [] },
+        on: { blur: _vm.commitField },
+        model: {
+          value: _vm.field.wip,
+          callback: function($$v) {
+            _vm.$set(_vm.field, "wip", $$v)
+          },
+          expression: "field.wip"
+        }
+      })
+    : _c("div", {
+        class: _vm.fieldClasses,
+        domProps: { innerHTML: _vm._s(_vm.field.html) },
+        on: { click: _vm.editField, focus: _vm.editField }
+      })
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("section", { staticClass: "typed-choice-field" }, [
-      _c("h1", [_vm._v("typed-choice-field Component")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -1638,18 +2346,31 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _vm.readonly
+    ? _c("div", {
+        class: _vm.fieldClasses,
+        domProps: { innerHTML: _vm._s(_vm.field.html) }
+      })
+    : _vm.editMode
+    ? _c("multiselect", {
+        class: _vm.fieldClasses,
+        attrs: { options: [] },
+        on: { blur: _vm.commitField },
+        model: {
+          value: _vm.field.wip,
+          callback: function($$v) {
+            _vm.$set(_vm.field, "wip", $$v)
+          },
+          expression: "field.wip"
+        }
+      })
+    : _c("div", {
+        class: _vm.fieldClasses,
+        domProps: { innerHTML: _vm._s(_vm.field.html) },
+        on: { click: _vm.editField, focus: _vm.editField }
+      })
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("section", { staticClass: "typed-multiple-choice-field" }, [
-      _c("h1", [_vm._v("typed-multiple-choice-field Component")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -1671,18 +2392,41 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _vm.readonly
+    ? _c("div", {
+        class: _vm.fieldClasses,
+        domProps: { innerHTML: _vm._s(_vm.field.html) }
+      })
+    : _vm.editMode
+    ? _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.field.wip,
+            expression: "field.wip"
+          }
+        ],
+        class: _vm.fieldClasses,
+        attrs: { type: "text" },
+        domProps: { value: _vm.field.wip },
+        on: {
+          blur: _vm.commitField,
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.$set(_vm.field, "wip", $event.target.value)
+          }
+        }
+      })
+    : _c("div", {
+        class: _vm.fieldClasses,
+        domProps: { innerHTML: _vm._s(_vm.field.html) },
+        on: { click: _vm.editField, focus: _vm.editField }
+      })
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("section", { staticClass: "url-field" }, [
-      _c("h1", [_vm._v("url-field Component")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -1704,18 +2448,41 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _vm.readonly
+    ? _c("div", {
+        class: _vm.fieldClasses,
+        domProps: { innerHTML: _vm._s(_vm.field.html) }
+      })
+    : _vm.editMode
+    ? _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.field.wip,
+            expression: "field.wip"
+          }
+        ],
+        class: _vm.fieldClasses,
+        attrs: { type: "text" },
+        domProps: { value: _vm.field.wip },
+        on: {
+          blur: _vm.commitField,
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.$set(_vm.field, "wip", $event.target.value)
+          }
+        }
+      })
+    : _c("div", {
+        class: _vm.fieldClasses,
+        domProps: { innerHTML: _vm._s(_vm.field.html) },
+        on: { click: _vm.editField, focus: _vm.editField }
+      })
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("section", { staticClass: "uuid-field" }, [
-      _c("h1", [_vm._v("uuid-field Component")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -1865,6 +2632,17 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/mini-css-extract-plugin/dist/loader.js?!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/lib/loader.js?!./node_modules/cache-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./src/components/wx/f/IPAddressField.vue?vue&type=style&index=0&id=979fe2f8&scoped=true&lang=scss&":
+/*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/mini-css-extract-plugin/dist/loader.js??ref--8-oneOf-1-0!./node_modules/css-loader??ref--8-oneOf-1-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--8-oneOf-1-2!./node_modules/sass-loader/lib/loader.js??ref--8-oneOf-1-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/wx/f/IPAddressField.vue?vue&type=style&index=0&id=979fe2f8&scoped=true&lang=scss& ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
 /***/ "./node_modules/mini-css-extract-plugin/dist/loader.js?!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/lib/loader.js?!./node_modules/cache-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./src/components/wx/f/ImageField.vue?vue&type=style&index=0&id=f5366d54&scoped=true&lang=scss&":
 /*!******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/mini-css-extract-plugin/dist/loader.js??ref--8-oneOf-1-0!./node_modules/css-loader??ref--8-oneOf-1-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--8-oneOf-1-2!./node_modules/sass-loader/lib/loader.js??ref--8-oneOf-1-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/wx/f/ImageField.vue?vue&type=style&index=0&id=f5366d54&scoped=true&lang=scss& ***!
@@ -1880,6 +2658,17 @@ render._withStripped = true
 /*!********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/mini-css-extract-plugin/dist/loader.js??ref--8-oneOf-1-0!./node_modules/css-loader??ref--8-oneOf-1-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--8-oneOf-1-2!./node_modules/sass-loader/lib/loader.js??ref--8-oneOf-1-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/wx/f/IntegerField.vue?vue&type=style&index=0&id=1ef52513&scoped=true&lang=scss& ***!
   \********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
+/***/ "./node_modules/mini-css-extract-plugin/dist/loader.js?!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/lib/loader.js?!./node_modules/cache-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./src/components/wx/f/JSONField.vue?vue&type=style&index=0&id=6fdde8eb&scoped=true&lang=scss&":
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/mini-css-extract-plugin/dist/loader.js??ref--8-oneOf-1-0!./node_modules/css-loader??ref--8-oneOf-1-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--8-oneOf-1-2!./node_modules/sass-loader/lib/loader.js??ref--8-oneOf-1-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/wx/f/JSONField.vue?vue&type=style&index=0&id=6fdde8eb&scoped=true&lang=scss& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3406,6 +4195,111 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./src/components/wx/f/IPAddressField.vue":
+/*!************************************************!*\
+  !*** ./src/components/wx/f/IPAddressField.vue ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _IPAddressField_vue_vue_type_template_id_979fe2f8_scoped_true_lang_html___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./IPAddressField.vue?vue&type=template&id=979fe2f8&scoped=true&lang=html& */ "./src/components/wx/f/IPAddressField.vue?vue&type=template&id=979fe2f8&scoped=true&lang=html&");
+/* harmony import */ var _IPAddressField_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./IPAddressField.vue?vue&type=script&lang=js& */ "./src/components/wx/f/IPAddressField.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _IPAddressField_vue_vue_type_style_index_0_id_979fe2f8_scoped_true_lang_scss___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./IPAddressField.vue?vue&type=style&index=0&id=979fe2f8&scoped=true&lang=scss& */ "./src/components/wx/f/IPAddressField.vue?vue&type=style&index=0&id=979fe2f8&scoped=true&lang=scss&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _IPAddressField_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _IPAddressField_vue_vue_type_template_id_979fe2f8_scoped_true_lang_html___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _IPAddressField_vue_vue_type_template_id_979fe2f8_scoped_true_lang_html___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "979fe2f8",
+  null
+  
+)
+
+/* hot reload */
+if (true) {
+  var api = __webpack_require__(/*! ./node_modules/vue-hot-reload-api/dist/index.js */ "./node_modules/vue-hot-reload-api/dist/index.js")
+  api.install(__webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.runtime.esm.js"))
+  if (api.compatible) {
+    module.hot.accept()
+    if (!module.hot.data) {
+      api.createRecord('979fe2f8', component.options)
+    } else {
+      api.reload('979fe2f8', component.options)
+    }
+    module.hot.accept(/*! ./IPAddressField.vue?vue&type=template&id=979fe2f8&scoped=true&lang=html& */ "./src/components/wx/f/IPAddressField.vue?vue&type=template&id=979fe2f8&scoped=true&lang=html&", function(__WEBPACK_OUTDATED_DEPENDENCIES__) { /* harmony import */ _IPAddressField_vue_vue_type_template_id_979fe2f8_scoped_true_lang_html___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./IPAddressField.vue?vue&type=template&id=979fe2f8&scoped=true&lang=html& */ "./src/components/wx/f/IPAddressField.vue?vue&type=template&id=979fe2f8&scoped=true&lang=html&");
+(function () {
+      api.rerender('979fe2f8', {
+        render: _IPAddressField_vue_vue_type_template_id_979fe2f8_scoped_true_lang_html___WEBPACK_IMPORTED_MODULE_0__["render"],
+        staticRenderFns: _IPAddressField_vue_vue_type_template_id_979fe2f8_scoped_true_lang_html___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]
+      })
+    })(__WEBPACK_OUTDATED_DEPENDENCIES__); })
+  }
+}
+component.options.__file = "src/components/wx/f/IPAddressField.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./src/components/wx/f/IPAddressField.vue?vue&type=script&lang=js&":
+/*!*************************************************************************!*\
+  !*** ./src/components/wx/f/IPAddressField.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_cache_loader_dist_cjs_js_ref_12_0_node_modules_babel_loader_lib_index_js_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_IPAddressField_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/cache-loader/dist/cjs.js??ref--12-0!../../../../node_modules/babel-loader/lib!../../../../node_modules/cache-loader/dist/cjs.js??ref--0-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./IPAddressField.vue?vue&type=script&lang=js& */ "./node_modules/cache-loader/dist/cjs.js?!./node_modules/babel-loader/lib/index.js!./node_modules/cache-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./src/components/wx/f/IPAddressField.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_cache_loader_dist_cjs_js_ref_12_0_node_modules_babel_loader_lib_index_js_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_IPAddressField_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./src/components/wx/f/IPAddressField.vue?vue&type=style&index=0&id=979fe2f8&scoped=true&lang=scss&":
+/*!**********************************************************************************************************!*\
+  !*** ./src/components/wx/f/IPAddressField.vue?vue&type=style&index=0&id=979fe2f8&scoped=true&lang=scss& ***!
+  \**********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_index_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_IPAddressField_vue_vue_type_style_index_0_id_979fe2f8_scoped_true_lang_scss___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/mini-css-extract-plugin/dist/loader.js??ref--8-oneOf-1-0!../../../../node_modules/css-loader??ref--8-oneOf-1-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--8-oneOf-1-2!../../../../node_modules/sass-loader/lib/loader.js??ref--8-oneOf-1-3!../../../../node_modules/cache-loader/dist/cjs.js??ref--0-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./IPAddressField.vue?vue&type=style&index=0&id=979fe2f8&scoped=true&lang=scss& */ "./node_modules/mini-css-extract-plugin/dist/loader.js?!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/lib/loader.js?!./node_modules/cache-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./src/components/wx/f/IPAddressField.vue?vue&type=style&index=0&id=979fe2f8&scoped=true&lang=scss&");
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_index_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_IPAddressField_vue_vue_type_style_index_0_id_979fe2f8_scoped_true_lang_scss___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_index_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_IPAddressField_vue_vue_type_style_index_0_id_979fe2f8_scoped_true_lang_scss___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_index_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_IPAddressField_vue_vue_type_style_index_0_id_979fe2f8_scoped_true_lang_scss___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_index_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_IPAddressField_vue_vue_type_style_index_0_id_979fe2f8_scoped_true_lang_scss___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_index_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_IPAddressField_vue_vue_type_style_index_0_id_979fe2f8_scoped_true_lang_scss___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./src/components/wx/f/IPAddressField.vue?vue&type=template&id=979fe2f8&scoped=true&lang=html&":
+/*!*****************************************************************************************************!*\
+  !*** ./src/components/wx/f/IPAddressField.vue?vue&type=template&id=979fe2f8&scoped=true&lang=html& ***!
+  \*****************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _cache_loader_cacheDirectory_node_modules_cache_vue_loader_cacheIdentifier_e895c554_vue_loader_template_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_IPAddressField_vue_vue_type_template_id_979fe2f8_scoped_true_lang_html___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!cache-loader?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"e895c554-vue-loader-template"}!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/cache-loader/dist/cjs.js??ref--0-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./IPAddressField.vue?vue&type=template&id=979fe2f8&scoped=true&lang=html& */ "./node_modules/cache-loader/dist/cjs.js?{\"cacheDirectory\":\"node_modules/.cache/vue-loader\",\"cacheIdentifier\":\"e895c554-vue-loader-template\"}!./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/cache-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./src/components/wx/f/IPAddressField.vue?vue&type=template&id=979fe2f8&scoped=true&lang=html&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _cache_loader_cacheDirectory_node_modules_cache_vue_loader_cacheIdentifier_e895c554_vue_loader_template_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_IPAddressField_vue_vue_type_template_id_979fe2f8_scoped_true_lang_html___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _cache_loader_cacheDirectory_node_modules_cache_vue_loader_cacheIdentifier_e895c554_vue_loader_template_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_IPAddressField_vue_vue_type_template_id_979fe2f8_scoped_true_lang_html___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./src/components/wx/f/ImageField.vue":
 /*!********************************************!*\
   !*** ./src/components/wx/f/ImageField.vue ***!
@@ -3611,6 +4505,111 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _cache_loader_cacheDirectory_node_modules_cache_vue_loader_cacheIdentifier_e895c554_vue_loader_template_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_IntegerField_vue_vue_type_template_id_1ef52513_scoped_true_lang_html___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _cache_loader_cacheDirectory_node_modules_cache_vue_loader_cacheIdentifier_e895c554_vue_loader_template_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_IntegerField_vue_vue_type_template_id_1ef52513_scoped_true_lang_html___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./src/components/wx/f/JSONField.vue":
+/*!*******************************************!*\
+  !*** ./src/components/wx/f/JSONField.vue ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _JSONField_vue_vue_type_template_id_6fdde8eb_scoped_true_lang_html___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./JSONField.vue?vue&type=template&id=6fdde8eb&scoped=true&lang=html& */ "./src/components/wx/f/JSONField.vue?vue&type=template&id=6fdde8eb&scoped=true&lang=html&");
+/* harmony import */ var _JSONField_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./JSONField.vue?vue&type=script&lang=js& */ "./src/components/wx/f/JSONField.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _JSONField_vue_vue_type_style_index_0_id_6fdde8eb_scoped_true_lang_scss___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./JSONField.vue?vue&type=style&index=0&id=6fdde8eb&scoped=true&lang=scss& */ "./src/components/wx/f/JSONField.vue?vue&type=style&index=0&id=6fdde8eb&scoped=true&lang=scss&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _JSONField_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _JSONField_vue_vue_type_template_id_6fdde8eb_scoped_true_lang_html___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _JSONField_vue_vue_type_template_id_6fdde8eb_scoped_true_lang_html___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "6fdde8eb",
+  null
+  
+)
+
+/* hot reload */
+if (true) {
+  var api = __webpack_require__(/*! ./node_modules/vue-hot-reload-api/dist/index.js */ "./node_modules/vue-hot-reload-api/dist/index.js")
+  api.install(__webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.runtime.esm.js"))
+  if (api.compatible) {
+    module.hot.accept()
+    if (!module.hot.data) {
+      api.createRecord('6fdde8eb', component.options)
+    } else {
+      api.reload('6fdde8eb', component.options)
+    }
+    module.hot.accept(/*! ./JSONField.vue?vue&type=template&id=6fdde8eb&scoped=true&lang=html& */ "./src/components/wx/f/JSONField.vue?vue&type=template&id=6fdde8eb&scoped=true&lang=html&", function(__WEBPACK_OUTDATED_DEPENDENCIES__) { /* harmony import */ _JSONField_vue_vue_type_template_id_6fdde8eb_scoped_true_lang_html___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./JSONField.vue?vue&type=template&id=6fdde8eb&scoped=true&lang=html& */ "./src/components/wx/f/JSONField.vue?vue&type=template&id=6fdde8eb&scoped=true&lang=html&");
+(function () {
+      api.rerender('6fdde8eb', {
+        render: _JSONField_vue_vue_type_template_id_6fdde8eb_scoped_true_lang_html___WEBPACK_IMPORTED_MODULE_0__["render"],
+        staticRenderFns: _JSONField_vue_vue_type_template_id_6fdde8eb_scoped_true_lang_html___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]
+      })
+    })(__WEBPACK_OUTDATED_DEPENDENCIES__); })
+  }
+}
+component.options.__file = "src/components/wx/f/JSONField.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./src/components/wx/f/JSONField.vue?vue&type=script&lang=js&":
+/*!********************************************************************!*\
+  !*** ./src/components/wx/f/JSONField.vue?vue&type=script&lang=js& ***!
+  \********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_cache_loader_dist_cjs_js_ref_12_0_node_modules_babel_loader_lib_index_js_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_JSONField_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/cache-loader/dist/cjs.js??ref--12-0!../../../../node_modules/babel-loader/lib!../../../../node_modules/cache-loader/dist/cjs.js??ref--0-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./JSONField.vue?vue&type=script&lang=js& */ "./node_modules/cache-loader/dist/cjs.js?!./node_modules/babel-loader/lib/index.js!./node_modules/cache-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./src/components/wx/f/JSONField.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_cache_loader_dist_cjs_js_ref_12_0_node_modules_babel_loader_lib_index_js_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_JSONField_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./src/components/wx/f/JSONField.vue?vue&type=style&index=0&id=6fdde8eb&scoped=true&lang=scss&":
+/*!*****************************************************************************************************!*\
+  !*** ./src/components/wx/f/JSONField.vue?vue&type=style&index=0&id=6fdde8eb&scoped=true&lang=scss& ***!
+  \*****************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_index_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_JSONField_vue_vue_type_style_index_0_id_6fdde8eb_scoped_true_lang_scss___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/mini-css-extract-plugin/dist/loader.js??ref--8-oneOf-1-0!../../../../node_modules/css-loader??ref--8-oneOf-1-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--8-oneOf-1-2!../../../../node_modules/sass-loader/lib/loader.js??ref--8-oneOf-1-3!../../../../node_modules/cache-loader/dist/cjs.js??ref--0-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./JSONField.vue?vue&type=style&index=0&id=6fdde8eb&scoped=true&lang=scss& */ "./node_modules/mini-css-extract-plugin/dist/loader.js?!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/lib/loader.js?!./node_modules/cache-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./src/components/wx/f/JSONField.vue?vue&type=style&index=0&id=6fdde8eb&scoped=true&lang=scss&");
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_index_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_JSONField_vue_vue_type_style_index_0_id_6fdde8eb_scoped_true_lang_scss___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_index_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_JSONField_vue_vue_type_style_index_0_id_6fdde8eb_scoped_true_lang_scss___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_index_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_JSONField_vue_vue_type_style_index_0_id_6fdde8eb_scoped_true_lang_scss___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_index_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_JSONField_vue_vue_type_style_index_0_id_6fdde8eb_scoped_true_lang_scss___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_index_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_JSONField_vue_vue_type_style_index_0_id_6fdde8eb_scoped_true_lang_scss___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./src/components/wx/f/JSONField.vue?vue&type=template&id=6fdde8eb&scoped=true&lang=html&":
+/*!************************************************************************************************!*\
+  !*** ./src/components/wx/f/JSONField.vue?vue&type=template&id=6fdde8eb&scoped=true&lang=html& ***!
+  \************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _cache_loader_cacheDirectory_node_modules_cache_vue_loader_cacheIdentifier_e895c554_vue_loader_template_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_JSONField_vue_vue_type_template_id_6fdde8eb_scoped_true_lang_html___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!cache-loader?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"e895c554-vue-loader-template"}!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/cache-loader/dist/cjs.js??ref--0-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./JSONField.vue?vue&type=template&id=6fdde8eb&scoped=true&lang=html& */ "./node_modules/cache-loader/dist/cjs.js?{\"cacheDirectory\":\"node_modules/.cache/vue-loader\",\"cacheIdentifier\":\"e895c554-vue-loader-template\"}!./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/cache-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./src/components/wx/f/JSONField.vue?vue&type=template&id=6fdde8eb&scoped=true&lang=html&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _cache_loader_cacheDirectory_node_modules_cache_vue_loader_cacheIdentifier_e895c554_vue_loader_template_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_JSONField_vue_vue_type_template_id_6fdde8eb_scoped_true_lang_html___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _cache_loader_cacheDirectory_node_modules_cache_vue_loader_cacheIdentifier_e895c554_vue_loader_template_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_JSONField_vue_vue_type_template_id_6fdde8eb_scoped_true_lang_html___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

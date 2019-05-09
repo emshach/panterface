@@ -1,7 +1,7 @@
 <template lang="html"></template>
 
 <script lang="js">
-import widgets from '@/lib/widgets'
+import widgets from '@/components/widgets'
 import { Widget } from '@/lib/objects'
 export default  {
   name: 'WidgetWidget',

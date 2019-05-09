@@ -1,8 +1,8 @@
 <template lang="html"></template>
 
 <script lang="js">
-import DashboardWidget from '@/components/DashboardWidget'
-import InlineWidget from '@/components/InlineWidget'
+import DashboardWidget from '@/components/wx/DashboardWidget'
+import InlineWidget from '@/components/wx/InlineWidget'
 import { Widget } from '@/lib/objects'
 export default  {
   name: 'AdaptiveWidget',

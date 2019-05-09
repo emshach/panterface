@@ -72,19 +72,18 @@ def api_root( request, format=None ):
 
 @api_view([ 'GET' ])
 @permission_classes(( permissions.AllowAny, ))
-def api_complete( request, path='', format=None ):
+def api_ls( request, path='', format=None ):
     ptree = path.split('/')
     rx = r''
     for d in ptree:
         if d:
             rx = r"(?:{}/)?{}".format( rx, d )
     rx = r'^' + rx
-    base = ptree[-1]
-    if path and not base:
+    if path:
         rx = rx + r'(?:/|$)'
     candidates = Location.objects.filter( href__regex=rx )
     candidates = candidates.order_by( 'name' ).all()
-    completions = re.compile( r'%s([^/]*)(/|$)?' % rx )
+    completions = re.compile( r'%s([^/]*)(?:/|($))?' % rx )
     matches = set()
     slots = {}
     locations = []
@@ -98,7 +97,7 @@ def api_complete( request, path='', format=None ):
             if m2:
                 slot = m2.group(1)
                 if slot not in slots:
-                    app, model = slot.split( '.' )
+                    app, model = slot.split('.')
                     slots[ slot ] = dict(
                         app=app,
                         model=model,
@@ -111,7 +110,7 @@ def api_complete( request, path='', format=None ):
                     slots[ slot ][ 'new' ] = True
                     slots[ slot ][ 'search' ].add( 'new' )
             else:
-                matches.add( base + g )
+                matches.add(g)
             if m.group(2) is not None:
                 locations.append( candidate )
     expand = locations[ :1 ]
@@ -129,7 +128,6 @@ def api_complete( request, path='', format=None ):
             ptree=ptree,
             rx=rx
         ),
-        base=base,
         matches=tuple( matches ),
         slots=[
             dict(

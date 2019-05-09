@@ -47,6 +47,9 @@ a[data-v-aae30ed8] {
 .mf-prompt {
   width: 100%;
 }
+.mf-prompt .readline {
+    width: 100%;
+}
 .mf-prompt .breadcrumb {
     margin: 0;
     padding: 4px;

@@ -126,6 +126,9 @@ export default {
 <style lang="scss">
   .mf-prompt {
     width: 100%;
+    .readline {
+      width: 100%;
+    }
     .breadcrumb {
       margin: 0;
       padding: 4px;

@@ -15,8 +15,8 @@
         <input name="ctrl" class="filter uk-input uk-flex-1" v-model="ctrl"
                ref="ctrl" />
       </div>
-      <input v-else name="cli" class="cli uk-input uk-flex-1" v-model="cli"
-             ref="input" @input="input" @keydown="processKey( $event )" />
+      <input v-else name="cli" class="cli uk-input uk-flex-1" v-model="input"
+             ref="input" @input="processInput" @keydown="processKey( $event )" />
     </div>
   </form>
 </template>
@@ -63,7 +63,7 @@ export default {
   },
   methods: {
     submit() {
-      this.$emit( 'update', this.cli );
+      this.$emit( 'update', this.input );
       // TODO: based on state, push prospect, push breadcrumb
       this.entered = '';
       this.getCompletions();
@@ -78,11 +78,11 @@ export default {
     debouncedInput: debounce( function() {
       this.getCompletions();
     }, 250 ),
-    input() {
+    processInput() {
       this.entered = this.input;
     },
     complete( match ) {
-      this.cli = this.cli.replace( RegExp( this.base + '$' ), match + ' ' );
+      this.input = match;
       this.getCompletions();
       this.$refs.input.focus();
     },

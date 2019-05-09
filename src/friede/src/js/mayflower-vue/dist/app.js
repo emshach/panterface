@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "f4ebd0007fd27ba0b952";
+/******/ 	var hotCurrentHash = "c99b08f83a1d8d5debea";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1325,7 +1325,7 @@ __webpack_require__.r(__webpack_exports__);
           l2 = l;
 
           if (!widget) {
-            var w = l._widget_entries.find(function (x) {
+            var w = l._widget_entries && l._widget_entries.find(function (x) {
               return x.name === 'card';
             });
 

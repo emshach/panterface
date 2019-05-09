@@ -66,7 +66,8 @@ export default {
         do {
           l2 = l;
           if ( !widget ) {
-            var w = l._widget_entries.find( x => x.name === 'card' );
+            var w = l._widget_entries
+                && l._widget_entries.find( x => x.name === 'card' );
             if (w)
               widget = Widget( w.entry );
           }

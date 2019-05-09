@@ -2,9 +2,9 @@
   <form id="prompt" class="mf-prompt uk-flex uk-wrap-around" ref="form"
         @submit.prevent="submit">
     <switchboard :matches="matches" :locations="locations" @update="complete" />
-    <div class="readline">
+    <div class="readline uk-flex uk-wrap-around">
       <breadcrumb class="main" :items="breadcrumb" />
-      <breadcrumb class="tmp" :items="prospect" />
+      <breadcrumb v-if="prospect.length" class="tmp" :items="prospect" />
       <div v-if="searching" class="object-search">
         <span class="object">{{ searching }}:</span>
         <input name="filter" class="filter uk-input uk-flex-1" v-model="filter"
@@ -145,6 +145,11 @@ export default {
             background: rgba(255,255,255,0.25);
           }
         }
+      }
+      &.tmp {
+        background: rgba(255,255,255,0.3);
+        margin-right: -3px;
+        border-top-left-radius: 4px;
       }
     }
     .cli {

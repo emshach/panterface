@@ -68,6 +68,11 @@ a[data-v-aae30ed8] {
 .mf-prompt .breadcrumb li a:hover {
           background: rgba(255, 255, 255, 0.25);
 }
+.mf-prompt .breadcrumb.tmp {
+      background: rgba(255, 255, 255, 0.3);
+      margin-right: -3px;
+      border-top-left-radius: 4px;
+}
 .mf-prompt .cli {
     background: rgba(0, 0, 0, 0.5);
     font-family: monospace;

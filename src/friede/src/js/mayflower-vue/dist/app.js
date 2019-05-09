@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "c99b08f83a1d8d5debea";
+/******/ 	var hotCurrentHash = "d5921cb4159a90243e36";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1556,16 +1556,18 @@ var render = function() {
       }),
       _c(
         "div",
-        { staticClass: "readline" },
+        { staticClass: "readline uk-flex uk-wrap-around" },
         [
           _c("breadcrumb", {
             staticClass: "main",
             attrs: { items: _vm.breadcrumb }
           }),
-          _c("breadcrumb", {
-            staticClass: "tmp",
-            attrs: { items: _vm.prospect }
-          }),
+          _vm.prospect.length
+            ? _c("breadcrumb", {
+                staticClass: "tmp",
+                attrs: { items: _vm.prospect }
+              })
+            : _vm._e(),
           _vm.searching
             ? _c("div", { staticClass: "object-search" }, [
                 _c("span", { staticClass: "object" }, [

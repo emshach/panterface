@@ -4,11 +4,11 @@
       <dashboard :widgets="widgets" />
     </transition>
     <transition mode="in-out">
-      <vk-grid  v-if="matches.length || locations.length"
-                gutter="collapse" :class="[ 'completions', 'uk-margin', columnWidth ]"
-                :style="{ minWidth: 92 * ( getCompletionColumns() / 6 ) + '%' }">
+      <vk-grid v-if="matches.length || locations.length"
+               gutter="collapse" :class="[ 'completions', 'uk-margin', columnWidth ]"
+               :style="{ minWidth: 92 * ( getCompletionColumns() / 6 ) + '%' }">
         <vk-button-link
-          v-for="match in matches" href size="small" 
+          v-for="match in matches" href :key="match" size="small"
           @click.prevent="select( match )">{{ match }}</vk-button-link>
       </vk-grid>
     </transition>
@@ -18,8 +18,9 @@
 <script lang="js">
 import { Grid as VkGrid } from 'vuikit/lib/grid'
 import { ButtonLink as VkButtonLink } from 'vuikit/lib/button'
+import Dashboard from '@/components/Dashboard'
 import { Widget } from '@/lib/objects'
-export default { 
+export default {
   name: 'Switchboard',
   props: {
     matches: {
@@ -31,14 +32,11 @@ export default {
       default: () => []
     }
   },
-  components: { VkGrid, VkButtonLink, Widget },
+  components: { VkGrid, VkButtonLink, Dashboard },
   mounted() {
-    
   },
   data() {
-    return {
-      
-    }
+    return {}
   },
   methods: {
     select( match ) {
@@ -46,7 +44,7 @@ export default {
     },
     getCompletionColumns() {
       const matches = this.matches.length;
-      switch( matches ) {
+      switch ( matches ) {
       case 0:
       case 1:
       case 2:
@@ -68,12 +66,12 @@ export default {
         do {
           l2 = l;
           if ( !widget ) {
-            var w = l._widget_entries.find( x => x.name == 'card' );
+            var w = l._widget_entries.find( x => x.name === 'card' );
             if (w)
               widget = Widget( w.entry );
           }
           l = l.redirect_to
-        } while ( true );
+        } while (l);
         if ( widget )
           widget.data.location = l2;
         return widget;

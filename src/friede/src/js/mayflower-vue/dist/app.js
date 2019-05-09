@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "d5921cb4159a90243e36";
+/******/ 	var hotCurrentHash = "03f3dc68bfaf8324ad6c";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1182,7 +1182,7 @@ __webpack_require__.r(__webpack_exports__);
     getCompletions: function getCompletions() {
       var _this2 = this;
 
-      this.$api('complete', this.input).then(function (data) {
+      this.$api('ls', this.input).then(function (data) {
         _this2.pathMatches = data.matches;
         _this2.pathSlots = data.slots;
         _this2.pathLocations = data.locations;

@@ -69,7 +69,7 @@ export default {
       this.getCompletions();
     },
     getCompletions() {
-      this.$api( 'complete', this.input ).then( data => {
+      this.$api( 'ls', this.input ).then( data => {
         this.pathMatches = data.matches;
         this.pathSlots = data.slots;
         this.pathLocations = data.locations;

@@ -1,14 +1,15 @@
+import create from 'lodash/create'
 import extend from 'lodash/extend'
 function inherit( child, base, props ) {
-  child.prototype = _.create(base.prototype, extend({
+  child.prototype = create( base.prototype, extend({
     '_super': base.prototype,
     'constructor': child
-  }, props));
+  }, props ));
   return child;
 }
 const objects = {}
 
- function Widget( obj, cls ) {
+function Widget( obj, cls ) {
   if ( !cls )
     cls = Widget;
   if ( obj instanceof cls ) {

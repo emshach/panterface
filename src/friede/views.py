@@ -74,7 +74,7 @@ def api_root( request, format=None ):
 @permission_classes(( permissions.AllowAny, ))
 def api_ls( request, path='', format=None ):
     ptree = path.split('/')
-    rx = r''
+    rx = r'/?'
     for d in ptree:
         if d:
             rx = r"(?:{}/)?{}".format( rx, d )

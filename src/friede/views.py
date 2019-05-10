@@ -81,8 +81,7 @@ def api_ls( request, path='', format=None ):
     rx = r'^' + rx
     if path:
         rx = rx + r'(?:/|$)'
-    candidates = Location.objects.filter( href__regex=rx )
-    candidates = candidates.order_by( 'name' ).all()
+    candidates = Location.objects.filter( href__regex=rx ).all()
     completions = re.compile( r'%s([^/]*)(?:/|($))?' % rx )
     matches = set()
     slots = {}

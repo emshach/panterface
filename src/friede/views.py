@@ -93,6 +93,8 @@ def api_ls( request, path='', format=None ):
         m = completions.match( candidate.href )
         if m:
             g = m.group(1)
+            if not g:
+                continue
             m2 = re.match( r'{([\w.]+)(\*)?(\+)?}', g )
             if m2:
                 slot = m2.group(1)

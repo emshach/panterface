@@ -9,15 +9,15 @@
                :style="{ minWidth: 92 * ( getCompletionColumns() / 6 ) + '%' }">
         <vk-button-link
           v-for="m in matches" href :key="m" size="small"
-          :class="[ 'match', m === selected ? 'selected' : '' ]"
+          :class="[ 'match', m === value ? 'selected' : '' ]"
           @click.prevent="select(m)">{{m}}</vk-button-link>
         <vk-button-link
           v-for="l in locations" href :key="l.href" size="small"
-          :class="[ 'location', l === selected ? 'selected' : '' ]"
+          :class="[ 'location', l === value ? 'selected' : '' ]"
           @click.prevent="select(l)">{{ l.href }}</vk-button-link>
         <vk-button-link
           v-for="s in slots" href :key="s.app+'.'+s.model" size="small"
-          :class="[ 'slot', s === selected ? 'selected' : '' ]"
+          :class="[ 'slot', s === value ? 'selected' : '' ]"
           @click.prevent="select(s)">{{ s.label }}</vk-button-link>
       </vk-grid>
     </transition>

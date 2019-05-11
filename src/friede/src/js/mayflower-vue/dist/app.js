@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "dae26dd8765fece150f3";
+/******/ 	var hotCurrentHash = "3293365a0de52f52e8dc";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1223,7 +1223,7 @@ __webpack_require__.r(__webpack_exports__);
           if (this.all.length === 1) {
             this.update(this.selected = this.all[0]);
           } else {
-            this.selected = (this.all.indexOf(this.selected) + 1) % this.all.length;
+            this.selected = this.all[(this.all.indexOf(this.selected) + 1) % this.all.length];
             this.integrate(this.selected);
           }
         } // TODO: else cycle completions
@@ -1762,7 +1762,7 @@ var render = function() {
                       "vk-button-link",
                       {
                         key: m,
-                        class: ["match", m === _vm.selected ? "selected" : ""],
+                        class: ["match", m === _vm.value ? "selected" : ""],
                         attrs: { href: "", size: "small" },
                         on: {
                           click: function($event) {
@@ -1779,10 +1779,7 @@ var render = function() {
                       "vk-button-link",
                       {
                         key: l.href,
-                        class: [
-                          "location",
-                          l === _vm.selected ? "selected" : ""
-                        ],
+                        class: ["location", l === _vm.value ? "selected" : ""],
                         attrs: { href: "", size: "small" },
                         on: {
                           click: function($event) {
@@ -1799,7 +1796,7 @@ var render = function() {
                       "vk-button-link",
                       {
                         key: s.app + "." + s.model,
-                        class: ["slot", s === _vm.selected ? "selected" : ""],
+                        class: ["slot", s === _vm.value ? "selected" : ""],
                         attrs: { href: "", size: "small" },
                         on: {
                           click: function($event) {

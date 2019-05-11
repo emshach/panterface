@@ -108,7 +108,8 @@ export default {
           if ( this.all.length === 1 ) {
             this.update( this.selected = this.all[0] );
           } else {
-            this.selected = ( this.all.indexOf( this.selected ) + 1 ) % this.all.length;
+            this.selected = this.all[
+              ( this.all.indexOf( this.selected ) + 1 ) % this.all.length ];
             this.integrate( this.selected );
           }
         }

@@ -109,7 +109,7 @@ export default {
             this.update( this.selected = this.all[0] );
           } else {
             var cr = this.all.indexOf( this.selected );
-            if ( shiftKey ) {
+            if ( $event.shiftKey ) {
               if ( cr != -1 )
                 cr--;
             } else {

@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "94e6c8d55f8379e16b9e";
+/******/ 	var hotCurrentHash = "c9dbc4f6bc61d32ef19d";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1258,7 +1258,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     all: function all() {
-      return this.pathMatches.concat(this.pathLocations).concat(this.pathSlots);
+      return this.matches.concat(this.locations).concat(this.slots);
     },
     matches: function matches() {
       var _this3 = this;

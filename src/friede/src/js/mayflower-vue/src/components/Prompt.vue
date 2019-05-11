@@ -142,7 +142,7 @@ export default {
   },
   computed: {
     all() {
-      return this.pathMatches.concat( this.pathLocations ).concat( this.pathSlots );
+      return this.matches.concat( this.locations ).concat( this.slots );
     },
     matches() {
       if ( !this.entered )

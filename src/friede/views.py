@@ -129,7 +129,7 @@ def api_ls( request, path='', format=None ):
                 matches.add(g)
             if m.group(2) is not None:
                 locations.append( candidate )
-    for k, v in by_label:
+    for k, v in by_label.items():
         if len(v) > 1:
             for w in v:
                 w[ 'append' ]= " ({})".format( w.app )

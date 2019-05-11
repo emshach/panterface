@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "da4b704d1ef9a5349c8c";
+/******/ 	var hotCurrentHash = "94e6c8d55f8379e16b9e";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1239,6 +1239,20 @@ __webpack_require__.r(__webpack_exports__);
       } else if ($event.keyCode === 13) {
         $event.preventDefault();
         this.$refs.form.submit();
+      } else if ($event.keyCode === 27) {
+        if (this.selected) {
+          this.selected = null;
+          this.input = this.entered;
+        } else if (this.input) {
+          this.input = this.entered = '';
+        } else if (this.prospect.length) {
+          this.prospect = [];
+        } else {
+          this.$refs.input.blur();
+        }
+      } else if (this.selected) {
+        this.selected = null;
+        this.input = this.entered;
       }
     }
   },

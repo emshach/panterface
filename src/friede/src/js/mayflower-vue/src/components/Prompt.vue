@@ -123,6 +123,20 @@ export default {
       } else if ( $event.keyCode === 13 ) { 
         $event.preventDefault();
         this.$refs.form.submit();
+      } else if ( $event.keyCode === 27 ) {
+        if ( this.selected ) {
+          this.selected = null;
+          this.input = this.entered;
+        } else if ( this.input ) {
+          this.input = this.entered = '';
+        } else if ( this.prospect.length ) {
+          this.prospect = []
+        } else {
+          this.$refs.input.blur();
+        }
+      } else if ( this.selected ) {
+        this.selected = null;
+        this.input = this.entered;
       }
     }
   },

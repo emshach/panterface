@@ -114,7 +114,7 @@ export default {
         return this.pathSlots;
       return this.pathSlots.filter(
           x => x.search.filter(
-            y => y.indexOf( filter ) > -1 ).length )
+            y => y.indexOf( this.entered ) > -1 ).length )
     },
     locations() {
       if ( !this.entered )

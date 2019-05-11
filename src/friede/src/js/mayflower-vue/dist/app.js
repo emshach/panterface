@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "4c34caab450d01e2b38f";
+/******/ 	var hotCurrentHash = "299730edded6d7c91b28";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1222,19 +1222,21 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     slots: function slots() {
+      var _this4 = this;
+
       if (!this.entered) return this.pathSlots;
       return this.pathSlots.filter(function (x) {
         return x.search.filter(function (y) {
-          return y.indexOf(filter) > -1;
+          return y.indexOf(_this4.entered) > -1;
         }).length;
       });
     },
     locations: function locations() {
-      var _this4 = this;
+      var _this5 = this;
 
       if (!this.entered) return this.pathLocations;
       return this.pathLocations.filter(function (x) {
-        return x.name.indexOf(_this4.entered) === 0;
+        return x.name.indexOf(_this5.entered) === 0;
       });
     },
     filters: function filters() {
@@ -1772,7 +1774,7 @@ var render = function() {
                     return _c(
                       "vk-button-link",
                       {
-                        key: l,
+                        key: l.href,
                         class: [
                           "location",
                           _vm.m === _vm.selected ? "selected" : ""
@@ -1792,7 +1794,7 @@ var render = function() {
                     return _c(
                       "vk-button-link",
                       {
-                        key: s,
+                        key: s.app + "." + s.model,
                         class: [
                           "slot",
                           _vm.m === _vm.selected ? "selected" : ""

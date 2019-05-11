@@ -12,11 +12,11 @@
           :class="[ 'match', m === selected ? 'selected' : '' ]"
           @click.prevent="select( m, 'match' )">{{m}}</vk-button-link>
         <vk-button-link
-          v-for="l in locations" href :key="l" size="small"
+          v-for="l in locations" href :key="l.href" size="small"
           :class="[ 'location', m === selected ? 'selected' : '' ]"
           @click.prevent="select( l, 'location' )">{{ l.href }}</vk-button-link>
         <vk-button-link
-          v-for="s in slots" href :key="s" size="small"
+          v-for="s in slots" href :key="s.app+'.'+s.model" size="small"
           :class="[ 'slot', m === selected ? 'selected' : '' ]"
           @click.prevent="select( s, 'slot' )">{{ s.label }}</vk-button-link>
       </vk-grid>

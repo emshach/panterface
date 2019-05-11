@@ -127,17 +127,19 @@ def api_ls( request, path='', format=None ):
                     slots[ slot ][ 'search' ].add( 'new' )
             else:
                 matches.add(g)
-            if m.group(2) is not None:
-                locations.append( candidate )
+                if m.group(2) is not None:
+                    locations.append( candidate )
     for k, v in by_label.items():
         if len(v) > 1:
             for w in v:
                 w[ 'append' ]= " ({})".format( w.app )
                 w[ 'label' ]= ( w['plural' if w[ 'multiple'] else 'singular' ]
                                + w[ 'append' ]).title()
+                w[ 'search' ] = list( w[ 'search' ])
         else:
             w = v[0]
             w[ 'label' ]= w['plural' if w[ 'multiple'] else 'singular' ].title()
+            w[ 'search' ] = list( w[ 'search' ])
 
     expand = locations[ :1 ]
     rest = locations[ 1: ]
@@ -155,14 +157,7 @@ def api_ls( request, path='', format=None ):
             rx=rx
         ),
         matches=tuple( matches ),
-        slots=[
-            dict(
-                app=s[ 'app' ],
-                model=s[ 'model' ],
-                new=s[ 'new' ],
-                multiple=s[ 'multiple' ],
-                search=list( s[ 'search' ])
-            ) for s in slots.values() ],
+        slots=slots.values(),
         locations=expanded_serializer.data + rest_serializer.data
     ))
 

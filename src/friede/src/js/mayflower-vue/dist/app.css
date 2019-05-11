@@ -33,14 +33,24 @@ a[data-v-aae30ed8] {
     padding: 0px 8px;
     text-align: left;
     text-transform: none;
-    color: white;
+    color: lightskyblue;
 }
 .switchboard .completions .uk-button.uk-button-default[data-v-10af6d32] {
       background: transparent;
       border: 0 none;
 }
+.switchboard .completions .uk-button.uk-button-default.selected[data-v-10af6d32] {
+        background: rgba(255, 255, 255, 0.2);
+}
 .switchboard .completions .uk-button.uk-button-default[data-v-10af6d32]:hover {
-        background: rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.3);
+}
+.switchboard .completions .uk-button.location[data-v-10af6d32] {
+      color: lime;
+}
+.switchboard .completions .uk-button.slot[data-v-10af6d32] {
+      color: white;
+      font-weight: bold;
 }
 
 

@@ -2,7 +2,7 @@
   <form id="prompt" class="mf-prompt uk-flex uk-wrap-around" ref="form"
         @submit.prevent="submit">
     <switchboard :matches="matches" :locations="locations" :slots="slots"
-                 @select="select" />
+                 v-model="selected" @input="update" />
     <div class="readline uk-flex uk-wrap-around">
       <breadcrumb class="main" :items="breadcrumb" />
       <breadcrumb v-if="prospect.length" class="tmp" :items="prospect" />
@@ -60,6 +60,7 @@ export default {
       pathSlots: [],
       pathLocations: [],
       enterMeansSubmit: true,
+      selected: null,
     }
   },
   methods: {
@@ -82,28 +83,46 @@ export default {
     processInput() {
       this.entered = this.input;
     },
-    update( match, type ) {
-      if ( type === 'match' )
+    integrate( match ) {
+      if ( match.href ) {       // location, about to go
+        this.state = 'prelaunch';
+        this.input = 'Goto: ' + match.href;
+        // TODO: need to extract the part already entered
+      } else if ( match.label ) { // slot
+        this.state = 'searching';
+        this.input = 'Object: ' + match.label
+        // TODO: get completions for object
+      } else {                  // string match
+        this.state = 'nav';
         this.input = match;
+      }
     },
-    select( match, type ) {
-      if ( type === 'match' )
-        this.input = match;
-      this.submit();
+    update( match ) {
+      this.integrate( match );
+      this.submit()
     },
     processKey( $event ) {
       if ( $event.keyCode === 9 )  { // TAB
         $event.preventDefault();
-        if ( this.matches.length === 1 )
-          this.complete( this.matches[0] + ' ' )
+        if ( this.matches.length ) {
+          if ( this.all.length === 1 ) {
+            this.update( this.selected = this.all[0] );
+          } else {
+            this.selected = ( this.all.indexOf( this.selected ) + 1 ) % this.all.length;
+            this.integrate( this.selected );
+          }
+        }
         // TODO: else cycle completions
-      } else if( $event.keyCode === 13 && this.multiline && this.enterMeansSubmit) { 
+      } else if ( $event.keyCode === 13 ) { 
         $event.preventDefault();
         this.$refs.form.submit();
       }
     }
   },
   computed: {
+    all() {
+      return this.pathMatches.concat( this.pathLocations ).concat( this.pathSlots );
+    },
     matches() {
       if ( !this.entered )
         return this.pathMatches;

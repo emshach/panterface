@@ -10,15 +10,15 @@
         <vk-button-link
           v-for="m in matches" href :key="m" size="small"
           :class="[ 'match', m === selected ? 'selected' : '' ]"
-          @click.prevent="select( m, 'match' )">{{m}}</vk-button-link>
+          @click.prevent="select(m)">{{m}}</vk-button-link>
         <vk-button-link
           v-for="l in locations" href :key="l.href" size="small"
-          :class="[ 'location', m === selected ? 'selected' : '' ]"
-          @click.prevent="select( l, 'location' )">{{ l.href }}</vk-button-link>
+          :class="[ 'location', l === selected ? 'selected' : '' ]"
+          @click.prevent="select(l)">{{ l.href }}</vk-button-link>
         <vk-button-link
           v-for="s in slots" href :key="s.app+'.'+s.model" size="small"
-          :class="[ 'slot', m === selected ? 'selected' : '' ]"
-          @click.prevent="select( s, 'slot' )">{{ s.label }}</vk-button-link>
+          :class="[ 'slot', s === selected ? 'selected' : '' ]"
+          @click.prevent="select(s)">{{ s.label }}</vk-button-link>
       </vk-grid>
     </transition>
   </div>
@@ -44,41 +44,21 @@ export default {
       type: Array,
       default: () => []
     },
-    selected: {
+    value: {
       type: [ String, Object ],
       default: null
     }
   },
   components: { VkGrid, VkButtonLink, Dashboard },
   mounted() {
-    this.cr = this.all.indexOf( this.selected );
   },
   data() {
-    return {
-      cr: -1
-    }
+    return {}
   },
   methods: {
     select( match, type ) {
-      this.selected = match;
-      this.cr = this.all.indexOf( this.selected );
-      this.$emit( 'select', match, type );
-    },
-    selectNext() {
-      const all = this.all;
-      var type = 'slot';
-      if ( this.cr == -1 ) {
-        this.cr = 0
-      } else {
-        this.cr = this.all.indexOf( this.selected ) % this.all.length;
-      }
-      this.selected = this.all[ this.cr ];
-      if ( cr < this.matches.length ) {
-        type = 'match';
-      } else if ( cr < ( this.matches.length + this.locations.length )) {
-        type = 'location';
-      }
-      this.$emit( 'update', this.selected, type );
+      this.value = match;
+      this.$emit( 'input', match );
     },
     getCompletionColumns() {
       const matches = this.matches.length;
@@ -95,9 +75,6 @@ export default {
     }
   },
   computed: {
-    all() {
-      return this.matches.concat( this.locations ).concat( this.slot );
-    },
     columnWidth() {
       return 'uk-child-width-1-' + this.getCompletionColumns()
     },
@@ -143,13 +120,23 @@ export default {
       padding: 0px 8px;
       text-align: left;
       text-transform: none;
-      color: white;
+      color: lightskyblue;
       &.uk-button-default {
         background: transparent;
         border: 0 none;
-        &:hover {
-          background: rgba(255,255,255,0.1);
+        &.selected {
+          background: rgba(255,255,255,0.2);
         }
+        &:hover {
+          background: rgba(255,255,255,0.3);
+        }
+      }
+      &.location {
+        color: lime;
+      }
+      &.slot {
+        color: white;
+        font-weight: bold;
       }
     }
   }

@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "299730edded6d7c91b28";
+/******/ 	var hotCurrentHash = "dae26dd8765fece150f3";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1169,7 +1169,8 @@ __webpack_require__.r(__webpack_exports__);
       pathMatches: [],
       pathSlots: [],
       pathLocations: [],
-      enterMeansSubmit: true
+      enterMeansSubmit: true,
+      selected: null
     };
   },
   methods: {
@@ -1194,25 +1195,49 @@ __webpack_require__.r(__webpack_exports__);
     processInput: function processInput() {
       this.entered = this.input;
     },
-    update: function update(match, type) {
-      if (type === 'match') this.input = match;
+    integrate: function integrate(match) {
+      if (match.href) {
+        // location, about to go
+        this.state = 'prelaunch';
+        this.input = 'Goto: ' + match.href; // TODO: need to extract the part already entered
+      } else if (match.label) {
+        // slot
+        this.state = 'searching';
+        this.input = 'Object: ' + match.label; // TODO: get completions for object
+      } else {
+        // string match
+        this.state = 'nav';
+        this.input = match;
+      }
     },
-    select: function select(match, type) {
-      if (type === 'match') this.input = match;
+    update: function update(match) {
+      this.integrate(match);
       this.submit();
     },
     processKey: function processKey($event) {
       if ($event.keyCode === 9) {
         // TAB
         $event.preventDefault();
-        if (this.matches.length === 1) this.complete(this.matches[0] + ' '); // TODO: else cycle completions
-      } else if ($event.keyCode === 13 && this.multiline && this.enterMeansSubmit) {
+
+        if (this.matches.length) {
+          if (this.all.length === 1) {
+            this.update(this.selected = this.all[0]);
+          } else {
+            this.selected = (this.all.indexOf(this.selected) + 1) % this.all.length;
+            this.integrate(this.selected);
+          }
+        } // TODO: else cycle completions
+
+      } else if ($event.keyCode === 13) {
         $event.preventDefault();
         this.$refs.form.submit();
       }
     }
   },
   computed: {
+    all: function all() {
+      return this.pathMatches.concat(this.pathLocations).concat(this.pathSlots);
+    },
     matches: function matches() {
       var _this3 = this;
 
@@ -1291,7 +1316,7 @@ __webpack_require__.r(__webpack_exports__);
         return [];
       }
     },
-    selected: {
+    value: {
       type: [String, Object],
       default: null
     }
@@ -1301,39 +1326,14 @@ __webpack_require__.r(__webpack_exports__);
     VkButtonLink: vuikit_lib_button__WEBPACK_IMPORTED_MODULE_3__["ButtonLink"],
     Dashboard: _components_Dashboard__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
-  mounted: function mounted() {
-    this.cr = this.all.indexOf(this.selected);
-  },
+  mounted: function mounted() {},
   data: function data() {
-    return {
-      cr: -1
-    };
+    return {};
   },
   methods: {
     select: function select(match, type) {
-      this.selected = match;
-      this.cr = this.all.indexOf(this.selected);
-      this.$emit('select', match, type);
-    },
-    selectNext: function selectNext() {
-      var all = this.all;
-      var type = 'slot';
-
-      if (this.cr == -1) {
-        this.cr = 0;
-      } else {
-        this.cr = this.all.indexOf(this.selected) % this.all.length;
-      }
-
-      this.selected = this.all[this.cr];
-
-      if (cr < this.matches.length) {
-        type = 'match';
-      } else if (cr < this.matches.length + this.locations.length) {
-        type = 'location';
-      }
-
-      this.$emit('update', this.selected, type);
+      this.value = match;
+      this.$emit('input', match);
     },
     getCompletionColumns: function getCompletionColumns() {
       var matches = this.matches.length;
@@ -1352,9 +1352,6 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   computed: {
-    all: function all() {
-      return this.matches.concat(this.locations).concat(this.slot);
-    },
     columnWidth: function columnWidth() {
       return 'uk-child-width-1-' + this.getCompletionColumns();
     },
@@ -1599,7 +1596,14 @@ var render = function() {
           locations: _vm.locations,
           slots: _vm.slots
         },
-        on: { select: _vm.select }
+        on: { input: _vm.update },
+        model: {
+          value: _vm.selected,
+          callback: function($$v) {
+            _vm.selected = $$v
+          },
+          expression: "selected"
+        }
       }),
       _c(
         "div",
@@ -1763,7 +1767,7 @@ var render = function() {
                         on: {
                           click: function($event) {
                             $event.preventDefault()
-                            return _vm.select(m, "match")
+                            return _vm.select(m)
                           }
                         }
                       },
@@ -1777,13 +1781,13 @@ var render = function() {
                         key: l.href,
                         class: [
                           "location",
-                          _vm.m === _vm.selected ? "selected" : ""
+                          l === _vm.selected ? "selected" : ""
                         ],
                         attrs: { href: "", size: "small" },
                         on: {
                           click: function($event) {
                             $event.preventDefault()
-                            return _vm.select(l, "location")
+                            return _vm.select(l)
                           }
                         }
                       },
@@ -1795,15 +1799,12 @@ var render = function() {
                       "vk-button-link",
                       {
                         key: s.app + "." + s.model,
-                        class: [
-                          "slot",
-                          _vm.m === _vm.selected ? "selected" : ""
-                        ],
+                        class: ["slot", s === _vm.selected ? "selected" : ""],
                         attrs: { href: "", size: "small" },
                         on: {
                           click: function($event) {
                             $event.preventDefault()
-                            return _vm.select(s, "slot")
+                            return _vm.select(s)
                           }
                         }
                       },

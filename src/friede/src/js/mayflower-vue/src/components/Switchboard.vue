@@ -8,8 +8,17 @@
                gutter="collapse" :class="[ 'completions', 'uk-margin', columnWidth ]"
                :style="{ minWidth: 92 * ( getCompletionColumns() / 6 ) + '%' }">
         <vk-button-link
-          v-for="match in matches" href :key="match" size="small"
-          @click.prevent="select( match )">{{ match }}</vk-button-link>
+          v-for="m in matches" href :key="m" size="small"
+          :class="[ 'match', m === selected ? 'selected' : '' ]"
+          @click.prevent="select( m, 'match' )">{{m}}</vk-button-link>
+        <vk-button-link
+          v-for="l in locations" href :key="l" size="small"
+          :class="[ 'location', m === selected ? 'selected' : '' ]"
+          @click.prevent="select( l, 'location' )">{{ l.href }}</vk-button-link>
+        <vk-button-link
+          v-for="s in slots" href :key="s" size="small"
+          :class="[ 'slot', m === selected ? 'selected' : '' ]"
+          @click.prevent="select( s, 'slot' )">{{ s.label }}</vk-button-link>
       </vk-grid>
     </transition>
   </div>
@@ -30,17 +39,46 @@ export default {
     locations: {
       type: Array,
       default: () => []
+    },
+    slots: {
+      type: Array,
+      default: () => []
+    },
+    selected: {
+      type: [ String, Object ],
+      default: null
     }
   },
   components: { VkGrid, VkButtonLink, Dashboard },
   mounted() {
+    this.cr = this.all.indexOf( this.selected );
   },
   data() {
-    return {}
+    return {
+      cr: -1
+    }
   },
   methods: {
-    select( match ) {
-      this.$emit( 'update', match )
+    select( match, type ) {
+      this.selected = match;
+      this.cr = this.all.indexOf( this.selected );
+      this.$emit( 'select', match, type );
+    },
+    selectNext() {
+      const all = this.all;
+      var type = 'slot';
+      if ( this.cr == -1 ) {
+        this.cr = 0
+      } else {
+        this.cr = this.all.indexOf( this.selected ) % this.all.length;
+      }
+      this.selected = this.all[ this.cr ];
+      if ( cr < this.matches.length ) {
+        type = 'match';
+      } else if ( cr < ( this.matches.length + this.locations.length )) {
+        type = 'location';
+      }
+      this.$emit( 'update', this.selected, type );
     },
     getCompletionColumns() {
       const matches = this.matches.length;
@@ -57,6 +95,9 @@ export default {
     }
   },
   computed: {
+    all() {
+      return this.matches.concat( this.locations ).concat( this.slot );
+    },
     columnWidth() {
       return 'uk-child-width-1-' + this.getCompletionColumns()
     },

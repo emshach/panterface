@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import render
+from django.contrib.contenttypes.models import ContentType
 from .objects import getregistries, getenv, Locations
 from .core import setup, setupshell, setuptheme, setupmenus
 from .models import *
@@ -85,6 +86,7 @@ def api_ls( request, path='', format=None ):
     completions = re.compile( r'%s([^/]*)(?:/|($))?' % rx )
     matches = set()
     slots = {}
+    by_label = {}
     locations = []
     for candidate in candidates:
         if not candidate.href:
@@ -99,12 +101,23 @@ def api_ls( request, path='', format=None ):
                 slot = m2.group(1)
                 if slot not in slots:
                     app, model = slot.split('.')
+                    try:
+                        obj = ContentType.objects.get( app_label=app, model=model )
+                    except ContentType.DoesNotExistException:
+                        continue
+                    obj = obj.model_class()
                     slots[ slot ] = dict(
                         app=app,
                         model=model,
+                        singular=obj.verbose_name,
+                        plural=obj.verbose_name_plural,
+                        append='',
                         new=False,
                         multiple=False,
                         search=set(( app, model )))
+                    if obj.verbose_name not in by_label:
+                        by_label[ obj.verbose_name ] = []
+                    by_label[ obj.verbose_name ].append( slots[ slot ])
                 if m2.group(2):
                     slots[ slot ][ 'multiple' ] = True
                 if m2.group(3):
@@ -114,6 +127,15 @@ def api_ls( request, path='', format=None ):
                 matches.add(g)
             if m.group(2) is not None:
                 locations.append( candidate )
+    for k, v in by_label:
+        if len(v) > 1:
+            for w in v:
+                w[ 'append' ]= " ({})".format( w.app )
+                w[ 'label' ]= ( w['plural' if w[ 'multiple'] else 'singular' ]
+                               + w[ 'append' ]).title()
+        else:
+            v[0][ 'label' ]= v[0]['plural' if w[ 'multiple'] else 'singular' ].title()
+
     expand = locations[ :1 ]
     rest = locations[ 1: ]
     expanded_serializer = LocationSerializer(

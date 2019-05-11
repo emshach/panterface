@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "ee6b44d4c27c9a3a6e20";
+/******/ 	var hotCurrentHash = "4de2c24f40821f8c03f2";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1194,10 +1194,12 @@ __webpack_require__.r(__webpack_exports__);
     processInput: function processInput() {
       this.entered = this.input;
     },
-    complete: function complete(match) {
-      this.input = match;
-      this.getCompletions();
-      this.$refs.input.focus();
+    update: function update(match, type) {
+      if (type === 'match') this.input = match;
+    },
+    select: function select(match, type) {
+      if (type === 'match') this.input = match;
+      this.submit();
     },
     processKey: function processKey($event) {
       if ($event.keyCode === 9) {
@@ -1280,6 +1282,16 @@ __webpack_require__.r(__webpack_exports__);
       default: function _default() {
         return [];
       }
+    },
+    slots: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
+    },
+    selected: {
+      type: [String, Object],
+      default: null
     }
   },
   components: {
@@ -1287,13 +1299,39 @@ __webpack_require__.r(__webpack_exports__);
     VkButtonLink: vuikit_lib_button__WEBPACK_IMPORTED_MODULE_3__["ButtonLink"],
     Dashboard: _components_Dashboard__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
-  mounted: function mounted() {},
+  mounted: function mounted() {
+    this.cr = this.all.indexOf(this.selected);
+  },
   data: function data() {
-    return {};
+    return {
+      cr: -1
+    };
   },
   methods: {
-    select: function select(match) {
-      this.$emit('update', match);
+    select: function select(match, type) {
+      this.selected = match;
+      this.cr = this.all.indexOf(this.selected);
+      this.$emit('select', match, type);
+    },
+    selectNext: function selectNext() {
+      var all = this.all;
+      var type = 'slot';
+
+      if (this.cr == -1) {
+        this.cr = 0;
+      } else {
+        this.cr = this.all.indexOf(this.selected) % this.all.length;
+      }
+
+      this.selected = this.all[this.cr];
+
+      if (cr < this.matches.length) {
+        type = 'match';
+      } else if (cr < this.matches.length + this.locations.length) {
+        type = 'location';
+      }
+
+      this.$emit('update', this.selected, type);
     },
     getCompletionColumns: function getCompletionColumns() {
       var matches = this.matches.length;
@@ -1312,6 +1350,9 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   computed: {
+    all: function all() {
+      return this.matches.concat(this.locations).concat(this.slot);
+    },
     columnWidth: function columnWidth() {
       return 'uk-child-width-1-' + this.getCompletionColumns();
     },
@@ -1551,7 +1592,11 @@ var render = function() {
     },
     [
       _c("switchboard", {
-        attrs: { matches: _vm.matches, locations: _vm.locations },
+        attrs: {
+          matches: _vm.matches,
+          locations: _vm.locations,
+          slots: "slots"
+        },
         on: { update: _vm.complete }
       }),
       _c(
@@ -1705,23 +1750,66 @@ var render = function() {
                   },
                   attrs: { gutter: "collapse" }
                 },
-                _vm._l(_vm.matches, function(match) {
-                  return _c(
-                    "vk-button-link",
-                    {
-                      key: match,
-                      attrs: { href: "", size: "small" },
-                      on: {
-                        click: function($event) {
-                          $event.preventDefault()
-                          return _vm.select(match)
+                [
+                  _vm._l(_vm.matches, function(m) {
+                    return _c(
+                      "vk-button-link",
+                      {
+                        key: m,
+                        class: ["match", m === _vm.selected ? "selected" : ""],
+                        attrs: { href: "", size: "small" },
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            return _vm.select(m, "match")
+                          }
                         }
-                      }
-                    },
-                    [_vm._v(_vm._s(match))]
-                  )
-                }),
-                1
+                      },
+                      [_vm._v(_vm._s(m))]
+                    )
+                  }),
+                  _vm._l(_vm.locations, function(l) {
+                    return _c(
+                      "vk-button-link",
+                      {
+                        key: l,
+                        class: [
+                          "location",
+                          _vm.m === _vm.selected ? "selected" : ""
+                        ],
+                        attrs: { href: "", size: "small" },
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            return _vm.select(l, "location")
+                          }
+                        }
+                      },
+                      [_vm._v(_vm._s(l.href))]
+                    )
+                  }),
+                  _vm._l(_vm.slots, function(s) {
+                    return _c(
+                      "vk-button-link",
+                      {
+                        key: s,
+                        class: [
+                          "slot",
+                          _vm.m === _vm.selected ? "selected" : ""
+                        ],
+                        attrs: { href: "", size: "small" },
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            return _vm.select(s, "slot")
+                          }
+                        }
+                      },
+                      [_vm._v(_vm._s(s.label))]
+                    )
+                  })
+                ],
+                2
               )
             : _vm._e()
         ],

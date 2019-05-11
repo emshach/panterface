@@ -1,7 +1,8 @@
 <template>
   <form id="prompt" class="mf-prompt uk-flex uk-wrap-around" ref="form"
         @submit.prevent="submit">
-    <switchboard :matches="matches" :locations="locations" @update="complete" />
+    <switchboard :matches="matches" :locations="locations" slots="slots"
+                 @update="complete" />
     <div class="readline uk-flex uk-wrap-around">
       <breadcrumb class="main" :items="breadcrumb" />
       <breadcrumb v-if="prospect.length" class="tmp" :items="prospect" />
@@ -81,10 +82,14 @@ export default {
     processInput() {
       this.entered = this.input;
     },
-    complete( match ) {
-      this.input = match;
-      this.getCompletions();
-      this.$refs.input.focus();
+    update( match, type ) {
+      if ( type === 'match' )
+        this.input = match;
+    },
+    select( match, type ) {
+      if ( type === 'match' )
+        this.input = match;
+      this.submit();
     },
     processKey( $event ) {
       if ( $event.keyCode === 9 )  { // TAB

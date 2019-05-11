@@ -136,7 +136,8 @@ def api_ls( request, path='', format=None ):
                 w[ 'label' ]= ( w['plural' if w[ 'multiple'] else 'singular' ]
                                + w[ 'append' ]).title()
         else:
-            v[0][ 'label' ]= v[0]['plural' if w[ 'multiple'] else 'singular' ].title()
+            w = v[0]
+            w[ 'label' ]= w['plural' if w[ 'multiple'] else 'singular' ].title()
 
     expand = locations[ :1 ]
     rest = locations[ 1: ]

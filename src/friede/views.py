@@ -106,18 +106,20 @@ def api_ls( request, path='', format=None ):
                     except ContentType.DoesNotExistException:
                         continue
                     obj = obj.model_class()
+                    singular = obj._meta.verbose_name
+                    plural = obj._meta.verbose_name_plural
                     slots[ slot ] = dict(
                         app=app,
                         model=model,
-                        singular=obj.verbose_name,
-                        plural=obj.verbose_name_plural,
+                        singular=singular,
+                        plural=plural,
                         append='',
                         new=False,
                         multiple=False,
                         search=set(( app, model )))
-                    if obj.verbose_name not in by_label:
-                        by_label[ obj.verbose_name ] = []
-                    by_label[ obj.verbose_name ].append( slots[ slot ])
+                    if singular not in by_label:
+                        by_label[ singular ] = []
+                    by_label[ singular ].append( slots[ slot ])
                 if m2.group(2):
                     slots[ slot ][ 'multiple' ] = True
                 if m2.group(3):

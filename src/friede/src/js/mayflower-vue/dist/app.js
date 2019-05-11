@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "3293365a0de52f52e8dc";
+/******/ 	var hotCurrentHash = "8c6f74a452103953fd1f";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1223,7 +1223,15 @@ __webpack_require__.r(__webpack_exports__);
           if (this.all.length === 1) {
             this.update(this.selected = this.all[0]);
           } else {
-            this.selected = this.all[(this.all.indexOf(this.selected) + 1) % this.all.length];
+            var cr = this.all.indexOf(this.selected);
+
+            if (shiftKey) {
+              if (cr != -1) cr--;
+            } else {
+              cr++;
+            }
+
+            this.selected = this.all[cr % this.all.length];
             this.integrate(this.selected);
           }
         } // TODO: else cycle completions

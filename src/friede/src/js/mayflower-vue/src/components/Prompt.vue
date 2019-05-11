@@ -108,8 +108,14 @@ export default {
           if ( this.all.length === 1 ) {
             this.update( this.selected = this.all[0] );
           } else {
-            this.selected = this.all[
-              ( this.all.indexOf( this.selected ) + 1 ) % this.all.length ];
+            var cr = this.all.indexOf( this.selected );
+            if ( shiftKey ) {
+              if ( cr != -1 )
+                cr--;
+            } else {
+              cr++;
+            }
+            this.selected = this.all[ cr % this.all.length ];
             this.integrate( this.selected );
           }
         }

@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "4de2c24f40821f8c03f2";
+/******/ 	var hotCurrentHash = "4c34caab450d01e2b38f";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1595,9 +1595,9 @@ var render = function() {
         attrs: {
           matches: _vm.matches,
           locations: _vm.locations,
-          slots: "slots"
+          slots: _vm.slots
         },
-        on: { update: _vm.complete }
+        on: { select: _vm.select }
       }),
       _c(
         "div",

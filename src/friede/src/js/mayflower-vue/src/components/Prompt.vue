@@ -1,8 +1,8 @@
 <template>
   <form id="prompt" class="mf-prompt uk-flex uk-wrap-around" ref="form"
         @submit.prevent="submit">
-    <switchboard :matches="matches" :locations="locations" slots="slots"
-                 @update="complete" />
+    <switchboard :matches="matches" :locations="locations" :slots="slots"
+                 @select="select" />
     <div class="readline uk-flex uk-wrap-around">
       <breadcrumb class="main" :items="breadcrumb" />
       <breadcrumb v-if="prospect.length" class="tmp" :items="prospect" />

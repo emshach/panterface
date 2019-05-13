@@ -6,15 +6,14 @@ import store from './store'
 import UIkit from 'uikit'
 import '@/assets/styles/styles.scss'
 import Icons from 'uikit/dist/js/uikit-icons'
-import coreapi from 'coreapi'
+import axios from 'axios'
 
 UIkit.use(Icons)
 window.UIkit = UIkit
 
 Vue.config.productionTip = false
-const client = new coreapi.Client()
 Vue.prototype.$api = function() {
-  return client.get( '/api/' + Array.prototype.join.call( arguments, '/' ))
+  return axios.get( '/api/' + Array.prototype.join.call( arguments, '/' ))
 }
 
 function Mayflower( args ) {

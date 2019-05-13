@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "67e2056f5abdcbb38cd4";
+/******/ 	var hotCurrentHash = "a063d5c3811d55c80fbc";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1211,8 +1211,8 @@ __webpack_require__.r(__webpack_exports__);
     getObjects: function getObjects(query) {
       var _this3 = this;
 
-      this.loading = true;
       var model = this.searching;
+      this.loading = true;
       this.$api(model.app, model.plural, '?search=' + query).then(function (data) {
         _this3.search = data.results;
         _this3.loading = false;
@@ -1385,7 +1385,6 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     select: function select(match, type) {
-      this.value = match;
       this.$emit('input', match);
     },
     getCompletionColumns: function getCompletionColumns() {
@@ -2870,8 +2869,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _assets_styles_styles_scss__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_assets_styles_styles_scss__WEBPACK_IMPORTED_MODULE_11__);
 /* harmony import */ var uikit_dist_js_uikit_icons__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! uikit/dist/js/uikit-icons */ "./node_modules/uikit/dist/js/uikit-icons.js");
 /* harmony import */ var uikit_dist_js_uikit_icons__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(uikit_dist_js_uikit_icons__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var coreapi__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! coreapi */ "./node_modules/coreapi/lib/index.js");
-/* harmony import */ var coreapi__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(coreapi__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_13__);
 
 
 
@@ -2889,10 +2888,9 @@ __webpack_require__.r(__webpack_exports__);
 uikit__WEBPACK_IMPORTED_MODULE_10___default.a.use(uikit_dist_js_uikit_icons__WEBPACK_IMPORTED_MODULE_12___default.a);
 window.UIkit = uikit__WEBPACK_IMPORTED_MODULE_10___default.a;
 vue__WEBPACK_IMPORTED_MODULE_5__["default"].config.productionTip = false;
-var client = new coreapi__WEBPACK_IMPORTED_MODULE_13___default.a.Client();
 
 vue__WEBPACK_IMPORTED_MODULE_5__["default"].prototype.$api = function () {
-  return client.get('/api/' + Array.prototype.join.call(arguments, '/'));
+  return axios__WEBPACK_IMPORTED_MODULE_13___default.a.get('/api/' + Array.prototype.join.call(arguments, '/'));
 };
 
 function Mayflower(args) {
@@ -2917,7 +2915,7 @@ Mayflower.prototype.init = function () {
   if (!this.vm) this.vm = new vue__WEBPACK_IMPORTED_MODULE_5__["default"](this.options).$mount(this.mountpoint);
 };
 
-window.coreapi = coreapi__WEBPACK_IMPORTED_MODULE_13___default.a;
+window.coreapi = coreapi;
 window.Vue = vue__WEBPACK_IMPORTED_MODULE_5__["default"];
 window.Mayflower = Mayflower;
 window.MayflowerApp = new Mayflower();

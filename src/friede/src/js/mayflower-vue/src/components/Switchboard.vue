@@ -57,7 +57,6 @@ export default {
   },
   methods: {
     select( match, type ) {
-      this.value = match;
       this.$emit( 'input', match );
     },
     getCompletionColumns() {

@@ -100,8 +100,8 @@ export default {
       });
     },
     getObjects( query ) {
-      this.loading = true;
       const model = this.searching;
+      this.loading = true;
       this.$api( model.app, model.plural, '?search='+query ).then( data => {
         this.search = data.results;
         this.loading = false;

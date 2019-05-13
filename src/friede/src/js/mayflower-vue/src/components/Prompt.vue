@@ -129,7 +129,7 @@ export default {
         // TODO: else cycle completions
       } else if ( $event.keyCode === 13 ) { 
         $event.preventDefault();
-        this.$refs.form.submit();
+        this.submit();
       } else if ( $event.keyCode === 27 ) {
         if ( this.selected ) {
           this.selected = this.input = this.entered;

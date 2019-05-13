@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "575ff34588b6c55f5a01";
+/******/ 	var hotCurrentHash = "05b6a333f076bc81b0f3";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1251,7 +1251,7 @@ __webpack_require__.r(__webpack_exports__);
 
       } else if ($event.keyCode === 13) {
         $event.preventDefault();
-        this.$refs.form.submit();
+        this.submit();
       } else if ($event.keyCode === 27) {
         if (this.selected) {
           this.selected = this.input = this.entered;

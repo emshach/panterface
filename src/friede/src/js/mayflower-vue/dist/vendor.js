@@ -32555,6 +32555,17 @@ function normalizeComponent (
 
 /***/ }),
 
+/***/ "./node_modules/vue-multiselect/dist/vue-multiselect.min.css":
+/*!*******************************************************************!*\
+  !*** ./node_modules/vue-multiselect/dist/vue-multiselect.min.css ***!
+  \*******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
 /***/ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js":
 /*!******************************************************************!*\
   !*** ./node_modules/vue-multiselect/dist/vue-multiselect.min.js ***!

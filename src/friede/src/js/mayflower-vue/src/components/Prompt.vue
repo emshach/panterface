@@ -39,6 +39,7 @@ import Switchboard from '@/components/Switchboard'
 import Breadcrumb from '@/components/Breadcrumb'
 import debounce from 'lodash/debounce'
 import Multiselect from 'vue-multiselect'
+import 'vue-multiselect/dist/vue-multiselect.min.css'
 export default {
   name: 'Prompt',
   props: {
@@ -237,10 +238,10 @@ export default {
     }
   }
   input {
+    &.cli {
       padding: 4px 10px;
       height: auto;
       font-size: 14px;
-    &.cli {
       background: rgba(0,0,0,0.5);
       font-family: monospace;
       border: 1px solid skyblue;
@@ -258,7 +259,7 @@ export default {
     padding: 0 10px;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
-    span {
+    > span {
       padding: 5px 0 0;
       font-weight: bold;
       color: steelblue;

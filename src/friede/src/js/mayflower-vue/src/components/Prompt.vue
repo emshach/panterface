@@ -20,6 +20,7 @@
           :show-labels="false"
           :internal-search="false"
           :loading="loading"
+          :multiple="searching.multiple"
           @search-change="getObjects"
           />
       </div>
@@ -106,6 +107,9 @@ export default {
       this.loading = true;
       this.$api( model.app, model.plural, '?search='+query ).then( r => {
         this.search = r.data.results;
+        if ( searching.create ) {
+          this.search.append({ path: '', title: 'New ' + searching.label })
+        }
         this.loading = false;
       });
       

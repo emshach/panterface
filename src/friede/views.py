@@ -113,7 +113,7 @@ def api_ls( request, path='', format=None ):
                         singular=singular,
                         plural=plural,
                         append='',
-                        new=False,
+                        create=False,
                         multiple=False,
                         search=set(( app, model )))
                     if singular not in by_label:
@@ -122,7 +122,7 @@ def api_ls( request, path='', format=None ):
                 if m2.group(2):
                     slots[ slot ][ 'multiple' ] = True
                 if m2.group(3):
-                    slots[ slot ][ 'new' ] = True
+                    slots[ slot ][ 'create' ] = True
                     slots[ slot ][ 'search' ].add( 'new' )
             else:
                 matches.add(g)

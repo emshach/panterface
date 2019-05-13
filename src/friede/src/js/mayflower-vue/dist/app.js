@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "68b8726ee76d1a0b1a5c";
+/******/ 	var hotCurrentHash = "6b2d23498dfddfce0282";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1218,6 +1218,14 @@ __webpack_require__.r(__webpack_exports__);
       this.loading = true;
       this.$api(model.app, model.plural, '?search=' + query).then(function (r) {
         _this3.search = r.data.results;
+
+        if (searching.create) {
+          _this3.search.append({
+            path: '',
+            title: 'New ' + searching.label
+          });
+        }
+
         _this3.loading = false;
       });
     },
@@ -1693,7 +1701,8 @@ var render = function() {
                       "close-on-select": true,
                       "show-labels": false,
                       "internal-search": false,
-                      loading: _vm.loading
+                      loading: _vm.loading,
+                      multiple: _vm.searching.multiple
                     },
                     on: { "search-change": _vm.getObjects },
                     model: {

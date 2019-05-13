@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "c9dbc4f6bc61d32ef19d";
+/******/ 	var hotCurrentHash = "575ff34588b6c55f5a01";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1175,10 +1175,22 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     submit: function submit() {
-      this.$emit('update', this.input); // TODO: based on state, push prospect, push breadcrumb
+      this.$emit('update', this.input);
 
-      this.entered = '';
-      this.getCompletions();
+      if (this.selected) {
+        if (this.selected.href) {// TODO: go to location
+        } else if (this.selected.label) {
+          this.searching = this.selected;
+        } else {
+          this.prospect.push({
+            href: this.selected,
+            title: this.selected
+          });
+        }
+
+        this.input = this.entered = '';
+        this.getCompletions();
+      }
     },
     getCompletions: function getCompletions() {
       var _this2 = this;
@@ -1193,9 +1205,11 @@ __webpack_require__.r(__webpack_exports__);
       this.getCompletions();
     }, 250),
     processInput: function processInput() {
-      this.entered = this.input;
+      this.selected = this.entered = this.input;
     },
-    integrate: function integrate(match) {
+    select: function select(match) {
+      this.selected = match;
+
       if (match.href) {
         // location, about to go
         this.state = 'prelaunch';
@@ -1211,7 +1225,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     update: function update(match) {
-      this.integrate(match);
+      this.select(match);
       this.submit();
     },
     processKey: function processKey($event) {
@@ -1221,7 +1235,7 @@ __webpack_require__.r(__webpack_exports__);
 
         if (this.matches.length) {
           if (this.all.length === 1) {
-            this.update(this.selected = this.all[0]);
+            this.update(this.all[0]);
           } else {
             var cr = this.all.indexOf(this.selected);
 
@@ -1231,8 +1245,7 @@ __webpack_require__.r(__webpack_exports__);
               cr++;
             }
 
-            this.selected = this.all[cr % this.all.length];
-            this.integrate(this.selected);
+            this.select(this.all[cr % this.all.length]);
           }
         } // TODO: else cycle completions
 
@@ -1241,8 +1254,7 @@ __webpack_require__.r(__webpack_exports__);
         this.$refs.form.submit();
       } else if ($event.keyCode === 27) {
         if (this.selected) {
-          this.selected = null;
-          this.input = this.entered;
+          this.selected = this.input = this.entered;
         } else if (this.input) {
           this.input = this.entered = '';
         } else if (this.prospect.length) {
@@ -1251,8 +1263,7 @@ __webpack_require__.r(__webpack_exports__);
           this.$refs.input.blur();
         }
       } else if (this.selected) {
-        this.selected = null;
-        this.input = this.entered;
+        this.selected = this.input = this.entered;
       }
     }
   },
@@ -1644,7 +1655,7 @@ var render = function() {
           _vm.searching
             ? _c("div", { staticClass: "object-search" }, [
                 _c("span", { staticClass: "object" }, [
-                  _vm._v(_vm._s(_vm.searching) + ":")
+                  _vm._v(_vm._s(_vm.searching.label) + ":")
                 ]),
                 _c("input", {
                   directives: [
@@ -1672,7 +1683,7 @@ var render = function() {
             : _vm.creating
             ? _c("div", { staticClass: "object-create" }, [
                 _c("span", { staticClass: "object" }, [
-                  _vm._v(_vm._s(_vm.creating) + ":")
+                  _vm._v("new " + _vm._s(_vm.creating.label) + ":")
                 ]),
                 _c("input", {
                   directives: [

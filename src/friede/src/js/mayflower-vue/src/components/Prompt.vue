@@ -7,12 +7,12 @@
       <breadcrumb class="main" :items="breadcrumb" />
       <breadcrumb v-if="prospect.length" class="tmp" :items="prospect" />
       <div v-if="searching" class="object-search">
-        <span class="object">{{ searching }}:</span>
+        <span class="object">{{ searching.label }}:</span>
         <input name="filter" class="filter uk-input uk-flex-1" v-model="filter"
                ref="filter" />
       </div>
       <div v-else-if="creating" class="object-create">
-        <span class="object">{{ creating }}:</span>
+        <span class="object">new {{ creating.label }}:</span>
         <input name="ctrl" class="filter uk-input uk-flex-1" v-model="ctrl"
                ref="ctrl" />
       </div>
@@ -66,9 +66,16 @@ export default {
   methods: {
     submit() {
       this.$emit( 'update', this.input );
-      // TODO: based on state, push prospect, push breadcrumb
-      this.entered = '';
-      this.getCompletions();
+      if ( this.selected ) {
+        if ( this.selected.href ) { // TODO: go to location
+        } else if ( this.selected.label ) {
+          this.searching = this.selected;
+        } else {
+          this.prospect.push({ href: this.selected, title: this.selected });
+        }
+        this.input = this.entered = '';
+        this.getCompletions();
+      }
     },
     getCompletions() {
       this.$api( 'ls', this.input ).then( data => {
@@ -81,9 +88,10 @@ export default {
       this.getCompletions();
     }, 250 ),
     processInput() {
-      this.entered = this.input;
+      this.selected = this.entered = this.input;
     },
-    integrate( match ) {
+    select( match ) {
+      this.selected = match;
       if ( match.href ) {       // location, about to go
         this.state = 'prelaunch';
         this.input = 'Goto: ' + match.href;
@@ -98,7 +106,7 @@ export default {
       }
     },
     update( match ) {
-      this.integrate( match );
+      this.select( match );
       this.submit()
     },
     processKey( $event ) {
@@ -106,7 +114,7 @@ export default {
         $event.preventDefault();
         if ( this.matches.length ) {
           if ( this.all.length === 1 ) {
-            this.update( this.selected = this.all[0] );
+            this.update( this.all[0] );
           } else {
             var cr = this.all.indexOf( this.selected );
             if ( $event.shiftKey ) {
@@ -115,8 +123,7 @@ export default {
             } else {
               cr++;
             }
-            this.selected = this.all[ cr % this.all.length ];
-            this.integrate( this.selected );
+            this.select( this.all[ cr % this.all.length ]);
           }
         }
         // TODO: else cycle completions
@@ -125,8 +132,7 @@ export default {
         this.$refs.form.submit();
       } else if ( $event.keyCode === 27 ) {
         if ( this.selected ) {
-          this.selected = null;
-          this.input = this.entered;
+          this.selected = this.input = this.entered;
         } else if ( this.input ) {
           this.input = this.entered = '';
         } else if ( this.prospect.length ) {
@@ -135,8 +141,7 @@ export default {
           this.$refs.input.blur();
         }
       } else if ( this.selected ) {
-        this.selected = null;
-        this.input = this.entered;
+        this.selected = this.input = this.entered;
       }
     }
   },

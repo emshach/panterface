@@ -12,6 +12,7 @@
           v-model="objects"
           class="filter uk-input uk-flex-1"
           ref="filter"
+          open-direction="above"
           label="title"
           track-by="path"
           :options="search"

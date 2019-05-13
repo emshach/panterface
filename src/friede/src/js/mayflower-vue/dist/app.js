@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "e1502f742f5f897262ba";
+/******/ 	var hotCurrentHash = "7749d9b90cee10978b64";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1683,6 +1683,7 @@ var render = function() {
                     ref: "filter",
                     staticClass: "filter uk-input uk-flex-1",
                     attrs: {
+                      "open-direction": "above",
                       label: "title",
                       "track-by": "path",
                       options: _vm.search,

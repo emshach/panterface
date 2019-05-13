@@ -8,8 +8,7 @@ from .core import setup, setupshell, setuptheme, setupmenus
 from .models import *
 from .serializers import *
 from .util import as_tree, form_field_mappings
-from rest_framework import status
-from rest_framework import viewsets, permissions
+from rest_framework import status, viewsets, permissions, filters
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
@@ -273,7 +272,8 @@ class LocationViewSet( RegistryViewSet ):
 class LinkViewSet( viewsets.ModelViewSet ):
     queryset = Link.objects.all()
     serializer_class = LinkSerializer
-
+    filter_backends = ( filters.SearchFilter, )
+    search_fields = ( 'name', 'title', 'description' )
 
 class IconViewSet( viewsets.ModelViewSet ):
     queryset = Icon.objects.all()

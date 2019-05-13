@@ -34,7 +34,6 @@ Mayflower.prototype.init = function () {
     this.vm = new Vue( this.options ).$mount( this.mountpoint );
 };
 
-window.coreapi = coreapi;
 window.Vue = Vue;
 window.Mayflower = Mayflower;
 window.MayflowerApp = new Mayflower();

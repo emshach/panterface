@@ -65,9 +65,9 @@ export default {
   },
   methods: {
     submit() {
-      this.$emit( 'update', this.input );
       if ( this.selected ) {
         if ( this.selected.href ) { // TODO: go to location
+          this.$emit( 'update', this.selected.href );
         } else if ( this.selected.label ) {
           this.searching = this.selected;
         } else {

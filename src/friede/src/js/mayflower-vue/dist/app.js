@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "05b6a333f076bc81b0f3";
+/******/ 	var hotCurrentHash = "5b82f67018b5f5bc8903";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1175,10 +1175,10 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     submit: function submit() {
-      this.$emit('update', this.input);
-
       if (this.selected) {
-        if (this.selected.href) {// TODO: go to location
+        if (this.selected.href) {
+          // TODO: go to location
+          this.$emit('update', this.selected.href);
         } else if (this.selected.label) {
           this.searching = this.selected;
         } else {

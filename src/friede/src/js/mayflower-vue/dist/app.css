@@ -106,11 +106,12 @@ a[data-v-aae30ed8] {
 }
 .mf-prompt .object-search {
     background: white;
-    padding: 4px 10px;
+    padding: 0 10px;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
 }
 .mf-prompt .object-search span {
+      padding: 5px 0 0;
       font-weight: bold;
       color: steelblue;
 }

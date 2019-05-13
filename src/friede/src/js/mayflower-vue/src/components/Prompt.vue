@@ -8,8 +8,19 @@
       <breadcrumb v-if="prospect.length" class="tmp" :items="prospect" />
       <div v-if="searching" class="object-search uk-flex uk-wrap-around">
         <span class="object">{{ searching.label }}:</span>
-        <input name="filter" class="filter uk-input uk-flex-1" v-model="filter"
-               ref="filter" />
+        <multiselect
+          v-model="objects"
+          class="filter uk-input uk-flex-1"
+          ref="filter"
+          label="title"
+          track-by="path"
+          :options="search"
+          :close-on-select="true"
+          :show-labels="false"
+          :internal-search="false"
+          :loading="loading"
+          @search-change="getObjects"
+          />
       </div>
       <div v-else-if="creating" class="object-create uk-flex uk-wrap-around">
         <span class="object">new {{ creating.label }}:</span>
@@ -26,6 +37,7 @@
 import Switchboard from '@/components/Switchboard'
 import Breadcrumb from '@/components/Breadcrumb'
 import debounce from 'lodash/debounce'
+import Multiselect from 'vue-multiselect'
 export default {
   name: 'Prompt',
   props: {
@@ -38,7 +50,7 @@ export default {
       default: true
     }
   },
-  components: { Switchboard, Breadcrumb },
+  components: { Switchboard, Breadcrumb, Multiselect },
   mounted() {
     this.$nextTick(() => {
       this.$refs.input.focus();
@@ -54,6 +66,8 @@ export default {
       ctrl: '',
       values: {},
       searching: null,
+      search: [],
+      objects: [],
       creating: null,
       prospect:  [],
       pathMatches: [],
@@ -61,6 +75,7 @@ export default {
       pathLocations: [],
       enterMeansSubmit: true,
       selected: null,
+      loading: false,
     }
   },
   methods: {
@@ -83,6 +98,15 @@ export default {
         this.pathSlots = data.slots;
         this.pathLocations = data.locations;
       });
+    },
+    getObjects( query ) {
+      this.loading = true;
+      const model = this.searching;
+      this.$api( model.app, model.plural, '?search='+query ).then( data => {
+        this.search = data.results;
+        this.loading = false;
+      });
+      
     },
     debouncedInput: debounce( function() {
       this.getCompletions();
@@ -230,10 +254,11 @@ export default {
   }
   .object-search {
     background: white;
-    padding: 4px 10px;
+    padding: 0 10px;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
     span {
+      padding: 5px 0 0;
       font-weight: bold;
       color: steelblue;
     }

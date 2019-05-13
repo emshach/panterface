@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "559a24e326535c0aea7f";
+/******/ 	var hotCurrentHash = "67e2056f5abdcbb38cd4";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1122,6 +1122,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Breadcrumb__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/components/Breadcrumb */ "./src/components/Breadcrumb.vue");
 /* harmony import */ var lodash_debounce__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! lodash/debounce */ "./node_modules/lodash/debounce.js");
 /* harmony import */ var lodash_debounce__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(lodash_debounce__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js");
+/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_6__);
+
 
 
 
@@ -1144,7 +1147,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   components: {
     Switchboard: _components_Switchboard__WEBPACK_IMPORTED_MODULE_3__["default"],
-    Breadcrumb: _components_Breadcrumb__WEBPACK_IMPORTED_MODULE_4__["default"]
+    Breadcrumb: _components_Breadcrumb__WEBPACK_IMPORTED_MODULE_4__["default"],
+    Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_6___default.a
   },
   mounted: function mounted() {
     var _this = this;
@@ -1164,13 +1168,16 @@ __webpack_require__.r(__webpack_exports__);
       ctrl: '',
       values: {},
       searching: null,
+      search: [],
+      objects: [],
       creating: null,
       prospect: [],
       pathMatches: [],
       pathSlots: [],
       pathLocations: [],
       enterMeansSubmit: true,
-      selected: null
+      selected: null,
+      loading: false
     };
   },
   methods: {
@@ -1199,6 +1206,16 @@ __webpack_require__.r(__webpack_exports__);
         _this2.pathMatches = data.matches;
         _this2.pathSlots = data.slots;
         _this2.pathLocations = data.locations;
+      });
+    },
+    getObjects: function getObjects(query) {
+      var _this3 = this;
+
+      this.loading = true;
+      var model = this.searching;
+      this.$api(model.app, model.plural, '?search=' + query).then(function (data) {
+        _this3.search = data.results;
+        _this3.loading = false;
       });
     },
     debouncedInput: lodash_debounce__WEBPACK_IMPORTED_MODULE_5___default()(function () {
@@ -1272,32 +1289,32 @@ __webpack_require__.r(__webpack_exports__);
       return this.matches.concat(this.locations).concat(this.slots);
     },
     matches: function matches() {
-      var _this3 = this;
+      var _this4 = this;
 
       if (this.searching || this.creating) return [];
       if (!this.entered) return this.pathMatches;
       return this.pathMatches.filter(function (x) {
-        return x.indexOf(_this3.entered) === 0;
+        return x.indexOf(_this4.entered) === 0;
       });
     },
     slots: function slots() {
-      var _this4 = this;
+      var _this5 = this;
 
       if (this.searching || this.creating) return [];
       if (!this.entered) return this.pathSlots;
       return this.pathSlots.filter(function (x) {
         return x.search.filter(function (y) {
-          return y.indexOf(_this4.entered) > -1;
+          return y.indexOf(_this5.entered) > -1;
         }).length;
       });
     },
     locations: function locations() {
-      var _this5 = this;
+      var _this6 = this;
 
       if (this.searching || this.creating) return [];
       if (!this.entered) return this.pathLocations;
       return this.pathLocations.filter(function (x) {
-        return x.name.indexOf(_this5.entered) === 0;
+        return x.name.indexOf(_this6.entered) === 0;
       });
     },
     filters: function filters() {
@@ -1663,29 +1680,29 @@ var render = function() {
                   _c("span", { staticClass: "object" }, [
                     _vm._v(_vm._s(_vm.searching.label) + ":")
                   ]),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.filter,
-                        expression: "filter"
-                      }
-                    ],
+                  _c("multiselect", {
                     ref: "filter",
                     staticClass: "filter uk-input uk-flex-1",
-                    attrs: { name: "filter" },
-                    domProps: { value: _vm.filter },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.filter = $event.target.value
-                      }
+                    attrs: {
+                      label: "title",
+                      "track-by": "path",
+                      options: _vm.search,
+                      "close-on-select": true,
+                      "show-labels": false,
+                      "internal-search": false,
+                      loading: _vm.loading
+                    },
+                    on: { "search-change": _vm.getObjects },
+                    model: {
+                      value: _vm.objects,
+                      callback: function($$v) {
+                        _vm.objects = $$v
+                      },
+                      expression: "objects"
                     }
                   })
-                ]
+                ],
+                1
               )
             : _vm.creating
             ? _c(

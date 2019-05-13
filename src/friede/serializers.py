@@ -309,7 +309,7 @@ class LocationSerializer( RegistrySerializer ):
 class LinkSerializer( HyperlinkedModelSerializer ):
     class Meta:
         model = Link
-        fields = F.base + F.location
+        fields = F.base + F.link
         expandable_fields = RegistrySerializer.Meta.expandable_fields
 
 

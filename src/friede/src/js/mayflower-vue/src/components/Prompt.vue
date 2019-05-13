@@ -150,11 +150,15 @@ export default {
       return this.matches.concat( this.locations ).concat( this.slots );
     },
     matches() {
+      if ( this.searching || this.creating )
+        return [];
       if ( !this.entered )
         return this.pathMatches;
       return this.pathMatches.filter( x => x.indexOf( this.entered ) === 0 )
     },
     slots() {
+      if ( this.searching || this.creating )
+        return [];
       if ( !this.entered )
         return this.pathSlots;
       return this.pathSlots.filter(
@@ -162,6 +166,8 @@ export default {
             y => y.indexOf( this.entered ) > -1 ).length )
     },
     locations() {
+      if ( this.searching || this.creating )
+        return [];
       if ( !this.entered )
         return this.pathLocations;
       return this.pathLocations.filter( x => x.name.indexOf( this.entered ) === 0 )
@@ -225,7 +231,8 @@ export default {
   .object-search {
     background: white;
     padding: 4px 10px;
-    margin-bottom: 4px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
     span {
       font-weight: bold;
       color: steelblue;

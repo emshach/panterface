@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "eec932c53de3ee4c7170";
+/******/ 	var hotCurrentHash = "559a24e326535c0aea7f";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1274,6 +1274,7 @@ __webpack_require__.r(__webpack_exports__);
     matches: function matches() {
       var _this3 = this;
 
+      if (this.searching || this.creating) return [];
       if (!this.entered) return this.pathMatches;
       return this.pathMatches.filter(function (x) {
         return x.indexOf(_this3.entered) === 0;
@@ -1282,6 +1283,7 @@ __webpack_require__.r(__webpack_exports__);
     slots: function slots() {
       var _this4 = this;
 
+      if (this.searching || this.creating) return [];
       if (!this.entered) return this.pathSlots;
       return this.pathSlots.filter(function (x) {
         return x.search.filter(function (y) {
@@ -1292,6 +1294,7 @@ __webpack_require__.r(__webpack_exports__);
     locations: function locations() {
       var _this5 = this;
 
+      if (this.searching || this.creating) return [];
       if (!this.entered) return this.pathLocations;
       return this.pathLocations.filter(function (x) {
         return x.name.indexOf(_this5.entered) === 0;

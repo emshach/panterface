@@ -93,17 +93,17 @@ export default {
       }
     },
     getCompletions() {
-      this.$api( 'ls', this.input ).then( data => {
-        this.pathMatches = data.matches;
-        this.pathSlots = data.slots;
-        this.pathLocations = data.locations;
+      this.$api( 'ls', this.input ).then( r => {
+        this.pathMatches = r.data.matches;
+        this.pathSlots = r.data.slots;
+        this.pathLocations = r.data.locations;
       });
     },
     getObjects( query ) {
       const model = this.searching;
       this.loading = true;
-      this.$api( model.app, model.plural, '?search='+query ).then( data => {
-        this.search = data.results;
+      this.$api( model.app, model.plural, '?search='+query ).then( r => {
+        this.search = r.data.results;
         this.loading = false;
       });
       

@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "ed384e0ae558eb39cc8e";
+/******/ 	var hotCurrentHash = "e1502f742f5f897262ba";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1202,10 +1202,10 @@ __webpack_require__.r(__webpack_exports__);
     getCompletions: function getCompletions() {
       var _this2 = this;
 
-      this.$api('ls', this.input).then(function (data) {
-        _this2.pathMatches = data.matches;
-        _this2.pathSlots = data.slots;
-        _this2.pathLocations = data.locations;
+      this.$api('ls', this.input).then(function (r) {
+        _this2.pathMatches = r.data.matches;
+        _this2.pathSlots = r.data.slots;
+        _this2.pathLocations = r.data.locations;
       });
     },
     getObjects: function getObjects(query) {
@@ -1213,8 +1213,8 @@ __webpack_require__.r(__webpack_exports__);
 
       var model = this.searching;
       this.loading = true;
-      this.$api(model.app, model.plural, '?search=' + query).then(function (data) {
-        _this3.search = data.results;
+      this.$api(model.app, model.plural, '?search=' + query).then(function (r) {
+        _this3.search = r.data.results;
         _this3.loading = false;
       });
     },

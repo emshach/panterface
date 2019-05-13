@@ -6,12 +6,12 @@
     <div class="readline uk-flex uk-wrap-around">
       <breadcrumb class="main" :items="breadcrumb" />
       <breadcrumb v-if="prospect.length" class="tmp" :items="prospect" />
-      <div v-if="searching" class="object-search">
+      <div v-if="searching" class="object-search uk-flex uk-wrap-around">
         <span class="object">{{ searching.label }}:</span>
         <input name="filter" class="filter uk-input uk-flex-1" v-model="filter"
                ref="filter" />
       </div>
-      <div v-else-if="creating" class="object-create">
+      <div v-else-if="creating" class="object-create uk-flex uk-wrap-around">
         <span class="object">new {{ creating.label }}:</span>
         <input name="ctrl" class="filter uk-input uk-flex-1" v-model="ctrl"
                ref="ctrl" />
@@ -174,55 +174,66 @@ export default {
 </script>
 
 <style lang="scss">
-  .mf-prompt {
+.mf-prompt {
+  width: 100%;
+  .readline {
     width: 100%;
-    .readline {
-      width: 100%;
-    }
-    .breadcrumb {
-      margin: 0;
-      padding: 4px;
-      color: white;
-      text-shadow: 0 0 1px black;
-      li {
-        font-weight: bold;
-        &:before {
-          color: lightskyblue !important;
-          margin: 0 4px !important;
-          display: inline !important;
-        }
-        a {
-          color: white;
-          padding: 1px 4px;
-          &:hover {
-            background: rgba(255,255,255,0.25);
-          }
+  }
+  .breadcrumb {
+    margin: 0;
+    padding: 4px;
+    color: white;
+    text-shadow: 0 0 1px black;
+    li {
+      font-weight: bold;
+      &:before {
+        color: lightskyblue !important;
+        margin: 0 4px !important;
+        display: inline !important;
+      }
+      a {
+        color: white;
+        padding: 1px 4px;
+        &:hover {
+          background: rgba(255,255,255,0.25);
         }
       }
-      &.tmp {
-        background: rgba(255,255,255,0.3);
-        margin-right: -3px;
-        border-top-left-radius: 4px;
-      }
     }
-    .cli {
-      background: rgba(0,0,0,0.5);
-      font-family: monospace;
+    &.tmp {
+      background: rgba(255,255,255,0.3);
+      margin-right: -3px;
+      border-top-left-radius: 4px;
+    }
+  }
+  input {
       padding: 4px 10px;
       height: auto;
+      font-size: 14px;
+    &.cli {
+      background: rgba(0,0,0,0.5);
+      font-family: monospace;
       border: 1px solid skyblue;
       border-bottom-width: 0;
       border-right-width: 0;
       border-top-left-radius: 4px;
       box-shadow: inset 0 2px 4px rgba(0,0,0,0.25);
-      font-size: 14px;
       &:focus {
         background: rgba(0,0,0,0.8);
       }
     }
-    textarea.cli {
-      line-height: normal;
-      padding: 8px 10px;
+  }
+  .object-search {
+    background: white;
+    padding: 4px 10px;
+    margin-bottom: 4px;
+    span {
+      font-weight: bold;
+      color: steelblue;
+    }
+  }
+  textarea.cli {
+    line-height: normal;
+    padding: 8px 10px;
     }
   }
 </style>

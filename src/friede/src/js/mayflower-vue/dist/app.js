@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "5b82f67018b5f5bc8903";
+/******/ 	var hotCurrentHash = "eec932c53de3ee4c7170";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1653,61 +1653,69 @@ var render = function() {
               })
             : _vm._e(),
           _vm.searching
-            ? _c("div", { staticClass: "object-search" }, [
-                _c("span", { staticClass: "object" }, [
-                  _vm._v(_vm._s(_vm.searching.label) + ":")
-                ]),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.filter,
-                      expression: "filter"
-                    }
-                  ],
-                  ref: "filter",
-                  staticClass: "filter uk-input uk-flex-1",
-                  attrs: { name: "filter" },
-                  domProps: { value: _vm.filter },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
+            ? _c(
+                "div",
+                { staticClass: "object-search uk-flex uk-wrap-around" },
+                [
+                  _c("span", { staticClass: "object" }, [
+                    _vm._v(_vm._s(_vm.searching.label) + ":")
+                  ]),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.filter,
+                        expression: "filter"
                       }
-                      _vm.filter = $event.target.value
+                    ],
+                    ref: "filter",
+                    staticClass: "filter uk-input uk-flex-1",
+                    attrs: { name: "filter" },
+                    domProps: { value: _vm.filter },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.filter = $event.target.value
+                      }
                     }
-                  }
-                })
-              ])
+                  })
+                ]
+              )
             : _vm.creating
-            ? _c("div", { staticClass: "object-create" }, [
-                _c("span", { staticClass: "object" }, [
-                  _vm._v("new " + _vm._s(_vm.creating.label) + ":")
-                ]),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.ctrl,
-                      expression: "ctrl"
-                    }
-                  ],
-                  ref: "ctrl",
-                  staticClass: "filter uk-input uk-flex-1",
-                  attrs: { name: "ctrl" },
-                  domProps: { value: _vm.ctrl },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
+            ? _c(
+                "div",
+                { staticClass: "object-create uk-flex uk-wrap-around" },
+                [
+                  _c("span", { staticClass: "object" }, [
+                    _vm._v("new " + _vm._s(_vm.creating.label) + ":")
+                  ]),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.ctrl,
+                        expression: "ctrl"
                       }
-                      _vm.ctrl = $event.target.value
+                    ],
+                    ref: "ctrl",
+                    staticClass: "filter uk-input uk-flex-1",
+                    attrs: { name: "ctrl" },
+                    domProps: { value: _vm.ctrl },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.ctrl = $event.target.value
+                      }
                     }
-                  }
-                })
-              ])
+                  })
+                ]
+              )
             : _c("input", {
                 directives: [
                   {

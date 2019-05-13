@@ -86,21 +86,32 @@ a[data-v-aae30ed8] {
       margin-right: -3px;
       border-top-left-radius: 4px;
 }
-.mf-prompt .cli {
-    background: rgba(0, 0, 0, 0.5);
-    font-family: monospace;
+.mf-prompt input {
     padding: 4px 10px;
     height: auto;
-    border: 1px solid skyblue;
-    border-bottom-width: 0;
-    border-right-width: 0;
-    border-top-left-radius: 4px;
-    -webkit-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.25);
-            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.25);
     font-size: 14px;
 }
-.mf-prompt .cli:focus {
-      background: rgba(0, 0, 0, 0.8);
+.mf-prompt input.cli {
+      background: rgba(0, 0, 0, 0.5);
+      font-family: monospace;
+      border: 1px solid skyblue;
+      border-bottom-width: 0;
+      border-right-width: 0;
+      border-top-left-radius: 4px;
+      -webkit-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.25);
+              box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.25);
+}
+.mf-prompt input.cli:focus {
+        background: rgba(0, 0, 0, 0.8);
+}
+.mf-prompt .object-search {
+    background: white;
+    padding: 4px 10px;
+    margin-bottom: 4px;
+}
+.mf-prompt .object-search span {
+      font-weight: bold;
+      color: steelblue;
 }
 .mf-prompt textarea.cli {
     line-height: normal;

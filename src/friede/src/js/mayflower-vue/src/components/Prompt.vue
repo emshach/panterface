@@ -23,6 +23,12 @@
           :multiple="searching.multiple"
           @search-change="getObjects"
           />
+        <vk-button-link class="btn-confirm" @click.prevent="confirmSearch">
+          <font-awesome-icon icon="check" />
+        </vk-button-link>
+        <vk-button-link class="btn-cancel" @click.prevent="cancelSearch">
+          <font-awesome-icon icon="times" />
+        </vk-button-link>
       </div>
       <div v-else-if="creating" class="object-create uk-flex uk-wrap-around">
         <span class="object">new {{ creating.label }}:</span>
@@ -40,7 +46,14 @@ import Switchboard from '@/components/Switchboard'
 import Breadcrumb from '@/components/Breadcrumb'
 import debounce from 'lodash/debounce'
 import Multiselect from 'vue-multiselect'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faTimes, faCheck } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { ButtonLink as VkButtonLink } from 'vuikit/lib/button'
 import 'vue-multiselect/dist/vue-multiselect.min.css'
+
+library.add( faTimes, faCheck )
+
 export default {
   name: 'Prompt',
   props: {
@@ -53,7 +66,13 @@ export default {
       default: true
     }
   },
-  components: { Switchboard, Breadcrumb, Multiselect },
+  components: {
+    Switchboard,
+    Breadcrumb,
+    Multiselect,
+    FontAwesomeIcon,
+    VkButtonLink,
+  },
   mounted() {
     this.$nextTick(() => {
       this.$refs.input.focus();
@@ -88,6 +107,10 @@ export default {
           this.$emit( 'update', this.selected.href );
         } else if ( this.selected.label ) {
           this.searching = this.selected;
+          this.selected = null;
+          this.$nextTick(() => {
+            this.$refs.filter.$el.focus();
+          })
         } else {
           this.prospect.push({ href: this.selected, title: this.selected });
         }
@@ -106,11 +129,11 @@ export default {
       const model = this.searching;
       this.loading = true;
       this.$api( model.app, model.plural, '?search='+query ).then( r => {
+        this.loading = false;
         this.search = r.data.results;
         if ( searching.create ) {
-          this.search.append({ path: '', title: 'New ' + searching.label })
+          this.search.push({ path: '', title: 'New ' + searching.label })
         }
-        this.loading = false;
       });
       
     },
@@ -173,6 +196,22 @@ export default {
       } else if ( this.selected ) {
         this.selected = this.input = this.entered;
       }
+    },
+    confirmSearch() {
+      this.prospect.push({
+        href: this.searching.label,
+        title: this.searching.label,
+        slot: this.searching });
+      this.cancelSearch();      // lol
+    },
+    cancelSearch() {
+      this.searching = null;
+      this.search = [];
+      this.objects = [];
+      this.input = this.entered = '';
+      this.$nextTick(() => {
+        this.$refs.input.focus();
+      });
     }
   },
   computed: {
@@ -267,6 +306,19 @@ export default {
       padding: 5px 0 0;
       font-weight: bold;
       color: steelblue;
+    }
+    >.multiselect {
+      padding-right: 0;
+      background: transparent;
+      height: 30px;
+      min-height: 30px;      
+      .multiselect__tags {
+        padding-top: 4px;
+        padding-left: 4px;
+      }
+      .multiselect__select {
+        height: 32px;
+      }
     }
   }
   textarea.cli {

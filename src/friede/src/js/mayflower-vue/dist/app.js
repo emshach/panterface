@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "6b2d23498dfddfce0282";
+/******/ 	var hotCurrentHash = "c423f2ac20b9c4a86995";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1124,8 +1124,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lodash_debounce__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(lodash_debounce__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js");
 /* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var vue_multiselect_dist_vue_multiselect_min_css__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vue-multiselect/dist/vue-multiselect.min.css */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.css");
-/* harmony import */ var vue_multiselect_dist_vue_multiselect_min_css__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect_dist_vue_multiselect_min_css__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @fortawesome/fontawesome-svg-core */ "./node_modules/@fortawesome/fontawesome-svg-core/index.es.js");
+/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+/* harmony import */ var _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @fortawesome/vue-fontawesome */ "./node_modules/@fortawesome/vue-fontawesome/index.es.js");
+/* harmony import */ var vuikit_lib_button__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! vuikit/lib/button */ "./node_modules/vuikit/lib/button.js");
+/* harmony import */ var vue_multiselect_dist_vue_multiselect_min_css__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! vue-multiselect/dist/vue-multiselect.min.css */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.css");
+/* harmony import */ var vue_multiselect_dist_vue_multiselect_min_css__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect_dist_vue_multiselect_min_css__WEBPACK_IMPORTED_MODULE_11__);
 
 
 
@@ -1134,6 +1138,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_7__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_8__["faTimes"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_8__["faCheck"]);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Prompt',
   props: {
@@ -1151,7 +1160,9 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     Switchboard: _components_Switchboard__WEBPACK_IMPORTED_MODULE_3__["default"],
     Breadcrumb: _components_Breadcrumb__WEBPACK_IMPORTED_MODULE_4__["default"],
-    Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_6___default.a
+    Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_6___default.a,
+    FontAwesomeIcon: _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_9__["FontAwesomeIcon"],
+    VkButtonLink: vuikit_lib_button__WEBPACK_IMPORTED_MODULE_10__["ButtonLink"]
   },
   mounted: function mounted() {
     var _this = this;
@@ -1185,12 +1196,18 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     submit: function submit() {
+      var _this2 = this;
+
       if (this.selected) {
         if (this.selected.href) {
           // TODO: go to location
           this.$emit('update', this.selected.href);
         } else if (this.selected.label) {
           this.searching = this.selected;
+          this.selected = null;
+          this.$nextTick(function () {
+            _this2.$refs.filter.$el.focus();
+          });
         } else {
           this.prospect.push({
             href: this.selected,
@@ -1203,30 +1220,29 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     getCompletions: function getCompletions() {
-      var _this2 = this;
+      var _this3 = this;
 
       this.$api('ls', this.input).then(function (r) {
-        _this2.pathMatches = r.data.matches;
-        _this2.pathSlots = r.data.slots;
-        _this2.pathLocations = r.data.locations;
+        _this3.pathMatches = r.data.matches;
+        _this3.pathSlots = r.data.slots;
+        _this3.pathLocations = r.data.locations;
       });
     },
     getObjects: function getObjects(query) {
-      var _this3 = this;
+      var _this4 = this;
 
       var model = this.searching;
       this.loading = true;
       this.$api(model.app, model.plural, '?search=' + query).then(function (r) {
-        _this3.search = r.data.results;
+        _this4.loading = false;
+        _this4.search = r.data.results;
 
         if (searching.create) {
-          _this3.search.append({
+          _this4.search.push({
             path: '',
             title: 'New ' + searching.label
           });
         }
-
-        _this3.loading = false;
       });
     },
     debouncedInput: lodash_debounce__WEBPACK_IMPORTED_MODULE_5___default()(function () {
@@ -1293,6 +1309,25 @@ __webpack_require__.r(__webpack_exports__);
       } else if (this.selected) {
         this.selected = this.input = this.entered;
       }
+    },
+    confirmSearch: function confirmSearch() {
+      this.prospect.push({
+        href: this.searching.label,
+        title: this.searching.label,
+        slot: this.searching
+      });
+      this.cancelSearch(); // lol
+    },
+    cancelSearch: function cancelSearch() {
+      var _this5 = this;
+
+      this.searching = null;
+      this.search = [];
+      this.objects = [];
+      this.input = this.entered = '';
+      this.$nextTick(function () {
+        _this5.$refs.input.focus();
+      });
     }
   },
   computed: {
@@ -1300,32 +1335,32 @@ __webpack_require__.r(__webpack_exports__);
       return this.matches.concat(this.locations).concat(this.slots);
     },
     matches: function matches() {
-      var _this4 = this;
+      var _this6 = this;
 
       if (this.searching || this.creating) return [];
       if (!this.entered) return this.pathMatches;
       return this.pathMatches.filter(function (x) {
-        return x.indexOf(_this4.entered) === 0;
+        return x.indexOf(_this6.entered) === 0;
       });
     },
     slots: function slots() {
-      var _this5 = this;
+      var _this7 = this;
 
       if (this.searching || this.creating) return [];
       if (!this.entered) return this.pathSlots;
       return this.pathSlots.filter(function (x) {
         return x.search.filter(function (y) {
-          return y.indexOf(_this5.entered) > -1;
+          return y.indexOf(_this7.entered) > -1;
         }).length;
       });
     },
     locations: function locations() {
-      var _this6 = this;
+      var _this8 = this;
 
       if (this.searching || this.creating) return [];
       if (!this.entered) return this.pathLocations;
       return this.pathLocations.filter(function (x) {
-        return x.name.indexOf(_this6.entered) === 0;
+        return x.name.indexOf(_this8.entered) === 0;
       });
     },
     filters: function filters() {
@@ -1712,7 +1747,35 @@ var render = function() {
                       },
                       expression: "objects"
                     }
-                  })
+                  }),
+                  _c(
+                    "vk-button-link",
+                    {
+                      staticClass: "btn-confirm",
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          return _vm.confirmSearch($event)
+                        }
+                      }
+                    },
+                    [_c("font-awesome-icon", { attrs: { icon: "check" } })],
+                    1
+                  ),
+                  _c(
+                    "vk-button-link",
+                    {
+                      staticClass: "btn-cancel",
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          return _vm.cancelSearch($event)
+                        }
+                      }
+                    },
+                    [_c("font-awesome-icon", { attrs: { icon: "times" } })],
+                    1
+                  )
                 ],
                 1
               )

@@ -113,6 +113,19 @@ a[data-v-aae30ed8] {
       font-weight: bold;
       color: steelblue;
 }
+.mf-prompt .object-search > .multiselect {
+      padding-right: 0;
+      background: transparent;
+      height: 30px;
+      min-height: 30px;
+}
+.mf-prompt .object-search > .multiselect .multiselect__tags {
+        padding-top: 4px;
+        padding-left: 4px;
+}
+.mf-prompt .object-search > .multiselect .multiselect__select {
+        height: 32px;
+}
 .mf-prompt textarea.cli {
     line-height: normal;
     padding: 8px 10px;

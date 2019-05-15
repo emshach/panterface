@@ -24,7 +24,7 @@ export default {
     return {
       menus: Friede.menus,
       searching: false,         // TODO: 
-      breadcrumb: [{ href: '/', title: '/' }]
+      breadcrumb: [{ href: '', title: '/' }]
     };
   },
   methods: {

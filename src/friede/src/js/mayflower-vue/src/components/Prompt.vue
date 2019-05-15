@@ -121,7 +121,7 @@ export default {
     },
     getCompletions() {
       this.$api( 'ls', this.path ).then( r => {
-        this.base = r.data.rx;
+        this.base = r.data.base;
         this.pathMatches = r.data.matches;
         this.pathSlots = r.data.slots;
         this.pathLocations = r.data.locations;

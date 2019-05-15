@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "5f85503f7d55075314fd";
+/******/ 	var hotCurrentHash = "a11ee065d88b94fa9d2a";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -996,7 +996,7 @@ __webpack_require__.r(__webpack_exports__);
       searching: false,
       // TODO: 
       breadcrumb: [{
-        href: '/',
+        href: '',
         title: '/'
       }]
     };
@@ -1224,7 +1224,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_7__["library"].add(_f
       var _this3 = this;
 
       this.$api('ls', this.path).then(function (r) {
-        _this3.base = r.data.rx;
+        _this3.base = r.data.base;
         _this3.pathMatches = r.data.matches;
         _this3.pathSlots = r.data.slots;
         _this3.pathLocations = r.data.locations;

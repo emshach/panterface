@@ -81,6 +81,7 @@ export default {
   },
   data() {
     return {
+      base: '',
       input: '',
       entered: '',
       state: 'nav',
@@ -119,7 +120,8 @@ export default {
       }
     },
     getCompletions() {
-      this.$api( 'ls', this.input ).then( r => {
+      this.$api( 'ls', this.path ).then( r => {
+        this.base = r.data.rx;
         this.pathMatches = r.data.matches;
         this.pathSlots = r.data.slots;
         this.pathLocations = r.data.locations;
@@ -198,10 +200,11 @@ export default {
       }
     },
     confirmSearch() {
+      const s = this.searching;
       this.prospect.push({
-        href: this.searching.label,
-        title: this.searching.label,
-        slot: this.searching });
+        href: '{' + s.app + '.' + s.model + '\*?\+?}',
+        title: s.label,
+        slot: s });
       this.cancelSearch();      // lol
     },
     cancelSearch() {
@@ -244,6 +247,16 @@ export default {
     filters() {
       return this.filter.split(/\s+/)
     }
+  },
+  path() {
+    const crumb = breadcrumb;
+    const tmp = prospect;
+    var path = '/';
+    crumb.forEach( x => {
+    });
+    tmp.forEach( x => {
+    });
+    return path;
   }
 }
 </script>
@@ -315,9 +328,28 @@ export default {
       .multiselect__tags {
         padding-top: 4px;
         padding-left: 4px;
+        height: 30px;
+        min-height: 30px;      
       }
       .multiselect__select {
         height: 32px;
+      }
+    }
+    .btn {
+      padding: 0 7px;
+      height: 30px;
+      line-height: 33px;
+      &.btn-confirm {
+        color: limegreen;
+        &:hover {
+          color: forestgreen;
+        }
+      }
+      &.btn-cancel {
+        color: red;
+        &:hover {
+          color: darkred;
+        }
       }
     }
   }

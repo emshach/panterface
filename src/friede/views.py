@@ -155,6 +155,7 @@ def api_ls( request, path='', format=None ):
             ptree=ptree,
             rx=rx
         ),
+        base=rx,
         matches=tuple( matches ),
         slots=slots.values(),
         locations=expanded_serializer.data + rest_serializer.data

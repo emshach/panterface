@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "c423f2ac20b9c4a86995";
+/******/ 	var hotCurrentHash = "a0d3ede1e00b10a5f254";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1175,6 +1175,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_7__["library"].add(_f
   },
   data: function data() {
     return {
+      base: '',
       input: '',
       entered: '',
       state: 'nav',
@@ -1222,7 +1223,8 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_7__["library"].add(_f
     getCompletions: function getCompletions() {
       var _this3 = this;
 
-      this.$api('ls', this.input).then(function (r) {
+      this.$api('ls', this.path).then(function (r) {
+        _this3.base = r.data.rx;
         _this3.pathMatches = r.data.matches;
         _this3.pathSlots = r.data.slots;
         _this3.pathLocations = r.data.locations;
@@ -1311,10 +1313,11 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_7__["library"].add(_f
       }
     },
     confirmSearch: function confirmSearch() {
+      var s = this.searching;
       this.prospect.push({
-        href: this.searching.label,
-        title: this.searching.label,
-        slot: this.searching
+        href: '{' + s.app + '.' + s.model + '\*?\+?}',
+        title: s.label,
+        slot: s
       });
       this.cancelSearch(); // lol
     },
@@ -1366,6 +1369,14 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_7__["library"].add(_f
     filters: function filters() {
       return this.filter.split(/\s+/);
     }
+  },
+  path: function path() {
+    var crumb = breadcrumb;
+    var tmp = prospect;
+    var path = '/';
+    crumb.forEach(function (x) {});
+    tmp.forEach(function (x) {});
+    return path;
   }
 });
 

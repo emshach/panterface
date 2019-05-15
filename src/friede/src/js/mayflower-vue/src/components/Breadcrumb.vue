@@ -21,18 +21,13 @@ export default {
   },
   components: { VkBreadcrumb, VkBreadcrumbItem },
   mounted() {
-
   },
   data() {
-    return {
-      
-    }
+    return {}
   },
   methods: {
-    
   },
   computed: {
-    
   }
 }
 </script>

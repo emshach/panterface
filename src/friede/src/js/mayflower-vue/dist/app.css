@@ -122,9 +122,28 @@ a[data-v-aae30ed8] {
 .mf-prompt .object-search > .multiselect .multiselect__tags {
         padding-top: 4px;
         padding-left: 4px;
+        height: 30px;
+        min-height: 30px;
 }
 .mf-prompt .object-search > .multiselect .multiselect__select {
         height: 32px;
+}
+.mf-prompt .object-search .btn {
+      padding: 0 7px;
+      height: 30px;
+      line-height: 33px;
+}
+.mf-prompt .object-search .btn.btn-confirm {
+        color: limegreen;
+}
+.mf-prompt .object-search .btn.btn-confirm:hover {
+          color: forestgreen;
+}
+.mf-prompt .object-search .btn.btn-cancel {
+        color: red;
+}
+.mf-prompt .object-search .btn.btn-cancel:hover {
+          color: darkred;
 }
 .mf-prompt textarea.cli {
     line-height: normal;

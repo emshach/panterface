@@ -201,11 +201,13 @@ export default {
     },
     confirmSearch() {
       const s = this.searching;
+      const o = this.objects;
       this.prospect.push({
         href: '{' + s.app + '.' + s.model + '\*?\+?}',
-        objects: s.objects,
-        title: ( s.objects.length === 1 ? s.singular + ': ' + s.objects[0].title
-                 : s.objects.length + ' ' + s.plural ),
+        objects: o,
+        title: ( o.length === 1
+                 ? s.singular + ': ' + o[0].title
+                 : ( o.length + ' ' + s.plural )),
         slot: s });
       this.cancelSearch();      // lol
       this.getCompletions();

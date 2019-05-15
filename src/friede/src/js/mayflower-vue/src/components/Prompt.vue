@@ -74,7 +74,7 @@ export default {
     VkButtonLink,
   },
   mounted() {
-    this.myBreadcrumb = breadcrumb;
+    this.myBreadcrumb = this.breadcrumb;
     this.$nextTick(() => {
       this.$refs.input.focus();
       this.getCompletions();

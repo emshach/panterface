@@ -167,7 +167,7 @@ export default {
     processKey( $event ) {
       if ( $event.keyCode === 9 )  { // TAB
         $event.preventDefault();
-        if ( this.matches.length ) {
+        if ( this.all.length ) {
           if ( this.all.length === 1 ) {
             this.update( this.all[0] );
           } else {
@@ -233,9 +233,8 @@ export default {
         return [];
       if ( !this.entered )
         return this.pathSlots;
-      return this.pathSlots.filter(
-        x => x.search.filter(
-          y => y.indexOf( this.entered ) > -1 ).length )
+      const rx = new RegExp( this.entered, 'i' );
+      return this.pathSlots.filter( x => x.search.filter( y => y.match( rx )).length )
     },
     locations() {
       if ( this.searching || this.creating )

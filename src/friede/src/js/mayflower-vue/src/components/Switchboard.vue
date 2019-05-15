@@ -4,7 +4,7 @@
       <dashboard :widgets="widgets" />
     </transition>
     <transition mode="in-out">
-      <vk-grid v-if="matches.length || locations.length"
+      <vk-grid v-if="matches.length || locations.length || slots.length"
                gutter="collapse" :class="[ 'completions', 'uk-margin', columnWidth ]"
                :style="{ minWidth: 92 * ( getCompletionColumns() / 6 ) + '%' }">
         <vk-button-link

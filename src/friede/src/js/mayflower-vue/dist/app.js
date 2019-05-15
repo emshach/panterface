@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "a11ee065d88b94fa9d2a";
+/******/ 	var hotCurrentHash = "f5320ab83c26dd25f290";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1205,7 +1205,6 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_7__["library"].add(_f
           this.$emit('update', this.selected.href);
         } else if (this.selected.label) {
           this.searching = this.selected;
-          this.selected = null;
           this.$nextTick(function () {
             _this2.$refs.filter.$el.focus();
           });
@@ -1217,6 +1216,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_7__["library"].add(_f
         }
 
         this.input = this.entered = '';
+        this.selected = null;
         this.getCompletions();
       }
     },
@@ -1892,7 +1892,7 @@ var render = function() {
         "transition",
         { attrs: { mode: "in-out" } },
         [
-          _vm.matches.length || _vm.locations.length
+          _vm.matches.length || _vm.locations.length || _vm.slots.length
             ? _c(
                 "vk-grid",
                 {

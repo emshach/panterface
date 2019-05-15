@@ -108,7 +108,6 @@ export default {
           this.$emit( 'update', this.selected.href );
         } else if ( this.selected.label ) {
           this.searching = this.selected;
-          this.selected = null;
           this.$nextTick(() => {
             this.$refs.filter.$el.focus();
           })
@@ -116,6 +115,7 @@ export default {
           this.prospect.push({ href: this.selected, title: this.selected });
         }
         this.input = this.entered = '';
+        this.selected = null;
         this.getCompletions();
       }
     },

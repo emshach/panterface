@@ -133,8 +133,8 @@ export default {
       this.$api( model.app, model.plural, '?search='+query ).then( r => {
         this.loading = false;
         this.search = r.data.results;
-        if ( searching.create ) {
-          this.search.push({ path: '', title: 'New ' + searching.label })
+        if ( model.create ) {
+          this.search.push({ path: '', title: 'New ' + model.label })
         }
       });
       

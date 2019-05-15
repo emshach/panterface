@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "e8514a84c34671147e91";
+/******/ 	var hotCurrentHash = "d22a812c547b925e4198";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1245,10 +1245,10 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_9__["library"].add(_f
         _this4.loading = false;
         _this4.search = r.data.results;
 
-        if (searching.create) {
+        if (model.create) {
           _this4.search.push({
             path: '',
-            title: 'New ' + searching.label
+            title: 'New ' + model.label
           });
         }
       });

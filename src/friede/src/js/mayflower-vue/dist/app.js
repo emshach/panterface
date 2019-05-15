@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "2121835c6b00ffdbd782";
+/******/ 	var hotCurrentHash = "f71e13bfa2c03734d4c7";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1173,6 +1173,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_9__["library"].add(_f
   mounted: function mounted() {
     var _this = this;
 
+    this.myBreadcrumb = breadcrumb;
     this.$nextTick(function () {
       _this.$refs.input.focus();
 
@@ -1198,7 +1199,8 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_9__["library"].add(_f
       pathLocations: [],
       enterMeansSubmit: true,
       selected: null,
-      loading: false
+      loading: false,
+      myBreadcrumb: []
     };
   },
   methods: {
@@ -1282,7 +1284,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_9__["library"].add(_f
     },
     processKey: function processKey($event) {
       if ($event.keyCode === 9) {
-        // TAB
+        // <TAB>
         $event.preventDefault();
 
         if (this.all.length) {
@@ -1302,17 +1304,38 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_9__["library"].add(_f
         } // TODO: else cycle completions
 
       } else if ($event.keyCode === 13) {
+        // <ENTER>
         $event.preventDefault();
         this.submit();
       } else if ($event.keyCode === 27) {
+        // <ESC>
         if (this.selected) {
           this.selected = this.input = this.entered;
         } else if (this.input) {
           this.input = this.entered = '';
         } else if (this.prospect.length) {
           this.prospect = [];
+        } else if (this.myBreadcrumb.map(function (x) {
+          return x.href;
+        }).join('/') != this.breadcrumb.map(function (x) {
+          return x.href;
+        }).join('/')) {
+          this.myBreadcrumb = this.breadcrumb;
         } else {
           this.$refs.input.blur();
+        }
+      } else if ($event.keyCode === 8) {
+        // <BKSPC>
+        if (!this.entered) {
+          if (this.prospect.length) {
+            $event.preventDefault();
+            this.prospect.pop();
+            this.getCompletions();
+          } else if (this.myBreadcrumb.length) {
+            $event.preventDefault();
+            this.myBreadcrumb.pop();
+            this.getCompletions();
+          }
         }
       } else if (this.selected) {
         this.selected = this.input = this.entered;
@@ -1322,7 +1345,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_9__["library"].add(_f
       var s = this.searching;
       var o = this.objects;
       this.prospect.push({
-        href: '{' + s.app + '.' + s.model + '\*?\+?}',
+        href: '{' + s.app + '.' + s.model + '\\*?\\+?}',
         objects: o,
         title: o.length === 1 ? s.singular + ': ' + o[0].title : o.length + ' ' + s.plural,
         slot: s
@@ -1379,10 +1402,10 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_9__["library"].add(_f
       return this.filter.split(/\s+/);
     },
     path: function path() {
-      return this.breadcrumb.map(function (x) {
+      return this.myBreadcrumb.map(function (x) {
         return x.href;
       }).concat(this.prospect.map(function (x) {
-        return x.href;
+        return escape(x.href);
       })).join('/');
     }
   }
@@ -1728,7 +1751,7 @@ var render = function() {
         [
           _c("breadcrumb", {
             staticClass: "main",
-            attrs: { items: _vm.breadcrumb }
+            attrs: { items: _vm.myBreadcrumb }
           }),
           _vm.prospect.length
             ? _c("breadcrumb", {
@@ -1770,7 +1793,7 @@ var render = function() {
                   _c(
                     "vk-button-link",
                     {
-                      staticClass: "btn-confirm",
+                      staticClass: "btn btn-confirm",
                       on: {
                         click: function($event) {
                           $event.preventDefault()
@@ -1784,7 +1807,7 @@ var render = function() {
                   _c(
                     "vk-button-link",
                     {
-                      staticClass: "btn-cancel",
+                      staticClass: "btn btn-cancel",
                       on: {
                         click: function($event) {
                           $event.preventDefault()

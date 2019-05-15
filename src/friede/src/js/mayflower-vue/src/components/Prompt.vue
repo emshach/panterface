@@ -4,7 +4,7 @@
     <switchboard :matches="matches" :locations="locations" :slots="slots"
                  v-model="selected" @input="update" />
     <div class="readline uk-flex uk-wrap-around">
-      <breadcrumb class="main" :items="breadcrumb" />
+      <breadcrumb class="main" :items="myBreadcrumb" />
       <breadcrumb v-if="prospect.length" class="tmp" :items="prospect" />
       <div v-if="searching" class="object-search uk-flex uk-wrap-around">
         <span class="object">{{ searching.label }}:</span>
@@ -23,10 +23,10 @@
           :multiple="searching.multiple"
           @search-change="getObjects"
           />
-        <vk-button-link class="btn-confirm" @click.prevent="confirmSearch">
+        <vk-button-link class="btn btn-confirm" @click.prevent="confirmSearch">
           <font-awesome-icon icon="check" />
         </vk-button-link>
-        <vk-button-link class="btn-cancel" @click.prevent="cancelSearch">
+        <vk-button-link class="btn btn-cancel" @click.prevent="cancelSearch">
           <font-awesome-icon icon="times" />
         </vk-button-link>
       </div>
@@ -74,6 +74,7 @@ export default {
     VkButtonLink,
   },
   mounted() {
+    this.myBreadcrumb = breadcrumb;
     this.$nextTick(() => {
       this.$refs.input.focus();
       this.getCompletions();
@@ -99,6 +100,7 @@ export default {
       enterMeansSubmit: true,
       selected: null,
       loading: false,
+      myBreadcrumb: []
     }
   },
   methods: {
@@ -165,7 +167,7 @@ export default {
       this.submit()
     },
     processKey( $event ) {
-      if ( $event.keyCode === 9 )  { // TAB
+      if ( $event.keyCode === 9 )  { // <TAB>
         $event.preventDefault();
         if ( this.all.length ) {
           if ( this.all.length === 1 ) {
@@ -182,18 +184,33 @@ export default {
           }
         }
         // TODO: else cycle completions
-      } else if ( $event.keyCode === 13 ) { 
+      } else if ( $event.keyCode === 13 ) { // <ENTER>
         $event.preventDefault();
         this.submit();
-      } else if ( $event.keyCode === 27 ) {
+      } else if ( $event.keyCode === 27 ) { // <ESC>
         if ( this.selected ) {
           this.selected = this.input = this.entered;
         } else if ( this.input ) {
           this.input = this.entered = '';
         } else if ( this.prospect.length ) {
           this.prospect = []
+        } else if ( this.myBreadcrumb.map( x => x.href ).join('/')
+                    != this.breadcrumb.map( x => x.href ).join('/')){
+          this.myBreadcrumb = this.breadcrumb;
         } else {
           this.$refs.input.blur();
+        }
+      } else if ( $event.keyCode === 8 ) { // <BKSPC>
+        if ( !this.entered ) {
+          if ( this.prospect.length ) {
+            $event.preventDefault();
+            this.prospect.pop();
+            this.getCompletions();
+          } else if ( this.myBreadcrumb.length ) {
+            $event.preventDefault();
+            this.myBreadcrumb.pop();
+            this.getCompletions();
+          }
         }
       } else if ( this.selected ) {
         this.selected = this.input = this.entered;
@@ -203,7 +220,7 @@ export default {
       const s = this.searching;
       const o = this.objects;
       this.prospect.push({
-        href: '{' + s.app + '.' + s.model + '\*?\+?}',
+        href: '{' + s.app + '.' + s.model + '\\*?\\+?}',
         objects: o,
         title: ( o.length === 1
                  ? s.singular + ': ' + o[0].title
@@ -252,8 +269,8 @@ export default {
       return this.filter.split(/\s+/)
     },
     path() {
-      return this.breadcrumb.map( x => x.href ).concat(
-        this.prospect.map( x => x.href )).join('/');
+      return this.myBreadcrumb.map( x => x.href ).concat(
+        this.prospect.map( x => escape( x.href ))).join('/');
     }
   }
 }

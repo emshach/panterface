@@ -203,9 +203,12 @@ export default {
       const s = this.searching;
       this.prospect.push({
         href: '{' + s.app + '.' + s.model + '\*?\+?}',
-        title: s.label,
+        objects: s.objects,
+        title: ( s.objects.length === 1 ? s.singular + ': ' + s.objects[0].title
+                 : s.objects.length + ' ' + s.plural ),
         slot: s });
       this.cancelSearch();      // lol
+      this.getCompletions();
     },
     cancelSearch() {
       this.searching = null;

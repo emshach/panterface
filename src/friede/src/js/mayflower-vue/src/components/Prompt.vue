@@ -234,8 +234,8 @@ export default {
       if ( !this.entered )
         return this.pathSlots;
       return this.pathSlots.filter(
-          x => x.search.filter(
-            y => y.indexOf( this.entered ) > -1 ).length )
+        x => x.search.filter(
+          y => y.indexOf( this.entered ) > -1 ).length )
     },
     locations() {
       if ( this.searching || this.creating )
@@ -246,17 +246,11 @@ export default {
     },
     filters() {
       return this.filter.split(/\s+/)
+    },
+    path() {
+      return this.breadcrumb.map( x => x.href ).concat(
+        this.prospect.map( x => x.href )).join('/');
     }
-  },
-  path() {
-    const crumb = breadcrumb;
-    const tmp = prospect;
-    var path = '/';
-    crumb.forEach( x => {
-    });
-    tmp.forEach( x => {
-    });
-    return path;
   }
 }
 </script>

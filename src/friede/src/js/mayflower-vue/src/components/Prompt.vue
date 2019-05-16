@@ -30,7 +30,7 @@
           @search-change="getObjects"
           @keydown="processSlotKey( $event )"
           >
-          <template #no-options>All</template>
+          <template #noOptions>All</template>
         </multiselect>
         <vk-button-link class="btn btn-confirm" @click.prevent="confirmSearch">
           <font-awesome-icon icon="check" />
@@ -216,6 +216,7 @@ export default {
         } else {
           this.$refs.input.blur();
         }
+        this.getCompletions();
       } else if ( $event.keyCode === 8 ) { // <BKSPC>
         if ( !this.entered ) {
           if ( this.prospect.length ) {
@@ -233,6 +234,7 @@ export default {
       }
     },
     processSlotKey( $event ) {
+      console.log( 'processSlotKey', $event );
       if ( $event.keyCode === 13 ) { // <ENTER>
         if ( !this.query ) {
           $event.preventDefault();
@@ -328,7 +330,7 @@ export default {
     color: white;
     /* text-shadow: 0 0 1px black; */
     li {
-      font-weight: bold;
+      /* font-weight: bold; */
       &:before {
         /* color: lightskyblue !important; */
         color: #3a3a92;

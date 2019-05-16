@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "e39162af3fc3a3a9b80d";
+/******/ 	var hotCurrentHash = "3f73e3e258a6fcbb005c";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1323,6 +1323,8 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_9__["library"].add(_f
         } else {
           this.$refs.input.blur();
         }
+
+        this.getCompletions();
       } else if ($event.keyCode === 8) {
         // <BKSPC>
         if (!this.entered) {
@@ -1341,6 +1343,8 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_9__["library"].add(_f
       }
     },
     processSlotKey: function processSlotKey($event) {
+      console.log('processSlotKey', $event);
+
       if ($event.keyCode === 13) {
         // <ENTER>
         if (!this.query) {
@@ -1835,7 +1839,7 @@ var render = function() {
                     scopedSlots: _vm._u(
                       [
                         {
-                          key: "no-options",
+                          key: "noOptions",
                           fn: function() {
                             return [_vm._v("All")]
                           },
@@ -1844,7 +1848,7 @@ var render = function() {
                       ],
                       null,
                       false,
-                      1252697184
+                      3786231597
                     ),
                     model: {
                       value: _vm.objects,

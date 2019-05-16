@@ -150,10 +150,13 @@ export default {
       });
     },
     addFilter( tag ) {
+      if ( this.filters.find( x => x.tag === tag ))
+        return;
       const filter = {
         path: `_filter.${tag}`,
         title: `filter: ${tag}`,
-        filter: true
+        filter: true,
+        tag: tag
       }
       this.filters.push( filter );
       this.objects.push( filter );

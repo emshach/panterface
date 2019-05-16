@@ -64,19 +64,22 @@ a[data-v-aae30ed8] {
     margin: 0;
     padding: 4px;
     color: white;
-    text-shadow: 0 0 1px black;
+    /* text-shadow: 0 0 1px black; */
 }
 .mf-prompt .breadcrumb li {
       font-weight: bold;
 }
 .mf-prompt .breadcrumb li:before {
-        color: lightskyblue !important;
-        margin: 0 4px !important;
+        /* color: lightskyblue !important; */
+        color: #3a3a92;
+        margin: 0 !important;
         display: inline !important;
+        font-size: 0.875rem !important;
+        font-weight: bold !important;
 }
 .mf-prompt .breadcrumb li a {
-        color: white;
-        padding: 1px 4px;
+        color: #3a3a92;
+        padding: 1px 2px;
 }
 .mf-prompt .breadcrumb li a:hover {
           background: rgba(255, 255, 255, 0.25);
@@ -110,7 +113,6 @@ a[data-v-aae30ed8] {
 }
 .mf-prompt .object-search > span {
       padding: 5px 0 0;
-      font-weight: bold;
       color: steelblue;
 }
 .mf-prompt .object-search > .multiselect {
@@ -127,6 +129,13 @@ a[data-v-aae30ed8] {
 }
 .mf-prompt .object-search > .multiselect .multiselect__select {
         height: 32px;
+}
+.mf-prompt .object-search > .multiselect .multiselect__placeholder {
+        padding-top: 0;
+        height: 24px;
+        min-height: 24px;
+        line-height: 24px;
+        vertical-align: top;
 }
 .mf-prompt .object-search .btn {
       padding: 0 7px;
@@ -145,10 +154,15 @@ a[data-v-aae30ed8] {
 .mf-prompt .object-search .btn.btn-cancel:hover {
           color: darkred;
 }
-.mf-prompt .object-search .btn.btn-go {
-        float: right;
-        background: limegreen;
-        color: white;
+.mf-prompt.btn-go {
+    background: limegreen;
+    color: white;
+    height: 32px;
+    border: 1px solid lightgreen;
+    border-radius: 4px 0 0 0;
+    border-bottom-width: 0;
+    border-right-width: 0;
+    line-height: 30px;
 }
 .mf-prompt textarea.cli {
     line-height: normal;

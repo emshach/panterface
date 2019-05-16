@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "921f6ee573395a2fcf36";
+/******/ 	var hotCurrentHash = "c2d5c827bae4683601ee";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1191,6 +1191,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_9__["library"].add(_f
       values: {},
       searching: null,
       search: [],
+      query: '',
       objects: [],
       creating: null,
       prospect: [],
@@ -1206,17 +1207,13 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_9__["library"].add(_f
   },
   methods: {
     submit: function submit() {
-      var _this2 = this;
-
       if (this.selected) {
         if (this.selected.href) {
           // TODO: go to location
           this.$emit('update', this.selected.href);
         } else if (this.selected.label) {
           this.searching = this.selected;
-          this.$nextTick(function () {
-            _this2.$refs.filter.$el.focus();
-          });
+          this.focusSlot();
         } else {
           this.prospect.push({
             href: this.selected,
@@ -1233,27 +1230,28 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_9__["library"].add(_f
       }
     },
     getCompletions: function getCompletions() {
-      var _this3 = this;
+      var _this2 = this;
 
       this.$api('ls', this.path).then(function (r) {
-        _this3.base = r.data.base;
-        _this3.endpoint = r.data.endpoint;
-        _this3.pathMatches = r.data.matches;
-        _this3.pathSlots = r.data.slots;
-        _this3.pathLocations = r.data.locations;
+        _this2.base = r.data.base;
+        _this2.endpoint = r.data.endpoint;
+        _this2.pathMatches = r.data.matches;
+        _this2.pathSlots = r.data.slots;
+        _this2.pathLocations = r.data.locations;
       });
     },
     getObjects: function getObjects(query) {
-      var _this4 = this;
+      var _this3 = this;
 
+      this.query = query;
       var model = this.searching;
       this.loading = true;
       this.$api(model.app, model.plural, '?search=' + query).then(function (r) {
-        _this4.loading = false;
-        _this4.search = r.data.results;
+        _this3.loading = false;
+        _this3.search = r.data.results;
 
         if (model.create) {
-          _this4.search.push({
+          _this3.search.push({
             path: '',
             title: 'New ' + model.label
           });
@@ -1320,7 +1318,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_9__["library"].add(_f
           this.input = this.entered = '';
         } else if (this.prospect.length) {
           this.prospect = [];
-        } else if (this.myBreadcrumb.map(function (x) {
+        } else if (this.myBreadcrumb.length != this.breadcrumb.length || this.myBreadcrumb.map(function (x) {
           return x.href;
         }).join('/') != this.breadcrumb.map(function (x) {
           return x.href;
@@ -1345,6 +1343,26 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_9__["library"].add(_f
       } else if (this.selected) {
         this.selected = this.input = this.entered;
       }
+    },
+    processSlotKey: function processSlotKey($event) {
+      if ($event.keyCode === 13) {
+        // <ENTER>
+        if (!this.query) {
+          $event.preventDefault();
+          this.confirmSearch();
+        }
+      } else if ($event.keyCode === 27) {
+        // <ESC>
+        $event.preventDefault();
+        this.cancelSearch();
+      }
+    },
+    focusSlot: function focusSlot() {
+      var _this4 = this;
+
+      this.$nextTick(function () {
+        _this4.$refs.filter.$el.focus();
+      });
     },
     confirmSearch: function confirmSearch() {
       var s = this.searching;
@@ -1408,7 +1426,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_9__["library"].add(_f
     },
     path: function path() {
       return this.myBreadcrumb.map(function (x) {
-        return x.href;
+        return escape(x.href);
       }).concat(this.prospect.map(function (x) {
         return escape(x.href);
       })).join('/');
@@ -1781,7 +1799,7 @@ var render = function() {
                 { staticClass: "object-search uk-flex uk-wrap-around" },
                 [
                   _c("span", { staticClass: "object" }, [
-                    _vm._v(_vm._s(_vm.searching.label) + ":")
+                    _vm._v(_vm._s(_vm.searching.label))
                   ]),
                   _c("multiselect", {
                     ref: "filter",
@@ -1790,14 +1808,38 @@ var render = function() {
                       "open-direction": "above",
                       label: "title",
                       "track-by": "path",
+                      placeholder: "filter",
+                      "tag-placeholder": "add filter",
                       options: _vm.search,
-                      "close-on-select": true,
+                      "close-on-select": false,
+                      "hide-selected": true,
                       "show-labels": false,
                       "internal-search": false,
                       loading: _vm.loading,
-                      multiple: _vm.searching.multiple
+                      multiple: _vm.searching.multiple,
+                      taggable: true
                     },
-                    on: { "search-change": _vm.getObjects },
+                    on: {
+                      input: _vm.focusSlot,
+                      "search-change": _vm.getObjects,
+                      keydown: function($event) {
+                        return _vm.processSlotKey($event)
+                      }
+                    },
+                    scopedSlots: _vm._u(
+                      [
+                        {
+                          key: "no-options",
+                          fn: function() {
+                            return [_vm._v("All")]
+                          },
+                          proxy: true
+                        }
+                      ],
+                      null,
+                      false,
+                      1252697184
+                    ),
                     model: {
                       value: _vm.objects,
                       callback: function($$v) {
@@ -1843,7 +1885,7 @@ var render = function() {
                 { staticClass: "object-create uk-flex uk-wrap-around" },
                 [
                   _c("span", { staticClass: "object" }, [
-                    _vm._v("new " + _vm._s(_vm.creating.label) + ":")
+                    _vm._v("new " + _vm._s(_vm.creating.label))
                   ]),
                   _c("input", {
                     directives: [

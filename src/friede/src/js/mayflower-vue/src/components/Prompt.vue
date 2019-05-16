@@ -8,7 +8,7 @@
       <breadcrumb class="main" :items="myBreadcrumb" />
       <breadcrumb v-if="prospect.length" class="tmp" :items="prospect" />
       <div v-if="searching" class="object-search uk-flex uk-wrap-around">
-        <span class="object">{{ searching.label }}:</span>
+        <span class="object">{{ searching.label }}</span>
         <multiselect
           v-model="objects"
           class="filter uk-input uk-flex-1"
@@ -16,14 +16,22 @@
           open-direction="above"
           label="title"
           track-by="path"
+          placeholder="filter"
+          tag-placeholder="add filter"
           :options="search"
-          :close-on-select="true"
+          :close-on-select="false"
+          :hide-selected="true"
           :show-labels="false"
           :internal-search="false"
           :loading="loading"
           :multiple="searching.multiple"
+          :taggable="true"
+          @input="focusSlot"
           @search-change="getObjects"
-          />
+          @keydown="processSlotKey( $event )"
+          >
+          <template #no-options>All</template>
+        </multiselect>
         <vk-button-link class="btn btn-confirm" @click.prevent="confirmSearch">
           <font-awesome-icon icon="check" />
         </vk-button-link>
@@ -32,7 +40,7 @@
         </vk-button-link>
       </div>
       <div v-else-if="creating" class="object-create uk-flex uk-wrap-around">
-        <span class="object">new {{ creating.label }}:</span>
+        <span class="object">new {{ creating.label }}</span>
         <input name="ctrl" class="filter uk-input uk-flex-1" v-model="ctrl"
                ref="ctrl" />
       </div>
@@ -95,6 +103,7 @@ export default {
       values: {},
       searching: null,
       search: [],
+      query: '',
       objects: [],
       creating: null,
       prospect:  [],
@@ -115,9 +124,7 @@ export default {
           this.$emit( 'update', this.selected.href );
         } else if ( this.selected.label ) {
           this.searching = this.selected;
-          this.$nextTick(() => {
-            this.$refs.filter.$el.focus();
-          })
+          this.focusSlot();
         } else {
           this.prospect.push({ href: this.selected, title: this.selected });
         }
@@ -139,6 +146,7 @@ export default {
       });
     },
     getObjects( query ) {
+      this.query = query;
       const model = this.searching;
       this.loading = true;
       this.$api( model.app, model.plural, '?search='+query ).then( r => {
@@ -203,8 +211,9 @@ export default {
           this.input = this.entered = '';
         } else if ( this.prospect.length ) {
           this.prospect = []
-        } else if ( this.myBreadcrumb.map( x => x.href ).join('/')
-                    != this.breadcrumb.map( x => x.href ).join('/')){
+        } else if ( this.myBreadcrumb.length != this.breadcrumb.length
+                    || this.myBreadcrumb.map( x => x.href ).join('/')
+                    != this.breadcrumb.map( x => x.href ).join('/') ) {
           this.myBreadcrumb = this.breadcrumb;
         } else {
           this.$refs.input.blur();
@@ -224,6 +233,22 @@ export default {
       } else if ( this.selected ) {
         this.selected = this.input = this.entered;
       }
+    },
+    processSlotKey( $event ) {
+      if ( $event.keyCode === 13 ) { // <ENTER>
+        if ( !this.query ) {
+          $event.preventDefault();
+          this.confirmSearch();
+        }
+      } else if ( $event.keyCode === 27 ) { // <ESC>
+        $event.preventDefault();
+        this.cancelSearch();
+      }
+    },
+    focusSlot() {
+      this.$nextTick(() => {
+        this.$refs.filter.$el.focus();
+      });
     },
     confirmSearch() {
       const s = this.searching;
@@ -278,7 +303,7 @@ export default {
       return this.filter.split(/\s+/)
     },
     path() {
-      return this.myBreadcrumb.map( x => x.href ).concat(
+      return this.myBreadcrumb.map( x => escape( x.href )).concat(
         this.prospect.map( x => escape( x.href ))).join('/');
     }
   }
@@ -295,17 +320,20 @@ export default {
     margin: 0;
     padding: 4px;
     color: white;
-    text-shadow: 0 0 1px black;
+    /* text-shadow: 0 0 1px black; */
     li {
       font-weight: bold;
       &:before {
-        color: lightskyblue !important;
-        margin: 0 4px !important;
+        /* color: lightskyblue !important; */
+        color: #3a3a92;
+        margin: 0 !important;
         display: inline !important;
+        font-size: 0.875rem !important;
+        font-weight: bold !important;
       }
       a {
-        color: white;
-        padding: 1px 4px;
+        color: #3a3a92;
+        padding: 1px 2px;
         &:hover {
           background: rgba(255,255,255,0.25);
         }
@@ -341,7 +369,6 @@ export default {
     border-top-right-radius: 4px;
     > span {
       padding: 5px 0 0;
-      font-weight: bold;
       color: steelblue;
     }
     >.multiselect {
@@ -357,6 +384,13 @@ export default {
       }
       .multiselect__select {
         height: 32px;
+      }
+      .multiselect__placeholder {
+        padding-top: 0;
+        height: 24px;
+        min-height: 24px;
+        line-height: 24px;
+        vertical-align: top;
       }
     }
     .btn {
@@ -375,12 +409,17 @@ export default {
           color: darkred;
         }
       }
-      &.btn-go {
-        float: right;
-        background: limegreen;
-        color: white;
-      }
     }
+  }
+  &.btn-go {
+    background: limegreen;
+    color: white;
+    height: 32px;
+    border: 1px solid lightgreen;
+    border-radius: 4px 0 0 0;
+    border-bottom-width: 0;
+    border-right-width: 0;
+    line-height: 30px;
   }
   textarea.cli {
     line-height: normal;

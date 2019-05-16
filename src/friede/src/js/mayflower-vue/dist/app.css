@@ -145,6 +145,11 @@ a[data-v-aae30ed8] {
 .mf-prompt .object-search .btn.btn-cancel:hover {
           color: darkred;
 }
+.mf-prompt .object-search .btn.btn-go {
+        float: right;
+        background: limegreen;
+        color: white;
+}
 .mf-prompt textarea.cli {
     line-height: normal;
     padding: 8px 10px;

@@ -14,7 +14,7 @@
         <vk-button-link
           v-for="l in locations" href :key="l.href" size="small"
           :class="[ 'location', l === value ? 'selected' : '' ]"
-          @click.prevent="select(l)">{{ l.href }}</vk-button-link>
+          @click.prevent="select(l)">{{ l.href.replace( baseRx, '' )}}</vk-button-link>
         <vk-button-link
           v-for="s in slots" href :key="s.app+'.'+s.model" size="small"
           :class="[ 'slot', s === value ? 'selected' : '' ]"
@@ -47,6 +47,10 @@ export default {
     value: {
       type: [ String, Object ],
       default: null
+    },
+    base: {
+      type: String,
+      default: ''
     }
   },
   components: { VkGrid, VkButtonLink, Dashboard },
@@ -76,6 +80,9 @@ export default {
   computed: {
     columnWidth() {
       return 'uk-child-width-1-' + this.getCompletionColumns()
+    },
+    baseRx() {
+      return new RegExp( this.base, 'i' );
     },
     widgets() {
       return this.locations.slice( 0, 10 ).forEach( location => {

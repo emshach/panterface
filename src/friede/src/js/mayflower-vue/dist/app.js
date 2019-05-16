@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "4155c89797465d1c7dd8";
+/******/ 	var hotCurrentHash = "921f6ee573395a2fcf36";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1200,7 +1200,8 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_9__["library"].add(_f
       enterMeansSubmit: true,
       selected: null,
       loading: false,
-      myBreadcrumb: []
+      myBreadcrumb: [],
+      endpoint: false
     };
   },
   methods: {
@@ -1226,6 +1227,9 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_9__["library"].add(_f
         this.input = this.entered = '';
         this.selected = null;
         this.getCompletions();
+      } else {
+        this.myBreadcrumb = this.myBreadcrumb.concat(this.prospect);
+        this.prospect = [];
       }
     },
     getCompletions: function getCompletions() {
@@ -1233,6 +1237,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_9__["library"].add(_f
 
       this.$api('ls', this.path).then(function (r) {
         _this3.base = r.data.base;
+        _this3.endpoint = r.data.endpoint;
         _this3.pathMatches = r.data.matches;
         _this3.pathSlots = r.data.slots;
         _this3.pathLocations = r.data.locations;
@@ -1347,7 +1352,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_9__["library"].add(_f
       this.prospect.push({
         href: '{' + s.app + '.' + s.model + '\\*?\\+?}',
         objects: o,
-        title: o.length === 1 ? s.singular + ': ' + o[0].title : o.length + ' ' + s.plural,
+        title: o.length === 1 ? s.singular + ': ' + o[0].title : o.length ? o.length + ' ' + s.plural : s.plural,
         slot: s
       });
       this.cancelSearch(); // lol
@@ -1426,10 +1431,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es6_function_name__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_function_name__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var core_js_modules_es6_array_find__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es6.array.find */ "./node_modules/core-js/modules/es6.array.find.js");
 /* harmony import */ var core_js_modules_es6_array_find__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_array_find__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var vuikit_lib_grid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuikit/lib/grid */ "./node_modules/vuikit/lib/grid.js");
-/* harmony import */ var vuikit_lib_button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuikit/lib/button */ "./node_modules/vuikit/lib/button.js");
-/* harmony import */ var _components_Dashboard__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/components/Dashboard */ "./src/components/Dashboard.vue");
-/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
+/* harmony import */ var core_js_modules_es6_regexp_constructor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es6.regexp.constructor */ "./node_modules/core-js/modules/es6.regexp.constructor.js");
+/* harmony import */ var core_js_modules_es6_regexp_constructor__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_regexp_constructor__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var vuikit_lib_grid__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuikit/lib/grid */ "./node_modules/vuikit/lib/grid.js");
+/* harmony import */ var vuikit_lib_button__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuikit/lib/button */ "./node_modules/vuikit/lib/button.js");
+/* harmony import */ var _components_Dashboard__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/components/Dashboard */ "./src/components/Dashboard.vue");
+/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
+
 
 
 
@@ -1460,12 +1468,16 @@ __webpack_require__.r(__webpack_exports__);
     value: {
       type: [String, Object],
       default: null
+    },
+    base: {
+      type: String,
+      default: ''
     }
   },
   components: {
-    VkGrid: vuikit_lib_grid__WEBPACK_IMPORTED_MODULE_2__["Grid"],
-    VkButtonLink: vuikit_lib_button__WEBPACK_IMPORTED_MODULE_3__["ButtonLink"],
-    Dashboard: _components_Dashboard__WEBPACK_IMPORTED_MODULE_4__["default"]
+    VkGrid: vuikit_lib_grid__WEBPACK_IMPORTED_MODULE_3__["Grid"],
+    VkButtonLink: vuikit_lib_button__WEBPACK_IMPORTED_MODULE_4__["ButtonLink"],
+    Dashboard: _components_Dashboard__WEBPACK_IMPORTED_MODULE_5__["default"]
   },
   mounted: function mounted() {},
   data: function data() {
@@ -1495,6 +1507,9 @@ __webpack_require__.r(__webpack_exports__);
     columnWidth: function columnWidth() {
       return 'uk-child-width-1-' + this.getCompletionColumns();
     },
+    baseRx: function baseRx() {
+      return new RegExp(this.base, 'i');
+    },
     widgets: function widgets() {
       return this.locations.slice(0, 10).forEach(function (location) {
         var l = location,
@@ -1509,7 +1524,7 @@ __webpack_require__.r(__webpack_exports__);
               return x.name === 'card';
             });
 
-            if (w) widget = Object(_lib_objects__WEBPACK_IMPORTED_MODULE_5__["Widget"])(w.entry);
+            if (w) widget = Object(_lib_objects__WEBPACK_IMPORTED_MODULE_6__["Widget"])(w.entry);
           }
 
           l = l.redirect_to;
@@ -1734,7 +1749,8 @@ var render = function() {
         attrs: {
           matches: _vm.matches,
           locations: _vm.locations,
-          slots: _vm.slots
+          slots: _vm.slots,
+          base: _vm.base
         },
         on: { input: _vm.update },
         model: {
@@ -1853,36 +1869,43 @@ var render = function() {
                   })
                 ]
               )
-            : _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.input,
-                    expression: "input"
-                  }
-                ],
-                ref: "input",
-                staticClass: "cli uk-input uk-flex-1",
-                attrs: { name: "cli" },
-                domProps: { value: _vm.input },
-                on: {
-                  input: [
-                    function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.input = $event.target.value
-                    },
-                    _vm.processInput
+            : [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.input,
+                      expression: "input"
+                    }
                   ],
-                  keydown: function($event) {
-                    return _vm.processKey($event)
+                  ref: "input",
+                  staticClass: "cli uk-input uk-flex-1",
+                  attrs: { name: "cli" },
+                  domProps: { value: _vm.input },
+                  on: {
+                    input: [
+                      function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.input = $event.target.value
+                      },
+                      _vm.processInput
+                    ],
+                    keydown: function($event) {
+                      return _vm.processKey($event)
+                    }
                   }
-                }
-              })
+                }),
+                _vm.endpoint
+                  ? _c("vk-button-link", { staticClass: "btn btn-go" }, [
+                      _vm._v("go")
+                    ])
+                  : _vm._e()
+              ]
         ],
-        1
+        2
       )
     ],
     1
@@ -1966,7 +1989,7 @@ var render = function() {
                           }
                         }
                       },
-                      [_vm._v(_vm._s(l.href))]
+                      [_vm._v(_vm._s(l.href.replace(_vm.baseRx, "")))]
                     )
                   }),
                   _vm._l(_vm.slots, function(s) {

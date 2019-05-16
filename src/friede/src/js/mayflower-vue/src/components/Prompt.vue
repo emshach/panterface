@@ -2,6 +2,7 @@
   <form id="prompt" class="mf-prompt uk-flex uk-wrap-around" ref="form"
         @submit.prevent="submit">
     <switchboard :matches="matches" :locations="locations" :slots="slots"
+                 :base="base"
                  v-model="selected" @input="update" />
     <div class="readline uk-flex uk-wrap-around">
       <breadcrumb class="main" :items="myBreadcrumb" />
@@ -35,8 +36,11 @@
         <input name="ctrl" class="filter uk-input uk-flex-1" v-model="ctrl"
                ref="ctrl" />
       </div>
-      <input v-else name="cli" class="cli uk-input uk-flex-1" v-model="input"
-             ref="input" @input="processInput" @keydown="processKey( $event )" />
+      <template v-else>
+        <input name="cli" class="cli uk-input uk-flex-1" v-model="input"
+               ref="input" @input="processInput" @keydown="processKey( $event )" />
+        <vk-button-link v-if="endpoint" class="btn btn-go">go</vk-button-link>
+      </template>
     </div>
   </form>
 </template>
@@ -100,7 +104,8 @@ export default {
       enterMeansSubmit: true,
       selected: null,
       loading: false,
-      myBreadcrumb: []
+      myBreadcrumb: [],
+      endpoint: false
     }
   },
   methods: {
@@ -119,11 +124,15 @@ export default {
         this.input = this.entered = '';
         this.selected = null;
         this.getCompletions();
+      } else {
+        this.myBreadcrumb = this.myBreadcrumb.concat( this.prospect );
+        this.prospect = [];
       }
     },
     getCompletions() {
       this.$api( 'ls', this.path ).then( r => {
         this.base = r.data.base;
+        this.endpoint = r.data.endpoint;
         this.pathMatches = r.data.matches;
         this.pathSlots = r.data.slots;
         this.pathLocations = r.data.locations;
@@ -224,7 +233,7 @@ export default {
         objects: o,
         title: ( o.length === 1
                  ? s.singular + ': ' + o[0].title
-                 : ( o.length + ' ' + s.plural )),
+                 : ( o.length ? o.length + ' ' + s.plural : s.plural )),
         slot: s });
       this.cancelSearch();      // lol
       this.getCompletions();
@@ -365,6 +374,11 @@ export default {
         &:hover {
           color: darkred;
         }
+      }
+      &.btn-go {
+        float: right;
+        background: limegreen;
+        color: white;
       }
     }
   }

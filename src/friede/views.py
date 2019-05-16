@@ -87,6 +87,7 @@ def api_ls( request, path='', format=None ):
     slots = {}
     by_label = {}
     locations = []
+    endpoint = False
     for candidate in candidates:
         if not candidate.href:
             continue
@@ -94,6 +95,7 @@ def api_ls( request, path='', format=None ):
         if m:
             g = m.group(1)
             if not g:
+                endpoint = True
                 continue
             m2 = re.match( r'{([\w.]+)(\*)?(\+)?}', g )
             if m2:
@@ -155,6 +157,7 @@ def api_ls( request, path='', format=None ):
             ptree=ptree,
             rx=rx
         ),
+        endpoint=endpoint,
         base=rx,
         matches=tuple( matches ),
         slots=slots.values(),

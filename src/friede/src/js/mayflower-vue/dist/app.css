@@ -88,6 +88,10 @@ a[data-v-aae30ed8] {
       background: rgba(255, 255, 255, 0.3);
       margin-right: -3px;
       border-top-left-radius: 4px;
+      padding-right: 6px;
+}
+.mf-prompt .breadcrumb.tmp li a {
+        color: #3f3f98;
 }
 .mf-prompt input.cli {
     padding: 4px 10px;
@@ -118,14 +122,14 @@ a[data-v-aae30ed8] {
 .mf-prompt .object-search > .multiselect {
       padding-right: 0;
       background: transparent;
-      height: 30px;
-      min-height: 30px;
+      height: 32px;
+      min-height: 32px;
 }
 .mf-prompt .object-search > .multiselect .multiselect__tags {
         padding-top: 4px;
         padding-left: 4px;
-        height: 30px;
-        min-height: 30px;
+        height: 32px;
+        min-height: 32px;
 }
 .mf-prompt .object-search > .multiselect .multiselect__select {
         height: 32px;

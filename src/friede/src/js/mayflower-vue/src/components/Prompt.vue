@@ -18,7 +18,7 @@
           track-by="path"
           placeholder="filter"
           tag-placeholder="add filter"
-          :options="search"
+          :options="slotOptions"
           :close-on-select="false"
           :hide-selected="true"
           :show-labels="false"
@@ -28,9 +28,10 @@
           :taggable="true"
           @input="focusSlot"
           @search-change="getObjects"
+          @tag="addFilter"
           @keydown="processSlotKey( $event )"
           >
-          <template #noOptions>All</template>
+          <template #noOptions>All {{ searching.plural }}</template>
         </multiselect>
         <vk-button-link class="btn btn-confirm" @click.prevent="confirmSearch">
           <font-awesome-icon icon="check" />
@@ -98,7 +99,7 @@ export default {
       input: '',
       entered: '',
       state: 'nav',
-      filter: '',
+      filters: [],
       ctrl: '',
       values: {},
       searching: null,
@@ -127,6 +128,9 @@ export default {
           this.focusSlot();
         } else {
           this.prospect.push({ href: this.selected, title: this.selected });
+          this.$nextTick(() => {
+            this.$refs.input.focus();
+          });
         }
         this.input = this.entered = '';
         this.selected = null;
@@ -145,6 +149,15 @@ export default {
         this.pathLocations = r.data.locations;
       });
     },
+    addFilter( tag ) {
+      const filter = {
+        path: `_filter.${tag}`,
+        title: `filter: ${tag}`,
+        filter: true
+      }
+      this.filters.push( filter );
+      this.objects.push( filter );
+    },
     getObjects( query ) {
       this.query = query;
       const model = this.searching;
@@ -156,7 +169,6 @@ export default {
           this.search.push({ path: '', title: 'New ' + model.label })
         }
       });
-      
     },
     debouncedInput: debounce( function() {
       this.getCompletions();
@@ -265,6 +277,7 @@ export default {
     },
     cancelSearch() {
       this.searching = null;
+      this.filters = [];
       this.search = [];
       this.objects = [];
       this.input = this.entered = '';
@@ -299,9 +312,6 @@ export default {
         return this.pathLocations;
       return this.pathLocations.filter( x => x.name.indexOf( this.entered ) === 0 )
     },
-    filters() {
-      return this.filter.split(/\s+/)
-    },
     path() {
       return this.myBreadcrumb.map( x => escape( x.href )).concat(
         this.prospect.map( x => escape( x.href ))).join('/');
@@ -313,6 +323,9 @@ export default {
     },
     canGo() {
       return this.endpoint && ( this.prospect.length || this.partial )
+    },
+    slotOptions() {
+      return this.filters.concat( this.search );
     }
   }
 }
@@ -351,6 +364,12 @@ export default {
       background: rgba(255,255,255,0.3);
       margin-right: -3px;
       border-top-left-radius: 4px;
+      padding-right: 6px;
+      li {
+        a{
+          color: #3f3f98;
+        }
+      }
     }
   }
   input {
@@ -382,13 +401,13 @@ export default {
     >.multiselect {
       padding-right: 0;
       background: transparent;
-      height: 30px;
-      min-height: 30px;      
+      height: 32px;
+      min-height: 32px;
       .multiselect__tags {
         padding-top: 4px;
         padding-left: 4px;
-        height: 30px;
-        min-height: 30px;      
+        height: 32px;
+        min-height: 32px;
       }
       .multiselect__select {
         height: 32px;

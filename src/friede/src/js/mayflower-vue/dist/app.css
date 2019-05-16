@@ -154,7 +154,7 @@ a[data-v-aae30ed8] {
 .mf-prompt .object-search .btn.btn-cancel:hover {
           color: darkred;
 }
-.mf-prompt.btn-go {
+.mf-prompt .btn-go {
     background: limegreen;
     color: white;
     height: 32px;

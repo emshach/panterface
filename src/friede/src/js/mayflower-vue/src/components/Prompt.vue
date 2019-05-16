@@ -47,7 +47,7 @@
       <template v-else>
         <input name="cli" class="cli uk-input uk-flex-1" v-model="input"
                ref="input" @input="processInput" @keydown="processKey( $event )" />
-        <vk-button-link v-if="endpoint" class="btn btn-go">go</vk-button-link>
+        <vk-button-link v-if="canGo" class="btn btn-go">go</vk-button-link>
       </template>
     </div>
   </form>
@@ -211,9 +211,7 @@ export default {
           this.input = this.entered = '';
         } else if ( this.prospect.length ) {
           this.prospect = []
-        } else if ( this.myBreadcrumb.length != this.breadcrumb.length
-                    || this.myBreadcrumb.map( x => x.href ).join('/')
-                    != this.breadcrumb.map( x => x.href ).join('/') ) {
+        } else if ( this.partial ) {
           this.myBreadcrumb = this.breadcrumb;
         } else {
           this.$refs.input.blur();
@@ -305,6 +303,14 @@ export default {
     path() {
       return this.myBreadcrumb.map( x => escape( x.href )).concat(
         this.prospect.map( x => escape( x.href ))).join('/');
+    },
+    partial() {
+      return this.myBreadcrumb.length != this.breadcrumb.length
+         || this.myBreadcrumb.map( x => x.href ).join('/')
+         != this.breadcrumb.map( x => x.href ).join('/');
+    },
+    canGo() {
+      return this.endpoint && ( this.prospect.length || this.partial )
     }
   }
 }
@@ -411,7 +417,7 @@ export default {
       }
     }
   }
-  &.btn-go {
+  .btn-go {
     background: limegreen;
     color: white;
     height: 32px;

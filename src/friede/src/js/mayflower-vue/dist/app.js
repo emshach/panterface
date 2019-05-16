@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "c2d5c827bae4683601ee";
+/******/ 	var hotCurrentHash = "e39162af3fc3a3a9b80d";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1318,11 +1318,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_9__["library"].add(_f
           this.input = this.entered = '';
         } else if (this.prospect.length) {
           this.prospect = [];
-        } else if (this.myBreadcrumb.length != this.breadcrumb.length || this.myBreadcrumb.map(function (x) {
-          return x.href;
-        }).join('/') != this.breadcrumb.map(function (x) {
-          return x.href;
-        }).join('/')) {
+        } else if (this.partial) {
           this.myBreadcrumb = this.breadcrumb;
         } else {
           this.$refs.input.blur();
@@ -1430,6 +1426,16 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_9__["library"].add(_f
       }).concat(this.prospect.map(function (x) {
         return escape(x.href);
       })).join('/');
+    },
+    partial: function partial() {
+      return this.myBreadcrumb.length != this.breadcrumb.length || this.myBreadcrumb.map(function (x) {
+        return x.href;
+      }).join('/') != this.breadcrumb.map(function (x) {
+        return x.href;
+      }).join('/');
+    },
+    canGo: function canGo() {
+      return this.endpoint && (this.prospect.length || this.partial);
     }
   }
 });
@@ -1940,7 +1946,7 @@ var render = function() {
                     }
                   }
                 }),
-                _vm.endpoint
+                _vm.canGo
                   ? _c("vk-button-link", { staticClass: "btn btn-go" }, [
                       _vm._v("go")
                     ])

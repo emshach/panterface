@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "369d57b30170eaa2675b";
+/******/ 	var hotCurrentHash = "1afef4d0ba5331a01b7b";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1274,6 +1274,11 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_9__["library"].add(_f
             title: 'New ' + model.label
           });
         }
+
+        _this4.search.push({
+          path: '_action.done',
+          title: 'Done'
+        });
       });
     },
     debouncedInput: lodash_debounce__WEBPACK_IMPORTED_MODULE_7___default()(function () {
@@ -1381,6 +1386,11 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_9__["library"].add(_f
       this.$nextTick(function () {
         _this5.$refs.filter.$el.focus();
       });
+    },
+    searchSelect: function searchSelect(value) {
+      if (value.path === '_action.done') {
+        this.confirmSearch();
+      }
     },
     confirmSearch: function confirmSearch() {
       var s = this.searching;
@@ -1852,6 +1862,8 @@ var render = function() {
                       input: _vm.focusSlot,
                       "search-change": _vm.getObjects,
                       tag: _vm.addFilter,
+                      select: _vm.searchSelect,
+                      close: _vm.cancelSearch,
                       keydown: function($event) {
                         return _vm.processSlotKey($event)
                       }

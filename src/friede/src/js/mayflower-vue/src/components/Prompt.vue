@@ -29,6 +29,8 @@
           @input="focusSlot"
           @search-change="getObjects"
           @tag="addFilter"
+          @select="searchSelect"
+          @close="cancelSearch"
           @keydown="processSlotKey( $event )"
           >
           <template #noOptions>All {{ searching.plural }}</template>
@@ -171,6 +173,7 @@ export default {
         if ( model.create ) {
           this.search.push({ path: '', title: 'New ' + model.label })
         }
+        this.search.push({ path: '_action.done', title: 'Done' })
       });
     },
     debouncedInput: debounce( function() {
@@ -264,6 +267,11 @@ export default {
       this.$nextTick(() => {
         this.$refs.filter.$el.focus();
       });
+    },
+    searchSelect( value ) {
+      if ( value.path === '_action.done' ) {
+        this.confirmSearch();
+      }
     },
     confirmSearch() {
       const s = this.searching;

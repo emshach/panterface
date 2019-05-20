@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "1afef4d0ba5331a01b7b";
+/******/ 	var hotCurrentHash = "a874dc00d734cc3002a9";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1269,15 +1269,23 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_9__["library"].add(_f
         _this4.search = r.data.results;
 
         if (model.create) {
-          _this4.search.push({
+          _this4.search.unshift({
             path: '',
-            title: 'New ' + model.label
+            title: 'New ' + model.label,
+            ctrl: true
           });
         }
 
-        _this4.search.push({
+        _this4.search.unshift({
+          path: '_action.cancel',
+          title: 'Cancel',
+          ctrl: true
+        });
+
+        _this4.search.unshift({
           path: '_action.done',
-          title: 'Done'
+          title: 'Done',
+          ctrl: true
         });
       });
     },
@@ -1390,6 +1398,8 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_9__["library"].add(_f
     searchSelect: function searchSelect(value) {
       if (value.path === '_action.done') {
         this.confirmSearch();
+      } else if (value.path === '_action.cancel') {
+        this.cancelSearch();
       }
     },
     confirmSearch: function confirmSearch() {
@@ -1416,6 +1426,9 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_9__["library"].add(_f
       this.$nextTick(function () {
         _this6.$refs.input.focus();
       });
+    },
+    serializeNode: function serializeNode(node) {
+      return escape(node.href);
     }
   },
   computed: {
@@ -1456,6 +1469,9 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_9__["library"].add(_f
       }).concat(this.prospect.map(function (x) {
         return escape(x.href);
       })).join('/');
+    },
+    route: function route() {
+      return this.myBreadcrumb.map(this.serializeNode).concat(this.prospect.map(this.serializeNdoe)).join('/');
     },
     partial: function partial() {
       return this.myBreadcrumb.length != this.breadcrumb.length || this.myBreadcrumb.map(function (x) {
@@ -1863,7 +1879,6 @@ var render = function() {
                       "search-change": _vm.getObjects,
                       tag: _vm.addFilter,
                       select: _vm.searchSelect,
-                      close: _vm.cancelSearch,
                       keydown: function($event) {
                         return _vm.processSlotKey($event)
                       }

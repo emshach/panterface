@@ -30,7 +30,6 @@
           @search-change="getObjects"
           @tag="addFilter"
           @select="searchSelect"
-          @close="cancelSearch"
           @keydown="processSlotKey( $event )"
           >
           <template #noOptions>All {{ searching.plural }}</template>
@@ -171,9 +170,10 @@ export default {
         this.loading = false;
         this.search = r.data.results;
         if ( model.create ) {
-          this.search.push({ path: '', title: 'New ' + model.label })
+          this.search.unshift({ path: '', title: 'New ' + model.label, ctrl: true })
         }
-        this.search.push({ path: '_action.done', title: 'Done' })
+        this.search.unshift({ path: '_action.cancel', title: 'Cancel', ctrl: true })
+        this.search.unshift({ path: '_action.done', title: 'Done', ctrl: true })
       });
     },
     debouncedInput: debounce( function() {
@@ -271,6 +271,8 @@ export default {
     searchSelect( value ) {
       if ( value.path === '_action.done' ) {
         this.confirmSearch();
+      } else if ( value.path === '_action.cancel' ) {
+        this.cancelSearch();
       }
     },
     confirmSearch() {
@@ -295,6 +297,9 @@ export default {
       this.$nextTick(() => {
         this.$refs.input.focus();
       });
+    },
+    serializeNode( node ) {
+      return escape( node.href );
     }
   },
   computed: {
@@ -326,6 +331,10 @@ export default {
     path() {
       return this.myBreadcrumb.map( x => escape( x.href )).concat(
         this.prospect.map( x => escape( x.href ))).join('/');
+    },
+    route() {
+      return this.myBreadcrumb.map( this.serializeNode ).concat(
+        this.prospect.map( this.serializeNdoe )).join('/');
     },
     partial() {
       return this.myBreadcrumb.length != this.breadcrumb.length

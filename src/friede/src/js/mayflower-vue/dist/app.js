@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "a874dc00d734cc3002a9";
+/******/ 	var hotCurrentHash = "383fb44a747d61ac59b0";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1392,7 +1392,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_9__["library"].add(_f
       var _this5 = this;
 
       this.$nextTick(function () {
-        _this5.$refs.filter.$el.focus();
+        if (_this5.$refs.filter) _this5.$refs.filter.$el.focus();
       });
     },
     searchSelect: function searchSelect(value) {
@@ -1405,10 +1405,21 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_9__["library"].add(_f
     confirmSearch: function confirmSearch() {
       var s = this.searching;
       var o = this.objects;
+      var filter = o.filter(function (x) {
+        return x.filter;
+      }).map(function (x) {
+        return x.tag;
+      }).join('+');
+      var ids = o.filter(function (x) {
+        return x.id;
+      }).map(function (x) {
+        return x.id;
+      });
       this.prospect.push({
         href: '{' + s.app + '.' + s.model + '\\*?\\+?}',
+        hash: s.app + '.' + s.model + (ids ? ':' + ids.join('+') : '') + (filter ? ':' + filter : ''),
         objects: o,
-        title: o.length === 1 ? s.singular + ': ' + o[0].title : o.length ? o.length + ' ' + s.plural : s.plural,
+        title: filter ? s.plural + ': ' + filter + (ids ? ' + ' + ids.length : '') : o.length === 1 ? s.singular + ': ' + o[0].title : o.length ? o.length + ' ' + s.plural : s.plural,
         slot: s
       });
       this.cancelSearch(); // lol
@@ -1428,7 +1439,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_9__["library"].add(_f
       });
     },
     serializeNode: function serializeNode(node) {
-      return escape(node.href);
+      return node.hash || node.href;
     }
   },
   computed: {
@@ -1865,6 +1876,7 @@ var render = function() {
                       "track-by": "path",
                       placeholder: "filter",
                       "tag-placeholder": "add filter",
+                      "tag-position": "bottom",
                       options: _vm.slotOptions,
                       "close-on-select": false,
                       "hide-selected": true,

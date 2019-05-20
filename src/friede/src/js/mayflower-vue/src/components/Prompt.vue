@@ -18,6 +18,7 @@
           track-by="path"
           placeholder="filter"
           tag-placeholder="add filter"
+          tag-position="bottom"
           :options="slotOptions"
           :close-on-select="false"
           :hide-selected="true"
@@ -265,7 +266,8 @@ export default {
     },
     focusSlot() {
       this.$nextTick(() => {
-        this.$refs.filter.$el.focus();
+        if ( this.$refs.filter )
+          this.$refs.filter.$el.focus();
       });
     },
     searchSelect( value ) {
@@ -278,10 +280,16 @@ export default {
     confirmSearch() {
       const s = this.searching;
       const o = this.objects;
+      var filter = o.filter( x => x.filter ).map( x => ( x.tag )).join('+');
+      var ids = o.filter( x => x.id ).map( x => x.id );
       this.prospect.push({
         href: '{' + s.app + '.' + s.model + '\\*?\\+?}',
+        hash: s.app + '.' + s.model + ( ids ? ':'+ ids.join('+') : '' )
+           + ( filter ? ':' + filter : '' ),
         objects: o,
-        title: ( o.length === 1
+        title: ( filter ? ( s.plural + ': ' + filter
+                            + ( ids ? ' + ' + ids.length : '' ))
+                 : o.length === 1
                  ? s.singular + ': ' + o[0].title
                  : ( o.length ? o.length + ' ' + s.plural : s.plural )),
         slot: s });
@@ -299,7 +307,7 @@ export default {
       });
     },
     serializeNode( node ) {
-      return escape( node.href );
+      return node.hash || node.href;
     }
   },
   computed: {

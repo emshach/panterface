@@ -342,7 +342,7 @@ export default {
     },
     route() {
       return this.myBreadcrumb.map( this.serializeNode ).concat(
-        this.prospect.map( this.serializeNdoe )).join('/');
+        this.prospect.map( this.serializeNode )).join('/');
     },
     partial() {
       return this.myBreadcrumb.length != this.breadcrumb.length

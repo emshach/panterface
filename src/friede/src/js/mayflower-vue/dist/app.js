@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "383fb44a747d61ac59b0";
+/******/ 	var hotCurrentHash = "40713ff76d7e9d3bab42";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1482,7 +1482,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_9__["library"].add(_f
       })).join('/');
     },
     route: function route() {
-      return this.myBreadcrumb.map(this.serializeNode).concat(this.prospect.map(this.serializeNdoe)).join('/');
+      return this.myBreadcrumb.map(this.serializeNode).concat(this.prospect.map(this.serializeNode)).join('/');
     },
     partial: function partial() {
       return this.myBreadcrumb.length != this.breadcrumb.length || this.myBreadcrumb.map(function (x) {

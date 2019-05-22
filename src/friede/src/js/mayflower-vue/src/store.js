@@ -21,7 +21,7 @@ export default new Vuex.Store({
       // Vue.prototype.$api.get( 'path', path ).done( r => {
       //   commit( 'setContext', r.data.context );
       // });
-      const ctx = path.split('/');
+      const ctx = ( path || '' ).split('/');
       commit( 'setContext', ctx.map( x =>({ title: x || '/', href: x })))
     },
   },

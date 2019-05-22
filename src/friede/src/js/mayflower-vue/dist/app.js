@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "bb0f29e103d9c6f78c68";
+/******/ 	var hotCurrentHash = "ac9cfc878b3c8b452947";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -3363,7 +3363,7 @@ vue__WEBPACK_IMPORTED_MODULE_1__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_2_
       // Vue.prototype.$api.get( 'path', path ).done( r => {
       //   commit( 'setContext', r.data.context );
       // });
-      var ctx = path.split('/');
+      var ctx = (path || '').split('/');
       commit('setContext', ctx.map(function (x) {
         return {
           title: x || '/',

@@ -12,6 +12,7 @@ from rest_framework import status, viewsets, permissions, filters
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
+from rest_framework.exceptions import ValidationError
 from rest_framework_serializer_extensions.views import SerializerExtensionsAPIViewMixin
 from collections import OrderedDict
 from importlib import import_module
@@ -24,11 +25,16 @@ class IdsFilter( filters.BaseFilterBackend ):
     Filter for retrieving multiple objects by ID
     """
     def filter_queryset( self, request, queryset, view ):
-        ids = [ int(x) for x in request.GET.get( 'ids' ).split(',') if len(x) ]
+        ids = request.GET.get( 'ids' )
+        if not ids:
+            return queryset
+        try:
+            ids = [ int(x) for x in ids.split(',') if len(x) ]
+        except Exception:
+            raise ValidationError( "Only comma-separated list of IDs for ids filter" )
         if len( ids ):
             return queryset.filter( pk__in=ids )
         return queryset
-    # TODO: make neater
 
 
 routes = OrderedDict()

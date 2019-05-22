@@ -24,10 +24,11 @@ class IdsFilter( filters.BaseFilterBackend ):
     Filter for retrieving multiple objects by ID
     """
     def filter_queryset( self, request, queryset, view ):
-        ids = [ int(x) for x in request.GET.get( 'ids' ).split(',') ]
+        ids = [ int(x) for x in request.GET.get( 'ids' ).split(',') if len(x) ]
         if len( ids ):
             return queryset.filter( pk__in=ids )
         return queryset
+    # TODO: make neater
 
 
 routes = OrderedDict()
@@ -231,7 +232,12 @@ def api_models( request, models=None, format=None ):
 
     return Response( dict( models=out ))
 
-class RegistryViewSet( SerializerExtensionsAPIViewMixin, viewsets.ModelViewSet ):
+class SearchViewSet( viewsets.ModelViewSet ):
+    filter_backends = ( IdsFilter, filters.SearchFilter, )
+    search_fields = ( 'name', 'title', 'description' )
+
+
+class RegistryViewSet( SerializerExtensionsAPIViewMixin, SearchViewSet ):
     queryset = Registry.objects.all()
     serializer_class = RegistrySerializer
 
@@ -285,28 +291,27 @@ class LocationViewSet( RegistryViewSet ):
     serializer_class = LocationSerializer
 
 
-class LinkViewSet( viewsets.ModelViewSet ):
+class LinkViewSet( SearchViewSet ):
     queryset = Link.objects.all()
     serializer_class = LinkSerializer
-    filter_backends = ( IdsFilter, filters.SearchFilter, )
-    search_fields = ( 'name', 'title', 'description' )
 
-class IconViewSet( viewsets.ModelViewSet ):
+
+class IconViewSet( SearchViewSet ):
     queryset = Icon.objects.all()
     serializer_class = IconSerializer
 
 
-class ReferenceViewSet( viewsets.ModelViewSet ):
+class ReferenceViewSet( SearchViewSet ):
     queryset = Reference.objects.all()
     serializer_class = ReferenceSerializer
 
 
-class SettingViewSet( viewsets.ModelViewSet ):
+class SettingViewSet( SearchViewSet ):
     queryset = Setting.objects.all()
     serializer_class = SettingSerializer
 
 
-class ActionViewSet( viewsets.ModelViewSet ):
+class ActionViewSet( SearchViewSet ):
     queryset = Action.objects.all()
     serializer_class = ActionSerializer
 

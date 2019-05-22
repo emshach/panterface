@@ -52,12 +52,12 @@ router.beforeResolve( async ( to, from, next ) => {
       });
     }
     if ( to != store.getters.getRoute ) {
-      store.dipatch( 'setPath', to );
+      store.dispatch( 'setPath', to );
     }
     return next()
   }
   if ( to != store.getters.getRoute ) {
-    store.dipatch( 'setPath', to );
+    store.dispatch( 'setPath', to );
   }
   return next()
 });

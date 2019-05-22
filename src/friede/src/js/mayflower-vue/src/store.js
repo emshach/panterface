@@ -18,11 +18,12 @@ export default new Vuex.Store({
   },
   actions: {
     setPath({ commit, state }, path ) {
-      console.log( 'path', path );
       // Vue.prototype.$api.get( 'path', path ).done( r => {
       //   commit( 'setContext', r.data.context );
       // });
-      const ctx = ( path || '' ).split('/');
+      const ctx = [''].concat(( path || '' ).split('/').filter( x => x ));
+      if ( ctx.length > 1 && !ctx[ctx.length-1] )
+        ctx.pop();
       commit( 'setContext', ctx.map( x =>({ title: x || '/', href: x })))
     },
   },

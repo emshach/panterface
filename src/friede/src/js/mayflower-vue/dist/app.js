@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "f2796074e05ac22b122d";
+/******/ 	var hotCurrentHash = "9dc59198a0d989cbbfe9";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -3295,14 +3295,14 @@ function () {
 
           case 6:
             if (to != _store__WEBPACK_IMPORTED_MODULE_4__["default"].getters.getRoute) {
-              _store__WEBPACK_IMPORTED_MODULE_4__["default"].dispatch('setPath', to);
+              _store__WEBPACK_IMPORTED_MODULE_4__["default"].dispatch('setPath', to.fullPath);
             }
 
             return _context.abrupt("return", next());
 
           case 8:
             if (to != _store__WEBPACK_IMPORTED_MODULE_4__["default"].getters.getRoute) {
-              _store__WEBPACK_IMPORTED_MODULE_4__["default"].dispatch('setPath', to);
+              _store__WEBPACK_IMPORTED_MODULE_4__["default"].dispatch('setPath', to.fullPath);
             }
 
             return _context.abrupt("return", next());
@@ -3360,11 +3360,13 @@ vue__WEBPACK_IMPORTED_MODULE_1__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_2_
     setPath: function setPath(_ref, path) {
       var commit = _ref.commit,
           state = _ref.state;
-      console.log('path', path); // Vue.prototype.$api.get( 'path', path ).done( r => {
+      // Vue.prototype.$api.get( 'path', path ).done( r => {
       //   commit( 'setContext', r.data.context );
       // });
-
-      var ctx = (path || '').split('/');
+      var ctx = [''].concat((path || '').split('/').filter(function (x) {
+        return x;
+      }));
+      if (ctx.length > 1 && !ctx[ctx.length - 1]) ctx.pop();
       commit('setContext', ctx.map(function (x) {
         return {
           title: x || '/',

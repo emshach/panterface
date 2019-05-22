@@ -18,6 +18,18 @@ from importlib import import_module
 import json
 import re
 
+### custom filter
+class IdsFilter( filters.BaseFilterBackend ):
+    """
+    Filter for retrieving multiple objects by ID
+    """
+    def filter_queryset( self, request, queryset, view ):
+        ids = [ int(x) for x in request.params.get( 'ids' ).split(',') ]
+        if len( ids ):
+            return queryset.filter( pk__in=ids )
+        return queryset
+
+
 routes = OrderedDict()
 
 ### route views
@@ -276,7 +288,7 @@ class LocationViewSet( RegistryViewSet ):
 class LinkViewSet( viewsets.ModelViewSet ):
     queryset = Link.objects.all()
     serializer_class = LinkSerializer
-    filter_backends = ( filters.SearchFilter, )
+    filter_backends = ( IdsFilter, filters.SearchFilter, )
     search_fields = ( 'name', 'title', 'description' )
 
 class IconViewSet( viewsets.ModelViewSet ):

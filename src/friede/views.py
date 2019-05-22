@@ -24,7 +24,7 @@ class IdsFilter( filters.BaseFilterBackend ):
     Filter for retrieving multiple objects by ID
     """
     def filter_queryset( self, request, queryset, view ):
-        ids = [ int(x) for x in request.params.get( 'ids' ).split(',') ]
+        ids = [ int(x) for x in request.GET.get( 'ids' ).split(',') ]
         if len( ids ):
             return queryset.filter( pk__in=ids )
         return queryset

@@ -334,3 +334,19 @@ class ActionSerializer( HyperlinkedModelSerializer ):
         expandable_fields = RegistrySerializer.Meta.expandable_fields
 
 
+by_model = dict(
+    registry=  RegistrySerializer,
+    container= ContainerSerializer,
+    widget=    WidgetSerializer,
+    block=     BlockSerializer,
+    screen=    ScreenSerializer,
+    shell=     ShellSerializer,
+    theme=     ThemeSerializer,
+    slot=      SlotSerializer,
+    app=       AppSerializer,
+    location=  LocationSerializer,
+    link=      LinkSerializer,
+    reference= ReferenceSerializer,
+    setting=   SettingSerializer,
+    action=    ActionSerializer,
+)

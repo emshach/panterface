@@ -9,7 +9,7 @@
       <search-results-page v-if="searching" />
       <router-view v-else />
     </transition>
-    <prompt :breadcrumb="breadcrumb" @update="promptInput" />
+    <prompt :breadcrumb="context" @update="promptInput" />
   </div>
 </template>
 
@@ -24,16 +24,17 @@ export default {
     return {
       menus: Friede.menus,
       searching: false,         // TODO: 
-      breadcrumb: [{ href: '', title: '/' }]
     };
   },
   methods: {
-    promptInput( value ) {
-      if ( !value ) {
-        return;
-      }
-      this.breadcrumb = value.split( /\s+/ )
-         .map( x => ({ href: x, title: x }));
+    promptInput( value, context ) {
+      this.context = context;
+      this.$store.commit( 'setContext', context );
+    }
+  },
+  computed: {
+    context() {
+      return this.$store.state.context;
     }
   }
 }

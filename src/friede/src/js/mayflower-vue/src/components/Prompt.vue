@@ -124,7 +124,11 @@ export default {
     submit() {
       if ( this.selected ) {
         if ( this.selected.href ) { // TODO: go to location
-          this.$emit( 'update', this.selected.href );
+          this.prospect.push( this.selected );
+          this.selected = null;
+          this.$nextTick(() => {
+            this.submit();
+          });
         } else if ( this.selected.label ) {
           this.searching = this.selected;
           this.focusSlot();
@@ -138,7 +142,8 @@ export default {
         this.selected = null;
         this.getCompletions();
       } else {
-        this.myBreadcrumb = this.myBreadcrumb.concat( this.prospect );
+        this.$emit( 'update', this.route, this.myBreadcrumb.concat( this.prospect ));
+        // this.myBreadcrumb = this.myBreadcrumb.concat( this.prospect );
         this.prospect = [];
       }
     },
@@ -284,7 +289,8 @@ export default {
       var ids = o.filter( x => x.id ).map( x => x.id );
       this.prospect.push({
         href: '{' + s.app + '.' + s.model + '\\*?\\+?}',
-        hash: s.app + '.' + s.model + ( ids ? ':'+ ids.join('+') : '' )
+        hash: s.app + '.' + s.plural
+           + ( ids ? ':'+ ids.join('+') : filter ? ':' : '' )
            + ( filter ? ':' + filter : '' ),
         objects: o,
         title: ( filter ? ( s.plural + ': ' + filter

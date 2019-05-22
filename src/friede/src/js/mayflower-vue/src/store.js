@@ -5,23 +5,29 @@ Vue.use( Vuex )
 
 export default new Vuex.Store({
   state: {
-    location: [{ href: '/', title: '/' }]
+    user: null,
+    context: [{ href: '', title: '/' }]
   },
   mutations: {
-    goto( state, location ) {
-      if ( typeof location == 'string') {
-        location = location.split('/');
-      }
-      location = location.map( x => (
-        (typeof x == 'string' ) ? { href: x, title: x } : x
-      ));
-      if ( !location.length || location[0].href != '/' ) {
-        location.unshift({ href: '/', title: '/' });
-      }
-      state.location = location;
-    }
+    setUser( state, user ) {
+      state.user = user;
+    },
+    setContext( state, context ) {
+      state.context = context;
+    },
   },
   actions: {
-
+    setPath({ commit, state }, path ) {
+      // Vue.prototype.$api.get( 'path', path ).done( r => {
+      //   commit( 'setContext', r.data.context );
+      // });
+      const ctx = path.split('/');
+      commit( 'setContext', ctx.map( x =>({ title: x || '/', href: x })))
+    },
+  },
+  getters: {
+    getRoute: state => {
+      return state.context.map( x => x.hash || x.href ).join('/');
+    }
   }
 })

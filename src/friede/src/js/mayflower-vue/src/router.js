@@ -1,10 +1,26 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import store from './store'
 import Home from './views/Home'
 
-Vue.use(Router)
+Vue.use( Router )
 
-export default new Router({
+let user;
+
+function getUser() {
+  return Vue.prototype.$Amplify.Auth.currentAuthenticatedUser().then( data => {
+    if ( data && data.signInUserSession ) {
+      store.commit( 'setUser', data );
+      return data;
+    }
+    return null;
+  }).catch( e => {
+    store.commit( 'setUser', null );
+    return null
+  });
+}
+
+const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
@@ -22,4 +38,28 @@ export default new Router({
     //   component: () => import(/* webpackChunkName: "about" */ './views/About')
     // }
   ]
-})
+});
+
+router.beforeResolve( async ( to, from, next ) => {
+  if ( to.matched.some( record => record.meta.requiresAuth )) {
+    user = await getUser();
+    if ( !user ) {
+      return next({
+        path: '/login',
+        query: {
+          redirect: to.fullPath,
+        }
+      });
+    }
+    if ( to != store.getters.getRoute ) {
+      store.dipatch( 'setPath', to );
+    }
+    return next()
+  }
+  if ( to != store.getters.getRoute ) {
+    store.dipatch( 'setPath', to );
+  }
+  return next()
+});
+
+export default router

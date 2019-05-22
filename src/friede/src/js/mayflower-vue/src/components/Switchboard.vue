@@ -8,7 +8,7 @@
                gutter="collapse" :class="[ 'completions', 'uk-margin', columnWidth ]"
                :style="{ minWidth: 92 * ( getCompletionColumns() / 6 ) + '%' }">
         <vk-button-link
-          v-for="m in matches" href :key="m" size="small"
+          v-for="m in filteredMatches" href :key="m" size="small"
           :class="[ 'match', m === value ? 'selected' : '' ]"
           @click.prevent="select(m)">{{m}}</vk-button-link>
         <vk-button-link
@@ -83,6 +83,13 @@ export default {
     },
     baseRx() {
       return new RegExp( this.base, 'i' );
+    },
+    locationHrefs() {
+      return this.locations.map( x => x.href.replace( this.baseRx, '' ));
+    },
+    filteredMatches() {
+      const l = this.locationHrefs;
+      return this.matches.filter( x => !l.find( y => x === y ));
     },
     widgets() {
       return this.locations.slice( 0, 10 ).forEach( location => {

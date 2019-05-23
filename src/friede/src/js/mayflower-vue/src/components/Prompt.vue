@@ -367,6 +367,11 @@ export default {
     slotOptions() {
       return this.filters.concat( this.search );
     }
+  },
+  watch: {
+    breadcrumb( val ) {
+      this.myBreadcrumb = val;
+    }
   }
 }
 </script>

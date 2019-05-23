@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "9b06762707b4c816264c";
+/******/ 	var hotCurrentHash = "2ecf9bc2daf9324d5dba";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1497,6 +1497,11 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_9__["library"].add(_f
     },
     slotOptions: function slotOptions() {
       return this.filters.concat(this.search);
+    }
+  },
+  watch: {
+    breadcrumb: function breadcrumb(val) {
+      this.myBreadcrumb = val;
     }
   }
 });

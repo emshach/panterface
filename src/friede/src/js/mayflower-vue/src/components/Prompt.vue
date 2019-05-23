@@ -278,24 +278,30 @@ export default {
     searchSelect( value ) {
       if ( value.path === '_action.done' ) {
         this.confirmSearch();
+        return false;
       } else if ( value.path === '_action.cancel' ) {
         this.cancelSearch();
+        return false;
       }
     },
     confirmSearch() {
       const s = this.searching;
       const o = this.objects;
-      var filter = o.filter( x => x.filter ).map( x => ( x.tag )).join('+');
-      var ids = o.filter( x => x.id ).map( x => x.id );
+      var filters = o.filter( x => x.filter ).map( x => ( x.tag ))
+      var filter = filters.join('+');
+      var objects = o.filter( x => x.id );
+      var ids = objects.map( x => x.id );
       this.prospect.push({
         href: '{' + s.app + '.' + s.model + '\\*?\\+?}',
         hash: s.app + '.' + s.plural
            + ( ids ? ':'+ ids.join('+') : filter ? ':' : '' )
            + ( filter ? ':' + filter : '' ),
-        objects: o,
+        objects: objects,
+        filters: filters,
+        filter: filter,
         title: ( filter ? ( s.plural + ': ' + filter
                             + ( ids ? ' + ' + ids.length : '' ))
-                 : o.length === 1
+                 : objects.length === 1
                  ? s.singular + ': ' + o[0].title
                  : ( o.length ? o.length + ' ' + s.plural : s.plural )),
         slot: s });

@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "9dc59198a0d989cbbfe9";
+/******/ 	var hotCurrentHash = "3e92fd4b3023b72cd744";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1393,28 +1393,34 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_9__["library"].add(_f
     searchSelect: function searchSelect(value) {
       if (value.path === '_action.done') {
         this.confirmSearch();
+        return false;
       } else if (value.path === '_action.cancel') {
         this.cancelSearch();
+        return false;
       }
     },
     confirmSearch: function confirmSearch() {
       var s = this.searching;
       var o = this.objects;
-      var filter = o.filter(function (x) {
+      var filters = o.filter(function (x) {
         return x.filter;
       }).map(function (x) {
         return x.tag;
-      }).join('+');
-      var ids = o.filter(function (x) {
+      });
+      var filter = filters.join('+');
+      var objects = o.filter(function (x) {
         return x.id;
-      }).map(function (x) {
+      });
+      var ids = objects.map(function (x) {
         return x.id;
       });
       this.prospect.push({
         href: '{' + s.app + '.' + s.model + '\\*?\\+?}',
         hash: s.app + '.' + s.plural + (ids ? ':' + ids.join('+') : filter ? ':' : '') + (filter ? ':' + filter : ''),
-        objects: o,
-        title: filter ? s.plural + ': ' + filter + (ids ? ' + ' + ids.length : '') : o.length === 1 ? s.singular + ': ' + o[0].title : o.length ? o.length + ' ' + s.plural : s.plural,
+        objects: objects,
+        filters: filters,
+        filter: filter,
+        title: filter ? s.plural + ': ' + filter + (ids ? ' + ' + ids.length : '') : objects.length === 1 ? s.singular + ': ' + o[0].title : o.length ? o.length + ' ' + s.plural : s.plural,
         slot: s
       });
       this.cancelSearch(); // lol
@@ -3332,15 +3338,30 @@ function () {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es6_regexp_split__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es6.regexp.split */ "./node_modules/core-js/modules/es6.regexp.split.js");
-/* harmony import */ var core_js_modules_es6_regexp_split__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_regexp_split__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.runtime.esm.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_core_js_promise__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime-corejs2/core-js/promise */ "./node_modules/@babel/runtime-corejs2/core-js/promise.js");
+/* harmony import */ var _home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_core_js_promise__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_core_js_promise__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/web.dom.iterable */ "./node_modules/core-js/modules/web.dom.iterable.js");
+/* harmony import */ var core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_es6_object_to_string__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es6.object.to-string */ "./node_modules/core-js/modules/es6.object.to-string.js");
+/* harmony import */ var core_js_modules_es6_object_to_string__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_object_to_string__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_es6_string_iterator__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es6.string.iterator */ "./node_modules/core-js/modules/es6.string.iterator.js");
+/* harmony import */ var core_js_modules_es6_string_iterator__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_string_iterator__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var core_js_modules_es6_regexp_replace__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es6.regexp.replace */ "./node_modules/core-js/modules/es6.regexp.replace.js");
+/* harmony import */ var core_js_modules_es6_regexp_replace__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_regexp_replace__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var core_js_modules_es6_regexp_split__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es6.regexp.split */ "./node_modules/core-js/modules/es6.regexp.split.js");
+/* harmony import */ var core_js_modules_es6_regexp_split__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_regexp_split__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.runtime.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_1__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_2__["default"]);
-/* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
+
+
+
+
+
+vue__WEBPACK_IMPORTED_MODULE_6__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_7__["default"]);
+/* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_7__["default"].Store({
   state: {
     user: null,
     context: [{
@@ -3360,19 +3381,75 @@ vue__WEBPACK_IMPORTED_MODULE_1__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_2_
     setPath: function setPath(_ref, path) {
       var commit = _ref.commit,
           state = _ref.state;
-      // Vue.prototype.$api.get( 'path', path ).done( r => {
-      //   commit( 'setContext', r.data.context );
-      // });
-      var ctx = [''].concat((path || '').split('/').filter(function (x) {
-        return x;
+      var obj = {};
+      var ctx = [{
+        href: '',
+        title: '/'
+      }].concat((path || '').split('/').filter(function (x) {
+        if (!x) return false;
+
+        if (x.indexOf('.' > -1)) {
+          obj[x] = null;
+        }
+
+        return true;
       }));
-      if (ctx.length > 1 && !ctx[ctx.length - 1]) ctx.pop();
-      commit('setContext', ctx.map(function (x) {
-        return {
-          title: x || '/',
-          href: x
+      var p = [];
+
+      for (var k in obj) {
+        var d = k.split(':');
+        var m = k[0].split('.');
+        obj[k] = {
+          app: m[0],
+          plural: m[1],
+          filters: [],
+          objects: []
         };
-      }));
+
+        if (d[1]) {
+          p.push(vue__WEBPACK_IMPORTED_MODULE_6__["default"].prototype.$api(m[0], m[1], '?ids=' + d[1].replace('+', ',')).then(function (r) {
+            obj[k].objects = r.data.results;
+          }));
+        }
+
+        if (d[2]) {
+          obj[k].filters = d[2].split('+').map(function (tag) {
+            return {
+              path: "_filter.".concat(tag),
+              title: "filter: ".concat(tag),
+              filter: true,
+              tag: tag
+            };
+          });
+        }
+      }
+
+      _home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_core_js_promise__WEBPACK_IMPORTED_MODULE_0___default.a.all(p).then(function () {
+        commit('setContext', ctx.map(function (x) {
+          if (x in obj) {
+            var o = obj[x];
+            var ids = o.objects.map(function (x) {
+              return x.id;
+            });
+            var singular = o.plural; // FIXME: this
+
+            return {
+              href: '{' + o.app + '.' + o.plural + '\\*?\\+?}',
+              hash: x,
+              filter: o.filter,
+              filters: o.filters,
+              objects: o.objects,
+              title: o.filter ? o.plural + ': ' + o.filter + (ids ? ' + ' + ids.length : '') : o.objects.length === 1 ? singular + ': ' + o.objects[0].title : o.objects.length ? o.objects.length + ' ' + o.plural : o.plural,
+              slot: 'TBD'
+            };
+          }
+
+          return {
+            title: x || '/',
+            href: x
+          };
+        }));
+      });
     }
   },
   getters: {

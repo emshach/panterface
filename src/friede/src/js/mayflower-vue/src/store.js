@@ -18,13 +18,63 @@ export default new Vuex.Store({
   },
   actions: {
     setPath({ commit, state }, path ) {
-      // Vue.prototype.$api.get( 'path', path ).done( r => {
-      //   commit( 'setContext', r.data.context );
-      // });
-      const ctx = [''].concat(( path || '' ).split('/').filter( x => x ));
-      if ( ctx.length > 1 && !ctx[ctx.length-1] )
-        ctx.pop();
-      commit( 'setContext', ctx.map( x =>({ title: x || '/', href: x })))
+      var obj = {}
+      const ctx = [{ href: '', title: '/' }].concat(
+        ( path || '' ).split('/').filter( x => {
+          if ( !x )
+            return false;
+          if ( x.indexOf('.' > -1 )) {
+            obj[x] = null;
+          }
+          return true;
+        }));
+      var p = []
+      for ( var k in obj ) {
+        var d = k.split(':');
+        var m = k[0].split('.');
+        obj[k] = {
+          app: m[0],
+          plural: m[1],
+          filters: [],
+          objects: [],
+        };
+        if ( d[1] ) {
+          p.push(
+            Vue.prototype.$api( m[0], m[1], '?ids='+ d[1].replace( '+', ',' ))
+               .then( r => { obj[k].objects = r.data.results }));
+        }
+        if ( d[2] ) {
+          obj[k].filters = d[2].split('+').map( tag => ({
+            path: `_filter.${tag}`,
+            title: `filter: ${tag}`,
+            filter: true,
+            tag: tag
+          }));
+        }
+      }
+      Promise.all(p).then(() => {
+        commit( 'setContext', ctx.map( x => {
+          if ( x in obj ) {
+            var o = obj[x];
+            var ids = o.objects.map( x => x.id );
+            var singular = o.plural; // FIXME: this
+            return {
+              href: '{' + o.app + '.' + o.plural + '\\*?\\+?}',
+              hash: x,
+              filter: o.filter,
+              filters: o.filters,
+              objects: o.objects,
+              title: ( o.filter ? ( o.plural + ': ' + o.filter
+                            + ( ids ? ' + ' + ids.length : '' ))
+                 : o.objects.length === 1
+                 ? singular + ': ' + o.objects[0].title
+                 : ( o.objects.length ? o.objects.length + ' ' + o.plural : o.plural )),
+              slot: 'TBD',
+            }
+          }
+          return { title: x || '/', href: x };
+        }));
+      })
     },
   },
   getters: {

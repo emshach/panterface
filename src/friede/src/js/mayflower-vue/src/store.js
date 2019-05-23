@@ -12,7 +12,7 @@ export default new Vuex.Store({
     setUser( state, user ) {
       state.user = user;
     },
-    setContext( state, context ) {
+    setContext( state, context, debug ) {
       state.context = context;
     },
   },
@@ -23,7 +23,7 @@ export default new Vuex.Store({
         ( path || '' ).split('/').filter( x => {
           if ( !x )
             return false;
-          if ( x.indexOf('.' > -1 )) {
+          if ( x.indexOf('.') > -1 ) {
             obj[x] = null;
           }
           return true;
@@ -37,6 +37,8 @@ export default new Vuex.Store({
           plural: m[1],
           filters: [],
           objects: [],
+          idstr: d[1],
+          filter: d[2]
         };
         if ( d[1] ) {
           p.push(
@@ -73,7 +75,7 @@ export default new Vuex.Store({
             }
           }
           return { title: x || '/', href: x };
-        }));
+        }), { objects: obj });
       })
     },
   },

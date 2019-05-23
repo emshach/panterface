@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "3e92fd4b3023b72cd744";
+/******/ 	var hotCurrentHash = "abe49735a8f5fdba68a8";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -3373,7 +3373,7 @@ vue__WEBPACK_IMPORTED_MODULE_6__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_7_
     setUser: function setUser(state, user) {
       state.user = user;
     },
-    setContext: function setContext(state, context) {
+    setContext: function setContext(state, context, debug) {
       state.context = context;
     }
   },
@@ -3388,7 +3388,7 @@ vue__WEBPACK_IMPORTED_MODULE_6__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_7_
       }].concat((path || '').split('/').filter(function (x) {
         if (!x) return false;
 
-        if (x.indexOf('.' > -1)) {
+        if (x.indexOf('.') > -1) {
           obj[x] = null;
         }
 
@@ -3403,7 +3403,9 @@ vue__WEBPACK_IMPORTED_MODULE_6__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_7_
           app: m[0],
           plural: m[1],
           filters: [],
-          objects: []
+          objects: [],
+          idstr: d[1],
+          filter: d[2]
         };
 
         if (d[1]) {
@@ -3448,7 +3450,9 @@ vue__WEBPACK_IMPORTED_MODULE_6__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_7_
             title: x || '/',
             href: x
           };
-        }));
+        }), {
+          objects: obj
+        });
       });
     }
   },

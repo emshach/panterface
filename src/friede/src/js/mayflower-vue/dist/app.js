@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "22e94acb09f341fdc535";
+/******/ 	var hotCurrentHash = "fdaa87150e296bed2760";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1416,7 +1416,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_9__["library"].add(_f
         return x.id;
       });
       this.prospect.push({
-        href: '{' + s.app + '-' + s.model + '\\*?\\+?}',
+        href: '{' + s.app + '.' + s.model + '\\*?\\+?}',
         hash: '-' + s.app + '-' + s.plural + (ids.length ? '-' + ids.join('-') : filter ? '+' : '') + (filter ? '+' + filter : ''),
         objects: objects,
         filters: filters,

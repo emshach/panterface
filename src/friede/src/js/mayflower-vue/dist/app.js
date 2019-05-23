@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "9a84a6a68908e13f9294";
+/******/ 	var hotCurrentHash = "35b72aa133e6f4c781b5";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1851,7 +1851,7 @@ var render = function() {
     {
       ref: "form",
       staticClass: "mf-prompt uk-flex uk-wrap-around",
-      attrs: { id: "prompt" },
+      attrs: { id: "prompt", autocomplete: "off" },
       on: {
         submit: function($event) {
           $event.preventDefault()

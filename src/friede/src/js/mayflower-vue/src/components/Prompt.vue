@@ -1,5 +1,6 @@
 <template>
   <form id="prompt" class="mf-prompt uk-flex uk-wrap-around" ref="form"
+        autocomplete="off"
         @submit.prevent="submit">
     <switchboard :matches="matches" :locations="locations" :slots="slots"
                  :base="base" :focused="completing"

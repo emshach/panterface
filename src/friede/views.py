@@ -61,7 +61,7 @@ def index( request ):
     for app in apps:
         try:
             app_models = ContentType.objects.get( app_label=app.name )
-        except ContentType.DoesNotExistException:
+        except ContentType.DoesNotExist:
             continue
         mo = models[ app.name ] = {}
         for m in app_models:
@@ -143,7 +143,7 @@ def api_ls( request, path='', format=None ):
                     app, model = slot.split('.')
                     try:
                         obj = ContentType.objects.get( app_label=app, model=model )
-                    except ContentType.DoesNotExistException:
+                    except ContentType.DoesNotExist:
                         continue
                     obj = obj.model_class()
                     singular = obj._meta.verbose_name

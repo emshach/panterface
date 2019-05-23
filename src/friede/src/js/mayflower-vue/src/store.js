@@ -75,7 +75,7 @@ export default new Vuex.Store({
             }
           }
           return { title: x || '/', href: x };
-        }), { objects: obj }));
+        })), { objects: obj, ctx: ctx });
       })
     },
   },

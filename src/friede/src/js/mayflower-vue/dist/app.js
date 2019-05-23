@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "19a68fb421b042aebfee";
+/******/ 	var hotCurrentHash = "accbc9b1f988221b04a6";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -3456,9 +3456,10 @@ vue__WEBPACK_IMPORTED_MODULE_6__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_7_
             title: x || '/',
             href: x
           };
-        }), {
-          objects: obj
-        }));
+        })), {
+          objects: obj,
+          ctx: ctx
+        });
       });
     }
   },

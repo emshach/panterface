@@ -51,12 +51,12 @@ router.beforeResolve( async ( to, from, next ) => {
         }
       });
     }
-    if ( to != store.getters.getRoute ) {
+    if ( to.fullPath != store.getters.getRoute ) {
       store.dispatch( 'setPath', to.fullPath );
     }
     return next()
   }
-  if ( to != store.getters.getRoute ) {
+  if ( to.fullPath != store.getters.getRoute ) {
     store.dispatch( 'setPath', to.fullPath );
   }
   return next()

@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "564240d0063d3265ac92";
+/******/ 	var hotCurrentHash = "f562d5bf42e061de9921";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -3305,14 +3305,14 @@ function () {
             }));
 
           case 6:
-            if (to != _store__WEBPACK_IMPORTED_MODULE_4__["default"].getters.getRoute) {
+            if (to.fullPath != _store__WEBPACK_IMPORTED_MODULE_4__["default"].getters.getRoute) {
               _store__WEBPACK_IMPORTED_MODULE_4__["default"].dispatch('setPath', to.fullPath);
             }
 
             return _context.abrupt("return", next());
 
           case 8:
-            if (to != _store__WEBPACK_IMPORTED_MODULE_4__["default"].getters.getRoute) {
+            if (to.fullPath != _store__WEBPACK_IMPORTED_MODULE_4__["default"].getters.getRoute) {
               _store__WEBPACK_IMPORTED_MODULE_4__["default"].dispatch('setPath', to.fullPath);
             }
 

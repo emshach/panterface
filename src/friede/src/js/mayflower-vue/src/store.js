@@ -41,7 +41,7 @@ export default new Vuex.Store({
         };
         if ( d[1] ) {
           p.push(
-            Vue.prototype.$api( m[0], m[1], '?ids='+ d[1].replace( '+', ',' ))
+            Vue.prototype.$api( m[0], m[1], '?ids='+ d[1].replace( /\+/g, ',' ))
                .then( r => { obj[k].objects = r.data.results }));
         }
         if ( d[2] ) {

@@ -371,6 +371,8 @@ export default {
   watch: {
     breadcrumb( val ) {
       this.myBreadcrumb = val;
+      this.prospect = [];
+      this.getCompletions();
     }
   }
 }

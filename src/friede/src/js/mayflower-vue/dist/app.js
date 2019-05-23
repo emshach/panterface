@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "f562d5bf42e061de9921";
+/******/ 	var hotCurrentHash = "5638e52a538828ba76d3";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1502,6 +1502,8 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_9__["library"].add(_f
   watch: {
     breadcrumb: function breadcrumb(val) {
       this.myBreadcrumb = val;
+      this.prospect = [];
+      this.getCompletions();
     }
   }
 });

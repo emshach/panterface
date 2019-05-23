@@ -19,15 +19,14 @@ export default new Vuex.Store({
   actions: {
     setPath({ commit, state }, path ) {
       var obj = {}
-      const ctx = [{ href: '', title: '/' }].concat(
-        ( path || '' ).split('/').filter( x => {
-          if ( !x )
-            return false;
-          if ( x.indexOf('.') > -1 ) {
-            obj[x] = null;
-          }
-          return true;
-        }));
+      const ctx = ( path || '' ).split('/').filter( x => {
+        if ( !x )
+          return false;
+        if ( x.indexOf('.') > -1 ) {
+          obj[x] = null;
+        }
+        return true;
+      });
       var p = []
       for ( var k in obj ) {
         var d = k.split(':');
@@ -56,7 +55,7 @@ export default new Vuex.Store({
       }
       Promise.all(p).then(() => {
         console.log( 'obj', obj );
-        commit( 'setContext', ctx.map( x => {
+        commit( 'setContext', [{ href: '', title: '/' }].concat( ctx.map( x => {
           if ( x in obj ) {
             var o = obj[x];
             var ids = o.objects.map( x => x.id );
@@ -76,7 +75,7 @@ export default new Vuex.Store({
             }
           }
           return { title: x || '/', href: x };
-        }), { objects: obj });
+        }), { objects: obj }));
       })
     },
   },

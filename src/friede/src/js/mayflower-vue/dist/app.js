@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "2ecf9bc2daf9324d5dba";
+/******/ 	var hotCurrentHash = "6d4628d9286205701790";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -3387,10 +3387,7 @@ vue__WEBPACK_IMPORTED_MODULE_6__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_7_
       var commit = _ref.commit,
           state = _ref.state;
       var obj = {};
-      var ctx = [{
-        href: '',
-        title: '/'
-      }].concat((path || '').split('/').filter(function (x) {
+      var ctx = (path || '').split('/').filter(function (x) {
         if (!x) return false;
 
         if (x.indexOf('.') > -1) {
@@ -3398,7 +3395,7 @@ vue__WEBPACK_IMPORTED_MODULE_6__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_7_
         }
 
         return true;
-      }));
+      });
       var p = [];
 
       for (var k in obj) {
@@ -3433,7 +3430,10 @@ vue__WEBPACK_IMPORTED_MODULE_6__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_7_
 
       _home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_core_js_promise__WEBPACK_IMPORTED_MODULE_0___default.a.all(p).then(function () {
         console.log('obj', obj);
-        commit('setContext', ctx.map(function (x) {
+        commit('setContext', [{
+          href: '',
+          title: '/'
+        }].concat(ctx.map(function (x) {
           if (x in obj) {
             var o = obj[x];
             var ids = o.objects.map(function (x) {
@@ -3458,7 +3458,7 @@ vue__WEBPACK_IMPORTED_MODULE_6__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_7_
           };
         }), {
           objects: obj
-        });
+        }));
       });
     }
   },

@@ -60,7 +60,7 @@ def index( request ):
     apps = App.objects.filter( active=True ).all()
     for app in apps:
         try:
-            app_models = ContentType.objects.get( app_label=app.name )
+            app_models = ContentType.objects.filter( app_label=app.name ).all()
         except ContentType.DoesNotExist:
             continue
         mo = models[ app.name ] = {}

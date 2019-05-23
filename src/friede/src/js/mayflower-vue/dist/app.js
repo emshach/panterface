@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "9125b9e13b66496b7420";
+/******/ 	var hotCurrentHash = "9b06762707b4c816264c";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -3398,7 +3398,7 @@ vue__WEBPACK_IMPORTED_MODULE_6__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_7_
 
       for (var k in obj) {
         var d = k.split(':');
-        var m = k[0].split('.');
+        var m = d[0].split('.');
         obj[k] = {
           app: m[0],
           plural: m[1],

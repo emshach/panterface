@@ -31,7 +31,7 @@ export default new Vuex.Store({
       var p = []
       for ( var k in obj ) {
         var d = k.split(':');
-        var m = k[0].split('.');
+        var m = d[0].split('.');
         obj[k] = {
           app: m[0],
           plural: m[1],

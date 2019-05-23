@@ -63,11 +63,11 @@ def index( request ):
             app_models = ContentType.objects.filter( app_label=app.name ).all()
         except ContentType.DoesNotExist:
             continue
-        mo = models[ app.name ] = {}
+        mo = models[ app.name.encode( 'ascii', 'ignore' ) ] = {}
         for m in app_models:
             obj = m.model_class()
-            singular = obj._meta.verbose_name
-            plural = obj._meta.verbose_name_plural
+            singular = obj._meta.verbose_name.encode( 'ascii', 'ignore' )
+            plural = obj._meta.verbose_name_plural.encode( 'ascii', 'ignore' )
             o = dict(
                 singular=singular,
                 plural=plural

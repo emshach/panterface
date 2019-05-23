@@ -91,7 +91,7 @@ export default {
     VkButtonLink,
   },
   mounted() {
-    this.myBreadcrumb = this.breadcrumb;
+    this.myBreadcrumb = this.breadcrumb.slice();
     this.$nextTick(() => {
       this.$refs.input.focus();
       this.getCompletions();
@@ -239,7 +239,7 @@ export default {
         } else if ( this.prospect.length ) {
           this.prospect = []
         } else if ( this.partial ) {
-          this.myBreadcrumb = this.breadcrumb;
+          this.myBreadcrumb = this.breadcrumb.slice();
         } else {
           this.$refs.input.blur();
         }
@@ -371,7 +371,7 @@ export default {
   },
   watch: {
     breadcrumb( val ) {
-      this.myBreadcrumb = val;
+      this.myBreadcrumb = val.slice();
       this.prospect = [];
       this.getCompletions();
     }

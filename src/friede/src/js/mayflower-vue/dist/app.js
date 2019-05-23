@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "ec2fac34be3c6fcd3bc0";
+/******/ 	var hotCurrentHash = "1b6c59387ff9f2bf1660";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1163,7 +1163,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_9__["library"].add(_f
   mounted: function mounted() {
     var _this = this;
 
-    this.myBreadcrumb = this.breadcrumb;
+    this.myBreadcrumb = this.breadcrumb.slice();
     this.$nextTick(function () {
       _this.$refs.input.focus();
 
@@ -1346,7 +1346,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_9__["library"].add(_f
         } else if (this.prospect.length) {
           this.prospect = [];
         } else if (this.partial) {
-          this.myBreadcrumb = this.breadcrumb;
+          this.myBreadcrumb = this.breadcrumb.slice();
         } else {
           this.$refs.input.blur();
         }
@@ -1498,7 +1498,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_9__["library"].add(_f
   },
   watch: {
     breadcrumb: function breadcrumb(val) {
-      this.myBreadcrumb = val;
+      this.myBreadcrumb = val.slice();
       this.prospect = [];
       this.getCompletions();
     }

@@ -4,9 +4,10 @@
       <dashboard :widgets="widgets" />
     </transition>
     <transition mode="in-out">
-      <vk-grid v-if="matches.length || locations.length || slots.length"
-               gutter="collapse" :class="[ 'completions', 'uk-margin', columnWidth ]"
-               :style="{ minWidth: 92 * ( getCompletionColumns() / 6 ) + '%' }">
+      <vk-grid
+        v-if="focused && ( matches.length || locations.length || slots.length )"
+        gutter="collapse" :class="[ 'completions', 'uk-margin', columnWidth ]"
+        :style="{ minWidth: 92 * ( completionColumns / 6 ) + '%' }">
         <vk-button-link
           v-for="m in filteredMatches" href :key="m" size="small"
           :class="[ 'match', m === value ? 'selected' : '' ]"
@@ -51,6 +52,10 @@ export default {
     base: {
       type: String,
       default: ''
+    },
+    focused: {
+      type: Boolean,
+      default: false
     }
   },
   components: { VkGrid, VkButtonLink, Dashboard },
@@ -63,23 +68,24 @@ export default {
     select( match, type ) {
       this.$emit( 'input', match );
     },
-    getCompletionColumns() {
-      const matches = this.matches.length;
-      switch ( matches ) {
+  },
+  computed: {
+    completionColumns() {
+      const length = this.filteredMatches.length + this.locations.length
+            + this.slots.length;
+      switch ( length ) {
       case 0:
       case 1:
       case 2:
       case 3:
       case 4:
       case 5:
-        return matches;
+        return length;
       }
       return 6;
-    }
-  },
-  computed: {
+    },
     columnWidth() {
-      return 'uk-child-width-1-' + this.getCompletionColumns()
+      return 'uk-child-width-1-' + this.completionColumns;
     },
     baseRx() {
       return new RegExp( this.base, 'i' );
@@ -123,7 +129,7 @@ export default {
     bottom: 18px;
     right: 6px;
     max-width: 92%;
-    background: rgba(0,0,0,0.75);
+    background: rgba(0,0,0,0.5);
     color: white;
     border-radius: 4px;
     padding: 10px;

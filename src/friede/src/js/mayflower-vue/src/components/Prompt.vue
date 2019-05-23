@@ -2,7 +2,7 @@
   <form id="prompt" class="mf-prompt uk-flex uk-wrap-around" ref="form"
         @submit.prevent="submit">
     <switchboard :matches="matches" :locations="locations" :slots="slots"
-                 :base="base"
+                 :base="base" :focused="completing"
                  v-model="selected" @input="update" />
     <div class="readline uk-flex uk-wrap-around">
       <breadcrumb class="main" :items="myBreadcrumb" />
@@ -49,7 +49,8 @@
       </div>
       <template v-else>
         <input name="cli" class="cli uk-input uk-flex-1" v-model="input"
-               ref="input" @input="processInput" @keydown="processKey( $event )" />
+               ref="input" @input="processInput" @keydown="processKey( $event )"
+               @focus="completing = true" @blur="completing = false"/>
         <vk-button-link v-if="canGo" class="btn btn-go">go</vk-button-link>
       </template>
     </div>
@@ -117,7 +118,8 @@ export default {
       selected: null,
       loading: false,
       myBreadcrumb: [],
-      endpoint: false
+      endpoint: false,
+      completing: false,
     }
   },
   methods: {

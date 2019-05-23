@@ -55,7 +55,7 @@ export default {
   top: 0;
   right: 0;
   a {
-    font-weight: bold;
+    font-size: 0.9rem;
     color: #2c3e50;
     padding: 4px 8px;
     text-shadow: 0 0 1px black;

@@ -21,7 +21,7 @@ a[data-v-aae30ed8] {
   bottom: 18px;
   right: 6px;
   max-width: 92%;
-  background: rgba(0, 0, 0, 0.75);
+  background: rgba(0, 0, 0, 0.5);
   color: white;
   border-radius: 4px;
   padding: 10px;
@@ -188,7 +188,7 @@ a[data-v-aae30ed8] {
   right: 0;
 }
 #nav a[data-v-7ba5bd90] {
-    font-weight: bold;
+    font-size: 0.9rem;
     color: #2c3e50;
     padding: 4px 8px;
     text-shadow: 0 0 1px black;

@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "5638e52a538828ba76d3";
+/******/ 	var hotCurrentHash = "9a84a6a68908e13f9294";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1192,7 +1192,8 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_9__["library"].add(_f
       selected: null,
       loading: false,
       myBreadcrumb: [],
-      endpoint: false
+      endpoint: false,
+      completing: false
     };
   },
   methods: {
@@ -1567,6 +1568,10 @@ __webpack_require__.r(__webpack_exports__);
     base: {
       type: String,
       default: ''
+    },
+    focused: {
+      type: Boolean,
+      default: false
     }
   },
   components: {
@@ -1581,26 +1586,26 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     select: function select(match, type) {
       this.$emit('input', match);
-    },
-    getCompletionColumns: function getCompletionColumns() {
-      var matches = this.matches.length;
+    }
+  },
+  computed: {
+    completionColumns: function completionColumns() {
+      var length = this.filteredMatches.length + this.locations.length + this.slots.length;
 
-      switch (matches) {
+      switch (length) {
         case 0:
         case 1:
         case 2:
         case 3:
         case 4:
         case 5:
-          return matches;
+          return length;
       }
 
       return 6;
-    }
-  },
-  computed: {
+    },
     columnWidth: function columnWidth() {
-      return 'uk-child-width-1-' + this.getCompletionColumns();
+      return 'uk-child-width-1-' + this.completionColumns;
     },
     baseRx: function baseRx() {
       return new RegExp(this.base, 'i');
@@ -1860,7 +1865,8 @@ var render = function() {
           matches: _vm.matches,
           locations: _vm.locations,
           slots: _vm.slots,
-          base: _vm.base
+          base: _vm.base,
+          focused: _vm.completing
         },
         on: { input: _vm.update },
         model: {
@@ -2034,6 +2040,12 @@ var render = function() {
                     ],
                     keydown: function($event) {
                       return _vm.processKey($event)
+                    },
+                    focus: function($event) {
+                      _vm.completing = true
+                    },
+                    blur: function($event) {
+                      _vm.completing = false
                     }
                   }
                 }),
@@ -2086,14 +2098,13 @@ var render = function() {
         "transition",
         { attrs: { mode: "in-out" } },
         [
-          _vm.matches.length || _vm.locations.length || _vm.slots.length
+          _vm.focused &&
+          (_vm.matches.length || _vm.locations.length || _vm.slots.length)
             ? _c(
                 "vk-grid",
                 {
                   class: ["completions", "uk-margin", _vm.columnWidth],
-                  style: {
-                    minWidth: 92 * (_vm.getCompletionColumns() / 6) + "%"
-                  },
+                  style: { minWidth: 92 * (_vm.completionColumns / 6) + "%" },
                   attrs: { gutter: "collapse" }
                 },
                 [

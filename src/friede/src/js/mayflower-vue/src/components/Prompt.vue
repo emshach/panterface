@@ -360,7 +360,7 @@ export default {
         this.prospect.map( this.serializeNode )).join('/');
     },
     partial() {
-      return this.route != this.$store.getters.route
+      return ( this.route != this.$store.getters.route );
     },
     canGo() {
       return this.endpoint && this.partial;

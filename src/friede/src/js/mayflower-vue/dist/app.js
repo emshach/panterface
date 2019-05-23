@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "4ff926202bbd743c5587";
+/******/ 	var hotCurrentHash = "e7a7f682f264d3e9af41";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -3411,9 +3411,12 @@ vue__WEBPACK_IMPORTED_MODULE_5__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_6_
         var mod = pre[2];
         var ids = pre.slice(3).join(',');
         var filters = top.slice(1);
+        var m = Friede.models[app][mod];
         obj[k] = {
           app: app,
-          plural: mod,
+          model: m.model,
+          singular: m.singular,
+          plural: m.plural,
           filters: [],
           objects: [],
           idstr: ids,
@@ -3449,14 +3452,13 @@ vue__WEBPACK_IMPORTED_MODULE_5__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_6_
             var ids = o.objects.map(function (x) {
               return x.id;
             });
-            var singular = Friede.models[o.app][o.plural].singular;
             return {
-              href: '{' + o.app + '.' + o.plural + '\\*?\\+?}',
+              href: '{' + o.app + '.' + o.model + '\\*?\\+?}',
               hash: x,
               filter: o.filter,
               filters: o.filters,
               objects: o.objects,
-              title: o.filter ? o.plural + ': ' + o.filter + (ids ? ' + ' + ids.length : '') : o.objects.length === 1 ? singular + ': ' + o.objects[0].title : o.objects.length ? o.objects.length + ' ' + o.plural : o.plural,
+              title: o.filter ? o.plural + ': ' + o.filter + (ids ? ' + ' + ids.length : '') : o.objects.length === 1 ? o.singular + ': ' + o.objects[0].title : o.objects.length ? o.objects.length + ' ' + o.plural : o.plural,
               slot: null
             };
           }

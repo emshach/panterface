@@ -35,9 +35,12 @@ export default new Vuex.Store({
         var mod = pre[2];
         var ids = pre.slice(3).join(',')
         var filters = top.slice(1)
+        var m = Friede.models[ app ][ mod ]
         obj[k] = {
           app: app,
-          plural: mod,
+          model: m.model,
+          singular: m.singular,
+          plural: m.plural,
           filters: [],
           objects: [],
           idstr: ids,
@@ -63,9 +66,8 @@ export default new Vuex.Store({
           if ( x in obj ) {
             var o = obj[x];
             var ids = o.objects.map( x => x.id );
-            var singular = Friede.models[ o.app ][ o.plural ].singular;
             return {
-              href: '{' + o.app + '.' + o.plural + '\\*?\\+?}',
+              href: '{' + o.app + '.' + o.model + '\\*?\\+?}',
               hash: x,
               filter: o.filter,
               filters: o.filters,
@@ -73,7 +75,7 @@ export default new Vuex.Store({
               title: ( o.filter ? ( o.plural + ': ' + o.filter
                             + ( ids ? ' + ' + ids.length : '' ))
                  : o.objects.length === 1
-                 ? singular + ': ' + o.objects[0].title
+                 ? o.singular + ': ' + o.objects[0].title
                  : ( o.objects.length ? o.objects.length + ' ' + o.plural : o.plural )),
               slot: null,
             }

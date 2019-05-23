@@ -66,12 +66,15 @@ def index( request ):
         mo = models[ app.name.encode( 'ascii', 'ignore' ) ] = {}
         for m in app_models:
             obj = m.model_class()
+            model=m.model.encode( 'ascii', 'ignore' )
             singular = obj._meta.verbose_name.encode( 'ascii', 'ignore' )
             plural = obj._meta.verbose_name_plural.encode( 'ascii', 'ignore' )
             o = dict(
+                model=model,
                 singular=singular,
                 plural=plural
             )
+            mo[ model ] = o
             mo[ singular ] = o
             mo[ plural ] = o
 

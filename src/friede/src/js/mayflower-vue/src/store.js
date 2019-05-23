@@ -80,7 +80,7 @@ export default new Vuex.Store({
     },
   },
   getters: {
-    getRoute: state => {
+    route: state => {
       return state.context.map( x => x.hash || x.href ).join('/');
     }
   }

@@ -250,7 +250,7 @@ export default {
             $event.preventDefault();
             this.prospect.pop();
             this.getCompletions();
-          } else if ( this.myBreadcrumb.length ) {
+          } else if ( this.myBreadcrumb.length > 1 ) {
             $event.preventDefault();
             this.myBreadcrumb.pop();
             this.getCompletions();
@@ -360,12 +360,10 @@ export default {
         this.prospect.map( this.serializeNode )).join('/');
     },
     partial() {
-      return this.myBreadcrumb.length != this.breadcrumb.length
-         || this.myBreadcrumb.map( x => x.href ).join('/')
-         != this.breadcrumb.map( x => x.href ).join('/');
+      return this.route != this.$store.getters.route
     },
     canGo() {
-      return this.endpoint && ( this.prospect.length || this.partial )
+      return this.endpoint && this.partial;
     },
     slotOptions() {
       return this.filters.concat( this.search );

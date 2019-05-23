@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "35b72aa133e6f4c781b5";
+/******/ 	var hotCurrentHash = "9a3fce1611e8a752a214";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1359,7 +1359,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_9__["library"].add(_f
             $event.preventDefault();
             this.prospect.pop();
             this.getCompletions();
-          } else if (this.myBreadcrumb.length) {
+          } else if (this.myBreadcrumb.length > 1) {
             $event.preventDefault();
             this.myBreadcrumb.pop();
             this.getCompletions();
@@ -1487,14 +1487,10 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_9__["library"].add(_f
       return this.myBreadcrumb.map(this.serializeNode).concat(this.prospect.map(this.serializeNode)).join('/');
     },
     partial: function partial() {
-      return this.myBreadcrumb.length != this.breadcrumb.length || this.myBreadcrumb.map(function (x) {
-        return x.href;
-      }).join('/') != this.breadcrumb.map(function (x) {
-        return x.href;
-      }).join('/');
+      return this.route != this.$store.getters.route;
     },
     canGo: function canGo() {
-      return this.endpoint && (this.prospect.length || this.partial);
+      return this.endpoint && this.partial;
     },
     slotOptions: function slotOptions() {
       return this.filters.concat(this.search);
@@ -3318,14 +3314,14 @@ function () {
             }));
 
           case 6:
-            if (to.fullPath != _store__WEBPACK_IMPORTED_MODULE_4__["default"].getters.getRoute) {
+            if (to.fullPath != _store__WEBPACK_IMPORTED_MODULE_4__["default"].getters.route) {
               _store__WEBPACK_IMPORTED_MODULE_4__["default"].dispatch('setPath', to.fullPath);
             }
 
             return _context.abrupt("return", next());
 
           case 8:
-            if (to.fullPath != _store__WEBPACK_IMPORTED_MODULE_4__["default"].getters.getRoute) {
+            if (to.fullPath != _store__WEBPACK_IMPORTED_MODULE_4__["default"].getters.route) {
               _store__WEBPACK_IMPORTED_MODULE_4__["default"].dispatch('setPath', to.fullPath);
             }
 
@@ -3477,7 +3473,7 @@ vue__WEBPACK_IMPORTED_MODULE_6__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_7_
     }
   },
   getters: {
-    getRoute: function getRoute(state) {
+    route: function route(state) {
       return state.context.map(function (x) {
         return x.hash || x.href;
       }).join('/');

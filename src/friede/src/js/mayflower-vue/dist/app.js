@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "fdaa87150e296bed2760";
+/******/ 	var hotCurrentHash = "4ff926202bbd743c5587";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -3449,8 +3449,7 @@ vue__WEBPACK_IMPORTED_MODULE_5__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_6_
             var ids = o.objects.map(function (x) {
               return x.id;
             });
-            var singular = o.plural; // FIXME: this
-
+            var singular = Friede.models[o.app][o.plural].singular;
             return {
               href: '{' + o.app + '.' + o.plural + '\\*?\\+?}',
               hash: x,
@@ -3458,7 +3457,7 @@ vue__WEBPACK_IMPORTED_MODULE_5__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_6_
               filters: o.filters,
               objects: o.objects,
               title: o.filter ? o.plural + ': ' + o.filter + (ids ? ' + ' + ids.length : '') : o.objects.length === 1 ? singular + ': ' + o.objects[0].title : o.objects.length ? o.objects.length + ' ' + o.plural : o.plural,
-              slot: 'TBD'
+              slot: null
             };
           }
 

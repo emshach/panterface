@@ -56,10 +56,30 @@ def index( request ):
     if not theme:
         theme = setuptheme( shell )
     # TODO: DoesNotExistException
+    models = {}
+    apps = App.objects.filter( active=True ).all
+    for app in apps:
+        try:
+            app_models = ContentType.objects.get( app_label=app.name )
+        except ContentType.DoesNotExistException:
+            continue
+        mo = models[ app.name ] = {}
+        for m in app_models:
+            obj = m.model_class()
+            singular = obj._meta.verbose_name
+            plural = obj._meta.verbose_name_plural
+            o = dict(
+                singular=singular,
+                plural=plural
+            )
+            mo[ singular ] = o
+            mo[ plural ] = o
+
     context = dict(
         shell=shell,
         theme=theme,
         menus=json.dumps( menus ),
+        models=models
     )
     for registry in getregistries():
         context[ registry.name ] = registry

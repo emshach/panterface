@@ -63,7 +63,7 @@ export default new Vuex.Store({
           if ( x in obj ) {
             var o = obj[x];
             var ids = o.objects.map( x => x.id );
-            var singular = o.plural; // FIXME: this
+            var singular = Friede.models[ o.app ][ o.plural ].singular;
             return {
               href: '{' + o.app + '.' + o.plural + '\\*?\\+?}',
               hash: x,
@@ -75,7 +75,7 @@ export default new Vuex.Store({
                  : o.objects.length === 1
                  ? singular + ': ' + o.objects[0].title
                  : ( o.objects.length ? o.objects.length + ' ' + o.plural : o.plural )),
-              slot: 'TBD',
+              slot: null,
             }
           }
           return { title: x || '/', href: x };

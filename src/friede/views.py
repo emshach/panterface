@@ -57,7 +57,7 @@ def index( request ):
         theme = setuptheme( shell )
     # TODO: DoesNotExistException
     models = {}
-    apps = App.objects.filter( active=True ).all
+    apps = App.objects.filter( active=True ).all()
     for app in apps:
         try:
             app_models = ContentType.objects.get( app_label=app.name )

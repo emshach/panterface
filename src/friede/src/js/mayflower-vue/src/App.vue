@@ -27,9 +27,10 @@ export default {
     };
   },
   methods: {
-    promptInput( value, context ) {
+    promptInput( route, context ) {
       this.context = context;
       this.$store.commit( 'setContext', context );
+      this.$route.push( route );
     }
   },
   computed: {

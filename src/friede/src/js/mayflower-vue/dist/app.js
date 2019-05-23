@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "981fe8a9607f6b14e567";
+/******/ 	var hotCurrentHash = "52bc9c7fe8d5dffb51a1";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -995,9 +995,10 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    promptInput: function promptInput(value, context) {
+    promptInput: function promptInput(route, context) {
       this.context = context;
       this.$store.commit('setContext', context);
+      this.$route.push(route);
     }
   },
   computed: {

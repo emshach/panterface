@@ -55,6 +55,7 @@ export default new Vuex.Store({
         }
       }
       Promise.all(p).then(() => {
+        console.log( 'obj', obj );
         commit( 'setContext', ctx.map( x => {
           if ( x in obj ) {
             var o = obj[x];

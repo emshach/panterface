@@ -49,22 +49,26 @@ export default {
   color: #2c3e50;
 }
 #nav {
-  margin: 4px;
+  margin: 0 4px 4px;
   padding: 0;
   position: fixed;
   top: 0;
   right: 0;
   a {
+    display: inline-block;
     font-size: 0.9rem;
     color: #2c3e50;
-    padding: 4px 8px;
+    padding: 2px 8px 4px;
     text-shadow: 0 0 1px black;
     text-decoration: none !important;
-    border-radius: 2px;
+    border-radius: 3px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
     text-shadow: 0 0 1px lightskyblue;
     &.router-link-exact-active {
       color: white;
-      text-shadow: 0 0 1px black;
+      font-weight: bold;
+      background: rgba(0,0,150,0.3);
     }
     &:hover {
       /* background: rgba(255,255,255,0.25); */

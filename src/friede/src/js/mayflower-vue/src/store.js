@@ -22,30 +22,34 @@ export default new Vuex.Store({
       const ctx = ( path || '' ).split('/').filter( x => {
         if ( !x )
           return false;
-        if ( x.indexOf('.') > -1 ) {
+        if ( x[0] === '-' ) {
           obj[x] = null;
         }
         return true;
       });
       var p = []
       for ( var k in obj ) {
-        var d = k.split(':');
-        var m = d[0].split('.');
+        var top = k.split('+');
+        var pre = top[0].split('-');
+        var app = pre[1];
+        var mod = pre[2];
+        var ids = pre.slice(3).join(',')
+        var filters = top.slice(1)
         obj[k] = {
-          app: m[0],
-          plural: m[1],
+          app: app,
+          plural: mod,
           filters: [],
           objects: [],
-          idstr: d[1],
-          filter: d[2]
+          idstr: ids,
+          filter: filters
         };
-        if ( d[1] ) {
+        if ( ids ) {
           p.push(
-            Vue.prototype.$api( m[0], m[1], '?ids='+ d[1].replace( /\+/g, ',' ))
+            Vue.prototype.$api( app, mod, '?ids='+ ids )
                .then( r => { obj[k].objects = r.data.results }));
         }
-        if ( d[2] ) {
-          obj[k].filters = d[2].split('+').map( tag => ({
+        if ( filters.length ) {
+          obj[k].filters = filters.map( tag => ({
             path: `_filter.${tag}`,
             title: `filter: ${tag}`,
             filter: true,

@@ -295,10 +295,10 @@ export default {
       var objects = o.filter( x => x.id );
       var ids = objects.map( x => x.id );
       this.prospect.push({
-        href: '{' + s.app + '.' + s.model + '\\*?\\+?}',
-        hash: s.app + '.' + s.plural
-           + ( ids ? ':'+ ids.join('+') : filter ? ':' : '' )
-           + ( filter ? ':' + filter : '' ),
+        href: '{' + s.app + '-' + s.model + '\\*?\\+?}',
+        hash: '-' + s.app + '-' + s.plural
+           + ( ids.length ? '-' + ids.join('-') : filter ? '+' : '' )
+           + ( filter ? '+' + filter : '' ),
         objects: objects,
         filters: filters,
         filter: filter,

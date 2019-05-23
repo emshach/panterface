@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "71aa490e5629cf11eb19";
+/******/ 	var hotCurrentHash = "22e94acb09f341fdc535";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1416,8 +1416,8 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_9__["library"].add(_f
         return x.id;
       });
       this.prospect.push({
-        href: '{' + s.app + '.' + s.model + '\\*?\\+?}',
-        hash: s.app + '.' + s.plural + (ids ? ':' + ids.join('+') : filter ? ':' : '') + (filter ? ':' + filter : ''),
+        href: '{' + s.app + '-' + s.model + '\\*?\\+?}',
+        hash: '-' + s.app + '-' + s.plural + (ids.length ? '-' + ids.join('-') : filter ? '+' : '') + (filter ? '+' + filter : ''),
         objects: objects,
         filters: filters,
         filter: filter,
@@ -3360,12 +3360,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es6_object_to_string__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_object_to_string__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var core_js_modules_es6_string_iterator__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es6.string.iterator */ "./node_modules/core-js/modules/es6.string.iterator.js");
 /* harmony import */ var core_js_modules_es6_string_iterator__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_string_iterator__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var core_js_modules_es6_regexp_replace__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es6.regexp.replace */ "./node_modules/core-js/modules/es6.regexp.replace.js");
-/* harmony import */ var core_js_modules_es6_regexp_replace__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_regexp_replace__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var core_js_modules_es6_regexp_split__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es6.regexp.split */ "./node_modules/core-js/modules/es6.regexp.split.js");
-/* harmony import */ var core_js_modules_es6_regexp_split__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_regexp_split__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.runtime.esm.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var core_js_modules_es6_regexp_split__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es6.regexp.split */ "./node_modules/core-js/modules/es6.regexp.split.js");
+/* harmony import */ var core_js_modules_es6_regexp_split__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_regexp_split__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.runtime.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 
 
 
@@ -3373,9 +3371,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-vue__WEBPACK_IMPORTED_MODULE_6__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_7__["default"]);
-/* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_7__["default"].Store({
+vue__WEBPACK_IMPORTED_MODULE_5__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_6__["default"]);
+/* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_6__["default"].Store({
   state: {
     user: null,
     context: [{
@@ -3399,7 +3396,7 @@ vue__WEBPACK_IMPORTED_MODULE_6__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_7_
       var ctx = (path || '').split('/').filter(function (x) {
         if (!x) return false;
 
-        if (x.indexOf('.') > -1) {
+        if (x[0] === '-') {
           obj[x] = null;
         }
 
@@ -3408,25 +3405,29 @@ vue__WEBPACK_IMPORTED_MODULE_6__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_7_
       var p = [];
 
       for (var k in obj) {
-        var d = k.split(':');
-        var m = d[0].split('.');
+        var top = k.split('+');
+        var pre = top[0].split('-');
+        var app = pre[1];
+        var mod = pre[2];
+        var ids = pre.slice(3).join(',');
+        var filters = top.slice(1);
         obj[k] = {
-          app: m[0],
-          plural: m[1],
+          app: app,
+          plural: mod,
           filters: [],
           objects: [],
-          idstr: d[1],
-          filter: d[2]
+          idstr: ids,
+          filter: filters
         };
 
-        if (d[1]) {
-          p.push(vue__WEBPACK_IMPORTED_MODULE_6__["default"].prototype.$api(m[0], m[1], '?ids=' + d[1].replace(/\+/g, ',')).then(function (r) {
+        if (ids) {
+          p.push(vue__WEBPACK_IMPORTED_MODULE_5__["default"].prototype.$api(app, mod, '?ids=' + ids).then(function (r) {
             obj[k].objects = r.data.results;
           }));
         }
 
-        if (d[2]) {
-          obj[k].filters = d[2].split('+').map(function (tag) {
+        if (filters.length) {
+          obj[k].filters = filters.map(function (tag) {
             return {
               path: "_filter.".concat(tag),
               title: "filter: ".concat(tag),

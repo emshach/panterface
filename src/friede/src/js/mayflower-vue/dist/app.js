@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "accbc9b1f988221b04a6";
+/******/ 	var hotCurrentHash = "564240d0063d3265ac92";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -3262,7 +3262,7 @@ function getUser() {
 
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_3__["default"]({
   mode: 'history',
-  base: "/static/friede/mayflower/",
+  base: '/',
   routes: [{
     path: '/',
     name: 'home',

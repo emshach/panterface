@@ -19,7 +19,8 @@ from importlib import import_module
 import json
 import re
 
-### custom filter
+### custom filters
+
 class IdsFilter( filters.BaseFilterBackend ):
     """
     Filter for retrieving multiple objects by ID
@@ -34,6 +35,18 @@ class IdsFilter( filters.BaseFilterBackend ):
             raise ValidationError( "Only comma-separated list of IDs for ids filter" )
         if len( ids ):
             return queryset.filter( pk__in=ids )
+        return queryset
+
+
+class PathFilter( filters.BaseFilterBackend ):
+    """
+    Filter for retrieving multiple objects by ID
+    """
+    def filter_queryset( self, request, queryset, view ):
+        path = request.GET.get( 'path' )
+        if not ids:
+            return queryset
+        return queryset.filter( path=path )
         return queryset
 
 
@@ -256,7 +269,7 @@ def api_models( request, models=None, format=None ):
     return Response( dict( models=out ))
 
 class SearchViewSet( viewsets.ModelViewSet ):
-    filter_backends = ( IdsFilter, filters.SearchFilter, )
+    filter_backends = ( IdsFilter, PathFilter, filters.SearchFilter, )
     search_fields = ( 'name', 'title', 'description' )
 
 

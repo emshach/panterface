@@ -26,7 +26,7 @@ class IdsFilter( filters.BaseFilterBackend ):
     Filter for retrieving multiple objects by ID
     """
     def filter_queryset( self, request, queryset, view ):
-        ids = request.GET.get( 'ids' )
+        ids = request.query_params.get( 'ids' )
         if not ids:
             return queryset
         try:
@@ -43,7 +43,13 @@ class PathFilter( filters.BaseFilterBackend ):
     Filter for retrieving multiple objects by ID
     """
     def filter_queryset( self, request, queryset, view ):
-        path = request.GET.get( 'path', 'nosuchpath' )
+        path = request.query_params.get( 'path', 'nosuchpath' )
+        rpath = request.path.split('/')
+        while len( rpath ) and not rpath[-1]:
+            rpath.pop()
+        name = rpath[-1]
+        if not path.startswith( name + '.' ):
+            path = "{}.{}".format( name, path )
         return queryset.filter( path=path )
         return queryset
 
@@ -232,7 +238,7 @@ def api_models( request, models=None, format=None ):
         return Response({})
     models = models.split(',')[ ::-1 ]
     out = {}
-    have = set( request.GET.getlist( 'have' ))
+    have = set( request.query_params.getlist( 'have' ))
     while models:
         name = models.pop()
         if not name or name in out or name in have: continue

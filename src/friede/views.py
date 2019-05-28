@@ -228,7 +228,7 @@ def api_models( request, models=None, format=None ):
         model = _get_model( name )
         if not model:
             return Response({
-                'error': "found no model '%s'" % model },
+                'error': "found no model '%s'" % name },
                             status=status.HTTP_404_NOT_FOUND )
 
         meta = model._meta
@@ -246,7 +246,7 @@ def api_models( request, models=None, format=None ):
             field = dict( name=f.name, type=ftype )
             if getattr( f, 'related_model', None ):
                 m = f.related_model
-                related = "%s.%s" % ( m._meta.app_label, m.model )
+                related = "%s.%s" % ( m._meta.app_label, m._meta.model_name )
                 field[ 'related' ] = related
                 if 'Rel' not in ftype0 and related not in out and related not in have:
                     models.append( related )

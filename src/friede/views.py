@@ -43,9 +43,7 @@ class PathFilter( filters.BaseFilterBackend ):
     Filter for retrieving multiple objects by ID
     """
     def filter_queryset( self, request, queryset, view ):
-        path = request.GET.get( 'path' )
-        if not ids:
-            return queryset
+        path = request.GET.get( 'path', 'nosuchpath' )
         return queryset.filter( path=path )
         return queryset
 

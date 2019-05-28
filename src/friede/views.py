@@ -207,18 +207,12 @@ def api_ls( request, path='', format=None ):
     ))
 
 def _get_model( name ):
-    model = name.split('.')
-    app = ".".join( model[:-1] )
-    model = model[-1]
+    app, model = name.split('.')
     try:
-        mod = import_module( "%s.%s" % ( app, 'models' ))
-    except ImportError:
-        return Response({ 'error': "found no models in '%s'" % app },
-                        status=status.HTTP_404_NOT_FOUND )
-
-    name = model
-    model = getattr( mod, name, None )
-    return model
+        obj = ContentType.objects.get( app_label=app, model=model )
+    except ContentType.DoesNotExist:
+        return None
+    return obj.model_class()
 
 @api_view([ 'GET' ])
 @permission_classes(( permissions.AllowAny, ))
@@ -234,7 +228,7 @@ def api_models( request, models=None, format=None ):
         model = _get_model( name )
         if not model:
             return Response({
-                'error': "found no model '%s' in '%s.models'" % ( name, app ) },
+                'error': "found no model '%s'" % model },
                             status=status.HTTP_404_NOT_FOUND )
 
         meta = model._meta
@@ -252,7 +246,7 @@ def api_models( request, models=None, format=None ):
             field = dict( name=f.name, type=ftype )
             if getattr( f, 'related_model', None ):
                 m = f.related_model
-                related = "%s.%s" % ( m._meta.app_label, m.__name__)
+                related = "%s.%s" % ( m._meta.app_label, m.model )
                 field[ 'related' ] = related
                 if 'Rel' not in ftype0 and related not in out and related not in have:
                     models.append( related )

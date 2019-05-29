@@ -106,7 +106,7 @@ class App( object ) :
         pass
 
     def update( self ):
-        return updateapp( self.model, self.getdata() )
+        return updateapp( self.name, self.getdata() )
 
     def postupdate( self ):
         pass

@@ -5,12 +5,12 @@ from friede import app
 
 class App( app.App ):
     name        =  'intrepid'
-    icon        = 'fontawesome.gem',
-    module      = 'intrepid',
+    icon        = 'fontawesome.gem'
+    module      = 'intrepid'
     title       = 'Project Intrepid',
     description = '''Time, task and finance management system
 
-    Also includes goal-setting, strategizing, and teamwork tools.''',
+    Also includes goal-setting, strategizing, and teamwork tools.'''
 
     objects = '''note resource product goal objective target strategy plan phase
             step project task action currency account pool allotment allocation

@@ -302,7 +302,7 @@ def api_path( request, path=None, format=None ):
             model = qs.model
             meta = model._meta
             serializer = vs.serializer_class
-            objects=qs.filter( pk_in=ids )
+            objects=qs.filter( pk__in=ids )
             data = serializer( objects, many=True, context={ 'request': request })
             node.update(
                 app=app,

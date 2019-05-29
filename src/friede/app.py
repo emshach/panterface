@@ -99,7 +99,7 @@ class App( object ) :
     def preinit( self ):
         pass
 
-    def init( self, register, rotuer=None, urlpatterns=None ):
+    def init( self, register, router=None, urlpatterns=None ):
         for k, v in routes:
             register( k, v )
 

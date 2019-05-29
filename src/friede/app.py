@@ -75,7 +75,6 @@ class App( object ) :
             module=self.module,
             title=self.title,
             description=self.description,
-            data=self.data
         )
 
     def postinstallheader( self ):

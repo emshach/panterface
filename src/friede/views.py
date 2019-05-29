@@ -312,7 +312,7 @@ def api_path( request, path=None, format=None ):
                 objects=data.data,
                 filter='+'.join( ndata[1:] ),
                 filters= ndata[1:],
-                href="{{{}\.{}\*?\+?}}".format( app, mod ),
+                href="{{{}\.{}\*?\+?}}".format( app, meta.model_name ),
                 title='TBD'
             )
             rx0 = r"{}/{}".format( rx0, node[ 'href' ])

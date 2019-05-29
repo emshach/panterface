@@ -26,8 +26,8 @@ class NamedDefaultRouter( routers.DefaultRouter ):
         self.root_view_name = "api-root-%s" % name
         super( NamedDefaultRouter, self ).__init__( *args, **kwargs )
 
-def registrar( router, routes, module ):
-    name = module.name
+def registrar( router, routes, app ):
+    name = app.name
     myrouter = None
     try:
         myrouter = routes[ name ]

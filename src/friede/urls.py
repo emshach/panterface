@@ -14,7 +14,7 @@ try:
     friede = friede_app.App()
     friede.install()
     friede.init( router=router,
-                 register=registrar( router, routes, friede_app ),
+                 register=registrar( router, routes, friede ),
                  urlpatterns=urlpatterns )
     for app_name in settings.INSTALLED_APPS:
         if app_name == 'friede': continue
@@ -27,7 +27,7 @@ try:
                 apps[ app.name ] = app
                 if app.installed:
                     app.init( register=registrar(
-                                  router=router, routes=routes, module=friede ),
+                                  router=router, routes=routes, module=app ),
                               router=router,
                               urlpatterns=urlpatterns )
             except ImportError, AttributeError:

@@ -285,7 +285,7 @@ def api_path( request, path=None, format=None ):
         endpoint = False
         node=dict( hash=n )
         if n[0] == '-':
-            ndata = node[1:].split('+')
+            ndata = n[1:].split('+')
             odata = ndata[0].split('-')
             app = odata[0]
             reg = odata[1]

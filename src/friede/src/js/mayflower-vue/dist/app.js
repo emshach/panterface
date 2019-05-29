@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "3868b0a67d61a5e2c289";
+/******/ 	var hotCurrentHash = "0d85fa7cf915cae5b964";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -3376,7 +3376,7 @@ vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_1_
 /* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   state: {
     user: null,
-    context: null,
+    context: [],
     location: null,
     lastlocation: null
   },
@@ -3405,7 +3405,7 @@ vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_1_
   },
   getters: {
     route: function route(state) {
-      if (state.context == null) return null;
+      if (!state.context.length) return null;
       return state.context.map(function (x) {
         return x.hash || x.href;
       }).join('/');

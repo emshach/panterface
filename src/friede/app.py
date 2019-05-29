@@ -100,7 +100,7 @@ class App( object ) :
         pass
 
     def init( self, register, router=None, urlpatterns=None ):
-        for k, v in routes:
+        for k, v in self.routes:
             register( k, v )
 
     def preupdate( self ):

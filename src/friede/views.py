@@ -339,7 +339,7 @@ def api_path( request, path=None, format=None ):
             if 'href' not in node:
                 node.update( href=n, title=n )
         out.append( node )
-        return Response( dict( route=out, endpoint=endpoint ))
+    return Response( dict( route=out, endpoint=endpoint ))
 
 class SearchViewSet( viewsets.ModelViewSet ):
     filter_backends = ( IdsFilter, PathFilter, filters.SearchFilter, )

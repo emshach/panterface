@@ -280,8 +280,7 @@ def api_models( request, models=None, format=None ):
 @permission_classes(( permissions.AllowAny, ))
 def api_path( request, path=None, format=None ):
     from friede.app import apps
-    nodes = ('',) + tuple( x for x in path.split('/') if x )
-    out = []
+    nodes = tuple( x for x in path.split('/') if x )
     rx0 = '^'
     rx1 = ''
     endpoint = False
@@ -290,6 +289,14 @@ def api_path( request, path=None, format=None ):
         detail=  True,
         expand=  [ '_widget_entries', '_screen_entries' ]
     )
+    out = [
+        dict(
+            title='',
+            href='/',
+            location=LocationSerializer(
+                Location.object.filter( href__regex=r'^/?$').first(),
+                context=lscontext ).data
+        )]
     for n in nodes:
         endpoint = False
         node=dict( hash=n )

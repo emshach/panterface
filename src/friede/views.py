@@ -207,7 +207,7 @@ def api_ls( request, path='', format=None ):
         expand, many=True, context=dict(
             request= request,
             detail=  True,
-            expand=  [ '_widget_entries' ]))
+            expand=  [ '_widget_entries', '_screen_entries' ]))
     rest_serializer = LocationSerializer(
         rest, many=True, context={ 'request': request })
     return Response( dict(
@@ -271,6 +271,75 @@ def api_models( request, models=None, format=None ):
             data[ 'fields' ].append( field )
 
     return Response( dict( models=out ))
+
+@api_view([ 'GET' ])
+@permission_classes(( permissions.AllowAny, ))
+def api_path( request, path=None, format=None ):
+    from friede.app import apps
+    nodes = [ x for x in path.split('/') if x ]
+    out = []
+    rx0 = '^'
+    rx1 = ''
+    endpoint = False
+    for n in nodes:
+        endpoint = False
+        node=dict( hash=n )
+        if n[0] == '-':
+            ndata = node[1:].split('+')
+            odata = ndata[0].split('-')
+            app = odata[0]
+            reg = odata[1]
+            ids = [ int(x) for x in odata[2:] ] # TODO: validationerror
+            app_obj = apps.get( app )
+            if app_obj is None:
+                continue        # TODO: validationerror
+            vs = dict( app_obj.routes ).get( reg )
+            if reg is None:
+                continue        # TODO: ''
+            qs = vs.queryset
+            model = qs.model
+            meta = model._meta
+            serializer = vs.serializer_class
+            objects=qs.filter( pk_in=ids )
+            data = serializer( objects, many=True, context={ 'request': request })
+            node.update(
+                app=app,
+                model=meta.model_name,
+                singular=meta.verbose_name,
+                plural=meta.verbose_name_plural,
+                objects=data.data,
+                filter='+'.join( ndata[1:] ),
+                filters= ndata[1:],
+                href="{{{}\.{}\*?\+?}}".format( app, mod ),
+                title='TBD'
+            )
+            rx0 = r"{}/{}".format( rx0, node[ 'href' ])
+            rx1 = r"(?:{}/)?{}".format( rx, node[ 'href' ])
+            loc0 = Location.objects.filter( href__regex=rx0+r'/?$' )
+            if len( loc0 ):
+                node[ 'location' ] = LocationSerializer( loc0.first() ).data
+                endpoint = True
+            else:
+                loc1 = Location.objects.filter( href__regex=rx1+r'/?$' )
+                if len ( loc1 ):
+                    node[ 'location' ] = LocationSerializer( loc1.first() ).data
+                    endpoint = True
+        else:
+            rx0 = r"{}/{}".format( rx0, n )
+            rx1 = r"(?:{}/)?{}".format( rx, node[ 'href' ])
+            loc0 = Location.objects.filter( href__regex=rx0+r'/?$' )
+            if len( loc0 ):
+                node.update( **LocationSerializer( loc0.first() ).data )
+                endpoint = True
+            else:
+                loc1 = Location.objects.filter( href__regex=rx1+r'/?$' )
+                if len ( loc1 ):
+                    node.update( **LocationSerializer( loc1.first() ).data )
+                    endpoint = True
+            if 'href' not in node:
+                node.update( href=n, title=n )
+        out.append( node )
+        return Response( dict( route=out, endpoint=endpoint ))
 
 class SearchViewSet( viewsets.ModelViewSet ):
     filter_backends = ( IdsFilter, PathFilter, filters.SearchFilter, )

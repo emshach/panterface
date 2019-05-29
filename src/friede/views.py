@@ -291,8 +291,8 @@ def api_path( request, path=None, format=None ):
     )
     out = [
         dict(
-            title='',
-            href='/',
+            title='/',
+            href='',
             location=LocationSerializer(
                 Location.objects.filter( href__regex=r'^/?$').first(),
                 context=lscontext ).data

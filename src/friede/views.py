@@ -280,7 +280,7 @@ def api_models( request, models=None, format=None ):
 @permission_classes(( permissions.AllowAny, ))
 def api_path( request, path=None, format=None ):
     from friede.app import apps
-    nodes = [ x for x in path.split('/') if x ]
+    nodes = ('',) + tuple( x for x in path.split('/') if x )
     out = []
     rx0 = '^'
     rx1 = ''

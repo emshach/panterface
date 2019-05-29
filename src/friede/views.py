@@ -317,24 +317,28 @@ def api_path( request, path=None, format=None ):
             rx1 = r"(?:{}/)?{}".format( rx1, node[ 'href' ])
             loc0 = Location.objects.filter( href__regex=rx0+r'/?$' )
             if len( loc0 ):
-                node[ 'location' ] = LocationSerializer( loc0.first() ).data
+                node[ 'location' ] = LocationSerializer(
+                    loc0.first(), context={ 'request': request }).data
                 endpoint = True
             else:
                 loc1 = Location.objects.filter( href__regex=rx1+r'/?$' )
                 if len ( loc1 ):
-                    node[ 'location' ] = LocationSerializer( loc1.first() ).data
+                    node[ 'location' ] = LocationSerializer(
+                        loc1.first(), context={ 'request': request } ).data
                     endpoint = True
         else:
             rx0 = r"{}/{}".format( rx0, n )
             rx1 = r"(?:{}/)?{}".format( rx1, n )
             loc0 = Location.objects.filter( href__regex=rx0+r'/?$' )
             if len( loc0 ):
-                node.update( **LocationSerializer( loc0.first() ).data )
+                node.update( **LocationSerializer(
+                    loc0.first(), context={ 'request': request }).data )
                 endpoint = True
             else:
                 loc1 = Location.objects.filter( href__regex=rx1+r'/?$' )
                 if len ( loc1 ):
-                    node.update( **LocationSerializer( loc1.first() ).data )
+                    node.update( **LocationSerializer(
+                        loc1.first(), context={ 'request': request }).data )
                     endpoint = True
             if 'href' not in node:
                 node.update( href=n, title=n )

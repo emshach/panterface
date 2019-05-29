@@ -6,7 +6,7 @@ Vue.use( Vuex );
 export default new Vuex.Store({
   state: {
     user: null,
-    context: [{ href: '', title: '/' }],
+    context: null,
     location: null,
     lastlocation: null,
   },
@@ -33,6 +33,8 @@ export default new Vuex.Store({
   },
   getters: {
     route: state => {
+      if ( state.context == null )
+        return null;
       return state.context.map( x => x.hash || x.href ).join('/');
     }
   }

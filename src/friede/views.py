@@ -314,7 +314,7 @@ def api_path( request, path=None, format=None ):
                 title='TBD'
             )
             rx0 = r"{}/{}".format( rx0, node[ 'href' ])
-            rx1 = r"(?:{}/)?{}".format( rx, node[ 'href' ])
+            rx1 = r"(?:{}/)?{}".format( rx1, node[ 'href' ])
             loc0 = Location.objects.filter( href__regex=rx0+r'/?$' )
             if len( loc0 ):
                 node[ 'location' ] = LocationSerializer( loc0.first() ).data
@@ -326,7 +326,7 @@ def api_path( request, path=None, format=None ):
                     endpoint = True
         else:
             rx0 = r"{}/{}".format( rx0, n )
-            rx1 = r"(?:{}/)?{}".format( rx, node[ 'href' ])
+            rx1 = r"(?:{}/)?{}".format( rx1, n )
             loc0 = Location.objects.filter( href__regex=rx0+r'/?$' )
             if len( loc0 ):
                 node.update( **LocationSerializer( loc0.first() ).data )

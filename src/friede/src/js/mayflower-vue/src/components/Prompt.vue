@@ -46,12 +46,15 @@
       <div v-else-if="creating" class="object-create uk-flex uk-wrap-around">
         <span class="object">new {{ creating.label }}</span>
         <input name="ctrl" class="filter uk-input uk-flex-1" v-model="ctrl"
-               ref="ctrl" />
+               ref="ctrl" tabindex="0" />
       </div>
       <template v-else>
         <input name="cli" class="cli uk-input uk-flex-1" v-model="input"
-               ref="input" @input="processInput" @keydown="processKey( $event )"
-               @focus="completing = true" @blur="completing = false"/>
+               ref="input" tabindex="0"
+               @input="processInput"
+               @keydown="processKey( $event )"
+               @focus="completing = true"
+               @blur="completing = false"/>
         <vk-button-link v-if="canGo" class="btn btn-go">go</vk-button-link>
       </template>
     </div>
@@ -127,6 +130,7 @@ export default {
     submit() {
       if ( this.selected ) {
         if ( this.selected.href ) { // TODO: go to location
+          this.selected.hash = this.selected.href.replace( baseRx, '' );
           this.prospect.push( this.selected );
           this.selected = null;
           this.$nextTick(() => {
@@ -157,6 +161,9 @@ export default {
         this.pathMatches = r.data.matches;
         this.pathSlots = r.data.slots;
         this.pathLocations = r.data.locations;
+        if ( this.endpoint && this.prospect.length ) {
+          this.prospect[ this.prospect.length-1 ].location = this.endpoint;
+        }
       });
     },
     addFilter( tag ) {
@@ -328,6 +335,9 @@ export default {
   computed: {
     all() {
       return this.matches.concat( this.locations ).concat( this.slots );
+    },
+    baseRx() {
+      return new RegExp( this.base, 'i' );
     },
     matches() {
       if ( this.searching || this.creating )

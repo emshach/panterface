@@ -4,7 +4,7 @@
       v-for="( item, index ) in items"
       :key="index"
       :href="item.href"
-      :target="item.target">{{ item.title }}</vk-breadcrumb-item>
+      :target="item.target">{{ label( item )}}</vk-breadcrumb-item>
   </vk-breadcrumb>
 </template>
 
@@ -26,6 +26,11 @@ export default {
     return {}
   },
   methods: {
+    label( item ) {
+      if ( 'label' in item )
+        return item.label;
+      return item.title
+    }
   },
   computed: {
   }

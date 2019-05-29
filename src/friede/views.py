@@ -154,7 +154,11 @@ def api_ls( request, path='', format=None ):
         if m:
             g = m.group(1)
             if not g:
-                endpoint = True
+                endpoint = LocationSerializer(
+                    candidate, context=dict(
+                        request= request,
+                        detail=  True,
+                        expand=  [ '_widget_entries', '_screen_entries' ])).data
                 continue
             m2 = re.match( r'{([\w.]+)(\*)?(\+)?}', g )
             if m2:
@@ -281,6 +285,11 @@ def api_path( request, path=None, format=None ):
     rx0 = '^'
     rx1 = ''
     endpoint = False
+    lscontext = dict(
+        request= request,
+        detail=  True,
+        expand=  [ '_widget_entries', '_screen_entries' ]
+    )
     for n in nodes:
         endpoint = False
         node=dict( hash=n )
@@ -320,13 +329,13 @@ def api_path( request, path=None, format=None ):
             loc0 = Location.objects.filter( href__regex=rx0+r'/?$' )
             if len( loc0 ):
                 node[ 'location' ] = LocationSerializer(
-                    loc0.first(), context={ 'request': request }).data
+                    loc0.first(), context=lscontext ).data
                 endpoint = True
             else:
                 loc1 = Location.objects.filter( href__regex=rx1+r'/?$' )
                 if len ( loc1 ):
                     node[ 'location' ] = LocationSerializer(
-                        loc1.first(), context={ 'request': request } ).data
+                        loc1.first(), context=lscontext ).data
                     endpoint = True
         else:
             rx0 = r"{}/{}".format( rx0, n )
@@ -334,13 +343,13 @@ def api_path( request, path=None, format=None ):
             loc0 = Location.objects.filter( href__regex=rx0+r'/?$' )
             if len( loc0 ):
                 node.update( **LocationSerializer(
-                    loc0.first(), context={ 'request': request }).data )
+                    loc0.first(), context=lscontext ).data )
                 endpoint = True
             else:
                 loc1 = Location.objects.filter( href__regex=rx1+r'/?$' )
                 if len ( loc1 ):
                     node.update( **LocationSerializer(
-                        loc1.first(), context={ 'request': request }).data )
+                        loc1.first(), context=lscontext ).data )
                     endpoint = True
             if 'href' not in node:
                 node.update( href=n, title=n )

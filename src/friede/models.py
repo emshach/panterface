@@ -348,6 +348,7 @@ class App( Registry, DataMixin ):
     module        = M.CharField( max_length=128 )
     rest          = M.CharField( max_length=32, default=True )
     version       = M.CharField( max_length=32, default='0.0.0' )
+    available     = M.CharField( max_length=32, default='0.0.0' )
 
     def to_dict( self ):
         out = super( Link, self).to_dict()

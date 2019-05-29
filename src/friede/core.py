@@ -110,10 +110,9 @@ def setuptheme( shell=None ):
     return theme
 
 @transaction.atomic
-def installapp( name, module, title, description, icon='', rest=True,
-                active=True, version=None, router=None, data=None ):
+def installappheader( name, module, title, description, icon='', rest=True,
+                      router=None ):
     try:
-        from .models import App
         path = name
         if not path.startswith( 'apps.' ):
             path = 'apps.' + path
@@ -121,6 +120,34 @@ def installapp( name, module, title, description, icon='', rest=True,
             icon = 'fontawesome.tablet-alt'
         if isinstance( icon, basestring ):
             icon, new = Icon.objects.get_or_create( path=icon )
+
+        return App.objects.get_or_create( path=path, defaults=dict(
+            title=title,
+            module=module,
+            description=description,
+            icon=icon,
+            rest=rest,
+            active=False,
+            version='0.0.0',
+        ))
+
+    except Exception as e:
+        print >> sys.stderr, "got exception", type(e), e, 'in installapp'
+        traceback.print_exc()
+        return None, None
+
+@transaction.atomic
+def installapp( name, module, title, description, icon='', rest=True,
+                active=True, version=None, router=None, data=None ):
+    try:
+        path = name
+        if not path.startswith( 'apps.' ):
+            path = 'apps.' + path
+        if not icon:
+            icon = 'fontawesome.tablet-alt'
+        if isinstance( icon, basestring ):
+            icon, new = Icon.objects.get_or_create( path=icon )
+
         app, new = App.objects.get_or_create( path=path, defaults=dict(
             title=title,
             module=module,
@@ -131,8 +158,32 @@ def installapp( name, module, title, description, icon='', rest=True,
             version='0.0.0',
         ))
         if data:
-            updateapp( app, data, upto=version )
+            upgradeapp( app, data, upto=version )
         return app, new
+    except Exception as e:
+        print >> sys.stderr, "got exception", type(e), e, 'in installapp'
+        traceback.print_exc()
+        return None, None
+
+@transaction.atomic
+def updateapp( name, data=None ):
+    try:
+        path = name
+        if not path.startswith( 'apps.' ):
+            path = 'apps.' + path
+
+        if data:
+            available = version_parse( '0.0.0' )
+            for d in data:
+                v = version_parse( d[0] )
+                if v > available:
+                    available = v
+
+        app = App.objects.get( path=path )
+        app.available = available
+        app.save()
+        return app
+
     except Exception as e:
         print >> sys.stderr, "got exception", type(e), e, 'in installapp'
         traceback.print_exc()
@@ -165,15 +216,17 @@ def mklocations( app, objects, relations, actions=None ):
           tuple (
               ( '_' + o , dict(
                   title="new {}".format(rs[o][ 'plural' ]).title(),
-                  href="/new/{}".format(o) ),
-                ( 'widgets', ( 'card', dict( path="new.{}_{}".format( name, o )))))
+                  href="/new/{}".format(o),
+                  data=dict( model="{}.{}".format( name, o ))),
+                ( '#widgets', ( 'card', dict( path="new.{}_{}".format( name, o )))),
+                ( '#screens', ( 'default', dict( path='form.single' ))))
               for o in objects )),
         ( 'delete.' + name,
           tuple (
               ( '_' + o, dict(
                   title="delete {}".format( rs[o][ 'plural' ]).title(),
                   href="/delete/{{{}.{}*}}".format( name, o )),
-                ( 'widgets', ( 'card', dict( path="delete.{}_{}".format( name, o )))))
+                ( '#widgets', ( 'card', dict( path="delete.{}_{}".format( name, o )))))
               for o in objects )),
         tuple (
             ( "{}.{}".format( action, name ),
@@ -300,7 +353,7 @@ shortcuts = dict(
     settings=mksettings,
 )
 
-def updateapp( app, data, upto=None ):
+def upgradeapp( app, data, upto=None ):
     app_version = version_parse( app.version )
     max_version = None
     if upto:
@@ -352,6 +405,10 @@ def updateapp( app, data, upto=None ):
                             continue
                         if isinstance( top[0], basestring ):
                             tag = top[0]
+                            inst = False
+                            if tag[0] == '#':
+                                tag = tag[1:]
+                                inst = True
                             if tag == 'from relations' :
                                 try:
                                     bundle = shortcuts[ registry[0] ]( app, *( top[1:] ))
@@ -362,12 +419,12 @@ def updateapp( app, data, upto=None ):
                                 except KeyError as e:
                                     print >> sys.stderr, e
                                     pass
-                            elif tag in types:
+                            elif inst and tag in types:
                                 stack.append( popmodel )
                                 model.appendleft( types[ tag ])
                                 registry.appendleft( tag )
                                 if path[0]:
-                                    "then this may add to the elemnts of the current object"
+                                    "this may add to the elemnts of the current object"
                                     if not obj:
                                         obj, new = Container.objects.get_or_create(
                                             path=path[0] )

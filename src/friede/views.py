@@ -292,9 +292,11 @@ def api_path( request, path=None, format=None ):
             ids = [ int(x) for x in odata[2:] ] # TODO: validationerror
             app_obj = apps.get( app )
             if app_obj is None:
+                out.append(dict( error="no app object for '%s'" % app ))
                 continue        # TODO: validationerror
             vs = dict( app_obj.routes ).get( reg )
             if reg is None:
+                out.append(dict( error="no registry '%s' for '%s'" %( reg, app )))
                 continue        # TODO: ''
             qs = vs.queryset
             model = qs.model

@@ -51,7 +51,6 @@ class App( object ) :
     objects = ()
     relations = ()
     actions = ()
-    data = ()
     routes = ()
     model=None
 
@@ -90,7 +89,7 @@ class App( object ) :
             module=self.module,
             title=self.title,
             description=self.description,
-            data=self.data
+            data=self.getdata()
         )
 
     def postinstall( self ):
@@ -107,7 +106,7 @@ class App( object ) :
         pass
 
     def update( self ):
-        return updateapp( self.model, self.data )
+        return updateapp( self.model, self.getdata() )
 
     def postupdate( self ):
         pass
@@ -116,7 +115,7 @@ class App( object ) :
         pass
 
     def upgrade( self, to=None ):
-        return upgradeapp( self.model, self.data, to )
+        return upgradeapp( self.model, self.getdata(), to )
 
     def postupgrade( self ):
         pass
@@ -150,3 +149,6 @@ class App( object ) :
 
     def postremove( self ):
         pass
+
+    def getdata( self ):
+        return None

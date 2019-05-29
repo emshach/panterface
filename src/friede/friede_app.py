@@ -101,7 +101,37 @@ class App( app.App ):
             'in'     : registry_objects
         },
     )
-    data = (
+    routes=(
+        ( 'registries',       views.RegistryViewSet       ),
+        ( 'containers',       views.ContainerViewSet      ),
+        ( 'widgets',          views.WidgetViewSet         ),
+        ( 'blocks',           views.BlockViewSet          ),
+        ( 'screens',          views.ScreenViewSet         ),
+        ( 'shells',           views.ShellViewSet          ),
+        ( 'themes',           views.ThemeViewSet          ),
+        ( 'slots',            views.SlotViewSet           ),
+        ( 'apps',             views.AppViewSet            ),
+        ( 'icons',            views.IconViewSet           ),
+        ( 'locations',        views.LocationViewSet       ),
+        ( 'links',            views.LinkViewSet           ),
+        ( 'references',       views.ReferenceViewSet      ),
+        ( 'settings',         views.SettingViewSet        ),
+        ( 'containerentries', views.ContainerEntryViewSet ),
+        ( 'widgetentries',    views.WidgetEntryViewSet    ),
+        ( 'blockentries',     views.BlockEntryViewSet     ),
+        ( 'screenentries',    views.ScreenEntryViewSet    ),
+        ( 'shellentries',     views.ShellEntryViewSet     ),
+        ( 'themeentries',     views.ThemeEntryViewSet     ),
+        ( 'slotentries',      views.SlotEntryViewSet      ),
+        ( 'appentries',       views.AppEntryViewSet       ),
+        ( 'locationentries',  views.LocationEntryViewSet  ),
+        ( 'iconentries',      views.IconEntryViewSet      ),
+        ( 'linkentries',      views.LinkEntryViewSet      ),
+        ( 'referenceentries', views.ReferenceEntryViewSet ),
+        ( 'settingentries',   views.SettingEntryViewSet   ),
+    )
+    def getdata( self ):
+        return (
         ( '0.1.0',
           ( '#actions',
             ( 'list', dict(
@@ -251,7 +281,7 @@ class App( app.App ):
                 data=dict(
                     component='RemoveModelWidget'
                 ))),
-            ( 'from relations', objects, relations ),),
+            ( 'from relations', self.objects, self.relations ),),
           ( '#blocks',
             ( 'form',
               ( 'group', dict(
@@ -286,9 +316,9 @@ class App( app.App ):
             ( '.apps',   dict( title='Apps',       href='/apps'    )),
             ( 'about',   dict( title='About Us',   href='/about'   )),
             ( 'contact', dict( title='Contact Us', href='/contact' )),
-            ( 'from relations', objects, relations )),
+            ( 'from relations', self.objects, self.relations )),
           ( '#settings',
-            ( 'from relations', objects, relations ),
+            ( 'from relations', self.objects, self.relations ),
             ( 'sys', dict( title='System' ),
               ( 'ui', dict( title='User Interface' ),
                 ( 'shell', dict(
@@ -342,33 +372,4 @@ class App( app.App ):
                 templates='friede/mayflower' ),
               ( '#themes', ( 'current', dict( path='mayflower.acamar' ))))),
         ),
-    )
-    routes=(
-        ( 'registries',       views.RegistryViewSet       ),
-        ( 'containers',       views.ContainerViewSet      ),
-        ( 'widgets',          views.WidgetViewSet         ),
-        ( 'blocks',           views.BlockViewSet          ),
-        ( 'screens',          views.ScreenViewSet         ),
-        ( 'shells',           views.ShellViewSet          ),
-        ( 'themes',           views.ThemeViewSet          ),
-        ( 'slots',            views.SlotViewSet           ),
-        ( 'apps',             views.AppViewSet            ),
-        ( 'icons',            views.IconViewSet           ),
-        ( 'locations',        views.LocationViewSet       ),
-        ( 'links',            views.LinkViewSet           ),
-        ( 'references',       views.ReferenceViewSet      ),
-        ( 'settings',         views.SettingViewSet        ),
-        ( 'containerentries', views.ContainerEntryViewSet ),
-        ( 'widgetentries',    views.WidgetEntryViewSet    ),
-        ( 'blockentries',     views.BlockEntryViewSet     ),
-        ( 'screenentries',    views.ScreenEntryViewSet    ),
-        ( 'shellentries',     views.ShellEntryViewSet     ),
-        ( 'themeentries',     views.ThemeEntryViewSet     ),
-        ( 'slotentries',      views.SlotEntryViewSet      ),
-        ( 'appentries',       views.AppEntryViewSet       ),
-        ( 'locationentries',  views.LocationEntryViewSet  ),
-        ( 'iconentries',      views.IconEntryViewSet      ),
-        ( 'linkentries',      views.LinkEntryViewSet      ),
-        ( 'referenceentries', views.ReferenceEntryViewSet ),
-        ( 'settingentries',   views.SettingEntryViewSet   ),
     )

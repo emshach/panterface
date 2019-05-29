@@ -12,6 +12,7 @@ app_name = 'friede'
 urlpatterns = []
 try:
     friede = friede_app.App()
+    apps['friede'] = friede
     friede.install()
     friede.init( router=router,
                  register=registrar( router, routes, friede ),

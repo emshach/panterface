@@ -294,7 +294,7 @@ def api_path( request, path=None, format=None ):
             title='',
             href='/',
             location=LocationSerializer(
-                Location.object.filter( href__regex=r'^/?$').first(),
+                Location.objects.filter( href__regex=r'^/?$').first(),
                 context=lscontext ).data
         )]
     for n in nodes:

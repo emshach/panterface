@@ -52,12 +52,12 @@ var render = function() {
           _c(
             "ul",
             _vm._l(_vm.model.fields, function(field) {
-              return _c("li", { key: field.name }, [
-                _c("b", [_vm._v(_vm._s(field.type) + ":")]),
-                _vm._v(" " + _vm._s(field.name) + "\n      ")
-              ])
+              return _c("field", {
+                key: field.name,
+                attrs: { type: field.type, name: field.name }
+              })
             }),
-            0
+            1
           )
         ])
       : _vm._e()

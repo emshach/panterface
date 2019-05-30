@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="basicp-age">
+  <div class="basic-page">
     <component :is="component" />
   </div>
 </template>

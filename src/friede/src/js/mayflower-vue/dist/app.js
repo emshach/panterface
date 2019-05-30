@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "7ba323cc6a4fe8f1d0b6";
+/******/ 	var hotCurrentHash = "bf8d6a3fe825d1752dc8";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -2266,7 +2266,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "basicp-age" },
+    { staticClass: "basic-page" },
     [_c(_vm.component, { tag: "component" })],
     1
   )

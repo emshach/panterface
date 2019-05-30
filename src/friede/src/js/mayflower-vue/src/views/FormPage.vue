@@ -4,9 +4,8 @@
     <section v-if="model">
       <h2>Model fields</h2>
       <ul>
-        <li v-for="field in model.fields" :key="field.name">
-          <b>{{ field.type }}:</b> {{ field.name }}
-        </li>
+        <field v-for="field in model.fields" :key="field.name"
+               :type="field.type" :name="field.name" />
       </ul>
     </section>
   </section>

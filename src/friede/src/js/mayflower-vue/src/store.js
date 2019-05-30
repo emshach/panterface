@@ -75,6 +75,7 @@ export default new Vuex.Store({
     },
     screen: state => {
       return state.lastLocation
+         && state.lastLocation.screens
          && state.lastLocation.screens.default
          && state.lastLocation.screens.default.data.component
     },

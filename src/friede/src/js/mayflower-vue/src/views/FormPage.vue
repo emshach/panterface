@@ -1,19 +1,22 @@
 <template lang="html">
-  <section class="form-page">
-    <h1>{{ location.title }}</h1>
+  <vk-card class="form-page">
+    <vk-card-title>{{ location.title }}</vk-card-title>
     <form v-if="model" class="uk-form-stacked">
       <field v-for="field in data.fields" :key="field.meta.name"
              :type="field.meta.type" :name="field.meta.name" :data="field" />
     </form>
-  </section>
+  </vk-card>
 </template>
 
 <script lang="js">
+import { Card as VkCard, CardTitle as VkCardTitle } from 'vuikit/lib/card'
 import Field from '@/components/Field'
 import { Model } from '@/lib/objects'
 export default  {
   name: 'FormPage',
   components: {
+    VkCard,
+    VkCardTitle,
     Field
   },
   mounted() {

@@ -59,14 +59,18 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _components_Field__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/components/Field */ "./src/components/Field.vue");
-/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
+/* harmony import */ var vuikit_lib_card__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuikit/lib/card */ "./node_modules/vuikit/lib/card.js");
+/* harmony import */ var _components_Field__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/components/Field */ "./src/components/Field.vue");
+/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'FormPage',
   components: {
-    Field: _components_Field__WEBPACK_IMPORTED_MODULE_0__["default"]
+    VkCard: vuikit_lib_card__WEBPACK_IMPORTED_MODULE_0__["Card"],
+    VkCardTitle: vuikit_lib_card__WEBPACK_IMPORTED_MODULE_0__["CardTitle"],
+    Field: _components_Field__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   mounted: function mounted() {},
   data: function data() {
@@ -81,7 +85,7 @@ __webpack_require__.r(__webpack_exports__);
       return this.$store.state.model;
     },
     data: function data() {
-      return this.$store.state.modelData || Object(_lib_objects__WEBPACK_IMPORTED_MODULE_1__["Model"])(this.model);
+      return this.$store.state.modelData || Object(_lib_objects__WEBPACK_IMPORTED_MODULE_2__["Model"])(this.model);
     }
   }
 });
@@ -140,26 +144,31 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("section", { staticClass: "form-page" }, [
-    _c("h1", [_vm._v(_vm._s(_vm.location.title))]),
-    _vm.model
-      ? _c(
-          "form",
-          { staticClass: "uk-form-stacked" },
-          _vm._l(_vm.data.fields, function(field) {
-            return _c("field", {
-              key: field.meta.name,
-              attrs: {
-                type: field.meta.type,
-                name: field.meta.name,
-                data: field
-              }
-            })
-          }),
-          1
-        )
-      : _vm._e()
-  ])
+  return _c(
+    "vk-card",
+    { staticClass: "form-page" },
+    [
+      _c("vk-card-title", [_vm._v(_vm._s(_vm.location.title))]),
+      _vm.model
+        ? _c(
+            "form",
+            { staticClass: "uk-form-stacked" },
+            _vm._l(_vm.data.fields, function(field) {
+              return _c("field", {
+                key: field.meta.name,
+                attrs: {
+                  type: field.meta.type,
+                  name: field.meta.name,
+                  data: field
+                }
+              })
+            }),
+            1
+          )
+        : _vm._e()
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

@@ -25,6 +25,10 @@ const ModelFieldMixin = {
   methods: {
     editField() {
       this.editMode = true;
+    },
+    commitField() {
+      this.field.html = this.field.wip;
+      this.editMode = false;
     }
   },
   computed: {

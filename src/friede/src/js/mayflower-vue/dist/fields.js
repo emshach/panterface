@@ -6128,6 +6128,10 @@ var ModelFieldMixin = {
   methods: {
     editField: function editField() {
       this.editMode = true;
+    },
+    commitField: function commitField() {
+      this.field.html = this.field.wip;
+      this.editMode = false;
     }
   },
   computed: {

@@ -15,18 +15,14 @@ export default  {
   mixins: [ ModelFieldMixin ],
   props: {},
   mounted() {
-    
   },
   data() {
     return {
-      
     }
   },
   methods: {
-    
   },
   computed: {
-    
   }
 }
 </script>

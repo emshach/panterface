@@ -43,6 +43,7 @@ export default  {
 
 <style scoped lang="scss">
   .form-page {
-
+    margrin: 40px 20px;
+    border-radius: 2px;
   }
 </style>

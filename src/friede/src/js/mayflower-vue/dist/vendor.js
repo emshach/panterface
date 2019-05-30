@@ -22348,6 +22348,17 @@ try {
 
 /***/ }),
 
+/***/ "./node_modules/uikit/dist/css/uikit.min.css":
+/*!***************************************************!*\
+  !*** ./node_modules/uikit/dist/css/uikit.min.css ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
 /***/ "./node_modules/uikit/dist/js/uikit-icons.js":
 /*!***************************************************!*\
   !*** ./node_modules/uikit/dist/js/uikit-icons.js ***!

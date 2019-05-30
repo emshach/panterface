@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "b2c6dae623372cc9100c";
+/******/ 	var hotCurrentHash = "c358809cbab2c377f850";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -3254,12 +3254,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./store */ "./src/store.js");
 /* harmony import */ var uikit__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! uikit */ "./node_modules/uikit/dist/js/uikit.js");
 /* harmony import */ var uikit__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(uikit__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var _assets_styles_styles_scss__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @/assets/styles/styles.scss */ "./src/assets/styles/styles.scss");
-/* harmony import */ var _assets_styles_styles_scss__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_assets_styles_styles_scss__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var uikit_dist_js_uikit_icons__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! uikit/dist/js/uikit-icons */ "./node_modules/uikit/dist/js/uikit-icons.js");
-/* harmony import */ var uikit_dist_js_uikit_icons__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(uikit_dist_js_uikit_icons__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var uikit_dist_css_uikit_min_css__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! uikit/dist/css/uikit.min.css */ "./node_modules/uikit/dist/css/uikit.min.css");
+/* harmony import */ var uikit_dist_css_uikit_min_css__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(uikit_dist_css_uikit_min_css__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var _assets_styles_styles_scss__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @/assets/styles/styles.scss */ "./src/assets/styles/styles.scss");
+/* harmony import */ var _assets_styles_styles_scss__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_assets_styles_styles_scss__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var uikit_dist_js_uikit_icons__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! uikit/dist/js/uikit-icons */ "./node_modules/uikit/dist/js/uikit-icons.js");
+/* harmony import */ var uikit_dist_js_uikit_icons__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(uikit_dist_js_uikit_icons__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_14__);
 
 
 
@@ -3274,12 +3276,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-uikit__WEBPACK_IMPORTED_MODULE_10___default.a.use(uikit_dist_js_uikit_icons__WEBPACK_IMPORTED_MODULE_12___default.a);
+
+uikit__WEBPACK_IMPORTED_MODULE_10___default.a.use(uikit_dist_js_uikit_icons__WEBPACK_IMPORTED_MODULE_13___default.a);
 window.UIkit = uikit__WEBPACK_IMPORTED_MODULE_10___default.a;
 vue__WEBPACK_IMPORTED_MODULE_5__["default"].config.productionTip = false;
 
 vue__WEBPACK_IMPORTED_MODULE_5__["default"].prototype.$api = function () {
-  return axios__WEBPACK_IMPORTED_MODULE_13___default.a.get('/api/' + Array.prototype.join.call(arguments, '/'));
+  return axios__WEBPACK_IMPORTED_MODULE_14___default.a.get('/api/' + Array.prototype.join.call(arguments, '/'));
 };
 
 function Mayflower(args) {

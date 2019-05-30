@@ -148,7 +148,9 @@ var render = function() {
     "vk-card",
     { staticClass: "form-page" },
     [
-      _c("vk-card-title", [_vm._v(_vm._s(_vm.location.title))]),
+      _c("vk-card-title", { attrs: { slot: "header" }, slot: "header" }, [
+        _vm._v(_vm._s(_vm.location.title))
+      ]),
       _vm.model
         ? _c(
             "form",

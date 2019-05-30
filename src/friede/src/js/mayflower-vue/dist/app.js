@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "455d9a4e368ffe88f369";
+/******/ 	var hotCurrentHash = "fb95b5019ddcb21696c2";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1785,12 +1785,7 @@ var render = function() {
         }),
         1
       ),
-      _c(
-        "transition",
-        { attrs: { name: "fade-fast", mode: "out-in" } },
-        [_vm.searching ? _c("search-results-page") : _c("router-view")],
-        1
-      ),
+      _c("router-view"),
       _c("prompt", {
         attrs: { breadcrumb: _vm.context },
         on: { update: _vm.promptInput }

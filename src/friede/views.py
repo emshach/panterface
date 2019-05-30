@@ -288,7 +288,7 @@ def api_models( request, models=None, format=None ):
                             status=status.HTTP_404_NOT_FOUND )
         for f in meta.get_fields():
             if f.name not in sr.Meta.fields and (
-                    not sr.Meta.expandable_fields
+                    not hasattr( sr.Meta, 'expandable_fields' )
                     or f.name not in sr.Meta.expandable_fields ):
                 continue
             ftype0 = f.__class__.__name__

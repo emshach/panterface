@@ -1,24 +1,21 @@
 <template lang="html">
   <section class="form-page">
     <h1>{{ location.title }}</h1>
-    <section v-if="model">
-      <h2>Model fields</h2>
-      <ul>
-        <field v-for="field in model.fields" :key="field.name"
-               :type="field.type" :name="field.name" :data="field" />
-      </ul>
-    </section>
+    <form v-if="model" class="uk-form-stacked">
+      <field v-for="field in modelData.fields" :key="field.name"
+             :type="field.type" :name="field.name" :data="field" />
+    </form>
   </section>
 </template>
 
 <script lang="js">
 import Field from '@/components/Field'
+import { Model } from '@/lib/objects'
 export default  {
   name: 'FormPage',
   components: {
     Field
   },
-  props: [],
   mounted() {
   },
   data() {
@@ -33,6 +30,9 @@ export default  {
     },
     model() {
       return this.$store.state.model
+    },
+    data() {
+      return this.$store.state.modelData || Model( this.model )
     }
   }
 }

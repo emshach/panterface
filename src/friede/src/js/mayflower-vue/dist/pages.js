@@ -60,13 +60,14 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Field__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/components/Field */ "./src/components/Field.vue");
+/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'FormPage',
   components: {
     Field: _components_Field__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  props: [],
   mounted: function mounted() {},
   data: function data() {
     return {};
@@ -78,6 +79,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     model: function model() {
       return this.$store.state.model;
+    },
+    data: function data() {
+      return this.$store.state.modelData || Object(_lib_objects__WEBPACK_IMPORTED_MODULE_1__["Model"])(this.model);
     }
   }
 });
@@ -99,10 +103,20 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(_vm.type, {
-    tag: "component",
-    attrs: { name: _vm.type, field: _vm.field }
-  })
+  return _c("div", [
+    _c("label", { staticClass: "uk-form-label" }, [_vm._v(_vm._s(_vm.name))]),
+    _c(
+      "div",
+      { staticClass: "uk-form-controls" },
+      [
+        _c(_vm.type, {
+          tag: "component",
+          attrs: { name: _vm.name, field: _vm.field }
+        })
+      ],
+      1
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -129,19 +143,17 @@ var render = function() {
   return _c("section", { staticClass: "form-page" }, [
     _c("h1", [_vm._v(_vm._s(_vm.location.title))]),
     _vm.model
-      ? _c("section", [
-          _c("h2", [_vm._v("Model fields")]),
-          _c(
-            "ul",
-            _vm._l(_vm.model.fields, function(field) {
-              return _c("field", {
-                key: field.name,
-                attrs: { type: field.type, name: field.name, data: field }
-              })
-            }),
-            1
-          )
-        ])
+      ? _c(
+          "form",
+          { staticClass: "uk-form-stacked" },
+          _vm._l(_vm.modelData.fields, function(field) {
+            return _c("field", {
+              key: field.name,
+              attrs: { type: field.type, name: field.name, data: field }
+            })
+          }),
+          1
+        )
       : _vm._e()
   ])
 }

@@ -64,23 +64,6 @@ inherit ( Widget, Object, {
   }
 })
 
-function Model( obj, cls ) {
-  if ( !cls )
-    cls = Model;
-  if ( obj instanceof cls ) {
-    return obj;
-  }
-  if ( this instanceof cls ) {
-    this.init( obj );
-    return this;
-  }
-  return new cls( obj || {} );
-}
-inherit( Model, Object, {
-  init( obj ) {
-  }
-})
-
 function Field( obj, cls ) {
   if ( !cls )
     cls = Field;
@@ -98,6 +81,24 @@ inherit( Field, Object, {
     this.html='';
     this.wip='';
     this.value={};
+  }
+})
+
+function Model( obj, cls ) {
+  if ( !cls )
+    cls = Model;
+  if ( obj instanceof cls ) {
+    return obj;
+  }
+  if ( this instanceof cls ) {
+    this.init( obj );
+    return this;
+  }
+  return new cls( obj || {} );
+}
+inherit( Model, Object, {
+  init( obj ) {
+    this.fields = obj.fields.map( x => Field(x) );
   }
 })
 

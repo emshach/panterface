@@ -20,6 +20,7 @@ export default new Vuex.Store({
     screen: null,
     models: {},
     model: null,
+    modelData: null,
   },
   mutations: {
     setUser( state, user ) {

@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "f4377e8a791010b83447";
+/******/ 	var hotCurrentHash = "4a42614256aec5557d65";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -3177,25 +3177,6 @@ inherit(Widget, Object, {
   }
 });
 
-function Model(obj, cls) {
-  if (!cls) cls = Model;
-
-  if (obj instanceof cls) {
-    return obj;
-  }
-
-  if (this instanceof cls) {
-    this.init(obj);
-    return this;
-  }
-
-  return new cls(obj || {});
-}
-
-inherit(Model, Object, {
-  init: function init(obj) {}
-});
-
 function Field(obj, cls) {
   if (!cls) cls = Field;
 
@@ -3216,6 +3197,29 @@ inherit(Field, Object, {
     this.html = '';
     this.wip = '';
     this.value = {};
+  }
+});
+
+function Model(obj, cls) {
+  if (!cls) cls = Model;
+
+  if (obj instanceof cls) {
+    return obj;
+  }
+
+  if (this instanceof cls) {
+    this.init(obj);
+    return this;
+  }
+
+  return new cls(obj || {});
+}
+
+inherit(Model, Object, {
+  init: function init(obj) {
+    this.fields = obj.fields.map(function (x) {
+      return Field(x);
+    });
   }
 });
 
@@ -3501,7 +3505,8 @@ function _getModel() {
     lastLocation: null,
     screen: null,
     models: {},
-    model: null
+    model: null,
+    modelData: null
   },
   mutations: {
     setUser: function setUser(state, user) {

@@ -1,5 +1,10 @@
 <template lang="html">
-  <component :is="type" :name="type" :field="field" />
+  <div>
+    <label class="uk-form-label">{{ name }}</label>
+    <div class="uk-form-controls">
+      <component :is="type" :name="name" :field="field" />
+    </div>
+  </div>
 </template>
 
 <script lang="js">

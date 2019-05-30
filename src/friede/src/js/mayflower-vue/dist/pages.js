@@ -146,7 +146,7 @@ var render = function() {
       ? _c(
           "form",
           { staticClass: "uk-form-stacked" },
-          _vm._l(_vm.model.fields, function(field) {
+          _vm._l(_vm.data.fields, function(field) {
             return _c("field", {
               key: field.name,
               attrs: { type: field.type, name: field.name, data: field }

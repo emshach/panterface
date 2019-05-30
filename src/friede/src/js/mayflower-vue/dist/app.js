@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "e7fc1a9eb890184084b9";
+/******/ 	var hotCurrentHash = "9cb35ae0815cc7e21e01";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -3217,6 +3217,7 @@ function Model(obj, cls) {
 
 inherit(Model, Object, {
   init: function init(obj) {
+    this.meta = obj;
     this.fields = obj.fields.map(function (x) {
       return Field(x);
     });

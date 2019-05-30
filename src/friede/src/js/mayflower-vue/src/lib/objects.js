@@ -98,6 +98,7 @@ function Model( obj, cls ) {
 }
 inherit( Model, Object, {
   init( obj ) {
+    this.meta = obj;
     this.fields = obj.fields.map( x => Field(x) );
   }
 })

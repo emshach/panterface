@@ -7,6 +7,25 @@ const ModelFieldMixin = {
     field: {
       type: Field,
       required: true
+    },
+    readonly: {
+      type: Boolean,
+      default: false
+    }
+  },
+  data() {
+    return {
+      editMode: false
+    }
+  },
+  methods: {
+    editField() {
+      this.editMode = true;
+    }
+  },
+  computed: {
+    fieldClasses() {
+      return []
     }
   }
 }

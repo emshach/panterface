@@ -1869,6 +1869,25 @@ var ModelFieldMixin = {
     field: {
       type: _lib_objects__WEBPACK_IMPORTED_MODULE_0__["Field"],
       required: true
+    },
+    readonly: {
+      type: Boolean,
+      default: false
+    }
+  },
+  data: function data() {
+    return {
+      editMode: false
+    };
+  },
+  methods: {
+    editField: function editField() {
+      this.editMode = true;
+    }
+  },
+  computed: {
+    fieldClasses: function fieldClasses() {
+      return [];
     }
   }
 };

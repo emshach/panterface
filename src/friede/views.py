@@ -255,6 +255,8 @@ def _get_model( name ):
 def api_models( request, models=None, format=None ):
     if not models:
         return Response({})
+    while models.endswith('/'):
+        models = models[:-1]
     models = models.split(',')[ ::-1 ]
     out = {}
     have = set( request.query_params.getlist( 'have' ))

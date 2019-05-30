@@ -282,7 +282,7 @@ def api_models( request, models=None, format=None ):
         if app_obj is None:
             return Response({ 'error': "found no app '%s'" % meta.app_label },
                             status=status.HTTP_404_NOT_FOUND )
-        sr = dict( app_obj.serializers ).get( reg )
+        sr = dict( app_obj.serializers ).get( meta.model_name )
         if sr is None:
             return Response({ 'error': "found no seralizer for '%s'" % name },
                             status=status.HTTP_404_NOT_FOUND )

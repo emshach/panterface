@@ -1,9 +1,9 @@
 
-.form-page[data-v-165efba6] {
+.form-page {
   margin: 40px 20px;
   border-radius: 2px;
 }
-.form-page .uk-input[data-v-165efba6], .form-page .uk-select[data-v-165efba6], .form-page .uk-textarea[data-v-165efba6] {
+.form-page .uk-input, .form-page .uk-select, .form-page .uk-textarea {
     border: 1px solid #e5e5e5;
 }
 

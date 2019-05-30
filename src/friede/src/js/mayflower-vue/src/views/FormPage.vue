@@ -42,7 +42,7 @@ export default  {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
   .form-page {
     margin: 40px 20px;
     border-radius: 2px;

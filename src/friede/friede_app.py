@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from . import views, app
+from . import views, serializers, app
 from .models import Setting
 
 class App( app.App ):
@@ -129,6 +129,35 @@ class App( app.App ):
         ( 'linkentries',      views.LinkEntryViewSet      ),
         ( 'referenceentries', views.ReferenceEntryViewSet ),
         ( 'settingentries',   views.SettingEntryViewSet   ),
+    )
+    serializers=(
+        ( 'registry',       serializers.RegistrySerializer       ),
+        ( 'container',      serializers.ContainerSerializer      ),
+        ( 'widget',         serializers.WidgetSerializer         ),
+        ( 'block',          serializers.BlockSerializer          ),
+        ( 'screen',         serializers.ScreenSerializer         ),
+        ( 'shell',          serializers.ShellSerializer          ),
+        ( 'theme',          serializers.ThemeSerializer          ),
+        ( 'slot',           serializers.SlotSerializer           ),
+        ( 'app',            serializers.AppSerializer            ),
+        ( 'icon',           serializers.IconSerializer           ),
+        ( 'location',       serializers.LocationSerializer       ),
+        ( 'link',           serializers.LinkSerializer           ),
+        ( 'reference',      serializers.ReferenceSerializer      ),
+        ( 'setting',        serializers.SettingSerializer        ),
+        ( 'containerentry', serializers.ContainerEntrySerializer ),
+        ( 'widgetentry',    serializers.WidgetEntrySerializer    ),
+        ( 'blockentry',     serializers.BlockEntrySerializer     ),
+        ( 'screenentry',    serializers.ScreenEntrySerializer    ),
+        ( 'shellentry',     serializers.ShellEntrySerializer     ),
+        ( 'themeentry',     serializers.ThemeEntrySerializer     ),
+        ( 'slotentry',      serializers.SlotEntrySerializer      ),
+        ( 'appentry',       serializers.AppEntrySerializer       ),
+        ( 'locationentry',  serializers.LocationEntrySerializer  ),
+        ( 'iconentry',      serializers.IconEntrySerializer      ),
+        ( 'linkentry',      serializers.LinkEntrySerializer      ),
+        ( 'referenceentry', serializers.ReferenceEntrySerializer ),
+        ( 'settingentry',   serializers.SettingEntrySerializer   ),
     )
     def getdata( self ):
         return (

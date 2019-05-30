@@ -52,6 +52,7 @@ class App( object ) :
     relations = ()
     actions = ()
     routes = ()
+    serializers = ()
     model=None
 
     def __init__( self ):

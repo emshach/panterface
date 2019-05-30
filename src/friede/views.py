@@ -265,8 +265,7 @@ def api_models( request, models=None, format=None ):
         if not name or name in out or name in have: continue
         model = _get_model( name )
         if not model:
-            return Response({
-                'error': "found no model '%s'" % name },
+            return Response({ 'error': "found no model '%s'" % name },
                             status=status.HTTP_404_NOT_FOUND )
 
         meta = model._meta
@@ -278,7 +277,19 @@ def api_models( request, models=None, format=None ):
             fields=[],
         )
         out[ name ] = data
+        app_obj = apps.get( meta.app_label )
+        if app_obj is None:
+            return Response({ 'error': "found no app '%s'" % meta.app_label },
+                            status=status.HTTP_404_NOT_FOUND )
+        sr = dict( app_obj.serializers ).get( reg )
+        if sr is None:
+            return Response({ 'error': "found no seralizer for '%s'" % name },
+                            status=status.HTTP_404_NOT_FOUND )
         for f in meta.get_fields():
+            if f.name not in sr.Meta.fields and (
+                    not sr.Meta.expandable_fields
+                    or f.name not in sr.Meta.expandable_fields ):
+                continue
             ftype0 = f.__class__.__name__
             ftype = ftype0
             if ftype in form_field_mappings:
@@ -331,7 +342,7 @@ def api_path( request, path=None, format=None ):
                 out.append(dict( error="no app object for '%s'" % app ))
                 continue        # TODO: validationerror
             vs = dict( app_obj.routes ).get( reg )
-            if reg is None:
+            if vs is None:
                 out.append(dict( error="no registry '%s' for '%s'" %( reg, app )))
                 continue        # TODO: ''
             qs = vs.queryset

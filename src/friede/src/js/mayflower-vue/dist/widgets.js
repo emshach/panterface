@@ -1873,6 +1873,10 @@ var ModelFieldMixin = {
     readonly: {
       type: Boolean,
       default: false
+    },
+    placeholder: {
+      type: String,
+      default: 'enter data'
     }
   },
   data: function data() {

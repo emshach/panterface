@@ -677,13 +677,11 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
-/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
-
+/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'SlugField',
-  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_1__["ModelFieldMixin"]],
+  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_0__["ModelFieldMixin"]],
   props: {},
   mounted: function mounted() {},
   data: function data() {
@@ -2135,11 +2133,20 @@ var render = function() {
           }
         }
       })
-    : _c("div", {
+    : _vm.field.html
+    ? _c("div", {
         class: _vm.fieldClasses,
         domProps: { innerHTML: _vm._s(_vm.field.html) },
         on: { click: _vm.editField, focus: _vm.editField }
       })
+    : _c(
+        "div",
+        {
+          class: [_vm.fieldClasses, "no-data"],
+          on: { click: _vm.editField, focus: _vm.editField }
+        },
+        [_vm._v(_vm._s(_vm.placeholder))]
+      )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -6107,6 +6114,10 @@ var ModelFieldMixin = {
     readonly: {
       type: Boolean,
       default: false
+    },
+    placeholder: {
+      type: String,
+      default: 'enter data'
     }
   },
   data: function data() {

@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "e8b26e65e75c3aafae20";
+/******/ 	var hotCurrentHash = "6dec2567f84e922d5028";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -996,7 +996,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     promptInput: function promptInput(route, context) {
-      this.$store.commit('setContext', context);
+      this.$store.dispatch('setContext', context);
       this.$router.push(route || '/');
     }
   },
@@ -3533,10 +3533,17 @@ function _getModel() {
     }
   },
   actions: {
-    setPath: function setPath(_ref, path) {
+    setContext: function setContext(_ref, context) {
       var commit = _ref.commit,
           state = _ref.state,
           dispatch = _ref.dispatch;
+      commit('setContext', context);
+      dispatch('getModel');
+    },
+    setPath: function setPath(_ref2, path) {
+      var commit = _ref2.commit,
+          state = _ref2.state,
+          dispatch = _ref2.dispatch;
       vue__WEBPACK_IMPORTED_MODULE_4__["default"].prototype.$api('path', path).then(function (r) {
         commit('setContext', r.data.route);
         dispatch('getModel');
@@ -3546,13 +3553,13 @@ function _getModel() {
     getModel: function () {
       var _getModel3 = Object(_home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_3__["default"])(
       /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee(_ref2, model) {
+      regeneratorRuntime.mark(function _callee(_ref3, model) {
         var commit, state, have, models;
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                commit = _ref2.commit, state = _ref2.state;
+                commit = _ref3.commit, state = _ref3.state;
 
                 if (model) {
                   _context.next = 5;

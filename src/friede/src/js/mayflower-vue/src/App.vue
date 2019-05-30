@@ -28,7 +28,7 @@ export default {
   },
   methods: {
     promptInput( route, context ) {
-      this.$store.commit( 'setContext', context );
+      this.$store.dispatch( 'setContext', context );
       this.$router.push( route || '/' );
     }
   },

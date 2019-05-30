@@ -41,6 +41,10 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    setContext({ commit, state, dispatch }, context ) {
+      commit( 'setContext', context );
+      dispatch( 'getModel' );
+    },
     setPath({ commit, state, dispatch }, path ) {
       Vue.prototype.$api( 'path', path ).then( r => {
         commit( 'setContext', r.data.route );

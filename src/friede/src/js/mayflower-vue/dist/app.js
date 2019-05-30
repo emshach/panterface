@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "d6d4a2d3aabe6ddfa451";
+/******/ 	var hotCurrentHash = "fc2026a57195aa7762ba";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -3382,7 +3382,7 @@ vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_1_
     user: null,
     context: [],
     location: null,
-    lastlocation: null,
+    lastLocation: null,
     screen: null
   },
   mutations: {
@@ -3394,7 +3394,7 @@ vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_1_
       state.location = context.length && context[context.length - 1].location;
 
       if (state.location) {
-        state.lastlocation = state.location;
+        state.lastLocation = state.location;
       }
     }
   },

@@ -8,7 +8,7 @@ export default new Vuex.Store({
     user: null,
     context: [],
     location: null,
-    lastlocation: null,
+    lastLocation: null,
     screen: null,
   },
   mutations: {
@@ -19,7 +19,7 @@ export default new Vuex.Store({
       state.context = context;
       state.location = context.length && context[ context.length-1 ].location;
       if ( state.location ){
-        state.lastlocation = state.location;
+        state.lastLocation = state.location;
       }
     },
   },

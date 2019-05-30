@@ -2,7 +2,7 @@
   <section class="form-page">
     <h1>{{ location.title }}</h1>
     <form v-if="model" class="uk-form-stacked">
-      <field v-for="field in modelData.fields" :key="field.name"
+      <field v-for="field in model.fields" :key="field.name"
              :type="field.type" :name="field.name" :data="field" />
     </form>
   </section>

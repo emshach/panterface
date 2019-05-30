@@ -42,7 +42,7 @@ export default new Vuex.Store({
       return state.lastLocation && state.lastLocation.screens
          && state.lastLocation.screens.default
          && state.lastLocation.screens.default.data
-         && state.lastLocation.screens.default.data.model
+         && state.lastLocation.screens.default.data.component
     }
   }
 })

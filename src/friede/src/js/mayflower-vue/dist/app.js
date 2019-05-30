@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "f43ff4b5f7bebf5cc474";
+/******/ 	var hotCurrentHash = "f93554e9e7a0dedc205e";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1727,7 +1727,7 @@ var FormPage = function FormPage() {
   methods: {},
   computed: {
     component: function component() {
-      return this.$store.state.getters.screen || 'Home';
+      return this.$store.getters.screen || 'Home';
     }
   }
 });

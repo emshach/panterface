@@ -23,7 +23,7 @@ export default  {
   },
   computed: {
     component() {
-      return this.$store.state.getters.screen || 'Home'
+      return this.$store.getters.screen || 'Home'
     }
   }
 }

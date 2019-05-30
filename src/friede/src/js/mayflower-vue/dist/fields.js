@@ -1017,7 +1017,8 @@ var render = function() {
             expression: "field.wip"
           }
         ],
-        class: _vm.fieldClasses,
+        ref: "input",
+        class: ["uk-input", _vm.fieldClasses],
         attrs: { type: "text" },
         domProps: { value: _vm.field.wip },
         on: {
@@ -1030,11 +1031,20 @@ var render = function() {
           }
         }
       })
-    : _c("div", {
+    : _vm.field.html
+    ? _c("div", {
         class: _vm.fieldClasses,
         domProps: { innerHTML: _vm._s(_vm.field.html) },
         on: { click: _vm.editField, focus: _vm.editField }
       })
+    : _c(
+        "div",
+        {
+          class: [_vm.fieldClasses, "no-data"],
+          on: { click: _vm.editField, focus: _vm.editField }
+        },
+        [_vm._v(_vm._s(_vm.placeholder))]
+      )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -2223,7 +2233,8 @@ var render = function() {
       })
     : _vm.editMode
     ? _c("textaarea", {
-        class: _vm.fieldClasses,
+        ref: "input",
+        class: ["uk-textarea", _vm.fieldClasses],
         on: { blur: _vm.commitField },
         model: {
           value: _vm.field.wip,
@@ -2233,11 +2244,20 @@ var render = function() {
           expression: "field.wip"
         }
       })
-    : _c("div", {
+    : _vm.field.html
+    ? _c("div", {
         class: _vm.fieldClasses,
         domProps: { innerHTML: _vm._s(_vm.field.html) },
         on: { click: _vm.editField, focus: _vm.editField }
       })
+    : _c(
+        "div",
+        {
+          class: [_vm.fieldClasses, "no-data"],
+          on: { click: _vm.editField, focus: _vm.editField }
+        },
+        [_vm._v(_vm._s(_vm.placeholder))]
+      )
 }
 var staticRenderFns = []
 render._withStripped = true

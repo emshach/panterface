@@ -1,9 +1,11 @@
 <template lang="html">
   <div v-if="readonly" v-html="field.html" :class="fieldClasses" />
   <textaarea v-else-if="editMode" v-model="field.wip"
-             :class="fieldClasses" @blur="commitField" />
-  <div v-else v-html="field.html" @click="editField" @focus="editField"
-       :class="fieldClasses" /> 
+         :class="[ 'uk-textarea', fieldClasses ]" @blur="commitField" ref="input" />
+  <div v-else-if="field.html" v-html="field.html" @click="editField" @focus="editField"
+       :class="fieldClasses" />
+  <div v-else @click="editField" @focus="editField"
+       :class="[ fieldClasses, 'no-data' ]">{{ placeholder }}</div>
 </template>
 
 <script lang="js">

@@ -136,7 +136,7 @@ def _process_location( location ):
             k0 = k[ 1:-8 ] + 's'
             o = out[k0] = {}
             for x in v:
-                o[ x[ 'name' ]]=v[ 'entry' ]
+                o[ x[ 'name' ]]=x[ 'entry' ]
         else:
             out[k] = v
     return out

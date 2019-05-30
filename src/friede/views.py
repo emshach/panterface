@@ -272,6 +272,9 @@ def api_models( request, models=None, format=None ):
         meta = model._meta
         data = dict(
             name=meta.model_name,
+            fullname=name,
+            singular=meta.verbose_name,
+            plural=meta.verbose_name_plural,
             fields=[],
         )
         out[ name ] = data

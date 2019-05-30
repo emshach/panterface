@@ -17,7 +17,14 @@ __webpack_require__.r(__webpack_exports__);
     return {};
   },
   methods: {},
-  computed: {}
+  computed: {
+    location: function location() {
+      return this.$store.state.location;
+    },
+    model: function model() {
+      return this.$store.state.model;
+    }
+  }
 });
 
 /***/ }),
@@ -37,18 +44,26 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("section", { staticClass: "form-page" }, [
+    _c("h1", [_vm._v(_vm._s(_vm.location.title))]),
+    _vm.model
+      ? _c("section", [
+          _c("h2", [_vm._v("Model fields")]),
+          _c(
+            "ul",
+            _vm._l(_vm.model.fields, function(field) {
+              return _c("li", { key: field.name }, [
+                _c("b", [_vm._v(_vm._s(field.type) + ":")]),
+                _vm._v(" " + _vm._s(field.name) + "\n      ")
+              ])
+            }),
+            0
+          )
+        ])
+      : _vm._e()
+  ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("section", { staticClass: "form-page" }, [
-      _c("h1", [_vm._v("form-page Component")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "de6c56ccb11820927ef0";
+/******/ 	var hotCurrentHash = "7ba323cc6a4fe8f1d0b6";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -3444,18 +3444,60 @@ function () {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.runtime.esm.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime-corejs2/core-js/object/keys */ "./node_modules/@babel/runtime-corejs2/core-js/object/keys.js");
+/* harmony import */ var _home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! regenerator-runtime/runtime */ "./node_modules/regenerator-runtime/runtime.js");
+/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/@babel/runtime-corejs2/core-js/object/assign */ "./node_modules/@babel/runtime-corejs2/core-js/object/assign.js");
+/* harmony import */ var _home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/@babel/runtime-corejs2/helpers/esm/asyncToGenerator */ "./node_modules/@babel/runtime-corejs2/helpers/esm/asyncToGenerator.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.runtime.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 
 
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
-/* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
+
+
+
+
+vue__WEBPACK_IMPORTED_MODULE_4__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_5__["default"]);
+
+function _getModel2(_x, _x2) {
+  return _getModel.apply(this, arguments);
+}
+
+function _getModel() {
+  _getModel = Object(_home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  /*#__PURE__*/
+  regeneratorRuntime.mark(function _callee2(model, have) {
+    return regeneratorRuntime.wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            return _context2.abrupt("return", vue__WEBPACK_IMPORTED_MODULE_4__["default"].prototype.$api('models', model, have ? '?' + have.map(function (x) {
+              return 'have=' + x;
+            }).join('&') : '').then(function (r) {
+              return r.data.models;
+            }));
+
+          case 1:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2);
+  }));
+  return _getModel.apply(this, arguments);
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_5__["default"].Store({
   state: {
     user: null,
     context: [],
     location: null,
     lastLocation: null,
-    screen: null
+    screen: null,
+    models: {},
+    model: null
   },
   mutations: {
     setUser: function setUser(state, user) {
@@ -3468,17 +3510,84 @@ vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_1_
       if (state.location) {
         state.lastLocation = state.location;
       }
+    },
+    addModels: function addModels(state, models) {
+      state.models = _home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_2___default()({}, state.models, models);
+    },
+    setModel: function setModel(state, model) {
+      state.model = model;
     }
   },
   actions: {
     setPath: function setPath(_ref, path) {
       var commit = _ref.commit,
-          state = _ref.state;
-      vue__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.$api('path', path).then(function (r) {
+          state = _ref.state,
+          dispatch = _ref.dispatch;
+      vue__WEBPACK_IMPORTED_MODULE_4__["default"].prototype.$api('path', path).then(function (r) {
         commit('setContext', r.data.route);
+        dispatch('getModel');
       }).catch(function (x) {// TODO: handle
       });
-    }
+    },
+    getModel: function () {
+      var _getModel3 = Object(_home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_3__["default"])(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee(_ref2, model) {
+        var commit, state, have, models;
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                commit = _ref2.commit, state = _ref2.state;
+
+                if (model) {
+                  _context.next = 5;
+                  break;
+                }
+
+                model = state.lastLocation && state.lastLocation.data.model;
+
+                if (model) {
+                  _context.next = 5;
+                  break;
+                }
+
+                return _context.abrupt("return", null);
+
+              case 5:
+                if (!(model in state.models)) {
+                  _context.next = 8;
+                  break;
+                }
+
+                if (!state.model || state.model.fullname !== model) commit('setModel', state.models[model]);
+                return _context.abrupt("return", state.models[model]);
+
+              case 8:
+                have = _home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_0___default()(state.models);
+                _context.next = 11;
+                return _getModel2(model, have);
+
+              case 11:
+                models = _context.sent;
+                commit('addModels', models);
+                commit('setModel', models[model]);
+                return _context.abrupt("return", models[model]);
+
+              case 15:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }));
+
+      function getModel(_x3, _x4) {
+        return _getModel3.apply(this, arguments);
+      }
+
+      return getModel;
+    }()
   },
   getters: {
     route: function route(state) {
@@ -3489,9 +3598,6 @@ vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_1_
     },
     screen: function screen(state) {
       return state.lastLocation && state.lastLocation.screens.default && state.lastLocation.screens.default.data.component;
-    },
-    model: function model(state) {
-      return state.lastLocation && state.lastLocation.data.model;
     }
   }
 }));

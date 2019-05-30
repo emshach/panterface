@@ -3,6 +3,14 @@ import Vuex from 'vuex'
 
 Vue.use( Vuex );
 
+async function getModel( model, have ) {
+  return Vue.prototype.$api(
+    'models', model,
+    have ? '?'+ have.map( x => 'have='+x ).join('&') : '' ).then( r => {
+    return r.data.models;
+  })
+}
+
 export default new Vuex.Store({
   state: {
     user: null,
@@ -10,6 +18,8 @@ export default new Vuex.Store({
     location: null,
     lastLocation: null,
     screen: null,
+    models: {},
+    model: null,
   },
   mutations: {
     setUser( state, user ) {
@@ -18,19 +28,43 @@ export default new Vuex.Store({
     setContext( state, context, debug ) {
       state.context = context;
       state.location = context.length && context[ context.length-1 ].location;
-      if ( state.location ){
+      if ( state.location ) {
         state.lastLocation = state.location;
       }
     },
+    addModels( state, models ) {
+      state.models = Object.assign( {}, state.models, models );
+    },
+    setModel( state, model ) {
+      state.model = model;
+    }
   },
   actions: {
-    setPath({ commit, state }, path ) {
+    setPath({ commit, state, dispatch }, path ) {
       Vue.prototype.$api( 'path', path ).then( r => {
         commit( 'setContext', r.data.route );
+        dispatch( 'getModel' );
       }).catch( x => {
         // TODO: handle
       });
     },
+    async getModel({ commit, state }, model ) {
+      if ( !model ) {
+        model = state.lastLocation && state.lastLocation.data.model;
+        if ( !model ) 
+          return null;
+      }
+      if ( model in state.models ) {
+        if ( !state.model || state.model.fullname !== model )
+          commit( 'setModel', state.models[ model ]);
+        return state.models[ model ];
+      }
+      const have = Object.keys( state.models );
+      var models = await getModel( model, have );
+      commit( 'addModels', models );
+      commit( 'setModel', models[ model ]);
+      return models[ model ];
+    }
   },
   getters: {
     route: state => {
@@ -43,8 +77,5 @@ export default new Vuex.Store({
          && state.lastLocation.screens.default
          && state.lastLocation.screens.default.data.component
     },
-    model: state => {
-      return state.lastLocation && state.lastLocation.data.model
-    }
   }
 })

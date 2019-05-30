@@ -2,8 +2,8 @@
   <section class="form-page">
     <h1>{{ location.title }}</h1>
     <form v-if="model" class="uk-form-stacked">
-      <field v-for="field in data.fields" :key="field.name"
-             :type="field.type" :name="field.name" :data="field" />
+      <field v-for="field in data.fields" :key="field.meta.name"
+             :type="field.meta.type" :name="field.meta.name" :data="field" />
     </form>
   </section>
 </template>

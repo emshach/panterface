@@ -78,6 +78,7 @@ function Field( obj, cls ) {
 }
 inherit( Field, Object, {
   init( obj ) {
+    this.meta = obj;
     this.html='';
     this.wip='';
     this.value={};

@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "fb95b5019ddcb21696c2";
+/******/ 	var hotCurrentHash = "f43ff4b5f7bebf5cc474";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -3364,7 +3364,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_3__["default"]({
   mode: 'history',
   base: '/',
   routes: [{
-    path: '/',
+    path: '*',
     name: 'home',
     component: _views_BasicPage__WEBPACK_IMPORTED_MODULE_5__["default"]
   }]

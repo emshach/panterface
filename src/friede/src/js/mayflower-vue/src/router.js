@@ -25,7 +25,7 @@ const router = new Router({
   base: '/',
   routes: [
     {
-      path: '/',
+      path: '*',
       name: 'home',
       component: BasicPage
     },

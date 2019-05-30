@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "bf8d6a3fe825d1752dc8";
+/******/ 	var hotCurrentHash = "0d3fa6b5041e7c6e3910";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1711,7 +1711,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var FormPage = function FormPage() {
-  return __webpack_require__.e(/*! import() | pages */ "pages").then(__webpack_require__.bind(null, /*! @/views/FormPage */ "./src/views/FormPage.vue"));
+  return Promise.all(/*! import() | pages */[__webpack_require__.e("vendor"), __webpack_require__.e("pages")]).then(__webpack_require__.bind(null, /*! @/views/FormPage */ "./src/views/FormPage.vue"));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = ({

@@ -6083,6 +6083,34 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+/***/ }),
+
+/***/ "./src/lib/mixins.js":
+/*!***************************!*\
+  !*** ./src/lib/mixins.js ***!
+  \***************************/
+/*! exports provided: ModelWidgetMixin, ModelFieldMixin, DurationOptions */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ModelWidgetMixin", function() { return ModelWidgetMixin; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ModelFieldMixin", function() { return ModelFieldMixin; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DurationOptions", function() { return DurationOptions; });
+/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
+
+var ModelWidgetMixin = {};
+var ModelFieldMixin = {
+  props: {
+    field: {
+      type: _lib_objects__WEBPACK_IMPORTED_MODULE_0__["Field"],
+      required: true
+    }
+  }
+};
+var DurationOptions = [];
+
+
 /***/ })
 
 }]);

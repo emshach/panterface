@@ -12,8 +12,12 @@
 </template>
 
 <script lang="js">
+import Field from '@/components/Field'
 export default  {
-  name: 'form-page',
+  name: 'FormPage',
+  components: {
+    Field
+  },
   props: [],
   mounted() {
   },

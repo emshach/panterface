@@ -10,6 +10,7 @@ const FormPage = () => import(/* webpackChunkName: "pages" */ '@/views/FormPage'
 export default  {
   name: 'BasicPage',
   components: {
+    Home,
     FormPage
   },
   props: [],

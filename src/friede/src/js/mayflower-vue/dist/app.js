@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "f93554e9e7a0dedc205e";
+/******/ 	var hotCurrentHash = "b823b65b2cb5f2126532";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1717,6 +1717,7 @@ var FormPage = function FormPage() {
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'BasicPage',
   components: {
+    Home: _views_Home__WEBPACK_IMPORTED_MODULE_0__["default"],
     FormPage: FormPage
   },
   props: [],

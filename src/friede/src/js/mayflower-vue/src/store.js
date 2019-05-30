@@ -39,10 +39,12 @@ export default new Vuex.Store({
       return state.context.map( x => x.hash || x.href ).join('/');
     },
     screen: state => {
-      return state.lastLocation && state.lastLocation.screens
+      return state.lastLocation
          && state.lastLocation.screens.default
-         && state.lastLocation.screens.default.data
          && state.lastLocation.screens.default.data.component
+    },
+    model: state => {
+      return state.lastLocation && state.lastLocation.data.model
     }
   }
 })

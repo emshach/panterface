@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "b823b65b2cb5f2126532";
+/******/ 	var hotCurrentHash = "de6c56ccb11820927ef0";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -3488,7 +3488,10 @@ vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_1_
       }).join('/');
     },
     screen: function screen(state) {
-      return state.lastLocation && state.lastLocation.screens && state.lastLocation.screens.default && state.lastLocation.screens.default.data && state.lastLocation.screens.default.data.component;
+      return state.lastLocation && state.lastLocation.screens.default && state.lastLocation.screens.default.data.component;
+    },
+    model: function model(state) {
+      return state.lastLocation && state.lastLocation.data.model;
     }
   }
 }));

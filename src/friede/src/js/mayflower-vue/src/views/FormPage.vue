@@ -1,9 +1,10 @@
 <template lang="html">
   <vk-card class="form-page">
     <vk-card-title slot="header">{{ location.title }}</vk-card-title>
-    <form v-if="model" class="uk-form-stacked">
+    <form slot="body" v-if="model" class="uk-form-stacked uk-text-left">
       <field v-for="field in data.fields" :key="field.meta.name"
-             :type="field.meta.type" :name="field.meta.name" :data="field" />
+             :type="field.meta.type" :name="field.meta.name" :data="field"
+             class="uk-margin" />
     </form>
   </vk-card>
 </template>
@@ -45,5 +46,8 @@ export default  {
   .form-page {
     margin: 40px 20px;
     border-radius: 2px;
+    .uk-input, .uk-select, .uk-textarea {
+      border: 1px solid #e5e5e5;
+    }
   }
 </style>

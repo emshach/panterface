@@ -154,10 +154,15 @@ var render = function() {
       _vm.model
         ? _c(
             "form",
-            { staticClass: "uk-form-stacked" },
+            {
+              staticClass: "uk-form-stacked uk-text-left",
+              attrs: { slot: "body" },
+              slot: "body"
+            },
             _vm._l(_vm.data.fields, function(field) {
               return _c("field", {
                 key: field.meta.name,
+                staticClass: "uk-margin",
                 attrs: {
                   type: field.meta.type,
                   name: field.meta.name,

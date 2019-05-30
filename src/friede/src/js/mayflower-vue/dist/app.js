@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "0d3fa6b5041e7c6e3910";
+/******/ 	var hotCurrentHash = "f3466ca151d0e8e774ba";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -3212,7 +3212,11 @@ function Field(obj, cls) {
 }
 
 inherit(Field, Object, {
-  init: function init(obj) {}
+  init: function init(obj) {
+    obj.html = '';
+    obj.wip = '';
+    obj.value = {};
+  }
 });
 
 

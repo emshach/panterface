@@ -1,8 +1,9 @@
 <template lang="html">
-  <component :is="type" />
+  <component :is="type" :name="type" :field="field" />
 </template>
 
 <script lang="js">
+import { Field } from '@/lib/objects'
 import fields from './fields'
 export default  {
   name: 'Field',
@@ -16,11 +17,17 @@ export default  {
       type: String,
       default: ''
     },
+    data: {
+      type: Object,
+      default: null
+    }
   },
   mounted() {
+    this.field = Field( this.data || { type: this.type, name: this.name });
   },
   data() {
     return {
+      field: Field()
     }
   },
   methods: {

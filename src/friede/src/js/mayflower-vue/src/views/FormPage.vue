@@ -5,7 +5,7 @@
       <h2>Model fields</h2>
       <ul>
         <field v-for="field in model.fields" :key="field.name"
-               :type="field.type" :name="field.name" />
+               :type="field.type" :name="field.name" :data="field" />
       </ul>
     </section>
   </section>

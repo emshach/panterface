@@ -8,7 +8,6 @@
 </template>
 
 <script lang="js">
-import { Field } from '@/lib/objects'
 import { ModelFieldMixin } from '@/lib/mixins'
 import Multiselect from 'vue-multiselect'
 export default {

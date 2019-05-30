@@ -592,19 +592,17 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
-/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
-/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js");
-/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_2__);
-
+/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
+/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js");
+/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_1__);
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'MultipleChoiceField',
-  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_1__["ModelFieldMixin"]],
+  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_0__["ModelFieldMixin"]],
   props: {},
   components: {
-    Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_2___default.a
+    Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_1___default.a
   },
   mounted: function mounted() {},
   data: function data() {

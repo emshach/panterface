@@ -9,11 +9,16 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _fields__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./fields */ "./src/components/fields.js");
+/* harmony import */ var core_js_modules_es6_function_name__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es6.function.name */ "./node_modules/core-js/modules/es6.function.name.js");
+/* harmony import */ var core_js_modules_es6_function_name__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_function_name__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
+/* harmony import */ var _fields__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./fields */ "./src/components/fields.js");
+
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Field',
-  components: _fields__WEBPACK_IMPORTED_MODULE_0__["default"],
+  components: _fields__WEBPACK_IMPORTED_MODULE_2__["default"],
   props: {
     type: {
       type: String,
@@ -22,11 +27,22 @@ __webpack_require__.r(__webpack_exports__);
     name: {
       type: String,
       default: ''
+    },
+    data: {
+      type: Object,
+      default: null
     }
   },
-  mounted: function mounted() {},
+  mounted: function mounted() {
+    this.field = Object(_lib_objects__WEBPACK_IMPORTED_MODULE_1__["Field"])(this.data || {
+      type: this.type,
+      name: this.name
+    });
+  },
   data: function data() {
-    return {};
+    return {
+      field: Object(_lib_objects__WEBPACK_IMPORTED_MODULE_1__["Field"])()
+    };
   },
   methods: {},
   computed: {}
@@ -83,7 +99,10 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(_vm.type, { tag: "component" })
+  return _c(_vm.type, {
+    tag: "component",
+    attrs: { name: _vm.type, field: _vm.field }
+  })
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -117,7 +136,7 @@ var render = function() {
             _vm._l(_vm.model.fields, function(field) {
               return _c("field", {
                 key: field.name,
-                attrs: { type: field.type, name: field.name }
+                attrs: { type: field.type, name: field.name, data: field }
               })
             }),
             1

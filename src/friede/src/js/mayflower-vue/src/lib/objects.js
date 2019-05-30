@@ -95,6 +95,9 @@ function Field( obj, cls ) {
 }
 inherit( Field, Object, {
   init( obj ) {
+    obj.html='';
+    obj.wip='';
+    obj.value={};
   }
 })
 

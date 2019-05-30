@@ -129,6 +129,21 @@ def api_root( request, format=None ):
                           request=request, format=None )
     return Response( out )
 
+def _process_location( location ):
+    out = {}
+    for k, v in location.items():
+        if k.endswith( '_entries' ):
+            k0 = k[ 1:-8 ] + 's'
+            o = out[k0] = {}
+            for x in v:
+                o[ x[ 'name' ]]=v[ 'entry' ]
+        else:
+            out[k] = v
+    return out
+
+def _process_locations( locations ):
+    return [ _process_location(l) for l in locations ]
+
 @api_view([ 'GET' ])
 @permission_classes(( permissions.AllowAny, ))
 def api_ls( request, path='', format=None ):
@@ -224,7 +239,7 @@ def api_ls( request, path='', format=None ):
         base=rx,
         matches=tuple( matches ),
         slots=slots.values(),
-        locations=expanded_serializer.data + rest_serializer.data
+        locations=_process_locations( expanded_serializer.data ) + rest_serializer.data
     ))
 
 def _get_model( name ):
@@ -293,9 +308,9 @@ def api_path( request, path=None, format=None ):
         dict(
             title='/',
             href='',
-            location=LocationSerializer(
+            location=_process_location( LocationSerializer(
                 Location.objects.filter( href__regex=r'^/?$').first(),
-                context=lscontext ).data
+                context=lscontext ).data )
         )]
     for n in nodes:
         endpoint = False
@@ -335,28 +350,28 @@ def api_path( request, path=None, format=None ):
             rx1 = r"(?:{}/)?{}".format( rx1, node[ 'href' ])
             loc0 = Location.objects.filter( href__regex=rx0+r'/?$' )
             if len( loc0 ):
-                node[ 'location' ] = LocationSerializer(
-                    loc0.first(), context=lscontext ).data
+                node[ 'location' ] = _process_location(
+                    LocationSerializer( loc0.first(), context=lscontext ).data )
                 endpoint = True
             else:
                 loc1 = Location.objects.filter( href__regex=rx1+r'/?$' )
                 if len ( loc1 ):
-                    node[ 'location' ] = LocationSerializer(
-                        loc1.first(), context=lscontext ).data
+                    node[ 'location' ] = _process_location(
+                        LocationSerializer( loc1.first(), context=lscontext ).data )
                     endpoint = True
         else:
             rx0 = r"{}/{}".format( rx0, n )
             rx1 = r"(?:{}/)?{}".format( rx1, n )
             loc0 = Location.objects.filter( href__regex=rx0+r'/?$' )
             if len( loc0 ):
-                node.update( **LocationSerializer(
-                    loc0.first(), context=lscontext ).data )
+                node['location'] = _process_location(
+                    LocationSerializer( loc0.first(), context=lscontext ).data )
                 endpoint = True
             else:
                 loc1 = Location.objects.filter( href__regex=rx1+r'/?$' )
                 if len ( loc1 ):
-                    node.update( **LocationSerializer(
-                        loc1.first(), context=lscontext ).data )
+                    node[ 'location' ] = _process_location(
+                        LocationSerializer( loc1.first(), context=lscontext ).data )
                     endpoint = True
             if 'href' not in node:
                 node.update( href=n, title=n )

@@ -130,8 +130,12 @@ export default {
     submit() {
       if ( this.selected ) {
         if ( this.selected.href ) { // TODO: go to location
-          this.selected.hash = this.selected.href.replace( baseRx, '' );
-          this.prospect.push( this.selected );
+          this.prospect.push({
+            href: this.selected,
+            title: this.selected,
+            hash: this.selected.href.replace( baseRx, '' ),
+            location: this.selected
+          });
           this.selected = null;
           this.$nextTick(() => {
             this.submit();

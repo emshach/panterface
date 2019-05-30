@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "0d85fa7cf915cae5b964";
+/******/ 	var hotCurrentHash = "d6d4a2d3aabe6ddfa451";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1211,8 +1211,12 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_10__["library"].add(_
       if (this.selected) {
         if (this.selected.href) {
           // TODO: go to location
-          this.selected.hash = this.selected.href.replace(baseRx, '');
-          this.prospect.push(this.selected);
+          this.prospect.push({
+            href: this.selected,
+            title: this.selected,
+            hash: this.selected.href.replace(baseRx, ''),
+            location: this.selected
+          });
           this.selected = null;
           this.$nextTick(function () {
             _this2.submit();
@@ -3378,7 +3382,8 @@ vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_1_
     user: null,
     context: [],
     location: null,
-    lastlocation: null
+    lastlocation: null,
+    screen: null
   },
   mutations: {
     setUser: function setUser(state, user) {
@@ -3409,6 +3414,9 @@ vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_1_
       return state.context.map(function (x) {
         return x.hash || x.href;
       }).join('/');
+    },
+    screen: function screen(state) {
+      return state.lastLocation && state.lastLocation.screens && state.lastLocation.screens.default && state.lastLocation.screens.default.data && state.lastLocation.screens.default.data.model;
     }
   }
 }));

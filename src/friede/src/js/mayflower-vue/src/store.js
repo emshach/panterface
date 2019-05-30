@@ -9,6 +9,7 @@ export default new Vuex.Store({
     context: [],
     location: null,
     lastlocation: null,
+    screen: null,
   },
   mutations: {
     setUser( state, user ) {
@@ -36,6 +37,12 @@ export default new Vuex.Store({
       if ( !state.context.length )
         return null;
       return state.context.map( x => x.hash || x.href ).join('/');
+    },
+    screen: state => {
+      return state.lastLocation && state.lastLocation.screens
+         && state.lastLocation.screens.default
+         && state.lastLocation.screens.default.data
+         && state.lastLocation.screens.default.data.model
     }
   }
 })

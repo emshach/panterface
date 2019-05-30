@@ -169,11 +169,11 @@ def api_ls( request, path='', format=None ):
         if m:
             g = m.group(1)
             if not g:
-                endpoint = LocationSerializer(
+                endpoint = _process_location( LocationSerializer(
                     candidate, context=dict(
                         request= request,
                         detail=  True,
-                        expand=  [ '_widget_entries', '_screen_entries' ])).data
+                        expand=  [ '_widget_entries', '_screen_entries' ])).data )
                 continue
             m2 = re.match( r'{([\w.]+)(\*)?(\+)?}', g )
             if m2:

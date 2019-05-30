@@ -1886,7 +1886,12 @@ var ModelFieldMixin = {
   },
   methods: {
     editField: function editField() {
+      var _this = this;
+
       this.editMode = true;
+      this.$nextTick(function () {
+        if (_this.$refs.input) _this.$refs.input.focus();else if (_this.$refs.inputV) _this.$refs.inputV.$el.focus();
+      });
     },
     commitField: function commitField() {
       this.field.html = this.field.wip;

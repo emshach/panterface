@@ -25,6 +25,12 @@ const ModelFieldMixin = {
   methods: {
     editField() {
       this.editMode = true;
+      this.$nextTick(() => {
+        if ( this.$refs.input )
+          this.$refs.input.focus();
+        else if( this.$refs.inputV )
+          this.$refs.inputV.$el.focus();
+      });
     },
     commitField() {
       this.field.html = this.field.wip;

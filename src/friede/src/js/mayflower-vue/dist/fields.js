@@ -2120,7 +2120,8 @@ var render = function() {
             expression: "field.wip"
           }
         ],
-        class: _vm.fieldClasses,
+        ref: "input",
+        class: ["uk-input", _vm.fieldClasses],
         attrs: { type: "text" },
         domProps: { value: _vm.field.wip },
         on: {
@@ -6127,7 +6128,12 @@ var ModelFieldMixin = {
   },
   methods: {
     editField: function editField() {
+      var _this = this;
+
       this.editMode = true;
+      this.$nextTick(function () {
+        if (_this.$refs.input) _this.$refs.input.focus();else if (_this.$refs.inputV) _this.$refs.inputV.$el.focus();
+      });
     },
     commitField: function commitField() {
       this.field.html = this.field.wip;

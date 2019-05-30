@@ -19,7 +19,7 @@ function Widget( obj, cls ) {
     this.init( obj );
     return this;
   }
-  return new cls( obj );
+  return new cls( obj || {} );
 }
 inherit ( Widget, Object, {
   init( obj ) {
@@ -74,7 +74,7 @@ function Model( obj, cls ) {
     this.init( obj );
     return this;
   }
-  return new cls( obj );
+  return new cls( obj || {} );
 }
 inherit( Model, Object, {
   init( obj ) {
@@ -91,13 +91,13 @@ function Field( obj, cls ) {
     this.init( obj );
     return this;
   }
-  return new cls( obj );
+  return new cls( obj || {} );
 }
 inherit( Field, Object, {
   init( obj ) {
-    obj.html='';
-    obj.wip='';
-    obj.value={};
+    this.html='';
+    this.wip='';
+    this.value={};
   }
 })
 

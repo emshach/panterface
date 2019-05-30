@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "f3466ca151d0e8e774ba";
+/******/ 	var hotCurrentHash = "2ac0e57acb37865df71a";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -3135,7 +3135,7 @@ function Widget(obj, cls) {
     return this;
   }
 
-  return new cls(obj);
+  return new cls(obj || {});
 }
 
 inherit(Widget, Object, {
@@ -3189,7 +3189,7 @@ function Model(obj, cls) {
     return this;
   }
 
-  return new cls(obj);
+  return new cls(obj || {});
 }
 
 inherit(Model, Object, {
@@ -3208,14 +3208,14 @@ function Field(obj, cls) {
     return this;
   }
 
-  return new cls(obj);
+  return new cls(obj || {});
 }
 
 inherit(Field, Object, {
   init: function init(obj) {
-    obj.html = '';
-    obj.wip = '';
-    obj.value = {};
+    this.html = '';
+    this.wip = '';
+    this.value = {};
   }
 });
 

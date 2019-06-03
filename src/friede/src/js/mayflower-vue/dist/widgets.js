@@ -1862,16 +1862,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ModelFieldMixin", function() { return ModelFieldMixin; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ModelModelsFieldMixin", function() { return ModelModelsFieldMixin; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DurationOptions", function() { return DurationOptions; });
-/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
-/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js");
-/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_es6_regexp_split__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es6.regexp.split */ "./node_modules/core-js/modules/es6.regexp.split.js");
+/* harmony import */ var core_js_modules_es6_regexp_split__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_regexp_split__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
+/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js");
+/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_2__);
+
 
 
 var ModelWidgetMixin = {};
 var ModelFieldMixin = {
   props: {
     field: {
-      type: _lib_objects__WEBPACK_IMPORTED_MODULE_0__["Field"],
+      type: _lib_objects__WEBPACK_IMPORTED_MODULE_1__["Field"],
       required: true
     },
     readonly: {
@@ -1923,7 +1926,7 @@ var ModelFieldMixin = {
 };
 var ModelModelsFieldMixin = {
   components: {
-    Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_1___default.a
+    Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_2___default.a
   },
   data: function data() {
     return {
@@ -1936,26 +1939,17 @@ var ModelModelsFieldMixin = {
     getObjects: function getObjects(query) {
       var _this2 = this;
 
-      var model = this.field.meta.related;
-      this.query = query;
+      var m = this.field.meta.related;
+      var app = m.split('.')[0];
+      var model = this.$store.state.models[m];
       this.loading = true;
-      this.$api(model.app, model.plural, '?search=' + query).then(function (r) {
+      this.$api(app, model.plural, '?search=' + query).then(function (r) {
         _this2.loading = false;
-        _this2.options = r.data.results;
-
-        _this2.options.unshift({
-          path: '',
-          title: 'New ' + model.label,
-          ctrl: true
-        }, {
-          path: '_action.cancel',
-          title: 'Cancel',
-          ctrl: true
-        }, {
-          path: '_action.done',
-          title: 'Done',
-          ctrl: true
-        });
+        _this2.options = r.data.results; // this.options.unshift(
+        //   { path: '', title: 'New ' + model.label, ctrl: true },
+        //   { path: '_action.cancel', title: 'Cancel', ctrl: true },
+        //   { path: '_action.done', title: 'Done', ctrl: true })
+        // TODO: put this in maybe
       });
     }
   }

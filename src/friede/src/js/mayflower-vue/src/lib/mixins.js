@@ -78,16 +78,18 @@ const ModelModelsFieldMixin = {
   },
   methods: {
     getObjects( query ) {
-      const model = this.field.meta.related;
-      this.query = query;
+      const m = this.field.meta.related;
+      const app = m.split('.')[0];
+      const model = this.$store.state.models[m];
       this.loading = true;
-      this.$api( model.app, model.plural, '?search='+query ).then( r => {
+      this.$api( app, model.plural, '?search='+query ).then( r => {
         this.loading = false;
         this.options = r.data.results;
-        this.options.unshift(
-          { path: '', title: 'New ' + model.label, ctrl: true },
-          { path: '_action.cancel', title: 'Cancel', ctrl: true },
-          { path: '_action.done', title: 'Done', ctrl: true })
+        // this.options.unshift(
+        //   { path: '', title: 'New ' + model.label, ctrl: true },
+        //   { path: '_action.cancel', title: 'Cancel', ctrl: true },
+        //   { path: '_action.done', title: 'Done', ctrl: true })
+        // TODO: put this in maybe
       });
     }
   }

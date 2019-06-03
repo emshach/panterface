@@ -119,6 +119,8 @@ def installappheader( name, module, title, description, icon='', rest=True,
         if not icon:
             icon = 'fontawesome.tablet-alt'
         if isinstance( icon, basestring ):
+            if not icon.startswith( 'icons.' ):
+                icon = 'icons.' + icon
             icon, new = Icon.objects.get_or_create( path=icon )
 
         return App.objects.get_or_create( path=path, defaults=dict(

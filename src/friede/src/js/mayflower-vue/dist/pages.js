@@ -60,8 +60,10 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuikit_lib_card__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuikit/lib/card */ "./node_modules/vuikit/lib/card.js");
-/* harmony import */ var _components_Field__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/components/Field */ "./src/components/Field.vue");
-/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
+/* harmony import */ var vuikit_lib_button__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuikit/lib/button */ "./node_modules/vuikit/lib/button.js");
+/* harmony import */ var _components_Field__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/Field */ "./src/components/Field.vue");
+/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
+
 
 
 
@@ -70,13 +72,19 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     VkCard: vuikit_lib_card__WEBPACK_IMPORTED_MODULE_0__["Card"],
     VkCardTitle: vuikit_lib_card__WEBPACK_IMPORTED_MODULE_0__["CardTitle"],
-    Field: _components_Field__WEBPACK_IMPORTED_MODULE_1__["default"]
+    VkBtn: vuikit_lib_button__WEBPACK_IMPORTED_MODULE_1__["Button"],
+    VkBtnGrp: vuikit_lib_button__WEBPACK_IMPORTED_MODULE_1__["ButtonGroup"],
+    Field: _components_Field__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   mounted: function mounted() {},
   data: function data() {
     return {};
   },
-  methods: {},
+  methods: {
+    submit: function submit() {},
+    submitAndRedo: function submitAndRedo() {},
+    cancel: function cancel() {}
+  },
   computed: {
     location: function location() {
       return this.$store.state.location;
@@ -85,7 +93,7 @@ __webpack_require__.r(__webpack_exports__);
       return this.$store.state.model;
     },
     data: function data() {
-      return this.$store.state.modelData || Object(_lib_objects__WEBPACK_IMPORTED_MODULE_2__["Model"])(this.model);
+      return this.$store.state.modelData || Object(_lib_objects__WEBPACK_IMPORTED_MODULE_3__["Model"])(this.model);
     }
   }
 });
@@ -172,7 +180,59 @@ var render = function() {
             }),
             1
           )
-        : _vm._e()
+        : _vm._e(),
+      _c(
+        "div",
+        { attrs: { slot: "footer" }, slot: "footer" },
+        [
+          _c(
+            "vk-btn-grp",
+            [
+              _c(
+                "vk-btn",
+                {
+                  attrs: { type: "primry" },
+                  on: {
+                    click: function($event) {
+                      $event.stopPropagation()
+                      return _vm.submit($event)
+                    }
+                  }
+                },
+                [_vm._v("Save")]
+              ),
+              _c(
+                "vk-btn",
+                {
+                  attrs: { type: "primary" },
+                  on: {
+                    click: function($event) {
+                      $event.stopPropagation()
+                      return _vm.submitAndRedo($event)
+                    }
+                  }
+                },
+                [_vm._v("Add another")]
+              )
+            ],
+            1
+          ),
+          _c(
+            "vk-btn",
+            {
+              attrs: { type: "link" },
+              on: {
+                click: function($event) {
+                  $event.stopPropagation()
+                  return _vm.cancel($event)
+                }
+              }
+            },
+            [_vm._v("cancel")]
+          )
+        ],
+        1
+      )
     ],
     1
   )

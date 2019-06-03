@@ -6,11 +6,19 @@
              :type="field.meta.type" :name="field.meta.name" :data="field"
              class="uk-margin" />
     </form>
+    <div slot="footer">
+      <vk-btn-grp>
+        <vk-btn type="primry" @click.stop="submit">Save</vk-btn>
+        <vk-btn type="primary" @click.stop="submitAndRedo">Add another</vk-btn>
+      </vk-btn-grp>
+      <vk-btn type="link" @click.stop="cancel">cancel</vk-btn>
+    </div>
   </vk-card>
 </template>
 
 <script lang="js">
 import { Card as VkCard, CardTitle as VkCardTitle } from 'vuikit/lib/card'
+import { Button as VkBtn, ButtonGroup as VkBtnGrp } from 'vuikit/lib/button'
 import Field from '@/components/Field'
 import { Model } from '@/lib/objects'
 export default  {
@@ -18,6 +26,8 @@ export default  {
   components: {
     VkCard,
     VkCardTitle,
+    VkBtn,
+    VkBtnGrp,
     Field
   },
   mounted() {
@@ -27,6 +37,12 @@ export default  {
     }
   },
   methods: {
+    submit() {
+    },
+    submitAndRedo() {
+    },
+    cancel() {
+    }
   },
   computed: {
     location() {

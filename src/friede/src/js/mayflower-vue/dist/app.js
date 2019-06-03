@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "160cfd7d30fdaca78465";
+/******/ 	var hotCurrentHash = "a3ed3726044e9d65cc94";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -2268,21 +2268,14 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "vue-perfect-scrollbar",
+    { staticClass: "basic-page" },
+    [_c(_vm.component, { tag: "component" })],
+    1
+  )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "vue-perfect-scrollbar",
-      { staticClass: "basic-page" },
-      [_c(_vm.component, { tag: "component" })],
-      1
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

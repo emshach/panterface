@@ -1,5 +1,5 @@
 <template lang="html">
-  <vue-perfect-scrollbar v-once class="basic-page">
+  <vue-perfect-scrollbar class="basic-page">
     <component :is="component" />
   </vue-perfect-scrollbar>
 </template>

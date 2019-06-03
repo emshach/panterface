@@ -1,15 +1,11 @@
 <template lang="html">
-  <div v-if="readonly" v-html="field.html" :class="fieldClasses" />
-  <textarea v-else-if="editMode" v-model="field.wip"
-         :class="[ 'uk-textarea', fieldClasses ]" @blur="commitField" ref="input" />
-  <div v-else-if="field.html" v-html="field.html" @click="editField" @focus="editField"
+  <textarea v-if="editMode" v-model="field.wip" ref="input"
+         :class="[ 'uk-textarea', fieldClasses ]" @blur="commitField" />
+  <div v-else v-html="html" @click="editField" @focus="editField"
        :class="fieldClasses" />
-  <div v-else @click="editField" @focus="editField"
-       :class="[ fieldClasses, 'no-data' ]">{{ placeholder }}</div>
 </template>
 
 <script lang="js">
-import { Field } from '@/lib/objects'
 import { ModelFieldMixin } from '@/lib/mixins'
 export default {
   name: 'TextField',

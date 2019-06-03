@@ -1,6 +1,6 @@
 <template lang="html">
-  <input v-if="editMode" type="checkbox" v-model="field.wip"
-         :class="fieldClasses" @blur="commitField" />
+  <input v-if="editMode" type="checkbox" v-model="field.wip" ref="input"
+         :class="[ 'uk-checkbox', fieldClasses ]" @blur="commitField" />
   <div v-else v-html="html" @click="editField" @focus="editField"
        :class="fieldClasses" />
 </template>
@@ -24,11 +24,6 @@ export default {
     
   },
   computed: {
-    isset() {
-      if ( this.field.value === undefined )
-        return false;
-      return true;
-    },
     html() {
       if ( this.isset ) {
         if ( this.field.value )

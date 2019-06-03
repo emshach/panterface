@@ -1,8 +1,7 @@
 <template lang="html">
-  <div v-if="readonly" v-html="field.html" :class="fieldClasses" />
-  <flat-pickr v-else-if="editMode" v-model="field.wip"
-         :class="fieldClasses" @blur="commitField" />
-  <div v-else v-html="field.html" @click="editField" @focus="editField"
+  <flat-pickr v-if="editMode" v-model="field.wip" ref="inputV"
+              :class="fieldClasses" @blur="commitField" />
+  <div v-else v-html="html" @click="editField" @focus="editField"
        :class="fieldClasses" />
 </template>
 

@@ -1853,15 +1853,19 @@ __webpack_require__.r(__webpack_exports__);
 /*!***************************!*\
   !*** ./src/lib/mixins.js ***!
   \***************************/
-/*! exports provided: ModelWidgetMixin, ModelFieldMixin, DurationOptions */
+/*! exports provided: ModelWidgetMixin, ModelFieldMixin, ModelModelsFieldMixin, DurationOptions */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ModelWidgetMixin", function() { return ModelWidgetMixin; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ModelFieldMixin", function() { return ModelFieldMixin; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ModelModelsFieldMixin", function() { return ModelModelsFieldMixin; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DurationOptions", function() { return DurationOptions; });
 /* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
+/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js");
+/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_1__);
+
 
 var ModelWidgetMixin = {};
 var ModelFieldMixin = {
@@ -1893,6 +1897,7 @@ var ModelFieldMixin = {
       var _this = this;
 
       if (this.readonly) return;
+      this.field.wip = this.field.value;
       this.editMode = true;
       this.$nextTick(function () {
         if (_this.$refs.input) _this.$refs.input.focus();else if (_this.$refs.inputV) _this.$refs.inputV.$el.focus();
@@ -1905,10 +1910,53 @@ var ModelFieldMixin = {
   },
   computed: {
     fieldClasses: function fieldClasses() {
-      return [this.field.value === undefined || this.field.value === null || this.field.value === '' ? 'no-data' : '', this.readonly ? 'readonly' : ''];
+      return [this.isset ? '' : 'no-data', this.readonly ? 'readonly' : ''];
+    },
+    isset: function isset() {
+      if (this.field.value === undefined || this.field.value === null || this.field.value === '') return false;
+      return true;
     },
     html: function html() {
-      return this.field.value;
+      return this.isset ? this.field.value : this.emptyValue;
+    }
+  }
+};
+var ModelModelsFieldMixin = {
+  components: {
+    Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_1___default.a
+  },
+  data: function data() {
+    return {
+      loading: false,
+      options: [],
+      values: []
+    };
+  },
+  methods: {
+    getObjects: function getObjects(query) {
+      var _this2 = this;
+
+      var model = this.field.meta.related;
+      this.query = query;
+      this.loading = true;
+      this.$api(model.app, model.plural, '?search=' + query).then(function (r) {
+        _this2.loading = false;
+        _this2.options = r.data.results;
+
+        _this2.options.unshift({
+          path: '',
+          title: 'New ' + model.label,
+          ctrl: true
+        }, {
+          path: '_action.cancel',
+          title: 'Cancel',
+          ctrl: true
+        }, {
+          path: '_action.done',
+          title: 'Done',
+          ctrl: true
+        });
+      });
     }
   }
 };

@@ -1,9 +1,8 @@
 <template lang="html">
-  <div v-if="readonly" v-html="field.html" :class="fieldClasses" />
-  <multiselect v-else-if="editMode" v-model="field.wip"
-               :options="[]"
+  <multiselect v-if="editMode" v-model="field.wip" ref="inputV"
+               :options="field.meta.options"
                :class="fieldClasses" @blur="commitField" />
-  <div v-else v-html="field.html" @click="editField" @focus="editField"
+  <div v-else v-html="html" @click="editField" @focus="editField"
        :class="fieldClasses" />
 </template>
 

@@ -23,10 +23,6 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {},
   computed: {
-    isset: function isset() {
-      if (this.field.value === undefined) return false;
-      return true;
-    },
     html: function html() {
       if (this.isset) {
         if (this.field.value) return 'Yes';
@@ -49,13 +45,11 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
-/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
-
+/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'CharField',
-  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_1__["ModelFieldMixin"]],
+  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_0__["ModelFieldMixin"]],
   props: {},
   mounted: function mounted() {},
   data: function data() {
@@ -76,19 +70,17 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
-/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
-/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js");
-/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_2__);
-
+/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
+/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js");
+/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_1__);
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'ChoiceField',
-  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_1__["ModelFieldMixin"]],
+  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_0__["ModelFieldMixin"]],
   props: {},
   components: {
-    Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_2___default.a
+    Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_1___default.a
   },
   mounted: function mounted() {},
   data: function data() {
@@ -485,13 +477,23 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
-/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.runtime.esm.js");
+/* harmony import */ var vue_highlightjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-highlightjs */ "./node_modules/vue-highlightjs/index.js");
+/* harmony import */ var vue_highlightjs__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_highlightjs__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
+/* harmony import */ var vue_json_edit__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-json-edit */ "./node_modules/vue-json-edit/dist/vue-json-edit.js");
+/* harmony import */ var vue_json_edit__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue_json_edit__WEBPACK_IMPORTED_MODULE_3__);
 
 
+
+
+vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vue_highlightjs__WEBPACK_IMPORTED_MODULE_1___default.a);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'JsonField',
-  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_1__["ModelFieldMixin"]],
+  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_2__["ModelFieldMixin"]],
+  components: {
+    JsonEditor: vue_json_edit__WEBPACK_IMPORTED_MODULE_3___default.a
+  },
   props: {},
   mounted: function mounted() {},
   data: function data() {
@@ -512,21 +514,15 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
-/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
-/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js");
-/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_2__);
-
-
+/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'ModelChoiceField',
-  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_1__["ModelFieldMixin"]],
-  props: {},
-  components: {
-    Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_2___default.a
+  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_0__["ModelFieldMixin"], _lib_mixins__WEBPACK_IMPORTED_MODULE_0__["ModelModelsFieldMixin"]],
+  props: [],
+  mounted: function mounted() {
+    if (!this.readonly) this.getObjects('');
   },
-  mounted: function mounted() {},
   data: function data() {
     return {};
   },
@@ -751,13 +747,11 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
-/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
-
+/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'TextField',
-  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_1__["ModelFieldMixin"]],
+  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_0__["ModelFieldMixin"]],
   props: {},
   mounted: function mounted() {},
   data: function data() {
@@ -950,7 +944,8 @@ var render = function() {
             expression: "field.wip"
           }
         ],
-        class: _vm.fieldClasses,
+        ref: "input",
+        class: ["uk-checkbox", _vm.fieldClasses],
         attrs: { type: "checkbox" },
         domProps: {
           checked: Array.isArray(_vm.field.wip)
@@ -1010,12 +1005,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.readonly
-    ? _c("div", {
-        class: _vm.fieldClasses,
-        domProps: { innerHTML: _vm._s(_vm.field.html) }
-      })
-    : _vm.editMode
+  return _vm.editMode
     ? _c("input", {
         directives: [
           {
@@ -1039,20 +1029,11 @@ var render = function() {
           }
         }
       })
-    : _vm.field.html
-    ? _c("div", {
+    : _c("div", {
         class: _vm.fieldClasses,
-        domProps: { innerHTML: _vm._s(_vm.field.html) },
+        domProps: { innerHTML: _vm._s(_vm.html) },
         on: { click: _vm.editField, focus: _vm.editField }
       })
-    : _c(
-        "div",
-        {
-          class: [_vm.fieldClasses, "no-data"],
-          on: { click: _vm.editField, focus: _vm.editField }
-        },
-        [_vm._v(_vm._s(_vm.placeholder))]
-      )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -1076,15 +1057,11 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.readonly
-    ? _c("div", {
-        class: _vm.fieldClasses,
-        domProps: { innerHTML: _vm._s(_vm.field.html) }
-      })
-    : _vm.editMode
+  return _vm.editMode
     ? _c("multiselect", {
+        ref: "inputV",
         class: _vm.fieldClasses,
-        attrs: { options: [] },
+        attrs: { options: _vm.field.meta.options },
         on: { blur: _vm.commitField },
         model: {
           value: _vm.field.wip,
@@ -1096,7 +1073,7 @@ var render = function() {
       })
     : _c("div", {
         class: _vm.fieldClasses,
-        domProps: { innerHTML: _vm._s(_vm.field.html) },
+        domProps: { innerHTML: _vm._s(_vm.html) },
         on: { click: _vm.editField, focus: _vm.editField }
       })
 }
@@ -1167,13 +1144,9 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.readonly
-    ? _c("div", {
-        class: _vm.fieldClasses,
-        domProps: { innerHTML: _vm._s(_vm.field.html) }
-      })
-    : _vm.editMode
+  return _vm.editMode
     ? _c("flat-pickr", {
+        ref: "inputV",
         class: _vm.fieldClasses,
         on: { blur: _vm.commitField },
         model: {
@@ -1186,7 +1159,7 @@ var render = function() {
       })
     : _c("div", {
         class: _vm.fieldClasses,
-        domProps: { innerHTML: _vm._s(_vm.field.html) },
+        domProps: { innerHTML: _vm._s(_vm.html) },
         on: { click: _vm.editField, focus: _vm.editField }
       })
 }
@@ -1757,38 +1730,34 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.readonly
-    ? _c("div", {
+  return _vm.editMode
+    ? _c("json-editor", {
         class: _vm.fieldClasses,
-        domProps: { innerHTML: _vm._s(_vm.field.html) }
-      })
-    : _vm.editMode
-    ? _c("textarea", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.field.wip,
-            expression: "field.wip"
-          }
-        ],
-        class: _vm.fieldClasses,
-        domProps: { value: _vm.field.wip },
-        on: {
-          blur: _vm.commitField,
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.$set(_vm.field, "wip", $event.target.value)
-          }
+        on: { blur: _vm.commitField },
+        model: {
+          value: _vm.field.wip,
+          callback: function($$v) {
+            _vm.$set(_vm.field, "wip", $$v)
+          },
+          expression: "field.wip"
         }
       })
-    : _c("div", {
-        class: _vm.fieldClasses,
-        domProps: { innerHTML: _vm._s(_vm.field.html) },
-        on: { click: _vm.editField, focus: _vm.editField }
-      })
+    : _c(
+        "pre",
+        {
+          directives: [
+            {
+              name: "highlightjs",
+              rawName: "v-highlightjs",
+              value: _vm.field.value,
+              expression: "field.value"
+            }
+          ],
+          class: _vm.fieldClasses,
+          on: { click: _vm.editField, focus: _vm.editField }
+        },
+        [_c("code", { staticClass: "json" })]
+      )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -1812,27 +1781,23 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.readonly
-    ? _c("div", {
-        class: _vm.fieldClasses,
-        domProps: { innerHTML: _vm._s(_vm.field.html) }
-      })
-    : _vm.editMode
+  return _vm.editMode
     ? _c("multiselect", {
+        ref: "inputV",
         class: _vm.fieldClasses,
-        attrs: { options: [] },
-        on: { blur: _vm.commitField },
+        attrs: { options: _vm.options, label: "title", "track-by": "path" },
+        on: { blur: _vm.commitField, "search-change": _vm.getObjects },
         model: {
-          value: _vm.field.wip,
+          value: _vm.values,
           callback: function($$v) {
-            _vm.$set(_vm.field, "wip", $$v)
+            _vm.values = $$v
           },
-          expression: "field.wip"
+          expression: "values"
         }
       })
     : _c("div", {
         class: _vm.fieldClasses,
-        domProps: { innerHTML: _vm._s(_vm.field.html) },
+        domProps: { innerHTML: _vm._s(_vm.html) },
         on: { click: _vm.editField, focus: _vm.editField }
       })
 }
@@ -2234,12 +2199,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.readonly
-    ? _c("div", {
-        class: _vm.fieldClasses,
-        domProps: { innerHTML: _vm._s(_vm.field.html) }
-      })
-    : _vm.editMode
+  return _vm.editMode
     ? _c("textarea", {
         directives: [
           {
@@ -2262,20 +2222,11 @@ var render = function() {
           }
         }
       })
-    : _vm.field.html
-    ? _c("div", {
+    : _c("div", {
         class: _vm.fieldClasses,
-        domProps: { innerHTML: _vm._s(_vm.field.html) },
+        domProps: { innerHTML: _vm._s(_vm.html) },
         on: { click: _vm.editField, focus: _vm.editField }
       })
-    : _c(
-        "div",
-        {
-          class: [_vm.fieldClasses, "no-data"],
-          on: { click: _vm.editField, focus: _vm.editField }
-        },
-        [_vm._v(_vm._s(_vm.placeholder))]
-      )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -2344,15 +2295,11 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.readonly
-    ? _c("div", {
-        class: _vm.fieldClasses,
-        domProps: { innerHTML: _vm._s(_vm.field.html) }
-      })
-    : _vm.editMode
+  return _vm.editMode
     ? _c("multiselect", {
+        ref: "inputV",
         class: _vm.fieldClasses,
-        attrs: { options: [] },
+        attrs: { options: _vm.field.meta.options },
         on: { blur: _vm.commitField },
         model: {
           value: _vm.field.wip,
@@ -2364,7 +2311,7 @@ var render = function() {
       })
     : _c("div", {
         class: _vm.fieldClasses,
-        domProps: { innerHTML: _vm._s(_vm.field.html) },
+        domProps: { innerHTML: _vm._s(_vm.html) },
         on: { click: _vm.editField, focus: _vm.editField }
       })
 }
@@ -6133,15 +6080,19 @@ __webpack_require__.r(__webpack_exports__);
 /*!***************************!*\
   !*** ./src/lib/mixins.js ***!
   \***************************/
-/*! exports provided: ModelWidgetMixin, ModelFieldMixin, DurationOptions */
+/*! exports provided: ModelWidgetMixin, ModelFieldMixin, ModelModelsFieldMixin, DurationOptions */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ModelWidgetMixin", function() { return ModelWidgetMixin; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ModelFieldMixin", function() { return ModelFieldMixin; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ModelModelsFieldMixin", function() { return ModelModelsFieldMixin; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DurationOptions", function() { return DurationOptions; });
 /* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
+/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js");
+/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_1__);
+
 
 var ModelWidgetMixin = {};
 var ModelFieldMixin = {
@@ -6173,6 +6124,7 @@ var ModelFieldMixin = {
       var _this = this;
 
       if (this.readonly) return;
+      this.field.wip = this.field.value;
       this.editMode = true;
       this.$nextTick(function () {
         if (_this.$refs.input) _this.$refs.input.focus();else if (_this.$refs.inputV) _this.$refs.inputV.$el.focus();
@@ -6185,10 +6137,53 @@ var ModelFieldMixin = {
   },
   computed: {
     fieldClasses: function fieldClasses() {
-      return [this.field.value === undefined || this.field.value === null || this.field.value === '' ? 'no-data' : '', this.readonly ? 'readonly' : ''];
+      return [this.isset ? '' : 'no-data', this.readonly ? 'readonly' : ''];
+    },
+    isset: function isset() {
+      if (this.field.value === undefined || this.field.value === null || this.field.value === '') return false;
+      return true;
     },
     html: function html() {
-      return this.field.value;
+      return this.isset ? this.field.value : this.emptyValue;
+    }
+  }
+};
+var ModelModelsFieldMixin = {
+  components: {
+    Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_1___default.a
+  },
+  data: function data() {
+    return {
+      loading: false,
+      options: [],
+      values: []
+    };
+  },
+  methods: {
+    getObjects: function getObjects(query) {
+      var _this2 = this;
+
+      var model = this.field.meta.related;
+      this.query = query;
+      this.loading = true;
+      this.$api(model.app, model.plural, '?search=' + query).then(function (r) {
+        _this2.loading = false;
+        _this2.options = r.data.results;
+
+        _this2.options.unshift({
+          path: '',
+          title: 'New ' + model.label,
+          ctrl: true
+        }, {
+          path: '_action.cancel',
+          title: 'Cancel',
+          ctrl: true
+        }, {
+          path: '_action.done',
+          title: 'Done',
+          ctrl: true
+        });
+      });
     }
   }
 };

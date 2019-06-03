@@ -1,23 +1,24 @@
 <template lang="html">
-  <div v-if="readonly" v-html="field.html" :class="fieldClasses" />
-  <multiselect v-else-if="editMode" v-model="field.wip"
-               :options="[]"
-               :class="fieldClasses" @blur="commitField" />
-  <div v-else v-html="field.html" @click="editField" @focus="editField"
+  <multiselect v-if="editMode" v-model="values" ref="inputV"
+               :options="options" :class="fieldClasses"
+               label="title"
+               track-by="path"
+               @blur="commitField"
+               @search-change="getObjects"
+               />
+  <div v-else v-html="html" @click="editField" @focus="editField"
        :class="fieldClasses" />
 </template>
 
 <script lang="js">
-import { Field } from '@/lib/objects'
-import { ModelFieldMixin } from '@/lib/mixins'
-import Multiselect from 'vue-multiselect'
+import { ModelFieldMixin, ModelModelsFieldMixin } from '@/lib/mixins'
 export default {
   name: 'ModelChoiceField',
-  mixins: [ ModelFieldMixin ],
-  props: {},
-  components: { Multiselect },
+  mixins: [ ModelFieldMixin, ModelModelsFieldMixin ],
+  props: [],
   mounted() {
-    
+    if ( !this.readonly )
+      this.getObjects('');
   },
   data() {
     return {

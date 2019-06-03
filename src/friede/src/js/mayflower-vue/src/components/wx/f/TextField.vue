@@ -1,6 +1,6 @@
 <template lang="html">
   <div v-if="readonly" v-html="field.html" :class="fieldClasses" />
-  <textaarea v-else-if="editMode" v-model="field.wip"
+  <textarea v-else-if="editMode" v-model="field.wip"
          :class="[ 'uk-textarea', fieldClasses ]" @blur="commitField" ref="input" />
   <div v-else-if="field.html" v-html="field.html" @click="editField" @focus="editField"
        :class="fieldClasses" />

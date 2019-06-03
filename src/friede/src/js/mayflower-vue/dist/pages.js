@@ -155,7 +155,7 @@ var render = function() {
         ? _c(
             "form",
             {
-              staticClass: "uk-form-stacked uk-text-left",
+              staticClass: "uk-form-horizontal uk-text-left",
               attrs: { slot: "body" },
               slot: "body"
             },

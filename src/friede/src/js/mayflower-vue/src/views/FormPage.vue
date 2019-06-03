@@ -1,7 +1,7 @@
 <template lang="html">
   <vk-card class="form-page">
     <vk-card-title slot="header">{{ location.title }}</vk-card-title>
-    <form slot="body" v-if="model" class="uk-form-stacked uk-text-left">
+    <form slot="body" v-if="model" class="uk-form-horizontal uk-text-left">
       <field v-for="field in data.fields" :key="field.meta.name"
              :type="field.meta.type" :name="field.meta.name" :data="field"
              class="uk-margin" />

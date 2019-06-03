@@ -15,6 +15,10 @@ const ModelFieldMixin = {
     placeholder: {
       type: String,
       default: 'enter data'
+    },
+    emptyValue: {
+      type: String,
+      default: 'not set'
     }
   },
   data() {
@@ -24,6 +28,8 @@ const ModelFieldMixin = {
   },
   methods: {
     editField() {
+      if ( this.readonly )
+        return;
       this.editMode = true;
       this.$nextTick(() => {
         if ( this.$refs.input )
@@ -33,13 +39,21 @@ const ModelFieldMixin = {
       });
     },
     commitField() {
-      this.field.html = this.field.wip;
+      this.field.commit();
       this.editMode = false;
     }
   },
   computed: {
     fieldClasses() {
-      return []
+      return [
+        this.field.value === undefined
+           || this.field.value === null
+           || this.field.value === '' ? 'no-data' : '' ,
+        this.readonly ? 'readonly' : '',
+      ]
+    },
+    html() {
+      return this.field.value;
     }
   }
 }

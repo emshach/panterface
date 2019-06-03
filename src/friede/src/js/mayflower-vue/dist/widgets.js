@@ -1877,6 +1877,10 @@ var ModelFieldMixin = {
     placeholder: {
       type: String,
       default: 'enter data'
+    },
+    emptyValue: {
+      type: String,
+      default: 'not set'
     }
   },
   data: function data() {
@@ -1888,19 +1892,23 @@ var ModelFieldMixin = {
     editField: function editField() {
       var _this = this;
 
+      if (this.readonly) return;
       this.editMode = true;
       this.$nextTick(function () {
         if (_this.$refs.input) _this.$refs.input.focus();else if (_this.$refs.inputV) _this.$refs.inputV.$el.focus();
       });
     },
     commitField: function commitField() {
-      this.field.html = this.field.wip;
+      this.field.commit();
       this.editMode = false;
     }
   },
   computed: {
     fieldClasses: function fieldClasses() {
-      return [];
+      return [this.field.value === undefined || this.field.value === null || this.field.value === '' ? 'no-data' : '', this.readonly ? 'readonly' : ''];
+    },
+    html: function html() {
+      return this.field.value;
     }
   }
 };

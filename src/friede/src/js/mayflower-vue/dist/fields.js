@@ -22,7 +22,20 @@ __webpack_require__.r(__webpack_exports__);
     return {};
   },
   methods: {},
-  computed: {}
+  computed: {
+    isset: function isset() {
+      if (this.field.value === undefined) return false;
+      return true;
+    },
+    html: function html() {
+      if (this.isset) {
+        if (this.field.value) return 'Yes';
+        return 'No';
+      }
+
+      return this.emptyValue;
+    }
+  }
 });
 
 /***/ }),
@@ -927,12 +940,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.readonly
-    ? _c("div", {
-        class: _vm.fieldClasses,
-        domProps: { innerHTML: _vm._s(_vm.field.html) }
-      })
-    : _vm.editMode
+  return _vm.editMode
     ? _c("input", {
         directives: [
           {
@@ -976,7 +984,7 @@ var render = function() {
       })
     : _c("div", {
         class: _vm.fieldClasses,
-        domProps: { innerHTML: _vm._s(_vm.field.html) },
+        domProps: { innerHTML: _vm._s(_vm.html) },
         on: { click: _vm.editField, focus: _vm.editField }
       })
 }
@@ -2232,16 +2240,26 @@ var render = function() {
         domProps: { innerHTML: _vm._s(_vm.field.html) }
       })
     : _vm.editMode
-    ? _c("textaarea", {
+    ? _c("textarea", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.field.wip,
+            expression: "field.wip"
+          }
+        ],
         ref: "input",
         class: ["uk-textarea", _vm.fieldClasses],
-        on: { blur: _vm.commitField },
-        model: {
-          value: _vm.field.wip,
-          callback: function($$v) {
-            _vm.$set(_vm.field, "wip", $$v)
-          },
-          expression: "field.wip"
+        domProps: { value: _vm.field.wip },
+        on: {
+          blur: _vm.commitField,
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.$set(_vm.field, "wip", $event.target.value)
+          }
         }
       })
     : _vm.field.html
@@ -6139,6 +6157,10 @@ var ModelFieldMixin = {
     placeholder: {
       type: String,
       default: 'enter data'
+    },
+    emptyValue: {
+      type: String,
+      default: 'not set'
     }
   },
   data: function data() {
@@ -6150,19 +6172,23 @@ var ModelFieldMixin = {
     editField: function editField() {
       var _this = this;
 
+      if (this.readonly) return;
       this.editMode = true;
       this.$nextTick(function () {
         if (_this.$refs.input) _this.$refs.input.focus();else if (_this.$refs.inputV) _this.$refs.inputV.$el.focus();
       });
     },
     commitField: function commitField() {
-      this.field.html = this.field.wip;
+      this.field.commit();
       this.editMode = false;
     }
   },
   computed: {
     fieldClasses: function fieldClasses() {
-      return [];
+      return [this.field.value === undefined || this.field.value === null || this.field.value === '' ? 'no-data' : '', this.readonly ? 'readonly' : ''];
+    },
+    html: function html() {
+      return this.field.value;
     }
   }
 };

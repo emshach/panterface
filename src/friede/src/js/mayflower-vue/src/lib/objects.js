@@ -79,9 +79,12 @@ function Field( obj, cls ) {
 inherit( Field, Object, {
   init( obj ) {
     this.meta = obj;
-    this.html='';
-    this.wip='';
+    this.value='';
+    this.wip=undefined;
     this.value={};
+  },
+  commit() {
+    this.value = this.wip === undefined || this.wip === null ? '' : this.wip;
   }
 })
 

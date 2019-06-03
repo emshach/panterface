@@ -1,5 +1,7 @@
 import create from 'lodash/create'
 import extend from 'lodash/extend'
+import isArray from 'lodash/isArray'
+import isFunction from 'lodash/isFunction'
 function inherit( child, base, props ) {
   child.prototype = create( base.prototype, extend({
     '_super': base.prototype,
@@ -79,7 +81,11 @@ function Field( obj, cls ) {
 inherit( Field, Object, {
   init( obj ) {
     this.meta  = obj;
-    this.value = this.meta.value || this.meta.default;
+    if ( this.meta.default && isArray( this.meta.default )
+         && this.meta.default[0] === 'f')
+      this.meta.default = eval( this.meta.default[1] );
+    var val = this.meta.value || this.meta.default;
+    this.value =  isFunction( val ) ? val() : val;
     this.wip   = this.value;
   },
   commit() {

@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "b77fdd00ba19756fd620";
+/******/ 	var hotCurrentHash = "02176598ac3db2fceb99";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -3108,6 +3108,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lodash_create__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash_create__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var lodash_extend__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! lodash/extend */ "./node_modules/lodash/extend.js");
 /* harmony import */ var lodash_extend__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(lodash_extend__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var lodash_isArray__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! lodash/isArray */ "./node_modules/lodash/isArray.js");
+/* harmony import */ var lodash_isArray__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(lodash_isArray__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var lodash_isFunction__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! lodash/isFunction */ "./node_modules/lodash/isFunction.js");
+/* harmony import */ var lodash_isFunction__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(lodash_isFunction__WEBPACK_IMPORTED_MODULE_5__);
+
+
 
 
 
@@ -3195,7 +3201,9 @@ function Field(obj, cls) {
 inherit(Field, Object, {
   init: function init(obj) {
     this.meta = obj;
-    this.value = this.meta.value || this.meta.default;
+    if (this.meta.default && lodash_isArray__WEBPACK_IMPORTED_MODULE_4___default()(this.meta.default) && this.meta.default[0] === 'f') this.meta.default = eval(this.meta.default[1]);
+    var val = this.meta.value || this.meta.default;
+    this.value = lodash_isFunction__WEBPACK_IMPORTED_MODULE_5___default()(val) ? val() : val;
     this.wip = this.value;
   },
   commit: function commit() {

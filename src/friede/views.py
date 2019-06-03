@@ -300,6 +300,18 @@ def api_models( request, models=None, format=None ):
             field = dict( name=f.name, type=ftype, default=None )
             try:
                 dflt = getattr( f, 'default' )
+                if dflt is dict:
+                    dflt = ('f', 'Object' )
+                elif dflt in ( list, tuple ):
+                    dflt = ( 'f', 'Array' )
+                elif dflt in ( int, float ):
+                    dflt = ( 'f', 'Number' )
+                elif dflt in ( str, basestring ):
+                    dflt = ( 'f', 'String' )
+                elif dflt is bool:
+                    dflt = ( 'f', 'Boolean' )
+                else:
+                    dflt = NOT_PROVIDED
                 if dflt is not NOT_PROVIDED:
                     field[ 'default' ] = dflt
             except AttributeError:

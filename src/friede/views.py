@@ -311,7 +311,7 @@ def api_models( request, models=None, format=None ):
                     dflt = ( 'f', 'String' )
                 elif dflt is bool:
                     dflt = ( 'f', 'Boolean' )
-                else:
+                elif callable( dflt ):
                     dflt = NOT_PROVIDED
                 if dflt is not NOT_PROVIDED:
                     field[ 'default' ] = dflt

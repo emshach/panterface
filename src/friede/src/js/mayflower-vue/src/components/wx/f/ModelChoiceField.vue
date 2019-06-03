@@ -17,8 +17,6 @@ export default {
   mixins: [ ModelFieldMixin, ModelModelsFieldMixin ],
   props: [],
   mounted() {
-    if ( !this.readonly )
-      this.getObjects('');
   },
   data() {
     return {

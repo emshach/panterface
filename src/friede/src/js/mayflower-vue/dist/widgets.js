@@ -1945,7 +1945,10 @@ var ModelModelsFieldMixin = {
       this.loading = true;
       this.$api(app, model.plural, '?search=' + query).then(function (r) {
         _this2.loading = false;
-        _this2.options = r.data.results; // this.options.unshift(
+        _this2.options = r.data.results.map(function (x) {
+          if (!x.title) x.title = x.path;
+          return x;
+        }); // this.options.unshift(
         //   { path: '', title: 'New ' + model.label, ctrl: true },
         //   { path: '_action.cancel', title: 'Cancel', ctrl: true },
         //   { path: '_action.done', title: 'Done', ctrl: true })

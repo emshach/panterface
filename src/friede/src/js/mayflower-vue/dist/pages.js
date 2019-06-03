@@ -156,34 +156,9 @@ var render = function() {
     "vk-card",
     { staticClass: "form-page" },
     [
-      _c("vk-card-title", { attrs: { slot: "header" }, slot: "header" }, [
-        _vm._v(_vm._s(_vm.location.title))
-      ]),
-      _vm.model
-        ? _c(
-            "form",
-            {
-              staticClass: "uk-form-horizontal uk-text-left",
-              attrs: { slot: "body" },
-              slot: "body"
-            },
-            _vm._l(_vm.data.fields, function(field) {
-              return _c("field", {
-                key: field.meta.name,
-                staticClass: "uk-margin",
-                attrs: {
-                  type: field.meta.type,
-                  name: field.meta.name,
-                  data: field
-                }
-              })
-            }),
-            1
-          )
-        : _vm._e(),
       _c(
         "div",
-        { staticClass: "form-controls uk-text-right" },
+        { staticClass: "form-controls uk-align-right uk-text-right" },
         [
           _c(
             "vk-btn",
@@ -232,7 +207,34 @@ var render = function() {
           )
         ],
         1
-      )
+      ),
+      _c("vk-card-title", { staticClass: "uk-align-left" }, [
+        _vm._v(_vm._s(_vm.location.title))
+      ]),
+      _c("vue-perfect-scrollbar", [
+        _vm.model
+          ? _c(
+              "form",
+              {
+                staticClass: "uk-form-horizontal uk-text-left",
+                attrs: { slot: "body" },
+                slot: "body"
+              },
+              _vm._l(_vm.data.fields, function(field) {
+                return _c("field", {
+                  key: field.meta.name,
+                  staticClass: "uk-margin",
+                  attrs: {
+                    type: field.meta.type,
+                    name: field.meta.name,
+                    data: field
+                  }
+                })
+              }),
+              1
+            )
+          : _vm._e()
+      ])
     ],
     1
   )

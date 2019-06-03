@@ -1,7 +1,12 @@
 
 .form-page {
-  margin: 40px 20px;
   border-radius: 2px;
+}
+.form-page .uk-card-title {
+    margin: 6px 10px 20px;
+}
+.form-page .form-controls {
+    margin-bottom: 0;
 }
 .form-page .uk-input, .form-page .uk-select, .form-page .uk-textarea {
     border: 1px solid #e5e5e5;
@@ -10,12 +15,12 @@
     color: rgba(0, 0, 0, 0.35);
 }
 .uk-button-group .uk-button:first-child {
-  border-top-left-radius: 2px;
+  /* border-top-left-radius: 2px; */
   border-bottom-left-radius: 2px;
 }
 .uk-button-group .uk-button:last-child {
   border-top-right-radius: 2px;
-  border-bottom-right-radius: 2px;
+  /* border-bottom-right-radius: 2px; */
 }
 
 

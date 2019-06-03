@@ -47,11 +47,17 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 #nav {
   margin: 0 4px 4px;
   padding: 0;
   position: fixed;
+  z-index: 200;
   top: 0;
   right: 0;
   a {

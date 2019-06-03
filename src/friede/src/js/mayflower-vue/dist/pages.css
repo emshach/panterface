@@ -2,8 +2,14 @@
 .form-page {
   border-radius: 2px;
 }
+.form-page > .uk-card-header {
+    padding: 0;
+}
+.form-page .uk-card-header {
+    padding: 0;
+}
 .form-page .uk-card-title {
-    margin: 6px 10px 20px;
+    margin: 6px 14px;
 }
 .form-page .form-controls {
     margin-bottom: 0;

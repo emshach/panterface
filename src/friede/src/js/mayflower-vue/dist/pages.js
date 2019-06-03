@@ -197,6 +197,7 @@ var render = function() {
                   _c(
                     "vk-btn",
                     {
+                      attrs: { type: "primary" },
                       on: {
                         click: function($event) {
                           $event.stopPropagation()

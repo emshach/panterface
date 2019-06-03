@@ -5,7 +5,7 @@
         <vk-btn type="text" class="uk-margin-right" @click.stop="cancel">cancel</vk-btn>
         <vk-btn-grp>
           <vk-btn type="primary" @click.stop="submit">Save</vk-btn>
-          <vk-btn @click.stop="submitAndRedo">Add another</vk-btn>
+          <vk-btn type="primary" @click.stop="submitAndRedo">Add another</vk-btn>
         </vk-btn-grp>
       </div>
       <vk-card-title class="uk-align-left">{{ location.title }}</vk-card-title>
@@ -65,8 +65,14 @@ export default  {
 <style lang="scss">
 .form-page {
   border-radius: 2px;
+  > .uk-card-header {
+    padding: 0;
+  }
+  .uk-card-header {
+    padding: 0;
+  }
   .uk-card-title{
-    margin: 6px 10px 20px;
+    margin: 6px 14px;
   }
   .form-controls{
     margin-bottom: 0;

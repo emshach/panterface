@@ -44,7 +44,9 @@ class PathFilter( filters.BaseFilterBackend ):
     Filter for retrieving multiple objects by ID
     """
     def filter_queryset( self, request, queryset, view ):
-        path = request.query_params.get( 'path', 'nosuchpath' )
+        path = request.query_params.get( 'path' )
+        if path is None:
+            return queryset
         rpath = request.path.split('/')
         while len( rpath ) and not rpath[-1]:
             rpath.pop()
@@ -52,7 +54,6 @@ class PathFilter( filters.BaseFilterBackend ):
         if not path.startswith( name + '.' ):
             path = "{}.{}".format( name, path )
         return queryset.filter( path=path )
-        return queryset
 
 
 routes = OrderedDict()

@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render
 from django.contrib.contenttypes.models import ContentType
+from django.db.models.fields import NOT_PROVIDED
 from .objects import getregistries, getenv, Locations
 from .core import setup, setupshell, setuptheme, setupmenus
 from .models import *
@@ -296,7 +297,13 @@ def api_models( request, models=None, format=None ):
             if ftype in form_field_mappings:
                 ftype = form_field_mappings[ ftype ]
                 if not ftype: continue
-            field = dict( name=f.name, type=ftype )
+            field = dict( name=f.name, type=ftype, default=None )
+            try:
+                dflt = getattr( f, 'default' )
+                if dflt is not NOT_PROVIDED:
+                    field[ 'default' ] = dflt
+            except AttributeError:
+                pass
             if getattr( f, 'related_model', None ):
                 m = f.related_model
                 related = "%s.%s" % ( m._meta.app_label, m._meta.model_name )

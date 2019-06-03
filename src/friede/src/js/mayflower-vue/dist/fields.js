@@ -2088,12 +2088,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.readonly
-    ? _c("div", {
-        class: _vm.fieldClasses,
-        domProps: { innerHTML: _vm._s(_vm.field.html) }
-      })
-    : _vm.editMode
+  return _vm.editMode
     ? _c("input", {
         directives: [
           {
@@ -2117,20 +2112,11 @@ var render = function() {
           }
         }
       })
-    : _vm.field.html
-    ? _c("div", {
+    : _c("div", {
         class: _vm.fieldClasses,
-        domProps: { innerHTML: _vm._s(_vm.field.html) },
+        domProps: { innerHTML: _vm._s(_vm.html) },
         on: { click: _vm.editField, focus: _vm.editField }
       })
-    : _c(
-        "div",
-        {
-          class: [_vm.fieldClasses, "no-data"],
-          on: { click: _vm.editField, focus: _vm.editField }
-        },
-        [_vm._v(_vm._s(_vm.placeholder))]
-      )
 }
 var staticRenderFns = []
 render._withStripped = true

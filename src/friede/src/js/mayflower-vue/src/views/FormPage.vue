@@ -70,6 +70,7 @@ export default  {
   }
   .uk-card-header {
     padding: 0;
+    border-bottom: none;
   }
   .uk-card-title{
     margin: 6px 14px;

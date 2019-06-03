@@ -7,6 +7,7 @@
 }
 .form-page .uk-card-header {
     padding: 0;
+    border-bottom: none;
 }
 .form-page .uk-card-title {
     margin: 6px 14px;

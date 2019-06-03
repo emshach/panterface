@@ -6,6 +6,17 @@
 .form-page .uk-input, .form-page .uk-select, .form-page .uk-textarea {
     border: 1px solid #e5e5e5;
 }
+.form-page .no-data {
+    color: rgba(0, 0, 0, 0.35);
+}
+.uk-button-group .uk-button:first-child {
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+.uk-button-group .uk-button:last-child {
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+}
 
 
 /*# sourceMappingURL=pages.css.map*/

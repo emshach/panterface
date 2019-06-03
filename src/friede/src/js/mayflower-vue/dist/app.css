@@ -210,6 +210,12 @@ a[data-v-aae30ed8] {
               box-shadow: 0 -20px 30px #ffffa3;
 }
 
+.basic-page[data-v-27467493] {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  padding: 20px;
+}
 
 /* ========================================================================
    Component: Base

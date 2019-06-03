@@ -1,15 +1,17 @@
 <template lang="html">
-  <div class="basic-page">
+  <vue-perfect-scrollbar v-once class="basic-page">
     <component :is="component" />
-  </div>
+  </vue-perfect-scrollbar>
 </template>
 
 <script lang="js">
+import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 import Home from '@/views/Home'
 const FormPage = () => import(/* webpackChunkName: "pages" */ '@/views/FormPage' )
 export default  {
   name: 'BasicPage',
   components: {
+    VuePerfectScrollbar,
     Home,
     FormPage
   },
@@ -31,7 +33,10 @@ export default  {
 </script>
 
 <style scoped lang="scss">
-  .basic-page {
-
-  }
+.basic-page {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  padding: 20px;
+}
 </style>

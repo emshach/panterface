@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "7593f8128c47eecde0ee";
+/******/ 	var hotCurrentHash = "160cfd7d30fdaca78465";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1707,7 +1707,10 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _views_Home__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/views/Home */ "./src/views/Home.vue");
+/* harmony import */ var vue_perfect_scrollbar__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-perfect-scrollbar */ "./node_modules/vue-perfect-scrollbar/dist/index.js");
+/* harmony import */ var vue_perfect_scrollbar__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_perfect_scrollbar__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _views_Home__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/views/Home */ "./src/views/Home.vue");
+
 
 
 var FormPage = function FormPage() {
@@ -1717,7 +1720,8 @@ var FormPage = function FormPage() {
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'BasicPage',
   components: {
-    Home: _views_Home__WEBPACK_IMPORTED_MODULE_0__["default"],
+    VuePerfectScrollbar: vue_perfect_scrollbar__WEBPACK_IMPORTED_MODULE_0___default.a,
+    Home: _views_Home__WEBPACK_IMPORTED_MODULE_1__["default"],
     FormPage: FormPage
   },
   props: [],
@@ -2264,14 +2268,21 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "basic-page" },
-    [_c(_vm.component, { tag: "component" })],
-    1
-  )
+  return _vm._m(0)
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "vue-perfect-scrollbar",
+      { staticClass: "basic-page" },
+      [_c(_vm.component, { tag: "component" })],
+      1
+    )
+  }
+]
 render._withStripped = true
 
 

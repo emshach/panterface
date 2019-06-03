@@ -183,15 +183,29 @@ var render = function() {
         : _vm._e(),
       _c(
         "div",
-        { attrs: { slot: "footer" }, slot: "footer" },
+        { staticClass: "form-controls uk-text-right" },
         [
+          _c(
+            "vk-btn",
+            {
+              staticClass: "uk-margin-right",
+              attrs: { type: "text" },
+              on: {
+                click: function($event) {
+                  $event.stopPropagation()
+                  return _vm.cancel($event)
+                }
+              }
+            },
+            [_vm._v("cancel")]
+          ),
           _c(
             "vk-btn-grp",
             [
               _c(
                 "vk-btn",
                 {
-                  attrs: { type: "primry" },
+                  attrs: { type: "primary" },
                   on: {
                     click: function($event) {
                       $event.stopPropagation()
@@ -204,7 +218,6 @@ var render = function() {
               _c(
                 "vk-btn",
                 {
-                  attrs: { type: "primary" },
                   on: {
                     click: function($event) {
                       $event.stopPropagation()
@@ -216,19 +229,6 @@ var render = function() {
               )
             ],
             1
-          ),
-          _c(
-            "vk-btn",
-            {
-              attrs: { type: "link" },
-              on: {
-                click: function($event) {
-                  $event.stopPropagation()
-                  return _vm.cancel($event)
-                }
-              }
-            },
-            [_vm._v("cancel")]
           )
         ],
         1

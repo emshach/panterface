@@ -1,13 +1,15 @@
 <template lang="html">
   <vk-card class="form-page">
+    <div slot="header">
       <div class="form-controls uk-align-right uk-text-right">
-      <vk-btn type="text" class="uk-margin-right" @click.stop="cancel">cancel</vk-btn>
-      <vk-btn-grp>
-        <vk-btn type="primary" @click.stop="submit">Save</vk-btn>
-        <vk-btn @click.stop="submitAndRedo">Add another</vk-btn>
-      </vk-btn-grp>
+        <vk-btn type="text" class="uk-margin-right" @click.stop="cancel">cancel</vk-btn>
+        <vk-btn-grp>
+          <vk-btn type="primary" @click.stop="submit">Save</vk-btn>
+          <vk-btn @click.stop="submitAndRedo">Add another</vk-btn>
+        </vk-btn-grp>
+      </div>
+      <vk-card-title class="uk-align-left">{{ location.title }}</vk-card-title>
     </div>
-    <vk-card-title class="uk-align-left">{{ location.title }}</vk-card-title>
     <vue-perfect-scrollbar>
       <form slot="body" v-if="model" class="uk-form-horizontal uk-text-left">
         <field v-for="field in data.fields" :key="field.meta.name"

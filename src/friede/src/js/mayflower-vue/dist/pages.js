@@ -158,59 +158,66 @@ var render = function() {
     [
       _c(
         "div",
-        { staticClass: "form-controls uk-align-right uk-text-right" },
+        { attrs: { slot: "header" }, slot: "header" },
         [
           _c(
-            "vk-btn",
-            {
-              staticClass: "uk-margin-right",
-              attrs: { type: "text" },
-              on: {
-                click: function($event) {
-                  $event.stopPropagation()
-                  return _vm.cancel($event)
-                }
-              }
-            },
-            [_vm._v("cancel")]
-          ),
-          _c(
-            "vk-btn-grp",
+            "div",
+            { staticClass: "form-controls uk-align-right uk-text-right" },
             [
               _c(
                 "vk-btn",
                 {
-                  attrs: { type: "primary" },
+                  staticClass: "uk-margin-right",
+                  attrs: { type: "text" },
                   on: {
                     click: function($event) {
                       $event.stopPropagation()
-                      return _vm.submit($event)
+                      return _vm.cancel($event)
                     }
                   }
                 },
-                [_vm._v("Save")]
+                [_vm._v("cancel")]
               ),
               _c(
-                "vk-btn",
-                {
-                  on: {
-                    click: function($event) {
-                      $event.stopPropagation()
-                      return _vm.submitAndRedo($event)
-                    }
-                  }
-                },
-                [_vm._v("Add another")]
+                "vk-btn-grp",
+                [
+                  _c(
+                    "vk-btn",
+                    {
+                      attrs: { type: "primary" },
+                      on: {
+                        click: function($event) {
+                          $event.stopPropagation()
+                          return _vm.submit($event)
+                        }
+                      }
+                    },
+                    [_vm._v("Save")]
+                  ),
+                  _c(
+                    "vk-btn",
+                    {
+                      on: {
+                        click: function($event) {
+                          $event.stopPropagation()
+                          return _vm.submitAndRedo($event)
+                        }
+                      }
+                    },
+                    [_vm._v("Add another")]
+                  )
+                ],
+                1
               )
             ],
             1
-          )
+          ),
+          _c("vk-card-title", { staticClass: "uk-align-left" }, [
+            _vm._v(_vm._s(_vm.location.title))
+          ])
         ],
         1
       ),
-      _c("vk-card-title", { staticClass: "uk-align-left" }, [
-        _vm._v(_vm._s(_vm.location.title))
-      ]),
       _c("vue-perfect-scrollbar", [
         _vm.model
           ? _c(

@@ -323,7 +323,7 @@ def api_models( request, models=None, format=None ):
                 field[ 'related' ] = related
                 if related in out or related in have:
                     continue
-                fm = app_label.relations.get( meta.model_name )
+                fm = app_obj.relations.get( meta.model_name )
                 if fm is not None and fm.get( links ) is not None\
                    and f.name in fm[ 'links' ]:
                     models.append( related )

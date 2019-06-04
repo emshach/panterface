@@ -131,6 +131,7 @@ class App( app.App ):
         ( 'links',            views.LinkViewSet           ),
         ( 'references',       views.ReferenceViewSet      ),
         ( 'settings',         views.SettingViewSet        ),
+        ( 'actions',          views.ActionViewSet         ),
         ( 'containerentries', views.ContainerEntryViewSet ),
         ( 'widgetentries',    views.WidgetEntryViewSet    ),
         ( 'blockentries',     views.BlockEntryViewSet     ),
@@ -160,6 +161,7 @@ class App( app.App ):
         ( 'link',           serializers.LinkSerializer           ),
         ( 'reference',      serializers.ReferenceSerializer      ),
         ( 'setting',        serializers.SettingSerializer        ),
+        ( 'action',         serializers.ActionSerializer         ),
         ( 'containerentry', serializers.ContainerEntrySerializer ),
         ( 'widgetentry',    serializers.WidgetEntrySerializer    ),
         ( 'blockentry',     serializers.BlockEntrySerializer     ),
@@ -173,6 +175,7 @@ class App( app.App ):
         ( 'linkentry',      serializers.LinkEntrySerializer      ),
         ( 'referenceentry', serializers.ReferenceEntrySerializer ),
         ( 'settingentry',   serializers.SettingEntrySerializer   ),
+        ( 'actionentry',    serializers.ActionEntrySerializer    ),
     )
     def getdata( self ):
         return (

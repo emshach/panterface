@@ -324,7 +324,7 @@ def api_models( request, models=None, format=None ):
                 if related in out or related in have:
                     continue
                 fm = app_obj.relations.get( meta.model_name )
-                if fm is not None and fm.get( links ) is not None\
+                if fm is not None and fm.get( 'links' ) is not None\
                    and f.name in fm[ 'links' ]:
                     models.append( related )
                 elif 'Rel' not in ftype0:

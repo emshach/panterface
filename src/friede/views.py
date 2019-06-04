@@ -265,7 +265,6 @@ def api_models( request, models=None, format=None ):
     have = set( request.query_params.getlist( 'have' ))
     while models:
         name, cont = models.pop()
-        if not cont: continue
         if not name or name in out or name in have: continue
         model = _get_model( name )
         if not model:
@@ -322,7 +321,7 @@ def api_models( request, models=None, format=None ):
                 m = f.related_model
                 related = "%s.%s" % ( m._meta.app_label, m._meta.model_name )
                 field[ 'related' ] = related
-                if related in out or related in have:
+                if not cont or related in out or related in have:
                     continue
                 fm = app_obj.relations.get( meta.model_name )
                 if fm is not None and fm.get( 'links' ) is not None\

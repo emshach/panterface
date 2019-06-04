@@ -223,15 +223,11 @@ var render = function() {
         ],
         1
       ),
-      _c("vue-perfect-scrollbar", [
+      _c("vue-perfect-scrollbar", { attrs: { slot: "body" }, slot: "body" }, [
         _vm.model
           ? _c(
               "form",
-              {
-                staticClass: "uk-form-horizontal uk-text-left",
-                attrs: { slot: "body" },
-                slot: "body"
-              },
+              { staticClass: "uk-form-horizontal uk-text-left" },
               _vm._l(_vm.data.fields, function(field) {
                 return _c("field", {
                   key: field.meta.name,

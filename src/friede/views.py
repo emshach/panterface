@@ -321,7 +321,13 @@ def api_models( request, models=None, format=None ):
                 m = f.related_model
                 related = "%s.%s" % ( m._meta.app_label, m._meta.model_name )
                 field[ 'related' ] = related
-                if 'Rel' not in ftype0 and related not in out and related not in have:
+                if related in out or related in have:
+                    continue
+                fm = app_label.relations.get( meta.model_name )
+                if fm is not None and fm.get( links ) is not None\
+                   and f.name in fm[ 'links' ]:
+                    models.append( related )
+                elif 'Rel' not in ftype0:
                     models.append( related )
             # TODO: get field groups from settings
             data[ 'fields' ].append( field )

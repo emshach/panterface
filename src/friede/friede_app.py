@@ -15,69 +15,84 @@ class App( app.App ):
     registry_objects = '''container widget block screen shell theme slot app
                           location'''.split()
     objects = registry_objects + 'link reference setting'.split()
+
+    links = '''_container_entries _widget_entries _block_entries _screen_entries
+               _shell_entries _theme_entries _slot_entries _app_entries
+               _location_entries _icon_entries _link_entries _reference_entries
+               _setting_entries _action_entries'''.split()
+
     relations = dict(
         container={
             'model'  : 'Container',
             'icon'   : 'fontawesome.box-open',
             'plural' : 'containers',
             'has'    : objects,
-            'in'     : registry_objects
+            'in'     : registry_objects,
+            'links'  : links,
         },
         widget={
             'model'  : 'Widget',
             'icon'   : 'fontawesome.toggle-on',
             'plural' : 'widgets',
             'has'    : objects,
-            'in'     : registry_objects
+            'in'     : registry_objects,
+            'links'  : links,
         },
         block={
             'model'  : 'Block',
             'icon'   : 'fontawesome.columns',
             'plural' : 'blocks',
             'has'    : objects,
-            'in'     : registry_objects
+            'in'     : registry_objects,
+            'links'  : links,
         },
         screen={
             'model'  : 'Screen',
             'icon'   : 'fontawesome.desktop',
             'plural' : 'screens',
             'has'    : objects,
-            'in'     : registry_objects
+            'in'     : registry_objects,
+            'links'  : links,
         },
         shell={
             'model'  : 'Shell',
             'icon'   : 'fontawesome.terminal',
             'plural' : 'shells',
             'has'    : objects,
-            'in'     : registry_objects
+            'in'     : registry_objects,
+            'links'  : links,
         },
         theme={
             'model'  : 'Theme',
             'icon'   : 'fontawesome.image',
             'plural' : 'themes',
             'has'    : objects,
-            'in'     : registry_objects
+            'in'     : registry_objects,
+            'links'  : links,
         },
         slot={
             'model'  : 'Slot',
             'icon'   : 'fontawesome.indent',
             'plural' : 'slots',
             'has'    : objects,
-            'in'     : registry_objects
+            'in'     : registry_objects,
+            'links'  : links,
         },
         app={
             'model'  : 'App',
             'icon'   : 'fontawesome.mobile-alt',
             'plural' : 'apps',
             'has'    : objects,
-            'in'     : registry_objects
+            'in'     : registry_objects,
+            'links'  : links,
         },
         location={
             'model'  : 'Location',
             'icon'   : 'fontawesome.location-arrow',
             'plural' : 'locations',
             'has'    : objects,
-            'in'     : registry_objects
+            'in'     : registry_objects,
+            'links'  : links,
         },
         link={
             'model'  : 'Link',

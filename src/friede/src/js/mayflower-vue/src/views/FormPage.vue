@@ -29,6 +29,7 @@ import { Model } from '@/lib/objects'
 export default  {
   name: 'FormPage',
   components: {
+    VuePerfectScrollbar,
     VkCard,
     VkCardTitle,
     VkBtn,

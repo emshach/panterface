@@ -73,6 +73,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'FormPage',
   components: {
+    VuePerfectScrollbar: vue_perfect_scrollbar__WEBPACK_IMPORTED_MODULE_0___default.a,
     VkCard: vuikit_lib_card__WEBPACK_IMPORTED_MODULE_1__["Card"],
     VkCardTitle: vuikit_lib_card__WEBPACK_IMPORTED_MODULE_1__["CardTitle"],
     VkBtn: vuikit_lib_button__WEBPACK_IMPORTED_MODULE_2__["Button"],

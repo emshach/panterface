@@ -260,11 +260,12 @@ def api_models( request, models=None, format=None ):
         return Response({})
     while models.endswith('/'):
         models = models[:-1]
-    models = models.split(',')[ ::-1 ]
+    models = [( m, True ) for m in models.split(',')[ ::-1 ]]
     out = {}
     have = set( request.query_params.getlist( 'have' ))
     while models:
-        name = models.pop()
+        name, cont = models.pop()
+        if not cont: continue
         if not name or name in out or name in have: continue
         model = _get_model( name )
         if not model:
@@ -326,9 +327,9 @@ def api_models( request, models=None, format=None ):
                 fm = app_obj.relations.get( meta.model_name )
                 if fm is not None and fm.get( 'links' ) is not None\
                    and f.name in fm[ 'links' ]:
-                    models.append( related )
+                    models.append(( related, False ))
                 elif 'Rel' not in ftype0:
-                    models.append( related )
+                    models.append(( related, True ))
             # TODO: get field groups from settings
             data[ 'fields' ].append( field )
 

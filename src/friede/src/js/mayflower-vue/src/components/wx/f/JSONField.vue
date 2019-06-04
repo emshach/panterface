@@ -11,13 +11,12 @@ import VueHighlightJS from 'vue-highlightjs'
 import { ModelFieldMixin } from '@/lib/mixins'
 import JsonEditor from 'vue-json-edit'
 
+Vue.use( JsonEditor );
 Vue.use( VueHighlightJS );
 export default {
   name: 'JsonField',
   mixins: [ ModelFieldMixin ],
-  components: {
-    JsonEditor
-  },
+  components: {},
   props: {},
   mounted() {
     

@@ -59,10 +59,13 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vuikit_lib_card__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuikit/lib/card */ "./node_modules/vuikit/lib/card.js");
-/* harmony import */ var vuikit_lib_button__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuikit/lib/button */ "./node_modules/vuikit/lib/button.js");
-/* harmony import */ var _components_Field__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/Field */ "./src/components/Field.vue");
-/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
+/* harmony import */ var vue_perfect_scrollbar__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-perfect-scrollbar */ "./node_modules/vue-perfect-scrollbar/dist/index.js");
+/* harmony import */ var vue_perfect_scrollbar__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_perfect_scrollbar__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vuikit_lib_card__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuikit/lib/card */ "./node_modules/vuikit/lib/card.js");
+/* harmony import */ var vuikit_lib_button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuikit/lib/button */ "./node_modules/vuikit/lib/button.js");
+/* harmony import */ var _components_Field__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/Field */ "./src/components/Field.vue");
+/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
+
 
 
 
@@ -70,11 +73,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'FormPage',
   components: {
-    VkCard: vuikit_lib_card__WEBPACK_IMPORTED_MODULE_0__["Card"],
-    VkCardTitle: vuikit_lib_card__WEBPACK_IMPORTED_MODULE_0__["CardTitle"],
-    VkBtn: vuikit_lib_button__WEBPACK_IMPORTED_MODULE_1__["Button"],
-    VkBtnGrp: vuikit_lib_button__WEBPACK_IMPORTED_MODULE_1__["ButtonGroup"],
-    Field: _components_Field__WEBPACK_IMPORTED_MODULE_2__["default"]
+    VkCard: vuikit_lib_card__WEBPACK_IMPORTED_MODULE_1__["Card"],
+    VkCardTitle: vuikit_lib_card__WEBPACK_IMPORTED_MODULE_1__["CardTitle"],
+    VkBtn: vuikit_lib_button__WEBPACK_IMPORTED_MODULE_2__["Button"],
+    VkBtnGrp: vuikit_lib_button__WEBPACK_IMPORTED_MODULE_2__["ButtonGroup"],
+    Field: _components_Field__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
   mounted: function mounted() {},
   data: function data() {
@@ -93,7 +96,7 @@ __webpack_require__.r(__webpack_exports__);
       return this.$store.state.model;
     },
     data: function data() {
-      return this.$store.state.modelData || Object(_lib_objects__WEBPACK_IMPORTED_MODULE_3__["Model"])(this.model);
+      return this.$store.state.modelData || Object(_lib_objects__WEBPACK_IMPORTED_MODULE_4__["Model"])(this.model);
     }
   }
 });

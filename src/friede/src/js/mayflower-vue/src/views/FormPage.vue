@@ -21,6 +21,7 @@
 </template>
 
 <script lang="js">
+import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 import { Card as VkCard, CardTitle as VkCardTitle } from 'vuikit/lib/card'
 import { Button as VkBtn, ButtonGroup as VkBtnGrp } from 'vuikit/lib/button'
 import Field from '@/components/Field'

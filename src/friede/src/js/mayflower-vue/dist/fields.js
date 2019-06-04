@@ -487,13 +487,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vue_json_edit__WEBPACK_IMPORTED_MODULE_3___default.a);
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vue_highlightjs__WEBPACK_IMPORTED_MODULE_1___default.a);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'JsonField',
   mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_2__["ModelFieldMixin"]],
-  components: {
-    JsonEditor: vue_json_edit__WEBPACK_IMPORTED_MODULE_3___default.a
-  },
+  components: {},
   props: {},
   mounted: function mounted() {},
   data: function data() {

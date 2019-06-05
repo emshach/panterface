@@ -155,7 +155,7 @@ var render = function() {
           _c("hr", { staticClass: "titlesep" }),
           _c(_vm.type, {
             tag: "component",
-            attrs: { name: _vm.name, field: _vm.field }
+            attrs: { name: _vm.name, field: _vm.field, "empty-value": "None" }
           })
         ],
         1

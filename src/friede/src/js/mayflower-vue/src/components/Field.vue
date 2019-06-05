@@ -2,7 +2,7 @@
   <div v-if="fieldset" class="uk-fieldset">
     <h4>{{ label }}</h4>
     <hr class="titlesep" />
-    <component :is="type" :name="name" :field="field" />
+    <component :is="type" :name="name" :field="field" empty-value="None" />
   </div>
   <div v-else>
     <label class="uk-form-label">{{ label }}</label>

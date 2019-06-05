@@ -148,8 +148,8 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _vm.fieldset
     ? _c(
-        "fieldset",
-        { staticClass: "uk-field" },
+        "div",
+        { staticClass: "uk-fieldest" },
         [
           _c("legend", { staticClass: "uk-legend" }, [
             _vm._v(_vm._s(_vm.label))

@@ -1,8 +1,8 @@
 <template lang="html">
-  <fieldset v-if="fieldset" class="uk-field">
+  <div v-if="fieldset" class="uk-fieldest">
     <legend class="uk-legend">{{ label }}</legend>
     <component :is="type" :name="name" :field="field" />
-  </fieldset>
+  </div>
   <div v-else>
     <label class="uk-form-label">{{ label }}</label>
     <div class="uk-form-controls">
@@ -58,7 +58,11 @@ export default  {
 </script>
 
 <style scoped lang="scss">
-  .field {
-
+.field {
+}
+.up-fieldset {
+  legend {
+    text-transform: capitalize;
   }
+}
 </style>

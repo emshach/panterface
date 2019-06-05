@@ -328,8 +328,9 @@ def api_models( request, models=None, format=None ):
                 if fm is not None and fm.get( 'links' ) is not None\
                    and f.name in fm[ 'links' ]:
                     models.append(( related, False ))
-                    if isinstance( fm[ 'links' ], dict ) and fm[ 'links' ].get( 'via' ):
-                        field[ 'link_field' ] = fm[ 'links' ][ 'via' ]
+                    if isinstance( fm[ 'links' ], dict )\
+                       and fm[ 'links' ][ f.name ].get( 'via' ):
+                        field[ 'link_field' ] = fm[ 'links' ][ f.name ][ 'via' ]
                 elif 'Rel' not in ftype0:
                     models.append(( related, True ))
             # TODO: get field groups from settings

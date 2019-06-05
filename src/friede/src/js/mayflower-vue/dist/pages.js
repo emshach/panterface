@@ -149,7 +149,7 @@ var render = function() {
   return _vm.fieldset
     ? _c(
         "div",
-        { staticClass: "uk-fieldest" },
+        { staticClass: "uk-fieldset" },
         [
           _c("h4", [_vm._v(_vm._s(_vm.label))]),
           _c("hr", { staticClass: "titlesep" }),

@@ -1,5 +1,5 @@
 <template lang="html">
-  <div v-if="fieldset" class="uk-fieldest">
+  <div v-if="fieldset" class="uk-fieldset">
     <h4>{{ label }}</h4>
     <hr class="titlesep" />
     <component :is="type" :name="name" :field="field" />
@@ -67,6 +67,7 @@ export default  {
     text-transform: capitalize;
   }
   .titlesep {
+    margin-top: 0;
     margin-bottom: 20px;
   }
 }

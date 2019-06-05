@@ -19,6 +19,7 @@ export default new Vuex.Store({
     lastLocation: null,
     screen: null,
     models: {},
+    modelsRequested: {},
     model: null,
     modelData: null,
   },

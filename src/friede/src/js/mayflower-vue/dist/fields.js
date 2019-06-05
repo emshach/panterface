@@ -6095,9 +6095,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DurationOptions", function() { return DurationOptions; });
 /* harmony import */ var core_js_modules_es6_regexp_split__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es6.regexp.split */ "./node_modules/core-js/modules/es6.regexp.split.js");
 /* harmony import */ var core_js_modules_es6_regexp_split__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_regexp_split__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
-/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js");
-/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! regenerator-runtime/runtime */ "./node_modules/regenerator-runtime/runtime.js");
+/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/@babel/runtime-corejs2/helpers/esm/asyncToGenerator */ "./node_modules/@babel/runtime-corejs2/helpers/esm/asyncToGenerator.js");
+/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
+/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js");
+/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_4__);
+
+
 
 
 
@@ -6105,7 +6110,7 @@ var ModelWidgetMixin = {};
 var ModelFieldMixin = {
   props: {
     field: {
-      type: _lib_objects__WEBPACK_IMPORTED_MODULE_1__["Field"],
+      type: _lib_objects__WEBPACK_IMPORTED_MODULE_3__["Field"],
       required: true
     },
     readonly: {
@@ -6157,7 +6162,7 @@ var ModelFieldMixin = {
 };
 var ModelModelsFieldMixin = {
   components: {
-    Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_2___default.a
+    Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_4___default.a
   },
   data: function data() {
     return {
@@ -6167,25 +6172,51 @@ var ModelModelsFieldMixin = {
     };
   },
   methods: {
-    getObjects: function getObjects(query) {
-      var _this2 = this;
+    getObjects: function () {
+      var _getObjects = Object(_home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__["default"])(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee(query) {
+        var _this2 = this;
 
-      var m = this.searchModel;
-      var app = m.split('.')[0];
-      var model = this.$store.state.models[m];
-      this.loading = true;
-      this.$api(app, model.plural, '?search=' + query).then(function (r) {
-        _this2.loading = false;
-        _this2.options = r.data.results.map(function (x) {
-          if (!x.title) x.title = x.path;
-          return x;
-        }); // this.options.unshift(
-        //   { path: '', title: 'New ' + model.label, ctrl: true },
-        //   { path: '_action.cancel', title: 'Cancel', ctrl: true },
-        //   { path: '_action.done', title: 'Done', ctrl: true })
-        // TODO: put this in maybe
-      });
-    }
+        var m, app, model;
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                m = this.searchModel;
+                app = m.split('.')[0];
+                _context.next = 4;
+                return this.$store.dispatch('getModel', m);
+
+              case 4:
+                model = _context.sent;
+                this.loading = true;
+                this.$api(app, model.plural, '?search=' + query).then(function (r) {
+                  _this2.loading = false;
+                  _this2.options = r.data.results.map(function (x) {
+                    if (!x.title) x.title = x.path;
+                    return x;
+                  }); // this.options.unshift(
+                  //   { path: '', title: 'New ' + model.label, ctrl: true },
+                  //   { path: '_action.cancel', title: 'Cancel', ctrl: true },
+                  //   { path: '_action.done', title: 'Done', ctrl: true })
+                  // TODO: put this in maybe
+                });
+
+              case 7:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function getObjects(_x) {
+        return _getObjects.apply(this, arguments);
+      }
+
+      return getObjects;
+    }()
   },
   computed: {
     searchModel: function searchModel() {

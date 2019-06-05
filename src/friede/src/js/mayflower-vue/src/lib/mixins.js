@@ -77,10 +77,10 @@ const ModelModelsFieldMixin = {
     }
   },
   methods: {
-    getObjects( query ) {
+    async getObjects( query ) {
       const m = this.searchModel;
       const app = m.split('.')[0];
-      const model = this.$store.state.models[m];
+      const model = await this.$store.dispatch( 'getModel', m );
       this.loading = true;
       this.$api( app, model.plural, '?search='+query ).then( r => {
         this.loading = false;

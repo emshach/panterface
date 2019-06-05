@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "9ed2d93f143c06edd6a4";
+/******/ 	var hotCurrentHash = "22bf870207af58ccbf93";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -3524,6 +3524,7 @@ function _getModel() {
     lastLocation: null,
     screen: null,
     models: {},
+    modelsRequested: {},
     model: null,
     modelData: null
   },

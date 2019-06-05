@@ -547,15 +547,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es6_function_name__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_function_name__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var core_js_modules_es6_array_find__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es6.array.find */ "./node_modules/core-js/modules/es6.array.find.js");
 /* harmony import */ var core_js_modules_es6_array_find__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_array_find__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_helpers_esm_readOnlyError__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/@babel/runtime-corejs2/helpers/esm/readOnlyError */ "./node_modules/@babel/runtime-corejs2/helpers/esm/readOnlyError.js");
-/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
-
+/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'ModelMultipleChoiceField',
-  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_3__["ModelFieldMixin"], _lib_mixins__WEBPACK_IMPORTED_MODULE_3__["ModelModelsFieldMixin"]],
+  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_2__["ModelFieldMixin"], _lib_mixins__WEBPACK_IMPORTED_MODULE_2__["ModelModelsFieldMixin"]],
   props: {},
   mounted: function mounted() {},
   data: function data() {
@@ -568,15 +566,10 @@ __webpack_require__.r(__webpack_exports__);
       var l = this.field.meta.link_field;
 
       if (l) {
-        try {
-          var model = this.$store.state.models[m];
-          console.log('model', model);
-          m = (Object(_home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_helpers_esm_readOnlyError__WEBPACK_IMPORTED_MODULE_2__["default"])("m"), model && model.fields.find(function (x) {
-            return x.name === l;
-          }));
-        } catch (e) {
-          console.warn('error in eval', e);
-        }
+        var model = this.$store.state.models[m];
+        return model && model.fields.find(function (x) {
+          return x.name === l;
+        });
       }
 
       return m;

@@ -151,9 +151,8 @@ var render = function() {
         "div",
         { staticClass: "uk-fieldest" },
         [
-          _c("legend", { staticClass: "uk-legend" }, [
-            _vm._v(_vm._s(_vm.label))
-          ]),
+          _c("h4", [_vm._v(_vm._s(_vm.label))]),
+          _c("hr", { staticClass: "titlesep" }),
           _c(_vm.type, {
             tag: "component",
             attrs: { name: _vm.name, field: _vm.field }

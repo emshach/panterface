@@ -1,5 +1,11 @@
-.up-fieldset legend[data-v-3a2f7ffa] {
-  text-transform: capitalize;
+.uk-fieldset[data-v-3a2f7ffa] {
+  margin-top: 30px;
+}
+.uk-fieldset h4[data-v-3a2f7ffa] {
+    text-transform: capitalize;
+}
+.uk-fieldset .titlesep[data-v-3a2f7ffa] {
+    margin-bottom: 20px;
 }
 
 .form-page {

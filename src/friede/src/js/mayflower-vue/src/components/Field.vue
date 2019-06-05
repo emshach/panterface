@@ -1,6 +1,7 @@
 <template lang="html">
   <div v-if="fieldset" class="uk-fieldest">
-    <legend class="uk-legend">{{ label }}</legend>
+    <h4>{{ label }}</h4>
+    <hr class="titlesep" />
     <component :is="type" :name="name" :field="field" />
   </div>
   <div v-else>
@@ -60,9 +61,13 @@ export default  {
 <style scoped lang="scss">
 .field {
 }
-.up-fieldset {
-  legend {
+.uk-fieldset {
+  margin-top: 30px;
+  h4 {
     text-transform: capitalize;
+  }
+  .titlesep {
+    margin-bottom: 20px;
   }
 }
 </style>

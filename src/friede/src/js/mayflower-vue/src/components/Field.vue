@@ -62,13 +62,13 @@ export default  {
 .field {
 }
 .uk-fieldset {
-  margin-top: 30px;
+  margin: 36px 0 20px;
   h4 {
+    margin: 0;
     text-transform: capitalize;
   }
   .titlesep {
-    margin-top: 0;
-    margin-bottom: 20px;
+    margin: 0 0 12px;
   }
 }
 </style>

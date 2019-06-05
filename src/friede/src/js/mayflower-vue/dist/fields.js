@@ -568,10 +568,15 @@ __webpack_require__.r(__webpack_exports__);
       var l = this.field.meta.link_field;
 
       if (l) {
-        var model = this.$store.state.models[m];
-        m = (Object(_home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_helpers_esm_readOnlyError__WEBPACK_IMPORTED_MODULE_2__["default"])("m"), model && model.fields.find(function (x) {
-          return x.name === l;
-        }));
+        try {
+          var model = this.$store.state.models[m];
+          console.log('model', model);
+          m = (Object(_home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_helpers_esm_readOnlyError__WEBPACK_IMPORTED_MODULE_2__["default"])("m"), model && model.fields.find(function (x) {
+            return x.name === l;
+          }));
+        } catch (e) {
+          console.warn('error in eval', e);
+        }
       }
 
       return m;

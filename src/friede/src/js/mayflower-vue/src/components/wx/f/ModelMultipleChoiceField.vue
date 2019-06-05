@@ -33,8 +33,13 @@ export default {
       const m = this.field.meta.related;
       let l = this.field.meta.link_field;
       if (l) {
+        try {
         const model = this.$store.state.models[m];
-        m = model && model.fields.find( x => x.name === l );
+        console.log( 'model', model);
+          m = model && model.fields.find( x => x.name === l );
+        } catch (e) {
+          console.warn( 'error in eval', e );
+        }
       }
       return m;
     }

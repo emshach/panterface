@@ -543,20 +543,12 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
-/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
-/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js");
-/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_2__);
-
-
+/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'ModelMultipleChoiceField',
-  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_1__["ModelFieldMixin"]],
+  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_0__["ModelFieldMixin"], _lib_mixins__WEBPACK_IMPORTED_MODULE_0__["ModelModelsFieldMixin"]],
   props: {},
-  components: {
-    Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_2___default.a
-  },
   mounted: function mounted() {},
   data: function data() {
     return {};
@@ -1826,27 +1818,28 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.readonly
-    ? _c("div", {
-        class: _vm.fieldClasses,
-        domProps: { innerHTML: _vm._s(_vm.field.html) }
-      })
-    : _vm.editMode
+  return _vm.editMode
     ? _c("multiselect", {
+        ref: "inputV",
         class: _vm.fieldClasses,
-        attrs: { options: [] },
-        on: { blur: _vm.commitField },
+        attrs: {
+          options: _vm.options,
+          multiple: true,
+          label: "title",
+          "track-by": "path"
+        },
+        on: { blur: _vm.commitField, "search-change": _vm.getObjects },
         model: {
-          value: _vm.field.wip,
+          value: _vm.values,
           callback: function($$v) {
-            _vm.$set(_vm.field, "wip", $$v)
+            _vm.values = $$v
           },
-          expression: "field.wip"
+          expression: "values"
         }
       })
     : _c("div", {
         class: _vm.fieldClasses,
-        domProps: { innerHTML: _vm._s(_vm.field.html) },
+        domProps: { innerHTML: _vm._s(_vm.html) },
         on: { click: _vm.editField, focus: _vm.editField }
       })
 }

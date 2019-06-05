@@ -36,9 +36,9 @@ export default  {
 .basic-page {
   position: absolute;
   top: 0;
-  bottom: 0;
+  bottom: 34px;
   left: 0;
   right: 0;
-  padding: 40px 20px;
+  padding: 40px 20px 10px;
 }
 </style>

@@ -34,7 +34,8 @@ __webpack_require__.r(__webpack_exports__);
     data: {
       type: Object,
       default: null
-    }
+    },
+    fieldset: Boolean
   },
   mounted: function mounted() {
     this.field = Object(_lib_objects__WEBPACK_IMPORTED_MODULE_2__["Field"])(this.data || {
@@ -72,12 +73,15 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue_perfect_scrollbar__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-perfect-scrollbar */ "./node_modules/vue-perfect-scrollbar/dist/index.js");
-/* harmony import */ var vue_perfect_scrollbar__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_perfect_scrollbar__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vuikit_lib_card__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuikit/lib/card */ "./node_modules/vuikit/lib/card.js");
-/* harmony import */ var vuikit_lib_button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuikit/lib/button */ "./node_modules/vuikit/lib/button.js");
-/* harmony import */ var _components_Field__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/Field */ "./src/components/Field.vue");
-/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
+/* harmony import */ var core_js_modules_es6_regexp_match__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es6.regexp.match */ "./node_modules/core-js/modules/es6.regexp.match.js");
+/* harmony import */ var core_js_modules_es6_regexp_match__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_regexp_match__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vue_perfect_scrollbar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-perfect-scrollbar */ "./node_modules/vue-perfect-scrollbar/dist/index.js");
+/* harmony import */ var vue_perfect_scrollbar__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_perfect_scrollbar__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var vuikit_lib_card__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuikit/lib/card */ "./node_modules/vuikit/lib/card.js");
+/* harmony import */ var vuikit_lib_button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuikit/lib/button */ "./node_modules/vuikit/lib/button.js");
+/* harmony import */ var _components_Field__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/components/Field */ "./src/components/Field.vue");
+/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
+
 
 
 
@@ -86,12 +90,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'FormPage',
   components: {
-    VuePerfectScrollbar: vue_perfect_scrollbar__WEBPACK_IMPORTED_MODULE_0___default.a,
-    VkCard: vuikit_lib_card__WEBPACK_IMPORTED_MODULE_1__["Card"],
-    VkCardTitle: vuikit_lib_card__WEBPACK_IMPORTED_MODULE_1__["CardTitle"],
-    VkBtn: vuikit_lib_button__WEBPACK_IMPORTED_MODULE_2__["Button"],
-    VkBtnGrp: vuikit_lib_button__WEBPACK_IMPORTED_MODULE_2__["ButtonGroup"],
-    Field: _components_Field__WEBPACK_IMPORTED_MODULE_3__["default"]
+    VuePerfectScrollbar: vue_perfect_scrollbar__WEBPACK_IMPORTED_MODULE_1___default.a,
+    VkCard: vuikit_lib_card__WEBPACK_IMPORTED_MODULE_2__["Card"],
+    VkCardTitle: vuikit_lib_card__WEBPACK_IMPORTED_MODULE_2__["CardTitle"],
+    VkBtn: vuikit_lib_button__WEBPACK_IMPORTED_MODULE_3__["Button"],
+    VkBtnGrp: vuikit_lib_button__WEBPACK_IMPORTED_MODULE_3__["ButtonGroup"],
+    Field: _components_Field__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
   mounted: function mounted() {},
   data: function data() {
@@ -110,7 +114,17 @@ __webpack_require__.r(__webpack_exports__);
       return this.$store.state.model;
     },
     data: function data() {
-      return this.$store.state.modelData || Object(_lib_objects__WEBPACK_IMPORTED_MODULE_4__["Model"])(this.model);
+      return this.$store.state.modelData || Object(_lib_objects__WEBPACK_IMPORTED_MODULE_5__["Model"])(this.model);
+    },
+    simpleFields: function simpleFields() {
+      return this.data.fields.filter(function (x) {
+        return !x.meta.related || !x.meta.type.match(/Multiple|Choices/);
+      });
+    },
+    relationFields: function relationFields() {
+      return this.data.fields.filter(function (x) {
+        return x.meta.related && x.meta.type.match(/Multiple|Choices/);
+      });
     }
   }
 });
@@ -132,20 +146,37 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("label", { staticClass: "uk-form-label" }, [_vm._v(_vm._s(_vm.label))]),
-    _c(
-      "div",
-      { staticClass: "uk-form-controls" },
-      [
-        _c(_vm.type, {
-          tag: "component",
-          attrs: { name: _vm.name, field: _vm.field }
-        })
-      ],
-      1
-    )
-  ])
+  return _vm.fieldset
+    ? _c(
+        "fieldset",
+        { staticClass: "uk-field" },
+        [
+          _c("legend", { staticClass: "uk-legend" }, [
+            _vm._v(_vm._s(_vm.label))
+          ]),
+          _c(_vm.type, {
+            tag: "component",
+            attrs: { name: _vm.name, field: _vm.field }
+          })
+        ],
+        1
+      )
+    : _c("div", [
+        _c("label", { staticClass: "uk-form-label" }, [
+          _vm._v(_vm._s(_vm.label))
+        ]),
+        _c(
+          "div",
+          { staticClass: "uk-form-controls" },
+          [
+            _c(_vm.type, {
+              tag: "component",
+              attrs: { name: _vm.name, field: _vm.field }
+            })
+          ],
+          1
+        )
+      ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -241,18 +272,32 @@ var render = function() {
           ? _c(
               "form",
               { staticClass: "uk-form-horizontal uk-text-left" },
-              _vm._l(_vm.data.fields, function(field) {
-                return _c("field", {
-                  key: field.meta.name,
-                  staticClass: "uk-margin",
-                  attrs: {
-                    type: field.meta.type,
-                    name: field.meta.name,
-                    data: field
-                  }
+              [
+                _vm._l(_vm.simpleFields, function(field) {
+                  return _c("field", {
+                    key: field.meta.name,
+                    staticClass: "uk-margin",
+                    attrs: {
+                      type: field.meta.type,
+                      name: field.meta.name,
+                      data: field
+                    }
+                  })
+                }),
+                _vm._l(_vm.relationFields, function(field) {
+                  return _c("field", {
+                    key: field.meta.name,
+                    staticClass: "uk-margin",
+                    attrs: {
+                      type: field.meta.type,
+                      name: field.meta.name,
+                      data: field,
+                      fieldset: true
+                    }
+                  })
                 })
-              }),
-              1
+              ],
+              2
             )
           : _vm._e()
       ])

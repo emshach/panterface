@@ -12,8 +12,12 @@
     </div>
     <vue-perfect-scrollbar slot="body">
       <form v-if="model" class="uk-form-horizontal uk-text-left">
-        <field v-for="field in data.fields" :key="field.meta.name"
+        <field v-for="field in simpleFields" :key="field.meta.name"
                :type="field.meta.type" :name="field.meta.name" :data="field"
+               class="uk-margin" />
+        <field v-for="field in relationFields" :key="field.meta.name"
+               :type="field.meta.type" :name="field.meta.name" :data="field"
+               :fieldset="true"
                class="uk-margin" />
       </form>
     </vue-perfect-scrollbar>
@@ -59,6 +63,14 @@ export default  {
     },
     data() {
       return this.$store.state.modelData || Model( this.model )
+    },
+    simpleFields() {
+      return this.data.fields.filter(
+        x => !x.meta.related || !x.meta.type.match( /Multiple|Choices/ ))
+    },
+    relationFields() {
+      return this.data.fields.filter(
+        x => x.meta.related && x.meta.type.match( /Multiple|Choices/ ))
     }
   }
 }

@@ -1,5 +1,9 @@
 <template lang="html">
-  <div>
+  <fieldset v-if="fieldset" class="uk-field">
+    <legend class="uk-legend">{{ label }}</legend>
+    <component :is="type" :name="name" :field="field" />
+  </fieldset>
+  <div v-else>
     <label class="uk-form-label">{{ label }}</label>
     <div class="uk-form-controls">
       <component :is="type" :name="name" :field="field" />
@@ -25,7 +29,8 @@ export default  {
     data: {
       type: Object,
       default: null
-    }
+    },
+    fieldset: Boolean
   },
   mounted() {
     this.field = Field( this.data || { type: this.type, name: this.name });
@@ -43,7 +48,7 @@ export default  {
         if ( this.field.meta.related
              && this.$store.state.models[ this.field.meta.related ]) {
           return this.$store.state.models[ this.field.meta.related ][
-            this.type.match(/Multiple|Choices/) ? 'plural' : 'singular' ]
+            this.type.match( /Multiple|Choices/ ) ? 'plural' : 'singular' ]
         }
       }
       return this.name;

@@ -3,6 +3,11 @@ from __future__ import unicode_literals
 from . import views, serializers, app
 from .models import Setting
 
+_links = '''_container_entries _widget_entries _block_entries _screen_entries
+               _shell_entries _theme_entries _slot_entries _app_entries
+               _location_entries _icon_entries _link_entries _reference_entries
+               _setting_entries _action_entries'''.split()
+
 class App( app.App ):
     name        = 'friede'
     actions     = 'list view new edit report delete'.split()
@@ -16,10 +21,7 @@ class App( app.App ):
                           location'''.split()
     objects = registry_objects + 'link reference setting'.split()
 
-    links = '''_container_entries _widget_entries _block_entries _screen_entries
-               _shell_entries _theme_entries _slot_entries _app_entries
-               _location_entries _icon_entries _link_entries _reference_entries
-               _setting_entries _action_entries'''.split()
+    links = { x: dict( via='entry' ) for x in _links }
 
     relations = dict(
         container={

@@ -33,8 +33,9 @@ export default {
       const m = this.field.meta.related;
       let l = this.field.meta.link_field;
       if (l) {
-          const model = this.$store.state.models[m];
-          return model && model.fields.find( x => x.name === l );
+        const model = this.$store.state.models[m];
+        var f = model && model.fields.find( x => x.name === l );
+        return f && f.related;
       }
       return m;
     }

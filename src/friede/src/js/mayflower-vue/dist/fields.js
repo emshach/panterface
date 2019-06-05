@@ -567,9 +567,10 @@ __webpack_require__.r(__webpack_exports__);
 
       if (l) {
         var model = this.$store.state.models[m];
-        return model && model.fields.find(function (x) {
+        var f = model && model.fields.find(function (x) {
           return x.name === l;
         });
+        return f && f.related;
       }
 
       return m;

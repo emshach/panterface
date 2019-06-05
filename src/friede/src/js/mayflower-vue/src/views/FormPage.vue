@@ -17,8 +17,7 @@
                class="uk-margin" />
         <field v-for="field in relationFields" :key="field.meta.name"
                :type="field.meta.type" :name="field.meta.name" :data="field"
-               :fieldset="true"
-               class="uk-margin" />
+               :fieldset="true" />
       </form>
     </vue-perfect-scrollbar>
   </vk-card>

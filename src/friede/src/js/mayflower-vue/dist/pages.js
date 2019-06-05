@@ -286,7 +286,6 @@ var render = function() {
                 _vm._l(_vm.relationFields, function(field) {
                   return _c("field", {
                     key: field.meta.name,
-                    staticClass: "uk-margin",
                     attrs: {
                       type: field.meta.type,
                       name: field.meta.name,

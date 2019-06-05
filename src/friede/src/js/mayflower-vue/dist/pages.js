@@ -9,16 +9,19 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es6_function_name__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es6.function.name */ "./node_modules/core-js/modules/es6.function.name.js");
-/* harmony import */ var core_js_modules_es6_function_name__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_function_name__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
-/* harmony import */ var _fields__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./fields */ "./src/components/fields.js");
+/* harmony import */ var core_js_modules_es6_regexp_match__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es6.regexp.match */ "./node_modules/core-js/modules/es6.regexp.match.js");
+/* harmony import */ var core_js_modules_es6_regexp_match__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_regexp_match__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es6_function_name__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es6.function.name */ "./node_modules/core-js/modules/es6.function.name.js");
+/* harmony import */ var core_js_modules_es6_function_name__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_function_name__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
+/* harmony import */ var _fields__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./fields */ "./src/components/fields.js");
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Field',
-  components: _fields__WEBPACK_IMPORTED_MODULE_2__["default"],
+  components: _fields__WEBPACK_IMPORTED_MODULE_3__["default"],
   props: {
     type: {
       type: String,
@@ -34,18 +37,28 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
-    this.field = Object(_lib_objects__WEBPACK_IMPORTED_MODULE_1__["Field"])(this.data || {
+    this.field = Object(_lib_objects__WEBPACK_IMPORTED_MODULE_2__["Field"])(this.data || {
       type: this.type,
       name: this.name
     });
   },
   data: function data() {
     return {
-      field: Object(_lib_objects__WEBPACK_IMPORTED_MODULE_1__["Field"])()
+      field: Object(_lib_objects__WEBPACK_IMPORTED_MODULE_2__["Field"])()
     };
   },
   methods: {},
-  computed: {}
+  computed: {
+    label: function label() {
+      if (this.field && this.field.meta) {
+        if (this.field.meta.related && this.$store.state.models[this.field.meta.related]) {
+          return this.$store.state.models[this.field.meta.related][this.type.match(/Multiple|Choices/) ? 'plural' : 'singular'];
+        }
+      }
+
+      return this.name;
+    }
+  }
 });
 
 /***/ }),
@@ -120,7 +133,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("label", { staticClass: "uk-form-label" }, [_vm._v(_vm._s(_vm.name))]),
+    _c("label", { staticClass: "uk-form-label" }, [_vm._v(_vm._s(_vm.label))]),
     _c(
       "div",
       { staticClass: "uk-form-controls" },

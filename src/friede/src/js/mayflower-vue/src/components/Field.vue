@@ -1,6 +1,6 @@
 <template lang="html">
   <div>
-    <label class="uk-form-label">{{ name }}</label>
+    <label class="uk-form-label">{{ label }}</label>
     <div class="uk-form-controls">
       <component :is="type" :name="name" :field="field" />
     </div>
@@ -38,6 +38,16 @@ export default  {
   methods: {
   },
   computed: {
+    label() {
+      if ( this.field && this.field.meta) {
+        if ( this.field.meta.related
+             && this.$store.state.models[ this.field.meta.related ]) {
+          return this.$store.state.models[ this.field.meta.related ][
+            this.type.match(/Multiple|Choices/) ? 'plural' : 'singular' ]
+        }
+      }
+      return this.name;
+    }
   }
 }
 </script>

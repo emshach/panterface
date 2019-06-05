@@ -496,7 +496,12 @@ vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vue_highlightjs__WEBPACK_IMPORTE
   props: {},
   mounted: function mounted() {},
   data: function data() {
-    return {};
+    return {
+      options: {
+        confirmText: 'confirm',
+        cancelText: 'cancel'
+      }
+    };
   },
   methods: {},
   computed: {}
@@ -1730,6 +1735,7 @@ var render = function() {
   return _vm.editMode
     ? _c("json-editor", {
         class: _vm.fieldClasses,
+        attrs: { objData: _vm.field.wip, options: _vm.options },
         on: { blur: _vm.commitField },
         model: {
           value: _vm.field.wip,

@@ -1,6 +1,6 @@
 <template lang="html">
-  <json-editor v-if="editMode" v-model="field.wip"
-               :class="fieldClasses" @blur="commitField" />
+  <json-editor v-if="editMode" v-model="field.wip" :objData="field.wip"
+               :class="fieldClasses" @blur="commitField" :options="options" />
   <pre v-else v-highlightjs="field.value" @click="editField" @focus="editField"
        :class="fieldClasses" ><code class="json"  /></pre>
 </template>
@@ -23,7 +23,10 @@ export default {
   },
   data() {
     return {
-      
+      options: {
+        confirmText: 'confirm',
+        cancelText: 'cancel'
+      }
     }
   },
   methods: {

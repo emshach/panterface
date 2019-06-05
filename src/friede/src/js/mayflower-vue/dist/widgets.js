@@ -1939,7 +1939,7 @@ var ModelModelsFieldMixin = {
     getObjects: function getObjects(query) {
       var _this2 = this;
 
-      var m = this.field.meta.related;
+      var m = this.searchModel;
       var app = m.split('.')[0];
       var model = this.$store.state.models[m];
       this.loading = true;
@@ -1954,6 +1954,11 @@ var ModelModelsFieldMixin = {
         //   { path: '_action.done', title: 'Done', ctrl: true })
         // TODO: put this in maybe
       });
+    }
+  },
+  computed: {
+    searchModel: function searchModel() {
+      return this.field.meta.related;
     }
   }
 };

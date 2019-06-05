@@ -27,10 +27,16 @@ export default {
     }
   },
   methods: {
-    
   },
   computed: {
-    
+    searchModel() {
+      const m = this.field.meta.related;
+      if ( this.field.meta.link_field ) {
+        const model = this.$store.state.models[m];
+        m = model.fields.find( x => x.name === this.field.meta.link_field );
+      }
+      return m;
+    }
   }
 }
 </script>

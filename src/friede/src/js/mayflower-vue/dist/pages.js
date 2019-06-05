@@ -266,39 +266,43 @@ var render = function() {
         ],
         1
       ),
-      _c("vue-perfect-scrollbar", { attrs: { slot: "body" }, slot: "body" }, [
-        _vm.model
-          ? _c(
-              "form",
-              { staticClass: "uk-form-horizontal uk-text-left" },
-              [
-                _vm._l(_vm.simpleFields, function(field) {
-                  return _c("field", {
-                    key: field.meta.name,
-                    staticClass: "uk-margin",
-                    attrs: {
-                      type: field.meta.type,
-                      name: field.meta.name,
-                      data: field
-                    }
+      _c(
+        "vue-perfect-scrollbar",
+        { staticClass: "scroller", attrs: { slot: "body" }, slot: "body" },
+        [
+          _vm.model
+            ? _c(
+                "form",
+                { staticClass: "uk-form-horizontal uk-text-left" },
+                [
+                  _vm._l(_vm.simpleFields, function(field) {
+                    return _c("field", {
+                      key: field.meta.name,
+                      staticClass: "uk-margin",
+                      attrs: {
+                        type: field.meta.type,
+                        name: field.meta.name,
+                        data: field
+                      }
+                    })
+                  }),
+                  _vm._l(_vm.relationFields, function(field) {
+                    return _c("field", {
+                      key: field.meta.name,
+                      attrs: {
+                        type: field.meta.type,
+                        name: field.meta.name,
+                        data: field,
+                        fieldset: true
+                      }
+                    })
                   })
-                }),
-                _vm._l(_vm.relationFields, function(field) {
-                  return _c("field", {
-                    key: field.meta.name,
-                    attrs: {
-                      type: field.meta.type,
-                      name: field.meta.name,
-                      data: field,
-                      fieldset: true
-                    }
-                  })
-                })
-              ],
-              2
-            )
-          : _vm._e()
-      ])
+                ],
+                2
+              )
+            : _vm._e()
+        ]
+      )
     ],
     1
   )

@@ -10,7 +10,7 @@
       </div>
       <vk-card-title class="uk-align-left">{{ location.title }}</vk-card-title>
     </div>
-    <vue-perfect-scrollbar slot="body">
+    <vue-perfect-scrollbar class="scroller" slot="body">
       <form v-if="model" class="uk-form-horizontal uk-text-left">
         <field v-for="field in simpleFields" :key="field.meta.name"
                :type="field.meta.type" :name="field.meta.name" :data="field"
@@ -80,19 +80,25 @@ export default  {
   border-radius: 2px;
   > .uk-card-header {
     padding: 0;
-  }
-  .uk-card-header {
-    padding: 0;
     border-bottom: none;
-  }
-  .uk-card-title{
-    margin: 6px 14px;
-  }
-  .form-controls{
-    margin-bottom: 0;
+    .uk-card-title{
+      margin: 6px 14px;
+    }
+    .form-controls{
+      margin-bottom: 0;
+    }
   }
   .uk-input, .uk-select, .uk-textarea {
     border: 1px solid #e5e5e5;
+  }
+  .uk-card-body {
+    height: calc( 100% - 45px );
+    box-sizing: border-box;
+    padding: 24px 0px 1px 24px;
+    > .scroller {
+      height: 100%;
+      padding-right: 16px;
+    }
   }
   .no-data {
     color: rgba(0,0,0,0.35);

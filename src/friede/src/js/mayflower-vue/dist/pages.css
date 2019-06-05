@@ -14,19 +14,26 @@
 }
 .form-page > .uk-card-header {
     padding: 0;
-}
-.form-page .uk-card-header {
-    padding: 0;
     border-bottom: none;
 }
-.form-page .uk-card-title {
-    margin: 6px 14px;
+.form-page > .uk-card-header .uk-card-title {
+      margin: 6px 14px;
 }
-.form-page .form-controls {
-    margin-bottom: 0;
+.form-page > .uk-card-header .form-controls {
+      margin-bottom: 0;
 }
 .form-page .uk-input, .form-page .uk-select, .form-page .uk-textarea {
     border: 1px solid #e5e5e5;
+}
+.form-page .uk-card-body {
+    height: calc( 100% - 45px);
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    padding: 24px 0px 1px 24px;
+}
+.form-page .uk-card-body > .scroller {
+      height: 100%;
+      padding-right: 16px;
 }
 .form-page .no-data {
     color: rgba(0, 0, 0, 0.35);

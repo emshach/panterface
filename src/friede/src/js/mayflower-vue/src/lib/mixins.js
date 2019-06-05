@@ -78,7 +78,7 @@ const ModelModelsFieldMixin = {
   },
   methods: {
     getObjects( query ) {
-      const m = this.field.meta.related;
+      const m = this.searchModel;
       const app = m.split('.')[0];
       const model = this.$store.state.models[m];
       this.loading = true;
@@ -95,6 +95,11 @@ const ModelModelsFieldMixin = {
         //   { path: '_action.done', title: 'Done', ctrl: true })
         // TODO: put this in maybe
       });
+    }
+  },
+  computed: {
+    searchModel() {
+      return this.field.meta.related;
     }
   }
 };

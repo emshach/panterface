@@ -564,14 +564,13 @@ __webpack_require__.r(__webpack_exports__);
   methods: {},
   computed: {
     searchModel: function searchModel() {
-      var _this = this;
-
       var m = this.field.meta.related;
+      var l = this.field.meta.link_field;
 
-      if (this.field.meta.link_field) {
+      if (l) {
         var model = this.$store.state.models[m];
-        m = (Object(_home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_helpers_esm_readOnlyError__WEBPACK_IMPORTED_MODULE_2__["default"])("m"), model.fields.find(function (x) {
-          return x.name === _this.field.meta.link_field;
+        m = (Object(_home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_helpers_esm_readOnlyError__WEBPACK_IMPORTED_MODULE_2__["default"])("m"), model && model.fields.find(function (x) {
+          return x.name === l;
         }));
       }
 

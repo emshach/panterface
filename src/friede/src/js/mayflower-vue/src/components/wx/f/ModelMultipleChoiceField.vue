@@ -31,9 +31,10 @@ export default {
   computed: {
     searchModel() {
       const m = this.field.meta.related;
-      if ( this.field.meta.link_field ) {
+      let l = this.field.meta.link_field;
+      if (l) {
         const model = this.$store.state.models[m];
-        m = model.fields.find( x => x.name === this.field.meta.link_field );
+        m = model && model.fields.find( x => x.name === l );
       }
       return m;
     }

@@ -317,6 +317,7 @@ def api_models( request, models=None, format=None ):
                     field[ 'default' ] = dflt
             except AttributeError:
                 pass
+            data[ 'fields' ].append( field )
             if getattr( f, 'related_model', None ):
                 m = f.related_model
                 related = "%s.%s" % ( m._meta.app_label, m._meta.model_name )
@@ -330,7 +331,6 @@ def api_models( request, models=None, format=None ):
                 elif 'Rel' not in ftype0:
                     models.append(( related, True ))
             # TODO: get field groups from settings
-            data[ 'fields' ].append( field )
 
     return Response( dict( models=out ))
 

@@ -1826,7 +1826,8 @@ var render = function() {
           options: _vm.options,
           multiple: true,
           label: "title",
-          "track-by": "path"
+          "track-by": "path",
+          "open-direction": "bottom"
         },
         on: { blur: _vm.commitField, "search-change": _vm.getObjects },
         model: {

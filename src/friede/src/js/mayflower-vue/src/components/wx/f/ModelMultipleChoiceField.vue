@@ -4,6 +4,7 @@
                :multiple="true"
                label="title"
                track-by="path"
+               open-direction="bottom"
                @blur="commitField"
                @search-change="getObjects"
                />

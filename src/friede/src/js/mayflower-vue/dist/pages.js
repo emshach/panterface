@@ -98,15 +98,10 @@ __webpack_require__.r(__webpack_exports__);
     VkBtnGrp: vuikit_lib_button__WEBPACK_IMPORTED_MODULE_3__["ButtonGroup"],
     Field: _components_Field__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
-  created: function created() {
-    this.model = this.$store.state.model;
-    this.modelData = this.$store.state.modelData || Object(_lib_objects__WEBPACK_IMPORTED_MODULE_5__["Model"])(this.model);
-  },
+  mounted: function mounted() {},
   data: function data() {
     return {
-      modelData: {
-        fields: []
-      },
+      data: null,
       model: null
     };
   },
@@ -116,6 +111,16 @@ __webpack_require__.r(__webpack_exports__);
     cancel: function cancel() {}
   },
   computed: {
+    model: function model() {
+      return this.$store.state.model;
+    },
+    modelData: function modelData() {
+      if (this.data) return this.data;
+      if (this.$store.state.modelData) this.data = this.$store.state.modelData;else if (this.model) this.data = Object(_lib_objects__WEBPACK_IMPORTED_MODULE_5__["Model"])(this.model);
+      return this.data || {
+        fields: []
+      };
+    },
     location: function location() {
       return this.$store.state.location;
     },

@@ -39,13 +39,11 @@ export default  {
     VkBtnGrp,
     Field
   },
-  created() {
-    this.model = this.$store.state.model;
-    this.modelData = this.$store.state.modelData || Model( this.model );
+  mounted() {
   },
   data() {
     return {
-      modelData: { fields: [] },
+      data: null,
       model: null,
     }
   },
@@ -58,6 +56,18 @@ export default  {
     }
   },
   computed: {
+    model() {
+      return this.$store.state.model;
+    },
+    modelData() {
+      if ( this.data )
+        return this.data;
+      if ( this.$store.state.modelData )
+        this.data = this.$store.state.modelData;
+      else if ( this.model )
+        this.data = Model( this.model );
+      return this.data || { fields: [] };
+    },
     location() {
       return this.$store.state.location
     },

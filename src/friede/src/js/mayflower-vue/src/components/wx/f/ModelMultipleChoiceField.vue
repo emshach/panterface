@@ -32,8 +32,9 @@
           </vk-btn-grp>
         </label>
       </template>
-      <vk-btn-link v-else @click="editField" @focus="editField">
-        <font-awesome-icon icon="times" /> add
+      <vk-btn-link v-else class="btn btn-add" type="light" size="small"
+                   @click="editField" @focus="editField">
+        <font-awesome-icon icon="plus" /> add
       </vk-btn-link>
     </div>
   </div>

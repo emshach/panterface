@@ -2071,9 +2071,13 @@ var render = function() {
               ]
             : _c(
                 "vk-btn-link",
-                { on: { click: _vm.editField, focus: _vm.editField } },
+                {
+                  staticClass: "btn btn-add",
+                  attrs: { type: "light", size: "small" },
+                  on: { click: _vm.editField, focus: _vm.editField }
+                },
                 [
-                  _c("font-awesome-icon", { attrs: { icon: "times" } }),
+                  _c("font-awesome-icon", { attrs: { icon: "plus" } }),
                   _vm._v(" add\n    ")
                 ],
                 1

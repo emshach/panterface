@@ -601,7 +601,8 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_7__["library"].add(_f
   components: {
     VkTable: vuikit_lib_table__WEBPACK_IMPORTED_MODULE_5__["Table"],
     VkTableColumn: vuikit_lib_table__WEBPACK_IMPORTED_MODULE_5__["TableColumn"],
-    VkButtonLink: vuikit_lib_button__WEBPACK_IMPORTED_MODULE_6__["ButtonLink"],
+    VkBtnLink: vuikit_lib_button__WEBPACK_IMPORTED_MODULE_6__["ButtonLink"],
+    VkBtnGrp: vuikit_lib_button__WEBPACK_IMPORTED_MODULE_6__["ButtonGroup"],
     FontAwesomeIcon: _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_9__["FontAwesomeIcon"]
   },
   props: {},
@@ -1961,7 +1962,19 @@ var render = function() {
     "div",
     { staticClass: "model-multiple-choice-field" },
     [
-      _vm.isset
+      _vm.field.wip && _vm.field.wip.length
+        ? _c(
+            "vk-table",
+            { attrs: { data: _vm.field.wip } },
+            _vm._l(_vm.columns, function(c) {
+              return _c("vk-table-column", {
+                key: c.name,
+                attrs: { title: c.name, name: c.name }
+              })
+            }),
+            1
+          )
+        : _vm.isset
         ? _c(
             "vk-table",
             { attrs: { data: _vm.field.value || [] } },
@@ -1986,42 +1999,9 @@ var render = function() {
             ? [
                 _c(
                   "label",
+                  { staticClass: "uk-flex" },
                   [
                     _vm._v("\n        add\n        "),
-                    _c(
-                      "vk-button-link",
-                      {
-                        staticClass: "btn btn-confirm",
-                        on: {
-                          click: function($event) {
-                            $event.preventDefault()
-                            return _vm.commit($event)
-                          }
-                        }
-                      },
-                      [
-                        _c("font-awesome-icon", { attrs: { icon: "check" } }),
-                        _vm._v(" done\n        ")
-                      ],
-                      1
-                    ),
-                    _c(
-                      "vk-button-link",
-                      {
-                        staticClass: "btn btn-cancel",
-                        on: {
-                          click: function($event) {
-                            $event.preventDefault()
-                            return _vm.cancel($event)
-                          }
-                        }
-                      },
-                      [
-                        _c("font-awesome-icon", { attrs: { icon: "times" } }),
-                        _vm._v(" cancel\n        ")
-                      ],
-                      1
-                    ),
                     _c("multiselect", {
                       ref: "inputV",
                       attrs: {
@@ -2039,7 +2019,52 @@ var render = function() {
                         },
                         expression: "values"
                       }
-                    })
+                    }),
+                    _c(
+                      "vk-btn-grp",
+                      { staticClass: "uk-align-right" },
+                      [
+                        _c(
+                          "vk-btn-link",
+                          {
+                            staticClass: "btn btn-confirm",
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                return _vm.commit($event)
+                              }
+                            }
+                          },
+                          [
+                            _c("font-awesome-icon", {
+                              attrs: { icon: "check" }
+                            }),
+                            _vm._v(" done\n          ")
+                          ],
+                          1
+                        ),
+                        _c(
+                          "vk-btn-link",
+                          {
+                            staticClass: "btn btn-cancel",
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                return _vm.cancel($event)
+                              }
+                            }
+                          },
+                          [
+                            _c("font-awesome-icon", {
+                              attrs: { icon: "times" }
+                            }),
+                            _vm._v(" cancel\n          ")
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
                   ],
                   1
                 )

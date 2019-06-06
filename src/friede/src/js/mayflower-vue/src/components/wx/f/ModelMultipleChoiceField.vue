@@ -1,6 +1,10 @@
 <template lang="html">
   <div class="model-multiple-choice-field" >
-    <vk-table v-if="isset" :data="field.value||[]">
+    <vk-table v-if="field.wip && field.wip.length" :data="field.wip">
+      <vk-table-column v-for="c in columns"
+                       :key="c.name" :title="c.name" :name="c.name" />
+    </vk-table>
+    <vk-table v-else-if="isset" :data="field.value||[]">
       <vk-table-column v-for="c in columns"
                        :key="c.name" :title="c.name" :name="c.name" />
     </vk-table>
@@ -8,14 +12,8 @@
          :class="fieldClasses" />
     <div :class="fieldClasses">
       <template v-if="editMode">
-        <label>
+        <label class="uk-flex">
           add
-          <vk-button-link class="btn btn-confirm" @click.prevent="commit">
-            <font-awesome-icon icon="check" /> done
-          </vk-button-link>
-          <vk-button-link class="btn btn-cancel" @click.prevent="cancel">
-            <font-awesome-icon icon="times" /> cancel
-          </vk-button-link>
           <multiselect v-model="values" ref="inputV"
                        :options="options"
                        :multiple="true"
@@ -24,6 +22,14 @@
                        open-direction="bottom"
                        @search-change="getObjects"
                        />
+          <vk-btn-grp class="uk-align-right">
+            <vk-btn-link class="btn btn-confirm" @click.prevent="commit">
+              <font-awesome-icon icon="check" /> done
+            </vk-btn-link>
+            <vk-btn-link class="btn btn-cancel" @click.prevent="cancel">
+              <font-awesome-icon icon="times" /> cancel
+            </vk-btn-link>
+          </vk-btn-grp>
         </label>
       </template>
       <vk-button-link v-else @click="editField" @focus="editField">
@@ -36,7 +42,7 @@
 <script lang="js">
 import { Field } from '@/lib/objects'
 import { Table as VkTable, TableColumn as VkTableColumn } from 'vuikit/lib/table'
-import { ButtonLink as VkButtonLink } from 'vuikit/lib/button'
+import { ButtonLink as VkBtnLink, ButtonGroup as VkBtnGrp } from 'vuikit/lib/button'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faTimes, faCheck } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
@@ -50,7 +56,8 @@ export default {
   components: {
     VkTable,
     VkTableColumn,
-    VkButtonLink,
+    VkBtnLink,
+    VkBtnGrp,
     FontAwesomeIcon,
   },
   props: {},

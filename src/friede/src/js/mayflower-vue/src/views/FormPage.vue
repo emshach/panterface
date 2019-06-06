@@ -44,7 +44,6 @@ export default  {
   data() {
     return {
       data: null,
-      model: null,
     }
   },
   methods: {

@@ -89,6 +89,24 @@ const ModelModelsFieldMixin = {
     }
   },
   methods: {
+    editField() {
+      if ( this.readonly )
+        return;
+      this.field.wip = (this.field.value || []).slice();
+      this.editMode = true;
+      this.$nextTick(() => {
+        if ( this.$refs.input )
+          this.$refs.input.focus();
+        else if( this.$refs.inputV )
+          this.$refs.inputV.$el.focus();
+      });
+    },
+    commitField() {
+      if ( this.values.length )
+        this.field.wip = ( this.field.wip || []).concat( this.values )
+      this.field.commit();
+      this.editMode = false;
+    },
     async getObjects( query ) {
       const m = this.searchModel;
       const app = m.split('.')[0];

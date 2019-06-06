@@ -1867,9 +1867,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! regenerator-runtime/runtime */ "./node_modules/regenerator-runtime/runtime.js");
 /* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/@babel/runtime-corejs2/helpers/esm/asyncToGenerator */ "./node_modules/@babel/runtime-corejs2/helpers/esm/asyncToGenerator.js");
-/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
-/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js");
-/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/web.dom.iterable */ "./node_modules/core-js/modules/web.dom.iterable.js");
+/* harmony import */ var core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var core_js_modules_es6_object_to_string__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es6.object.to-string */ "./node_modules/core-js/modules/es6.object.to-string.js");
+/* harmony import */ var core_js_modules_es6_object_to_string__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_object_to_string__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
+/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js");
+/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_6__);
+
+
 
 
 
@@ -1879,7 +1885,7 @@ var ModelWidgetMixin = {};
 var ModelFieldMixin = {
   props: {
     field: {
-      type: _lib_objects__WEBPACK_IMPORTED_MODULE_3__["Field"],
+      type: _lib_objects__WEBPACK_IMPORTED_MODULE_5__["Field"],
       required: true
     },
     readonly: {
@@ -1940,7 +1946,7 @@ var ModelFieldMixin = {
 };
 var ModelModelsFieldMixin = {
   components: {
-    Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_4___default.a
+    Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_6___default.a
   },
   data: function data() {
     return {
@@ -1950,11 +1956,26 @@ var ModelModelsFieldMixin = {
     };
   },
   methods: {
+    editField: function editField() {
+      var _this2 = this;
+
+      if (this.readonly) return;
+      this.field.wip = (this.field.value || []).slice();
+      this.editMode = true;
+      this.$nextTick(function () {
+        if (_this2.$refs.input) _this2.$refs.input.focus();else if (_this2.$refs.inputV) _this2.$refs.inputV.$el.focus();
+      });
+    },
+    commitField: function commitField() {
+      if (this.values.length) this.field.wip = (this.field.wip || []).concat(this.values);
+      this.field.commit();
+      this.editMode = false;
+    },
     getObjects: function () {
       var _getObjects = Object(_home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__["default"])(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee(query) {
-        var _this2 = this;
+        var _this3 = this;
 
         var m, app, model;
         return regeneratorRuntime.wrap(function _callee$(_context) {
@@ -1970,8 +1991,8 @@ var ModelModelsFieldMixin = {
                 model = _context.sent;
                 this.loading = true;
                 this.$api(app, model.plural, '?search=' + query).then(function (r) {
-                  _this2.loading = false;
-                  _this2.options = r.data.results.map(function (x) {
+                  _this3.loading = false;
+                  _this3.options = r.data.results.map(function (x) {
                     if (!x.title) x.title = x.path;
                     return x;
                   }); // this.options.unshift(

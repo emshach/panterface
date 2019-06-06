@@ -547,7 +547,13 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {};
   },
-  methods: {},
+  methods: {
+    editField: _lib_mixins__WEBPACK_IMPORTED_MODULE_0__["ModelFieldMixin"].methods.editField,
+    commit: function commit(val) {
+      this.field.wip = val;
+      this.commitField();
+    }
+  },
   computed: {}
 });
 
@@ -567,17 +573,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es6_array_find__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es6.array.find */ "./node_modules/core-js/modules/es6.array.find.js");
 /* harmony import */ var core_js_modules_es6_array_find__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_array_find__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var vuikit_lib_table__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuikit/lib/table */ "./node_modules/vuikit/lib/table.js");
-/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
+/* harmony import */ var vuikit_lib_button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuikit/lib/button */ "./node_modules/vuikit/lib/button.js");
+/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+/* harmony import */ var _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @fortawesome/vue-fontawesome */ "./node_modules/@fortawesome/vue-fontawesome/index.es.js");
+/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
 
 
 
 
+
+
+
+library.add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__["faTimes"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__["faCheck"]);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'ModelMultipleChoiceField',
-  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_3__["ModelFieldMixin"], _lib_mixins__WEBPACK_IMPORTED_MODULE_3__["ModelModelsFieldMixin"]],
+  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_6__["ModelFieldMixin"], _lib_mixins__WEBPACK_IMPORTED_MODULE_6__["ModelModelsFieldMixin"]],
   components: {
     VkTable: vuikit_lib_table__WEBPACK_IMPORTED_MODULE_2__["Table"],
-    VkTableColumn: vuikit_lib_table__WEBPACK_IMPORTED_MODULE_2__["TableColumn"]
+    VkTableColumn: vuikit_lib_table__WEBPACK_IMPORTED_MODULE_2__["TableColumn"],
+    VkButtonLink: vuikit_lib_button__WEBPACK_IMPORTED_MODULE_3__["ButtonLink"],
+    FontAwesomeIcon: _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"]
   },
   props: {},
   mounted: function mounted() {},
@@ -1853,7 +1868,7 @@ var render = function() {
         class: _vm.fieldClasses,
         attrs: { options: _vm.options, label: "title", "track-by": "path" },
         on: {
-          input: _vm.commitField,
+          input: _vm.commit,
           blur: _vm.revertField,
           "search-change": _vm.getObjects
         },
@@ -1900,7 +1915,7 @@ var render = function() {
       _vm.isset
         ? _c(
             "vk-table",
-            { attrs: { data: _vm.values } },
+            { attrs: { data: _vm.field.value || [] } },
             _vm._l(_vm.columns, function(c) {
               return _c("vk-table-column", {
                 key: c.name,
@@ -1914,27 +1929,62 @@ var render = function() {
             domProps: { innerHTML: _vm._s(_vm.html) },
             on: { click: _vm.editField, focus: _vm.editField }
           }),
-      _vm.editMode
-        ? _c("multiselect", {
-            ref: "inputV",
-            class: _vm.fieldClasses,
-            attrs: {
-              options: _vm.options,
-              multiple: true,
-              label: "title",
-              "track-by": "path",
-              "open-direction": "bottom"
-            },
-            on: { blur: _vm.commitField, "search-change": _vm.getObjects },
-            model: {
-              value: _vm.values,
-              callback: function($$v) {
-                _vm.values = $$v
-              },
-              expression: "values"
+      _c(
+        "label",
+        [
+          _vm._v("\n    add\n    "),
+          _vm.editMode
+            ? _c("multiselect", {
+                ref: "inputV",
+                class: _vm.fieldClasses,
+                attrs: {
+                  options: _vm.options,
+                  multiple: true,
+                  label: "title",
+                  "track-by": "path",
+                  "open-direction": "bottom"
+                },
+                on: { "search-change": _vm.getObjects },
+                model: {
+                  value: _vm.values,
+                  callback: function($$v) {
+                    _vm.values = $$v
+                  },
+                  expression: "values"
+                }
+              })
+            : _vm._e()
+        ],
+        1
+      ),
+      _c(
+        "vk-button-link",
+        {
+          staticClass: "btn btn-confirm",
+          on: {
+            click: function($event) {
+              $event.preventDefault()
+              return _vm.commitField($event)
             }
-          })
-        : _vm._e()
+          }
+        },
+        [_c("font-awesome-icon", { attrs: { icon: "check" } })],
+        1
+      ),
+      _c(
+        "vk-button-link",
+        {
+          staticClass: "btn btn-cancel",
+          on: {
+            click: function($event) {
+              $event.preventDefault()
+              return _vm.revertField($event)
+            }
+          }
+        },
+        [_c("font-awesome-icon", { attrs: { icon: "times" } })],
+        1
+      )
     ],
     1
   )
@@ -6172,9 +6222,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! regenerator-runtime/runtime */ "./node_modules/regenerator-runtime/runtime.js");
 /* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/@babel/runtime-corejs2/helpers/esm/asyncToGenerator */ "./node_modules/@babel/runtime-corejs2/helpers/esm/asyncToGenerator.js");
-/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
-/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js");
-/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/web.dom.iterable */ "./node_modules/core-js/modules/web.dom.iterable.js");
+/* harmony import */ var core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var core_js_modules_es6_object_to_string__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es6.object.to-string */ "./node_modules/core-js/modules/es6.object.to-string.js");
+/* harmony import */ var core_js_modules_es6_object_to_string__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_object_to_string__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
+/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js");
+/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_6__);
+
+
 
 
 
@@ -6184,7 +6240,7 @@ var ModelWidgetMixin = {};
 var ModelFieldMixin = {
   props: {
     field: {
-      type: _lib_objects__WEBPACK_IMPORTED_MODULE_3__["Field"],
+      type: _lib_objects__WEBPACK_IMPORTED_MODULE_5__["Field"],
       required: true
     },
     readonly: {
@@ -6245,7 +6301,7 @@ var ModelFieldMixin = {
 };
 var ModelModelsFieldMixin = {
   components: {
-    Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_4___default.a
+    Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_6___default.a
   },
   data: function data() {
     return {
@@ -6255,11 +6311,26 @@ var ModelModelsFieldMixin = {
     };
   },
   methods: {
+    editField: function editField() {
+      var _this2 = this;
+
+      if (this.readonly) return;
+      this.field.wip = (this.field.value || []).slice();
+      this.editMode = true;
+      this.$nextTick(function () {
+        if (_this2.$refs.input) _this2.$refs.input.focus();else if (_this2.$refs.inputV) _this2.$refs.inputV.$el.focus();
+      });
+    },
+    commitField: function commitField() {
+      if (this.values.length) this.field.wip = (this.field.wip || []).concat(this.values);
+      this.field.commit();
+      this.editMode = false;
+    },
     getObjects: function () {
       var _getObjects = Object(_home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__["default"])(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee(query) {
-        var _this2 = this;
+        var _this3 = this;
 
         var m, app, model;
         return regeneratorRuntime.wrap(function _callee$(_context) {
@@ -6275,8 +6346,8 @@ var ModelModelsFieldMixin = {
                 model = _context.sent;
                 this.loading = true;
                 this.$api(app, model.plural, '?search=' + query).then(function (r) {
-                  _this2.loading = false;
-                  _this2.options = r.data.results.map(function (x) {
+                  _this3.loading = false;
+                  _this3.options = r.data.results.map(function (x) {
                     if (!x.title) x.title = x.path;
                     return x;
                   }); // this.options.unshift(

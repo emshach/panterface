@@ -1,30 +1,49 @@
 <template lang="html">
   <div class="model-multiple-choice-field" >
-    <vk-table v-if="isset" :data="values">
+    <vk-table v-if="isset" :data="field.value||[]">
       <vk-table-column v-for="c in columns"
                        :key="c.name" :title="c.name" :name="c.name" />
     </vk-table>
     <div v-else v-html="html" @click="editField" @focus="editField"
          :class="fieldClasses" />
-    <multiselect v-if="editMode" v-model="values" ref="inputV"
-                 :options="options" :class="fieldClasses"
-                 :multiple="true"
-                 label="title"
-                 track-by="path"
-                 open-direction="bottom"
-                 @blur="commitField"
-                 @search-change="getObjects"
-               />
+    <label>
+      add
+      <multiselect v-if="editMode" v-model="values" ref="inputV"
+                   :options="options" :class="fieldClasses"
+                   :multiple="true"
+                   label="title"
+                   track-by="path"
+                   open-direction="bottom"
+                   @search-change="getObjects"
+                   />
+    </label>
+    <vk-button-link class="btn btn-confirm" @click.prevent="commitField">
+      <font-awesome-icon icon="check" />
+    </vk-button-link>
+    <vk-button-link class="btn btn-cancel" @click.prevent="revertField">
+      <font-awesome-icon icon="times" />
+    </vk-button-link>
   </div>
 </template>
 
 <script lang="js">
 import { Table as VkTable, TableColumn as VkTableColumn } from 'vuikit/lib/table'
+import { ButtonLink as VkButtonLink } from 'vuikit/lib/button'
+import { faTimes, faCheck } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { ModelFieldMixin, ModelModelsFieldMixin } from '@/lib/mixins'
+
+library.add( faTimes, faCheck )
+
 export default {
   name: 'ModelMultipleChoiceField',
   mixins: [ ModelFieldMixin, ModelModelsFieldMixin ],
-  components: { VkTable, VkTableColumn },
+  components: {
+    VkTable,
+    VkTableColumn,
+    VkButtonLink,
+    FontAwesomeIcon,
+  },
   props: {},
   mounted() {
     

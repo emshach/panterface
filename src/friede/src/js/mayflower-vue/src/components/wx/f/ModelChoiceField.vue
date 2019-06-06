@@ -3,7 +3,7 @@
                :options="options" :class="fieldClasses"
                label="title"
                track-by="path"
-               @input="commitField"
+               @input="commit"
                @blur="revertField"
                @search-change="getObjects"
                />
@@ -25,7 +25,11 @@ export default {
     }
   },
   methods: {
-    
+    editField: ModelFieldMixin.methods.editField,
+    commit( val ) {
+      this.field.wip = val;
+      this.commitField();
+    }
   },
   computed: {
     

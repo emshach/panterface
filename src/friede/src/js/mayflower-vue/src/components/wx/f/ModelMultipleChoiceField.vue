@@ -120,7 +120,7 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .model-multiple-choice-field {
   .btn {
     padding: 0 7px;

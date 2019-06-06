@@ -28,24 +28,24 @@
 
 
 
-.model-multiple-choice-field .btn[data-v-4e87dff7] {
+.model-multiple-choice-field .btn {
   padding: 0 7px;
   height: 30px;
   line-height: 33px;
 }
-.model-multiple-choice-field .btn.btn-confirm[data-v-4e87dff7] {
+.model-multiple-choice-field .btn.btn-confirm {
     color: limegreen;
 }
-.model-multiple-choice-field .btn.btn-confirm[data-v-4e87dff7]:hover {
+.model-multiple-choice-field .btn.btn-confirm:hover {
       color: forestgreen;
 }
-.model-multiple-choice-field .btn.btn-cancel[data-v-4e87dff7] {
+.model-multiple-choice-field .btn.btn-cancel {
     color: red;
 }
-.model-multiple-choice-field .btn.btn-cancel[data-v-4e87dff7]:hover {
+.model-multiple-choice-field .btn.btn-cancel:hover {
       color: darkred;
 }
-.model-multiple-choice-field .uk-table th[data-v-4e87dff7] {
+.model-multiple-choice-field .uk-table th {
   font-size: 12px;
   padding: 0 12px;
 }

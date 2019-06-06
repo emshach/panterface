@@ -1989,6 +1989,7 @@ var render = function() {
                                   tag: "component",
                                   attrs: {
                                     name: cell.meta.name,
+                                    type: cell.meta.type,
                                     field: cell,
                                     "empty-value": "not set"
                                   }

@@ -6,7 +6,7 @@
                  :key="c.name" :title="c.name" :name="c.name">
         <template slot-scope="{ cell }">
           <component v-if="cell" :is="cell.meta.type" :name="cell.meta.name"
-                     :field="cell" empty-value="not set" />
+                     :type="cell.meta.type" :field="cell" empty-value="not set" />
         </template>
       </vk-column>
     </vk-table>

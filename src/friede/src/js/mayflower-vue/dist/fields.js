@@ -594,7 +594,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_7__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_8__["faTimes"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_8__["faCheck"]);
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_7__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_8__["faTimes"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_8__["faCheck"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_8__["faPlus"]);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'ModelMultipleChoiceField',
   mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_10__["ModelFieldMixin"], _lib_mixins__WEBPACK_IMPORTED_MODULE_10__["ModelModelsFieldMixin"]],
@@ -2070,9 +2070,13 @@ var render = function() {
                 )
               ]
             : _c(
-                "vk-button-link",
+                "vk-btn-link",
                 { on: { click: _vm.editField, focus: _vm.editField } },
-                [_vm._v("\n      add\n    ")]
+                [
+                  _c("font-awesome-icon", { attrs: { icon: "times" } }),
+                  _vm._v(" add\n    ")
+                ],
+                1
               )
         ],
         2

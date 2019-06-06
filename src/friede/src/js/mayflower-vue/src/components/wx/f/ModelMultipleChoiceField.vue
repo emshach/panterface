@@ -32,9 +32,9 @@
           </vk-btn-grp>
         </label>
       </template>
-      <vk-button-link v-else @click="editField" @focus="editField">
-        add
-      </vk-button-link>
+      <vk-btn-link v-else @click="editField" @focus="editField">
+        <font-awesome-icon icon="times" /> add
+      </vk-btn-link>
     </div>
   </div>
 </template>
@@ -44,11 +44,11 @@ import { Field } from '@/lib/objects'
 import { Table as VkTable, TableColumn as VkTableColumn } from 'vuikit/lib/table'
 import { ButtonLink as VkBtnLink, ButtonGroup as VkBtnGrp } from 'vuikit/lib/button'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faTimes, faCheck } from '@fortawesome/free-solid-svg-icons'
+import { faTimes, faCheck, faPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { ModelFieldMixin, ModelModelsFieldMixin } from '@/lib/mixins'
 
-library.add( faTimes, faCheck )
+library.add( faTimes, faCheck, faPlus )
 
 export default {
   name: 'ModelMultipleChoiceField',
@@ -137,6 +137,10 @@ export default {
         color: darkred;
       }
     }
+  }
+  .uk-table th {
+    font-size: 12px;
+    padding: 0 12px;
   }
 }
 </style>

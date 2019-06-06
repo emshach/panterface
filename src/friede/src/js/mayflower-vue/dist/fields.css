@@ -45,6 +45,10 @@
 .model-multiple-choice-field .btn.btn-cancel[data-v-4e87dff7]:hover {
       color: darkred;
 }
+.model-multiple-choice-field .uk-table th[data-v-4e87dff7] {
+  font-size: 12px;
+  padding: 0 12px;
+}
 
 
 /*# sourceMappingURL=fields.css.map*/

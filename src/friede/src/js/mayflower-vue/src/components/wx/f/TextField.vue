@@ -1,6 +1,6 @@
 <template lang="html">
   <textarea v-if="editMode" v-model="field.wip" ref="input"
-         :class="[ 'uk-textarea', fieldClasses ]" @blur="commitField" />
+         :class="fieldClasses" @blur="commitField" />
   <div v-else v-html="html" @click="editField" @focus="editField"
        :class="fieldClasses" />
 </template>
@@ -16,7 +16,7 @@ export default {
   },
   data() {
     return {
-      
+      editClass: [ 'uk-textarea' ]
     }
   },
   methods: {

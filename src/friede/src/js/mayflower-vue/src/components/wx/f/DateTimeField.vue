@@ -1,15 +1,15 @@
 <template lang="html">
-  <div v-if="readonly" v-html="field.html" :class="fieldClasses" />
-  <flat-pickr v-else-if="editMode" v-model="field.wip"
-         :class="fieldClasses" @blur="commitField" />
-  <div v-else v-html="field.html" @click="editField" @focus="editField"
+  <flat-pickr v-if="editMode" v-model="field.wip" ref="inputV"
+              :config="config" :class="fieldClasses"
+              @on-change="commitField"
+              @on-close="revertField" />
+  <div v-else v-html="html" @click="editField" @focus="editField"
        :class="fieldClasses" />
 </template>
 
 <script lang="js">
-import flatPickr from 'vue-flatpickr-component'
+import FlatPickr from 'vue-flatpickr-component'
 import 'flatpickr/dist/flatpickr.css'
-import { Field } from '@/lib/objects'
 import { ModelFieldMixin } from '@/lib/mixins'
 export default {
   name: 'DateTimeField',
@@ -21,7 +21,9 @@ export default {
   },
   data() {
     return {
-      
+      config: {
+        dateFormat: 'Y-m-d'
+      }
     }
   },
   methods: {
@@ -34,7 +36,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  .date-time-field {
-
-  }
+.date-time-field {
+  
+}
 </style>

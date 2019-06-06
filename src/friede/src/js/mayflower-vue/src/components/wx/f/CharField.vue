@@ -1,6 +1,6 @@
 <template lang="html">
   <input v-if="editMode" type="text" v-model="field.wip" ref="input"
-         :class="[ 'uk-input', fieldClasses ]" @blur="commitField" />
+         :class="fieldClasses" @blur="commitField" />
   <div v-else v-html="html" @click="editField" @focus="editField"
        :class="fieldClasses" />
 </template>
@@ -16,7 +16,7 @@ export default {
   },
   data() {
     return {
-      
+      editClass: [ 'uk-input' ]
     }
   },
   methods: {

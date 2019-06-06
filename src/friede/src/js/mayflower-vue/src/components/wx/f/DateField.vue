@@ -1,6 +1,8 @@
 <template lang="html">
   <flat-pickr v-if="editMode" v-model="field.wip" ref="inputV"
-              :class="fieldClasses" @blur="commitField" />
+              :config="config" :class="fieldClasses"
+              @on-change="commitField"
+              @on-close="revertField" />
   <div v-else v-html="html" @click="editField" @focus="editField"
        :class="fieldClasses" />
 </template>
@@ -8,7 +10,6 @@
 <script lang="js">
 import FlatPickr from 'vue-flatpickr-component'
 import 'flatpickr/dist/flatpickr.css'
-import { Field } from '@/lib/objects'
 import { ModelFieldMixin } from '@/lib/mixins'
 export default {
   name: 'DateField',
@@ -20,7 +21,9 @@ export default {
   },
   data() {
     return {
-      
+      config: {
+        dateFormat: 'Y-m-d'
+      }
     }
   },
   methods: {
@@ -33,7 +36,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  .date-field {
-
-  }
+.date-field {
+  
+}
 </style>

@@ -24,6 +24,9 @@ const ModelFieldMixin = {
   },
   data() {
     return {
+      classes: [],
+      editClass: [],
+      viewClass: [],
       editMode: false,
     }
   },
@@ -43,14 +46,20 @@ const ModelFieldMixin = {
     commitField() {
       this.field.commit();
       this.editMode = false;
+    },
+    revertField() {
+      this.field.revert();
+      this.editMode = false;
     }
   },
   computed: {
     fieldClasses() {
-      return [
-        this.isset ? '' : 'no-data' ,
-        this.readonly ? 'readonly' : '',
-      ]
+      return this.classes.concat(
+        this.editMode ? this.editClass : this.viewClass,
+        [
+          this.isset ? '' : 'no-data' ,
+          this.readonly ? 'readonly' : '',
+        ])
     },
     isset() {
       if ( this.field.value === undefined
@@ -60,7 +69,10 @@ const ModelFieldMixin = {
       return true;
     },
     html() {
-      return this.isset ? this.field.value : this.emptyValue;
+      if (! this.isset)
+        return this.emptyValue;
+      const v = this.field.value;
+      return v.label || v.title || v.path || v;
     }
   }
 }

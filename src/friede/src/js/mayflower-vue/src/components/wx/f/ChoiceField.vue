@@ -1,7 +1,7 @@
 <template lang="html">
   <multiselect v-if="editMode" v-model="field.wip" ref="inputV"
                :options="field.meta.options"
-               :class="fieldClasses" @blur="commitField" />
+               :class="fieldClasses" @input="commitField" @blur="revertField" />
   <div v-else v-html="html" @click="editField" @focus="editField"
        :class="fieldClasses" />
 </template>
@@ -32,7 +32,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  .choice-field {
-
-  }
+.choice-field {
+  
+}
 </style>

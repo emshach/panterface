@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "22bf870207af58ccbf93";
+/******/ 	var hotCurrentHash = "24fee20a972eec25a0a1";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -3212,6 +3212,9 @@ inherit(Field, Object, {
   },
   commit: function commit() {
     this.value = this.wip === undefined || this.wip === null ? '' : this.wip;
+  },
+  revert: function revert() {
+    this.wip = this.value;
   }
 });
 
@@ -3495,12 +3498,12 @@ function _getModel2(_x, _x2) {
 function _getModel() {
   _getModel = Object(_home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_3__["default"])(
   /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee2(model, have) {
-    return regeneratorRuntime.wrap(function _callee2$(_context2) {
+  regeneratorRuntime.mark(function _callee5(model, have) {
+    return regeneratorRuntime.wrap(function _callee5$(_context5) {
       while (1) {
-        switch (_context2.prev = _context2.next) {
+        switch (_context5.prev = _context5.next) {
           case 0:
-            return _context2.abrupt("return", vue__WEBPACK_IMPORTED_MODULE_4__["default"].prototype.$api('models', model, have ? '?' + have.map(function (x) {
+            return _context5.abrupt("return", vue__WEBPACK_IMPORTED_MODULE_4__["default"].prototype.$api('models', model, have ? '?' + have.map(function (x) {
               return 'have=' + x;
             }).join('&') : '').then(function (r) {
               return r.data.models;
@@ -3508,10 +3511,10 @@ function _getModel() {
 
           case 1:
           case "end":
-            return _context2.stop();
+            return _context5.stop();
         }
       }
-    }, _callee2);
+    }, _callee5);
   }));
   return _getModel.apply(this, arguments);
 }
@@ -3548,69 +3551,25 @@ function _getModel() {
     }
   },
   actions: {
-    setContext: function setContext(_ref, context) {
-      var commit = _ref.commit,
-          state = _ref.state,
-          dispatch = _ref.dispatch;
-      commit('setContext', context);
-      dispatch('getModel');
-    },
-    setPath: function setPath(_ref2, path) {
-      var commit = _ref2.commit,
-          state = _ref2.state,
-          dispatch = _ref2.dispatch;
-      vue__WEBPACK_IMPORTED_MODULE_4__["default"].prototype.$api('path', path).then(function (r) {
-        commit('setContext', r.data.route);
-        dispatch('getModel');
-      }).catch(function (x) {// TODO: handle
-      });
-    },
-    getModel: function () {
-      var _getModel3 = Object(_home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_3__["default"])(
+    setContext: function () {
+      var _setContext = Object(_home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_3__["default"])(
       /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee(_ref3, model) {
-        var commit, state, have, models;
+      regeneratorRuntime.mark(function _callee(_ref, context) {
+        var commit, state, dispatch, model;
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                commit = _ref3.commit, state = _ref3.state;
+                commit = _ref.commit, state = _ref.state, dispatch = _ref.dispatch;
+                commit('setContext', context);
+                _context.next = 4;
+                return dispatch('getModel');
 
-                if (model) {
-                  _context.next = 5;
-                  break;
-                }
+              case 4:
+                model = _context.sent;
+                commit('setModel', model);
 
-                model = state.lastLocation && state.lastLocation.data.model;
-
-                if (model) {
-                  _context.next = 5;
-                  break;
-                }
-
-                return _context.abrupt("return", null);
-
-              case 5:
-                if (!(model in state.models)) {
-                  _context.next = 8;
-                  break;
-                }
-
-                if (!state.model || state.model.fullname !== model) commit('setModel', state.models[model]);
-                return _context.abrupt("return", state.models[model]);
-
-              case 8:
-                have = _home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_0___default()(state.models);
-                _context.next = 11;
-                return _getModel2(model, have);
-
-              case 11:
-                models = _context.sent;
-                commit('addModels', models);
-                commit('setModel', models[model]);
-                return _context.abrupt("return", models[model]);
-
-              case 15:
+              case 6:
               case "end":
                 return _context.stop();
             }
@@ -3618,7 +3577,121 @@ function _getModel() {
         }, _callee);
       }));
 
-      function getModel(_x3, _x4) {
+      function setContext(_x3, _x4) {
+        return _setContext.apply(this, arguments);
+      }
+
+      return setContext;
+    }(),
+    setPath: function () {
+      var _setPath = Object(_home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_3__["default"])(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee3(_ref2, path) {
+        var commit, state, dispatch;
+        return regeneratorRuntime.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                commit = _ref2.commit, state = _ref2.state, dispatch = _ref2.dispatch;
+                vue__WEBPACK_IMPORTED_MODULE_4__["default"].prototype.$api('path', path).then(
+                /*#__PURE__*/
+                function () {
+                  var _ref3 = Object(_home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_3__["default"])(
+                  /*#__PURE__*/
+                  regeneratorRuntime.mark(function _callee2(r) {
+                    var model;
+                    return regeneratorRuntime.wrap(function _callee2$(_context2) {
+                      while (1) {
+                        switch (_context2.prev = _context2.next) {
+                          case 0:
+                            commit('setContext', r.data.route);
+                            _context2.next = 3;
+                            return dispatch('getModel');
+
+                          case 3:
+                            model = _context2.sent;
+                            commit('setModel', model);
+
+                          case 5:
+                          case "end":
+                            return _context2.stop();
+                        }
+                      }
+                    }, _callee2);
+                  }));
+
+                  return function (_x7) {
+                    return _ref3.apply(this, arguments);
+                  };
+                }()).catch(function (x) {// TODO: handle
+                });
+
+              case 2:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }));
+
+      function setPath(_x5, _x6) {
+        return _setPath.apply(this, arguments);
+      }
+
+      return setPath;
+    }(),
+    getModel: function () {
+      var _getModel3 = Object(_home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_3__["default"])(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee4(_ref4, model) {
+        var commit, state, have, models;
+        return regeneratorRuntime.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                commit = _ref4.commit, state = _ref4.state;
+
+                if (model) {
+                  _context4.next = 5;
+                  break;
+                }
+
+                model = state.lastLocation && state.lastLocation.data.model;
+
+                if (model) {
+                  _context4.next = 5;
+                  break;
+                }
+
+                return _context4.abrupt("return", null);
+
+              case 5:
+                if (!(model in state.models)) {
+                  _context4.next = 7;
+                  break;
+                }
+
+                return _context4.abrupt("return", state.models[model]);
+
+              case 7:
+                have = _home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_0___default()(state.models);
+                _context4.next = 10;
+                return _getModel2(model, have);
+
+              case 10:
+                models = _context4.sent;
+                commit('addModels', models);
+                return _context4.abrupt("return", models[model]);
+
+              case 13:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4);
+      }));
+
+      function getModel(_x8, _x9) {
         return _getModel3.apply(this, arguments);
       }
 

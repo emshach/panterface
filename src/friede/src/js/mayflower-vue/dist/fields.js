@@ -53,7 +53,9 @@ __webpack_require__.r(__webpack_exports__);
   props: {},
   mounted: function mounted() {},
   data: function data() {
-    return {};
+    return {
+      editClass: ['uk-input']
+    };
   },
   methods: {},
   computed: {}
@@ -132,22 +134,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_flatpickr_component__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_flatpickr_component__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var flatpickr_dist_flatpickr_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! flatpickr/dist/flatpickr.css */ "./node_modules/flatpickr/dist/flatpickr.css");
 /* harmony import */ var flatpickr_dist_flatpickr_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(flatpickr_dist_flatpickr_css__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
-/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
-
+/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'DateField',
-  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_3__["ModelFieldMixin"]],
+  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_2__["ModelFieldMixin"]],
   props: {},
   components: {
     FlatPickr: vue_flatpickr_component__WEBPACK_IMPORTED_MODULE_0___default.a
   },
   mounted: function mounted() {},
   data: function data() {
-    return {};
+    return {
+      config: {
+        dateFormat: 'Y-m-d'
+      }
+    };
   },
   methods: {},
   computed: {}
@@ -168,22 +172,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_flatpickr_component__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_flatpickr_component__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var flatpickr_dist_flatpickr_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! flatpickr/dist/flatpickr.css */ "./node_modules/flatpickr/dist/flatpickr.css");
 /* harmony import */ var flatpickr_dist_flatpickr_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(flatpickr_dist_flatpickr_css__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
-/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
-
+/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'DateTimeField',
-  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_3__["ModelFieldMixin"]],
+  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_2__["ModelFieldMixin"]],
   props: {},
   components: {
-    FlatPickr: FlatPickr
+    FlatPickr: vue_flatpickr_component__WEBPACK_IMPORTED_MODULE_0___default.a
   },
   mounted: function mounted() {},
   data: function data() {
-    return {};
+    return {
+      config: {
+        dateFormat: 'Y-m-d'
+      }
+    };
   },
   methods: {},
   computed: {}
@@ -200,17 +206,17 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
-/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
-
+/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'DecimalField',
-  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_1__["ModelFieldMixin"]],
+  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_0__["ModelFieldMixin"]],
   props: {},
   mounted: function mounted() {},
   data: function data() {
-    return {};
+    return {
+      editClass: ['uk-input']
+    };
   },
   methods: {},
   computed: {}
@@ -235,19 +241,28 @@ __webpack_require__.r(__webpack_exports__);
   name: 'DurationField',
   mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_1__["ModelFieldMixin"]],
   props: {},
-  components: {
-    Multiselect: Multiselect
-  },
   mounted: function mounted() {},
   data: function data() {
     return {
-      count: 1,
+      days: 1,
+      hours: 0,
+      minutes: 0,
+      seconds: 0,
       duration: '',
       options: _lib_mixins__WEBPACK_IMPORTED_MODULE_1__["DurationOptions"]
     };
   },
   methods: {},
-  computed: {}
+  computed: {
+    value: function value() {
+      return "".concat(this.days, " ").concat(this.minutes, ":").concat(this.hours).concat(this.seconds);
+    }
+  },
+  watch: {
+    value: function value(val) {
+      this.field.wip = val;
+    }
+  }
 });
 
 /***/ }),
@@ -261,17 +276,17 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
-/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
-
+/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'EmailField',
-  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_1__["ModelFieldMixin"]],
+  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_0__["ModelFieldMixin"]],
   props: {},
   mounted: function mounted() {},
   data: function data() {
-    return {};
+    return {
+      editClass: ['uk-input']
+    };
   },
   methods: {},
   computed: {}
@@ -288,17 +303,17 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
-/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
-
+/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'FileField',
-  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_1__["ModelFieldMixin"]],
+  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_0__["ModelFieldMixin"]],
   props: {},
   mounted: function mounted() {},
   data: function data() {
-    return {};
+    return {
+      editClass: ['uk-input']
+    };
   },
   methods: {},
   computed: {}
@@ -315,17 +330,17 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
-/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
-
+/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'FilePathField',
-  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_1__["ModelFieldMixin"]],
+  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_0__["ModelFieldMixin"]],
   props: {},
   mounted: function mounted() {},
   data: function data() {
-    return {};
+    return {
+      editClass: ['uk-input']
+    };
   },
   methods: {},
   computed: {}
@@ -342,17 +357,17 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
-/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
-
+/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'FloatField',
-  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_1__["ModelFieldMixin"]],
+  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_0__["ModelFieldMixin"]],
   props: {},
   mounted: function mounted() {},
   data: function data() {
-    return {};
+    return {
+      editClass: ['uk-input']
+    };
   },
   methods: {},
   computed: {}
@@ -433,7 +448,9 @@ __webpack_require__.r(__webpack_exports__);
   props: {},
   mounted: function mounted() {},
   data: function data() {
-    return {};
+    return {
+      editClass: ['uk-input']
+    };
   },
   methods: {},
   computed: {}
@@ -460,7 +477,9 @@ __webpack_require__.r(__webpack_exports__);
   props: {},
   mounted: function mounted() {},
   data: function data() {
-    return {};
+    return {
+      editClass: ['uk-input']
+    };
   },
   methods: {},
   computed: {}
@@ -547,13 +566,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es6_function_name__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_function_name__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var core_js_modules_es6_array_find__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es6.array.find */ "./node_modules/core-js/modules/es6.array.find.js");
 /* harmony import */ var core_js_modules_es6_array_find__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_array_find__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
+/* harmony import */ var vuikit_lib_table__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuikit/lib/table */ "./node_modules/vuikit/lib/table.js");
+/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'ModelMultipleChoiceField',
-  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_2__["ModelFieldMixin"], _lib_mixins__WEBPACK_IMPORTED_MODULE_2__["ModelModelsFieldMixin"]],
+  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_3__["ModelFieldMixin"], _lib_mixins__WEBPACK_IMPORTED_MODULE_3__["ModelModelsFieldMixin"]],
+  components: {
+    VkTable: vuikit_lib_table__WEBPACK_IMPORTED_MODULE_2__["Table"],
+    VkTableColumn: vuikit_lib_table__WEBPACK_IMPORTED_MODULE_2__["TableColumn"]
+  },
   props: {},
   mounted: function mounted() {},
   data: function data() {
@@ -561,6 +586,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {},
   computed: {
+    columns: function columns() {
+      var m = this.field.meta.related;
+      var model = this.$store.state.models[m];
+      return model.fields;
+    },
     searchModel: function searchModel() {
       var m = this.field.meta.related;
       var l = this.field.meta.link_field;
@@ -770,7 +800,9 @@ __webpack_require__.r(__webpack_exports__);
   props: {},
   mounted: function mounted() {},
   data: function data() {
-    return {};
+    return {
+      editClass: ['uk-textarea']
+    };
   },
   methods: {},
   computed: {}
@@ -823,19 +855,17 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
-/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
-/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js");
-/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_2__);
-
+/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
+/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js");
+/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_1__);
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'TypedChoiceField',
-  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_1__["ModelFieldMixin"]],
+  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_0__["ModelFieldMixin"]],
   props: {},
   components: {
-    Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_2___default.a
+    Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_1___default.a
   },
   mounted: function mounted() {},
   data: function data() {
@@ -1031,7 +1061,7 @@ var render = function() {
           }
         ],
         ref: "input",
-        class: ["uk-input", _vm.fieldClasses],
+        class: _vm.fieldClasses,
         attrs: { type: "text" },
         domProps: { value: _vm.field.wip },
         on: {
@@ -1077,7 +1107,7 @@ var render = function() {
         ref: "inputV",
         class: _vm.fieldClasses,
         attrs: { options: _vm.field.meta.options },
-        on: { blur: _vm.commitField },
+        on: { input: _vm.commitField, blur: _vm.revertField },
         model: {
           value: _vm.field.wip,
           callback: function($$v) {
@@ -1163,7 +1193,8 @@ var render = function() {
     ? _c("flat-pickr", {
         ref: "inputV",
         class: _vm.fieldClasses,
-        on: { blur: _vm.commitField },
+        attrs: { config: _vm.config },
+        on: { "on-change": _vm.commitField, "on-close": _vm.revertField },
         model: {
           value: _vm.field.wip,
           callback: function($$v) {
@@ -1200,15 +1231,12 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.readonly
-    ? _c("div", {
-        class: _vm.fieldClasses,
-        domProps: { innerHTML: _vm._s(_vm.field.html) }
-      })
-    : _vm.editMode
+  return _vm.editMode
     ? _c("flat-pickr", {
+        ref: "inputV",
         class: _vm.fieldClasses,
-        on: { blur: _vm.commitField },
+        attrs: { config: _vm.config },
+        on: { "on-change": _vm.commitField, "on-close": _vm.revertField },
         model: {
           value: _vm.field.wip,
           callback: function($$v) {
@@ -1219,7 +1247,7 @@ var render = function() {
       })
     : _c("div", {
         class: _vm.fieldClasses,
-        domProps: { innerHTML: _vm._s(_vm.field.html) },
+        domProps: { innerHTML: _vm._s(_vm.html) },
         on: { click: _vm.editField, focus: _vm.editField }
       })
 }
@@ -1245,12 +1273,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.readonly
-    ? _c("div", {
-        class: _vm.fieldClasses,
-        domProps: { innerHTML: _vm._s(_vm.field.html) }
-      })
-    : _vm.editMode
+  return _vm.editMode
     ? _c("input", {
         directives: [
           {
@@ -1275,7 +1298,7 @@ var render = function() {
       })
     : _c("div", {
         class: _vm.fieldClasses,
-        domProps: { innerHTML: _vm._s(_vm.field.html) },
+        domProps: { innerHTML: _vm._s(_vm.html) },
         on: { click: _vm.editField, focus: _vm.editField }
       })
 }
@@ -1301,53 +1324,100 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.readonly
-    ? _c("div", {
-        class: _vm.fieldClasses,
-        domProps: { innerHTML: _vm._s(_vm.field.html) }
-      })
-    : _vm.editMode
-    ? _c(
-        "div",
-        { class: _vm.fieldClasses },
-        [
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.count,
-                expression: "count"
-              }
-            ],
-            attrs: { type: "number" },
-            domProps: { value: _vm.count },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.count = $event.target.value
-              }
+  return _vm.editMode
+    ? _c("div", { class: _vm.fieldClasses }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.days,
+              expression: "days"
             }
-          }),
-          _c("multiselect", {
-            attrs: { options: _vm.options },
-            on: { blur: _vm.commitField },
-            model: {
-              value: _vm.duration,
-              callback: function($$v) {
-                _vm.duration = $$v
-              },
-              expression: "duration"
+          ],
+          staticClass: "uk-input",
+          attrs: { type: "number" },
+          domProps: { value: _vm.days },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.days = $event.target.value
             }
-          })
-        ],
-        1
-      )
+          }
+        }),
+        _vm._v("days\n  "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.hours,
+              expression: "hours"
+            }
+          ],
+          staticClass: "uk-input",
+          attrs: { type: "number", max: "23" },
+          domProps: { value: _vm.hours },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.hours = $event.target.value
+            }
+          }
+        }),
+        _vm._v("hours\n  "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.minutes,
+              expression: "minutes"
+            }
+          ],
+          staticClass: "uk-input",
+          attrs: { type: "number", max: "59" },
+          domProps: { value: _vm.minutes },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.minutes = $event.target.value
+            }
+          }
+        }),
+        _vm._v("minutes\n  "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.seconds,
+              expression: "seconds"
+            }
+          ],
+          staticClass: "uk-input",
+          attrs: { type: "number", max: "59" },
+          domProps: { value: _vm.seconds },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.seconds = $event.target.value
+            }
+          }
+        }),
+        _vm._v("seconds\n")
+      ])
     : _c("div", {
         class: _vm.fieldClasses,
-        domProps: { innerHTML: _vm._s(_vm.field.html) },
+        domProps: { innerHTML: _vm._s(_vm.html) },
         on: { click: _vm.editField, focus: _vm.editField }
       })
 }
@@ -1373,12 +1443,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.readonly
-    ? _c("div", {
-        class: _vm.fieldClasses,
-        domProps: { innerHTML: _vm._s(_vm.field.html) }
-      })
-    : _vm.editMode
+  return _vm.editMode
     ? _c("input", {
         directives: [
           {
@@ -1403,7 +1468,7 @@ var render = function() {
       })
     : _c("div", {
         class: _vm.fieldClasses,
-        domProps: { innerHTML: _vm._s(_vm.field.html) },
+        domProps: { innerHTML: _vm._s(_vm.html) },
         on: { click: _vm.editField, focus: _vm.editField }
       })
 }
@@ -1447,12 +1512,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.readonly
-    ? _c("div", {
-        class: _vm.fieldClasses,
-        domProps: { innerHTML: _vm._s(_vm.field.html) }
-      })
-    : _vm.editMode
+  return _vm.editMode
     ? _c("input", {
         directives: [
           {
@@ -1477,7 +1537,7 @@ var render = function() {
       })
     : _c("div", {
         class: _vm.fieldClasses,
-        domProps: { innerHTML: _vm._s(_vm.field.html) },
+        domProps: { innerHTML: _vm._s(_vm.html) },
         on: { click: _vm.editField, focus: _vm.editField }
       })
 }
@@ -1503,12 +1563,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.readonly
-    ? _c("div", {
-        class: _vm.fieldClasses,
-        domProps: { innerHTML: _vm._s(_vm.field.html) }
-      })
-    : _vm.editMode
+  return _vm.editMode
     ? _c("input", {
         directives: [
           {
@@ -1533,7 +1588,7 @@ var render = function() {
       })
     : _c("div", {
         class: _vm.fieldClasses,
-        domProps: { innerHTML: _vm._s(_vm.field.html) },
+        domProps: { innerHTML: _vm._s(_vm.html) },
         on: { click: _vm.editField, focus: _vm.editField }
       })
 }
@@ -1689,12 +1744,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.readonly
-    ? _c("div", {
-        class: _vm.fieldClasses,
-        domProps: { innerHTML: _vm._s(_vm.field.html) }
-      })
-    : _vm.editMode
+  return _vm.editMode
     ? _c("input", {
         directives: [
           {
@@ -1719,7 +1769,7 @@ var render = function() {
       })
     : _c("div", {
         class: _vm.fieldClasses,
-        domProps: { innerHTML: _vm._s(_vm.field.html) },
+        domProps: { innerHTML: _vm._s(_vm.html) },
         on: { click: _vm.editField, focus: _vm.editField }
       })
 }
@@ -1802,7 +1852,11 @@ var render = function() {
         ref: "inputV",
         class: _vm.fieldClasses,
         attrs: { options: _vm.options, label: "title", "track-by": "path" },
-        on: { blur: _vm.commitField, "search-change": _vm.getObjects },
+        on: {
+          input: _vm.commitField,
+          blur: _vm.revertField,
+          "search-change": _vm.getObjects
+        },
         model: {
           value: _vm.values,
           callback: function($$v) {
@@ -1839,31 +1893,51 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.editMode
-    ? _c("multiselect", {
-        ref: "inputV",
-        class: _vm.fieldClasses,
-        attrs: {
-          options: _vm.options,
-          multiple: true,
-          label: "title",
-          "track-by": "path",
-          "open-direction": "bottom"
-        },
-        on: { blur: _vm.commitField, "search-change": _vm.getObjects },
-        model: {
-          value: _vm.values,
-          callback: function($$v) {
-            _vm.values = $$v
-          },
-          expression: "values"
-        }
-      })
-    : _c("div", {
-        class: _vm.fieldClasses,
-        domProps: { innerHTML: _vm._s(_vm.html) },
-        on: { click: _vm.editField, focus: _vm.editField }
-      })
+  return _c(
+    "div",
+    { staticClass: "model-multiple-choice-field" },
+    [
+      _vm.isset
+        ? _c(
+            "vk-table",
+            { attrs: { data: _vm.values } },
+            _vm._l(_vm.columns, function(c) {
+              return _c("vk-table-column", {
+                key: c.name,
+                attrs: { title: c.name, name: c.name }
+              })
+            }),
+            1
+          )
+        : _c("div", {
+            class: _vm.fieldClasses,
+            domProps: { innerHTML: _vm._s(_vm.html) },
+            on: { click: _vm.editField, focus: _vm.editField }
+          }),
+      _vm.editMode
+        ? _c("multiselect", {
+            ref: "inputV",
+            class: _vm.fieldClasses,
+            attrs: {
+              options: _vm.options,
+              multiple: true,
+              label: "title",
+              "track-by": "path",
+              "open-direction": "bottom"
+            },
+            on: { blur: _vm.commitField, "search-change": _vm.getObjects },
+            model: {
+              value: _vm.values,
+              callback: function($$v) {
+                _vm.values = $$v
+              },
+              expression: "values"
+            }
+          })
+        : _vm._e()
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -2214,7 +2288,7 @@ var render = function() {
           }
         ],
         ref: "input",
-        class: ["uk-textarea", _vm.fieldClasses],
+        class: _vm.fieldClasses,
         domProps: { value: _vm.field.wip },
         on: {
           blur: _vm.commitField,
@@ -2304,7 +2378,7 @@ var render = function() {
         ref: "inputV",
         class: _vm.fieldClasses,
         attrs: { options: _vm.field.meta.options },
-        on: { blur: _vm.commitField },
+        on: { input: _vm.commitField, blur: _vm.revertField },
         model: {
           value: _vm.field.wip,
           callback: function($$v) {
@@ -6128,6 +6202,9 @@ var ModelFieldMixin = {
   },
   data: function data() {
     return {
+      classes: [],
+      editClass: [],
+      viewClass: [],
       editMode: false
     };
   },
@@ -6145,18 +6222,24 @@ var ModelFieldMixin = {
     commitField: function commitField() {
       this.field.commit();
       this.editMode = false;
+    },
+    revertField: function revertField() {
+      this.field.revert();
+      this.editMode = false;
     }
   },
   computed: {
     fieldClasses: function fieldClasses() {
-      return [this.isset ? '' : 'no-data', this.readonly ? 'readonly' : ''];
+      return this.classes.concat(this.editMode ? this.editClass : this.viewClass, [this.isset ? '' : 'no-data', this.readonly ? 'readonly' : '']);
     },
     isset: function isset() {
       if (this.field.value === undefined || this.field.value === null || this.field.value === '') return false;
       return true;
     },
     html: function html() {
-      return this.isset ? this.field.value : this.emptyValue;
+      if (!this.isset) return this.emptyValue;
+      var v = this.field.value;
+      return v.label || v.title || v.path || v;
     }
   }
 };

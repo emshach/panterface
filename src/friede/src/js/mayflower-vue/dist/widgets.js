@@ -1897,6 +1897,9 @@ var ModelFieldMixin = {
   },
   data: function data() {
     return {
+      classes: [],
+      editClass: [],
+      viewClass: [],
       editMode: false
     };
   },
@@ -1914,18 +1917,24 @@ var ModelFieldMixin = {
     commitField: function commitField() {
       this.field.commit();
       this.editMode = false;
+    },
+    revertField: function revertField() {
+      this.field.revert();
+      this.editMode = false;
     }
   },
   computed: {
     fieldClasses: function fieldClasses() {
-      return [this.isset ? '' : 'no-data', this.readonly ? 'readonly' : ''];
+      return this.classes.concat(this.editMode ? this.editClass : this.viewClass, [this.isset ? '' : 'no-data', this.readonly ? 'readonly' : '']);
     },
     isset: function isset() {
       if (this.field.value === undefined || this.field.value === null || this.field.value === '') return false;
       return true;
     },
     html: function html() {
-      return this.isset ? this.field.value : this.emptyValue;
+      if (!this.isset) return this.emptyValue;
+      var v = this.field.value;
+      return v.label || v.title || v.path || v;
     }
   }
 };

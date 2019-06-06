@@ -78,6 +78,7 @@ export default  {
 <style lang="scss">
 .form-page {
   border-radius: 2px;
+  height: 100%;
   > .uk-card-header {
     padding: 0;
     border-bottom: none;

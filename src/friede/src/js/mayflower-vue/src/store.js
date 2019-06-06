@@ -42,14 +42,16 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    setContext({ commit, state, dispatch }, context ) {
+    async setContext({ commit, state, dispatch }, context ) {
       commit( 'setContext', context );
-      dispatch( 'getModel' );
+      var model = await dispatch( 'getModel' );
+      commit( 'setModel', model );
     },
-    setPath({ commit, state, dispatch }, path ) {
-      Vue.prototype.$api( 'path', path ).then( r => {
+    async setPath({ commit, state, dispatch }, path ) {
+      Vue.prototype.$api( 'path', path ).then( async r => {
         commit( 'setContext', r.data.route );
-        dispatch( 'getModel' );
+        var model = await dispatch( 'getModel' );
+        commit( 'setModel', model );
       }).catch( x => {
         // TODO: handle
       });
@@ -61,14 +63,11 @@ export default new Vuex.Store({
           return null;
       }
       if ( model in state.models ) {
-        if ( !state.model || state.model.fullname !== model )
-          commit( 'setModel', state.models[ model ]);
         return state.models[ model ];
       }
       const have = Object.keys( state.models );
       var models = await getModel( model, have );
       commit( 'addModels', models );
-      commit( 'setModel', models[ model ]);
       return models[ model ];
     }
   },

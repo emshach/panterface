@@ -1,13 +1,11 @@
 <template lang="html">
-  <div v-if="readonly" v-html="field.html" :class="fieldClasses" />
-  <input v-else-if="editMode" type="number" v-model="field.wip"
+  <input v-if="editMode" type="number" v-model="field.wip"
          :class="fieldClasses" @blur="commitField" />
-  <div v-else v-html="field.html" @click="editField" @focus="editField"
+  <div v-else v-html="html" @click="editField" @focus="editField"
        :class="fieldClasses" />
 </template>
 
 <script lang="js">
-import { Field } from '@/lib/objects'
 import { ModelFieldMixin } from '@/lib/mixins'
 export default {
   name: 'DecimalField',
@@ -16,9 +14,9 @@ export default {
   mounted() {
     
   },
-  data() {
-    return {
-      
+  data() { 
+   return {
+      editClass: [ 'uk-input' ]
     }
   },
   methods: {
@@ -31,7 +29,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  .decimal-field {
-
-  }
+.decimal-field {
+  
+}
 </style>

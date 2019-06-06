@@ -3,7 +3,8 @@
                :options="options" :class="fieldClasses"
                label="title"
                track-by="path"
-               @blur="commitField"
+               @input="commitField"
+               @blur="revertField"
                @search-change="getObjects"
                />
   <div v-else v-html="html" @click="editField" @focus="editField"
@@ -33,7 +34,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  .model-choice-field {
-
-  }
+.model-choice-field {
+  
+}
 </style>

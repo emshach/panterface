@@ -1,11 +1,11 @@
 <template lang="html">
-  <div v-if="readonly" v-html="field.html" :class="fieldClasses" />
-  <div v-else-if="editMode" :class="fieldClasses">
-    <input type="number" v-model="count" />
-    <multiselect v-model="duration"
-                 :options="options" @blur="commitField" />
+  <div v-if="editMode" :class="fieldClasses">
+    <input type="number" class="uk-input" v-model="days" />days
+    <input type="number" class="uk-input" max="23" v-model="hours" />hours
+    <input type="number" class="uk-input" max="59" v-model="minutes" />minutes
+    <input type="number" class="uk-input" max="59" v-model="seconds" />seconds
   </div>
-  <div v-else v-html="field.html" @click="editField" @focus="editField"
+  <div v-else v-html="html" @click="editField" @focus="editField"
        :class="fieldClasses" />
 </template>
 
@@ -16,13 +16,15 @@ export default {
   name: 'DurationField',
   mixins: [ ModelFieldMixin ],
   props: {},
-  components: { Multiselect },
   mounted() {
     
   },
   data() {
     return {
-      count: 1,
+      days: 1,
+      hours: 0,
+      minutes: 0,
+      seconds: 0,
       duration: '',
       options: DurationOptions
     }
@@ -31,7 +33,14 @@ export default {
     
   },
   computed: {
-    
+    value() {
+      return `${this.days} ${this.minutes}:${this.hours}${this.seconds}`;
+    }
+  },
+  watch: {
+    value( val ) {
+      this.field.wip = val;
+    }
   }
 }
 </script>

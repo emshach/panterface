@@ -1,8 +1,7 @@
 <template lang="html">
-  <div v-if="readonly" v-html="field.html" :class="fieldClasses" />
-  <input v-else-if="editMode" type="number" v-model="field.wip"
+  <input v-if="editMode" type="number" v-model="field.wip"
          :class="fieldClasses" @blur="commitField" />
-  <div v-else v-html="field.html" @click="editField" @focus="editField"
+  <div v-else v-html="html" @click="editField" @focus="editField"
        :class="fieldClasses" />
 </template>
 
@@ -18,7 +17,7 @@ export default {
   },
   data() {
     return {
-      
+      editClass: [ 'uk-input' ]
     }
   },
   methods: {

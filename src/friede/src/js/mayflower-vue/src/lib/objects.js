@@ -90,6 +90,9 @@ inherit( Field, Object, {
   },
   commit() {
     this.value = this.wip === undefined || this.wip === null ? '' : this.wip;
+  },
+  revert() {
+    this.wip = this.value;
   }
 })
 

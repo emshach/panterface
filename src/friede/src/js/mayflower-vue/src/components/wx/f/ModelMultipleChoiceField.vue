@@ -6,23 +6,25 @@
     </vk-table>
     <div v-else v-html="html" @click="editField" @focus="editField"
          :class="fieldClasses" />
-    <label>
-      add
-      <multiselect v-if="editMode" v-model="values" ref="inputV"
-                   :options="options" :class="fieldClasses"
-                   :multiple="true"
-                   label="title"
-                   track-by="path"
-                   open-direction="bottom"
-                   @search-change="getObjects"
-                   />
-    </label>
-    <vk-button-link class="btn btn-confirm" @click.prevent="commitField">
-      <font-awesome-icon icon="check" />
-    </vk-button-link>
-    <vk-button-link class="btn btn-cancel" @click.prevent="revertField">
-      <font-awesome-icon icon="times" />
-    </vk-button-link>
+    <div :class="fieldClasses">
+      <label>
+        add
+        <multiselect v-if="editMode" v-model="values" ref="inputV"
+                     :options="options"
+                     :multiple="true"
+                     label="title"
+                     track-by="path"
+                     open-direction="bottom"
+                     @search-change="getObjects"
+                     />
+      </label>
+      <vk-button-link class="btn btn-confirm" @click.prevent="commitField">
+        <font-awesome-icon icon="check" />
+      </vk-button-link>
+      <vk-button-link class="btn btn-cancel" @click.prevent="revertField">
+        <font-awesome-icon icon="times" />
+      </vk-button-link>
+    </div>
   </div>
 </template>
 
@@ -78,6 +80,22 @@ export default {
 
 <style scoped lang="scss">
 .model-multiple-choice-field {
-  
+  .btn {
+    padding: 0 7px;
+    height: 30px;
+    line-height: 33px;
+    &.btn-confirm {
+      color: limegreen;
+      &:hover {
+        color: forestgreen;
+      }
+    }
+    &.btn-cancel {
+      color: red;
+      &:hover {
+        color: darkred;
+      }
+    }
+  }
 }
 </style>

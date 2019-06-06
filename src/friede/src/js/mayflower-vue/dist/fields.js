@@ -1932,59 +1932,65 @@ var render = function() {
             on: { click: _vm.editField, focus: _vm.editField }
           }),
       _c(
-        "label",
+        "div",
+        { class: _vm.fieldClasses },
         [
-          _vm._v("\n    add\n    "),
-          _vm.editMode
-            ? _c("multiselect", {
-                ref: "inputV",
-                class: _vm.fieldClasses,
-                attrs: {
-                  options: _vm.options,
-                  multiple: true,
-                  label: "title",
-                  "track-by": "path",
-                  "open-direction": "bottom"
-                },
-                on: { "search-change": _vm.getObjects },
-                model: {
-                  value: _vm.values,
-                  callback: function($$v) {
-                    _vm.values = $$v
-                  },
-                  expression: "values"
+          _c(
+            "label",
+            [
+              _vm._v("\n      add\n      "),
+              _vm.editMode
+                ? _c("multiselect", {
+                    ref: "inputV",
+                    attrs: {
+                      options: _vm.options,
+                      multiple: true,
+                      label: "title",
+                      "track-by": "path",
+                      "open-direction": "bottom"
+                    },
+                    on: { "search-change": _vm.getObjects },
+                    model: {
+                      value: _vm.values,
+                      callback: function($$v) {
+                        _vm.values = $$v
+                      },
+                      expression: "values"
+                    }
+                  })
+                : _vm._e()
+            ],
+            1
+          ),
+          _c(
+            "vk-button-link",
+            {
+              staticClass: "btn btn-confirm",
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  return _vm.commitField($event)
                 }
-              })
-            : _vm._e()
+              }
+            },
+            [_c("font-awesome-icon", { attrs: { icon: "check" } })],
+            1
+          ),
+          _c(
+            "vk-button-link",
+            {
+              staticClass: "btn btn-cancel",
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  return _vm.revertField($event)
+                }
+              }
+            },
+            [_c("font-awesome-icon", { attrs: { icon: "times" } })],
+            1
+          )
         ],
-        1
-      ),
-      _c(
-        "vk-button-link",
-        {
-          staticClass: "btn btn-confirm",
-          on: {
-            click: function($event) {
-              $event.preventDefault()
-              return _vm.commitField($event)
-            }
-          }
-        },
-        [_c("font-awesome-icon", { attrs: { icon: "check" } })],
-        1
-      ),
-      _c(
-        "vk-button-link",
-        {
-          staticClass: "btn btn-cancel",
-          on: {
-            click: function($event) {
-              $event.preventDefault()
-              return _vm.revertField($event)
-            }
-          }
-        },
-        [_c("font-awesome-icon", { attrs: { icon: "times" } })],
         1
       )
     ],

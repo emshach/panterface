@@ -28,6 +28,23 @@
 
 
 
+.model-multiple-choice-field .btn[data-v-4e87dff7] {
+  padding: 0 7px;
+  height: 30px;
+  line-height: 33px;
+}
+.model-multiple-choice-field .btn.btn-confirm[data-v-4e87dff7] {
+    color: limegreen;
+}
+.model-multiple-choice-field .btn.btn-confirm[data-v-4e87dff7]:hover {
+      color: forestgreen;
+}
+.model-multiple-choice-field .btn.btn-cancel[data-v-4e87dff7] {
+    color: red;
+}
+.model-multiple-choice-field .btn.btn-cancel[data-v-4e87dff7]:hover {
+      color: darkred;
+}
 
 
 /*# sourceMappingURL=fields.css.map*/

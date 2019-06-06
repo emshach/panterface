@@ -10,6 +10,12 @@
       <template v-if="editMode">
         <label>
           add
+          <vk-button-link class="btn btn-confirm" @click.prevent="commit">
+            <font-awesome-icon icon="check" /> done
+          </vk-button-link>
+          <vk-button-link class="btn btn-cancel" @click.prevent="revertField">
+            <font-awesome-icon icon="times" /> cancel
+          </vk-button-link>
           <multiselect v-model="values" ref="inputV"
                        :options="options"
                        :multiple="true"
@@ -19,12 +25,6 @@
                        @search-change="getObjects"
                        />
         </label>
-        <vk-button-link class="btn btn-confirm" @click.prevent="commitField">
-          <font-awesome-icon icon="check" />
-        </vk-button-link>
-        <vk-button-link class="btn btn-cancel" @click.prevent="revertField">
-          <font-awesome-icon icon="times" />
-        </vk-button-link>
       </template>
       <vk-button-link v-else @click="editField" @focus="editField">
         add
@@ -34,6 +34,7 @@
 </template>
 
 <script lang="js">
+import { Field } from '@/lib/objects'
 import { Table as VkTable, TableColumn as VkTableColumn } from 'vuikit/lib/table'
 import { ButtonLink as VkButtonLink } from 'vuikit/lib/button'
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -62,6 +63,24 @@ export default {
     }
   },
   methods: {
+    commit() {
+      const m = this.field.meta.related;
+      let l = this.field.meta.link_field;
+      if ( !l ) {
+        this.commitField();
+        return;
+      }
+      const model = this.$store.state.models[m];
+      this.values = this.values.map( v => {
+        var link = {};
+        model.fields.forEach ( f => {
+          link[ f.name ] = Field(f).value;
+        });
+        link[l] = v;
+        return link;
+      });
+      this.commitField();
+    }
   },
   computed: {
     columns() {

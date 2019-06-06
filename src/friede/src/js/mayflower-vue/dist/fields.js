@@ -568,16 +568,21 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es6_function_name__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es6.function.name */ "./node_modules/core-js/modules/es6.function.name.js");
-/* harmony import */ var core_js_modules_es6_function_name__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_function_name__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es6_array_find__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es6.array.find */ "./node_modules/core-js/modules/es6.array.find.js");
-/* harmony import */ var core_js_modules_es6_array_find__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_array_find__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var vuikit_lib_table__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuikit/lib/table */ "./node_modules/vuikit/lib/table.js");
-/* harmony import */ var vuikit_lib_button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuikit/lib/button */ "./node_modules/vuikit/lib/button.js");
-/* harmony import */ var _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @fortawesome/fontawesome-svg-core */ "./node_modules/@fortawesome/fontawesome-svg-core/index.es.js");
-/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
-/* harmony import */ var _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @fortawesome/vue-fontawesome */ "./node_modules/@fortawesome/vue-fontawesome/index.es.js");
-/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
+/* harmony import */ var core_js_modules_es6_array_find__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es6.array.find */ "./node_modules/core-js/modules/es6.array.find.js");
+/* harmony import */ var core_js_modules_es6_array_find__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_array_find__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es6_function_name__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es6.function.name */ "./node_modules/core-js/modules/es6.function.name.js");
+/* harmony import */ var core_js_modules_es6_function_name__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_function_name__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/web.dom.iterable */ "./node_modules/core-js/modules/web.dom.iterable.js");
+/* harmony import */ var core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_es6_object_to_string__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es6.object.to-string */ "./node_modules/core-js/modules/es6.object.to-string.js");
+/* harmony import */ var core_js_modules_es6_object_to_string__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_object_to_string__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
+/* harmony import */ var vuikit_lib_table__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vuikit/lib/table */ "./node_modules/vuikit/lib/table.js");
+/* harmony import */ var vuikit_lib_button__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vuikit/lib/button */ "./node_modules/vuikit/lib/button.js");
+/* harmony import */ var _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @fortawesome/fontawesome-svg-core */ "./node_modules/@fortawesome/fontawesome-svg-core/index.es.js");
+/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+/* harmony import */ var _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @fortawesome/vue-fontawesome */ "./node_modules/@fortawesome/vue-fontawesome/index.es.js");
+/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
 
 
 
@@ -586,22 +591,46 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_4__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__["faTimes"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__["faCheck"]);
+
+
+
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_7__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_8__["faTimes"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_8__["faCheck"]);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'ModelMultipleChoiceField',
-  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_7__["ModelFieldMixin"], _lib_mixins__WEBPACK_IMPORTED_MODULE_7__["ModelModelsFieldMixin"]],
+  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_10__["ModelFieldMixin"], _lib_mixins__WEBPACK_IMPORTED_MODULE_10__["ModelModelsFieldMixin"]],
   components: {
-    VkTable: vuikit_lib_table__WEBPACK_IMPORTED_MODULE_2__["Table"],
-    VkTableColumn: vuikit_lib_table__WEBPACK_IMPORTED_MODULE_2__["TableColumn"],
-    VkButtonLink: vuikit_lib_button__WEBPACK_IMPORTED_MODULE_3__["ButtonLink"],
-    FontAwesomeIcon: _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_6__["FontAwesomeIcon"]
+    VkTable: vuikit_lib_table__WEBPACK_IMPORTED_MODULE_5__["Table"],
+    VkTableColumn: vuikit_lib_table__WEBPACK_IMPORTED_MODULE_5__["TableColumn"],
+    VkButtonLink: vuikit_lib_button__WEBPACK_IMPORTED_MODULE_6__["ButtonLink"],
+    FontAwesomeIcon: _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_9__["FontAwesomeIcon"]
   },
   props: {},
   mounted: function mounted() {},
   data: function data() {
     return {};
   },
-  methods: {},
+  methods: {
+    commit: function commit() {
+      var m = this.field.meta.related;
+      var l = this.field.meta.link_field;
+
+      if (!l) {
+        this.commitField();
+        return;
+      }
+
+      var model = this.$store.state.models[m];
+      this.values = this.values.map(function (v) {
+        var link = {};
+        model.fields.forEach(function (f) {
+          link[f.name] = Object(_lib_objects__WEBPACK_IMPORTED_MODULE_4__["Field"])(f).value;
+        });
+        link[l] = v;
+        return link;
+      });
+      this.commitField();
+    }
+  },
   computed: {
     columns: function columns() {
       var m = this.field.meta.related;
@@ -1941,6 +1970,40 @@ var render = function() {
                   "label",
                   [
                     _vm._v("\n        add\n        "),
+                    _c(
+                      "vk-button-link",
+                      {
+                        staticClass: "btn btn-confirm",
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            return _vm.commit($event)
+                          }
+                        }
+                      },
+                      [
+                        _c("font-awesome-icon", { attrs: { icon: "check" } }),
+                        _vm._v(" done\n        ")
+                      ],
+                      1
+                    ),
+                    _c(
+                      "vk-button-link",
+                      {
+                        staticClass: "btn btn-cancel",
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            return _vm.revertField($event)
+                          }
+                        }
+                      },
+                      [
+                        _c("font-awesome-icon", { attrs: { icon: "times" } }),
+                        _vm._v(" cancel\n        ")
+                      ],
+                      1
+                    ),
                     _c("multiselect", {
                       ref: "inputV",
                       attrs: {
@@ -1960,34 +2023,6 @@ var render = function() {
                       }
                     })
                   ],
-                  1
-                ),
-                _c(
-                  "vk-button-link",
-                  {
-                    staticClass: "btn btn-confirm",
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        return _vm.commitField($event)
-                      }
-                    }
-                  },
-                  [_c("font-awesome-icon", { attrs: { icon: "check" } })],
-                  1
-                ),
-                _c(
-                  "vk-button-link",
-                  {
-                    staticClass: "btn btn-cancel",
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        return _vm.revertField($event)
-                      }
-                    }
-                  },
-                  [_c("font-awesome-icon", { attrs: { icon: "times" } })],
                   1
                 )
               ]

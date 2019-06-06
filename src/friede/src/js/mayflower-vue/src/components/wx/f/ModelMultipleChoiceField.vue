@@ -3,7 +3,7 @@
     <vk-table v-if="field.wip && field.wip.length" responsive :data="field.wip">
       <vk-col-select/>
       <vk-column v-for="c in columns"
-                 :key="c.name" :title="c.name" :name="c.name">
+                 :key="c.name" :title="c.name" :cell="c.name">
         <!-- <template slot-scope="{ cell }"> -->
         <!--   <component v-if="cell" :is="cell.meta.type" :name="cell.meta.name" -->
         <!--              :type="cell.meta.type" :field="cell" empty-value="not set" /> -->

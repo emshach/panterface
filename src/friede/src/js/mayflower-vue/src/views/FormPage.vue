@@ -61,15 +61,15 @@ export default  {
       return this.$store.state.model
     },
     data() {
-      return this.$store.state.modelData || Model( this.model )
+      return this.$store.state.modelData || Model( this.model );
     },
     simpleFields() {
       return this.data.fields.filter(
-        x => !x.meta.related || !x.meta.type.match( /Multiple|Choices/ ))
+        x => !x.meta.related || !x.meta.type.match( /Multiple|Choices/ ));
     },
     relationFields() {
       return this.data.fields.filter(
-        x => x.meta.related && x.meta.type.match( /Multiple|Choices/ ))
+        x => x.meta.related && x.meta.type.match( /Multiple|Choices/ ));
     }
   }
 }

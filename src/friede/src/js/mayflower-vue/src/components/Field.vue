@@ -52,7 +52,7 @@ export default  {
       //       this.type.match( /Multiple|Choices/ ) ? 'plural' : 'singular' ]
       //   }
       // }
-      return this.name.replace( /^ /, '' ).replace( /_/g, ' ' );
+      return this.name.replace( /^_/, '' ).replace( /_/g, ' ' );
     }
   }
 }

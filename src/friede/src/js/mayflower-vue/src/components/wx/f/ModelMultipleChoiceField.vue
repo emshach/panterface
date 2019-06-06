@@ -8,7 +8,7 @@
         <!--   <component v-if="cell" :is="cell.meta.type" :name="cell.meta.name" -->
         <!--              :type="cell.meta.type" :field="cell" empty-value="not set" /> -->
         <!-- </template> -->
-        <div slot-scope="{ cell }">{{ cell.meta.type }}</div>
+        <div slot-scope="{ cell }">{{ cell && cell.meta.type }}</div>
       </vk-column>
     </vk-table>
     <vk-table v-else-if="isset" responsive :data="field.value||[]">

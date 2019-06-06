@@ -1983,7 +1983,9 @@ var render = function() {
                         key: "default",
                         fn: function(ref) {
                           var cell = ref.cell
-                          return _c("div", {}, [_vm._v(_vm._s(cell.meta.type))])
+                          return _c("div", {}, [
+                            _vm._v(_vm._s(cell && cell.meta.type))
+                          ])
                         }
                       }
                     ],

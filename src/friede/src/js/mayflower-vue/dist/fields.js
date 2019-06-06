@@ -1983,9 +1983,19 @@ var render = function() {
                         key: "default",
                         fn: function(ref) {
                           var cell = ref.cell
-                          return _c("div", {}, [
-                            _vm._v(_vm._s(cell && cell.meta.type))
-                          ])
+                          return [
+                            cell
+                              ? _c(cell.meta.type, {
+                                  tag: "component",
+                                  attrs: {
+                                    name: cell.meta.name,
+                                    type: cell.meta.type,
+                                    field: cell,
+                                    "empty-value": "not set"
+                                  }
+                                })
+                              : _vm._e()
+                          ]
                         }
                       }
                     ],

@@ -98,9 +98,13 @@ __webpack_require__.r(__webpack_exports__);
     VkBtnGrp: vuikit_lib_button__WEBPACK_IMPORTED_MODULE_3__["ButtonGroup"],
     Field: _components_Field__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
-  mounted: function mounted() {},
+  created: function created() {
+    this.modelData = this.$store.state.modelData || Object(_lib_objects__WEBPACK_IMPORTED_MODULE_5__["Model"])(this.model);
+  },
   data: function data() {
-    return {};
+    return {
+      modelData: null
+    };
   },
   methods: {
     submit: function submit() {},
@@ -114,16 +118,13 @@ __webpack_require__.r(__webpack_exports__);
     model: function model() {
       return this.$store.state.model;
     },
-    data: function data() {
-      return this.$store.state.modelData || Object(_lib_objects__WEBPACK_IMPORTED_MODULE_5__["Model"])(this.model);
-    },
     simpleFields: function simpleFields() {
-      return this.data.fields.filter(function (x) {
+      return this.modelData.fields.filter(function (x) {
         return !x.meta.related || !x.meta.type.match(/Multiple|Choices/);
       });
     },
-    relationFields: function relationFields() {
-      return this.data.fields.filter(function (x) {
+    complexFields: function complexFields() {
+      return this.modelData.fields.filter(function (x) {
         return x.meta.related && x.meta.type.match(/Multiple|Choices/);
       });
     }
@@ -287,7 +288,7 @@ var render = function() {
                       }
                     })
                   }),
-                  _vm._l(_vm.relationFields, function(field) {
+                  _vm._l(_vm.complexFields, function(field) {
                     return _c("field", {
                       key: field.meta.name,
                       attrs: {

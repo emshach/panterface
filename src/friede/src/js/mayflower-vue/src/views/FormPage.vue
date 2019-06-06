@@ -15,7 +15,7 @@
         <field v-for="field in simpleFields" :key="field.meta.name"
                :type="field.meta.type" :name="field.meta.name" :data="field"
                class="uk-margin" />
-        <field v-for="field in relationFields" :key="field.meta.name"
+        <field v-for="field in complexFields" :key="field.meta.name"
                :type="field.meta.type" :name="field.meta.name" :data="field"
                :fieldset="true" />
       </form>
@@ -39,10 +39,12 @@ export default  {
     VkBtnGrp,
     Field
   },
-  mounted() {
+  created() {
+    this.modelData = this.$store.state.modelData || Model( this.model );
   },
   data() {
     return {
+      modelData: null
     }
   },
   methods: {
@@ -60,15 +62,12 @@ export default  {
     model() {
       return this.$store.state.model
     },
-    data() {
-      return this.$store.state.modelData || Model( this.model );
-    },
     simpleFields() {
-      return this.data.fields.filter(
+      return this.modelData.fields.filter(
         x => !x.meta.related || !x.meta.type.match( /Multiple|Choices/ ));
     },
-    relationFields() {
-      return this.data.fields.filter(
+    complexFields() {
+      return this.modelData.fields.filter(
         x => x.meta.related && x.meta.type.match( /Multiple|Choices/ ));
     }
   }

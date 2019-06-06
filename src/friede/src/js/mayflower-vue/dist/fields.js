@@ -6441,7 +6441,7 @@ var ModelFieldMixin = {
       return this.classes.concat(this.editMode ? this.editClass : this.viewClass, [this.isset ? '' : 'no-data', this.readonly ? 'readonly' : '']);
     },
     isset: function isset() {
-      if (this.field.value === undefined || this.field.value === null || this.field.value === '' || typeof this.field.value.length !== 'udefined' && !this.field.value.length) return false;
+      if (this.field.value === undefined || this.field.value === null || this.field.value === '' || typeof this.field.value.length !== 'undefined' && !this.field.value.length) return false;
       return true;
     },
     html: function html() {

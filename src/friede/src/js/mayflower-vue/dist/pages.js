@@ -98,12 +98,14 @@ __webpack_require__.r(__webpack_exports__);
     VkBtnGrp: vuikit_lib_button__WEBPACK_IMPORTED_MODULE_3__["ButtonGroup"],
     Field: _components_Field__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
-  created: function created() {
+  mounted: function mounted() {
     this.modelData = this.$store.state.modelData || Object(_lib_objects__WEBPACK_IMPORTED_MODULE_5__["Model"])(this.model);
   },
   data: function data() {
     return {
-      modelData: null
+      modelData: {
+        fields: []
+      }
     };
   },
   methods: {

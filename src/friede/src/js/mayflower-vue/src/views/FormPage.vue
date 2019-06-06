@@ -39,12 +39,12 @@ export default  {
     VkBtnGrp,
     Field
   },
-  created() {
+  mounted() {
     this.modelData = this.$store.state.modelData || Model( this.model );
   },
   data() {
     return {
-      modelData: null
+      modelData: { fields: []}
     }
   },
   methods: {

@@ -1,13 +1,22 @@
 <template lang="html">
   <div class="model-multiple-choice-field" >
-    <vk-table v-if="field.wip && field.wip.length" :data="field.wip">
+    <vk-table v-if="field.wip && field.wip.length" responsive :data="field.wip">
       <vk-col-select/>
       <vk-column v-for="c in columns"
-                 :key="c.name" :title="c.name" :name="c.name" />
+                 :key="c.name" :title="c.name" :name="c.name">
+        <template slot-scope="{ cell }">
+          <component :is="cell.meta.type" :name="cell.meta.name"
+                     :field="cell" empty-value="not set" />
+        </template>
+      </vk-column>
     </vk-table>
-    <vk-table v-else-if="isset" :data="field.value||[]">
+    <vk-table v-else-if="isset" responsive :data="field.value||[]">
       <vk-column v-for="c in columns"
-                       :key="c.name" :title="c.name" :name="c.name" />
+                 :key="c.name" :title="c.name" :name="c.name">
+        <template slot-scope="{ cell }">
+          <div v-html="cell.value" />
+        </template>
+      </vk-column>
     </vk-table>
     <div v-else v-html="html" @click="editField" @focus="editField"
          :class="fieldClasses" />
@@ -49,6 +58,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faTimes, faCheck, faPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { ModelFieldMixin, ModelModelsFieldMixin } from '@/lib/mixins'
+import fields from '@/components/fields'
 
 library.add( faTimes, faCheck, faPlus )
 
@@ -62,6 +72,7 @@ export default {
     VkBtnLink,
     VkBtnGrp,
     FontAwesomeIcon,
+    ...fields
   },
   props: {},
   mounted() {
@@ -86,9 +97,9 @@ export default {
         var values = this.values.map( v => {
           var link = { _model: model };
           model.fields.forEach( f => {
-            link[ f.name ] = Field(f).value;
+            link[ f.name ] = Field(f);
           });
-          link[l] = v;
+          link[l].value = v;
           return link;
         });
         this.field.wip = ( this.field.wip || [] ).concat( values );

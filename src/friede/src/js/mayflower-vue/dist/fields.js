@@ -576,13 +576,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var core_js_modules_es6_object_to_string__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es6.object.to-string */ "./node_modules/core-js/modules/es6.object.to-string.js");
 /* harmony import */ var core_js_modules_es6_object_to_string__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_object_to_string__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
-/* harmony import */ var vuikit_lib_table__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vuikit/lib/table */ "./node_modules/vuikit/lib/table.js");
-/* harmony import */ var vuikit_lib_button__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vuikit/lib/button */ "./node_modules/vuikit/lib/button.js");
-/* harmony import */ var _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @fortawesome/fontawesome-svg-core */ "./node_modules/@fortawesome/fontawesome-svg-core/index.es.js");
-/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
-/* harmony import */ var _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @fortawesome/vue-fontawesome */ "./node_modules/@fortawesome/vue-fontawesome/index.es.js");
-/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
+/* harmony import */ var _home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js");
+/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
+/* harmony import */ var vuikit_lib_table__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vuikit/lib/table */ "./node_modules/vuikit/lib/table.js");
+/* harmony import */ var vuikit_lib_button__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vuikit/lib/button */ "./node_modules/vuikit/lib/button.js");
+/* harmony import */ var _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @fortawesome/fontawesome-svg-core */ "./node_modules/@fortawesome/fontawesome-svg-core/index.es.js");
+/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+/* harmony import */ var _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @fortawesome/vue-fontawesome */ "./node_modules/@fortawesome/vue-fontawesome/index.es.js");
+/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
+/* harmony import */ var _components_fields__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @/components/fields */ "./src/components/fields.js");
 
 
 
@@ -594,18 +596,20 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_7__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_8__["faTimes"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_8__["faCheck"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_8__["faPlus"]);
+
+
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_8__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_9__["faTimes"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_9__["faCheck"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_9__["faPlus"]);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'ModelMultipleChoiceField',
-  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_10__["ModelFieldMixin"], _lib_mixins__WEBPACK_IMPORTED_MODULE_10__["ModelModelsFieldMixin"]],
-  components: {
-    VkTable: vuikit_lib_table__WEBPACK_IMPORTED_MODULE_5__["Table"],
-    VkColumn: vuikit_lib_table__WEBPACK_IMPORTED_MODULE_5__["TableColumn"],
-    VkColSelect: vuikit_lib_table__WEBPACK_IMPORTED_MODULE_5__["TableColumnSelect"],
-    VkBtnLink: vuikit_lib_button__WEBPACK_IMPORTED_MODULE_6__["ButtonLink"],
-    VkBtnGrp: vuikit_lib_button__WEBPACK_IMPORTED_MODULE_6__["ButtonGroup"],
-    FontAwesomeIcon: _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_9__["FontAwesomeIcon"]
-  },
+  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_11__["ModelFieldMixin"], _lib_mixins__WEBPACK_IMPORTED_MODULE_11__["ModelModelsFieldMixin"]],
+  components: Object(_home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_4__["default"])({
+    VkTable: vuikit_lib_table__WEBPACK_IMPORTED_MODULE_6__["Table"],
+    VkColumn: vuikit_lib_table__WEBPACK_IMPORTED_MODULE_6__["TableColumn"],
+    VkColSelect: vuikit_lib_table__WEBPACK_IMPORTED_MODULE_6__["TableColumnSelect"],
+    VkBtnLink: vuikit_lib_button__WEBPACK_IMPORTED_MODULE_7__["ButtonLink"],
+    VkBtnGrp: vuikit_lib_button__WEBPACK_IMPORTED_MODULE_7__["ButtonGroup"],
+    FontAwesomeIcon: _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_10__["FontAwesomeIcon"]
+  }, _components_fields__WEBPACK_IMPORTED_MODULE_12__["default"]),
   props: {},
   mounted: function mounted() {
     var m = this.field.meta.related;
@@ -633,9 +637,9 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_7__["library"].add(_f
             _model: model
           };
           model.fields.forEach(function (f) {
-            link[f.name] = Object(_lib_objects__WEBPACK_IMPORTED_MODULE_4__["Field"])(f).value;
+            link[f.name] = Object(_lib_objects__WEBPACK_IMPORTED_MODULE_5__["Field"])(f);
           });
-          link[l] = v;
+          link[l].value = v;
           return link;
         });
         this.field.wip = (this.field.wip || []).concat(values);
@@ -1966,13 +1970,35 @@ var render = function() {
       _vm.field.wip && _vm.field.wip.length
         ? _c(
             "vk-table",
-            { attrs: { data: _vm.field.wip } },
+            { attrs: { responsive: "", data: _vm.field.wip } },
             [
               _c("vk-col-select"),
               _vm._l(_vm.columns, function(c) {
                 return _c("vk-column", {
                   key: c.name,
-                  attrs: { title: c.name, name: c.name }
+                  attrs: { title: c.name, name: c.name },
+                  scopedSlots: _vm._u(
+                    [
+                      {
+                        key: "default",
+                        fn: function(ref) {
+                          var cell = ref.cell
+                          return [
+                            _c(cell.meta.type, {
+                              tag: "component",
+                              attrs: {
+                                name: cell.meta.name,
+                                field: cell,
+                                "empty-value": "not set"
+                              }
+                            })
+                          ]
+                        }
+                      }
+                    ],
+                    null,
+                    true
+                  )
                 })
               })
             ],
@@ -1981,11 +2007,28 @@ var render = function() {
         : _vm.isset
         ? _c(
             "vk-table",
-            { attrs: { data: _vm.field.value || [] } },
+            { attrs: { responsive: "", data: _vm.field.value || [] } },
             _vm._l(_vm.columns, function(c) {
               return _c("vk-column", {
                 key: c.name,
-                attrs: { title: c.name, name: c.name }
+                attrs: { title: c.name, name: c.name },
+                scopedSlots: _vm._u(
+                  [
+                    {
+                      key: "default",
+                      fn: function(ref) {
+                        var cell = ref.cell
+                        return [
+                          _c("div", {
+                            domProps: { innerHTML: _vm._s(cell.value) }
+                          })
+                        ]
+                      }
+                    }
+                  ],
+                  null,
+                  true
+                )
               })
             }),
             1

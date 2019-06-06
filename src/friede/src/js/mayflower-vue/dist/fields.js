@@ -574,9 +574,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es6_array_find__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_array_find__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var vuikit_lib_table__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuikit/lib/table */ "./node_modules/vuikit/lib/table.js");
 /* harmony import */ var vuikit_lib_button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuikit/lib/button */ "./node_modules/vuikit/lib/button.js");
-/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
-/* harmony import */ var _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @fortawesome/vue-fontawesome */ "./node_modules/@fortawesome/vue-fontawesome/index.es.js");
-/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
+/* harmony import */ var _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @fortawesome/fontawesome-svg-core */ "./node_modules/@fortawesome/fontawesome-svg-core/index.es.js");
+/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+/* harmony import */ var _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @fortawesome/vue-fontawesome */ "./node_modules/@fortawesome/vue-fontawesome/index.es.js");
+/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
 
 
 
@@ -584,15 +585,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-library.add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__["faTimes"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__["faCheck"]);
+
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_4__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__["faTimes"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__["faCheck"]);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'ModelMultipleChoiceField',
-  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_6__["ModelFieldMixin"], _lib_mixins__WEBPACK_IMPORTED_MODULE_6__["ModelModelsFieldMixin"]],
+  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_7__["ModelFieldMixin"], _lib_mixins__WEBPACK_IMPORTED_MODULE_7__["ModelModelsFieldMixin"]],
   components: {
     VkTable: vuikit_lib_table__WEBPACK_IMPORTED_MODULE_2__["Table"],
     VkTableColumn: vuikit_lib_table__WEBPACK_IMPORTED_MODULE_2__["TableColumn"],
     VkButtonLink: vuikit_lib_button__WEBPACK_IMPORTED_MODULE_3__["ButtonLink"],
-    FontAwesomeIcon: _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"]
+    FontAwesomeIcon: _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_6__["FontAwesomeIcon"]
   },
   props: {},
   mounted: function mounted() {},

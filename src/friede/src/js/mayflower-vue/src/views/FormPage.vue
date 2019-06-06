@@ -39,12 +39,14 @@ export default  {
     VkBtnGrp,
     Field
   },
-  mounted() {
+  created() {
+    this.model = this.$store.state.model;
     this.modelData = this.$store.state.modelData || Model( this.model );
   },
   data() {
     return {
-      modelData: { fields: []}
+      modelData: { fields: [] },
+      model: null,
     }
   },
   methods: {
@@ -58,9 +60,6 @@ export default  {
   computed: {
     location() {
       return this.$store.state.location
-    },
-    model() {
-      return this.$store.state.model
     },
     simpleFields() {
       return this.modelData.fields.filter(

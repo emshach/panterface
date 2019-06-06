@@ -600,7 +600,8 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_7__["library"].add(_f
   mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_10__["ModelFieldMixin"], _lib_mixins__WEBPACK_IMPORTED_MODULE_10__["ModelModelsFieldMixin"]],
   components: {
     VkTable: vuikit_lib_table__WEBPACK_IMPORTED_MODULE_5__["Table"],
-    VkTableColumn: vuikit_lib_table__WEBPACK_IMPORTED_MODULE_5__["TableColumn"],
+    VkColumn: vuikit_lib_table__WEBPACK_IMPORTED_MODULE_5__["TableColumn"],
+    VkColSelect: vuikit_lib_table__WEBPACK_IMPORTED_MODULE_5__["TableColumnSelect"],
     VkBtnLink: vuikit_lib_button__WEBPACK_IMPORTED_MODULE_6__["ButtonLink"],
     VkBtnGrp: vuikit_lib_button__WEBPACK_IMPORTED_MODULE_6__["ButtonGroup"],
     FontAwesomeIcon: _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_9__["FontAwesomeIcon"]
@@ -1966,20 +1967,23 @@ var render = function() {
         ? _c(
             "vk-table",
             { attrs: { data: _vm.field.wip } },
-            _vm._l(_vm.columns, function(c) {
-              return _c("vk-table-column", {
-                key: c.name,
-                attrs: { title: c.name, name: c.name }
+            [
+              _c("vk-col-select"),
+              _vm._l(_vm.columns, function(c) {
+                return _c("vk-column", {
+                  key: c.name,
+                  attrs: { title: c.name, name: c.name }
+                })
               })
-            }),
-            1
+            ],
+            2
           )
         : _vm.isset
         ? _c(
             "vk-table",
             { attrs: { data: _vm.field.value || [] } },
             _vm._l(_vm.columns, function(c) {
-              return _c("vk-table-column", {
+              return _c("vk-column", {
                 key: c.name,
                 attrs: { title: c.name, name: c.name }
               })
@@ -2001,7 +2005,9 @@ var render = function() {
                   "label",
                   { staticClass: "uk-flex" },
                   [
-                    _vm._v("\n        add\n        "),
+                    _c("span", { staticClass: "uk-margin-right" }, [
+                      _vm._v("add")
+                    ]),
                     _c("multiselect", {
                       ref: "inputV",
                       attrs: {

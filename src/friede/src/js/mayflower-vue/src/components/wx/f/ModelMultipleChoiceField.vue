@@ -1,11 +1,12 @@
 <template lang="html">
   <div class="model-multiple-choice-field" >
     <vk-table v-if="field.wip && field.wip.length" :data="field.wip">
-      <vk-table-column v-for="c in columns"
-                       :key="c.name" :title="c.name" :name="c.name" />
+      <vk-col-select/>
+      <vk-column v-for="c in columns"
+                 :key="c.name" :title="c.name" :name="c.name" />
     </vk-table>
     <vk-table v-else-if="isset" :data="field.value||[]">
-      <vk-table-column v-for="c in columns"
+      <vk-column v-for="c in columns"
                        :key="c.name" :title="c.name" :name="c.name" />
     </vk-table>
     <div v-else v-html="html" @click="editField" @focus="editField"
@@ -13,7 +14,7 @@
     <div :class="fieldClasses">
       <template v-if="editMode">
         <label class="uk-flex">
-          add
+          <span class="uk-margin-right">add</span>
           <multiselect v-model="values" ref="inputV"
                        :options="options"
                        :multiple="true"
@@ -42,7 +43,7 @@
 
 <script lang="js">
 import { Field } from '@/lib/objects'
-import { Table as VkTable, TableColumn as VkTableColumn } from 'vuikit/lib/table'
+import { Table as VkTable, TableColumn as VkColumn, TableColumnSelect as VkColSelect } from 'vuikit/lib/table'
 import { ButtonLink as VkBtnLink, ButtonGroup as VkBtnGrp } from 'vuikit/lib/button'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faTimes, faCheck, faPlus } from '@fortawesome/free-solid-svg-icons'
@@ -56,7 +57,8 @@ export default {
   mixins: [ ModelFieldMixin, ModelModelsFieldMixin ],
   components: {
     VkTable,
-    VkTableColumn,
+    VkColumn,
+    VkColSelect,
     VkBtnLink,
     VkBtnGrp,
     FontAwesomeIcon,

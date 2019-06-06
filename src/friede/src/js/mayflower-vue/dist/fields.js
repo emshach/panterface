@@ -605,9 +605,14 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_7__["library"].add(_f
     FontAwesomeIcon: _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_9__["FontAwesomeIcon"]
   },
   props: {},
-  mounted: function mounted() {},
+  mounted: function mounted() {
+    var m = this.field.meta.related;
+    this.related = this.$store.state.models[m];
+  },
   data: function data() {
-    return {};
+    return {
+      related: null
+    };
   },
   methods: {
     commit: function commit() {
@@ -619,37 +624,50 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_7__["library"].add(_f
         return;
       }
 
-      var model = this.$store.state.models[m];
-      this.values = this.values.map(function (v) {
-        var link = {};
-        model.fields.forEach(function (f) {
-          link[f.name] = Object(_lib_objects__WEBPACK_IMPORTED_MODULE_4__["Field"])(f).value;
+      if (this.values.length) {
+        var model = this.$store.state.models[m];
+        var values = this.values.map(function (v) {
+          var link = {
+            _model: model
+          };
+          model.fields.forEach(function (f) {
+            link[f.name] = Object(_lib_objects__WEBPACK_IMPORTED_MODULE_4__["Field"])(f).value;
+          });
+          link[l] = v;
+          return link;
         });
-        link[l] = v;
-        return link;
-      });
+        this.field.wip = (this.field.wip || []).concat(values);
+        this.values = [];
+        return;
+      }
+
       this.commitField();
+    },
+    cancel: function cancel() {
+      if (this.values.length) {
+        this.values = [];
+        return;
+      }
+
+      this.revertField();
     }
   },
   computed: {
     columns: function columns() {
-      var m = this.field.meta.related;
-      var model = this.$store.state.models[m];
-      return model.fields;
+      return this.related ? this.related.fields : [];
     },
     searchModel: function searchModel() {
-      var m = this.field.meta.related;
       var l = this.field.meta.link_field;
 
       if (l) {
-        var model = this.$store.state.models[m];
+        var model = this.related;
         var f = model && model.fields.find(function (x) {
           return x.name === l;
         });
         return f && f.related;
       }
 
-      return m;
+      return this.field.meta.related;
     }
   }
 });
@@ -1994,7 +2012,7 @@ var render = function() {
                         on: {
                           click: function($event) {
                             $event.preventDefault()
-                            return _vm.revertField($event)
+                            return _vm.cancel($event)
                           }
                         }
                       },

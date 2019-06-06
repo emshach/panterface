@@ -13,7 +13,7 @@
           <vk-button-link class="btn btn-confirm" @click.prevent="commit">
             <font-awesome-icon icon="check" /> done
           </vk-button-link>
-          <vk-button-link class="btn btn-cancel" @click.prevent="revertField">
+          <vk-button-link class="btn btn-cancel" @click.prevent="cancel">
             <font-awesome-icon icon="times" /> cancel
           </vk-button-link>
           <multiselect v-model="values" ref="inputV"
@@ -55,11 +55,12 @@ export default {
   },
   props: {},
   mounted() {
-    
+    const m = this.field.meta.related;
+    this.related = this.$store.state.models[m];
   },
   data() {
     return {
-      
+      related: null,
     }
   },
   methods: {
@@ -70,33 +71,42 @@ export default {
         this.commitField();
         return;
       }
-      const model = this.$store.state.models[m];
-      this.values = this.values.map( v => {
-        var link = {};
-        model.fields.forEach ( f => {
-          link[ f.name ] = Field(f).value;
+      if ( this.values.length ) {
+        const model = this.$store.state.models[m];
+        var values = this.values.map( v => {
+          var link = { _model: model };
+          model.fields.forEach( f => {
+            link[ f.name ] = Field(f).value;
+          });
+          link[l] = v;
+          return link;
         });
-        link[l] = v;
-        return link;
-      });
+        this.field.wip = ( this.field.wip || [] ).concat( values );
+        this.values = [];
+        return;
+      }
       this.commitField();
+    },
+    cancel() {
+      if ( this.values.length ) {
+          this.values = [];
+        return;
+      }
+      this.revertField();
     }
   },
   computed: {
     columns() {
-      const m = this.field.meta.related;
-      const model = this.$store.state.models[m];
-      return model.fields
+      return this.related ? this.related.fields : [];
     },
     searchModel() {
-      const m = this.field.meta.related;
       let l = this.field.meta.link_field;
       if (l) {
-        const model = this.$store.state.models[m];
+        const model = this.related;
         var f = model && model.fields.find( x => x.name === l );
         return f && f.related;
       }
-      return m;
+      return this.field.meta.related;
     }
   }
 }

@@ -45,14 +45,14 @@ export default  {
   },
   computed: {
     label() {
-      if ( this.field && this.field.meta) {
-        if ( this.field.meta.related
-             && this.$store.state.models[ this.field.meta.related ]) {
-          return this.$store.state.models[ this.field.meta.related ][
-            this.type.match( /Multiple|Choices/ ) ? 'plural' : 'singular' ]
-        }
-      }
-      return this.name;
+      // if ( this.field && this.field.meta) {
+      //   if ( this.field.meta.related
+      //        && this.$store.state.models[ this.field.meta.related ]) {
+      //     return this.$store.state.models[ this.field.meta.related ][
+      //       this.type.match( /Multiple|Choices/ ) ? 'plural' : 'singular' ]
+      //   }
+      // }
+      return this.name.replace( /^ /, '' ).replace( /_/g, ' ' );
     }
   }
 }

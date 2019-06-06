@@ -7,22 +7,27 @@
     <div v-else v-html="html" @click="editField" @focus="editField"
          :class="fieldClasses" />
     <div :class="fieldClasses">
-      <label>
+      <template v-if="editMode">
+        <label>
+          add
+          <multiselect v-model="values" ref="inputV"
+                       :options="options"
+                       :multiple="true"
+                       label="title"
+                       track-by="path"
+                       open-direction="bottom"
+                       @search-change="getObjects"
+                       />
+        </label>
+        <vk-button-link class="btn btn-confirm" @click.prevent="commitField">
+          <font-awesome-icon icon="check" />
+        </vk-button-link>
+        <vk-button-link class="btn btn-cancel" @click.prevent="revertField">
+          <font-awesome-icon icon="times" />
+        </vk-button-link>
+      </template>
+      <vk-button-link v-else @click="editField" @focus="editField">
         add
-        <multiselect v-if="editMode" v-model="values" ref="inputV"
-                     :options="options"
-                     :multiple="true"
-                     label="title"
-                     track-by="path"
-                     open-direction="bottom"
-                     @search-change="getObjects"
-                     />
-      </label>
-      <vk-button-link class="btn btn-confirm" @click.prevent="commitField">
-        <font-awesome-icon icon="check" />
-      </vk-button-link>
-      <vk-button-link class="btn btn-cancel" @click.prevent="revertField">
-        <font-awesome-icon icon="times" />
       </vk-button-link>
     </div>
   </div>

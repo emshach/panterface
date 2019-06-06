@@ -65,7 +65,8 @@ const ModelFieldMixin = {
       if ( this.field.value === undefined
            || this.field.value === null
            || this.field.value === ''
-         || (( 'length' in this.field.value ) && !this.field.value.length ))
+           || ( typeof this.field.value.length !== 'udefined'
+                && !this.field.value.length ))
         return false;
       return true;
     },

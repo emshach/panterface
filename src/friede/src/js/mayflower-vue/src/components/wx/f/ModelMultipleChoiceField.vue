@@ -5,7 +5,7 @@
       <vk-column v-for="c in columns"
                  :key="c.name" :title="c.name" :name="c.name">
         <template slot-scope="{ cell }">
-          <component :is="cell.meta.type" :name="cell.meta.name"
+          <component v-if="cell" :is="cell.meta.type" :name="cell.meta.name"
                      :field="cell" empty-value="not set" />
         </template>
       </vk-column>

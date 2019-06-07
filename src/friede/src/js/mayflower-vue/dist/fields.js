@@ -504,20 +504,16 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.runtime.esm.js");
-/* harmony import */ var vue_highlightjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-highlightjs */ "./node_modules/vue-highlightjs/index.js");
-/* harmony import */ var vue_highlightjs__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_highlightjs__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
-/* harmony import */ var vue_json_edit__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-json-edit */ "./node_modules/vue-json-edit/dist/vue-json-edit.js");
-/* harmony import */ var vue_json_edit__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue_json_edit__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
+/* harmony import */ var vue_json_edit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-json-edit */ "./node_modules/vue-json-edit/dist/vue-json-edit.js");
+/* harmony import */ var vue_json_edit__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_json_edit__WEBPACK_IMPORTED_MODULE_2__);
 
 
 
-
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vue_json_edit__WEBPACK_IMPORTED_MODULE_3___default.a);
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vue_highlightjs__WEBPACK_IMPORTED_MODULE_1___default.a);
+vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vue_json_edit__WEBPACK_IMPORTED_MODULE_2___default.a);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'JsonField',
-  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_2__["ModelFieldMixin"]],
+  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_1__["ModelFieldMixin"]],
   components: {},
   props: {},
   mounted: function mounted() {},
@@ -1124,10 +1120,12 @@ var render = function() {
         },
         [
           _c("span", { domProps: { innerHTML: _vm._s(_vm.html) } }),
-          _c("font-awesome-icon", {
-            attrs: { icon: _vm.isset ? "edit" : "plus" },
-            on: { click: _vm.editField }
-          })
+          !_vm.readonly
+            ? _c("font-awesome-icon", {
+                attrs: { icon: _vm.isset ? "edit" : "plus" },
+                on: { click: _vm.editField }
+              })
+            : _vm._e()
         ],
         1
       )
@@ -1192,10 +1190,12 @@ var render = function() {
         },
         [
           _c("span", { domProps: { innerHTML: _vm._s(_vm.html) } }),
-          _c("font-awesome-icon", {
-            attrs: { icon: _vm.isset ? "edit" : "plus" },
-            on: { click: _vm.editField }
-          })
+          !_vm.readonly
+            ? _c("font-awesome-icon", {
+                attrs: { icon: _vm.isset ? "edit" : "plus" },
+                on: { click: _vm.editField }
+              })
+            : _vm._e()
         ],
         1
       )
@@ -1988,20 +1988,27 @@ var render = function() {
         }
       })
     : _c(
-        "pre",
+        "a",
         {
-          directives: [
-            {
-              name: "highlightjs",
-              rawName: "v-highlightjs",
-              value: _vm.field.value,
-              expression: "field.value"
-            }
-          ],
           class: _vm.fieldClasses,
-          on: { click: _vm.editField, focus: _vm.editField }
+          on: {
+            click: function($event) {
+              $event.preventDefault()
+              return _vm.editField($event)
+            },
+            focus: _vm.editField
+          }
         },
-        [_c("code", { staticClass: "json" })]
+        [
+          _c("span", { domProps: { innerHTML: _vm._s(_vm.html) } }),
+          !_vm.readonly
+            ? _c("font-awesome-icon", {
+                attrs: { icon: _vm.isset ? "edit" : "plus" },
+                on: { click: _vm.editField }
+              })
+            : _vm._e()
+        ],
+        1
       )
 }
 var staticRenderFns = []
@@ -2058,10 +2065,12 @@ var render = function() {
         },
         [
           _c("span", { domProps: { innerHTML: _vm._s(_vm.html) } }),
-          _c("font-awesome-icon", {
-            attrs: { icon: _vm.isset ? "edit" : "plus" },
-            on: { click: _vm.editField }
-          })
+          !_vm.readonly
+            ? _c("font-awesome-icon", {
+                attrs: { icon: _vm.isset ? "edit" : "plus" },
+                on: { click: _vm.editField }
+              })
+            : _vm._e()
         ],
         1
       )
@@ -2098,6 +2107,7 @@ var render = function() {
               ? _c(
                   "vk-table",
                   {
+                    staticClass: "edit-view",
                     attrs: {
                       responsive: "",
                       hoverable: "",
@@ -2585,10 +2595,12 @@ var render = function() {
         },
         [
           _c("span", { domProps: { innerHTML: _vm._s(_vm.html) } }),
-          _c("font-awesome-icon", {
-            attrs: { icon: _vm.isset ? "edit" : "plus" },
-            on: { click: _vm.editField }
-          })
+          !_vm.readonly
+            ? _c("font-awesome-icon", {
+                attrs: { icon: _vm.isset ? "edit" : "plus" },
+                on: { click: _vm.editField }
+              })
+            : _vm._e()
         ],
         1
       )
@@ -2697,10 +2709,12 @@ var render = function() {
         },
         [
           _c("span", { domProps: { innerHTML: _vm._s(_vm.html) } }),
-          _c("font-awesome-icon", {
-            attrs: { icon: _vm.isset ? "edit" : "plus" },
-            on: { click: _vm.editField }
-          })
+          !_vm.readonly
+            ? _c("font-awesome-icon", {
+                attrs: { icon: _vm.isset ? "edit" : "plus" },
+                on: { click: _vm.editField }
+              })
+            : _vm._e()
         ],
         1
       )

@@ -1,5 +1,5 @@
 <template lang="html">
-  <div v-if="fieldset" class="uk-fieldset">
+  <div v-if="fieldset" class="field uk-fieldset">
     <h4>{{ label }}</h4>
     <hr class="titlesep" />
     <component :is="type" :name="name" :field="field" empty-value="None" />
@@ -62,6 +62,15 @@ export default  {
 .field {
   .field-display span {
     margin-right: 6px;
+  }
+  tr {
+    .field-display span {
+      margin-right: 4px;
+    }
+    svg.svg-inline--fa {
+      font-size: 10px;
+      vertical-align: 0.2em;
+    }
   }
 }
 .uk-fieldset {

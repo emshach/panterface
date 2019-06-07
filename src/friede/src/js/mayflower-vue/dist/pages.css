@@ -1,6 +1,13 @@
 .field .field-display span {
   margin-right: 6px;
 }
+.field tr .field-display span {
+  margin-right: 4px;
+}
+.field tr svg.svg-inline--fa {
+  font-size: 10px;
+  vertical-align: 0.2em;
+}
 .uk-fieldset {
   margin: 36px 0 20px;
 }

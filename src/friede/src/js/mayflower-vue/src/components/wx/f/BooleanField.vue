@@ -1,7 +1,7 @@
 <template lang="html">
   <input v-if="editMode" type="checkbox" v-model="field.wip" ref="input"
          :class="fieldClasses" @change="commitField" @blur="revertField" />
-  <div v-else v-html="html" @click="editField" @focus="editField"
+  <a v-else v-html="html" @click.prevent="editField" @focus="editField"
        :class="fieldClasses" />
 </template>
 
@@ -40,7 +40,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  .boolean-field {
-
-  }
+.boolean-field {
+  
+}
 </style>

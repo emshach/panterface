@@ -1,7 +1,7 @@
 <template lang="html">
   <textarea v-if="editMode" v-model="field.wip" ref="input"
          :class="fieldClasses" @blur="commitField" />
-  <div v-else v-html="html" @click="editField" @focus="editField"
+  <a v-else v-html="html" @click.prevent="editField" @focus="editField"
        :class="fieldClasses" />
 </template>
 
@@ -29,7 +29,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  .text-field {
-
-  }
+.text-field {
+  
+}
 </style>

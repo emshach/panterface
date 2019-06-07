@@ -2,7 +2,7 @@
   <multiselect v-if="editMode" v-model="field.wip" ref="inputV"
                :options="field.meta.options"
                :class="fieldClasses" @input="commitField" @blur="revertField" />
-  <div v-else v-html="html" @click="editField" @focus="editField"
+  <a v-else v-html="html" @click="editField" @focus="editField"
        :class="fieldClasses" />
 </template>
 

@@ -1108,10 +1108,16 @@ var render = function() {
           blur: _vm.revertField
         }
       })
-    : _c("div", {
+    : _c("a", {
         class: _vm.fieldClasses,
         domProps: { innerHTML: _vm._s(_vm.html) },
-        on: { click: _vm.editField, focus: _vm.editField }
+        on: {
+          click: function($event) {
+            $event.preventDefault()
+            return _vm.editField($event)
+          },
+          focus: _vm.editField
+        }
       })
 }
 var staticRenderFns = []
@@ -1160,10 +1166,16 @@ var render = function() {
           }
         }
       })
-    : _c("div", {
+    : _c("a", {
         class: _vm.fieldClasses,
         domProps: { innerHTML: _vm._s(_vm.html) },
-        on: { click: _vm.editField, focus: _vm.editField }
+        on: {
+          click: function($event) {
+            $event.preventDefault()
+            return _vm.editField($event)
+          },
+          focus: _vm.editField
+        }
       })
 }
 var staticRenderFns = []
@@ -1202,7 +1214,7 @@ var render = function() {
           expression: "field.wip"
         }
       })
-    : _c("div", {
+    : _c("a", {
         class: _vm.fieldClasses,
         domProps: { innerHTML: _vm._s(_vm.html) },
         on: { click: _vm.editField, focus: _vm.editField }
@@ -2552,10 +2564,16 @@ var render = function() {
           }
         }
       })
-    : _c("div", {
+    : _c("a", {
         class: _vm.fieldClasses,
         domProps: { innerHTML: _vm._s(_vm.html) },
-        on: { click: _vm.editField, focus: _vm.editField }
+        on: {
+          click: function($event) {
+            $event.preventDefault()
+            return _vm.editField($event)
+          },
+          focus: _vm.editField
+        }
       })
 }
 var staticRenderFns = []
@@ -2639,7 +2657,7 @@ var render = function() {
           expression: "field.wip"
         }
       })
-    : _c("div", {
+    : _c("a", {
         class: _vm.fieldClasses,
         domProps: { innerHTML: _vm._s(_vm.html) },
         on: { click: _vm.editField, focus: _vm.editField }

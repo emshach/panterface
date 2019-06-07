@@ -1,9 +1,8 @@
 <template lang="html">
   <input v-if="editMode" type="text" v-model="field.wip" ref="input"
          :class="fieldClasses" @blur="commitField" />
-  <a v-else @click.prevent="editField" @focus="editField"
-     :class="fieldClasses" >
-    <div v-html="html" />
+  <a v-else @click.prevent="editField" @focus="editField" :class="fieldClasses">
+    <span v-html="html" />
     <font-awesome-icon :icon="isset ? 'edit': 'plus'" @click="editField" />
   </a>
 </template>
@@ -29,7 +28,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  .slug-field {
-
-  }
+.slug-field {
+  
+}
 </style>

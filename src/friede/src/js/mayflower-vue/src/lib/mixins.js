@@ -33,7 +33,7 @@ const ModelFieldMixin = {
     return {
       classes: [],
       editClass: [],
-      viewClass: [],
+      viewClass: [ 'field-display' ],
       editMode: false,
     }
   },

@@ -167,7 +167,7 @@ var render = function() {
         ],
         1
       )
-    : _c("div", [
+    : _c("div", { staticClass: "field" }, [
         _c("label", { staticClass: "uk-form-label" }, [
           _vm._v(_vm._s(_vm.label))
         ]),

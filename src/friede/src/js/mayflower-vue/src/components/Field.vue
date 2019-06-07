@@ -4,7 +4,7 @@
     <hr class="titlesep" />
     <component :is="type" :name="name" :field="field" empty-value="None" />
   </div>
-  <div v-else>
+  <div v-else class="field">
     <label class="uk-form-label">{{ label }}</label>
     <div class="uk-form-controls">
       <component :is="type" :name="name" :field="field" />
@@ -60,6 +60,9 @@ export default  {
 
 <style scoped lang="scss">
 .field {
+  .field-display {
+    margin-right: 4px;
+  }
 }
 .uk-fieldset {
   margin: 36px 0 20px;

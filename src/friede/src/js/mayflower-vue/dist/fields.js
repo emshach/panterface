@@ -1110,17 +1110,27 @@ var render = function() {
           blur: _vm.revertField
         }
       })
-    : _c("a", {
-        class: _vm.fieldClasses,
-        domProps: { innerHTML: _vm._s(_vm.html) },
-        on: {
-          click: function($event) {
-            $event.preventDefault()
-            return _vm.editField($event)
-          },
-          focus: _vm.editField
-        }
-      })
+    : _c(
+        "a",
+        {
+          class: _vm.fieldClasses,
+          on: {
+            click: function($event) {
+              $event.preventDefault()
+              return _vm.editField($event)
+            },
+            focus: _vm.editField
+          }
+        },
+        [
+          _c("span", { domProps: { innerHTML: _vm._s(_vm.html) } }),
+          _c("font-awesome-icon", {
+            attrs: { icon: _vm.isset ? "edit" : "plus" },
+            on: { click: _vm.editField }
+          })
+        ],
+        1
+      )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -1168,17 +1178,27 @@ var render = function() {
           }
         }
       })
-    : _c("a", {
-        class: _vm.fieldClasses,
-        domProps: { innerHTML: _vm._s(_vm.html) },
-        on: {
-          click: function($event) {
-            $event.preventDefault()
-            return _vm.editField($event)
-          },
-          focus: _vm.editField
-        }
-      })
+    : _c(
+        "a",
+        {
+          class: _vm.fieldClasses,
+          on: {
+            click: function($event) {
+              $event.preventDefault()
+              return _vm.editField($event)
+            },
+            focus: _vm.editField
+          }
+        },
+        [
+          _c("span", { domProps: { innerHTML: _vm._s(_vm.html) } }),
+          _c("font-awesome-icon", {
+            attrs: { icon: _vm.isset ? "edit" : "plus" },
+            on: { click: _vm.editField }
+          })
+        ],
+        1
+      )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -2024,17 +2044,27 @@ var render = function() {
           expression: "values"
         }
       })
-    : _c("a", {
-        class: _vm.fieldClasses,
-        domProps: { innerHTML: _vm._s(_vm.html) },
-        on: {
-          click: function($event) {
-            $event.preventDefault()
-            return _vm.editField($event)
-          },
-          focus: _vm.editField
-        }
-      })
+    : _c(
+        "a",
+        {
+          class: _vm.fieldClasses,
+          on: {
+            click: function($event) {
+              $event.preventDefault()
+              return _vm.editField($event)
+            },
+            focus: _vm.editField
+          }
+        },
+        [
+          _c("span", { domProps: { innerHTML: _vm._s(_vm.html) } }),
+          _c("font-awesome-icon", {
+            attrs: { icon: _vm.isset ? "edit" : "plus" },
+            on: { click: _vm.editField }
+          })
+        ],
+        1
+      )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -2554,7 +2584,7 @@ var render = function() {
           }
         },
         [
-          _c("div", { domProps: { innerHTML: _vm._s(_vm.html) } }),
+          _c("span", { domProps: { innerHTML: _vm._s(_vm.html) } }),
           _c("font-awesome-icon", {
             attrs: { icon: _vm.isset ? "edit" : "plus" },
             on: { click: _vm.editField }
@@ -2653,17 +2683,27 @@ var render = function() {
           }
         }
       })
-    : _c("a", {
-        class: _vm.fieldClasses,
-        domProps: { innerHTML: _vm._s(_vm.html) },
-        on: {
-          click: function($event) {
-            $event.preventDefault()
-            return _vm.editField($event)
-          },
-          focus: _vm.editField
-        }
-      })
+    : _c(
+        "a",
+        {
+          class: _vm.fieldClasses,
+          on: {
+            click: function($event) {
+              $event.preventDefault()
+              return _vm.editField($event)
+            },
+            focus: _vm.editField
+          }
+        },
+        [
+          _c("span", { domProps: { innerHTML: _vm._s(_vm.html) } }),
+          _c("font-awesome-icon", {
+            attrs: { icon: _vm.isset ? "edit" : "plus" },
+            on: { click: _vm.editField }
+          })
+        ],
+        1
+      )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -6585,7 +6625,7 @@ var ModelFieldMixin = {
     return {
       classes: [],
       editClass: [],
-      viewClass: [],
+      viewClass: ['field-display'],
       editMode: false
     };
   },

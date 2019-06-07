@@ -1,8 +1,10 @@
 <template lang="html">
   <textarea v-if="editMode" v-model="field.wip" ref="input"
          :class="fieldClasses" @blur="commitField" />
-  <a v-else v-html="html" @click.prevent="editField" @focus="editField"
-       :class="fieldClasses" />
+  <a v-else @click.prevent="editField" @focus="editField" :class="fieldClasses">
+    <span v-html="html" />
+    <font-awesome-icon :icon="isset ? 'edit': 'plus'" @click="editField" />
+  </a>
 </template>
 
 <script lang="js">

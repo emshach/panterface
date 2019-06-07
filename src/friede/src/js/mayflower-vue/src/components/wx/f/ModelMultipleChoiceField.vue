@@ -192,6 +192,13 @@ export default {
         }
       }
     }
+    &.uk-table-hover {
+      > tr:nth-of-type(odd), tbody tr:nth-of-type(odd) {
+        &:hover {
+          background: #ffb;
+        }
+      }
+    }
   }
 }
 </style>

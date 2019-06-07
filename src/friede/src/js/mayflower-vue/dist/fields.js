@@ -822,7 +822,9 @@ __webpack_require__.r(__webpack_exports__);
   props: {},
   mounted: function mounted() {},
   data: function data() {
-    return {};
+    return {
+      editClass: ['uk-input']
+    };
   },
   methods: {},
   computed: {}
@@ -2526,7 +2528,7 @@ var render = function() {
           }
         ],
         ref: "input",
-        class: ["uk-input", _vm.fieldClasses],
+        class: _vm.fieldClasses,
         attrs: { type: "text" },
         domProps: { value: _vm.field.wip },
         on: {
@@ -2552,13 +2554,13 @@ var render = function() {
           }
         },
         [
-          void 0,
+          _c("div", { domProps: { innerHTML: _vm._s(_vm.html) } }),
           _c("font-awesome-icon", {
             attrs: { icon: _vm.isset ? "edit" : "plus" },
             on: { click: _vm.editField }
           })
         ],
-        2
+        1
       )
 }
 var staticRenderFns = []

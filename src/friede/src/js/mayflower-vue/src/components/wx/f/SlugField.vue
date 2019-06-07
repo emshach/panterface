@@ -1,16 +1,16 @@
 <template lang="html">
   <input v-if="editMode" type="text" v-model="field.wip" ref="input"
-         :class="[ 'uk-input', fieldClasses ]" @blur="commitField" />
+         :class="fieldClasses" @blur="commitField" />
   <a v-else @click.prevent="editField" @focus="editField"
      :class="fieldClasses" >
-    <template v-html="html" />
+    <div v-html="html" />
     <font-awesome-icon :icon="isset ? 'edit': 'plus'" @click="editField" />
   </a>
 </template>
 
 <script lang="js">
 import { ModelFieldMixin } from '@/lib/mixins'
-export default  {
+export default {
   name: 'SlugField',
   mixins: [ ModelFieldMixin ],
   props: {},
@@ -18,6 +18,7 @@ export default  {
   },
   data() {
     return {
+      editClass: [ 'uk-input' ]
     }
   },
   methods: {

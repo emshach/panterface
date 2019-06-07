@@ -1988,6 +1988,14 @@ var render = function() {
                       "selected-rows": _vm.selected,
                       divided: false,
                       data: _vm.field.wip
+                    },
+                    on: {
+                      "update:selectedRows": function($event) {
+                        _vm.selected = $event
+                      },
+                      "update:selected-rows": function($event) {
+                        _vm.selected = $event
+                      }
                     }
                   },
                   [

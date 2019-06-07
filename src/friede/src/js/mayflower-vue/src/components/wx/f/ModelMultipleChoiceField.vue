@@ -2,7 +2,7 @@
   <div class="model-multiple-choice-field" >
     <template v-if="editMode">
       <vk-table v-if="field.wip && field.wip.length" responsive hoverable
-                justified striped rows-selectable :selected-rows="selected"
+                justified striped rows-selectable :selected-rows.sync="selected"
                 :divided="false" :data="field.wip">
         <vk-col-select/>
         <vk-column v-for="c in columns"
@@ -168,6 +168,13 @@ export default {
     td {
       font-size: 14px;
       padding: 4px 12px;
+    }
+    &.uk-table-striped {
+      > tr:nth-of-type(odd), tbody tr:nth-of-type(odd) {
+        background: rgba(0,0,0,0.02);
+        border-top: 1px solid rgba(0,0,0,0.08);
+        border-bottom: 1px solid rgba(0,0,0,0.10);
+      }
     }
   }
 }

@@ -62,6 +62,8 @@ import fields from '@/components/fields'
 
 library.add( faTimes, faCheck, faPlus )
 
+VkBtnLink.props.type.validator = val => !val || /^(light|primary|secondary|danger|text|link)$/.test(val);
+
 export default {
   name: 'ModelMultipleChoiceField',
   mixins: [ ModelFieldMixin, ModelModelsFieldMixin ],

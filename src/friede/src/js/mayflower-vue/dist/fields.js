@@ -599,6 +599,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_8__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_9__["faTimes"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_9__["faCheck"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_9__["faPlus"]);
+
+vuikit_lib_button__WEBPACK_IMPORTED_MODULE_7__["ButtonLink"].props.type.validator = function (val) {
+  return !val || /^(light|primary|secondary|danger|text|link)$/.test(val);
+};
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'ModelMultipleChoiceField',
   mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_11__["ModelFieldMixin"], _lib_mixins__WEBPACK_IMPORTED_MODULE_11__["ModelModelsFieldMixin"]],

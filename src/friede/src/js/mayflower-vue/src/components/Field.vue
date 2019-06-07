@@ -58,7 +58,7 @@ export default  {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .field {
   .field-display span {
     margin-right: 6px;

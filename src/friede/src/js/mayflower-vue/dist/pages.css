@@ -1,14 +1,14 @@
-.field .field-display span[data-v-3a2f7ffa] {
+.field .field-display span {
   margin-right: 6px;
 }
-.uk-fieldset[data-v-3a2f7ffa] {
+.uk-fieldset {
   margin: 36px 0 20px;
 }
-.uk-fieldset h4[data-v-3a2f7ffa] {
+.uk-fieldset h4 {
     margin: 0;
     text-transform: capitalize;
 }
-.uk-fieldset .titlesep[data-v-3a2f7ffa] {
+.uk-fieldset .titlesep {
     margin: 0 0 12px;
 }
 

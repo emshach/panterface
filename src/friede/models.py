@@ -111,6 +111,8 @@ class AppMixin( Model ):
 
 
 class Registry( Base, PathMixin ):
+    class Meta:
+        verbose_name_plural = 'registries'
     format = JSONField( default=dict )
     default = JSONField( default=dict )
     parent = M.ForeignKey( 'self', M.CASCADE, blank=True, null=True,

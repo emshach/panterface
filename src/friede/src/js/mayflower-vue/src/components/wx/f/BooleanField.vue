@@ -1,6 +1,6 @@
 <template lang="html">
   <input v-if="editMode" type="checkbox" v-model="field.wip" ref="input"
-         :class="[ 'uk-checkbox', fieldClasses ]" @blur="commitField" />
+         :class="fieldClasses" @input="commitField" @blur="revertField" />
   <div v-else v-html="html" @click="editField" @focus="editField"
        :class="fieldClasses" />
 </template>
@@ -17,7 +17,7 @@ export default {
   },
   data() {
     return {
-      
+      editClass: [ 'uk-checkbox' ]
     }
   },
   methods: {

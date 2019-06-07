@@ -19,7 +19,9 @@ __webpack_require__.r(__webpack_exports__);
   props: {},
   mounted: function mounted() {},
   data: function data() {
-    return {};
+    return {
+      editClass: ['uk-checkbox']
+    };
   },
   methods: {},
   computed: {
@@ -1066,7 +1068,7 @@ var render = function() {
           }
         ],
         ref: "input",
-        class: ["uk-checkbox", _vm.fieldClasses],
+        class: _vm.fieldClasses,
         attrs: { type: "checkbox" },
         domProps: {
           checked: Array.isArray(_vm.field.wip)
@@ -1074,7 +1076,8 @@ var render = function() {
             : _vm.field.wip
         },
         on: {
-          blur: _vm.commitField,
+          input: _vm.commitField,
+          blur: _vm.revertField,
           change: function($event) {
             var $$a = _vm.field.wip,
               $$el = $event.target,

@@ -36,13 +36,13 @@
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 import { Card as VkCard, CardTitle as VkCardTitle } from 'vuikit/lib/card'
 import { Button as VkBtn, ButtonGroup as VkBtnGrp } from 'vuikit/lib/button'
-import { faCheck, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faCheck, faPlus, faTrash, faCog } from '@fortawesome/free-solid-svg-icons'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import Field from '@/components/Field'
 import { Model } from '@/lib/objects'
 
-library.add( faPlus, faEdit )
+library.add( faCheck, faPlus, faTrash, faCog )
 
 export default  {
   name: 'FormPage',

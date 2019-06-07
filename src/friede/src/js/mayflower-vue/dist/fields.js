@@ -2031,7 +2031,7 @@ var render = function() {
             _vm._l(_vm.columns, function(c) {
               return _c("vk-column", {
                 key: c.name,
-                attrs: { title: c.name, name: c.name },
+                attrs: { title: c.name, cell: c.name },
                 scopedSlots: _vm._u(
                   [
                     {

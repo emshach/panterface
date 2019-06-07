@@ -15,7 +15,7 @@
     </template>
     <vk-table v-else-if="isset" responsive narrowed :data="field.value||[]">
       <vk-column v-for="c in columns"
-                 :key="c.name" :title="c.name" :name="c.name">
+                 :key="c.name" :title="c.name" :cell="c.name">
         <template slot-scope="{ cell }">
           <div v-html="cell.value" />
         </template>

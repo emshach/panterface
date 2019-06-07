@@ -6,10 +6,9 @@
         <vk-col-select/>
         <vk-column v-for="c in columns"
                    :key="c.name" :title="c.name" :cell="c.name">
-          <template slot-scope="{ cell }">
-            <component v-if="cell" :is="cell.meta.type" :name="cell.meta.name"
-                       :type="cell.meta.type" :field="cell" empty-value="not set" />
-          </template>
+          <component slot-scope="{ cell }"
+                     :is="cell.meta.type" :name="cell.meta.name"
+                     :type="cell.meta.type" :field="cell" empty-value="not set" />
         </vk-column>
       </vk-table>
     </template>

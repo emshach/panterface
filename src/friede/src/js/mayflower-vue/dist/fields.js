@@ -1081,29 +1081,31 @@ var render = function() {
             : _vm.field.wip
         },
         on: {
-          input: _vm.commit,
-          blur: _vm.revertField,
-          change: function($event) {
-            var $$a = _vm.field.wip,
-              $$el = $event.target,
-              $$c = $$el.checked ? true : false
-            if (Array.isArray($$a)) {
-              var $$v = null,
-                $$i = _vm._i($$a, $$v)
-              if ($$el.checked) {
-                $$i < 0 && _vm.$set(_vm.field, "wip", $$a.concat([$$v]))
+          change: [
+            function($event) {
+              var $$a = _vm.field.wip,
+                $$el = $event.target,
+                $$c = $$el.checked ? true : false
+              if (Array.isArray($$a)) {
+                var $$v = null,
+                  $$i = _vm._i($$a, $$v)
+                if ($$el.checked) {
+                  $$i < 0 && _vm.$set(_vm.field, "wip", $$a.concat([$$v]))
+                } else {
+                  $$i > -1 &&
+                    _vm.$set(
+                      _vm.field,
+                      "wip",
+                      $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                    )
+                }
               } else {
-                $$i > -1 &&
-                  _vm.$set(
-                    _vm.field,
-                    "wip",
-                    $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                  )
+                _vm.$set(_vm.field, "wip", $$c)
               }
-            } else {
-              _vm.$set(_vm.field, "wip", $$c)
-            }
-          }
+            },
+            _vm.commitField
+          ],
+          blur: _vm.revertField
         }
       })
     : _c("div", {

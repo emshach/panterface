@@ -1,6 +1,6 @@
 <template lang="html">
   <input v-if="editMode" type="checkbox" v-model="field.wip" ref="input"
-         :class="fieldClasses" @input="commit" @blur="revertField" />
+         :class="fieldClasses" @change="commitField" @blur="revertField" />
   <div v-else v-html="html" @click="editField" @focus="editField"
        :class="fieldClasses" />
 </template>

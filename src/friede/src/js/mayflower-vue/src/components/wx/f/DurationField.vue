@@ -5,7 +5,7 @@
     <input type="number" class="uk-input" max="59" v-model="minutes" />minutes
     <input type="number" class="uk-input" max="59" v-model="seconds" />seconds
   </div>
-  <div v-else v-html="html" @click="editField" @focus="editField"
+  <a v-else v-html="html" @click.prevent="editField" @focus="editField"
        :class="fieldClasses" />
 </template>
 

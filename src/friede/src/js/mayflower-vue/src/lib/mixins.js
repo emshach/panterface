@@ -1,9 +1,16 @@
-import { Field } from '@/lib/objects'
 import Multiselect from 'vue-multiselect'
+import { faPlus, faEdit } from '@fortawesome/free-solid-svg-icons'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { Field } from '@/lib/objects'
+
+library.add( faPlus, faEdit )
+
 const ModelWidgetMixin = {
 }
 
 const ModelFieldMixin = {
+  components: { FontAwesomeIcon },
   props: {
     field: {
       type: Field,

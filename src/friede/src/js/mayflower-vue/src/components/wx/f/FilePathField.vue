@@ -1,7 +1,7 @@
 <template lang="html">
   <input v-if="editMode" type="text" v-model="field.wip"
          :class="fieldClasses" @blur="commitField" />
-  <div v-else v-html="html" @click="editField" @focus="editField"
+  <a v-else v-html="html" @click.prevent="editField" @focus="editField"
        :class="fieldClasses" />
 </template>
 

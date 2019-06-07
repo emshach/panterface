@@ -7,7 +7,7 @@
                @blur="revertField"
                @search-change="getObjects"
                />
-  <div v-else v-html="html" @click="editField" @focus="editField"
+  <a v-else v-html="html" @click.prevent="editField" @focus="editField"
        :class="fieldClasses" />
 </template>
 

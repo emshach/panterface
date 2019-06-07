@@ -1,8 +1,11 @@
 <template lang="html">
   <input v-if="editMode" type="text" v-model="field.wip" ref="input"
          :class="[ 'uk-input', fieldClasses ]" @blur="commitField" />
-  <div v-else v-html="html" @click="editField" @focus="editField"
-       :class="fieldClasses" />
+  <a v-else @click.prevent="editField" @focus="editField"
+     :class="fieldClasses" >
+    <template v-html="html" />
+    <font-awesome-icon :icon="isset ? 'edit': 'plus'" @click="editField" />
+  </a>
 </template>
 
 <script lang="js">

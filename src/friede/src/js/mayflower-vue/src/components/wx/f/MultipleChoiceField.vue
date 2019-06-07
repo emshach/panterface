@@ -3,7 +3,7 @@
   <multiselect v-else-if="editMode" v-model="field.wip"
                :options="[]"
                :class="fieldClasses" @blur="commitField" />
-  <div v-else v-html="field.html" @click="editField" @focus="editField"
+  <a v-else v-html="field.html" @click.prevent="editField" @focus="editField"
        :class="fieldClasses" />
 </template>
 

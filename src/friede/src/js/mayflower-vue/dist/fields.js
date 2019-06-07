@@ -1217,7 +1217,18 @@ var render = function() {
     : _c("a", {
         class: _vm.fieldClasses,
         domProps: { innerHTML: _vm._s(_vm.html) },
-        on: { click: _vm.editField, focus: _vm.editField }
+        on: {
+          click: function($event) {
+            if (
+              !$event.type.indexOf("key") &&
+              _vm._k($event.keyCode, "click", undefined, $event.key, undefined)
+            ) {
+              return null
+            }
+            return _vm.editField($event)
+          },
+          focus: _vm.editField
+        }
       })
 }
 var staticRenderFns = []
@@ -1301,10 +1312,16 @@ var render = function() {
           expression: "field.wip"
         }
       })
-    : _c("div", {
+    : _c("a", {
         class: _vm.fieldClasses,
         domProps: { innerHTML: _vm._s(_vm.html) },
-        on: { click: _vm.editField, focus: _vm.editField }
+        on: {
+          click: function($event) {
+            $event.preventDefault()
+            return _vm.editField($event)
+          },
+          focus: _vm.editField
+        }
       })
 }
 var staticRenderFns = []
@@ -1343,10 +1360,16 @@ var render = function() {
           expression: "field.wip"
         }
       })
-    : _c("div", {
+    : _c("a", {
         class: _vm.fieldClasses,
         domProps: { innerHTML: _vm._s(_vm.html) },
-        on: { click: _vm.editField, focus: _vm.editField }
+        on: {
+          click: function($event) {
+            $event.preventDefault()
+            return _vm.editField($event)
+          },
+          focus: _vm.editField
+        }
       })
 }
 var staticRenderFns = []
@@ -1394,10 +1417,16 @@ var render = function() {
           }
         }
       })
-    : _c("div", {
+    : _c("a", {
         class: _vm.fieldClasses,
         domProps: { innerHTML: _vm._s(_vm.html) },
-        on: { click: _vm.editField, focus: _vm.editField }
+        on: {
+          click: function($event) {
+            $event.preventDefault()
+            return _vm.editField($event)
+          },
+          focus: _vm.editField
+        }
       })
 }
 var staticRenderFns = []
@@ -1513,10 +1542,16 @@ var render = function() {
         }),
         _vm._v("seconds\n")
       ])
-    : _c("div", {
+    : _c("a", {
         class: _vm.fieldClasses,
         domProps: { innerHTML: _vm._s(_vm.html) },
-        on: { click: _vm.editField, focus: _vm.editField }
+        on: {
+          click: function($event) {
+            $event.preventDefault()
+            return _vm.editField($event)
+          },
+          focus: _vm.editField
+        }
       })
 }
 var staticRenderFns = []
@@ -1564,10 +1599,16 @@ var render = function() {
           }
         }
       })
-    : _c("div", {
+    : _c("a", {
         class: _vm.fieldClasses,
         domProps: { innerHTML: _vm._s(_vm.html) },
-        on: { click: _vm.editField, focus: _vm.editField }
+        on: {
+          click: function($event) {
+            $event.preventDefault()
+            return _vm.editField($event)
+          },
+          focus: _vm.editField
+        }
       })
 }
 var staticRenderFns = []
@@ -1633,10 +1674,16 @@ var render = function() {
           }
         }
       })
-    : _c("div", {
+    : _c("a", {
         class: _vm.fieldClasses,
         domProps: { innerHTML: _vm._s(_vm.html) },
-        on: { click: _vm.editField, focus: _vm.editField }
+        on: {
+          click: function($event) {
+            $event.preventDefault()
+            return _vm.editField($event)
+          },
+          focus: _vm.editField
+        }
       })
 }
 var staticRenderFns = []
@@ -1684,10 +1731,16 @@ var render = function() {
           }
         }
       })
-    : _c("div", {
+    : _c("a", {
         class: _vm.fieldClasses,
         domProps: { innerHTML: _vm._s(_vm.html) },
-        on: { click: _vm.editField, focus: _vm.editField }
+        on: {
+          click: function($event) {
+            $event.preventDefault()
+            return _vm.editField($event)
+          },
+          focus: _vm.editField
+        }
       })
 }
 var staticRenderFns = []
@@ -1865,10 +1918,16 @@ var render = function() {
           }
         }
       })
-    : _c("div", {
+    : _c("a", {
         class: _vm.fieldClasses,
         domProps: { innerHTML: _vm._s(_vm.html) },
-        on: { click: _vm.editField, focus: _vm.editField }
+        on: {
+          click: function($event) {
+            $event.preventDefault()
+            return _vm.editField($event)
+          },
+          focus: _vm.editField
+        }
       })
 }
 var staticRenderFns = []
@@ -1963,10 +2022,16 @@ var render = function() {
           expression: "values"
         }
       })
-    : _c("div", {
+    : _c("a", {
         class: _vm.fieldClasses,
         domProps: { innerHTML: _vm._s(_vm.html) },
-        on: { click: _vm.editField, focus: _vm.editField }
+        on: {
+          click: function($event) {
+            $event.preventDefault()
+            return _vm.editField($event)
+          },
+          focus: _vm.editField
+        }
       })
 }
 var staticRenderFns = []
@@ -2285,10 +2350,16 @@ var render = function() {
           expression: "field.wip"
         }
       })
-    : _c("div", {
+    : _c("a", {
         class: _vm.fieldClasses,
         domProps: { innerHTML: _vm._s(_vm.field.html) },
-        on: { click: _vm.editField, focus: _vm.editField }
+        on: {
+          click: function($event) {
+            $event.preventDefault()
+            return _vm.editField($event)
+          },
+          focus: _vm.editField
+        }
       })
 }
 var staticRenderFns = []
@@ -2468,11 +2539,27 @@ var render = function() {
           }
         }
       })
-    : _c("div", {
-        class: _vm.fieldClasses,
-        domProps: { innerHTML: _vm._s(_vm.html) },
-        on: { click: _vm.editField, focus: _vm.editField }
-      })
+    : _c(
+        "a",
+        {
+          class: _vm.fieldClasses,
+          on: {
+            click: function($event) {
+              $event.preventDefault()
+              return _vm.editField($event)
+            },
+            focus: _vm.editField
+          }
+        },
+        [
+          void 0,
+          _c("font-awesome-icon", {
+            attrs: { icon: _vm.isset ? "edit" : "plus" },
+            on: { click: _vm.editField }
+          })
+        ],
+        2
+      )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -2660,7 +2747,13 @@ var render = function() {
     : _c("a", {
         class: _vm.fieldClasses,
         domProps: { innerHTML: _vm._s(_vm.html) },
-        on: { click: _vm.editField, focus: _vm.editField }
+        on: {
+          click: function($event) {
+            $event.preventDefault()
+            return _vm.editField($event)
+          },
+          focus: _vm.editField
+        }
       })
 }
 var staticRenderFns = []
@@ -6446,9 +6539,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var core_js_modules_es6_object_to_string__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es6.object.to-string */ "./node_modules/core-js/modules/es6.object.to-string.js");
 /* harmony import */ var core_js_modules_es6_object_to_string__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_object_to_string__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
-/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js");
-/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js");
+/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+/* harmony import */ var _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @fortawesome/fontawesome-svg-core */ "./node_modules/@fortawesome/fontawesome-svg-core/index.es.js");
+/* harmony import */ var _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @fortawesome/vue-fontawesome */ "./node_modules/@fortawesome/vue-fontawesome/index.es.js");
+/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
 
 
 
@@ -6456,11 +6552,18 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_7__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faPlus"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faEdit"]);
 var ModelWidgetMixin = {};
 var ModelFieldMixin = {
+  components: {
+    FontAwesomeIcon: _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_8__["FontAwesomeIcon"]
+  },
   props: {
     field: {
-      type: _lib_objects__WEBPACK_IMPORTED_MODULE_5__["Field"],
+      type: _lib_objects__WEBPACK_IMPORTED_MODULE_9__["Field"],
       required: true
     },
     readonly: {
@@ -6521,7 +6624,7 @@ var ModelFieldMixin = {
 };
 var ModelModelsFieldMixin = {
   components: {
-    Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_6___default.a
+    Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_5___default.a
   },
   data: function data() {
     return {

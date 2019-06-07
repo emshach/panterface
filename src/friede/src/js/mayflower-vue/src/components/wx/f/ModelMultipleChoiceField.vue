@@ -2,7 +2,7 @@
   <div class="model-multiple-choice-field" >
     <template v-if="editMode">
       <vk-table v-if="field.wip && field.wip.length" responsive hoverable
-                justified striped rows-selectable :selected-rows.sync="selected"
+                justified striped :selected-rows.sync="selected"
                 :divided="false" :data="field.wip">
         <vk-col-select/>
         <vk-column v-for="c in columns"
@@ -57,17 +57,29 @@
 
 <script lang="js">
 import { Field } from '@/lib/objects'
-import { Table as VkTable, TableColumn as VkColumn, TableColumnSelect as VkColSelect } from 'vuikit/lib/table'
-import { ButtonLink as VkBtnLink, ButtonGroup as VkBtnGrp } from 'vuikit/lib/button'
+import {
+  Table as VkTable,
+  TableColumn as VkColumn,
+  TableColumnSelect as VkColSelect
+} from 'vuikit/lib/table'
+import {
+  ButtonLink as VkBtnLink,
+  ButtonGroup as VkBtnGrp
+} from 'vuikit/lib/button'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faTimes, faCheck, faPlus } from '@fortawesome/free-solid-svg-icons'
+import {
+  faTimes,
+  faCheck,
+  faPlus,
+  faEdit
+} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { ModelFieldMixin, ModelModelsFieldMixin } from '@/lib/mixins'
 import fields from '@/components/fields'
 
-library.add( faTimes, faCheck, faPlus )
+library.add( faTimes, faCheck, faPlus, faEdit )
 
-VkBtnLink.props.type.validator = val => !val || /^(light|primary|secondary|danger|text|link)$/.test(val);
+VkBtnLink.props.type.validator = val => !val || /^(light|primary|secondary|danger|text|link)$/.test( val );
 
 export default {
   name: 'ModelMultipleChoiceField',
@@ -174,6 +186,9 @@ export default {
         background: rgba(0,0,0,0.02);
         border-top: 1px solid rgba(0,0,0,0.08);
         border-bottom: 1px solid rgba(0,0,0,0.10);
+        &.uk-active {
+          background: #ffb;
+        }
       }
     }
   }

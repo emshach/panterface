@@ -58,6 +58,9 @@
   border-top: 1px solid rgba(0, 0, 0, 0.08);
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
+.model-multiple-choice-field .uk-table.uk-table-striped > tr:nth-of-type(odd).uk-active, .model-multiple-choice-field .uk-table.uk-table-striped tbody tr:nth-of-type(odd).uk-active {
+    background: #ffb;
+}
 
 
 /*# sourceMappingURL=fields.css.map*/

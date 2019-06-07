@@ -598,7 +598,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_8__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_9__["faTimes"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_9__["faCheck"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_9__["faPlus"]);
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_8__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_9__["faTimes"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_9__["faCheck"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_9__["faPlus"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_9__["faEdit"]);
 
 vuikit_lib_button__WEBPACK_IMPORTED_MODULE_7__["ButtonLink"].props.type.validator = function (val) {
   return !val || /^(light|primary|secondary|danger|text|link)$/.test(val);
@@ -1984,7 +1984,6 @@ var render = function() {
                       hoverable: "",
                       justified: "",
                       striped: "",
-                      "rows-selectable": "",
                       "selected-rows": _vm.selected,
                       divided: false,
                       data: _vm.field.wip

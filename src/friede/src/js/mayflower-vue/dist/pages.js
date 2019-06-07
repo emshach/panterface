@@ -108,7 +108,8 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_5__["library"].add(_f
   mounted: function mounted() {},
   data: function data() {
     return {
-      data: null
+      data: null,
+      scrolled: ''
     };
   },
   methods: {
@@ -216,7 +217,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "vk-card",
-    { staticClass: "form-page" },
+    { class: ["form-page", _vm.scrolled] },
     [
       _c(
         "div",
@@ -310,7 +311,19 @@ var render = function() {
       ),
       _c(
         "vue-perfect-scrollbar",
-        { staticClass: "scroller", attrs: { slot: "body" }, slot: "body" },
+        {
+          staticClass: "scroller",
+          attrs: { slot: "body" },
+          on: {
+            "ps-scroll-down": function($event) {
+              _vm.scrolled = "scrolled"
+            },
+            "ps-y-reach-start": function($event) {
+              _vm.scrolled = ""
+            }
+          },
+          slot: "body"
+        },
         [
           _vm.model
             ? _c(

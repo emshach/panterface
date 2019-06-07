@@ -1,6 +1,10 @@
 .field .field-display span {
   margin-right: 6px;
 }
+.field .field-display svg.svg-inline--fa {
+  font-size: 0.875em;
+  vertical-align: 0;
+}
 .field tr .field-display span {
   margin-right: 4px;
 }
@@ -33,6 +37,18 @@
 .form-page > .uk-card-header .form-controls {
       margin-bottom: 0;
 }
+.form-page > .uk-card-header .uk-button {
+      font-size: 0.95rem;
+      line-height: 34px;
+}
+.form-page > .uk-card-header .uk-button-group .uk-button:first-child {
+      /* border-top-left-radius: 2px; */
+      border-bottom-left-radius: 2px;
+}
+.form-page > .uk-card-header .uk-button-group .uk-button:last-child {
+      border-top-right-radius: 2px;
+      /* border-bottom-right-radius: 2px; */
+}
 .form-page .uk-input, .form-page .uk-select, .form-page .uk-textarea {
     border: 1px solid #e5e5e5;
 }
@@ -40,22 +56,18 @@
     height: calc( 100% - 45px);
     -webkit-box-sizing: border-box;
             box-sizing: border-box;
-    padding: 24px 0px 1px 24px;
+    padding: 6px 0px 1px 24px;
 }
 .form-page .uk-card-body > .scroller {
       height: 100%;
       padding-right: 16px;
 }
+.form-page.scrolled .uk-card-body {
+    -webkit-box-shadow: inset 0 12px 11px -11px rgba(0, 0, 0, 0.1);
+            box-shadow: inset 0 12px 11px -11px rgba(0, 0, 0, 0.1);
+}
 .form-page .no-data {
     color: rgba(0, 0, 0, 0.35);
-}
-.uk-button-group .uk-button:first-child {
-  /* border-top-left-radius: 2px; */
-  border-bottom-left-radius: 2px;
-}
-.uk-button-group .uk-button:last-child {
-  border-top-right-radius: 2px;
-  /* border-bottom-right-radius: 2px; */
 }
 
 

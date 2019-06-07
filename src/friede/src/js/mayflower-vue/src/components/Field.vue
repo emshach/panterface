@@ -60,8 +60,14 @@ export default  {
 
 <style lang="scss">
 .field {
-  .field-display span {
-    margin-right: 6px;
+  .field-display {
+    span {
+      margin-right: 6px;
+  }
+    svg.svg-inline--fa {
+      font-size: 0.875em;
+      vertical-align: 0;
+    }
   }
   tr {
     .field-display span {

@@ -1,5 +1,5 @@
 <template lang="html">
-  <vk-card class="form-page">
+  <vk-card :class="[ 'form-page', scrolled ]">
     <div slot="header">
       <div class="form-controls uk-align-right uk-text-right">
         <vk-btn type="text" class="uk-margin-right" @click.stop="settings">
@@ -19,7 +19,9 @@
       </div>
       <vk-card-title class="uk-align-left">{{ location.title }}</vk-card-title>
     </div>
-    <vue-perfect-scrollbar class="scroller" slot="body">
+    <vue-perfect-scrollbar class="scroller" slot="body"
+                           @ps-scroll-down="scrolled='scrolled'"
+                           @ps-y-reach-start="scrolled=''">
       <form v-if="model" class="uk-form-horizontal uk-text-left">
         <field v-for="field in simpleFields" :key="field.meta.name"
                :type="field.meta.type" :name="field.meta.name" :data="field"
@@ -59,6 +61,7 @@ export default  {
   data() {
     return {
       data: null,
+      scrolled: ''
     }
   },
   methods: {
@@ -112,6 +115,20 @@ export default  {
     .form-controls{
       margin-bottom: 0;
     }
+    .uk-button {
+      font-size: 0.95rem;
+      line-height: 34px;
+    }
+    .uk-button-group {
+      .uk-button:first-child {
+        /* border-top-left-radius: 2px; */
+        border-bottom-left-radius: 2px;
+      }
+      .uk-button:last-child {
+        border-top-right-radius: 2px;
+        /* border-bottom-right-radius: 2px; */
+      }
+    }
   }
   .uk-input, .uk-select, .uk-textarea {
     border: 1px solid #e5e5e5;
@@ -119,22 +136,17 @@ export default  {
   .uk-card-body {
     height: calc( 100% - 45px );
     box-sizing: border-box;
-    padding: 24px 0px 1px 24px;
+    padding: 6px 0px 1px 24px;
     > .scroller {
       height: 100%;
       padding-right: 16px;
     }
   }
+  &.scrolled .uk-card-body {
+    box-shadow: inset 0 12px 11px -11px rgba(0, 0, 0, 0.1);
+  }
   .no-data {
     color: rgba(0,0,0,0.35);
   }
-}
-.uk-button-group .uk-button:first-child {
-  /* border-top-left-radius: 2px; */
-  border-bottom-left-radius: 2px;
-}
-.uk-button-group .uk-button:last-child {
-  border-top-right-radius: 2px;
-  /* border-bottom-right-radius: 2px; */
 }
 </style>

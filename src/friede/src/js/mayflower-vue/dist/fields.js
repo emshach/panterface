@@ -24,12 +24,9 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    commit: function commit() {
-      var _this = this;
-
-      this.$nextTick(function () {
-        _this.commitField();
-      });
+    commit: function commit(val) {
+      this.field.wip = val;
+      this.commitField();
     }
   },
   computed: {

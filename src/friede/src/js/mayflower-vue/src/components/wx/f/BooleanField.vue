@@ -21,8 +21,9 @@ export default {
     }
   },
   methods: {
-    commit() {
-      this.$nextTick(() => { this.commitField() });
+    commit( val ) {
+      this.field.wip = val;
+      this.commitField();
     }
   },
   computed: {

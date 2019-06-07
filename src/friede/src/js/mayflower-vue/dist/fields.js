@@ -2034,11 +2034,16 @@ var render = function() {
                       key: "default",
                       fn: function(ref) {
                         var cell = ref.cell
-                        return [
-                          _c("div", {
-                            domProps: { innerHTML: _vm._s(cell.value) }
-                          })
-                        ]
+                        return _c(cell.meta.type, {
+                          tag: "component",
+                          attrs: {
+                            readonly: true,
+                            name: cell.meta.name,
+                            type: cell.meta.type,
+                            field: cell,
+                            "empty-value": "not set"
+                          }
+                        })
                       }
                     }
                   ],

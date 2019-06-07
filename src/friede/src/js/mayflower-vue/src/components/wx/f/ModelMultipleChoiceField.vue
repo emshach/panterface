@@ -15,9 +15,9 @@
     <vk-table v-else-if="isset" responsive narrowed :data="field.value||[]">
       <vk-column v-for="c in columns"
                  :key="c.name" :title="c.name" :cell="c.name">
-        <template slot-scope="{ cell }">
-          <div v-html="cell.value" />
-        </template>
+          <component slot-scope="{ cell }" :readonly="true"
+                     :is="cell.meta.type" :name="cell.meta.name"
+                     :type="cell.meta.type" :field="cell" empty-value="not set" />
       </vk-column>
     </vk-table>
     <div v-else v-html="html" @click="editField" @focus="editField"

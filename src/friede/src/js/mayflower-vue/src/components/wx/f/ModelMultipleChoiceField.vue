@@ -1,16 +1,19 @@
 <template lang="html">
   <div class="model-multiple-choice-field" >
-    <vk-table v-if="field.wip && field.wip.length" responsive :data="field.wip">
-      <vk-col-select/>
-      <vk-column v-for="c in columns"
-                 :key="c.name" :title="c.name" :cell="c.name">
-        <template slot-scope="{ cell }">
-          <component v-if="cell" :is="cell.meta.type" :name="cell.meta.name"
-                     :type="cell.meta.type" :field="cell" empty-value="not set" />
-        </template>
-      </vk-column>
-    </vk-table>
-    <vk-table v-else-if="isset" responsive :data="field.value||[]">
+    <template v-if="editMode">
+      <vk-table v-if="field.wip && field.wip.length" responsive narrowed
+                :data="field.wip">
+        <vk-col-select/>
+        <vk-column v-for="c in columns"
+                   :key="c.name" :title="c.name" :cell="c.name">
+          <template slot-scope="{ cell }">
+            <component v-if="cell" :is="cell.meta.type" :name="cell.meta.name"
+                       :type="cell.meta.type" :field="cell" empty-value="not set" />
+          </template>
+        </vk-column>
+      </vk-table>
+    </template>
+    <vk-table v-else-if="isset" responsive narrowed :data="field.value||[]">
       <vk-column v-for="c in columns"
                  :key="c.name" :title="c.name" :name="c.name">
         <template slot-scope="{ cell }">

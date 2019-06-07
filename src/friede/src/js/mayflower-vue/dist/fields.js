@@ -1972,50 +1972,62 @@ var render = function() {
     "div",
     { staticClass: "model-multiple-choice-field" },
     [
-      _vm.field.wip && _vm.field.wip.length
-        ? _c(
-            "vk-table",
-            { attrs: { responsive: "", data: _vm.field.wip } },
-            [
-              _c("vk-col-select"),
-              _vm._l(_vm.columns, function(c) {
-                return _c("vk-column", {
-                  key: c.name,
-                  attrs: { title: c.name, cell: c.name },
-                  scopedSlots: _vm._u(
-                    [
-                      {
-                        key: "default",
-                        fn: function(ref) {
-                          var cell = ref.cell
-                          return [
-                            cell
-                              ? _c(cell.meta.type, {
-                                  tag: "component",
-                                  attrs: {
-                                    name: cell.meta.name,
-                                    type: cell.meta.type,
-                                    field: cell,
-                                    "empty-value": "not set"
-                                  }
-                                })
-                              : _vm._e()
-                          ]
-                        }
-                      }
-                    ],
-                    null,
-                    true
-                  )
-                })
-              })
-            ],
-            2
-          )
+      _vm.editMode
+        ? [
+            _vm.field.wip && _vm.field.wip.length
+              ? _c(
+                  "vk-table",
+                  {
+                    attrs: { responsive: "", narrowed: "", data: _vm.field.wip }
+                  },
+                  [
+                    _c("vk-col-select"),
+                    _vm._l(_vm.columns, function(c) {
+                      return _c("vk-column", {
+                        key: c.name,
+                        attrs: { title: c.name, cell: c.name },
+                        scopedSlots: _vm._u(
+                          [
+                            {
+                              key: "default",
+                              fn: function(ref) {
+                                var cell = ref.cell
+                                return [
+                                  cell
+                                    ? _c(cell.meta.type, {
+                                        tag: "component",
+                                        attrs: {
+                                          name: cell.meta.name,
+                                          type: cell.meta.type,
+                                          field: cell,
+                                          "empty-value": "not set"
+                                        }
+                                      })
+                                    : _vm._e()
+                                ]
+                              }
+                            }
+                          ],
+                          null,
+                          true
+                        )
+                      })
+                    })
+                  ],
+                  2
+                )
+              : _vm._e()
+          ]
         : _vm.isset
         ? _c(
             "vk-table",
-            { attrs: { responsive: "", data: _vm.field.value || [] } },
+            {
+              attrs: {
+                responsive: "",
+                narrowed: "",
+                data: _vm.field.value || []
+              }
+            },
             _vm._l(_vm.columns, function(c) {
               return _c("vk-column", {
                 key: c.name,
@@ -2143,7 +2155,7 @@ var render = function() {
         2
       )
     ],
-    1
+    2
   )
 }
 var staticRenderFns = []

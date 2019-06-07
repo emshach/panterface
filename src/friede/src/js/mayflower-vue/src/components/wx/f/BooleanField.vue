@@ -1,6 +1,6 @@
 <template lang="html">
   <input v-if="editMode" type="checkbox" v-model="field.wip" ref="input"
-         :class="fieldClasses" @input="commitField" @blur="revertField" />
+         :class="fieldClasses" @input="commit" @blur="revertField" />
   <div v-else v-html="html" @click="editField" @focus="editField"
        :class="fieldClasses" />
 </template>
@@ -21,7 +21,9 @@ export default {
     }
   },
   methods: {
-    
+    commit() {
+      this.$nextTick(() => { this.commitField() });
+    }
   },
   computed: {
     html() {

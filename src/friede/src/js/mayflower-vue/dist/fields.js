@@ -23,7 +23,15 @@ __webpack_require__.r(__webpack_exports__);
       editClass: ['uk-checkbox']
     };
   },
-  methods: {},
+  methods: {
+    commit: function commit() {
+      var _this = this;
+
+      this.$nextTick(function () {
+        _this.commitField();
+      });
+    }
+  },
   computed: {
     html: function html() {
       if (this.isset) {
@@ -1076,7 +1084,7 @@ var render = function() {
             : _vm.field.wip
         },
         on: {
-          input: _vm.commitField,
+          input: _vm.commit,
           blur: _vm.revertField,
           change: function($event) {
             var $$a = _vm.field.wip,

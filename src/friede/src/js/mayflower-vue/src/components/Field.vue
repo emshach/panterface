@@ -60,8 +60,8 @@ export default  {
 
 <style scoped lang="scss">
 .field {
-  .field-display {
-    margin-right: 4px;
+  .field-display span {
+    margin-right: 6px;
   }
 }
 .uk-fieldset {

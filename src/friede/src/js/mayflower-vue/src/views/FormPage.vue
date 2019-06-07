@@ -2,10 +2,19 @@
   <vk-card class="form-page">
     <div slot="header">
       <div class="form-controls uk-align-right uk-text-right">
-        <vk-btn type="text" class="uk-margin-right" @click.stop="cancel">cancel</vk-btn>
+        <vk-btn type="text" class="uk-margin-right" @click.stop="settings">
+          <font-awesome-icon icon="cog" />
+        </vk-btn>
+        <vk-btn type="text" class="uk-margin-right" @click.stop="discard">
+          <font-awesome-icon icon="trash" /> discard
+        </vk-btn>
         <vk-btn-grp>
-          <vk-btn type="primary" @click.stop="submit">Save</vk-btn>
-          <vk-btn type="primary" @click.stop="submitAndRedo">Add another</vk-btn>
+          <vk-btn type="primary" @click.stop="submit">
+            <font-awesome-icon icon="check" /> done
+          </vk-btn>
+          <vk-btn type="primary" @click.stop="submitAndRedo">
+            <font-awesome-icon icon="plus" /> and another
+          </vk-btn>
         </vk-btn-grp>
       </div>
       <vk-card-title class="uk-align-left">{{ location.title }}</vk-card-title>
@@ -27,8 +36,14 @@
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 import { Card as VkCard, CardTitle as VkCardTitle } from 'vuikit/lib/card'
 import { Button as VkBtn, ButtonGroup as VkBtnGrp } from 'vuikit/lib/button'
+import { faCheck, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import Field from '@/components/Field'
 import { Model } from '@/lib/objects'
+
+library.add( faPlus, faEdit )
+
 export default  {
   name: 'FormPage',
   components: {
@@ -47,11 +62,13 @@ export default  {
     }
   },
   methods: {
+    settings() {
+    },
     submit() {
     },
     submitAndRedo() {
     },
-    cancel() {
+    discard() {
     }
   },
   computed: {

@@ -1,8 +1,9 @@
 <template lang="html">
   <div class="model-multiple-choice-field" >
     <template v-if="editMode">
-      <vk-table v-if="field.wip && field.wip.length" responsive narrowed
-                :data="field.wip">
+      <vk-table v-if="field.wip && field.wip.length" responsive hoverable
+                justified striped rows-selectable :selected-rows="selected"
+                :divided="false" :data="field.wip">
         <vk-col-select/>
         <vk-column v-for="c in columns"
                    :key="c.name" :title="c.name" :cell="c.name">
@@ -12,7 +13,9 @@
         </vk-column>
       </vk-table>
     </template>
-    <vk-table v-else-if="isset" responsive narrowed :data="field.value||[]">
+    <vk-table v-else-if="isset" responsive hoverable justified striped
+              :divided="false"
+              :data="field.value||[]">
       <vk-column v-for="c in columns"
                  :key="c.name" :title="c.name" :cell="c.name">
           <component slot-scope="{ cell }" :readonly="true"
@@ -86,6 +89,7 @@ export default {
   data() {
     return {
       related: null,
+      selected: [],
     }
   },
   methods: {
@@ -156,9 +160,15 @@ export default {
       }
     }
   }
-  .uk-table th {
-    font-size: 12px;
-    padding: 0 12px;
+  .uk-table {
+    th {
+      font-size: 12px;
+      padding: 2px 12px;
+    }
+    td {
+      font-size: 14px;
+      padding: 4px 12px;
+    }
   }
 }
 </style>

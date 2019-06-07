@@ -47,7 +47,11 @@
 }
 .model-multiple-choice-field .uk-table th {
   font-size: 12px;
-  padding: 0 12px;
+  padding: 2px 12px;
+}
+.model-multiple-choice-field .uk-table td {
+  font-size: 14px;
+  padding: 4px 12px;
 }
 
 

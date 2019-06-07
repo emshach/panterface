@@ -622,7 +622,8 @@ vuikit_lib_button__WEBPACK_IMPORTED_MODULE_7__["ButtonLink"].props.type.validato
   },
   data: function data() {
     return {
-      related: null
+      related: null,
+      selected: []
     };
   },
   methods: {
@@ -1978,7 +1979,16 @@ var render = function() {
               ? _c(
                   "vk-table",
                   {
-                    attrs: { responsive: "", narrowed: "", data: _vm.field.wip }
+                    attrs: {
+                      responsive: "",
+                      hoverable: "",
+                      justified: "",
+                      striped: "",
+                      "rows-selectable": "",
+                      "selected-rows": _vm.selected,
+                      divided: false,
+                      data: _vm.field.wip
+                    }
                   },
                   [
                     _c("vk-col-select"),
@@ -2020,7 +2030,10 @@ var render = function() {
             {
               attrs: {
                 responsive: "",
-                narrowed: "",
+                hoverable: "",
+                justified: "",
+                striped: "",
+                divided: false,
                 data: _vm.field.value || []
               }
             },

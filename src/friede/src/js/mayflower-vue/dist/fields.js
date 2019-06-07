@@ -1982,7 +1982,6 @@ var render = function() {
                     attrs: {
                       responsive: "",
                       hoverable: "",
-                      justified: "",
                       striped: "",
                       "selected-rows": _vm.selected,
                       divided: false,
@@ -2038,7 +2037,6 @@ var render = function() {
               attrs: {
                 responsive: "",
                 hoverable: "",
-                justified: "",
                 striped: "",
                 divided: false,
                 data: _vm.field.value || []
@@ -2167,8 +2165,12 @@ var render = function() {
                   on: { click: _vm.editField, focus: _vm.editField }
                 },
                 [
-                  _c("font-awesome-icon", { attrs: { icon: "plus" } }),
-                  _vm._v(" add\n    ")
+                  _c("font-awesome-icon", {
+                    attrs: { icon: _vm.isset ? "edit" : "plus" }
+                  }),
+                  _vm._v(
+                    "\n      add" + _vm._s(_vm.isset ? "/edit" : "") + "\n    "
+                  )
                 ],
                 1
               )

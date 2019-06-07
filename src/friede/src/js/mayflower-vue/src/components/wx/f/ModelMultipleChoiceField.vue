@@ -2,7 +2,7 @@
   <div class="model-multiple-choice-field" >
     <template v-if="editMode">
       <vk-table v-if="field.wip && field.wip.length" responsive hoverable
-                justified striped :selected-rows.sync="selected"
+                striped :selected-rows.sync="selected"
                 :divided="false" :data="field.wip">
         <vk-col-select/>
         <vk-column v-for="c in columns"
@@ -13,7 +13,7 @@
         </vk-column>
       </vk-table>
     </template>
-    <vk-table v-else-if="isset" responsive hoverable justified striped
+    <vk-table v-else-if="isset" responsive hoverable striped
               :divided="false"
               :data="field.value||[]">
       <vk-column v-for="c in columns"
@@ -49,7 +49,8 @@
       </template>
       <vk-btn-link v-else class="btn btn-add" type="light" size="small"
                    @click="editField" @focus="editField">
-        <font-awesome-icon icon="plus" /> add
+        <font-awesome-icon :icon="isset ? 'edit' : 'plus'" />
+        add{{ isset? '/edit' : '' }}
       </vk-btn-link>
     </div>
   </div>

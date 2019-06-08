@@ -73,7 +73,7 @@ __webpack_require__.r(__webpack_exports__);
       default: false
     }
   },
-  created: function created() {
+  mounted: function mounted() {
     this.updateVal();
     this.editMode = this.edit;
   },
@@ -139,6 +139,10 @@ __webpack_require__.r(__webpack_exports__);
       var o = {};
       o[val] = null;
       return o;
+    },
+    input: function input(val) {
+      this._value = val;
+      this.$emit('input', val);
     }
   },
   computed: {
@@ -654,7 +658,8 @@ var render = function() {
         : _vm._e(),
       _c(_vm.tag, {
         tag: "component",
-        attrs: { readonly: _vm.readonly, edit: _vm.edit, value: _vm._value }
+        attrs: { readonly: _vm.readonly, edit: _vm.edit, value: _vm._value },
+        on: { input: _vm.inpput }
       })
     ],
     2

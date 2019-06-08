@@ -7,7 +7,8 @@
                 @click.prevent="setType(a)">{{ a.label }}</vk-btn>
       </vk-dropdown>
     </template>
-    <component :is="tag" :readonly="readonly" :edit="edit" :value="_value" />
+    <component :is="tag" :readonly="readonly" :edit="edit" :value="_value"
+               @input="inpput" />
   </span>
 </template>
 
@@ -42,7 +43,7 @@ export default  {
       default: false
     }
   },
-  created() {
+  mounted() {
     this.updateVal();
     this.editMode = this.edit;
   },
@@ -117,6 +118,10 @@ export default  {
       var o = {}
       o[ val ] = null;
       return o;
+    },
+    input( val ) {
+      this._value = val;
+      this.$emit( 'input', val );
     }
   },
   computed: {

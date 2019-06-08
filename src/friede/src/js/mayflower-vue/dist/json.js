@@ -294,7 +294,8 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_2__["library"].add(_f
   mounted: function mounted() {},
   data: function data() {
     return {
-      truncated: false
+      truncated: false,
+      collapse: false
     };
   },
   methods: {
@@ -311,7 +312,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_2__["library"].add(_f
         return "".concat($1, "<br/>\n");
       });
 
-      if (collapse && this.value.length > 40) {
+      if (this.collapse && this.value.length > 40) {
         this.truncated = true;
         return s.slice(0, 40);
       }
@@ -360,8 +361,19 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     commit: function commit() {
-      this.$emit('input', this.intlVal);
       this.editMode = false;
+    },
+    input: function input() {
+      this.$emit('input', {
+        key: this.$refs.key.value,
+        value: this.value.value
+      });
+    },
+    updateVal: function updateVal(val) {
+      this.$emit('input', {
+        key: this.$refs.key.value,
+        value: val
+      });
     },
     editKey: function editKey() {
       var _this = this;
@@ -827,26 +839,10 @@ var render = function() {
       _c("span", { staticClass: "json-key" }, [
         _vm.editing
           ? _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.intlVal.key,
-                  expression: "intlVal.key"
-                }
-              ],
               ref: "key",
               attrs: { type: "text" },
-              domProps: { value: _vm.intlVal.key },
-              on: {
-                blur: _vm.commit,
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.intlVal, "key", $event.target.value)
-                }
-              }
+              domProps: { value: _vm.value.key },
+              on: { blur: _vm.commit, input: _vm.input }
             })
           : _c(
               "a",
@@ -859,20 +855,14 @@ var render = function() {
                   }
                 }
               },
-              [_vm._v(_vm._s(_vm.intlVal.key.length ? _vm.intlVal.key : "''"))]
+              [_vm._v(_vm._s(_vm.value.key.length ? _vm.value.key : "''"))]
             ),
         _vm._v("\n    :\n  ")
       ]),
       _c("json-widget", {
         staticClass: "json-value",
-        attrs: { readonly: _vm.readonly },
-        model: {
-          value: _vm.intlVal.value,
-          callback: function($$v) {
-            _vm.$set(_vm.intlVal, "value", $$v)
-          },
-          expression: "intlVal.value"
-        }
+        attrs: { readonly: _vm.readonly, value: _vm.value.value },
+        on: { input: _vm.updateVal }
       })
     ],
     1

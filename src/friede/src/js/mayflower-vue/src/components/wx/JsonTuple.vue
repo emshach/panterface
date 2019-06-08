@@ -1,13 +1,15 @@
 <template lang="html">
   <div class="json-tuple">
     <span class="json-key">
-      <input v-if="editing" type="text" v-model="intlVal.key" @blur="commit"
+      <input v-if="editing" type="text" :value="value.key" @blur="commit"
+             @input="input"
              ref="key" />
       <a v-else href="#" @click.prevent="editKey">{{
-        intlVal.key.length ? intlVal.key : "''" }}</a>
+        value.key.length ? value.key : "''" }}</a>
       :
     </span>
-    <json-widget class="json-value" :readonly="readonly" v-model="intlVal.value"/>
+    <json-widget class="json-value" :readonly="readonly" :value="value.value"
+                 @input="updateVal"/>
   </div>
 </template>
 
@@ -32,8 +34,13 @@ export default  {
   },
   methods: {
     commit() {
-      this.$emit( 'input', this.intlVal );
       this.editMode = false;
+    },
+    input() {
+      this.$emit( 'input', { key: this.$refs.key.value, value: this.value.value })
+    },
+    updateVal( val ) {
+      this.$emit( 'input', { key: this.$refs.key.value, value: val })
     },
     editKey() {
       this.editMode = true;

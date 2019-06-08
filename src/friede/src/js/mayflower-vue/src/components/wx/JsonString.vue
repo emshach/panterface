@@ -40,7 +40,8 @@ export default  {
   },
   data() {
     return {
-      truncated: false
+      truncated: false,
+      collapse: false,
     }
   },
   methods: {
@@ -55,7 +56,7 @@ export default  {
     html() {
       const s = this.value.replace(
         /((?:\\\\)*)\\n/g, ( $0, $1 ) => `${$1}<br/>\n` );
-      if ( collapse && this.value.length > 40 ) {
+      if ( this.collapse && this.value.length > 40 ) {
         this.truncated = true;
         return s.slice( 0, 40 );
       }

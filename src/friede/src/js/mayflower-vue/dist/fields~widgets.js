@@ -136,6 +136,9 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   computed: {
+    editing: function editing() {
+      return !this.readonly && this.editMode;
+    },
     tag: function tag() {
       return 'json-' + this.type;
     },

@@ -115,6 +115,9 @@ export default  {
     }
   },
   computed: {
+    editing() {
+      return !this.readonly && this.editMode;
+    },
     tag() {
       return 'json-' + this.type;
     },

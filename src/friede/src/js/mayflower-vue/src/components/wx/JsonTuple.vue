@@ -2,7 +2,7 @@
   <div class="json-tuple">
     <span class="json-key">
       <input v-if="editing" type="text" v-model="intlVal.key" @blur="commit"
-             ref="key "/>
+             ref="key" />
       <a v-else href="#" @click.prevent="editKey">{{
         intlVal.key.length ? intlVal.key : "''" }}</a>
       :

@@ -833,7 +833,7 @@ var render = function() {
                   expression: "intlVal.key"
                 }
               ],
-              ref: "key ",
+              ref: "key",
               attrs: { type: "text" },
               domProps: { value: _vm.intlVal.key },
               on: {

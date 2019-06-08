@@ -35,11 +35,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_f
     }
   },
   created: function created() {
-    this.intlVal = this.value.map(function (x) {
-      return {
-        data: x
-      };
-    });
+    this.updateVal();
   },
   data: function data() {
     return {
@@ -48,11 +44,15 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_f
     };
   },
   methods: {
+    updateVal: function updateVal() {
+      this.intlVal = this.value.map(function (x) {
+        return {
+          data: x
+        };
+      });
+    },
     input: function input() {
       this.$emit('input', this.intlVal.map(function (x) {
-        return x.data;
-      }));
-      this.$emit('change', this.intlVal.map(function (x) {
         return x.data;
       }));
     },
@@ -62,7 +62,12 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_f
       });
     }
   },
-  computed: {}
+  computed: {},
+  watch: {
+    value: function value(val) {
+      this.updateVal();
+    }
+  }
 });
 
 /***/ }),
@@ -176,6 +181,9 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     input: function input() {
       this.$emit('input', this.$refs.input.value);
+    },
+    commit: function commit() {
+      this.editMode = false;
     }
   },
   computed: {}
@@ -451,10 +459,10 @@ var render = function() {
           )
         : _vm._e(),
       _vm.collapse
-        ? _c("span", { staticClass: "json-object-content" }, [_vm._v("...")])
+        ? _c("span", { staticClass: "json-array-content" }, [_vm._v("...")])
         : _c(
             "span",
-            { staticClass: "json-object-content" },
+            { staticClass: "json-array-content" },
             [
               _vm._l(_vm.intlVal, function(v, i) {
                 return [
@@ -627,21 +635,26 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "span",
-    { staticClass: "json-number" },
-    [
-      _vm.editing
-        ? _c("input", {
-            ref: "input",
-            attrs: { type: "number" },
-            domProps: { value: _vm.value },
-            on: { input: _vm.input }
-          })
-        : [_vm._v(_vm._s(_vm.value))]
-    ],
-    2
-  )
+  return _c("span", { staticClass: "json-number" }, [
+    _vm.editing
+      ? _c("input", {
+          ref: "input",
+          attrs: { type: "number" },
+          domProps: { value: _vm.value },
+          on: { input: _vm.input, blur: _vm.commit }
+        })
+      : _c(
+          "span",
+          {
+            on: {
+              click: function($event) {
+                _vm.editMode = true
+              }
+            }
+          },
+          [_vm._v(_vm._s(_vm.value))]
+        )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

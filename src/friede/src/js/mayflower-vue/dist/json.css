@@ -3,6 +3,10 @@
   margin-left: 1em;
 }
 
+.json-array .json-array-content > .json-widget {
+  display: block;
+  margin-left: 1em;
+}
 
 .json-number[data-v-e24bca02] {
   color: coral;

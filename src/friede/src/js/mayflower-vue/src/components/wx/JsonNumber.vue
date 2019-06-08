@@ -1,8 +1,8 @@
 <template lang="html">
   <span class="json-number">
     <input v-if="editing" type="number" :value="value" ref="input"
-           @input="input" /> 
-    <template v-else>{{ value }}</template>
+           @input="input" @blur="commit" /> 
+    <span v-else @click="editMode = true">{{ value }}</span>
   </span>
 </template>
 
@@ -26,6 +26,9 @@ export default  {
   methods: {
     input() {
       this.$emit( 'input', this.$refs.input.value );
+    },
+    commit() {
+      this.editMode = false;
     }
   },
   computed: {

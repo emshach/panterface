@@ -416,6 +416,12 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_16__["library"].add(_
         type: 'number',
         op: _home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_core_js_parse_float__WEBPACK_IMPORTED_MODULE_0___default.a
       }, {
+        label: 'to length',
+        type: 'number',
+        op: function op(x) {
+          return x.length;
+        }
+      }, {
         label: 'number',
         type: 'number',
         op: function op() {

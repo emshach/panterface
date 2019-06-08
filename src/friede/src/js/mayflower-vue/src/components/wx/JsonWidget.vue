@@ -364,6 +364,11 @@ export default  {
             op: parseFloat,
           },
           {
+            label: 'to length',
+            type: 'number',
+            op: x => x.length,
+          },
+          {
             label: 'number',
             type: 'number',
             op: () => 0,

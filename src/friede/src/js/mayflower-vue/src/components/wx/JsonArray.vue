@@ -5,8 +5,8 @@
             @click.prevent="collapse=!collapse">
       <font-awesome-icon :icon="collapse ? 'plus' : 'minus' " />
     </vk-btn>
-    <span v-if="collapse" class="json-object-content">...</span>
-    <span v-else class="json-object-content">
+    <span v-if="collapse" class="json-array-content">...</span>
+    <span v-else class="json-array-content">
       <template v-for="( v, i ) in intlVal">
         <json-widget :readonly="readonly" :edit="editMode" :key="i"
                      v-model="v.data" @input="input" />
@@ -39,7 +39,7 @@ export default  {
     }
   },
   created() {
-    this.intlVal = this.value.map( x => ({ data: x }))
+    this.updateVal();
   },
   data() {
     return {
@@ -48,22 +48,31 @@ export default  {
     }
   },
   methods: {
+    updateVal() {
+      this.intlVal = this.value.map( x => ({ data: x }))
+    },
     input() {
       this.$emit( 'input', this.intlVal.map( x => x.data ));
-      this.$emit( 'change', this.intlVal.map( x => x.data ));
     },
     addElem() {
       this.intlVal.push({ data: null });
     }
   },
   computed: {
-    
+  },
+  watch: {
+    value( val ) {
+      this.updateVal();
+    }
   }
 }
 </script>
 
 <style lang="scss">
-  .json-array {
-
+.json-array {
+  .json-array-content > .json-widget {
+    display: block;
+    margin-left: 1em;
   }
+}
 </style>

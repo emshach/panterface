@@ -155,6 +155,13 @@ const JsonWidgetMixin = {
       type: Boolean,
       default: false
     },
+    edit: {
+      type: Boolean,
+      default: false
+    }
+  },
+  mounted() {
+    this.editMode = this.edit;
   },
   data() {
     return {

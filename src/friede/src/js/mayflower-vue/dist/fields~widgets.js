@@ -67,6 +67,10 @@ __webpack_require__.r(__webpack_exports__);
     readonly: {
       type: Boolean,
       default: true
+    },
+    edit: {
+      type: Boolean,
+      default: false
     }
   },
   created: function created() {
@@ -653,7 +657,7 @@ var render = function() {
         : _vm._e(),
       _c(_vm.tag, {
         tag: "component",
-        attrs: { readonly: _vm.readonly, value: _vm._value }
+        attrs: { readonly: _vm.readonly, edit: _vm.edit, value: _vm._value }
       })
     ],
     2
@@ -1040,7 +1044,14 @@ var JsonWidgetMixin = {
     collapse: {
       type: Boolean,
       default: false
+    },
+    edit: {
+      type: Boolean,
+      default: false
     }
+  },
+  mounted: function mounted() {
+    this.editMode = this.edit;
   },
   data: function data() {
     return {

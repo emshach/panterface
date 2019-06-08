@@ -2000,7 +2000,7 @@ var render = function() {
           }
         },
         [
-          _c("json-widget", { attrs: { value: _vm.field.value } }),
+          _c("json-widget", { attrs: { value: _vm.field.value, edit: true } }),
           !_vm.readonly
             ? _c("font-awesome-icon", {
                 attrs: { icon: _vm.isset ? "edit" : "plus" },

@@ -49,6 +49,9 @@ export default  {
     input() {
       this.$emit( 'input', this.objectVal );
       this.$emit( 'change', this.objectVal );
+    },
+    addTuple() {
+      this._value.push( { key: '', value: null });
     }
   },
   computed: {

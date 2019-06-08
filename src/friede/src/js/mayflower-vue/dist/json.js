@@ -190,6 +190,12 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_4__["library"].add(_f
     input: function input() {
       this.$emit('input', this.objectVal);
       this.$emit('change', this.objectVal);
+    },
+    addTuple: function addTuple() {
+      this._value.push({
+        key: '',
+        value: null
+      });
     }
   },
   computed: {

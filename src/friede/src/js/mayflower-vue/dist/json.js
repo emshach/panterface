@@ -187,7 +187,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_4__["library"].add(_f
   name: 'json-object',
   mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_3__["JsonWidgetMixin"]],
   components: {
-    VkBtn: vuikit_lib_button__WEBPACK_IMPORTED_MODULE_1__["Button"],
+    VkBtn: vuikit_lib_button__WEBPACK_IMPORTED_MODULE_1__["ButtonLink"],
     JsonTuple: _json__WEBPACK_IMPORTED_MODULE_2__["JsonTuple"]
   },
   props: {
@@ -638,21 +638,23 @@ var render = function() {
                   _c("span", { staticClass: "json-sep" }, [_vm._v(",")])
                 ]
               }),
-              _c(
-                "vk-btn",
-                {
-                  staticClass: "json-add",
-                  attrs: { type: "light" },
-                  on: {
-                    click: function($event) {
-                      $event.preventDefault()
-                      return _vm.addTuple($event)
-                    }
-                  }
-                },
-                [_c("font-awesome-icon", { attrs: { icon: "plus" } })],
-                1
-              )
+              _vm.editing
+                ? _c(
+                    "vk-btn",
+                    {
+                      staticClass: "json-add",
+                      attrs: { type: "light" },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          return _vm.addTuple($event)
+                        }
+                      }
+                    },
+                    [_c("font-awesome-icon", { attrs: { icon: "plus" } })],
+                    1
+                  )
+                : _vm._e()
             ],
             2
           ),

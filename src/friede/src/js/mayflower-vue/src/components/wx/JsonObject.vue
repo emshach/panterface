@@ -11,7 +11,7 @@
                     @input="input" />
         <span class="json-sep">,</span>
       </template>
-      <vk-btn class="json-add" type="light" @click.prevent="addTuple">
+      <vk-btn v-if="editing" class="json-add" type="light" @click.prevent="addTuple">
         <font-awesome-icon icon="plus" />
       </vk-btn>
     </div>
@@ -20,7 +20,7 @@
 </template>
 
 <script lang="js">
-import { Button as VkBtn } from 'vuikit/lib/button'
+import { ButtonLink as VkBtn } from 'vuikit/lib/button'
 import { JsonTuple } from './json'
 import { JsonWidgetMixin } from '@/lib/mixins'
 import { library } from '@fortawesome/fontawesome-svg-core'

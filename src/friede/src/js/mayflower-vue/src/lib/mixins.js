@@ -151,10 +151,6 @@ const JsonWidgetMixin = {
       type: Boolean,
       default: true
     },
-    editMode: {
-      type: Boolean,
-      default: false
-    },
     collapse: {
       type: Boolean,
       default: false
@@ -162,6 +158,7 @@ const JsonWidgetMixin = {
   },
   data() {
     return {
+      editMode: false,
       _v: null
     }
   },

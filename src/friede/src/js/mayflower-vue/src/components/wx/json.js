@@ -1,14 +1,14 @@
-const JsonWidget = () => import(/* webpackChunkName: "json" */ './JsonWidget' );
-const JsonObject = () => import(/* webpackChunkName: "json" */ './JsonObject' );
-const JsonTuple = () => import(/* webpackChunkName: "json" */ './JsonTuple' );
-const JsonArray = () => import(/* webpackChunkName: "json" */ './JsonArray' );
-const JsonNumber = () => import(/* webpackChunkName: "json" */ './JsonNumber' );
-const JsonString = () => import(/* webpackChunkName: "json" */ './JsonString' );
-const JsonBoolean = () => import(/* webpackChunkName: "json" */ './JsonBoolean' );
-const JsonNull = () => import(/* webpackChunkName: "json" */ './JsonNull' );
-const JsonInvalid = () => import(/* webpackChunkName: "json" */ './JsonInvalid' );
+export const JsonWidget = () => import(/* webpackChunkName: "json" */ './JsonWidget' );
+export const JsonObject = () => import(/* webpackChunkName: "json" */ './JsonObject' );
+export const JsonTuple = () => import(/* webpackChunkName: "json" */ './JsonTuple' );
+export const JsonArray = () => import(/* webpackChunkName: "json" */ './JsonArray' );
+export const JsonNumber = () => import(/* webpackChunkName: "json" */ './JsonNumber' );
+export const JsonString = () => import(/* webpackChunkName: "json" */ './JsonString' );
+export const JsonBoolean = () => import(/* webpackChunkName: "json" */ './JsonBoolean' );
+export const JsonNull = () => import(/* webpackChunkName: "json" */ './JsonNull' );
+export const JsonInvalid = () => import(/* webpackChunkName: "json" */ './JsonInvalid' );
 
-export {
+export default {
   JsonWidget,
   JsonObject,
   JsonTuple,

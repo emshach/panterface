@@ -67,10 +67,6 @@ __webpack_require__.r(__webpack_exports__);
     readonly: {
       type: Boolean,
       default: true
-    },
-    editMode: {
-      type: Boolean,
-      default: false
     }
   },
   created: function created() {
@@ -113,8 +109,7 @@ __webpack_require__.r(__webpack_exports__);
           symbol: '?'
         }
       },
-      type: 'null',
-      tag: 'json-null'
+      type: 'null'
     };
   },
   methods: {
@@ -655,11 +650,7 @@ var render = function() {
         : _vm._e(),
       _c(_vm.tag, {
         tag: "component",
-        attrs: {
-          readonly: _vm.readonly,
-          "edit-mode": _vm.editMode,
-          value: _vm._v
-        }
+        attrs: { readonly: _vm.readonly, value: _vm._v }
       })
     ],
     2
@@ -792,7 +783,7 @@ __webpack_require__.r(__webpack_exports__);
 /*!***********************************!*\
   !*** ./src/components/wx/json.js ***!
   \***********************************/
-/*! exports provided: JsonWidget, JsonObject, JsonTuple, JsonArray, JsonNumber, JsonString, JsonBoolean, JsonNull, JsonInvalid */
+/*! exports provided: JsonWidget, JsonObject, JsonTuple, JsonArray, JsonNumber, JsonString, JsonBoolean, JsonNull, JsonInvalid, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -809,40 +800,41 @@ __webpack_require__.r(__webpack_exports__);
 var JsonWidget = function JsonWidget() {
   return __webpack_require__.e(/*! import() | json */ "json").then(__webpack_require__.bind(null, /*! ./JsonWidget */ "./src/components/wx/JsonWidget.vue"));
 };
-
 var JsonObject = function JsonObject() {
   return __webpack_require__.e(/*! import() | json */ "json").then(__webpack_require__.bind(null, /*! ./JsonObject */ "./src/components/wx/JsonObject.vue"));
 };
-
 var JsonTuple = function JsonTuple() {
   return __webpack_require__.e(/*! import() | json */ "json").then(__webpack_require__.bind(null, /*! ./JsonTuple */ "./src/components/wx/JsonTuple.vue"));
 };
-
 var JsonArray = function JsonArray() {
   return __webpack_require__.e(/*! import() | json */ "json").then(__webpack_require__.bind(null, /*! ./JsonArray */ "./src/components/wx/JsonArray.vue"));
 };
-
 var JsonNumber = function JsonNumber() {
   return __webpack_require__.e(/*! import() | json */ "json").then(__webpack_require__.bind(null, /*! ./JsonNumber */ "./src/components/wx/JsonNumber.vue"));
 };
-
 var JsonString = function JsonString() {
   return __webpack_require__.e(/*! import() | json */ "json").then(__webpack_require__.bind(null, /*! ./JsonString */ "./src/components/wx/JsonString.vue"));
 };
-
 var JsonBoolean = function JsonBoolean() {
   return __webpack_require__.e(/*! import() | json */ "json").then(__webpack_require__.bind(null, /*! ./JsonBoolean */ "./src/components/wx/JsonBoolean.vue"));
 };
-
 var JsonNull = function JsonNull() {
   return __webpack_require__.e(/*! import() | json */ "json").then(__webpack_require__.bind(null, /*! ./JsonNull */ "./src/components/wx/JsonNull.vue"));
 };
-
 var JsonInvalid = function JsonInvalid() {
   return __webpack_require__.e(/*! import() | json */ "json").then(__webpack_require__.bind(null, /*! ./JsonInvalid */ "./src/components/wx/JsonInvalid.vue"));
 };
-
-
+/* harmony default export */ __webpack_exports__["default"] = ({
+  JsonWidget: JsonWidget,
+  JsonObject: JsonObject,
+  JsonTuple: JsonTuple,
+  JsonArray: JsonArray,
+  JsonNumber: JsonNumber,
+  JsonString: JsonString,
+  JsonBoolean: JsonBoolean,
+  JsonNull: JsonNull,
+  JsonInvalid: JsonInvalid
+});
 
 /***/ }),
 
@@ -1042,10 +1034,6 @@ var JsonWidgetMixin = {
       type: Boolean,
       default: true
     },
-    editMode: {
-      type: Boolean,
-      default: false
-    },
     collapse: {
       type: Boolean,
       default: false
@@ -1053,6 +1041,7 @@ var JsonWidgetMixin = {
   },
   data: function data() {
     return {
+      editMode: false,
       _v: null
     };
   },

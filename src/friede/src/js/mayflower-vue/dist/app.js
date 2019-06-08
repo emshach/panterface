@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "cea6d30ddf01bc5f88d5";
+/******/ 	var hotCurrentHash = "96fc7d028f759e4481a6";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -2936,38 +2936,32 @@ __webpack_require__.r(__webpack_exports__);
 var DashboardWidget = function DashboardWidget() {
   return Promise.all(/*! import() | widgets */[__webpack_require__.e("vendor"), __webpack_require__.e("fields~widgets"), __webpack_require__.e("widgets")]).then(__webpack_require__.bind(null, /*! @/components/wx/DashboardWidget */ "./src/components/wx/DashboardWidget.vue"));
 };
-
 var InlineWidget = function InlineWidget() {
   return Promise.all(/*! import() | widgets */[__webpack_require__.e("vendor"), __webpack_require__.e("fields~widgets"), __webpack_require__.e("widgets")]).then(__webpack_require__.bind(null, /*! @/components/wx/InlineWidget */ "./src/components/wx/InlineWidget.vue"));
 };
-
 var AdaptiveWidget = function AdaptiveWidget() {
   return Promise.all(/*! import() | widgets */[__webpack_require__.e("vendor"), __webpack_require__.e("fields~widgets"), __webpack_require__.e("widgets")]).then(__webpack_require__.bind(null, /*! @/components/wx/AdaptiveWidget */ "./src/components/wx/AdaptiveWidget.vue"));
 };
-
 var ViewModelWidget = function ViewModelWidget() {
   return Promise.all(/*! import() | widgets */[__webpack_require__.e("vendor"), __webpack_require__.e("fields~widgets"), __webpack_require__.e("widgets")]).then(__webpack_require__.bind(null, /*! @/components/wx/ViewModelWidget */ "./src/components/wx/ViewModelWidget.vue"));
-}; // const ListModelWidget = () =>
+}; // export const ListModelWidget = () =>
 //         import(/* webpackChunkName: "widgets" */ '@/components/wx/ListModelWidget' )
-// const NewModelWidget = () =>
+// export const NewModelWidget = () =>
 //         import(/* webpackChunkName: "widgets" */ '@/components/wx/NewModelWidget' )
-// const EditModelWidget = () =>
+// export const EditModelWidget = () =>
 //         import(/* webpackChunkName: "widgets" */ '@/components/wx/EditModelWidget' )
-// const ReportModelWidget = () =>
+// export const ReportModelWidget = () =>
 //         import(/* webpackChunkName: "widgets" */ '@/components/wx/ReportModelWidget' )
-// const ModelWidget = () =>
+// export const ModelWidget = () =>
 //         import(/* webpackChunkName: "widgets" */ '@/components/wx/ModelWidget' )
-// const AddModelWidget = () =>
+// export const AddModelWidget = () =>
 //         import/* webpackChunkName: "widgets" */( '@/components/wx/AddModelWidget' )
-// const RemoveModelWidget = () =>
+// export const RemoveModelWidget = () =>
 //         import/* webpackChunkName: "widgets" */( '@/components/wx/RemoveModelWidget' )
-
 
 var Widget = function Widget() {
   return Promise.all(/*! import() | widgets */[__webpack_require__.e("vendor"), __webpack_require__.e("fields~widgets"), __webpack_require__.e("widgets")]).then(__webpack_require__.bind(null, /*! @/components/wx/Widget */ "./src/components/wx/Widget.vue"));
 };
-
-
 /* harmony default export */ __webpack_exports__["default"] = ({
   DashboardWidget: DashboardWidget,
   InlineWidget: InlineWidget,

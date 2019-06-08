@@ -8,7 +8,7 @@
                 @click.prevent="setType(a)">{{ a.label }}</vk-btn>
       </vk-dropdown>
     </template>
-    <component :is="tag" :readonly="readonly" :edit-mode="editMode" :value="_v" />
+    <component :is="tag" :readonly="readonly" :value="_v" />
   </div>
 </template>
 
@@ -37,10 +37,6 @@ export default  {
     readonly: {
       type: Boolean,
       default: true
-    },
-    editMode: {
-      type: Boolean,
-      default: false
     },
   },
   created() {
@@ -84,7 +80,6 @@ export default  {
         }
       },
       type: 'null',
-      tag: 'json-null'
     }
   },
   methods: {

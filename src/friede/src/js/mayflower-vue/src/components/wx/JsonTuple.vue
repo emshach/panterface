@@ -2,9 +2,9 @@
   <div class="json-tuple">
     <span class="json-key">
       <input v-if="editing" type="text" v-model="intlVal.key"
-             @change="input" @blur="this.editMode=false" />
-      <span v-else @click="this.editMode=true">{{
-        intlVal.key.length ? intlVal.key : "''" }}</span>
+             @change="input" @blur="editMode = false" />
+      <a v-else href="#" @click.prevent="editMode = true">{{
+        intlVal.key.length ? intlVal.key : "''" }}</a>
       :
     </span>
     <json-widget class="json-value" :readonly="readonly" v-model="intlVal.value"/>

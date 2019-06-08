@@ -815,7 +815,7 @@ var render = function() {
               on: {
                 change: _vm.input,
                 blur: function($event) {
-                  this.editMode = false
+                  _vm.editMode = false
                 },
                 input: function($event) {
                   if ($event.target.composing) {
@@ -826,11 +826,13 @@ var render = function() {
               }
             })
           : _c(
-              "span",
+              "a",
               {
+                attrs: { href: "#" },
                 on: {
                   click: function($event) {
-                    this.editMode = true
+                    $event.preventDefault()
+                    _vm.editMode = true
                   }
                 }
               },

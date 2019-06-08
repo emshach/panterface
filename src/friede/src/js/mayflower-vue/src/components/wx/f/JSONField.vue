@@ -1,8 +1,9 @@
 <template lang="html">
   <json-widget v-if="editMode" v-model="field.wip" :readonly="false"
-               :class="fieldClasses" @blur="commitField" />
+               :edit="true" :class="fieldClasses"
+               @blur="commitField" />
   <a v-else :class="fieldClasses" @click.prevent="editField" @focus="editField">
-    <json-widget :value="field.value" :edit="true" />
+    <json-widget :value="field.value" />
     <font-awesome-icon v-if="!readonly" :icon="isset ? 'edit': 'plus'"
                        @click="editField" />
   </a>

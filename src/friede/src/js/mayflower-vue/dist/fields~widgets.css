@@ -2,6 +2,16 @@
   font-weight: bold;
   color: midnightblue;
 }
+.json-widget .json-collapse {
+  line-height: 12px;
+  padding: 0 4px;
+  font-size: 12px;
+}
+.json-widget .json-type-chooser.uk-button {
+  padding: 1px 6px;
+  line-height: 18px;
+  font-size: 14px;
+}
 
 
 /*# sourceMappingURL=fields~widgets.css.map*/

@@ -1,7 +1,8 @@
 <template lang="html">
-  <div class="json-object">
+  <span class="json-object">
     <span class="json-delim">{</span>
-    <vk-btn class="json-collapse" type="light" @click.prevent="collapse=!collapse">
+    <vk-btn v-if="value.length > 1" class="json-collapse" type="light"
+            @click.prevent="collapse=!collapse">
       <font-awesome-icon :icon="collapse ? 'plus' : 'minus' " />
     </vk-btn>
     <span v-if="collapse" class="json-object-content">...</span>
@@ -16,7 +17,7 @@
       </vk-btn>
     </div>
     <span class="json-delim">}</span>
-  </div>
+  </span>
 </template>
 
 <script lang="js">
@@ -75,6 +76,5 @@ export default  {
 
 <style lang="scss">
 .json-object {
-  
 }
 </style>

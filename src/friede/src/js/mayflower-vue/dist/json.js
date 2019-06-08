@@ -592,29 +592,31 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "div",
+    "span",
     { staticClass: "json-object" },
     [
       _c("span", { staticClass: "json-delim" }, [_vm._v("{")]),
-      _c(
-        "vk-btn",
-        {
-          staticClass: "json-collapse",
-          attrs: { type: "light" },
-          on: {
-            click: function($event) {
-              $event.preventDefault()
-              _vm.collapse = !_vm.collapse
-            }
-          }
-        },
-        [
-          _c("font-awesome-icon", {
-            attrs: { icon: _vm.collapse ? "plus" : "minus" }
-          })
-        ],
-        1
-      ),
+      _vm.value.length > 1
+        ? _c(
+            "vk-btn",
+            {
+              staticClass: "json-collapse",
+              attrs: { type: "light" },
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  _vm.collapse = !_vm.collapse
+                }
+              }
+            },
+            [
+              _c("font-awesome-icon", {
+                attrs: { icon: _vm.collapse ? "plus" : "minus" }
+              })
+            ],
+            1
+          )
+        : _vm._e(),
       _vm.collapse
         ? _c("span", { staticClass: "json-object-content" }, [_vm._v("...")])
         : _c(

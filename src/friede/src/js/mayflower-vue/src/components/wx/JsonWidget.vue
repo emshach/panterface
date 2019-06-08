@@ -544,5 +544,15 @@ export default  {
     font-weight: bold;
     color: midnightblue;
   }
+  .json-collapse {
+    line-height: 12px;
+    padding: 0 4px;
+    font-size: 12px;
+  }
+  .json-type-chooser.uk-button {
+    padding: 1px 6px;
+    line-height: 18px;
+    font-size: 14px;
+  }
 }
 </style>

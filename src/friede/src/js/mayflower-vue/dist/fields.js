@@ -1977,7 +1977,7 @@ var render = function() {
   return _vm.editMode
     ? _c("json-widget", {
         class: _vm.fieldClasses,
-        attrs: { readonly: false },
+        attrs: { readonly: false, edit: true },
         on: { blur: _vm.commitField },
         model: {
           value: _vm.field.wip,
@@ -2000,7 +2000,7 @@ var render = function() {
           }
         },
         [
-          _c("json-widget", { attrs: { value: _vm.field.value, edit: true } }),
+          _c("json-widget", { attrs: { value: _vm.field.value } }),
           !_vm.readonly
             ? _c("font-awesome-icon", {
                 attrs: { icon: _vm.isset ? "edit" : "plus" },

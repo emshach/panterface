@@ -212,16 +212,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_4__["library"].add(_f
     }
   },
   mounted: function mounted() {
-    var _this = this;
-
-    this.intlVal = _home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_0___default()(this.value).map(function (x) {
-      return {
-        data: {
-          key: x,
-          value: _this.value[x]
-        }
-      };
-    });
+    updateVal();
   },
   data: function data() {
     return {
@@ -230,9 +221,20 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_4__["library"].add(_f
     };
   },
   methods: {
+    updateVal: function updateVal() {
+      var _this = this;
+
+      this.intlVal = _home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_0___default()(this.value).map(function (x) {
+        return {
+          data: {
+            key: x,
+            value: _this.value[x]
+          }
+        };
+      });
+    },
     input: function input() {
       this.$emit('input', this.objectVal);
-      this.$emit('change', this.objectVal);
     },
     addTuple: function addTuple() {
       this.intlVal.push({
@@ -247,9 +249,14 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_4__["library"].add(_f
     objectVal: function objectVal() {
       var o = {};
       this.intlVal.forEach(function (x) {
-        o[x.key] = x.value;
+        o[x.data.key] = x.data.value;
       });
       return o;
+    }
+  },
+  watch: {
+    value: function value(val) {
+      this.updateVal();
     }
   }
 });
@@ -842,7 +849,7 @@ var render = function() {
               ref: "key",
               attrs: { type: "text" },
               domProps: { value: _vm.value.key },
-              on: { blur: _vm.commit, input: _vm.input }
+              on: { blur: _vm.commit }
             })
           : _c(
               "a",

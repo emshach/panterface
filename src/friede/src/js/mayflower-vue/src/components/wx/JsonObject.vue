@@ -40,12 +40,7 @@ export default  {
     },
   },
   mounted() {
-    this.intlVal = Object.keys( this.value ).map( x => ({
-      data: {
-        key: x,
-        value: this.value[x]
-      }
-    }))
+    updateVal();
   },
   data() {
     return {
@@ -54,9 +49,16 @@ export default  {
     }
   },
   methods: {
+    updateVal() {
+      this.intlVal = Object.keys( this.value ).map( x => ({
+        data: {
+          key: x,
+          value: this.value[x]
+        }
+      }));
+    },
     input() {
       this.$emit( 'input', this.objectVal );
-      this.$emit( 'change', this.objectVal );
     },
     addTuple() {
       this.intlVal.push({ data: { key: '', value: null }});
@@ -66,9 +68,14 @@ export default  {
     objectVal() {
       var o = {}
       this.intlVal.forEach( x => {
-        o[x.key] = x.value
+        o[x.data.key] = x.data.value
       });
       return o
+    }
+  },
+  watch: {
+    value( val ) {
+      this.updateVal();
     }
   }
 }

@@ -332,9 +332,18 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {},
   data: function data() {
-    return {};
+    return {
+      intlVal: {
+        key: '',
+        value: null
+      }
+    };
   },
-  methods: {},
+  methods: {
+    input: function input() {
+      this.$emit('input', this.intlVal);
+    }
+  },
   computed: {}
 });
 

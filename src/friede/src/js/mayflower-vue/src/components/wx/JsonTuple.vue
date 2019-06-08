@@ -27,11 +27,13 @@ export default  {
   },
   data() {
     return {
-      
+      intlVal: { key: '', value: null },
     }
   },
   methods: {
-    
+    input() {
+      this.$emit( 'input', this.intlVal );
+    }
   },
   computed: {
     

@@ -1,9 +1,20 @@
 
 
 
+.json-number[data-v-e24bca02] {
+  color: coral;
+}
 
 
+.json-boolean {
+  font-weight: bold;
+  font-size: 12px;
+}
 
+.json-null[data-v-2780f486] {
+  font-weight: bold;
+  font-size: 12px;
+}
 
 
 

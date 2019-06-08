@@ -1,5 +1,5 @@
 <template lang="html">
-  <span class="uk-label" @click.prevent="toggle">{{
+  <span class="json-boolean uk-label" @click.prevent="toggle">{{
     this.intlVal ? 'true' : 'false' }}</span>
 </template>
 
@@ -28,6 +28,7 @@ export default  {
 
 <style lang="scss">
 .json-boolean {
-  
+  font-weight: bold;
+  font-size: 12px;
 }
 </style>

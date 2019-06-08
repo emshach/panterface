@@ -9,7 +9,6 @@
     <span v-else class="json-object-content">
       <template v-for="( v, i ) in intlVal">
         <json-widget :readonly="readonly" :key="i" v-model="v.data" @input="input" />
-        <span class="json-sep">,</span>
       </template>
       <vk-btn v-if="editing" class="json-add" type="light" @click.prevent="addElem">
         <font-awesome-icon icon="plus" />
@@ -43,7 +42,7 @@ export default  {
   },
   data() {
     return {
-      
+      collapse: false,
     }
   },
   methods: {

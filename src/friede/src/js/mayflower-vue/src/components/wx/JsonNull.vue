@@ -1,5 +1,5 @@
 <template lang="html">
-  <span class="uk-label uk-label-success" @click.prevent="toggle">null</span>
+  <span class="json-null uk-label uk-label-success" @click.prevent="toggle">null</span>
 </template>
 
 <script lang="js">
@@ -17,6 +17,7 @@ export default  {
 
 <style scoped lang="scss">
 .json-null {
-  
+  font-weight: bold;
+  font-size: 12px;
 }
 </style>

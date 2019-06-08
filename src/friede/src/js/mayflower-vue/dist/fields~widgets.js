@@ -1050,6 +1050,7 @@ var JsonWidgetMixin = {
   },
   mounted: function mounted() {
     this.editMode = this.edit;
+    this.initVal();
   },
   data: function data() {
     return {

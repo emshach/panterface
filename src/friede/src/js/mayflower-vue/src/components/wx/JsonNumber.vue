@@ -26,7 +26,7 @@ export default  {
 </script>
 
 <style scoped lang="scss">
-  .json-number {
-
-  }
+.json-number {
+  color: coral;
+}
 </style>

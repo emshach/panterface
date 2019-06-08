@@ -42,7 +42,9 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_f
     });
   },
   data: function data() {
-    return {};
+    return {
+      collapse: false
+    };
   },
   methods: {
     input: function input() {
@@ -398,8 +400,7 @@ var render = function() {
                       },
                       expression: "v.data"
                     }
-                  }),
-                  _c("span", { staticClass: "json-sep" }, [_vm._v(",")])
+                  })
                 ]
               }),
               _vm.editing
@@ -452,7 +453,7 @@ var render = function() {
   return _c(
     "span",
     {
-      staticClass: "uk-label",
+      staticClass: "json-boolean uk-label",
       on: {
         click: function($event) {
           $event.preventDefault()
@@ -524,7 +525,7 @@ var render = function() {
   return _c(
     "span",
     {
-      staticClass: "uk-label uk-label-success",
+      staticClass: "json-null uk-label uk-label-success",
       on: {
         click: function($event) {
           $event.preventDefault()
@@ -658,8 +659,7 @@ var render = function() {
                       },
                       expression: "v.data"
                     }
-                  }),
-                  _c("span", { staticClass: "json-sep" }, [_vm._v(",")])
+                  })
                 ]
               }),
               _vm.editing
@@ -799,46 +799,54 @@ var render = function() {
     "div",
     { staticClass: "json-tuple" },
     [
-      _c(
-        "span",
-        { staticClass: "json-key" },
-        [
-          _vm.editing
-            ? _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm._v.key,
-                    expression: "_v.key"
+      _c("span", { staticClass: "json-key" }, [
+        _vm.editing
+          ? _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.intlVal.key,
+                  expression: "intlVal.key"
+                }
+              ],
+              attrs: { type: "text" },
+              domProps: { value: _vm.intlVal.key },
+              on: {
+                change: _vm.input,
+                blur: function($event) {
+                  this.editMode = false
+                },
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
                   }
-                ],
-                attrs: { type: "text" },
-                domProps: { value: _vm._v.key },
+                  _vm.$set(_vm.intlVal, "key", $event.target.value)
+                }
+              }
+            })
+          : _c(
+              "span",
+              {
                 on: {
-                  change: _vm.input,
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm._v, "key", $event.target.value)
+                  click: function($event) {
+                    this.editMode = true
                   }
                 }
-              })
-            : [_vm._v(_vm._s(_vm._v.key))],
-          _vm._v("\n    :\n  ")
-        ],
-        2
-      ),
+              },
+              [_vm._v(_vm._s(_vm.intlVal.key.length ? _vm.intlVal.key : "''"))]
+            ),
+        _vm._v("\n    :\n  ")
+      ]),
       _c("json-widget", {
         staticClass: "json-value",
         attrs: { readonly: _vm.readonly },
         model: {
-          value: _vm._v.value,
+          value: _vm.intlVal.value,
           callback: function($$v) {
-            _vm.$set(_vm._v, "value", $$v)
+            _vm.$set(_vm.intlVal, "value", $$v)
           },
-          expression: "_v.value"
+          expression: "intlVal.value"
         }
       })
     ],

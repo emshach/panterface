@@ -10,7 +10,6 @@
       <template v-for="v in intlVal">
         <json-tuple :readonly="readonly" :key="v.data.key" v-model="v.data"
                     @input="input" />
-        <span class="json-sep">,</span>
       </template>
       <vk-btn v-if="editing" class="json-add" type="light" @click.prevent="addTuple">
         <font-awesome-icon icon="plus" />

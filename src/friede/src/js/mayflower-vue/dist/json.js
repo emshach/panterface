@@ -642,7 +642,7 @@ var render = function() {
     { staticClass: "json-object" },
     [
       _c("span", { staticClass: "json-delim" }, [_vm._v("{")]),
-      _vm.inltVal.length > 1
+      _vm.intlVal.length > 1
         ? _c(
             "vk-btn",
             {

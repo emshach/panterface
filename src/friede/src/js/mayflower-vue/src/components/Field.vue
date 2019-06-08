@@ -45,14 +45,7 @@ export default  {
   },
   computed: {
     label() {
-      // if ( this.field && this.field.meta) {
-      //   if ( this.field.meta.related
-      //        && this.$store.state.models[ this.field.meta.related ]) {
-      //     return this.$store.state.models[ this.field.meta.related ][
-      //       this.type.match( /Multiple|Choices/ ) ? 'plural' : 'singular' ]
-      //   }
-      // }
-      return this.name.replace( /^_/, '' ).replace( /_/g, ' ' );
+      return this.name.replace( /^_+/, '' ).replace( /_+/g, ' ' );
     }
   }
 }
@@ -61,21 +54,19 @@ export default  {
 <style lang="scss">
 .field {
   .field-display {
-    span {
-      margin-right: 6px;
-  }
-    svg.svg-inline--fa {
+    > svg.svg-inline--fa {
+      margin-left: 6px;
       font-size: 0.875em;
       vertical-align: 0;
     }
   }
   tr {
-    .field-display span {
-      margin-right: 4px;
-    }
-    svg.svg-inline--fa {
-      font-size: 10px;
-      vertical-align: 0.2em;
+    .field-display {
+      > svg.svg-inline--fa {
+        margin-left: 4px;
+        font-size: 10px;
+        vertical-align: 0.2em;
+      }
     }
   }
 }

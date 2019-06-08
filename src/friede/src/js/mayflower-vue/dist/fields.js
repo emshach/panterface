@@ -505,16 +505,16 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.runtime.esm.js");
 /* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
-/* harmony import */ var vue_json_edit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-json-edit */ "./node_modules/vue-json-edit/dist/vue-json-edit.js");
-/* harmony import */ var vue_json_edit__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_json_edit__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _JsonWidget__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../JsonWidget */ "./src/components/wx/JsonWidget.vue");
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vue_json_edit__WEBPACK_IMPORTED_MODULE_2___default.a);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'JsonField',
   mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_1__["ModelFieldMixin"]],
-  components: {},
+  components: {
+    JsonWidget: _JsonWidget__WEBPACK_IMPORTED_MODULE_2__["default"]
+  },
   props: {},
   mounted: function mounted() {},
   data: function data() {
@@ -1975,9 +1975,9 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _vm.editMode
-    ? _c("json-editor", {
+    ? _c("json-widget", {
         class: _vm.fieldClasses,
-        attrs: { objData: _vm.field.wip, options: _vm.options },
+        attrs: { readonly: false },
         on: { blur: _vm.commitField },
         model: {
           value: _vm.field.wip,
@@ -2000,7 +2000,7 @@ var render = function() {
           }
         },
         [
-          _c("span", { domProps: { innerHTML: _vm._s(_vm.html) } }),
+          _c("json-widget", { attrs: { value: _vm.field.value } }),
           !_vm.readonly
             ? _c("font-awesome-icon", {
                 attrs: { icon: _vm.isset ? "edit" : "plus" },
@@ -6569,195 +6569,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _cache_loader_cacheDirectory_node_modules_cache_vue_loader_cacheIdentifier_e895c554_vue_loader_template_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_UUIDField_vue_vue_type_template_id_92b04110_scoped_true_lang_html___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
-
-
-/***/ }),
-
-/***/ "./src/lib/mixins.js":
-/*!***************************!*\
-  !*** ./src/lib/mixins.js ***!
-  \***************************/
-/*! exports provided: ModelWidgetMixin, ModelFieldMixin, ModelModelsFieldMixin, DurationOptions */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ModelWidgetMixin", function() { return ModelWidgetMixin; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ModelFieldMixin", function() { return ModelFieldMixin; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ModelModelsFieldMixin", function() { return ModelModelsFieldMixin; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DurationOptions", function() { return DurationOptions; });
-/* harmony import */ var core_js_modules_es6_regexp_split__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es6.regexp.split */ "./node_modules/core-js/modules/es6.regexp.split.js");
-/* harmony import */ var core_js_modules_es6_regexp_split__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_regexp_split__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! regenerator-runtime/runtime */ "./node_modules/regenerator-runtime/runtime.js");
-/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/@babel/runtime-corejs2/helpers/esm/asyncToGenerator */ "./node_modules/@babel/runtime-corejs2/helpers/esm/asyncToGenerator.js");
-/* harmony import */ var core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/web.dom.iterable */ "./node_modules/core-js/modules/web.dom.iterable.js");
-/* harmony import */ var core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var core_js_modules_es6_object_to_string__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es6.object.to-string */ "./node_modules/core-js/modules/es6.object.to-string.js");
-/* harmony import */ var core_js_modules_es6_object_to_string__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_object_to_string__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js");
-/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
-/* harmony import */ var _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @fortawesome/fontawesome-svg-core */ "./node_modules/@fortawesome/fontawesome-svg-core/index.es.js");
-/* harmony import */ var _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @fortawesome/vue-fontawesome */ "./node_modules/@fortawesome/vue-fontawesome/index.es.js");
-/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
-
-
-
-
-
-
-
-
-
-
-_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_7__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faPlus"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faEdit"]);
-var ModelWidgetMixin = {};
-var ModelFieldMixin = {
-  components: {
-    FontAwesomeIcon: _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_8__["FontAwesomeIcon"]
-  },
-  props: {
-    field: {
-      type: _lib_objects__WEBPACK_IMPORTED_MODULE_9__["Field"],
-      required: true
-    },
-    readonly: {
-      type: Boolean,
-      default: false
-    },
-    placeholder: {
-      type: String,
-      default: 'enter data'
-    },
-    emptyValue: {
-      type: String,
-      default: 'not set'
-    }
-  },
-  data: function data() {
-    return {
-      classes: [],
-      editClass: [],
-      viewClass: ['field-display'],
-      editMode: false
-    };
-  },
-  methods: {
-    editField: function editField() {
-      var _this = this;
-
-      if (this.readonly) return;
-      this.field.wip = this.field.value;
-      this.editMode = true;
-      this.$nextTick(function () {
-        if (_this.$refs.input) _this.$refs.input.focus();else if (_this.$refs.inputV) _this.$refs.inputV.$el.focus();
-      });
-    },
-    commitField: function commitField() {
-      this.field.commit();
-      this.editMode = false;
-    },
-    revertField: function revertField() {
-      this.field.revert();
-      this.editMode = false;
-    }
-  },
-  computed: {
-    fieldClasses: function fieldClasses() {
-      return this.classes.concat(this.editMode ? this.editClass : this.viewClass, [this.isset ? '' : 'no-data', this.readonly ? 'readonly' : '']);
-    },
-    isset: function isset() {
-      if (this.field.value === undefined || this.field.value === null || this.field.value === '' || typeof this.field.value.length !== 'undefined' && !this.field.value.length) return false;
-      return true;
-    },
-    html: function html() {
-      if (!this.isset) return this.emptyValue;
-      var v = this.field.value;
-      return v.label || v.title || v.path || v;
-    }
-  }
-};
-var ModelModelsFieldMixin = {
-  components: {
-    Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_5___default.a
-  },
-  data: function data() {
-    return {
-      loading: false,
-      options: [],
-      values: []
-    };
-  },
-  methods: {
-    editField: function editField() {
-      var _this2 = this;
-
-      if (this.readonly) return;
-      this.field.wip = (this.field.value || []).slice();
-      this.editMode = true;
-      this.$nextTick(function () {
-        if (_this2.$refs.input) _this2.$refs.input.focus();else if (_this2.$refs.inputV) _this2.$refs.inputV.$el.focus();
-      });
-    },
-    commitField: function commitField() {
-      if (this.values.length) this.field.wip = (this.field.wip || []).concat(this.values);
-      this.field.commit();
-      this.editMode = false;
-    },
-    getObjects: function () {
-      var _getObjects = Object(_home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__["default"])(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee(query) {
-        var _this3 = this;
-
-        var m, app, model;
-        return regeneratorRuntime.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                m = this.searchModel;
-                app = m.split('.')[0];
-                _context.next = 4;
-                return this.$store.dispatch('getModel', m);
-
-              case 4:
-                model = _context.sent;
-                this.loading = true;
-                this.$api(app, model.plural, '?search=' + query).then(function (r) {
-                  _this3.loading = false;
-                  _this3.options = r.data.results.map(function (x) {
-                    if (!x.title) x.title = x.path;
-                    return x;
-                  }); // this.options.unshift(
-                  //   { path: '', title: 'New ' + model.label, ctrl: true },
-                  //   { path: '_action.cancel', title: 'Cancel', ctrl: true },
-                  //   { path: '_action.done', title: 'Done', ctrl: true })
-                  // TODO: put this in maybe
-                });
-
-              case 7:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, this);
-      }));
-
-      function getObjects(_x) {
-        return _getObjects.apply(this, arguments);
-      }
-
-      return getObjects;
-    }()
-  },
-  computed: {
-    searchModel: function searchModel() {
-      return this.field.meta.related;
-    }
-  }
-};
-var DurationOptions = [];
 
 
 /***/ })

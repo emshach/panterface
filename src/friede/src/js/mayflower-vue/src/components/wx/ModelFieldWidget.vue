@@ -9,7 +9,7 @@ export default  {
   props: {
     object: {
       type: Field,
-      default: () => {},
+      default: () => Field(),
       required: true
     },
     readonly: {

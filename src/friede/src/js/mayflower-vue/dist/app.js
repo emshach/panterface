@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "d946732826e92e4b5895";
+/******/ 	var hotCurrentHash = "dd2c11d373eb377b0f4f";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -768,7 +768,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"pages":"pages","widgets":"widgets","fields":"fields"}[chunkId]||chunkId) + ".js"
+/******/ 		return __webpack_require__.p + "" + ({"fields~widgets":"fields~widgets","widgets":"widgets","pages":"pages","json":"json","fields":"fields"}[chunkId]||chunkId) + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -805,11 +805,11 @@
 /******/
 /******/
 /******/ 		// mini-css-extract-plugin CSS loading
-/******/ 		var cssChunks = {"pages":1,"widgets":1,"fields":1};
+/******/ 		var cssChunks = {"fields~widgets":1,"widgets":1,"pages":1,"json":1,"fields":1};
 /******/ 		if(installedCssChunks[chunkId]) promises.push(installedCssChunks[chunkId]);
 /******/ 		else if(installedCssChunks[chunkId] !== 0 && cssChunks[chunkId]) {
 /******/ 			promises.push(installedCssChunks[chunkId] = new Promise(function(resolve, reject) {
-/******/ 				var href = "" + ({"pages":"pages","widgets":"widgets","fields":"fields"}[chunkId]||chunkId) + ".css";
+/******/ 				var href = "" + ({"fields~widgets":"fields~widgets","widgets":"widgets","pages":"pages","json":"json","fields":"fields"}[chunkId]||chunkId) + ".css";
 /******/ 				var fullhref = __webpack_require__.p + href;
 /******/ 				var existingLinkTags = document.getElementsByTagName("link");
 /******/ 				for(var i = 0; i < existingLinkTags.length; i++) {
@@ -2934,19 +2934,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ViewModelWidget", function() { return ViewModelWidget; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Widget", function() { return Widget; });
 var DashboardWidget = function DashboardWidget() {
-  return Promise.all(/*! import() | widgets */[__webpack_require__.e("vendor"), __webpack_require__.e("widgets")]).then(__webpack_require__.bind(null, /*! @/components/wx/DashboardWidget */ "./src/components/wx/DashboardWidget.vue"));
+  return Promise.all(/*! import() | widgets */[__webpack_require__.e("vendor"), __webpack_require__.e("fields~widgets"), __webpack_require__.e("widgets")]).then(__webpack_require__.bind(null, /*! @/components/wx/DashboardWidget */ "./src/components/wx/DashboardWidget.vue"));
 };
 
 var InlineWidget = function InlineWidget() {
-  return Promise.all(/*! import() | widgets */[__webpack_require__.e("vendor"), __webpack_require__.e("widgets")]).then(__webpack_require__.bind(null, /*! @/components/wx/InlineWidget */ "./src/components/wx/InlineWidget.vue"));
+  return Promise.all(/*! import() | widgets */[__webpack_require__.e("vendor"), __webpack_require__.e("fields~widgets"), __webpack_require__.e("widgets")]).then(__webpack_require__.bind(null, /*! @/components/wx/InlineWidget */ "./src/components/wx/InlineWidget.vue"));
 };
 
 var AdaptiveWidget = function AdaptiveWidget() {
-  return Promise.all(/*! import() | widgets */[__webpack_require__.e("vendor"), __webpack_require__.e("widgets")]).then(__webpack_require__.bind(null, /*! @/components/wx/AdaptiveWidget */ "./src/components/wx/AdaptiveWidget.vue"));
+  return Promise.all(/*! import() | widgets */[__webpack_require__.e("vendor"), __webpack_require__.e("fields~widgets"), __webpack_require__.e("widgets")]).then(__webpack_require__.bind(null, /*! @/components/wx/AdaptiveWidget */ "./src/components/wx/AdaptiveWidget.vue"));
 };
 
 var ViewModelWidget = function ViewModelWidget() {
-  return Promise.all(/*! import() | widgets */[__webpack_require__.e("vendor"), __webpack_require__.e("widgets")]).then(__webpack_require__.bind(null, /*! @/components/wx/ViewModelWidget */ "./src/components/wx/ViewModelWidget.vue"));
+  return Promise.all(/*! import() | widgets */[__webpack_require__.e("vendor"), __webpack_require__.e("fields~widgets"), __webpack_require__.e("widgets")]).then(__webpack_require__.bind(null, /*! @/components/wx/ViewModelWidget */ "./src/components/wx/ViewModelWidget.vue"));
 }; // const ListModelWidget = () =>
 //         import(/* webpackChunkName: "widgets" */ '@/components/wx/ListModelWidget' )
 // const NewModelWidget = () =>
@@ -2964,7 +2964,7 @@ var ViewModelWidget = function ViewModelWidget() {
 
 
 var Widget = function Widget() {
-  return Promise.all(/*! import() | widgets */[__webpack_require__.e("vendor"), __webpack_require__.e("widgets")]).then(__webpack_require__.bind(null, /*! @/components/wx/Widget */ "./src/components/wx/Widget.vue"));
+  return Promise.all(/*! import() | widgets */[__webpack_require__.e("vendor"), __webpack_require__.e("fields~widgets"), __webpack_require__.e("widgets")]).then(__webpack_require__.bind(null, /*! @/components/wx/Widget */ "./src/components/wx/Widget.vue"));
 };
 
 

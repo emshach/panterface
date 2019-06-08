@@ -2,17 +2,17 @@
   <vk-card :class="[ 'form-page', scrolled ]">
     <div slot="header">
       <div class="form-controls uk-align-right uk-text-right">
-        <vk-btn type="text" class="uk-margin-right" @click.stop="settings">
+        <vk-btn type="text" @click.prevent="settings">
           <font-awesome-icon icon="cog" />
         </vk-btn>
-        <vk-btn type="text" class="uk-margin-right" @click.stop="discard">
+        <vk-btn type="text" @click.prevent="discard">
           <font-awesome-icon icon="trash" /> discard
         </vk-btn>
         <vk-btn-grp>
-          <vk-btn type="primary" @click.stop="submit">
+          <vk-btn type="primary" @click.prevent="submit">
             <font-awesome-icon icon="check" /> done
           </vk-btn>
-          <vk-btn type="primary" @click.stop="submitAndRedo">
+          <vk-btn type="primary" @click.prevent="submitAndRedo">
             <font-awesome-icon icon="plus" /> and another
           </vk-btn>
         </vk-btn-grp>
@@ -118,6 +118,7 @@ export default  {
     .uk-button {
       font-size: 0.95rem;
       line-height: 34px;
+      padding: 0 12px;
     }
     .uk-button-group {
       .uk-button:first-child {

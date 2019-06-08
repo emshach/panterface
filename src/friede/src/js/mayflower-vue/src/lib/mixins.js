@@ -3,6 +3,7 @@ import { faPlus, faEdit } from '@fortawesome/free-solid-svg-icons'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { Field } from '@/lib/objects'
+import JsonWidget from '@/components/wx/JsonWidget'
 
 library.add( faPlus, faEdit )
 
@@ -143,10 +144,49 @@ const ModelModelsFieldMixin = {
   }
 };
 
+const JsonWidgetMixin = {
+  components: { JsonWidget },
+  props: {
+    readonly: {
+      type: Boolean,
+      default: true
+    },
+    editMode: {
+      type: Boolean,
+      default: false
+    },
+    collapse: {
+      type: Boolean,
+      default: false
+    },
+  },
+  data() {
+    return {
+      _v: null
+    }
+  },
+  methods: {
+    initVal() {
+      this._v = this.value;
+    },
+    input( val ) {
+      this._v = val;
+      this.$emit( 'input', val );
+    }
+  },
+  computed: {
+    editing() {
+      return !this.readonly && this.editMode;
+    }
+  }
+}
+
 const DurationOptions = []
 
 export {
   ModelWidgetMixin,
   ModelFieldMixin,
   ModelModelsFieldMixin,
-  DurationOptions }
+  JsonWidgetMixin,
+  DurationOptions,
+}

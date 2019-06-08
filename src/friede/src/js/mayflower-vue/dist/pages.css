@@ -1,14 +1,10 @@
-.field .field-display span {
-  margin-right: 6px;
-}
-.field .field-display svg.svg-inline--fa {
+.field .field-display > svg.svg-inline--fa {
+  margin-left: 6px;
   font-size: 0.875em;
   vertical-align: 0;
 }
-.field tr .field-display span {
-  margin-right: 4px;
-}
-.field tr svg.svg-inline--fa {
+.field tr .field-display > svg.svg-inline--fa {
+  margin-left: 4px;
   font-size: 10px;
   vertical-align: 0.2em;
 }
@@ -40,6 +36,7 @@
 .form-page > .uk-card-header .uk-button {
       font-size: 0.95rem;
       line-height: 34px;
+      padding: 0 12px;
 }
 .form-page > .uk-card-header .uk-button-group .uk-button:first-child {
       /* border-top-left-radius: 2px; */

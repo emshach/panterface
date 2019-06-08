@@ -37,6 +37,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuikit_lib_button__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! vuikit/lib/button */ "./node_modules/vuikit/lib/button.js");
 /* harmony import */ var vuikit_lib_dropdown__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! vuikit/lib/dropdown */ "./node_modules/vuikit/lib/dropdown.js");
 /* harmony import */ var _json__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./json */ "./src/components/wx/json.js");
+/* harmony import */ var _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @fortawesome/fontawesome-svg-core */ "./node_modules/@fortawesome/fontawesome-svg-core/index.es.js");
+/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+/* harmony import */ var _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @fortawesome/vue-fontawesome */ "./node_modules/@fortawesome/vue-fontawesome/index.es.js");
 
 
 
@@ -53,6 +56,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_16__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_17__["faEdit"]);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'JsonWidget',
   components: Object(_home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_6__["default"])({
@@ -638,6 +645,12 @@ var render = function() {
       }),
       !_vm.readonly
         ? [
+            _c(
+              "vk-btn",
+              { staticClass: "json-type-chooser", attrs: { type: "light" } },
+              [_c("font-awesome-icon", { attrs: { icon: "edit" } })],
+              1
+            ),
             _c(
               "vk-dropdown",
               _vm._l(_vm.actions, function(a, i) {

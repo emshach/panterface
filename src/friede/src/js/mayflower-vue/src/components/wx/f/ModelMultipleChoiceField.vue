@@ -78,7 +78,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { ModelFieldMixin, ModelModelsFieldMixin } from '@/lib/mixins'
 import fields from '@/components/fields'
 
-library.add( faTimes, faCheck, faPlus, faEdit )
+library.add( faTimes, faCheck, faPlus, faEdit );
 
 VkBtnLink.props.type.validator = val => !val || /^(light|primary|secondary|danger|text|link)$/.test( val );
 

@@ -3,7 +3,9 @@
     <component :is="tag" :readonly="readonly" :edit="editMode" :value="intlVal"
                @input="input" />
     <template v-if="!readonly">
-      <!-- <vk-btn class="json-type-chooser" type="primary">{{ types[ type ].symbol}}</vk-btn> -->
+      <vk-btn class="json-type-chooser" type="light">
+        <font-awesome-icon icon="edit" />
+      </vk-btn>
       <vk-dropdown>
         <vk-btn v-for="( a, i ) in actions" :key="i" size="small"
                 @click.prevent="setType(a)">{{ a.label }}</vk-btn>
@@ -22,6 +24,12 @@ import isNull from 'lodash/isNull'
 import { Button as VkBtn } from 'vuikit/lib/button'
 import { Dropdown as VkDropdown } from 'vuikit/lib/dropdown'
 import components from './json'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faEdit } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+library.add( faEdit );
+
 export default  {
   name: 'JsonWidget',
   components: {

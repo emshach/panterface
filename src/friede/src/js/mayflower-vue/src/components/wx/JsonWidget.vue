@@ -8,7 +8,7 @@
                 @click.prevent="setType(a)">{{ a.label }}</vk-btn>
       </vk-dropdown>
     </template>
-    <component :is="tag" :readonly="readonly" :value="_v" />
+    <component :is="tag" :readonly="readonly" :value="_value" />
   </div>
 </template>
 
@@ -44,7 +44,7 @@ export default  {
   },
   data() {
     return {
-      _v: null,
+      _value: null,
       types: {
         object: {
           label: 'Object',
@@ -97,16 +97,16 @@ export default  {
     updateVal() {
       const v = this.value;
       this.type = this.getType(v);
-      this._v = v;
+      this._value = v;
     },
     setType( action ) {
       this.type = action.type;
-      const v = action.op( this._v );
+      const v = action.op( this._value );
       if ( this.type === 'unknown' )
         this.type = this.getType(v);
-      this._v = v;
-      this.$emit( 'input', this._v );
-      this.$emit( 'change', this._v );
+      this._value = v;
+      this.$emit( 'input', this._value );
+      this.$emit( 'change', this._value );
     },
     toObjectKey( val ) {
       var o = {}
@@ -445,7 +445,7 @@ export default  {
             type: 'string',
             op: () => '',
           },
-          this._v === false ? {
+          this._value === false ? {
             label: 'true',
             type: 'boolean',
             op: () => true,

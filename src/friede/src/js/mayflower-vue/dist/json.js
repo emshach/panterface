@@ -30,8 +30,8 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_f
   },
   methods: {
     input: function input() {
-      this.$emit('input', this._v);
-      this.$emit('change', this._v);
+      this.$emit('input', this._value);
+      this.$emit('change', this._value);
     }
   },
   computed: {}
@@ -57,8 +57,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     toggle: function toggle() {
-      this._v = !this._v;
-      this.$emit('input', this._v);
+      this._value = !this._value;
+      this.$emit('input', this._value);
     }
   },
   computed: {}
@@ -174,7 +174,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_4__["library"].add(_f
   mounted: function mounted() {
     var _this = this;
 
-    this._v = _home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_0___default()(this.value).map(function (x) {
+    this._value = _home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_0___default()(this.value).map(function (x) {
       return {
         key: x,
         value: _this.value[x]
@@ -196,7 +196,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_4__["library"].add(_f
     objectVal: function objectVal() {
       var o = {};
 
-      this._v.forEach(function (x) {
+      this._value.forEach(function (x) {
         o[v.key] = o.value;
       });
 
@@ -243,11 +243,11 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_2__["library"].add(_f
   methods: {},
   computed: {
     html: function html() {
-      var s = this._v.replace(/((?:\\\\)*)\\n/g, function ($0, $1) {
+      var s = this._value.replace(/((?:\\\\)*)\\n/g, function ($0, $1) {
         return "".concat($1, "<br/>\n");
       });
 
-      if (collapse && this._v.length > 40) {
+      if (collapse && this._value.length > 40) {
         this.truncated = true;
         return s.slice(0, 40);
       }
@@ -338,7 +338,7 @@ var render = function() {
         }
       }
     },
-    [_vm._v(_vm._s(this._v ? "true" : "false"))]
+    [_vm._v(_vm._s(this._value ? "true" : "false"))]
   )
 }
 var staticRenderFns = []
@@ -445,26 +445,26 @@ var render = function() {
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm._v,
-                expression: "_v"
+                value: _vm._value,
+                expression: "_value"
               }
             ],
             attrs: { type: "number" },
-            domProps: { value: _vm._v },
+            domProps: { value: _vm._value },
             on: {
               input: [
                 function($event) {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm._v = $event.target.value
+                  _vm._value = $event.target.value
                 },
                 _vm.input
               ],
               change: _vm.input
             }
           })
-        : [_vm._v(_vm._s(_vm._v))]
+        : [_vm._v(_vm._s(_vm._value))]
     ],
     2
   )
@@ -520,18 +520,18 @@ var render = function() {
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm._v,
-                expression: "_v"
+                value: _vm._value,
+                expression: "_value"
               }
             ],
-            domProps: { value: _vm._v },
+            domProps: { value: _vm._value },
             on: {
               input: [
                 function($event) {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm._v = $event.target.value
+                  _vm._value = $event.target.value
                 },
                 _vm.input
               ],
@@ -546,7 +546,7 @@ var render = function() {
             _vm.truncated
               ? _c("span", { staticClass: "json-elipses" }, [_vm._v("...")])
               : _vm._e(),
-            this._v.length > 40
+            this._value.length > 40
               ? _c(
                   "vk-btn",
                   {

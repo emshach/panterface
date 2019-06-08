@@ -1,7 +1,8 @@
 <template lang="html">
   <span class="json-number">
-    <input v-if="editing" type="number" v-model="_v" @input="input" @change="input" />
-    <template v-else>{{ _v }}</template>
+    <input v-if="editing" type="number" v-model="_value" @input="input"
+           @change="input" /> 
+    <template v-else>{{ _value }}</template>
   </span>
 </template>
 

@@ -74,7 +74,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      _v: null,
+      _value: null,
       types: {
         object: {
           label: 'Object',
@@ -119,15 +119,15 @@ __webpack_require__.r(__webpack_exports__);
     updateVal: function updateVal() {
       var v = this.value;
       this.type = this.getType(v);
-      this._v = v;
+      this._value = v;
     },
     setType: function setType(action) {
       this.type = action.type;
-      var v = action.op(this._v);
+      var v = action.op(this._value);
       if (this.type === 'unknown') this.type = this.getType(v);
-      this._v = v;
-      this.$emit('input', this._v);
-      this.$emit('change', this._v);
+      this._value = v;
+      this.$emit('input', this._value);
+      this.$emit('change', this._value);
     },
     toObjectKey: function toObjectKey(val) {
       var o = {};
@@ -500,7 +500,7 @@ __webpack_require__.r(__webpack_exports__);
         op: function op() {
           return '';
         }
-      }, this._v === false ? {
+      }, this._value === false ? {
         label: 'true',
         type: 'boolean',
         op: function op() {
@@ -650,7 +650,7 @@ var render = function() {
         : _vm._e(),
       _c(_vm.tag, {
         tag: "component",
-        attrs: { readonly: _vm.readonly, value: _vm._v }
+        attrs: { readonly: _vm.readonly, value: _vm._value }
       })
     ],
     2
@@ -1042,15 +1042,15 @@ var JsonWidgetMixin = {
   data: function data() {
     return {
       editMode: false,
-      _v: null
+      _value: null
     };
   },
   methods: {
     initVal: function initVal() {
-      this._v = this.value;
+      this._value = this.value;
     },
     input: function input(val) {
-      this._v = val;
+      this._value = val;
       this.$emit('input', val);
     }
   },

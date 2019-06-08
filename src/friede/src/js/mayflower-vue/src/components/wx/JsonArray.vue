@@ -6,7 +6,7 @@
     </vk-btn>
     <span v-if="collapse" class="json-object-content">...</span>
     <div v-else class="json-object-content">
-      <template v-for"( v, i ) in _v" :key="i">
+      <template v-for"( v, i ) in _value" :key="i">
         <json-widget :readonly="readonly" v-model="v" @input="input" />
         <span class="json-sep">,</span>
       </template>
@@ -36,8 +36,8 @@ export default  {
   },
   methods: {
     input() {
-      this.$emit( 'input', this._v );
-      this.$emit( 'change', this._v );
+      this.$emit( 'input', this._value );
+      this.$emit( 'change', this._value );
     }
   },
   computed: {

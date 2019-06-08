@@ -36,10 +36,11 @@ export default  {
       this.editMode = false;
     },
     editKey() {
-      this.$nextTick(() => {
-        this.$refs.key.focus();
-      });
       editMode = true;
+      this.$nextTick(() => {
+        if ( this.$refs.key )
+          this.$refs.key.focus();
+      });
     }
   },
   computed: {

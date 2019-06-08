@@ -352,10 +352,10 @@ __webpack_require__.r(__webpack_exports__);
     editKey: function editKey() {
       var _this = this;
 
-      this.$nextTick(function () {
-        _this.$refs.key.focus();
-      });
       editMode = true;
+      this.$nextTick(function () {
+        if (_this.$refs.key) _this.$refs.key.focus();
+      });
     }
   },
   computed: {}

@@ -40,7 +40,7 @@ export default  {
       default: () => ({})
     },
   },
-  created() {
+  mounted() {
     this._value = Object.keys( this.value ).map( x => ({
       data: {
         key: x,

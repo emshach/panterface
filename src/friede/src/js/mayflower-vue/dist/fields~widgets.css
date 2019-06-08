@@ -7,7 +7,7 @@
   padding: 0 4px;
   font-size: 12px;
 }
-.json-widget .json-type-chooser.uk-button {
+.json-widget .uk-button.json-type-chooser, .json-widget .uk-button.json-add {
   padding: 1px 6px;
   line-height: 18px;
   font-size: 14px;

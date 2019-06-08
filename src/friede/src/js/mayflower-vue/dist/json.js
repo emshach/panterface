@@ -198,7 +198,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_4__["library"].add(_f
       }
     }
   },
-  created: function created() {
+  mounted: function mounted() {
     var _this = this;
 
     this._value = _home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_0___default()(this.value).map(function (x) {

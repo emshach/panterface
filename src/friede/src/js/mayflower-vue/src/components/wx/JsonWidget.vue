@@ -548,10 +548,11 @@ export default  {
     padding: 0 4px;
     font-size: 12px;
   }
-  .json-type-chooser.uk-button {
-    padding: 1px 6px;
-    line-height: 18px;
-    font-size: 14px;
-  }
+  .uk-button {
+    &.json-type-chooser, &.json-add {
+      padding: 1px 6px;
+      line-height: 18px;
+      font-size: 14px;
+  }}
 }
 </style>

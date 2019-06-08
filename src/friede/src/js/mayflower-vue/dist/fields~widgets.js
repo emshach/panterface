@@ -1038,10 +1038,6 @@ var JsonWidgetMixin = {
       type: Boolean,
       default: true
     },
-    collapse: {
-      type: Boolean,
-      default: false
-    },
     edit: {
       type: Boolean,
       default: false

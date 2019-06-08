@@ -368,6 +368,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     commit: function commit() {
+      this.input();
       this.editMode = false;
     },
     input: function input() {

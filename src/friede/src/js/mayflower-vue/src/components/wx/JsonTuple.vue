@@ -33,6 +33,7 @@ export default  {
   },
   methods: {
     commit() {
+      this.input();
       this.editMode = false;
     },
     input() {

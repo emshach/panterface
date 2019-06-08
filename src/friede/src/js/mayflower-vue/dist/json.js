@@ -80,7 +80,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'JsonBoolean',
   mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_0__["JsonWidgetMixin"]],
-  props: [],
+  props: {
+    value: {
+      type: Boolean,
+      default: false
+    }
+  },
   mounted: function mounted() {},
   data: function data() {
     return {};
@@ -343,6 +348,14 @@ __webpack_require__.r(__webpack_exports__);
     commit: function commit() {
       this.$emit('input', this.intlVal);
       this.editMode = false;
+    },
+    editKey: function editKey() {
+      var _this = this;
+
+      this.$nextTick(function () {
+        _this.$refs.key.focus();
+      });
+      editMode = true;
     }
   },
   computed: {}
@@ -366,11 +379,11 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "div",
-    { staticClass: "json-object" },
+    "span",
+    { staticClass: "json-array" },
     [
       _c("span", { staticClass: "json-delim" }, [_vm._v("[")]),
-      _vm.value.length > 1
+      _vm.intlVal.length > 1
         ? _c(
             "vk-btn",
             {
@@ -401,7 +414,7 @@ var render = function() {
                 return [
                   _c("json-widget", {
                     key: i,
-                    attrs: { readonly: _vm.readonly },
+                    attrs: { readonly: _vm.readonly, edit: _vm.editMode },
                     on: { input: _vm.input },
                     model: {
                       value: v.data,
@@ -629,7 +642,7 @@ var render = function() {
     { staticClass: "json-object" },
     [
       _c("span", { staticClass: "json-delim" }, [_vm._v("{")]),
-      _vm.value.length > 1
+      _vm.inltVal.length > 1
         ? _c(
             "vk-btn",
             {
@@ -820,6 +833,7 @@ var render = function() {
                   expression: "intlVal.key"
                 }
               ],
+              ref: "key ",
               attrs: { type: "text" },
               domProps: { value: _vm.intlVal.key },
               on: {
@@ -839,7 +853,7 @@ var render = function() {
                 on: {
                   click: function($event) {
                     $event.preventDefault()
-                    _vm.editMode = true
+                    return _vm.editKey($event)
                   }
                 }
               },

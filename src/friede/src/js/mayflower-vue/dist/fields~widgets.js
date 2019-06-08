@@ -642,6 +642,7 @@ var render = function() {
                   "vk-btn",
                   {
                     key: i,
+                    attrs: { size: "small" },
                     on: {
                       click: function($event) {
                         $event.preventDefault()
@@ -658,7 +659,11 @@ var render = function() {
         : _vm._e(),
       _c(_vm.tag, {
         tag: "component",
-        attrs: { readonly: _vm.readonly, edit: _vm.edit, value: _vm.intlVal },
+        attrs: {
+          readonly: _vm.readonly,
+          edit: _vm.editMode,
+          value: _vm.intlVal
+        },
         on: { input: _vm.input }
       })
     ],

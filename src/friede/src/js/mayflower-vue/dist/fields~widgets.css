@@ -8,9 +8,23 @@
   font-size: 12px;
 }
 .json-widget .uk-button.json-type-chooser, .json-widget .uk-button.json-add {
-  padding: 1px 6px;
-  line-height: 18px;
-  font-size: 14px;
+  padding: 2px 6px 3px;
+  line-height: 13px;
+  font-size: 13px;
+  font-weight: bold;
+  border-radius: 3px;
+}
+.json-widget .uk-button.json-type-chooser {
+  margin-right: 2px;
+}
+.json-widget > .uk-dropdown {
+  padding: 0;
+}
+.json-widget > .uk-dropdown > * {
+    display: block;
+    width: 100%;
+    padding: 2px 10px;
+    line-height: unset;
 }
 
 

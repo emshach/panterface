@@ -8,7 +8,12 @@ import { JsonWidgetMixin } from '@/lib/mixins'
 export default  {
   name: 'JsonBoolean',
   mixins: [ JsonWidgetMixin ],
-  props: [],
+  props: {
+    value: {
+      type: Boolean,
+      default: false,
+    }
+  },
   mounted() {
   },
   data() {

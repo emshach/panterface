@@ -3,11 +3,11 @@
     <template v-if="!readonly">
       <vk-btn class="json-type-chooser" type="primary">{{ types[ type ].symbol}}</vk-btn>
       <vk-dropdown>
-        <vk-btn v-for="( a, i ) in actions" :key="i"
+        <vk-btn v-for="( a, i ) in actions" :key="i" size="small"
                 @click.prevent="setType(a)">{{ a.label }}</vk-btn>
       </vk-dropdown>
     </template>
-    <component :is="tag" :readonly="readonly" :edit="edit" :value="intlVal"
+    <component :is="tag" :readonly="readonly" :edit="editMode" :value="intlVal"
                @input="input" />
   </span>
 </template>
@@ -555,9 +555,24 @@ export default  {
   }
   .uk-button {
     &.json-type-chooser, &.json-add {
-      padding: 1px 6px;
-      line-height: 18px;
-      font-size: 14px;
-  }}
+      padding: 2px 6px 3px;
+      line-height: 13px;
+      font-size: 13px;
+      font-weight: bold;
+      border-radius: 3px;
+    }
+    &.json-type-chooser {
+      margin-right: 2px;
+    }
+  }
+  > .uk-dropdown {
+    padding: 0;
+    > * {
+      display: block;
+      width: 100%;
+      padding: 2px 10px;
+      line-height: unset;
+    }
+  }
 }
 </style>

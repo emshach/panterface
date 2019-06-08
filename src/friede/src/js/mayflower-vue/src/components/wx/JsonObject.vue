@@ -1,7 +1,7 @@
 <template lang="html">
   <span class="json-object">
     <span class="json-delim">{</span>
-    <vk-btn v-if="value.length > 1" class="json-collapse" type="light"
+    <vk-btn v-if="inltVal.length > 1" class="json-collapse" type="light"
             @click.prevent="collapse=!collapse">
       <font-awesome-icon :icon="collapse ? 'plus' : 'minus' " />
     </vk-btn>

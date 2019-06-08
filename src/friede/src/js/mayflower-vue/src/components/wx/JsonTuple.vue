@@ -1,8 +1,9 @@
 <template lang="html">
   <div class="json-tuple">
     <span class="json-key">
-      <input v-if="editing" type="text" v-model="intlVal.key" @blur="commit" />
-      <a v-else href="#" @click.prevent="editMode = true">{{
+      <input v-if="editing" type="text" v-model="intlVal.key" @blur="commit"
+             ref="key "/>
+      <a v-else href="#" @click.prevent="editKey">{{
         intlVal.key.length ? intlVal.key : "''" }}</a>
       :
     </span>
@@ -33,6 +34,12 @@ export default  {
     commit() {
       this.$emit( 'input', this.intlVal );
       this.editMode = false;
+    },
+    editKey() {
+      this.$nextTick(() => {
+        this.$refs.key.focus();
+      });
+      editMode = true;
     }
   },
   computed: {
@@ -43,6 +50,6 @@ export default  {
 
 <style scoped lang="scss">
 .json-tuple {
-  
+  margin-left: 1em;
 }
 </style>

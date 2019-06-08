@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="json-widget">
+  <span class="json-widget">
     <vk-btn class="json-type-chooser" type="text">{{ types[ type ].symbol}}</vk-btn>
     <template v-if="editing">
       <vk-btn class="json-type-chooser" type="text">{{ types[ type ].symbol}}</vk-btn>
@@ -9,7 +9,7 @@
       </vk-dropdown>
     </template>
     <component :is="tag" :readonly="readonly" :value="_value" />
-  </div>
+  </span>
 </template>
 
 <script lang="js">

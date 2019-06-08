@@ -212,7 +212,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_4__["library"].add(_f
     }
   },
   mounted: function mounted() {
-    updateVal();
+    this.updateVal();
   },
   data: function data() {
     return {

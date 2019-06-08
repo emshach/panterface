@@ -40,7 +40,7 @@ export default  {
     },
   },
   mounted() {
-    updateVal();
+    this.updateVal();
   },
   data() {
     return {

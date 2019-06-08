@@ -24,7 +24,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_f
   name: 'JsonArray',
   mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_4__["JsonWidgetMixin"]],
   components: {
-    VkBtn: vuikit_lib_button__WEBPACK_IMPORTED_MODULE_0__["Button"],
+    VkBtn: vuikit_lib_button__WEBPACK_IMPORTED_MODULE_0__["ButtonLink"],
     FontAwesomeIcon: _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_3__["FontAwesomeIcon"]
   },
   props: {
@@ -161,14 +161,17 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es6_number_constructor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es6.number.constructor */ "./node_modules/core-js/modules/es6.number.constructor.js");
-/* harmony import */ var core_js_modules_es6_number_constructor__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_number_constructor__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
+/* harmony import */ var _home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime-corejs2/core-js/parse-int */ "./node_modules/@babel/runtime-corejs2/core-js/parse-int.js");
+/* harmony import */ var _home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es6_number_constructor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es6.number.constructor */ "./node_modules/core-js/modules/es6.number.constructor.js");
+/* harmony import */ var core_js_modules_es6_number_constructor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_number_constructor__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'json-number',
-  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_1__["JsonWidgetMixin"]],
+  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_2__["JsonWidgetMixin"]],
   props: {
     value: {
       type: Number,
@@ -181,7 +184,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     input: function input() {
-      this.$emit('input', this.$refs.input.value);
+      this.$emit('input', _home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_0___default()(this.$refs.input.value));
     },
     commit: function commit() {
       this.editMode = false;

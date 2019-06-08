@@ -25,7 +25,7 @@ export default  {
   },
   methods: {
     input() {
-      this.$emit( 'input', this.$refs.input.value );
+      this.$emit( 'input', parseInt( this.$refs.input.value ));
     },
     commit() {
       this.editMode = false;

@@ -20,7 +20,7 @@
 </template>
 
 <script lang="js">
-import { Button as VkBtn } from 'vuikit/lib/button'
+import { ButtonLink as VkBtn } from 'vuikit/lib/button'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'

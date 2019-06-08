@@ -1,6 +1,6 @@
 <template lang="html">
   <span class="uk-label" @click.prevent="toggle">{{
-    this._value ? 'true' : 'false' }}</span>
+    this.intlVal ? 'true' : 'false' }}</span>
 </template>
 
 <script lang="js">
@@ -17,8 +17,8 @@ export default  {
   },
   methods: {
     toggle() {
-      this._value = !this._value;
-      this.$emit( 'input', this._value );
+      this.intlVal = !this.intlVal;
+      this.$emit( 'input', this.intlVal );
     }
   },
   computed: {

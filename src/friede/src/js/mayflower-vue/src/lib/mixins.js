@@ -162,15 +162,15 @@ const JsonWidgetMixin = {
   data() {
     return {
       editMode: false,
-      _value: null
+      intlVal: null
     }
   },
   methods: {
     initVal() {
-      this._value = this.value;
+      this.intlVal = this.value;
     },
     input( val ) {
-      this._value = val;
+      this.intlVal = val;
       this.$emit( 'input', val );
     }
   },

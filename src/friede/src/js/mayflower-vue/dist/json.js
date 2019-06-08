@@ -35,7 +35,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_f
     }
   },
   created: function created() {
-    this._value = this.value.map(function (x) {
+    this.intlVal = this.value.map(function (x) {
       return {
         data: x
       };
@@ -46,12 +46,17 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_f
   },
   methods: {
     input: function input() {
-      this.$emit('input', this._value.map(function (x) {
+      this.$emit('input', this.intlVal.map(function (x) {
         return x.data;
       }));
-      this.$emit('change', this._value.map(function (x) {
+      this.$emit('change', this.intlVal.map(function (x) {
         return x.data;
       }));
+    },
+    addElem: function addElem() {
+      this.intlVal.push({
+        data: null
+      });
     }
   },
   computed: {}
@@ -80,8 +85,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     toggle: function toggle() {
-      this._value = !this._value;
-      this.$emit('input', this._value);
+      this.intlVal = !this.intlVal;
+      this.$emit('input', this.intlVal);
     }
   },
   computed: {}
@@ -201,7 +206,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_4__["library"].add(_f
   mounted: function mounted() {
     var _this = this;
 
-    this._value = _home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_0___default()(this.value).map(function (x) {
+    this.intlVal = _home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_0___default()(this.value).map(function (x) {
       return {
         data: {
           key: x,
@@ -221,7 +226,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_4__["library"].add(_f
       this.$emit('change', this.objectVal);
     },
     addTuple: function addTuple() {
-      this._value.push({
+      this.intlVal.push({
         data: {
           key: '',
           value: null
@@ -232,11 +237,9 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_4__["library"].add(_f
   computed: {
     objectVal: function objectVal() {
       var o = {};
-
-      this._value.forEach(function (x) {
+      this.intlVal.forEach(function (x) {
         o[v.key] = o.value;
       });
-
       return o;
     }
   }
@@ -283,11 +286,11 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_2__["library"].add(_f
   methods: {},
   computed: {
     html: function html() {
-      var s = this._value.replace(/((?:\\\\)*)\\n/g, function ($0, $1) {
+      var s = this.intlVal.replace(/((?:\\\\)*)\\n/g, function ($0, $1) {
         return "".concat($1, "<br/>\n");
       });
 
-      if (collapse && this._value.length > 40) {
+      if (collapse && this.intlVal.length > 40) {
         this.truncated = true;
         return s.slice(0, 40);
       }
@@ -355,32 +358,34 @@ var render = function() {
     { staticClass: "json-object" },
     [
       _c("span", { staticClass: "json-delim" }, [_vm._v("[")]),
-      _c(
-        "vk-btn",
-        {
-          staticClass: "json-collapse",
-          attrs: { type: "light" },
-          on: {
-            click: function($event) {
-              $event.preventDefault()
-              _vm.collapse = !_vm.collapse
-            }
-          }
-        },
-        [
-          _c("font-awesome-icon", {
-            attrs: { icon: _vm.collapse ? "plus" : "minus" }
-          })
-        ],
-        1
-      ),
+      _vm.value.length > 1
+        ? _c(
+            "vk-btn",
+            {
+              staticClass: "json-collapse",
+              attrs: { type: "light" },
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  _vm.collapse = !_vm.collapse
+                }
+              }
+            },
+            [
+              _c("font-awesome-icon", {
+                attrs: { icon: _vm.collapse ? "plus" : "minus" }
+              })
+            ],
+            1
+          )
+        : _vm._e(),
       _vm.collapse
         ? _c("span", { staticClass: "json-object-content" }, [_vm._v("...")])
         : _c(
-            "div",
+            "span",
             { staticClass: "json-object-content" },
             [
-              _vm._l(_vm._value, function(v, i) {
+              _vm._l(_vm.intlVal, function(v, i) {
                 return [
                   _c("json-widget", {
                     key: i,
@@ -396,7 +401,24 @@ var render = function() {
                   }),
                   _c("span", { staticClass: "json-sep" }, [_vm._v(",")])
                 ]
-              })
+              }),
+              _vm.editing
+                ? _c(
+                    "vk-btn",
+                    {
+                      staticClass: "json-add",
+                      attrs: { type: "light" },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          return _vm.addElem($event)
+                        }
+                      }
+                    },
+                    [_c("font-awesome-icon", { attrs: { icon: "plus" } })],
+                    1
+                  )
+                : _vm._e()
             ],
             2
           ),
@@ -438,7 +460,7 @@ var render = function() {
         }
       }
     },
-    [_vm._v(_vm._s(this._value ? "true" : "false"))]
+    [_vm._v(_vm._s(this.intlVal ? "true" : "false"))]
   )
 }
 var staticRenderFns = []
@@ -545,26 +567,26 @@ var render = function() {
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm._value,
-                expression: "_value"
+                value: _vm.intlVal,
+                expression: "intlVal"
               }
             ],
             attrs: { type: "number" },
-            domProps: { value: _vm._value },
+            domProps: { value: _vm.intlVal },
             on: {
               input: [
                 function($event) {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm._value = $event.target.value
+                  _vm.intlVal = $event.target.value
                 },
                 _vm.input
               ],
               change: _vm.input
             }
           })
-        : [_vm._v(_vm._s(_vm._value))]
+        : [_vm._v(_vm._s(_vm.intlVal))]
     ],
     2
   )
@@ -623,7 +645,7 @@ var render = function() {
             "span",
             { staticClass: "json-object-content" },
             [
-              _vm._l(_vm._value, function(v) {
+              _vm._l(_vm.intlVal, function(v) {
                 return [
                   _c("json-tuple", {
                     key: v.data.key,
@@ -698,18 +720,18 @@ var render = function() {
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm._value,
-                expression: "_value"
+                value: _vm.intlVal,
+                expression: "intlVal"
               }
             ],
-            domProps: { value: _vm._value },
+            domProps: { value: _vm.intlVal },
             on: {
               input: [
                 function($event) {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm._value = $event.target.value
+                  _vm.intlVal = $event.target.value
                 },
                 _vm.input
               ],
@@ -724,7 +746,7 @@ var render = function() {
             _vm.truncated
               ? _c("span", { staticClass: "json-elipses" }, [_vm._v("...")])
               : _vm._e(),
-            this._value.length > 40
+            this.intlVal.length > 40
               ? _c(
                   "vk-btn",
                   {

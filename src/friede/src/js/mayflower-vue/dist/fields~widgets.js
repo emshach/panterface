@@ -79,7 +79,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      _value: null,
+      intlVal: null,
       types: {
         object: {
           label: 'Object',
@@ -125,15 +125,15 @@ __webpack_require__.r(__webpack_exports__);
     updateVal: function updateVal() {
       var v = this.value;
       this.type = this.getType(v);
-      this._value = v;
+      this.intlVal = v;
     },
     setType: function setType(action) {
       this.type = action.type;
-      var v = action.op(this._value);
+      var v = action.op(this.intlVal);
       if (this.type === 'unknown') this.type = this.getType(v);
-      this._value = v;
-      this.$emit('input', this._value);
-      this.$emit('change', this._value);
+      this.intlVal = v;
+      this.$emit('input', this.intlVal);
+      this.$emit('change', this.intlVal);
     },
     toObjectKey: function toObjectKey(val) {
       var o = {};
@@ -141,7 +141,7 @@ __webpack_require__.r(__webpack_exports__);
       return o;
     },
     input: function input(val) {
-      this._value = val;
+      this.intlVal = val;
       this.$emit('input', val);
     }
   },
@@ -513,7 +513,7 @@ __webpack_require__.r(__webpack_exports__);
         op: function op() {
           return '';
         }
-      }, this._value === false ? {
+      }, this.intlVal === false ? {
         label: 'true',
         type: 'boolean',
         op: function op() {
@@ -658,8 +658,8 @@ var render = function() {
         : _vm._e(),
       _c(_vm.tag, {
         tag: "component",
-        attrs: { readonly: _vm.readonly, edit: _vm.edit, value: _vm._value },
-        on: { input: _vm.inpput }
+        attrs: { readonly: _vm.readonly, edit: _vm.edit, value: _vm.intlVal },
+        on: { input: _vm.input }
       })
     ],
     2
@@ -1054,15 +1054,15 @@ var JsonWidgetMixin = {
   data: function data() {
     return {
       editMode: false,
-      _value: null
+      intlVal: null
     };
   },
   methods: {
     initVal: function initVal() {
-      this._value = this.value;
+      this.intlVal = this.value;
     },
     input: function input(val) {
-      this._value = val;
+      this.intlVal = val;
       this.$emit('input', val);
     }
   },

@@ -7,7 +7,7 @@
     </vk-btn>
     <span v-if="collapse" class="json-object-content">...</span>
     <span v-else class="json-object-content">
-      <template v-for="v in _value">
+      <template v-for="v in intlVal">
         <json-tuple :readonly="readonly" :key="v.data.key" v-model="v.data"
                     @input="input" />
         <span class="json-sep">,</span>
@@ -41,7 +41,7 @@ export default  {
     },
   },
   mounted() {
-    this._value = Object.keys( this.value ).map( x => ({
+    this.intlVal = Object.keys( this.value ).map( x => ({
       data: {
         key: x,
         value: this.value[x]
@@ -59,13 +59,13 @@ export default  {
       this.$emit( 'change', this.objectVal );
     },
     addTuple() {
-      this._value.push( { data: { key: '', value: null }});
+      this.intlVal.push({ data: { key: '', value: null }});
     }
   },
   computed: {
     objectVal() {
       var o = {}
-      this._value.forEach( x => {
+      this.intlVal.forEach( x => {
         o[v.key] = o.value
       });
       return o

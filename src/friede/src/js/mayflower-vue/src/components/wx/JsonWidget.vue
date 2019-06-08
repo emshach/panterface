@@ -7,8 +7,8 @@
                 @click.prevent="setType(a)">{{ a.label }}</vk-btn>
       </vk-dropdown>
     </template>
-    <component :is="tag" :readonly="readonly" :edit="edit" :value="_value"
-               @input="inpput" />
+    <component :is="tag" :readonly="readonly" :edit="edit" :value="intlVal"
+               @input="input" />
   </span>
 </template>
 
@@ -49,7 +49,7 @@ export default  {
   },
   data() {
     return {
-      _value: null,
+      intlVal: null,
       types: {
         object: {
           label: 'Object',
@@ -103,16 +103,16 @@ export default  {
     updateVal() {
       const v = this.value;
       this.type = this.getType(v);
-      this._value = v;
+      this.intlVal = v;
     },
     setType( action ) {
       this.type = action.type;
-      const v = action.op( this._value );
+      const v = action.op( this.intlVal );
       if ( this.type === 'unknown' )
         this.type = this.getType(v);
-      this._value = v;
-      this.$emit( 'input', this._value );
-      this.$emit( 'change', this._value );
+      this.intlVal = v;
+      this.$emit( 'input', this.intlVal );
+      this.$emit( 'change', this.intlVal );
     },
     toObjectKey( val ) {
       var o = {}
@@ -120,7 +120,7 @@ export default  {
       return o;
     },
     input( val ) {
-      this._value = val;
+      this.intlVal = val;
       this.$emit( 'input', val );
     }
   },
@@ -458,7 +458,7 @@ export default  {
             type: 'string',
             op: () => '',
           },
-          this._value === false ? {
+          this.intlVal === false ? {
             label: 'true',
             type: 'boolean',
             op: () => true,

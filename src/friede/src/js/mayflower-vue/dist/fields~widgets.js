@@ -133,7 +133,6 @@ __webpack_require__.r(__webpack_exports__);
       if (this.type === 'unknown') this.type = this.getType(v);
       this.intlVal = v;
       this.$emit('input', this.intlVal);
-      this.$emit('change', this.intlVal);
     },
     toObjectKey: function toObjectKey(val) {
       var o = {};

@@ -40,7 +40,7 @@ export default  {
       this.$emit( 'input', { key: this.$refs.key.value, value: this.value.value })
     },
     updateVal( val ) {
-      this.$emit( 'input', { key: this.$refs.key.value, value: val })
+      this.$emit( 'input', { key: this.value.key, value: val })
     },
     editKey() {
       this.editMode = true;

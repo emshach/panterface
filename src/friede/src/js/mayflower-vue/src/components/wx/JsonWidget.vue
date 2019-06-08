@@ -112,7 +112,6 @@ export default  {
         this.type = this.getType(v);
       this.intlVal = v;
       this.$emit( 'input', this.intlVal );
-      this.$emit( 'change', this.intlVal );
     },
     toObjectKey( val ) {
       var o = {}

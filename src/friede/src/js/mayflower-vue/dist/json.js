@@ -379,7 +379,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     updateVal: function updateVal(val) {
       this.$emit('input', {
-        key: this.$refs.key.value,
+        key: this.value.key,
         value: val
       });
     },

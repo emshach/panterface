@@ -620,7 +620,7 @@ var render = function() {
       _vm.collapse
         ? _c("span", { staticClass: "json-object-content" }, [_vm._v("...")])
         : _c(
-            "div",
+            "span",
             { staticClass: "json-object-content" },
             [
               _vm._l(_vm._value, function(v) {

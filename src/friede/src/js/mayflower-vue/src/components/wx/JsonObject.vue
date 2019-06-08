@@ -6,7 +6,7 @@
       <font-awesome-icon :icon="collapse ? 'plus' : 'minus' " />
     </vk-btn>
     <span v-if="collapse" class="json-object-content">...</span>
-    <div v-else class="json-object-content">
+    <span v-else class="json-object-content">
       <template v-for="v in _value">
         <json-tuple :readonly="readonly" :key="v.data.key" v-model="v.data"
                     @input="input" />
@@ -15,7 +15,7 @@
       <vk-btn v-if="editing" class="json-add" type="light" @click.prevent="addTuple">
         <font-awesome-icon icon="plus" />
       </vk-btn>
-    </div>
+    </span>
     <span class="json-delim">}</span>
   </span>
 </template>

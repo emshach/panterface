@@ -1,8 +1,7 @@
 <template lang="html">
   <span class="json-widget">
-    <vk-btn class="json-type-chooser" type="text">{{ types[ type ].symbol}}</vk-btn>
     <template v-if="editing">
-      <vk-btn class="json-type-chooser" type="text">{{ types[ type ].symbol}}</vk-btn>
+      <vk-btn class="json-type-chooser" type="primary">{{ types[ type ].symbol}}</vk-btn>
       <vk-dropdown>
         <vk-btn v-for="( a, i ) in actions" :key="i"
                 @click.prevent="setType(a)">{{ a.label }}</vk-btn>

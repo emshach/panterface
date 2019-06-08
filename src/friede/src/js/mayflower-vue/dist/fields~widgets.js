@@ -624,16 +624,11 @@ var render = function() {
     "span",
     { staticClass: "json-widget" },
     [
-      _c(
-        "vk-btn",
-        { staticClass: "json-type-chooser", attrs: { type: "text" } },
-        [_vm._v(_vm._s(_vm.types[_vm.type].symbol))]
-      ),
       _vm.editing
         ? [
             _c(
               "vk-btn",
-              { staticClass: "json-type-chooser", attrs: { type: "text" } },
+              { staticClass: "json-type-chooser", attrs: { type: "primary" } },
               [_vm._v(_vm._s(_vm.types[_vm.type].symbol))]
             ),
             _c(

@@ -43,6 +43,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_f
   },
   data: function data() {
     return {
+      intlVal: [],
       collapse: false
     };
   },
@@ -353,9 +354,9 @@ __webpack_require__.r(__webpack_exports__);
     editKey: function editKey() {
       var _this = this;
 
-      editMode = true;
+      this.editMode = true;
       this.$nextTick(function () {
-        if (_this.$refs.key) _this.$refs.key.focus();
+        _this.$refs.key.focus();
       });
     }
   },

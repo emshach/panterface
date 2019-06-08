@@ -863,7 +863,11 @@ var render = function() {
       ]),
       _c("json-widget", {
         staticClass: "json-value",
-        attrs: { readonly: _vm.readonly, value: _vm.value.value },
+        attrs: {
+          readonly: _vm.readonly,
+          value: _vm.value.value,
+          edit: !_vm.readonly
+        },
         on: { input: _vm.updateVal }
       })
     ],

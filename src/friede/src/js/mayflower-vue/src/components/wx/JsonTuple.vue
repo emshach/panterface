@@ -8,7 +8,7 @@
       :
     </span>
     <json-widget class="json-value" :readonly="readonly" :value="value.value"
-                 @input="updateVal"/>
+                 @input="updateVal" :edit="!readonly"/>
   </div>
 </template>
 

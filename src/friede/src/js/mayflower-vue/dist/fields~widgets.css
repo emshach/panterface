@@ -16,6 +16,7 @@
 }
 .json-widget .uk-button.json-type-chooser {
   margin-right: 2px;
+  background: transparent;
 }
 .json-widget > .uk-dropdown {
   padding: 0;

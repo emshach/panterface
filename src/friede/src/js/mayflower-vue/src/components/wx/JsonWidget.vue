@@ -570,6 +570,7 @@ export default  {
     }
     &.json-type-chooser {
       margin-right: 2px;
+      background: transparent;
     }
   }
   > .uk-dropdown {

@@ -224,6 +224,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_4__["library"].add(_f
   },
   data: function data() {
     return {
+      intlVal: [],
       collapse: false
     };
   },

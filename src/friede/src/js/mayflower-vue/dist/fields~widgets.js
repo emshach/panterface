@@ -76,8 +76,8 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     this.updateVal();
   },
-  data: {
-    return: {
+  data: function data() {
+    return {
       _v: null,
       types: {
         object: {
@@ -115,7 +115,7 @@ __webpack_require__.r(__webpack_exports__);
       },
       type: 'null',
       tag: 'json-null'
-    }
+    };
   },
   methods: {
     getType: function getType(v) {
@@ -133,6 +133,11 @@ __webpack_require__.r(__webpack_exports__);
       this._v = v;
       this.$emit('input', this._v);
       this.$emit('change', this._v);
+    },
+    toObjectKey: function toObjectKey(val) {
+      var o = {};
+      o[val] = null;
+      return o;
     }
   },
   computed: {

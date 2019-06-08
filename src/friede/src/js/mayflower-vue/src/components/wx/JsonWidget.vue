@@ -46,8 +46,8 @@ export default  {
   created() {
     this.updateVal();
   },
-  data: {
-    return: {
+  data() {
+    return {
       _v: null,
       types: {
         object: {
@@ -112,6 +112,11 @@ export default  {
       this._v = v;
       this.$emit( 'input', this._v );
       this.$emit( 'change', this._v );
+    },
+    toObjectKey( val ) {
+      var o = {}
+      o[ val ] = null;
+      return o;
     }
   },
   computed: {

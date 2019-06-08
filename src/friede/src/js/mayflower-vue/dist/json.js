@@ -93,8 +93,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     toggle: function toggle() {
-      this.intlVal = !this.intlVal;
-      this.$emit('input', this.intlVal);
+      if (this.readonly) return;
+      this.$emit('input', !this.value);
     }
   },
   computed: {}
@@ -486,7 +486,7 @@ var render = function() {
         }
       }
     },
-    [_vm._v(_vm._s(this.intlVal ? "true" : "false"))]
+    [_vm._v(_vm._s(this.value ? "true" : "false"))]
   )
 }
 var staticRenderFns = []

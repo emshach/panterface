@@ -1,11 +1,13 @@
 <template lang="html">
   <span class="json-string">
     <span class="json-delim">"</span>
-    <textarea v-if="editing" v-model="intlVal" @input="input" @change="input" />
+    <textarea v-if="editing" :value="value" ref="input"
+              @blur="commit" @input="input" @change="input" />
     <template v-else>
-      <span class="json-string-content" v-html="html" />
+      <span class="json-string-content" v-html="html"
+            @click.prevent="editMode = true" />
       <span v-if="truncated" class="json-elipses">...</span>
-      <vk-btn v-if="this.intlVal.length > 40" class="json-collapse" type="light"
+      <vk-btn v-if="this.value.length > 40" class="json-collapse" type="light"
               @click.prevent="collapse=!collapse">
         <font-awesome-icon :icon="collapse ? 'plus' : 'minus' " />
       </vk-btn>
@@ -27,7 +29,12 @@ export default  {
   name: 'JsonString',
   mixins: [ JsonWidgetMixin ],
   components: { VkBtn },
-  props: [],
+  props: {
+    value: {
+      type: String,
+      default: ''
+    }
+  },
   mounted() {
     
   },
@@ -37,13 +44,18 @@ export default  {
     }
   },
   methods: {
-    
+    input() {
+      this.$emit( 'input', this.$refs.input.value );
+    },
+    commit() {
+      this.editMode = false;
+    },
   },
   computed: {
     html() {
-      const s = this.intlVal.replace(
+      const s = this.value.replace(
         /((?:\\\\)*)\\n/g, ( $0, $1 ) => `${$1}<br/>\n` );
-      if ( collapse && this.intlVal.length > 40 ) {
+      if ( collapse && this.value.length > 40 ) {
         this.truncated = true;
         return s.slice( 0, 40 );
       }

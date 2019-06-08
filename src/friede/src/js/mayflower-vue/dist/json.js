@@ -285,21 +285,33 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_2__["library"].add(_f
   components: {
     VkBtn: vuikit_lib_button__WEBPACK_IMPORTED_MODULE_1__["Button"]
   },
-  props: [],
+  props: {
+    value: {
+      type: String,
+      default: ''
+    }
+  },
   mounted: function mounted() {},
   data: function data() {
     return {
       truncated: false
     };
   },
-  methods: {},
+  methods: {
+    input: function input() {
+      this.$emit('input', this.$refs.input.value);
+    },
+    commit: function commit() {
+      this.editMode = false;
+    }
+  },
   computed: {
     html: function html() {
-      var s = this.intlVal.replace(/((?:\\\\)*)\\n/g, function ($0, $1) {
+      var s = this.value.replace(/((?:\\\\)*)\\n/g, function ($0, $1) {
         return "".concat($1, "<br/>\n");
       });
 
-      if (collapse && this.intlVal.length > 40) {
+      if (collapse && this.value.length > 40) {
         this.truncated = true;
         return s.slice(0, 40);
       }
@@ -741,37 +753,25 @@ var render = function() {
       _c("span", { staticClass: "json-delim" }, [_vm._v('"')]),
       _vm.editing
         ? _c("textarea", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.intlVal,
-                expression: "intlVal"
-              }
-            ],
-            domProps: { value: _vm.intlVal },
-            on: {
-              input: [
-                function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.intlVal = $event.target.value
-                },
-                _vm.input
-              ],
-              change: _vm.input
-            }
+            ref: "input",
+            domProps: { value: _vm.value },
+            on: { blur: _vm.commit, input: _vm.input, change: _vm.input }
           })
         : [
             _c("span", {
               staticClass: "json-string-content",
-              domProps: { innerHTML: _vm._s(_vm.html) }
+              domProps: { innerHTML: _vm._s(_vm.html) },
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  _vm.editMode = true
+                }
+              }
             }),
             _vm.truncated
               ? _c("span", { staticClass: "json-elipses" }, [_vm._v("...")])
               : _vm._e(),
-            this.intlVal.length > 40
+            this.value.length > 40
               ? _c(
                   "vk-btn",
                   {

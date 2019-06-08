@@ -10,9 +10,10 @@
 </template>
 
 <script lang="js">
-import { JsonWidgetMixn } from '@/lib/mixins'
+import { JsonWidgetMixin } from '@/lib/mixins'
 export default  {
   name: 'JsonTuple',
+  mixins: [ JsonWidgetMixin ],
   props: {
     value: {
       type: Object,

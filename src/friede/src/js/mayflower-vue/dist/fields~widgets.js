@@ -75,6 +75,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   created: function created() {
     this.updateVal();
+    this.editMode = this.edit;
   },
   data: function data() {
     return {
@@ -113,7 +114,8 @@ __webpack_require__.r(__webpack_exports__);
           symbol: '?'
         }
       },
-      type: 'null'
+      type: 'null',
+      editMode: false
     };
   },
   methods: {

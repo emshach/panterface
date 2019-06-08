@@ -4,8 +4,10 @@
 </template>
 
 <script lang="js">
+import { JsonWidgetMixin } from '@/lib/mixins'
 export default  {
   name: 'JsonBoolean',
+  mixins: [ JsonWidgetMixin ],
   props: [],
   mounted() {
   },

@@ -6,10 +6,14 @@
     </vk-btn>
     <span v-if="collapse" class="json-object-content">...</span>
     <div v-else class="json-object-content">
-      <template v-for"v in _value" :key="v.key">
-        <json-tuple :readonly="readonly" v-model="v" @input="input" />
+      <template v-for="v in _value">
+        <json-tuple :readonly="readonly" :key="v.data.key" v-model="v.data"
+                    @input="input" />
         <span class="json-sep">,</span>
       </template>
+      <vk-btn class="json-add" type="light" @click.prevent="addTuple">
+        <font-awesome-icon icon="plus" />
+      </vk-btn>
     </div>
     <span class="json-delim">}</span>
   </div>
@@ -18,7 +22,7 @@
 <script lang="js">
 import { Button as VkBtn } from 'vuikit/lib/button'
 import { JsonTuple } from './json'
-import { JsonWidgetMixn } from '@/lib/mixins'
+import { JsonWidgetMixin } from '@/lib/mixins'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
@@ -27,6 +31,7 @@ library.add( faPlus, faMinus )
 
 export default  {
   name: 'json-object',
+  mixins: [ JsonWidgetMixin ],
   components: { VkBtn, JsonTuple },
   props: {
     value: {
@@ -34,10 +39,12 @@ export default  {
       default: () => ({})
     },
   },
-  mounted() {
+  created() {
     this._value = Object.keys( this.value ).map( x => ({
-      key: x,
-      value: this.value[x]
+      data: {
+        key: x,
+        value: this.value[x]
+      }
     }))
   },
   data() {
@@ -51,7 +58,7 @@ export default  {
       this.$emit( 'change', this.objectVal );
     },
     addTuple() {
-      this._value.push( { key: '', value: null });
+      this._value.push( { data: { key: '', value: null }});
     }
   },
   computed: {

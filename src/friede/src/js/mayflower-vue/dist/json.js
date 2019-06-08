@@ -13,6 +13,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @fortawesome/fontawesome-svg-core */ "./node_modules/@fortawesome/fontawesome-svg-core/index.es.js");
 /* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
 /* harmony import */ var _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @fortawesome/vue-fontawesome */ "./node_modules/@fortawesome/vue-fontawesome/index.es.js");
+/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
+
 
 
 
@@ -20,18 +22,36 @@ __webpack_require__.r(__webpack_exports__);
 _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faPlus"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faMinus"]);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'JsonArray',
+  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_4__["JsonWidgetMixin"]],
   components: {
     VkBtn: vuikit_lib_button__WEBPACK_IMPORTED_MODULE_0__["Button"]
   },
-  props: [],
-  mounted: function mounted() {},
+  props: {
+    value: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
+    }
+  },
+  created: function created() {
+    this._value = this.value.map(function (x) {
+      return {
+        data: x
+      };
+    });
+  },
   data: function data() {
     return {};
   },
   methods: {
     input: function input() {
-      this.$emit('input', this._value);
-      this.$emit('change', this._value);
+      this.$emit('input', this._value.map(function (x) {
+        return x.data;
+      }));
+      this.$emit('change', this._value.map(function (x) {
+        return x.data;
+      }));
     }
   },
   computed: {}
@@ -48,8 +68,11 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_f
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'JsonBoolean',
+  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_0__["JsonWidgetMixin"]],
   props: [],
   mounted: function mounted() {},
   data: function data() {
@@ -119,8 +142,11 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'json-number',
+  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_0__["JsonWidgetMixin"]],
   props: [],
   mounted: function mounted() {},
   data: function data() {
@@ -159,6 +185,7 @@ __webpack_require__.r(__webpack_exports__);
 _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_4__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__["faPlus"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__["faMinus"]);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'json-object',
+  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_3__["JsonWidgetMixin"]],
   components: {
     VkBtn: vuikit_lib_button__WEBPACK_IMPORTED_MODULE_1__["Button"],
     JsonTuple: _json__WEBPACK_IMPORTED_MODULE_2__["JsonTuple"]
@@ -171,13 +198,15 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_4__["library"].add(_f
       }
     }
   },
-  mounted: function mounted() {
+  created: function created() {
     var _this = this;
 
     this._value = _home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_0___default()(this.value).map(function (x) {
       return {
-        key: x,
-        value: _this.value[x]
+        data: {
+          key: x,
+          value: _this.value[x]
+        }
       };
     });
   },
@@ -193,8 +222,10 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_4__["library"].add(_f
     },
     addTuple: function addTuple() {
       this._value.push({
-        key: '',
-        value: null
+        data: {
+          key: '',
+          value: null
+        }
       });
     }
   },
@@ -227,7 +258,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuikit_lib_button__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuikit/lib/button */ "./node_modules/vuikit/lib/button.js");
 /* harmony import */ var _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @fortawesome/fontawesome-svg-core */ "./node_modules/@fortawesome/fontawesome-svg-core/index.es.js");
 /* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
-/* harmony import */ var _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @fortawesome/vue-fontawesome */ "./node_modules/@fortawesome/vue-fontawesome/index.es.js");
+/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
+/* harmony import */ var _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @fortawesome/vue-fontawesome */ "./node_modules/@fortawesome/vue-fontawesome/index.es.js");
+
 
 
 
@@ -236,6 +269,7 @@ __webpack_require__.r(__webpack_exports__);
 _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_2__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faPlus"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faMinus"]);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'JsonString',
+  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_4__["JsonWidgetMixin"]],
   components: {
     VkBtn: vuikit_lib_button__WEBPACK_IMPORTED_MODULE_1__["Button"]
   },
@@ -279,6 +313,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'JsonTuple',
+  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_0__["JsonWidgetMixin"]],
   props: {
     value: {
       type: Object,
@@ -311,8 +346,67 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function () {}
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "json-object" },
+    [
+      _c("span", { staticClass: "json-delim" }, [_vm._v("[")]),
+      _c(
+        "vk-btn",
+        {
+          staticClass: "json-collapse",
+          attrs: { type: "light" },
+          on: {
+            click: function($event) {
+              $event.preventDefault()
+              _vm.collapse = !_vm.collapse
+            }
+          }
+        },
+        [
+          _c("font-awesome-icon", {
+            attrs: { icon: _vm.collapse ? "plus" : "minus" }
+          })
+        ],
+        1
+      ),
+      _vm.collapse
+        ? _c("span", { staticClass: "json-object-content" }, [_vm._v("...")])
+        : _c(
+            "div",
+            { staticClass: "json-object-content" },
+            [
+              _vm._l(_vm._value, function(v, i) {
+                return [
+                  _c("json-widget", {
+                    key: i,
+                    attrs: { readonly: _vm.readonly },
+                    on: { input: _vm.input },
+                    model: {
+                      value: v.data,
+                      callback: function($$v) {
+                        _vm.$set(v, "data", $$v)
+                      },
+                      expression: "v.data"
+                    }
+                  }),
+                  _c("span", { staticClass: "json-sep" }, [_vm._v(",")])
+                ]
+              })
+            ],
+            2
+          ),
+      _c("span", { staticClass: "json-delim" }, [_vm._v("]")])
+    ],
+    1
+  )
+}
 var staticRenderFns = []
+render._withStripped = true
 
 
 
@@ -493,8 +587,82 @@ render._withStripped = true
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function () {}
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "json-object" },
+    [
+      _c("span", { staticClass: "json-delim" }, [_vm._v("{")]),
+      _c(
+        "vk-btn",
+        {
+          staticClass: "json-collapse",
+          attrs: { type: "light" },
+          on: {
+            click: function($event) {
+              $event.preventDefault()
+              _vm.collapse = !_vm.collapse
+            }
+          }
+        },
+        [
+          _c("font-awesome-icon", {
+            attrs: { icon: _vm.collapse ? "plus" : "minus" }
+          })
+        ],
+        1
+      ),
+      _vm.collapse
+        ? _c("span", { staticClass: "json-object-content" }, [_vm._v("...")])
+        : _c(
+            "div",
+            { staticClass: "json-object-content" },
+            [
+              _vm._l(_vm._value, function(v) {
+                return [
+                  _c("json-tuple", {
+                    key: v.data.key,
+                    attrs: { readonly: _vm.readonly },
+                    on: { input: _vm.input },
+                    model: {
+                      value: v.data,
+                      callback: function($$v) {
+                        _vm.$set(v, "data", $$v)
+                      },
+                      expression: "v.data"
+                    }
+                  }),
+                  _c("span", { staticClass: "json-sep" }, [_vm._v(",")])
+                ]
+              }),
+              _c(
+                "vk-btn",
+                {
+                  staticClass: "json-add",
+                  attrs: { type: "light" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.addTuple($event)
+                    }
+                  }
+                },
+                [_c("font-awesome-icon", { attrs: { icon: "plus" } })],
+                1
+              )
+            ],
+            2
+          ),
+      _c("span", { staticClass: "json-delim" }, [_vm._v("}")])
+    ],
+    1
+  )
+}
 var staticRenderFns = []
+render._withStripped = true
 
 
 
@@ -759,8 +927,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _JsonArray_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./JsonArray.vue?vue&type=script&lang=js& */ "./src/components/wx/JsonArray.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _JsonArray_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./JsonArray.vue?vue&type=style&index=0&lang=scss& */ "./src/components/wx/JsonArray.vue?vue&type=style&index=0&lang=scss&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-/* harmony import */ var _JsonArray_vue_vue_type_custom_index_0_blockType_span_class_json_delim__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./JsonArray.vue?vue&type=custom&index=0&blockType=span&class=json-delim */ "./src/components/wx/JsonArray.vue?vue&type=custom&index=0&blockType=span&class=json-delim");
-/* harmony import */ var _JsonArray_vue_vue_type_custom_index_0_blockType_span_class_json_delim__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_JsonArray_vue_vue_type_custom_index_0_blockType_span_class_json_delim__WEBPACK_IMPORTED_MODULE_4__);
 
 
 
@@ -779,10 +945,6 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   null
   
 )
-
-/* custom blocks */
-
-if (typeof _JsonArray_vue_vue_type_custom_index_0_blockType_span_class_json_delim__WEBPACK_IMPORTED_MODULE_4___default.a === 'function') _JsonArray_vue_vue_type_custom_index_0_blockType_span_class_json_delim__WEBPACK_IMPORTED_MODULE_4___default()(component)
 
 /* hot reload */
 if (true) {
@@ -806,17 +968,6 @@ if (true) {
 }
 component.options.__file = "src/components/wx/JsonArray.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./src/components/wx/JsonArray.vue?vue&type=custom&index=0&blockType=span&class=json-delim":
-/*!*************************************************************************************************!*\
-  !*** ./src/components/wx/JsonArray.vue?vue&type=custom&index=0&blockType=span&class=json-delim ***!
-  \*************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-
 
 /***/ }),
 
@@ -1301,8 +1452,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _JsonObject_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./JsonObject.vue?vue&type=script&lang=js& */ "./src/components/wx/JsonObject.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _JsonObject_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./JsonObject.vue?vue&type=style&index=0&lang=scss& */ "./src/components/wx/JsonObject.vue?vue&type=style&index=0&lang=scss&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-/* harmony import */ var _JsonObject_vue_vue_type_custom_index_0_blockType_span_class_json_delim__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./JsonObject.vue?vue&type=custom&index=0&blockType=span&class=json-delim */ "./src/components/wx/JsonObject.vue?vue&type=custom&index=0&blockType=span&class=json-delim");
-/* harmony import */ var _JsonObject_vue_vue_type_custom_index_0_blockType_span_class_json_delim__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_JsonObject_vue_vue_type_custom_index_0_blockType_span_class_json_delim__WEBPACK_IMPORTED_MODULE_4__);
 
 
 
@@ -1321,10 +1470,6 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   null
   
 )
-
-/* custom blocks */
-
-if (typeof _JsonObject_vue_vue_type_custom_index_0_blockType_span_class_json_delim__WEBPACK_IMPORTED_MODULE_4___default.a === 'function') _JsonObject_vue_vue_type_custom_index_0_blockType_span_class_json_delim__WEBPACK_IMPORTED_MODULE_4___default()(component)
 
 /* hot reload */
 if (true) {
@@ -1348,17 +1493,6 @@ if (true) {
 }
 component.options.__file = "src/components/wx/JsonObject.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./src/components/wx/JsonObject.vue?vue&type=custom&index=0&blockType=span&class=json-delim":
-/*!**************************************************************************************************!*\
-  !*** ./src/components/wx/JsonObject.vue?vue&type=custom&index=0&blockType=span&class=json-delim ***!
-  \**************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-
 
 /***/ }),
 

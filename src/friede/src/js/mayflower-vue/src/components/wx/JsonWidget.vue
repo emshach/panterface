@@ -45,6 +45,7 @@ export default  {
   },
   created() {
     this.updateVal();
+    this.editMode = this.edit;
   },
   data() {
     return {
@@ -84,6 +85,7 @@ export default  {
         }
       },
       type: 'null',
+      editMode: false,
     }
   },
   methods: {

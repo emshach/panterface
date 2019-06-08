@@ -24,7 +24,8 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_f
   name: 'JsonArray',
   mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_4__["JsonWidgetMixin"]],
   components: {
-    VkBtn: vuikit_lib_button__WEBPACK_IMPORTED_MODULE_0__["Button"]
+    VkBtn: vuikit_lib_button__WEBPACK_IMPORTED_MODULE_0__["Button"],
+    FontAwesomeIcon: _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_3__["FontAwesomeIcon"]
   },
   props: {
     value: {
@@ -34,7 +35,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_f
       }
     }
   },
-  created: function created() {
+  mounted: function mounted() {
     this.updateVal();
   },
   data: function data() {
@@ -221,7 +222,8 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_4__["library"].add(_f
   mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_3__["JsonWidgetMixin"]],
   components: {
     VkBtn: vuikit_lib_button__WEBPACK_IMPORTED_MODULE_1__["ButtonLink"],
-    JsonTuple: _json__WEBPACK_IMPORTED_MODULE_2__["JsonTuple"]
+    JsonTuple: _json__WEBPACK_IMPORTED_MODULE_2__["JsonTuple"],
+    FontAwesomeIcon: _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_6__["FontAwesomeIcon"]
   },
   props: {
     value: {

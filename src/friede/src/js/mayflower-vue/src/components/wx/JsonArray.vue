@@ -31,14 +31,17 @@ library.add( faPlus, faMinus )
 export default  {
   name: 'JsonArray',
   mixins: [ JsonWidgetMixin ],
-  components: { VkBtn },
+  components: {
+    VkBtn,
+    FontAwesomeIcon,
+  },
   props: {
     value: {
       type: Array,
       default: () => []
     }
   },
-  created() {
+  mounted() {
     this.updateVal();
   },
   data() {

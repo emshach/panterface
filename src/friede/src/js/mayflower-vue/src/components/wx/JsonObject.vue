@@ -32,7 +32,11 @@ library.add( faPlus, faMinus )
 export default  {
   name: 'json-object',
   mixins: [ JsonWidgetMixin ],
-  components: { VkBtn, JsonTuple },
+  components: {
+    VkBtn,
+    JsonTuple,
+    FontAwesomeIcon,
+  },
   props: {
     value: {
       type: Object,

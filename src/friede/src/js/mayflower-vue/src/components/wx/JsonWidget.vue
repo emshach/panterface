@@ -1,14 +1,14 @@
 <template lang="html">
   <span class="json-widget">
+    <component :is="tag" :readonly="readonly" :edit="editMode" :value="intlVal"
+               @input="input" />
     <template v-if="!readonly">
-      <vk-btn class="json-type-chooser" type="primary">{{ types[ type ].symbol}}</vk-btn>
+      <!-- <vk-btn class="json-type-chooser" type="primary">{{ types[ type ].symbol}}</vk-btn> -->
       <vk-dropdown>
         <vk-btn v-for="( a, i ) in actions" :key="i" size="small"
                 @click.prevent="setType(a)">{{ a.label }}</vk-btn>
       </vk-dropdown>
     </template>
-    <component :is="tag" :readonly="readonly" :edit="editMode" :value="intlVal"
-               @input="input" />
   </span>
 </template>
 

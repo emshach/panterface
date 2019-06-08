@@ -627,13 +627,17 @@ var render = function() {
     "span",
     { staticClass: "json-widget" },
     [
+      _c(_vm.tag, {
+        tag: "component",
+        attrs: {
+          readonly: _vm.readonly,
+          edit: _vm.editMode,
+          value: _vm.intlVal
+        },
+        on: { input: _vm.input }
+      }),
       !_vm.readonly
         ? [
-            _c(
-              "vk-btn",
-              { staticClass: "json-type-chooser", attrs: { type: "primary" } },
-              [_vm._v(_vm._s(_vm.types[_vm.type].symbol))]
-            ),
             _c(
               "vk-dropdown",
               _vm._l(_vm.actions, function(a, i) {
@@ -655,16 +659,7 @@ var render = function() {
               1
             )
           ]
-        : _vm._e(),
-      _c(_vm.tag, {
-        tag: "component",
-        attrs: {
-          readonly: _vm.readonly,
-          edit: _vm.editMode,
-          value: _vm.intlVal
-        },
-        on: { input: _vm.input }
-      })
+        : _vm._e()
     ],
     2
   )

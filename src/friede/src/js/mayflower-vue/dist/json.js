@@ -155,17 +155,29 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
+/* harmony import */ var core_js_modules_es6_number_constructor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es6.number.constructor */ "./node_modules/core-js/modules/es6.number.constructor.js");
+/* harmony import */ var core_js_modules_es6_number_constructor__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_number_constructor__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'json-number',
-  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_0__["JsonWidgetMixin"]],
-  props: [],
+  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_1__["JsonWidgetMixin"]],
+  props: {
+    value: {
+      type: Number,
+      default: 0
+    }
+  },
   mounted: function mounted() {},
   data: function data() {
     return {};
   },
-  methods: {},
+  methods: {
+    input: function input() {
+      this.$emit('input', this.$refs.input.value);
+    }
+  },
   computed: {}
 });
 
@@ -621,30 +633,12 @@ var render = function() {
     [
       _vm.editing
         ? _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.intlVal,
-                expression: "intlVal"
-              }
-            ],
+            ref: "input",
             attrs: { type: "number" },
-            domProps: { value: _vm.intlVal },
-            on: {
-              input: [
-                function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.intlVal = $event.target.value
-                },
-                _vm.input
-              ],
-              change: _vm.input
-            }
+            domProps: { value: _vm.value },
+            on: { input: _vm.input }
           })
-        : [_vm._v(_vm._s(_vm.intlVal))]
+        : [_vm._v(_vm._s(_vm.value))]
     ],
     2
   )

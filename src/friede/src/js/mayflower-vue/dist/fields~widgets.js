@@ -628,7 +628,7 @@ var render = function() {
     "span",
     { staticClass: "json-widget" },
     [
-      _vm.editing
+      !_vm.readonly
         ? [
             _c(
               "vk-btn",

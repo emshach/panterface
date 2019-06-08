@@ -1,6 +1,6 @@
 <template lang="html">
   <span class="json-widget">
-    <template v-if="editing">
+    <template v-if="!readonly">
       <vk-btn class="json-type-chooser" type="primary">{{ types[ type ].symbol}}</vk-btn>
       <vk-dropdown>
         <vk-btn v-for="( a, i ) in actions" :key="i"

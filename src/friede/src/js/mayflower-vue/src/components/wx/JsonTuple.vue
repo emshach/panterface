@@ -1,8 +1,7 @@
 <template lang="html">
   <div class="json-tuple">
     <span class="json-key">
-      <input v-if="editing" type="text" v-model="intlVal.key"
-             @change="input" @blur="editMode = false" />
+      <input v-if="editing" type="text" v-model="intlVal.key" @blur="commit" />
       <a v-else href="#" @click.prevent="editMode = true">{{
         intlVal.key.length ? intlVal.key : "''" }}</a>
       :
@@ -31,8 +30,9 @@ export default  {
     }
   },
   methods: {
-    input() {
+    commit() {
       this.$emit( 'input', this.intlVal );
+      this.editMode = false;
     }
   },
   computed: {

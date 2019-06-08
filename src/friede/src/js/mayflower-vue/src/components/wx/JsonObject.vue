@@ -65,7 +65,7 @@ export default  {
     objectVal() {
       var o = {}
       this.intlVal.forEach( x => {
-        o[v.key] = o.value
+        o[x.key] = x.value
       });
       return o
     }

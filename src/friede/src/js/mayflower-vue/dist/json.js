@@ -240,7 +240,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_4__["library"].add(_f
     objectVal: function objectVal() {
       var o = {};
       this.intlVal.forEach(function (x) {
-        o[v.key] = o.value;
+        o[x.key] = x.value;
       });
       return o;
     }
@@ -340,8 +340,9 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    input: function input() {
+    commit: function commit() {
       this.$emit('input', this.intlVal);
+      this.editMode = false;
     }
   },
   computed: {}
@@ -822,10 +823,7 @@ var render = function() {
               attrs: { type: "text" },
               domProps: { value: _vm.intlVal.key },
               on: {
-                change: _vm.input,
-                blur: function($event) {
-                  _vm.editMode = false
-                },
+                blur: _vm.commit,
                 input: function($event) {
                   if ($event.target.composing) {
                     return

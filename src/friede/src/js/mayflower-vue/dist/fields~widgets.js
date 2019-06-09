@@ -1074,6 +1074,9 @@ var JsonWidgetMixin = {
     this.editMode = this.edit;
     this.initVal();
   },
+  updated: function updated() {
+    this.editMode = this.edit;
+  },
   data: function data() {
     return {
       editMode: false,

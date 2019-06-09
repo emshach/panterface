@@ -160,9 +160,6 @@ const JsonWidgetMixin = {
     this.editMode = this.edit;
     this.initVal();
   },
-  updated() {
-    this.editMode = this.edit;
-  },
   data() {
     return {
       editMode: false,

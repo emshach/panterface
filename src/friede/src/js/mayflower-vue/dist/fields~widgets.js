@@ -84,10 +84,6 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_16__["library"].add(_
     this.updateVal();
     this.editMode = this.edit;
   },
-  updated: function updated() {
-    this.updateVal();
-    this.editMode = this.edit;
-  },
   data: function data() {
     return {
       intlVal: null,
@@ -1076,9 +1072,6 @@ var JsonWidgetMixin = {
   mounted: function mounted() {
     this.editMode = this.edit;
     this.initVal();
-  },
-  updated: function updated() {
-    this.editMode = this.edit;
   },
   data: function data() {
     return {

@@ -553,6 +553,9 @@ export default  {
   watch: {
     value( val ) {
       this.updateVal();
+    },
+    edit( val ) {
+      this.editMode = val;
     }
   }
 }

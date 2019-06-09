@@ -242,9 +242,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_4__["library"].add(_f
       }
     }
   },
-  mounted: function mounted() {
-    this.updateVal();
-  },
+  mounted: function mounted() {},
   data: function data() {
     return {
       intlVal: [],
@@ -252,7 +250,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_4__["library"].add(_f
     };
   },
   methods: {
-    updateVal: function updateVal() {
+    initVal: function initVal() {
       var _this = this;
 
       this.intlVal = _home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_0___default()(this.value).map(function (x) {
@@ -288,7 +286,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_4__["library"].add(_f
   },
   watch: {
     value: function value(val) {
-      this.updateVal();
+      this.initVal();
     }
   }
 });

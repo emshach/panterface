@@ -45,7 +45,6 @@ export default  {
     },
   },
   mounted() {
-    this.updateVal();
   },
   data() {
     return {
@@ -54,7 +53,7 @@ export default  {
     }
   },
   methods: {
-    updateVal() {
+    initVal() {
       this.intlVal = Object.keys( this.value ).map( x => ({
         data: {
           key: x,
@@ -81,7 +80,7 @@ export default  {
   },
   watch: {
     value( val ) {
-      this.updateVal();
+      this.initVal();
     }
   }
 }

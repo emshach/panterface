@@ -182,6 +182,11 @@ const JsonWidgetMixin = {
     editing() {
       return !this.readonly && this.editMode;
     }
+  },
+  watch: {
+    edit( val ) {
+      this.editMode = val;
+    }
   }
 }
 

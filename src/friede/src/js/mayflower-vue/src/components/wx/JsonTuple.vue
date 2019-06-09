@@ -58,7 +58,7 @@ export default  {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .json-tuple {
   margin-left: 1em;
   &:not(:last-child):after {

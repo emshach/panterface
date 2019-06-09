@@ -73,13 +73,18 @@ export default  {
 
 <style lang="scss">
 .json-array {
-  .json-array-content:not(.single) > .json-widget {
-    display: block;
-    margin-left: 1em;
-    &:not(:last-child):after {
-      content: ",";
-      font-weight: bold;
-      margin-left: 2px;
+  .json-array-content{
+    &.single {
+      margin: 0 2px;
+    }
+    &:not(.single) > .json-widget {
+      display: block;
+      margin-left: 1em;
+      &:not(:last-child):after {
+        content: ",";
+        font-weight: bold;
+        margin-left: 2px;
+      }
     }
   }
 }

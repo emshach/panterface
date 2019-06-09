@@ -89,7 +89,7 @@ export default  {
 
 <style lang="scss">
 .json-object {
-  .json-object.content.single .json-tuple {
+  .json-object-content.single .json-tuple {
     display: inline;
   }
 }

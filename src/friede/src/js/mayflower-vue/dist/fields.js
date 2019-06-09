@@ -2004,6 +2004,7 @@ var render = function() {
                 "vk-btn-link",
                 {
                   staticClass: "btn btn-confirm",
+                  attrs: { size: "small" },
                   on: {
                     click: function($event) {
                       $event.preventDefault()
@@ -2021,6 +2022,7 @@ var render = function() {
                 "vk-btn-link",
                 {
                   staticClass: "btn btn-cancel",
+                  attrs: { size: "small" },
                   on: {
                     click: function($event) {
                       $event.preventDefault()
@@ -2160,7 +2162,6 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "model-multiple-choice-field" },
     [
       _vm.editMode
         ? [

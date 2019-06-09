@@ -2,10 +2,10 @@
   <div v-if="editMode" :class="fieldClasses">
     <json-widget v-model="field.wip" :readonly="false" :edit="true" />
     <vk-btn-grp class="btn-ctrls">
-      <vk-btn-link class="btn btn-confirm" @click.prevent="commitField">
+      <vk-btn-link class="btn btn-confirm" size="small" @click.prevent="commitField">
         <font-awesome-icon icon="check" /> done
         </vk-btn-link>
-      <vk-btn-link class="btn btn-cancel" @click.prevent="revertField">
+      <vk-btn-link class="btn btn-cancel" size="small" @click.prevent="revertField">
         <font-awesome-icon icon="times" /> cancel
       </vk-btn-link>
     </vk-btn-grp>

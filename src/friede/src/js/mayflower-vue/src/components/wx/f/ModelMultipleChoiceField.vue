@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="model-multiple-choice-field" >
+  <div>
     <template v-if="editMode">
       <vk-table v-if="field.wip && field.wip.length" responsive hoverable striped 
                 class="edit-view" :selected-rows.sync="selected"

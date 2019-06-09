@@ -55,6 +55,10 @@ export default  {
     this.updateVal();
     this.editMode = this.edit;
   },
+  updated() {
+    this.updateVal();
+    this.editMode = this.edit;
+  },
   data() {
     return {
       intlVal: null,

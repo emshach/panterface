@@ -1,6 +1,9 @@
 
 
 
+.json-field .btn-ctrls {
+  display: block;
+}
 
 
 
@@ -32,18 +35,6 @@
   padding: 0 7px;
   height: 30px;
   line-height: 33px;
-}
-.model-multiple-choice-field .btn.btn-confirm {
-    color: limegreen;
-}
-.model-multiple-choice-field .btn.btn-confirm:hover {
-      color: forestgreen;
-}
-.model-multiple-choice-field .btn.btn-cancel {
-    color: red;
-}
-.model-multiple-choice-field .btn.btn-cancel:hover {
-      color: darkred;
 }
 .model-multiple-choice-field .uk-table th {
   font-size: 12px;

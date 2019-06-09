@@ -1,7 +1,7 @@
 <template lang="html">
   <span class="json-string">
     <span class="json-delim">"</span>
-    <textarea v-if="editing" :value="value" ref="input"
+    <textarea v-if="editing" :value="value" ref="input" class="uk-textarea"
               @blur="commit" @input="input" @change="input" />
     <template v-else>
       <span class="json-string-content" v-html="html"
@@ -28,7 +28,10 @@ library.add( faPlus, faMinus )
 export default  {
   name: 'JsonString',
   mixins: [ JsonWidgetMixin ],
-  components: { VkBtn },
+  components: {
+    VkBtn,
+    FontAwesomeIcon,
+  },
   props: {
     value: {
       type: String,
@@ -36,7 +39,10 @@ export default  {
     }
   },
   mounted() {
-    
+    this.$nextTick(() => {
+      if ( this.editMode )
+        this.$refs.inptu.focus();
+    });
   },
   data() {
     return {
@@ -55,7 +61,7 @@ export default  {
   computed: {
     html() {
       const s = this.value.replace(
-        /((?:\\\\)*)\\n/g, ( $0, $1 ) => `${$1}<br/>\n` );
+        /((?:\\\\)*)\n/g, ( $0, $1 ) => `${$1}<br/>\n` );
       if ( this.collapse && this.value.length > 40 ) {
         this.truncated = true;
         return s.slice( 0, 40 );

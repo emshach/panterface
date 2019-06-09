@@ -18,6 +18,10 @@ export default  {
     }
   },
   mounted() {
+    this.$nextTick(() => {
+      if ( this.editMode )
+        this.$refs.inptu.focus();
+    });
   },
   data() {
     return {

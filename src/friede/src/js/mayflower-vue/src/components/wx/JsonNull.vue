@@ -19,5 +19,8 @@ export default  {
 .json-null {
   font-weight: bold;
   font-size: 12px;
+  line-height: 1;
+  padding: 1px 6px;
+  margin-bottom: 2px;
 }
 </style>

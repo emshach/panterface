@@ -16,11 +16,17 @@
 .json-boolean {
   font-weight: bold;
   font-size: 12px;
+  line-height: 1;
+  padding: 1px 6px;
+  margin-bottom: 2px;
 }
 
 .json-null[data-v-2780f486] {
   font-weight: bold;
   font-size: 12px;
+  line-height: 1;
+  padding: 1px 6px;
+  margin-bottom: 2px;
 }
 
 

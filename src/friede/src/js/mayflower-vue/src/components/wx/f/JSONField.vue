@@ -2,20 +2,22 @@
   <div v-if="editMode" :class="fieldClasses">
     <json-widget v-model="field.wip" :readonly="false"
                  :edit="true" />
-    <vk-btn-grp>
+    <vk-btn-grp class="btn-ctrls">
       <vk-btn-link class="btn btn-confirm" @click.prevent="commitField">
         <font-awesome-icon icon="check" /> done
-      </vk-btn-link>
+        </vk-btn-link>
       <vk-btn-link class="btn btn-cancel" @click.prevent="revertField">
         <font-awesome-icon icon="times" /> cancel
       </vk-btn-link>
     </vk-btn-grp>
   </div>
-  <a v-else :class="fieldClasses" @click.prevent="editField" @focus="editField">
+  <div v-else :class="fieldClasses">
     <json-widget :value="field.value" />
-    <font-awesome-icon v-if="!readonly" :icon="isset ? 'edit': 'plus'"
-                       @click="editField" />
-  </a>
+    <vk-btn-link @click.prevent="editField" @focus="editField">
+      <font-awesome-icon v-if="!readonly" :icon="isset ? 'edit': 'plus'"
+                         @click="editField" />
+    </vk-btn-link>
+  </div>
 </template>
 
 <script lang="js">
@@ -25,17 +27,19 @@ import {
   ButtonGroup as VkBtnGrp
 } from 'vuikit/lib/button'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCheck, faTimes} from '@fortawesome/free-solid-svg-icons'
+import { faCheck, faTimes, faEdit, faPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { ModelFieldMixin } from '@/lib/mixins'
 import JsonWidget from '../JsonWidget'
 
-library.add( faCheck, faTimes );
+library.add( faCheck, faTimes, faEdit, faPlus );
 
 export default {
   name: 'JsonField',
   mixins: [ ModelFieldMixin ],
   components: {
+    VkBtnLink,
+    VkBtnGrp,
     JsonWidget,
     FontAwesomeIcon,
   },
@@ -60,8 +64,10 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
-  .json-field {
-
+<style lang="scss">
+.json-field {
+  .btn-ctrls {
+    display: block;
   }
+}
 </style>

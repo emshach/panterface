@@ -178,7 +178,13 @@ __webpack_require__.r(__webpack_exports__);
       default: 0
     }
   },
-  mounted: function mounted() {},
+  mounted: function mounted() {
+    var _this = this;
+
+    this.$nextTick(function () {
+      if (_this.editMode) _this.$refs.inptu.focus();
+    });
+  },
   data: function data() {
     return {};
   },
@@ -266,7 +272,8 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_4__["library"].add(_f
         data: {
           key: '',
           value: null
-        }
+        },
+        edit: true
       });
     }
   },
@@ -315,7 +322,8 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_2__["library"].add(_f
   name: 'JsonString',
   mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_4__["JsonWidgetMixin"]],
   components: {
-    VkBtn: vuikit_lib_button__WEBPACK_IMPORTED_MODULE_1__["Button"]
+    VkBtn: vuikit_lib_button__WEBPACK_IMPORTED_MODULE_1__["Button"],
+    FontAwesomeIcon: _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"]
   },
   props: {
     value: {
@@ -323,7 +331,13 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_2__["library"].add(_f
       default: ''
     }
   },
-  mounted: function mounted() {},
+  mounted: function mounted() {
+    var _this = this;
+
+    this.$nextTick(function () {
+      if (_this.editMode) _this.$refs.inptu.focus();
+    });
+  },
   data: function data() {
     return {
       truncated: false,
@@ -340,7 +354,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_2__["library"].add(_f
   },
   computed: {
     html: function html() {
-      var s = this.value.replace(/((?:\\\\)*)\\n/g, function ($0, $1) {
+      var s = this.value.replace(/((?:\\\\)*)\n/g, function ($0, $1) {
         return "".concat($1, "<br/>\n");
       });
 
@@ -382,7 +396,13 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
   },
-  mounted: function mounted() {},
+  mounted: function mounted() {
+    var _this = this;
+
+    this.$nextTick(function () {
+      if (_this.editMode) _this.$refs.key.focus();
+    });
+  },
   data: function data() {
     return {
       intlVal: {
@@ -409,11 +429,11 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     editKey: function editKey() {
-      var _this = this;
+      var _this2 = this;
 
       this.editMode = true;
       this.$nextTick(function () {
-        _this.$refs.key.focus();
+        _this2.$refs.key.focus();
       });
     }
   },
@@ -719,7 +739,7 @@ var render = function() {
                 return [
                   _c("json-tuple", {
                     key: v.data.key,
-                    attrs: { readonly: _vm.readonly },
+                    attrs: { readonly: _vm.readonly, edit: v.edit },
                     on: { input: _vm.input },
                     model: {
                       value: v.data,
@@ -786,6 +806,7 @@ var render = function() {
       _vm.editing
         ? _c("textarea", {
             ref: "input",
+            staticClass: "uk-textarea",
             domProps: { value: _vm.value },
             on: { blur: _vm.commit, input: _vm.input, change: _vm.input }
           })

@@ -24,7 +24,10 @@ export default  {
     },
   },
   mounted() {
-    
+    this.$nextTick(() => {
+      if ( this.editMode )
+        this.$refs.key.focus();
+    });
   },
   data() {
     return {

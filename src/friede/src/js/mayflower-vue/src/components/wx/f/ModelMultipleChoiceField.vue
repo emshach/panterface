@@ -160,18 +160,6 @@ export default {
     padding: 0 7px;
     height: 30px;
     line-height: 33px;
-    &.btn-confirm {
-      color: limegreen;
-      &:hover {
-        color: forestgreen;
-      }
-    }
-    &.btn-cancel {
-      color: red;
-      &:hover {
-        color: darkred;
-      }
-    }
   }
   .uk-table {
     th {

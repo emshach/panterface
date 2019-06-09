@@ -66,6 +66,18 @@
 .form-page .no-data {
     color: rgba(0, 0, 0, 0.35);
 }
+.form-page .btn-confirm {
+    color: limegreen;
+}
+.form-page .btn-confirm:hover {
+      color: forestgreen;
+}
+.form-page .btn-cancel {
+    color: red;
+}
+.form-page .btn-cancel:hover {
+      color: darkred;
+}
 
 
 /*# sourceMappingURL=pages.css.map*/

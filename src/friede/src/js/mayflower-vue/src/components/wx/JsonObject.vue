@@ -9,6 +9,7 @@
     <span v-else class="json-object-content">
       <template v-for="v in intlVal">
         <json-tuple :readonly="readonly" :key="v.data.key" v-model="v.data"
+                    :edit="v.edit"
                     @input="input" />
       </template>
       <vk-btn v-if="editing" class="json-add" type="light" @click.prevent="addTuple">
@@ -65,7 +66,8 @@ export default  {
       this.$emit( 'input', this.objectVal );
     },
     addTuple() {
-      this.intlVal.push({ data: { key: '', value: null }});
+      this.intlVal.push({ data: { key: '', value: null },
+                          edit: true });
     }
   },
   computed: {

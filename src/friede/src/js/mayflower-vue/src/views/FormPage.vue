@@ -149,5 +149,17 @@ export default  {
   .no-data {
     color: rgba(0,0,0,0.35);
   }
+  .btn-confirm {
+    color: limegreen;
+    &:hover {
+      color: forestgreen;
+    }
+  }
+  .btn-cancel {
+    color: red;
+    &:hover {
+      color: darkred;
+    }
+  }
 }
 </style>

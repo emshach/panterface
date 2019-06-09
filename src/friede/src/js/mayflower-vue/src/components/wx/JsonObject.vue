@@ -5,7 +5,9 @@
             @click.prevent="collapse=!collapse">
       <font-awesome-icon :icon="collapse ? 'plus' : 'minus' " />
     </vk-btn>
-    <span v-if="collapse" class="json-object-content">...</span>
+    <span v-if="collapse" class="json-object-content">
+      <span class="json-ellipses">...</span>
+    </span>
     <span v-else :class="[ 'json-object-content', intlVal.length > 1 ? '' : 'single' ]">
       <template v-for="v in intlVal">
         <json-tuple :readonly="readonly" :key="v.data.key" v-model="v.data"
@@ -91,6 +93,7 @@ export default  {
 .json-object {
   .json-object-content.single .json-tuple {
     display: inline;
+    margin: 0 4px;
   }
 }
 </style>

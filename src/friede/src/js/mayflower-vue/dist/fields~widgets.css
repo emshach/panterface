@@ -30,6 +30,10 @@
       padding: 2px 10px;
       line-height: unset;
 }
+.json-widget .json-ellipses {
+    font-weight: bold;
+    margin: 0 2px;
+}
 
 
 /*# sourceMappingURL=fields~widgets.css.map*/

@@ -482,7 +482,9 @@ var render = function() {
           )
         : _vm._e(),
       _vm.collapse
-        ? _c("span", { staticClass: "json-array-content" }, [_vm._v("...")])
+        ? _c("span", { staticClass: "json-array-content" }, [
+            _c("span", { staticClass: "json-ellipses" }, [_vm._v("...")])
+          ])
         : _c(
             "span",
             {
@@ -733,7 +735,9 @@ var render = function() {
           )
         : _vm._e(),
       _vm.collapse
-        ? _c("span", { staticClass: "json-object-content" }, [_vm._v("...")])
+        ? _c("span", { staticClass: "json-object-content" }, [
+            _c("span", { staticClass: "json-ellipses" }, [_vm._v("...")])
+          ])
         : _c(
             "span",
             {

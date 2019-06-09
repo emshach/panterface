@@ -1,5 +1,6 @@
 .json-object .json-object-content.single .json-tuple {
   display: inline;
+  margin: 0 4px;
 }
 
 .json-tuple {

@@ -592,5 +592,9 @@ export default  {
       line-height: unset;
     }
   }
+  .json-ellipses {
+    font-weight: bold;
+    margin: 0 2px;
+  }
 }
 </style>

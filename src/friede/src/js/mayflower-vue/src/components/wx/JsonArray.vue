@@ -5,7 +5,9 @@
             @click.prevent="collapse=!collapse">
       <font-awesome-icon :icon="collapse ? 'plus' : 'minus' " />
     </vk-btn>
-    <span v-if="collapse" class="json-array-content">...</span>
+    <span v-if="collapse" class="json-array-content">
+      <span class="json-ellipses">...</span>
+    </span>
     <span v-else :class="[ 'json-array-content', intlVal.length > 1 ? '' : 'single' ]">
       <template v-for="( v, i ) in intlVal">
         <json-widget :readonly="readonly" :edit="editMode" :key="i"

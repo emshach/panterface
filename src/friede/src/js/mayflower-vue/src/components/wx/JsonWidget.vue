@@ -4,9 +4,9 @@
                @input="input" />
     <template v-if="!readonly">
       <vk-btn class="json-type-chooser" type="light">
-        <font-awesome-icon icon="edit" />
+        <font-awesome-icon icon="random" />
       </vk-btn>
-      <vk-dropdown>
+      <vk-dropdown :delay-show="100" :offset="2">
         <vk-btn v-for="( a, i ) in actions" :key="i" size="small"
                 @click.prevent="setType(a)">{{ a.label }}</vk-btn>
       </vk-dropdown>
@@ -25,16 +25,17 @@ import { Button as VkBtn } from 'vuikit/lib/button'
 import { Dropdown as VkDropdown } from 'vuikit/lib/dropdown'
 import components from './json'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faEdit } from '@fortawesome/free-solid-svg-icons'
+import { faRandom } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-library.add( faEdit );
+library.add( faRandom );
 
 export default  {
   name: 'JsonWidget',
   components: {
     VkBtn,
     VkDropdown,
+    FontAwesomeIcon,
     ...components
   },
   props: {

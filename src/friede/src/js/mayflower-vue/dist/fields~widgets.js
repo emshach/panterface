@@ -59,12 +59,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_16__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_17__["faEdit"]);
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_16__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_17__["faRandom"]);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'JsonWidget',
   components: Object(_home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_6__["default"])({
     VkBtn: vuikit_lib_button__WEBPACK_IMPORTED_MODULE_13__["Button"],
-    VkDropdown: vuikit_lib_dropdown__WEBPACK_IMPORTED_MODULE_14__["Dropdown"]
+    VkDropdown: vuikit_lib_dropdown__WEBPACK_IMPORTED_MODULE_14__["Dropdown"],
+    FontAwesomeIcon: _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_18__["FontAwesomeIcon"]
   }, _json__WEBPACK_IMPORTED_MODULE_15__["default"]),
   props: {
     value: {
@@ -657,11 +658,12 @@ var render = function() {
             _c(
               "vk-btn",
               { staticClass: "json-type-chooser", attrs: { type: "light" } },
-              [_c("font-awesome-icon", { attrs: { icon: "edit" } })],
+              [_c("font-awesome-icon", { attrs: { icon: "random" } })],
               1
             ),
             _c(
               "vk-dropdown",
+              { attrs: { "delay-show": 100, offset: 2 } },
               _vm._l(_vm.actions, function(a, i) {
                 return _c(
                   "vk-btn",

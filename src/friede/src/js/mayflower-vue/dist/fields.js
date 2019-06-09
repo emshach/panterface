@@ -533,7 +533,8 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_2__["library"].add(_f
     return {
       options: {
         confirmText: 'confirm',
-        cancelText: 'cancel'
+        cancelText: 'cancel',
+        classes: ['json-field']
       }
     };
   },
@@ -2051,8 +2052,10 @@ var render = function() {
         [
           _c("json-widget", { attrs: { value: _vm.field.value } }),
           _c(
-            "vk-btn-link",
+            "a",
             {
+              staticClass: "btn-edit",
+              attrs: { href: "#" },
               on: {
                 click: function($event) {
                   $event.preventDefault()

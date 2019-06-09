@@ -4,6 +4,9 @@
 .json-field .btn-ctrls {
   display: block;
 }
+.json-field .btn-edit {
+  margin-left: 4px;
+}
 
 
 

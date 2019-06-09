@@ -1,7 +1,6 @@
 <template lang="html">
   <div v-if="editMode" :class="fieldClasses">
-    <json-widget v-model="field.wip" :readonly="false"
-                 :edit="true" />
+    <json-widget v-model="field.wip" :readonly="false" :edit="true" />
     <vk-btn-grp class="btn-ctrls">
       <vk-btn-link class="btn btn-confirm" @click.prevent="commitField">
         <font-awesome-icon icon="check" /> done
@@ -13,10 +12,10 @@
   </div>
   <div v-else :class="fieldClasses">
     <json-widget :value="field.value" />
-    <vk-btn-link @click.prevent="editField" @focus="editField">
+    <a href="#" class="btn-edit" @click.prevent="editField" @focus="editField">
       <font-awesome-icon v-if="!readonly" :icon="isset ? 'edit': 'plus'"
                          @click="editField" />
-    </vk-btn-link>
+    </a>
   </div>
 </template>
 
@@ -51,7 +50,8 @@ export default {
     return {
       options: {
         confirmText: 'confirm',
-        cancelText: 'cancel'
+        cancelText: 'cancel',
+        classes: [ 'json-field' ],
       }
     }
   },
@@ -68,6 +68,9 @@ export default {
 .json-field {
   .btn-ctrls {
     display: block;
+  }
+  .btn-edit {
+    margin-left: 4px;
   }
 }
 </style>

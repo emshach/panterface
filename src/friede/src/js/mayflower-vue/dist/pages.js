@@ -13,15 +13,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es6_regexp_replace__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_regexp_replace__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var core_js_modules_es6_function_name__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es6.function.name */ "./node_modules/core-js/modules/es6.function.name.js");
 /* harmony import */ var core_js_modules_es6_function_name__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_function_name__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
-/* harmony import */ var _fields__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./fields */ "./src/components/fields.js");
+/* harmony import */ var lodash_kebabCase__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lodash/kebabCase */ "./node_modules/lodash/kebabCase.js");
+/* harmony import */ var lodash_kebabCase__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash_kebabCase__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
+/* harmony import */ var _fields__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./fields */ "./src/components/fields.js");
+
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Field',
-  components: _fields__WEBPACK_IMPORTED_MODULE_3__["default"],
+  components: _fields__WEBPACK_IMPORTED_MODULE_4__["default"],
   props: {
     type: {
       type: String,
@@ -38,20 +41,23 @@ __webpack_require__.r(__webpack_exports__);
     fieldset: Boolean
   },
   mounted: function mounted() {
-    this.field = Object(_lib_objects__WEBPACK_IMPORTED_MODULE_2__["Field"])(this.data || {
+    this.field = Object(_lib_objects__WEBPACK_IMPORTED_MODULE_3__["Field"])(this.data || {
       type: this.type,
       name: this.name
     });
   },
   data: function data() {
     return {
-      field: Object(_lib_objects__WEBPACK_IMPORTED_MODULE_2__["Field"])()
+      field: Object(_lib_objects__WEBPACK_IMPORTED_MODULE_3__["Field"])()
     };
   },
   methods: {},
   computed: {
     label: function label() {
       return this.name.replace(/^_+/, '').replace(/_+/g, ' ');
+    },
+    fieldClass: function fieldClass() {
+      return lodash_kebabCase__WEBPACK_IMPORTED_MODULE_2___default()(this.type);
     }
   }
 });
@@ -158,7 +164,7 @@ var render = function() {
   return _vm.fieldset
     ? _c(
         "div",
-        { staticClass: "field uk-fieldset" },
+        { class: ["field", "uk-fieldset", _vm.fieldClass] },
         [
           _c("h4", [_vm._v(_vm._s(_vm.label))]),
           _c("hr", { staticClass: "titlesep" }),
@@ -169,7 +175,7 @@ var render = function() {
         ],
         1
       )
-    : _c("div", { staticClass: "field" }, [
+    : _c("div", { class: ["field", "uk-fieldset", _vm.fieldClass] }, [
         _c("label", { staticClass: "uk-form-label" }, [
           _vm._v(_vm._s(_vm.label))
         ]),

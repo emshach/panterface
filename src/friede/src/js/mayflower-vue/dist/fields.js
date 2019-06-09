@@ -530,13 +530,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_2__["library"].add(_f
   props: {},
   mounted: function mounted() {},
   data: function data() {
-    return {
-      options: {
-        confirmText: 'confirm',
-        cancelText: 'cancel',
-        classes: ['json-field']
-      }
-    };
+    return {};
   },
   methods: {},
   computed: {}

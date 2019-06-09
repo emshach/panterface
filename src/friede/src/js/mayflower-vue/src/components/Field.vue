@@ -1,10 +1,10 @@
 <template lang="html">
-  <div v-if="fieldset" class="field uk-fieldset">
+  <div v-if="fieldset" :class="['field', 'uk-fieldset', fieldClass ]">
     <h4>{{ label }}</h4>
     <hr class="titlesep" />
     <component :is="type" :name="name" :field="field" empty-value="None" />
   </div>
-  <div v-else class="field">
+  <div v-else :class="['field', 'uk-fieldset', fieldClass ]">
     <label class="uk-form-label">{{ label }}</label>
     <div class="uk-form-controls">
       <component :is="type" :name="name" :field="field" />
@@ -13,6 +13,7 @@
 </template>
 
 <script lang="js">
+import kebabCase from 'lodash/kebabCase'
 import { Field } from '@/lib/objects'
 import fields from './fields'
 export default  {
@@ -46,6 +47,9 @@ export default  {
   computed: {
     label() {
       return this.name.replace( /^_+/, '' ).replace( /_+/g, ' ' );
+    },
+    fieldClass() {
+      return kebabCase( this.type );
     }
   }
 }
@@ -54,7 +58,7 @@ export default  {
 <style lang="scss">
 .field {
   .field-display {
-    > svg.svg-inline--fa {
+    > svg.svg-inline--fa, > .btn-edit svg.svg-inline--fa {
       margin-left: 6px;
       font-size: 0.875em;
       vertical-align: 0;

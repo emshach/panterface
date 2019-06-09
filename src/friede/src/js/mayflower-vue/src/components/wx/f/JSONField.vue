@@ -48,11 +48,6 @@ export default {
   },
   data() {
     return {
-      options: {
-        confirmText: 'confirm',
-        cancelText: 'cancel',
-        classes: [ 'json-field' ],
-      }
     }
   },
   methods: {
@@ -68,9 +63,6 @@ export default {
 .json-field {
   .btn-ctrls {
     display: block;
-  }
-  .btn-edit {
-    margin-left: 4px;
   }
 }
 </style>

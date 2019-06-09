@@ -6,7 +6,7 @@
       <font-awesome-icon :icon="collapse ? 'plus' : 'minus' " />
     </vk-btn>
     <span v-if="collapse" class="json-array-content">...</span>
-    <span v-else class="json-array-content">
+    <span v-else :class="[ 'json-array-content', intlVal.length > 1 ? '' : 'single' ]">
       <template v-for="( v, i ) in intlVal">
         <json-widget :readonly="readonly" :edit="editMode" :key="i"
                      v-model="v.data" @input="input" />
@@ -73,9 +73,14 @@ export default  {
 
 <style lang="scss">
 .json-array {
-  .json-array-content > .json-widget {
+  .json-array-content:not(.single) > .json-widget {
     display: block;
     margin-left: 1em;
+    &:not(:last-child):after {
+      content: ",";
+      font-weight: bold;
+      margin-left: 2px;
+    }
   }
 }
 </style>

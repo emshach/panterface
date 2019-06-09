@@ -485,7 +485,12 @@ var render = function() {
         ? _c("span", { staticClass: "json-array-content" }, [_vm._v("...")])
         : _c(
             "span",
-            { staticClass: "json-array-content" },
+            {
+              class: [
+                "json-array-content",
+                _vm.intlVal.length > 1 ? "" : "single"
+              ]
+            },
             [
               _vm._l(_vm.intlVal, function(v, i) {
                 return [
@@ -731,7 +736,12 @@ var render = function() {
         ? _c("span", { staticClass: "json-object-content" }, [_vm._v("...")])
         : _c(
             "span",
-            { staticClass: "json-object-content" },
+            {
+              class: [
+                "json-object-content",
+                _vm.intlVal.length > 1 ? "" : "single"
+              ]
+            },
             [
               _vm._l(_vm.intlVal, function(v) {
                 return [
@@ -748,27 +758,27 @@ var render = function() {
                     }
                   })
                 ]
-              }),
-              _vm.editing
-                ? _c(
-                    "vk-btn",
-                    {
-                      staticClass: "json-add",
-                      attrs: { type: "light" },
-                      on: {
-                        click: function($event) {
-                          $event.preventDefault()
-                          return _vm.addTuple($event)
-                        }
-                      }
-                    },
-                    [_c("font-awesome-icon", { attrs: { icon: "plus" } })],
-                    1
-                  )
-                : _vm._e()
+              })
             ],
             2
           ),
+      _vm.editing && !_vm.collapse
+        ? _c(
+            "vk-btn",
+            {
+              staticClass: "json-add",
+              attrs: { type: "light" },
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  return _vm.addTuple($event)
+                }
+              }
+            },
+            [_c("font-awesome-icon", { attrs: { icon: "plus" } })],
+            1
+          )
+        : _vm._e(),
       _c("span", { staticClass: "json-delim" }, [_vm._v("}")])
     ],
     1

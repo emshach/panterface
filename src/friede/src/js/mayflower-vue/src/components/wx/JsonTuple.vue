@@ -61,5 +61,10 @@ export default  {
 <style scoped lang="scss">
 .json-tuple {
   margin-left: 1em;
+  &:not(:last-child):after {
+    content: ",";
+    font-weight: bold;
+    margin-left: 2px;
+  }
 }
 </style>

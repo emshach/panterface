@@ -1,11 +1,24 @@
+.json-object .json-object.content.single .json-tuple {
+  display: inline;
+}
 
 .json-tuple[data-v-2869ddfc] {
   margin-left: 1em;
 }
+.json-tuple[data-v-2869ddfc]:not(:last-child):after {
+    content: ",";
+    font-weight: bold;
+    margin-left: 2px;
+}
 
-.json-array .json-array-content > .json-widget {
+.json-array .json-array-content:not(.single) > .json-widget {
   display: block;
   margin-left: 1em;
+}
+.json-array .json-array-content:not(.single) > .json-widget:not(:last-child):after {
+    content: ",";
+    font-weight: bold;
+    margin-left: 2px;
 }
 
 .json-number[data-v-e24bca02] {

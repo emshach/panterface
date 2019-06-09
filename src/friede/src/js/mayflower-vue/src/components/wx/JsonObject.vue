@@ -6,16 +6,17 @@
       <font-awesome-icon :icon="collapse ? 'plus' : 'minus' " />
     </vk-btn>
     <span v-if="collapse" class="json-object-content">...</span>
-    <span v-else class="json-object-content">
+    <span v-else :class="[ 'json-object-content', intlVal.length > 1 ? '' : 'single' ]">
       <template v-for="v in intlVal">
         <json-tuple :readonly="readonly" :key="v.data.key" v-model="v.data"
                     :edit="v.edit"
                     @input="input" />
       </template>
-      <vk-btn v-if="editing" class="json-add" type="light" @click.prevent="addTuple">
-        <font-awesome-icon icon="plus" />
-      </vk-btn>
     </span>
+    <vk-btn v-if="editing && !collapse" class="json-add" type="light"
+            @click.prevent="addTuple">
+      <font-awesome-icon icon="plus" />
+    </vk-btn>
     <span class="json-delim">}</span>
   </span>
 </template>
@@ -88,5 +89,8 @@ export default  {
 
 <style lang="scss">
 .json-object {
+  .json-object.content.single .json-tuple {
+    display: inline;
+  }
 }
 </style>

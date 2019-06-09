@@ -556,6 +556,7 @@ export default  {
 
 <style lang="scss">
 .json-widget {
+  line-height: 1.4em;
   .json-delim {
     font-weight: bold;
     color: midnightblue;

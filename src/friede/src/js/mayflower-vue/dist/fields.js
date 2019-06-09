@@ -504,16 +504,26 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.runtime.esm.js");
-/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
-/* harmony import */ var _JsonWidget__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../JsonWidget */ "./src/components/wx/JsonWidget.vue");
+/* harmony import */ var vuikit_lib_button__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuikit/lib/button */ "./node_modules/vuikit/lib/button.js");
+/* harmony import */ var _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @fortawesome/fontawesome-svg-core */ "./node_modules/@fortawesome/fontawesome-svg-core/index.es.js");
+/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+/* harmony import */ var _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @fortawesome/vue-fontawesome */ "./node_modules/@fortawesome/vue-fontawesome/index.es.js");
+/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
+/* harmony import */ var _JsonWidget__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../JsonWidget */ "./src/components/wx/JsonWidget.vue");
 
 
 
+
+
+
+
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_2__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faCheck"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faTimes"]);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'JsonField',
-  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_1__["ModelFieldMixin"]],
+  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_5__["ModelFieldMixin"]],
   components: {
-    JsonWidget: _JsonWidget__WEBPACK_IMPORTED_MODULE_2__["default"]
+    JsonWidget: _JsonWidget__WEBPACK_IMPORTED_MODULE_6__["default"],
+    FontAwesomeIcon: _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_4__["FontAwesomeIcon"]
   },
   props: {},
   mounted: function mounted() {},
@@ -1975,18 +1985,63 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _vm.editMode
-    ? _c("json-widget", {
-        class: _vm.fieldClasses,
-        attrs: { readonly: false, edit: true },
-        on: { blur: _vm.commitField },
-        model: {
-          value: _vm.field.wip,
-          callback: function($$v) {
-            _vm.$set(_vm.field, "wip", $$v)
-          },
-          expression: "field.wip"
-        }
-      })
+    ? _c(
+        "div",
+        { class: _vm.fieldClasses },
+        [
+          _c("json-widget", {
+            attrs: { readonly: false, edit: true },
+            model: {
+              value: _vm.field.wip,
+              callback: function($$v) {
+                _vm.$set(_vm.field, "wip", $$v)
+              },
+              expression: "field.wip"
+            }
+          }),
+          _c(
+            "vk-btn-grp",
+            [
+              _c(
+                "vk-btn-link",
+                {
+                  staticClass: "btn btn-confirm",
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.commitField($event)
+                    }
+                  }
+                },
+                [
+                  _c("font-awesome-icon", { attrs: { icon: "check" } }),
+                  _vm._v(" done\n    ")
+                ],
+                1
+              ),
+              _c(
+                "vk-btn-link",
+                {
+                  staticClass: "btn btn-cancel",
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.revertField($event)
+                    }
+                  }
+                },
+                [
+                  _c("font-awesome-icon", { attrs: { icon: "times" } }),
+                  _vm._v(" cancel\n    ")
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
     : _c(
         "a",
         {

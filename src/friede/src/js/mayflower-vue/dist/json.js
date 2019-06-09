@@ -182,7 +182,7 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     this.$nextTick(function () {
-      if (_this.editMode) _this.$refs.inptu.focus();
+      if (_this.editMode) _this.$refs.input.focus();
     });
   },
   data: function data() {
@@ -190,7 +190,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     input: function input() {
-      this.$emit('input', _home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_0___default()(this.$refs.input.value));
+      this.$emit('input', _home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_0___default()(this.$refs.input.value || 0));
     },
     commit: function commit() {
       this.editMode = false;

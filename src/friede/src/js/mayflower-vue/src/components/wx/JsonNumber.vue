@@ -20,7 +20,7 @@ export default  {
   mounted() {
     this.$nextTick(() => {
       if ( this.editMode )
-        this.$refs.inptu.focus();
+        this.$refs.input.focus();
     });
   },
   data() {
@@ -29,7 +29,7 @@ export default  {
   },
   methods: {
     input() {
-      this.$emit( 'input', parseInt( this.$refs.input.value ));
+      this.$emit( 'input', parseInt( this.$refs.input.value || 0 ));
     },
     commit() {
       this.editMode = false;

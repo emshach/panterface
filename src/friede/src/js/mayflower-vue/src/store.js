@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+const Friede = window.Friede;
+
 Vue.use( Vuex );
 
 async function getModel( model, have ) {
@@ -13,7 +15,7 @@ async function getModel( model, have ) {
 
 export default new Vuex.Store({
   state: {
-    user: null,
+    user: Friede.user,
     context: [],
     location: null,
     lastLocation: null,
@@ -81,7 +83,6 @@ export default new Vuex.Store({
       return state.lastLocation
          && state.lastLocation.screens
          && state.lastLocation.screens.default
-         && state.lastLocation.screens.default.data.component
     },
   }
 })

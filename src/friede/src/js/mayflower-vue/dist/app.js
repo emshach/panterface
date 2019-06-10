@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "4c841ca73d9bac7e6f83";
+/******/ 	var hotCurrentHash = "b56673e30061ad6a8f33";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -980,16 +980,29 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _components_Prompt__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/components/Prompt */ "./src/components/Prompt.vue");
+/* harmony import */ var vuikit_lib_button__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuikit/lib/button */ "./node_modules/vuikit/lib/button.js");
+/* harmony import */ var vuikit_lib_dropdown__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuikit/lib/dropdown */ "./node_modules/vuikit/lib/dropdown.js");
+/* harmony import */ var _vuikit_icons__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @vuikit/icons */ "./node_modules/@vuikit/icons/dist/vuikit-icons.esm.js");
+/* harmony import */ var vuikit_lib_nav__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuikit/lib/nav */ "./node_modules/vuikit/lib/nav.js");
+/* harmony import */ var _components_Prompt__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/components/Prompt */ "./src/components/Prompt.vue");
+
+
+
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'App',
   components: {
-    Prompt: _components_Prompt__WEBPACK_IMPORTED_MODULE_0__["default"]
+    VkBtnLink: vuikit_lib_button__WEBPACK_IMPORTED_MODULE_0__["ButtonLink"],
+    VkDropdown: vuikit_lib_dropdown__WEBPACK_IMPORTED_MODULE_1__["Dropdown"],
+    VkNav: vuikit_lib_nav__WEBPACK_IMPORTED_MODULE_3__["NavDropdown"],
+    VkNavItem: vuikit_lib_nav__WEBPACK_IMPORTED_MODULE_3__["NavItem"],
+    VkNavParent: vuikit_lib_nav__WEBPACK_IMPORTED_MODULE_3__["NavItemParent"],
+    VkIconUser: _vuikit_icons__WEBPACK_IMPORTED_MODULE_2__["IconUser"],
+    Prompt: _components_Prompt__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
   data: function data() {
     return {
-      menus: Friede.menus,
       searching: false // TODO: 
 
     };
@@ -1003,6 +1016,12 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     context: function context() {
       return this.$store.state.context;
+    },
+    menus: function menus() {
+      return Friede.menus;
+    },
+    user: function user() {
+      return Friede.user;
     }
   }
 });
@@ -1731,8 +1750,11 @@ var FormPage = function FormPage() {
   },
   methods: {},
   computed: {
+    screen: function screen() {
+      return this.$store.getters.screen;
+    },
     component: function component() {
-      return this.$store.getters.screen || 'Home';
+      return this.screen && this.screen.data.component || 'Home';
     }
   }
 });
@@ -1781,14 +1803,47 @@ var render = function() {
       _c(
         "div",
         { attrs: { id: "nav" } },
-        _vm._l(_vm.menus.nav.$links, function(link, key) {
-          return _c(
-            "router-link",
-            { key: key, attrs: { to: link.location.$href } },
-            [_vm._v(_vm._s(link.$title || link.location.$title))]
-          )
-        }),
-        1
+        [
+          _c(
+            "vk-btn-link",
+            [_c("vk-icon-user"), _vm._v(_vm._s(_vm.user.fname))],
+            1
+          ),
+          _c(
+            "vk-dropdown",
+            [
+              _c(
+                "vk-nav",
+                [
+                  _vm.user.uid && !_vm.user.anonymous
+                    ? [
+                        _c("vk-nav-item", { attrs: { href: "logout" } }, [
+                          _vm._v("logout")
+                        ])
+                      ]
+                    : [
+                        _c("vk-nav-item", { attrs: { href: "login" } }, [
+                          _vm._v("login")
+                        ]),
+                        _c("vk-nav-item", { attrs: { href: "sign up" } }, [
+                          _vm._v("login")
+                        ])
+                      ]
+                ],
+                2
+              )
+            ],
+            1
+          ),
+          _vm._l(_vm.menus.nav.$links, function(link, key) {
+            return _c(
+              "router-link",
+              { key: key, attrs: { to: link.location.$href } },
+              [_vm._v(_vm._s(link.$title || link.location.$title))]
+            )
+          })
+        ],
+        2
       ),
       _c("router-view"),
       _c("prompt", {
@@ -3483,6 +3538,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+var Friede = window.Friede;
 vue__WEBPACK_IMPORTED_MODULE_4__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_5__["default"]);
 
 function _getModel2(_x, _x2) {
@@ -3515,7 +3571,7 @@ function _getModel() {
 
 /* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_5__["default"].Store({
   state: {
-    user: null,
+    user: Friede.user,
     context: [],
     location: null,
     lastLocation: null,
@@ -3700,7 +3756,7 @@ function _getModel() {
       }).join('/');
     },
     screen: function screen(state) {
-      return state.lastLocation && state.lastLocation.screens && state.lastLocation.screens.default && state.lastLocation.screens.default.data.component;
+      return state.lastLocation && state.lastLocation.screens && state.lastLocation.screens.default;
     }
   }
 }));

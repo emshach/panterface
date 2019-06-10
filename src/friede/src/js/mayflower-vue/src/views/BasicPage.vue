@@ -25,8 +25,11 @@ export default  {
   methods: {
   },
   computed: {
+    screen() {
+      return this.$store.getters.screen
+    },
     component() {
-      return this.$store.getters.screen || 'Home'
+      return this.screen && this.screen.data.component || 'Home'
     }
   }
 }

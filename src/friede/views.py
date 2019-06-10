@@ -108,6 +108,7 @@ def index( request ):
             username=user.username,
             fname=user.first_name,
             lname=user.last_name,
+            anonymous=user.anonymous,
         )),
         models=models
     )
@@ -306,25 +307,30 @@ def api_models( request, models=None, format=None ):
             if ftype in form_field_mappings:
                 ftype = form_field_mappings[ ftype ]
                 if not ftype: continue
-            field = dict( name=f.name, type=ftype, default=None )
-            try:
-                dflt = getattr( f, 'default' )
-                if dflt is dict:
-                    dflt = ('f', 'Object' )
-                elif dflt in ( list, tuple ):
-                    dflt = ( 'f', 'Array' )
-                elif dflt in ( int, float ):
-                    dflt = ( 'f', 'Number' )
-                elif dflt in ( str, basestring ):
-                    dflt = ( 'f', 'String' )
-                elif dflt is bool:
-                    dflt = ( 'f', 'Boolean' )
-                elif callable( dflt ):
-                    dflt = NOT_PROVIDED
-                if dflt is not NOT_PROVIDED:
-                    field[ 'default' ] = dflt
-            except AttributeError:
-                pass
+            field = dict(
+                name=f.name,
+                type=ftype,
+                default=sr.relations[ f.name ].default,
+            )
+            if field.get( 'default' ) is None:
+                try:
+                    dflt = getattr( f, 'default' )
+                    if dflt is dict:
+                        dflt = ('f', 'Object' )
+                    elif dflt in ( list, tuple ):
+                        dflt = ( 'f', 'Array' )
+                    elif dflt in ( int, float ):
+                        dflt = ( 'f', 'Number' )
+                    elif dflt in ( str, basestring ):
+                        dflt = ( 'f', 'String' )
+                    elif dflt is bool:
+                        dflt = ( 'f', 'Boolean' )
+                    elif callable( dflt ):
+                        dflt = NOT_PROVIDED
+                    if dflt is not NOT_PROVIDED:
+                        field[ 'default' ] = dflt
+                except AttributeError:
+                    pass
             data[ 'fields' ].append( field )
             if getattr( f, 'related_model', None ):
                 m = f.related_model

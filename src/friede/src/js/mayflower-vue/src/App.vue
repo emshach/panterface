@@ -1,6 +1,18 @@
 <template lang="html">
   <div id="app">
     <div id="nav">
+      <vk-btn-link><vk-icon-user />{{ user.fname }}</vk-btn-link>
+      <vk-dropdown>
+        <vk-nav>
+          <template v-if="user.uid && !user.anonymous">
+            <vk-nav-item href="logout">logout</vk-nav-item>
+          </template>
+          <template v-else>
+            <vk-nav-item href="login">login</vk-nav-item>
+            <vk-nav-item href="sign up">login</vk-nav-item>
+          </template>
+        </vk-nav>
+      </vk-dropdown>
       <router-link
         v-for="( link, key ) in menus.nav.$links" :key="key"
         :to="link.location.$href">{{ link.$title || link.location.$title }}</router-link>
@@ -14,15 +26,28 @@
 </template>
 
 <script lang="js">
+import { ButtonLink as VkBtnLink } from 'vuikit/lib/button'
+import { Dropdown as VkDropdown } from 'vuikit/lib/dropdown'
+import { IconUser as VkIconUser } from '@vuikit/icons'
+import {
+  NavDropdown as VkNav,
+  NavItem as VkNavItem,
+  NavItemParent as VkNavParent,
+} from 'vuikit/lib/nav'
 import Prompt from '@/components/Prompt'
 export default {
   name: 'App',
   components: {
-    Prompt
+    VkBtnLink,
+    VkDropdown,
+    VkNav,
+    VkNavItem,
+    VkNavParent,
+    VkIconUser,
+    Prompt,
   },
   data() {
     return {
-      menus: Friede.menus,
       searching: false,         // TODO: 
     };
   },
@@ -35,7 +60,9 @@ export default {
   computed: {
     context() {
       return this.$store.state.context;
-    }
+    },
+    menus: () => Friede.menus,
+    user: () => Friede.user,
   }
 }
 </script>

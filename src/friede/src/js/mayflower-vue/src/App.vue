@@ -5,11 +5,11 @@
       <vk-dropdown>
         <vk-nav>
           <template v-if="user.uid && !user.anonymous">
-            <vk-nav-item href="logout">logout</vk-nav-item>
+            <vk-nav-item href="logout" title="logout" />
           </template>
           <template v-else>
-            <vk-nav-item href="login">login</vk-nav-item>
-            <vk-nav-item href="sign up">login</vk-nav-item>
+            <vk-nav-item href="login" title="login" />
+            <vk-nav-item href="sign up" title="sign up" />
           </template>
         </vk-nav>
       </vk-dropdown>

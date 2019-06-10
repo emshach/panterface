@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "7c729763236d23ef001e";
+/******/ 	var hotCurrentHash = "7d61b405b5e6954d57a7";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1818,17 +1818,17 @@ var render = function() {
                 [
                   _vm.user.uid && !_vm.user.anonymous
                     ? [
-                        _c("vk-nav-item", { attrs: { href: "logout" } }, [
-                          _vm._v("logout")
-                        ])
+                        _c("vk-nav-item", {
+                          attrs: { href: "logout", title: "logout" }
+                        })
                       ]
                     : [
-                        _c("vk-nav-item", { attrs: { href: "login" } }, [
-                          _vm._v("login")
-                        ]),
-                        _c("vk-nav-item", { attrs: { href: "sign up" } }, [
-                          _vm._v("login")
-                        ])
+                        _c("vk-nav-item", {
+                          attrs: { href: "login", title: "login" }
+                        }),
+                        _c("vk-nav-item", {
+                          attrs: { href: "sign up", title: "sign up" }
+                        })
                       ]
                 ],
                 2

@@ -21,7 +21,7 @@ def get_user( request, auth=True ):
         user.set_unusable_password()
         user.save()
 
-        user.username = "user%d" % uesr.id
+        user.username = "user%d" % user.id
         user.save()
 
         # comment out the next two lines if you aren't using profiles

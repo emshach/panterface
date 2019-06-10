@@ -310,7 +310,7 @@ def api_models( request, models=None, format=None ):
             field = dict(
                 name=f.name,
                 type=ftype,
-                default=sr.relations[ f.name ].default,
+                default=app_obj.relations[ f.name ].default,
             )
             if field.get( 'default' ) is None:
                 try:

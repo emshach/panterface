@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "7d61b405b5e6954d57a7";
+/******/ 	var hotCurrentHash = "0c2a338cbf29e339109b";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -984,12 +984,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuikit_lib_dropdown__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuikit/lib/dropdown */ "./node_modules/vuikit/lib/dropdown.js");
 /* harmony import */ var _vuikit_icons__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @vuikit/icons */ "./node_modules/@vuikit/icons/dist/vuikit-icons.esm.js");
 /* harmony import */ var vuikit_lib_nav__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuikit/lib/nav */ "./node_modules/vuikit/lib/nav.js");
-/* harmony import */ var _components_Prompt__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/components/Prompt */ "./src/components/Prompt.vue");
+/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+/* harmony import */ var _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @fortawesome/fontawesome-svg-core */ "./node_modules/@fortawesome/fontawesome-svg-core/index.es.js");
+/* harmony import */ var _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @fortawesome/vue-fontawesome */ "./node_modules/@fortawesome/vue-fontawesome/index.es.js");
+/* harmony import */ var _components_Prompt__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/components/Prompt */ "./src/components/Prompt.vue");
 
 
 
 
 
+
+
+
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_5__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__["faUserNinja"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__["faUser"]);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'App',
   components: {
@@ -999,7 +1006,8 @@ __webpack_require__.r(__webpack_exports__);
     VkNavItem: vuikit_lib_nav__WEBPACK_IMPORTED_MODULE_3__["NavItem"],
     VkNavParent: vuikit_lib_nav__WEBPACK_IMPORTED_MODULE_3__["NavItemParent"],
     VkIconUser: _vuikit_icons__WEBPACK_IMPORTED_MODULE_2__["IconUser"],
-    Prompt: _components_Prompt__WEBPACK_IMPORTED_MODULE_4__["default"]
+    FontAwesomeIcon: _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_6__["FontAwesomeIcon"],
+    Prompt: _components_Prompt__WEBPACK_IMPORTED_MODULE_7__["default"]
   },
   data: function data() {
     return {
@@ -1807,7 +1815,13 @@ var render = function() {
           _c(
             "router-link",
             { attrs: { to: "me" } },
-            [_c("vk-icon-user"), _vm._v(_vm._s(_vm.user.fname))],
+            [
+              _c("font-awesome-icon", {
+                staticClass: "nav-icon",
+                attrs: { icon: _vm.user.anonymous ? "user-ninja" : "user" }
+              }),
+              _vm._v(" " + _vm._s(_vm.user.fname) + "\n    ")
+            ],
             1
           ),
           _c(

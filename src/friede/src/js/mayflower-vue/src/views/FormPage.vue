@@ -9,11 +9,19 @@
           <font-awesome-icon icon="trash" /> discard
         </vk-btn>
         <vk-btn-grp>
+          <vk-btn v-if="editList.length && editing" type="primary"
+                  @click.prevent="prev">
+            <vk-icon-left />
+          </vk-btn>
           <vk-btn type="primary" @click.prevent="submit">
             <font-awesome-icon icon="check" /> done
           </vk-btn>
-          <vk-btn type="primary" @click.prevent="submitAndRedo">
+          <vk-btn v-if="mode==='new'" type="primary" @click.prevent="submitAndRedo">
             <font-awesome-icon icon="plus" /> and another
+          </vk-btn>
+          <vk-btn v-else-if="editList.length && editing < editList.length - 1 "
+                  type="primary" @click.prevent="next">
+            <vk-icon-right />
           </vk-btn>
         </vk-btn-grp>
       </div>
@@ -38,6 +46,10 @@
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 import { Card as VkCard, CardTitle as VkCardTitle } from 'vuikit/lib/card'
 import { Button as VkBtn, ButtonGroup as VkBtnGrp } from 'vuikit/lib/button'
+import {
+  IconChevronLeft as VkIconLeft,
+  IconChevronRight as VkIconRight
+} from '@vuikit/icons'
 import { faCheck, faPlus, faTrash, faCog } from '@fortawesome/free-solid-svg-icons'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
@@ -54,7 +66,23 @@ export default  {
     VkCardTitle,
     VkBtn,
     VkBtnGrp,
+    VkIconLeft,
+    VkIconRight,
     Field
+  },
+  props: {
+    mode: {
+      type: String,
+      default: 'new'
+    },
+    editList: {
+      type: Array,
+      default: () => []
+    },
+    editing: {
+      type: Number,
+      default: 0
+    }
   },
   mounted() {
   },
@@ -72,6 +100,16 @@ export default  {
     submitAndRedo() {
     },
     discard() {
+    },
+    prev() {
+      this.submit();
+      if ( this.editing )
+        this.editing--;
+    },
+    next() {
+      this.submit();
+      if ( this.editing < this.editList - 1 )
+        this.editing++;
     }
   },
   computed: {
@@ -97,7 +135,7 @@ export default  {
     complexFields() {
       return this.modelData.fields.filter(
         x => x.meta.related && x.meta.type.match( /Multiple|Choices/ ));
-    }
+    },
   }
 }
 </script>

@@ -75,15 +75,18 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es6_regexp_match__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es6.regexp.match */ "./node_modules/core-js/modules/es6.regexp.match.js");
 /* harmony import */ var core_js_modules_es6_regexp_match__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_regexp_match__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vue_perfect_scrollbar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-perfect-scrollbar */ "./node_modules/vue-perfect-scrollbar/dist/index.js");
-/* harmony import */ var vue_perfect_scrollbar__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_perfect_scrollbar__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var vuikit_lib_card__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuikit/lib/card */ "./node_modules/vuikit/lib/card.js");
-/* harmony import */ var vuikit_lib_button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuikit/lib/button */ "./node_modules/vuikit/lib/button.js");
-/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
-/* harmony import */ var _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @fortawesome/fontawesome-svg-core */ "./node_modules/@fortawesome/fontawesome-svg-core/index.es.js");
-/* harmony import */ var _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @fortawesome/vue-fontawesome */ "./node_modules/@fortawesome/vue-fontawesome/index.es.js");
-/* harmony import */ var _components_Field__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/components/Field */ "./src/components/Field.vue");
-/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
+/* harmony import */ var core_js_modules_es6_number_constructor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es6.number.constructor */ "./node_modules/core-js/modules/es6.number.constructor.js");
+/* harmony import */ var core_js_modules_es6_number_constructor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_number_constructor__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var vue_perfect_scrollbar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-perfect-scrollbar */ "./node_modules/vue-perfect-scrollbar/dist/index.js");
+/* harmony import */ var vue_perfect_scrollbar__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_perfect_scrollbar__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var vuikit_lib_card__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuikit/lib/card */ "./node_modules/vuikit/lib/card.js");
+/* harmony import */ var vuikit_lib_button__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuikit/lib/button */ "./node_modules/vuikit/lib/button.js");
+/* harmony import */ var _vuikit_icons__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @vuikit/icons */ "./node_modules/@vuikit/icons/dist/vuikit-icons.esm.js");
+/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+/* harmony import */ var _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @fortawesome/fontawesome-svg-core */ "./node_modules/@fortawesome/fontawesome-svg-core/index.es.js");
+/* harmony import */ var _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @fortawesome/vue-fontawesome */ "./node_modules/@fortawesome/vue-fontawesome/index.es.js");
+/* harmony import */ var _components_Field__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @/components/Field */ "./src/components/Field.vue");
+/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
 
 
 
@@ -93,16 +96,36 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_5__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__["faCheck"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__["faPlus"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__["faTrash"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__["faCog"]);
+
+
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_7__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faCheck"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faPlus"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faTrash"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faCog"]);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'FormPage',
   components: {
-    VuePerfectScrollbar: vue_perfect_scrollbar__WEBPACK_IMPORTED_MODULE_1___default.a,
-    VkCard: vuikit_lib_card__WEBPACK_IMPORTED_MODULE_2__["Card"],
-    VkCardTitle: vuikit_lib_card__WEBPACK_IMPORTED_MODULE_2__["CardTitle"],
-    VkBtn: vuikit_lib_button__WEBPACK_IMPORTED_MODULE_3__["Button"],
-    VkBtnGrp: vuikit_lib_button__WEBPACK_IMPORTED_MODULE_3__["ButtonGroup"],
-    Field: _components_Field__WEBPACK_IMPORTED_MODULE_7__["default"]
+    VuePerfectScrollbar: vue_perfect_scrollbar__WEBPACK_IMPORTED_MODULE_2___default.a,
+    VkCard: vuikit_lib_card__WEBPACK_IMPORTED_MODULE_3__["Card"],
+    VkCardTitle: vuikit_lib_card__WEBPACK_IMPORTED_MODULE_3__["CardTitle"],
+    VkBtn: vuikit_lib_button__WEBPACK_IMPORTED_MODULE_4__["Button"],
+    VkBtnGrp: vuikit_lib_button__WEBPACK_IMPORTED_MODULE_4__["ButtonGroup"],
+    VkIconLeft: _vuikit_icons__WEBPACK_IMPORTED_MODULE_5__["IconChevronLeft"],
+    VkIconRight: _vuikit_icons__WEBPACK_IMPORTED_MODULE_5__["IconChevronRight"],
+    Field: _components_Field__WEBPACK_IMPORTED_MODULE_9__["default"]
+  },
+  props: {
+    mode: {
+      type: String,
+      default: 'new'
+    },
+    editList: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
+    },
+    editing: {
+      type: Number,
+      default: 0
+    }
   },
   mounted: function mounted() {},
   data: function data() {
@@ -115,7 +138,15 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_5__["library"].add(_f
     settings: function settings() {},
     submit: function submit() {},
     submitAndRedo: function submitAndRedo() {},
-    discard: function discard() {}
+    discard: function discard() {},
+    prev: function prev() {
+      this.submit();
+      if (this.editing) this.editing--;
+    },
+    next: function next() {
+      this.submit();
+      if (this.editing < this.editList - 1) this.editing++;
+    }
   },
   computed: {
     model: function model() {
@@ -123,7 +154,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_5__["library"].add(_f
     },
     modelData: function modelData() {
       if (this.data) return this.data;
-      if (this.$store.state.modelData) this.data = this.$store.state.modelData;else if (this.model) this.data = Object(_lib_objects__WEBPACK_IMPORTED_MODULE_8__["Model"])(this.model);
+      if (this.$store.state.modelData) this.data = this.$store.state.modelData;else if (this.model) this.data = Object(_lib_objects__WEBPACK_IMPORTED_MODULE_10__["Model"])(this.model);
       return this.data || {
         fields: []
       };
@@ -260,6 +291,22 @@ var render = function() {
               _c(
                 "vk-btn-grp",
                 [
+                  _vm.editList.length && _vm.editing
+                    ? _c(
+                        "vk-btn",
+                        {
+                          attrs: { type: "primary" },
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              return _vm.prev($event)
+                            }
+                          }
+                        },
+                        [_c("vk-icon-left")],
+                        1
+                      )
+                    : _vm._e(),
                   _c(
                     "vk-btn",
                     {
@@ -277,23 +324,41 @@ var render = function() {
                     ],
                     1
                   ),
-                  _c(
-                    "vk-btn",
-                    {
-                      attrs: { type: "primary" },
-                      on: {
-                        click: function($event) {
-                          $event.preventDefault()
-                          return _vm.submitAndRedo($event)
-                        }
-                      }
-                    },
-                    [
-                      _c("font-awesome-icon", { attrs: { icon: "plus" } }),
-                      _vm._v(" and another\n        ")
-                    ],
-                    1
-                  )
+                  _vm.mode === "new"
+                    ? _c(
+                        "vk-btn",
+                        {
+                          attrs: { type: "primary" },
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              return _vm.submitAndRedo($event)
+                            }
+                          }
+                        },
+                        [
+                          _c("font-awesome-icon", { attrs: { icon: "plus" } }),
+                          _vm._v(" and another\n        ")
+                        ],
+                        1
+                      )
+                    : _vm.editList.length &&
+                      _vm.editing < _vm.editList.length - 1
+                    ? _c(
+                        "vk-btn",
+                        {
+                          attrs: { type: "primary" },
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              return _vm.next($event)
+                            }
+                          }
+                        },
+                        [_c("vk-icon-right")],
+                        1
+                      )
+                    : _vm._e()
                 ],
                 1
               )

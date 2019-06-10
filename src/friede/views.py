@@ -307,10 +307,13 @@ def api_models( request, models=None, format=None ):
             if ftype in form_field_mappings:
                 ftype = form_field_mappings[ ftype ]
                 if not ftype: continue
+            dflt = None
+            if meta.model_name in app_obj.relations:
+                dflt = app_obj.relations[ meta.model_name ].get( 'default' )
             field = dict(
                 name=f.name,
                 type=ftype,
-                default=app_obj.relations[ f.name ].default,
+                default=dflt,
             )
             if field.get( 'default' ) is None:
                 try:

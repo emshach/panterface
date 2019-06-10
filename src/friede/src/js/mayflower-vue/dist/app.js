@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "0c2a338cbf29e339109b";
+/******/ 	var hotCurrentHash = "8e651ae20a7bb9436d21";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1812,6 +1812,13 @@ var render = function() {
         "div",
         { attrs: { id: "nav" } },
         [
+          _vm._l(_vm.menus.nav.$links, function(link, key) {
+            return _c(
+              "router-link",
+              { key: key, attrs: { to: link.location.$href } },
+              [_vm._v(_vm._s(link.$title || link.location.$title) + "\n    ")]
+            )
+          }),
           _c(
             "router-link",
             { attrs: { to: "me" } },
@@ -1849,14 +1856,7 @@ var render = function() {
               )
             ],
             1
-          ),
-          _vm._l(_vm.menus.nav.$links, function(link, key) {
-            return _c(
-              "router-link",
-              { key: key, attrs: { to: link.location.$href } },
-              [_vm._v(_vm._s(link.$title || link.location.$title))]
-            )
-          })
+          )
         ],
         2
       ),

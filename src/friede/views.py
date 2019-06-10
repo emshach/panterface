@@ -4,11 +4,6 @@ from __future__ import unicode_literals
 from django.shortcuts import render
 from django.contrib.contenttypes.models import ContentType
 from django.db.models.fields import NOT_PROVIDED
-from .objects import getregistries, getenv, Locations
-from .core import setup, setupshell, setuptheme, setupmenus
-from .models import *
-from .serializers import *
-from .util import as_tree, form_field_mappings
 from rest_framework import status, viewsets, permissions, filters
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
@@ -17,6 +12,12 @@ from rest_framework.exceptions import ValidationError
 from rest_framework_serializer_extensions.views import SerializerExtensionsAPIViewMixin
 from collections import OrderedDict
 from importlib import import_module
+from aries import get_user
+from .objects import getregistries, getenv, Locations
+from .core import setup, setupshell, setuptheme, setupmenus
+from .models import *
+from .serializers import *
+from .util import as_tree, form_field_mappings
 import json
 import base64
 import re
@@ -98,7 +99,7 @@ def index( request ):
             mo[ singular ] = o
             mo[ plural ] = o
 
-    user = request.user
+    user = get_user( request )
     context = dict(
         shell=shell,
         theme=theme,

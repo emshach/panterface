@@ -12,7 +12,7 @@ from rest_framework.exceptions import ValidationError
 from rest_framework_serializer_extensions.views import SerializerExtensionsAPIViewMixin
 from collections import OrderedDict
 from importlib import import_module
-from aries import get_user
+from aries.auth import get_user
 from .objects import getregistries, getenv, Locations
 from .core import setup, setupshell, setuptheme, setupmenus
 from .models import *

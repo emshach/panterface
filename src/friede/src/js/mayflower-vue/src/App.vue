@@ -1,7 +1,7 @@
 <template lang="html">
   <div id="app">
     <div id="nav">
-      <vk-btn-link><vk-icon-user />{{ user.fname }}</vk-btn-link>
+      <router-link to="me"><vk-icon-user />{{ user.fname }}</router-link>
       <vk-dropdown>
         <vk-nav>
           <template v-if="user.uid && !user.anonymous">

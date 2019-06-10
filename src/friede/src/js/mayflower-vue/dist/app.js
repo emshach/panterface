@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "b56673e30061ad6a8f33";
+/******/ 	var hotCurrentHash = "7c729763236d23ef001e";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1805,7 +1805,8 @@ var render = function() {
         { attrs: { id: "nav" } },
         [
           _c(
-            "vk-btn-link",
+            "router-link",
+            { attrs: { to: "me" } },
             [_c("vk-icon-user"), _vm._v(_vm._s(_vm.user.fname))],
             1
           ),

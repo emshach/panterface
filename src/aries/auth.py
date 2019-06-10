@@ -1,4 +1,5 @@
 from random import randint
+from django.contrib.auth import authenticate, login
 from .models import User
 import base64
 import re

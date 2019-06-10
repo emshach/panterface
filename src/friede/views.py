@@ -18,6 +18,7 @@ from rest_framework_serializer_extensions.views import SerializerExtensionsAPIVi
 from collections import OrderedDict
 from importlib import import_module
 import json
+import base64
 import re
 
 ### custom filters
@@ -97,10 +98,17 @@ def index( request ):
             mo[ singular ] = o
             mo[ plural ] = o
 
+    user = request.user
     context = dict(
         shell=shell,
         theme=theme,
         menus=json.dumps( menus ),
+        user=json.dumps( dict(
+            uid=user.id,
+            username=user.username,
+            fname=user.first_name,
+            lname=user.last_name,
+        )),
         models=models
     )
     for registry in getregistries():

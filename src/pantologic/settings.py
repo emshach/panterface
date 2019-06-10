@@ -186,6 +186,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 AUTHENTICATION_BACKENDS = [
+    'aries.auth.AnonymousAuthBackend',
     'django.contrib.auth.backends.ModelBackend', # default
     # 'allauth.account.auth_backends.AuthenticationBackend',
     # 'guardian.backends.ObjectPermissionBackend',

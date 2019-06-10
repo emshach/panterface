@@ -19,7 +19,6 @@ from .models import *
 from .serializers import *
 from .util import as_tree, form_field_mappings
 import json
-import base64
 import re
 
 ### custom filters

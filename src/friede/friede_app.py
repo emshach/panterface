@@ -532,7 +532,7 @@ class App( app.App ):
                           'update',
                       ))),
                 ( '#blocks',
-                  ( 'breakfront', dict( path='featured' ))
+                  ( 'breakfront', dict( path='featured' )),
                   ( 'content', dict( path='grid.filtered' ))),
               ),
               ( 'home', dict(

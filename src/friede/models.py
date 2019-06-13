@@ -673,7 +673,7 @@ class ActionEntry( Entry ):
 # user stuff
 
 @python_2_unicode_compatible
-class UserApp( Model, DataMixin ):
+class UserApp( DataMixin ):
     user = M.ForeignKey( get_user_model(), M.CASCADE, related_name='friede_apps_use' )
     app = M.ForeignKey( App, M.CASCADE, related_name='use' )
     installed = M.BooleanField( default=False )

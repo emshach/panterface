@@ -34,8 +34,8 @@ try:
             except ImportError, AttributeError:
                 continue        # TODO: maybe warn
 except Exception:
-    # pass                        # TODO: handle
-    raise
+    pass                        # TODO: handle
+    # raise
 urlpatterns += [ url( r"^api/%s/" % k, include( v.urls ))
                  for k, v in routes.items() ]
 views.routes[ 'ls' ] = ( 'ls', [''] )

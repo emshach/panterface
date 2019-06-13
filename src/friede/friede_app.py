@@ -533,7 +533,7 @@ class App( app.App ):
                       ))),
                 ( '#blocks',
                   ( 'breakfront', dict( path='featured' ))
-                  ( 'content', dict( path='grid.filtered' )))
+                  ( 'content', dict( path='grid.filtered' ))),
               ),
               ( 'home', dict(
                   icon='fontawesome.home',

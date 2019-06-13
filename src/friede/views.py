@@ -189,6 +189,8 @@ def api_ls( request, path='', format=None ):
             m2 = re.match( r'{([\w.]+)(\*)?(\+)?}', g )
             if m2:
                 slot = m2.group(1)
+                if slot in ( 'user', 'users' ):
+                    continue    # for now
                 if slot not in slots:
                     app, model = slot.split('.')
                     try:

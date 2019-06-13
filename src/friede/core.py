@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from .objects import Settings, Shells, getenv, getregistries, getshell
+from .objects import Settings, Shells, getenv
 from .models import *
 from .util import split_dict
 from django.db import transaction
@@ -109,7 +109,6 @@ def setuptheme( shell=None ):
     shell.addtheme( 'current', theme )
     return theme
 
-@transaction.atomic
 def installappheader( name, module, title, description, icon='', rest=True,
                       router=None ):
     try:
@@ -138,7 +137,6 @@ def installappheader( name, module, title, description, icon='', rest=True,
         traceback.print_exc()
         return None, None
 
-@transaction.atomic
 def installapp( name, module, title, description, icon='', rest=True,
                 active=True, version=None, router=None, data=None ):
     try:
@@ -167,8 +165,7 @@ def installapp( name, module, title, description, icon='', rest=True,
         traceback.print_exc()
         return None, None
 
-@transaction.atomic
-def updateapp( name, data=None ):
+def updateapp( name, data=None, obj=None ):
     try:
         path = name
         if not path.startswith( 'apps.' ):
@@ -183,13 +180,20 @@ def updateapp( name, data=None ):
 
         app = App.objects.get( path=path )
         app.available = available
+        if obj:
+            app.min_version = obj.min_version
+            app.required = obj.required
+            app.user_required = obj.user_required
+            app.user_installable = obj.user_installable
+            app.auto_install = obj.auto_install
+            app.auto_user_install = obj.auto_user_install
         app.save()
         return app
 
     except Exception as e:
         print >> sys.stderr, "got exception", type(e), e, 'in installapp'
         traceback.print_exc()
-        return None, None
+        return None
 
 
 def mkwidgets( app, objects, relations, actions=None ):
@@ -355,6 +359,7 @@ shortcuts = dict(
     settings=mksettings,
 )
 
+@transaction.atomic
 def upgradeapp( app, data, upto=None ):
     app_version = version_parse( app.version )
     max_version = None

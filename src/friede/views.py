@@ -422,6 +422,8 @@ def api_path( request, path=None, format=None ):
                     node[ 'location' ] = _process_location(
                         LocationSerializer( loc1.first(), context=lscontext ).data )
                     endpoint = True
+        elif n[0] == '@':
+            users = n[1:].split('+')
         else:
             rx0 = r"{}/{}".format( rx0, n )
             rx1 = r"(?:{}/)?{}".format( rx1, n )

@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "8e651ae20a7bb9436d21";
+/******/ 	var hotCurrentHash = "feac92b2c4ce519d4899";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1821,7 +1821,7 @@ var render = function() {
           }),
           _c(
             "router-link",
-            { attrs: { to: "me" } },
+            { attrs: { to: "/me" } },
             [
               _c("font-awesome-icon", {
                 staticClass: "nav-icon",

@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from importlib import import_module
 from rest_framework import routers, relations
 from collections import OrderedDict
+from packaging.version import parse as version_parse
 from . import views
 from .core import installappheader, installapp, updateapp, upgradeapp
 from .models import App, Setting
@@ -54,16 +55,28 @@ class App( object ) :
     routes = ()
     serializers = ()
     model=None
+    version='0.0.0'
+    min_version='0.0.1'
+    required = False
+    user_required = False
+    user_installable = True
+    auto_install = False
+    auto_user_install = False
 
     def __init__( self ):
         self.preinstallheader()
         self.model, _ = self.installheader()
+        self.version = self.model.version
         if self.model:
             self.postinstallheader()
             self.preupdate()
             self.update()
             self.postupdate()
+        if self.required or self.auto_install:
+            self.install()
         # TODO: else raise exception
+
+    def __nonzero__( self ): return True
 
     def preinstallheader( self ):
         pass
@@ -90,7 +103,7 @@ class App( object ) :
             module=self.module,
             title=self.title,
             description=self.description,
-            data=self.getdata()
+            data=self.data
         )
 
     def postinstall( self ):
@@ -107,18 +120,22 @@ class App( object ) :
         pass
 
     def update( self ):
-        return updateapp( self.name, self.getdata() )
+        return updateapp( self.name, self.data, self )
 
     def postupdate( self ):
-        pass
+        if version_parse( self.version ) < version_parse( self.min_version ):
+            self.preupgrade()
+            self.upgrade( to=self.min_version )
+            self.postupgrade()
 
     def preupgrade( self ):
         pass
 
     def upgrade( self, to=None ):
-        return upgradeapp( self.model, self.getdata(), to )
+        return upgradeapp( self.model, self.data, to )
 
     def postupgrade( self ):
+        self.version = self.model.version
         pass
 
     def predowngrade( self ):
@@ -151,5 +168,6 @@ class App( object ) :
     def postremove( self ):
         pass
 
-    def getdata( self ):
+    @property
+    def data( self ):
         return None

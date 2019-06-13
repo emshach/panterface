@@ -23,6 +23,10 @@ class App( app.App ):
 
     links = { x: dict( via='entry' ) for x in _links }
 
+    min_version = '0.2.0'
+    required = True
+    user_required = True
+
     relations = dict(
         container={
             'model'  : 'Container',
@@ -179,7 +183,8 @@ class App( app.App ):
         ( 'settingentry',   serializers.SettingEntrySerializer   ),
         ( 'actionentry',    serializers.ActionEntrySerializer    ),
     )
-    def getdata( self ):
+    @property
+    def data( self ):
         return (
         ( '0.1.0',
           ( '#actions',
@@ -362,7 +367,7 @@ class App( app.App ):
           ),
           ( '#locations',
             ( 'home',    dict( title='Home',       href='/'        )),
-            ( '.apps',   dict( title='Apps',       href='/apps'    )),
+            ( 'apps',    dict( title='Apps',       href='/apps'    )),
             ( 'about',   dict( title='About Us',   href='/about'   )),
             ( 'contact', dict( title='Contact Us', href='/contact' )),
             ( 'from relations', self.objects, self.relations )),
@@ -395,7 +400,7 @@ class App( app.App ):
                   title='Home',
                   icon='fontawesome.home',
                   location='home' )),
-              ( '.apps', dict(
+              ( 'apps', dict(
                   title='Apps',
                   icon='fontawesome.tablet-alt',
                   location='apps' )),
@@ -421,4 +426,158 @@ class App( app.App ):
                 templates='friede/mayflower' ),
               ( '#themes', ( 'current', dict( path='mayflower.acamar' ))))),
         ),
+        ( '0.2.0',
+          ( '#actions',
+            ( 'install', dict(
+                icon='fontawesome.sign-in-alt',
+                title='Install',
+                description='''Incorporate the object into the system in some way''',
+                data=dict(
+                    reverse='uninstall',
+                    widget='Installer',
+                ))),
+            ( 'uninstall', dict(
+                icon='fontawesome.sign-out-alt',
+                title='Uninstall',
+                description='''Remove the object from the system''',
+                data=dict(
+                    reverse='install',
+                    widget='Installer',
+                ))),
+            ( 'activate', dict(
+                icon='fontawesome.toggle-on',
+                title='Activate',
+                description='''Enable the object to function''',
+                data=dict(
+                    reverse='deactivate',
+                    widget='Activator',
+                ))),
+            ( 'deactivate', dict(
+                icon='fontawesome.toggle-off',
+                title='Deactivate',
+                description='''Stop the object from functioning without removing it
+                               completely''',
+                data=dict(
+                    reverse='activate',
+                    widget='Activator',
+                ))),
+            ( 'update', dict(
+                icon='fontawesome.sync-alt',
+                title='Update',
+                description='''Change the version of the object, if possible''',
+                data=dict(
+                    implies='upgrade',
+                    widget='Installer',
+                ))),
+            ( 'upgrade', dict(
+                icon='fontawesome.redo-alt',
+                title='Upgrade',
+                description='''Update the object to newer version''',
+                data=dict(
+                    reverse='downgrade',
+                    widget='Installer',
+                ))),
+            ( 'downgrade', dict(
+                icon='fontawesome.undo-alt',
+                title='Downgrade',
+                description='''Revert the object to an older version''',
+                data=dict(
+                    reverse='upgrade',
+                    widget='Installer',
+                ))),
+          ),
+          ( '#blocks',
+            ( 'featured', dict(
+                data=dict(
+                    component='Centerfold'
+                ))),
+            ( 'grid', dict(
+                data=dict(
+                    component='GridDisplay'
+                )),
+              ( 'filtered', dict(
+                  extends='grid',
+                  data=dict(
+                      component='FilterGrid'
+                  )))),
+            ( 'list', dict(
+                data=dict(
+                    component='ListDisplay'
+                )),
+              ( 'filtered', dict(
+                  extends='list',
+                  data=dict(
+                      component='FilterList'
+                  )))),
+          ),
+          ( '#screens',
+            ( 'dashboard', dict(
+                icon='fontawesome.columns',
+                data=dict(
+                    component='DashboardPage',
+                )),
+              ( 'from_model', dict(
+                  icon='fontawesome.columns',
+                  extends='dashboard',
+                  data=dict(
+                      component='ModelDashboard',
+                  ))),
+              ( 'apps', dict(
+                  icon='fontawesome.rocket',
+                  extends='dashboard.from_model',
+                  data=dict(
+                      actions=(
+                          'install',
+                          'activate',
+                          'update',
+                      ))),
+                ( '#blocks',
+                  ( 'breakfront', dict( path='featured' ))
+                  ( 'content', dict( path='grid.filtered' )))
+              ),
+              ( 'home', dict(
+                  icon='fontawesome.home',
+                  extends='dashboard',
+                  data=dict(
+                      component='HomeDashboard',
+                  ))),
+              ( 'user', dict(
+                  icon='fontawesome.user',
+                  extends='dashboard',
+                  data=dict(
+                      component='UserDashboard',
+                  )),
+                ( 'home', dict(
+                    icon='fontawesome.bed',
+                    extends='dashboard.user',
+                    data=dict(
+                        component='UserHomeDashboard',
+                    ))),
+              ))
+          ),
+          ( '#locations',
+            ( 'home', {},
+              ( '#screens',
+                ( 'default', dict( path='dashboard.home' )))),
+            ( 'apps', {},
+              ( '#screens',
+                ( 'default', dict(
+                    path='dashboard.apps',
+                    data=dict( model='friede.app' ))))),
+            ( 'user',
+              ( 'private', dict(
+                  title='My Page',
+                  href='/me' ),
+                ( '#screens',
+                  ( 'default', dict( path='dashboard.user.home' )))),
+              ( 'public', dict(
+                  title='User Profile',
+                  href='/{user}' ),
+                ( '#screens',
+                  ( 'default', dict( path='dashboard.user' ))))),
+          ),
+        ),
     )
+    @property
+    def userdata( self ):
+        return ()

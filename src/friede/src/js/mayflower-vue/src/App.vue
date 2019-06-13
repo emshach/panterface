@@ -5,7 +5,7 @@
         v-for="( link, key ) in menus.nav.$links" :key="key"
         :to="link.location.$href">{{ link.$title || link.location.$title }}
       </router-link>
-      <router-link to="me">
+      <router-link to="/me">
         <font-awesome-icon :icon=" user.anonymous ? 'user-ninja': 'user'"
                            class="nav-icon" /> {{ user.fname }}
       </router-link>

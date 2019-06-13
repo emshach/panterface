@@ -385,11 +385,12 @@ class App( app.App ):
         (  'taxonomies',       views.TaxonomyViewSet       ),
         (  'terms',            views.TermViewSet           ),
     )
-    def getdata( self ):
+    @property
+    def data( self ):
         return (
         ( '0.1.0',
-          ( 'widgets', ( 'from relations', self.objects, self.relations )),
-          ( 'blocks',
+          ( '#widgets', ( 'from relations', self.objects, self.relations )),
+          ( '#blocks',
             ( 'form',
               ( 'basic', dict(
                   extends='form.section',
@@ -510,7 +511,7 @@ class App( app.App ):
                           dict( model='intrepid.Goal',
                                 start='actual_start',
                                 end='actual_end' )]))))),
-          ( 'screens',
+          ( '#screens',
             ( 'list',
               tuple(
                   ( o, dict(
@@ -522,14 +523,14 @@ class App( app.App ):
               ( 'note', dict(
                   extends='form.single',
                   data=dict(
-                      block_entries=
+                      blocks=
                       ( 'slot',
                         dict( block='form.basic' ),
                         dict( block='form.relations.note' ))))),
               ( 'resource', dict(
                   extends='form.single',
                   # data=dict(
-                  # block_entries=
+                  # blocks=
                   # ( 'slot',
                   #   dict( block='form.basic' ),
                   #   dict( block='form.extra.resource' ),
@@ -538,7 +539,7 @@ class App( app.App ):
               ( 'product', dict(
                   extends='form.single',
                   data=dict(
-                      block_entries=
+                      blocks=
                       ( 'slot',
                         dict( block='form.basic' ),
                         dict( block='form.extra.product' ),
@@ -546,7 +547,7 @@ class App( app.App ):
               ( 'goal', dict(
                   extends='form.single',
                   data=dict(
-                      block_entries=
+                      blocks=
                       ( 'slot',
                         dict( block='form.basic' ),
                         dict( block='form.infobox.goal' ),
@@ -554,296 +555,296 @@ class App( app.App ):
                         dict( block='form.relations.goal' ))))),
               # ( 'objective', dict(
               #     extends='form.single',
-              #     block_entries=
+              #     blocks=
               #     ( 'slot',
               #       dict( block='form.basic' ),
               #       dict( block='form.extra.objective' ),
               #       dict( block='form.relations.objective' )))),
               # ( 'target', dict(
               #     extends='form.single',
-              #     block_entries=
+              #     blocks=
               #     ( 'slot',
               #       dict( block='form.basic' ),
               #       dict( block='form.extra.target' ),
               #       dict( block='form.relations.target' )))),
               # ( 'strategy', dict(
               #     extends='form.single',
-              #     block_entries=
+              #     blocks=
               #     ( 'slot',
               #       dict( block='form.basic' ),
               #       dict( block='form.extra.strategy' ),
               #       dict( block='form.relations.strategy' )))),
               # ( 'plan', dict(
               #     extends='form.single',
-              #     block_entries=
+              #     blocks=
               #     ( 'slot',
               #       dict( block='form.basic' ),
               #       dict( block='form.extra.plan' ),
               #       dict( block='form.relations.plan' )))),
               # ( 'phase', dict(
               #     extends='form.single',
-              #     block_entries=
+              #     blocks=
               #     ( 'slot',
               #       dict( block='form.basic' ),
               #       dict( block='form.extra.phase' ),
               #       dict( block='form.relations.phase' )))),
               # ( 'step', dict(
               #     extends='form.single',
-              #     block_entries=
+              #     blocks=
               #     ( 'slot',
               #       dict( block='form.basic' ),
               #       dict( block='form.extra.step' ),
               #       dict( block='form.relations.step' )))),
               # ( 'project', dict(
               #     extends='form.single',
-              #     block_entries=
+              #     blocks=
               #     ( 'slot',
               #       dict( block='form.basic' ),
               #       dict( block='form.extra.project' ),
               #       dict( block='form.relations.project' )))),
               # ( 'task', dict(
               #     extends='form.single',
-              #     block_entries=
+              #     blocks=
               #     ( 'slot',
               #       dict( block='form.basic' ),
               #       dict( block='form.extra.task' ),
               #       dict( block='form.relations.task' )))),
               # ( 'action', dict(
               #     extends='form.single',
-              #     block_entries=
+              #     blocks=
               #     ( 'slot',
               #       dict( block='form.basic' ),
               #       dict( block='form.extra.action' ),
               #       dict( block='form.relations.action' )))),
               # ( 'currency', dict(
               #     extends='form.single',
-              #     block_entries=
+              #     blocks=
               #     ( 'slot',
               #       dict( block='form.basic' ),
               #       dict( block='form.extra.currency' ),
               #       dict( block='form.relations.currency' )))),
               # ( 'account', dict(
               #     extends='form.single',
-              #     block_entries=
+              #     blocks=
               #     ( 'slot',
               #       dict( block='form.basic' ),
               #       dict( block='form.extra.account' ),
               #       dict( block='form.relations.account' )))),
               # ( 'pool', dict(
               #     extends='form.single',
-              #     block_entries=
+              #     blocks=
               #     ( 'slot',
               #       dict( block='form.basic' ),
               #       dict( block='form.extra.pool' ),
               #       dict( block='form.relations.pool' )))),
               # ( 'allotment', dict(
               #     extends='form.single',
-              #     block_entries=
+              #     blocks=
               #     ( 'slot',
               #       dict( block='form.basic' ),
               #       dict( block='form.extra.allotment' ),
               #       dict( block='form.relations.allotment' )))),
               # ( 'allocation', dict(
               #     extends='form.single',
-              #     block_entries=
+              #     blocks=
               #     ( 'slot',
               #       dict( block='form.basic' ),
               #       dict( block='form.extra.allocation' ),
               #       dict( block='form.relations.allocation' )))),
               # ( 'income', dict(
               #     extends='form.single',
-              #     block_entries=
+              #     blocks=
               #     ( 'slot',
               #       dict( block='form.basic' ),
               #       dict( block='form.extra.income' ),
               #       dict( block='form.relations.income' )))),
               # ( 'expense', dict(
               #     extends='form.single',
-              #     block_entries=
+              #     blocks=
               #     ( 'slot',
               #       dict( block='form.basic' ),
               #       dict( block='form.extra.expense' ),
               #       dict( block='form.relations.expense' )))),
               # ( 'asset', dict(
               #     extends='form.single',
-              #     block_entries=
+              #     blocks=
               #     ( 'slot',
               #       dict( block='form.basic' ),
               #       dict( block='form.extra.asset' ),
               #       dict( block='form.relations.asset' )))),
               # ( 'donation', dict(
               #     extends='form.single',
-              #     block_entries=
+              #     blocks=
               #     ( 'slot',
               #       dict( block='form.basic' ),
               #       dict( block='form.extra.donation' ),
               #       dict( block='form.relations.donation' )))),
               # ( 'service', dict(
               #     extends='form.single',
-              #     block_entries=
+              #     blocks=
               #     ( 'slot',
               #       dict( block='form.basic' ),
               #       dict( block='form.extra.service' ),
               #       dict( block='form.relations.service' )))),
               # ( 'rental', dict(
               #     extends='form.single',
-              #     block_entries=
+              #     blocks=
               #     ( 'slot',
               #       dict( block='form.basic' ),
               #       dict( block='form.extra.rental' ),
               #       dict( block='form.relations.rental' )))),
               # ( 'liability', dict(
               #     extends='form.single',
-              #     block_entries=
+              #     blocks=
               #     ( 'slot',
               #       dict( block='form.basic' ),
               #       dict( block='form.extra.liability' ),
               #       dict( block='form.relations.liability' )))),
               # ( 'contribution', dict(
               #     extends='form.single',
-              #     block_entries=
+              #     blocks=
               #     ( 'slot',
               #       dict( block='form.basic' ),
               #       dict( block='form.extra.contribution' ),
               #       dict( block='form.relations.contribution' )))),
               # ( 'commission', dict(
               #     extends='form.single',
-              #     block_entries=
+              #     blocks=
               #     ( 'slot',
               #       dict( block='form.basic' ),
               #       dict( block='form.extra.commission' ),
               #       dict( block='form.relations.commission' )))),
               # ( 'employment', dict(
               #     extends='form.single',
-              #     block_entries=
+              #     blocks=
               #     ( 'slot',
               #       dict( block='form.basic' ),
               #       dict( block='form.extra.employment' ),
               #       dict( block='form.relations.employment' )))),
               # ( 'investment', dict(
               #     extends='form.single',
-              #     block_entries=
+              #     blocks=
               #     ( 'slot',
               #       dict( block='form.basic' ),
               #       dict( block='form.extra.investment' ),
               #       dict( block='form.relations.investment' )))),
               # ( 'receipt', dict(
               #     extends='form.single',
-              #     block_entries=
+              #     blocks=
               #     ( 'slot',
               #       dict( block='form.basic' ),
               #       dict( block='form.extra.receipt' ),
               #       dict( block='form.relations.receipt' )))),
               # ( 'deposit', dict(
               #     extends='form.single',
-              #     block_entries=
+              #     blocks=
               #     ( 'slot',
               #       dict( block='form.basic' ),
               #       dict( block='form.extra.deposit' ),
               #       dict( block='form.relations.deposit' )))),
               # ( 'payment', dict(
               #     extends='form.single',
-              #     block_entries=
+              #     blocks=
               #     ( 'slot',
               #       dict( block='form.basic' ),
               #       dict( block='form.extra.payment' ),
               #       dict( block='form.relations.payment' )))),
               # ( 'budget', dict(
               #     extends='form.single',
-              #     block_entries=
+              #     blocks=
               #     ( 'slot',
               #       dict( block='form.basic' ),
               #       dict( block='form.extra.budget' ),
               #       dict( block='form.relations.budget' )))),
               # ( 'transfer', dict(
               #     extends='form.single',
-              #     block_entries=
+              #     blocks=
               #     ( 'slot',
               #       dict( block='form.basic' ),
               #       dict( block='form.extra.transfer' ),
               #       dict( block='form.relations.transfer' )))),
               # ( 'relocation', dict(
               #     extends='form.single',
-              #     block_entries=
+              #     blocks=
               #     ( 'slot',
               #       dict( block='form.basic' ),
               #       dict( block='form.extra.relocation' ),
               #       dict( block='form.relations.relocation' )))),
               # ( 'earning', dict(
               #     extends='form.single',
-              #     block_entries=
+              #     blocks=
               #     ( 'slot',
               #       dict( block='form.basic' ),
               #       dict( block='form.extra.earning' ),
               #       dict( block='form.relations.earning' )))),
               # ( 'purchase', dict(
               #     extends='form.single',
-              #     block_entries=
+              #     blocks=
               #     ( 'slot',
               #       dict( block='form.basic' ),
               #       dict( block='form.extra.purchase' ),
               #       dict( block='form.relations.purchase' )))),
               # ( 'team', dict(
               #     extends='form.single',
-              #     block_entries=
+              #     blocks=
               #     ( 'slot',
               #       dict( block='form.basic' ),
               #       dict( block='form.extra.team' ),
               #       dict( block='form.relations.team' )))),
               # ( 'position', dict(
               #     extends='form.single',
-              #     block_entries=
+              #     blocks=
               #     ( 'slot',
               #       dict( block='form.basic' ),
               #       dict( block='form.extra.position' ),
               #       dict( block='form.relations.position' )))),
               # ( 'role', dict(
               #     extends='form.single',
-              #     block_entries=
+              #     blocks=
               #     ( 'slot',
               #       dict( block='form.basic' ),
               #       dict( block='form.extra.role' ),
               #       dict( block='form.relations.role' )))),
               # ( 'responsibility', dict(
               #     extends='form.single',
-              #     block_entries=
+              #     blocks=
               #     ( 'slot',
               #       dict( block='form.basic' ),
               #       dict( block='form.extra.responsibility' ),
               #       dict( block='form.relations.responsibility' )))),
               # ( 'capacity', dict(
               #     extends='form.single',
-              #     block_entries=
+              #     blocks=
               #     ( 'slot',
               #       dict( block='form.basic' ),
               #       dict( block='form.extra.capacity' ),
               #       dict( block='form.relations.capacity' )))),
               # ( 'user', dict(
               #     extends='form.single',
-              #     block_entries=
+              #     blocks=
               #     ( 'slot',
               #       dict( block='form.basic' ),
               #       dict( block='form.extra.user' ),
               #       dict( block='form.relations.user' )))),
               # ( 'taxonomy', dict(
               #     extends='form.single',
-              #     block_entries=
+              #     blocks=
               #     ( 'slot',
               #       dict( block='form.basic' ),
               #       dict( block='form.extra.taxonomy' ),
               #       dict( block='form.relations.taxonomy' )))),
               # ( 'term', dict(
               #     extends='form.single',
-              #     block_entries=
+              #     blocks=
               #     ( 'slot',
               #       dict( block='form.basic' ),
               #       dict( block='form.extra.term' ),
               #       dict( block='form.relations.term' )))),
                     ),
           ),
-          ( 'locations', ( 'from relations', self.objects, self.relations )),
-          ( 'settings', ( 'from relations', self.objects, self.relations )),
-          ( 'links', ),
+          ( '#locations', ( 'from relations', self.objects, self.relations )),
+          ( '#settings', ( 'from relations', self.objects, self.relations )),
+          ( '#links', ),
           # ( '', ),
         ),
     )

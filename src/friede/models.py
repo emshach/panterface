@@ -119,10 +119,10 @@ class Registry( Base, PathMixin ):
     parent = M.ForeignKey( 'self', M.CASCADE, blank=True, null=True,
                            related_name='_elements' )
     owner  = M.ForeignKey( get_user_model(), related_name='friede_registries',
-                           on_delete=models.CASCADE,
+                           on_delete=M.CASCADE,
                            blank=True, null=True )
     creator  = M.ForeignKey( get_user_model(), related_name='created_friede_registries',
-                           on_delete=models.CASCADE,
+                           on_delete=M.CASCADE,
                            blank=True, null=True )
 
     objects = InheritanceManager()
@@ -418,10 +418,10 @@ class Link( Base, PathMixin ):
     location = M.ForeignKey( Location, M.SET_NULL, blank=True, null=True,
                              related_name='_links' )
     owner  = M.ForeignKey( get_user_model(), related_name='friede_links',
-                           on_delete=models.CASCADE,
+                           on_delete=M.CASCADE,
                            blank=True, null=True )
     creator  = M.ForeignKey( get_user_model(), related_name='created_friede_links',
-                           on_delete=models.CASCADE,
+                           on_delete=M.CASCADE,
                            blank=True, null=True )
 
     def to_dict( self ):
@@ -519,10 +519,10 @@ class Setting( Base, PathMixin, DataMixin, ExtendsMixin ):
     type     = M.CharField( max_length=32, choices=Types.ALL, default=Types.CHAR )
     default  = JSONField( default=dict )
     owner  = M.ForeignKey( get_user_model(), related_name='friede_settings',
-                           on_delete=models.CASCADE,
+                           on_delete=M.CASCADE,
                            blank=True, null=True )
     creator  = M.ForeignKey( get_user_model(), related_name='created_friede_settings',
-                           on_delete=models.CASCADE,
+                           on_delete=M.CASCADE,
                            blank=True, null=True )
 
     def to_dict( self ):
@@ -540,10 +540,10 @@ class Action( Base, PathMixin, DataMixin ):
     registries = M.ManyToManyField( Registry, blank=True, through='ActionEntry',
                                     related_name='_actions' )
     owner  = M.ForeignKey( get_user_model(), related_name='friede_actions',
-                           on_delete=models.CASCADE,
+                           on_delete=M.CASCADE,
                            blank=True, null=True )
     creator  = M.ForeignKey( get_user_model(), related_name='created_friede_actions',
-                           on_delete=models.CASCADE,
+                           on_delete=M.CASCADE,
                            blank=True, null=True )
 
 

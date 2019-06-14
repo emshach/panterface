@@ -5,7 +5,7 @@
 </template>
 
 <script lang="js">
-import PageMixin from '@/lib/mixins'
+import { PageMixin } from '@/lib/mixins'
 export default {
   name: 'BasicPage',
   mixins: [ PageMixin ],

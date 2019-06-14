@@ -7,9 +7,9 @@
 
 <script lang="js">
 import { DashboardPage } from '@/views'
-export default {
+export default async () => ({
   name: 'HomeDashboard',
-  mixins: [ DashboardPage ],
+  mixins: [ await DashboardPage() ],
   props: [],
   mounted() {
     
@@ -25,7 +25,7 @@ export default {
   computed: {
     
   }
-}
+})
 </script>
 
 <style lang="scss">

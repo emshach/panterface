@@ -8,7 +8,7 @@
         <form v-if="editUser" class="uk-form-stacked uk-text-left"
               @submit.prevent="submitUser" @reset.prevent="resetUser">
           <div class="first-name field">
-            <label>first name</label>
+            <label>first name (or last name required)</label>
             <div class="uk-form-controls">
               <input class="uk-input" type="text" v-model="fname" />
             </div>
@@ -23,10 +23,6 @@
             <label>username (required)</label>
             <div class="uk-form-controls">
               <input class="uk-input" type="text" v-model="username" />
-            </div>
-            <div class="note">
-              <label class="uk-label">note</label>
-              first or last name required
             </div>
           </div>
           <div class="email field">

@@ -20,13 +20,17 @@
             </div>
           </div>
           <div class="username field">
-            <label>username</label>
+            <label>username (required)</label>
             <div class="uk-form-controls">
               <input class="uk-input" type="text" v-model="username" />
             </div>
+            <div class="note">
+              <label class="uk-label">note</label>
+              first or last name required
+            </div>
           </div>
           <div class="email field">
-            <label>email addres</label>
+            <label>email address</label>
             <div class="uk-form-controls">
               <input class="uk-input" type="text" v-model="email" />
             </div>
@@ -38,7 +42,7 @@
         </form>
         <template v-else>
           <div class="user-title">{{ user.fname}} {{ user.lname }}
-            <a href="#" title="change name" @click.prevent="editUser=true">
+            <a href="#" title="edit info" @click.prevent="editUser=true">
               <font-awesome-icon icon="user-edit" />
             </a>
           </div>
@@ -131,6 +135,9 @@ export default  {
   }
   .user-subtitle {
     font-size: 0.9em;
+  }
+  .note {
+    margin-top: 2px;
   }
   .user-info {
     margin-top: -4px;

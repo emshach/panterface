@@ -186,6 +186,9 @@ a[data-v-aae30ed8] {
 .user-menu .user-subtitle {
     font-size: 0.9em;
 }
+.user-menu .note {
+    margin-top: 2px;
+}
 .user-menu .user-info {
     margin-top: -4px;
     padding: 12px;

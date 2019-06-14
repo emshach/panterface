@@ -1,5 +1,8 @@
 <template lang="html">
-  <vk-dropdown class="user-menu">
+  <vk-dropdown class="user-menu"
+               animation="slide-top-small"
+               :delay-hide="3000"
+               :offset="0">
     <vk-nav>
       <div class="user-info">
         <form v-if="editUser" class="uk-form-stacked uk-text-left"
@@ -118,11 +121,16 @@ export default  {
 
 <style lang="scss">
 .user-menu {
+  text-align: left;
   .user-title {
     font-weight: bold;
+    font-size: 1.2em;
     a {
       padding-left: 10px;
     }
+  }
+  .user-subtitle {
+    font-size: 0.9em;
   }
   .user-info {
     margin-top: -4px;
@@ -137,6 +145,14 @@ export default  {
     }
     .field {
       margin-bottom: 8px;
+    }
+  }
+  .uk-dropdown-nav > li > a {
+    padding: 5px 10px;
+    background: transparent;
+    transition: 0.3s;
+    &:hover {
+      background: rgba(135, 206, 250, 0.3);
     }
   }
 }

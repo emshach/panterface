@@ -6,7 +6,7 @@
 
 <script lang="js">
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
-import { FormPage } from '@/views'
+import FormPage from '@/views/FormPage'
 export default {
   inheritAttrs: false,
   name: 'Page',

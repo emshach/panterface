@@ -6,7 +6,6 @@
 
 <script lang="js">
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
-import pages from '@/views'
 export default {
   name: 'BasicPage',
   components: {

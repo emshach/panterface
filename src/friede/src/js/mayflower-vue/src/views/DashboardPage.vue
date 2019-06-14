@@ -5,7 +5,7 @@
 </template>
 
 <script lang="js">
-import BasicPage from '@/views'
+import { BasicPage } from '@/views'
 export default {
   name: 'DashboardPage',
   extends: BasicPage,

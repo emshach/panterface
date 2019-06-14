@@ -596,7 +596,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560540640427
+      // 1560541135130
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -614,7 +614,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560540640018
+      // 1560541134649
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -632,7 +632,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560540640419
+      // 1560541135122
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -650,7 +650,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560540639825
+      // 1560541134491
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -668,7 +668,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560540640301
+      // 1560541135014
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -686,7 +686,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560540640025
+      // 1560541134682
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -704,7 +704,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560540640308
+      // 1560541135020
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -722,7 +722,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560540639991
+      // 1560541134655
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -740,7 +740,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560540639984
+      // 1560541134514
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -851,188 +851,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _cache_loader_cacheDirectory_node_modules_cache_vue_loader_cacheIdentifier_13a77282_vue_loader_template_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CloseButton_vue_vue_type_template_id_25b3204a_scoped_true_lang_html___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
-
-/***/ }),
-
-/***/ "./src/components/fields.js":
-/*!**********************************!*\
-  !*** ./src/components/fields.js ***!
-  \**********************************/
-/*! exports provided: BooleanField, CharField, TextField, JsonField, ChoiceField, TypedChoiceField, DateField, DateTimeField, DecimalField, DurationField, EmailField, FileField, FilePathField, FloatField, ImageField, IntegerField, IpAddressField, MultipleChoiceField, GenericIpAddressField, TypedMultipleChoiceField, NullBooleanField, RegexField, SlugField, TimeField, UrlField, UuidField, ComboField, MultiValueField, SplitDateTimeField, ModelChoiceField, ModelMultipleChoiceField, ChoicesField, TypedChoicesField, ModelField, ModelsField, default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BooleanField", function() { return BooleanField; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CharField", function() { return CharField; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TextField", function() { return TextField; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "JsonField", function() { return JsonField; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ChoiceField", function() { return ChoiceField; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TypedChoiceField", function() { return TypedChoiceField; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DateField", function() { return DateField; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DateTimeField", function() { return DateTimeField; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DecimalField", function() { return DecimalField; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DurationField", function() { return DurationField; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EmailField", function() { return EmailField; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FileField", function() { return FileField; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FilePathField", function() { return FilePathField; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FloatField", function() { return FloatField; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ImageField", function() { return ImageField; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IntegerField", function() { return IntegerField; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IpAddressField", function() { return IpAddressField; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MultipleChoiceField", function() { return MultipleChoiceField; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GenericIpAddressField", function() { return GenericIpAddressField; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TypedMultipleChoiceField", function() { return TypedMultipleChoiceField; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NullBooleanField", function() { return NullBooleanField; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RegexField", function() { return RegexField; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SlugField", function() { return SlugField; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TimeField", function() { return TimeField; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UrlField", function() { return UrlField; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UuidField", function() { return UuidField; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ComboField", function() { return ComboField; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MultiValueField", function() { return MultiValueField; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SplitDateTimeField", function() { return SplitDateTimeField; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ModelChoiceField", function() { return ModelChoiceField; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ModelMultipleChoiceField", function() { return ModelMultipleChoiceField; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ChoicesField", function() { return ChoicesField; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TypedChoicesField", function() { return TypedChoicesField; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ModelField", function() { return ModelField; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ModelsField", function() { return ModelsField; });
-/* harmony import */ var _home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty */ "./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js");
-
-
-var _BooleanField$CharFie;
-
-var BooleanField = function BooleanField() {
-  return Promise.all(/*! import() | fields */[__webpack_require__.e("vendor"), __webpack_require__.e("fields~widgets"), __webpack_require__.e("fields")]).then(__webpack_require__.bind(null, /*! @/components/wx/f/BooleanField */ "./src/components/wx/f/BooleanField.vue"));
-};
-var CharField = function CharField() {
-  return Promise.all(/*! import() | fields */[__webpack_require__.e("vendor"), __webpack_require__.e("fields~widgets"), __webpack_require__.e("fields")]).then(__webpack_require__.bind(null, /*! @/components/wx/f/CharField */ "./src/components/wx/f/CharField.vue"));
-};
-var TextField = function TextField() {
-  return Promise.all(/*! import() | fields */[__webpack_require__.e("vendor"), __webpack_require__.e("fields~widgets"), __webpack_require__.e("fields")]).then(__webpack_require__.bind(null, /*! @/components/wx/f/TextField */ "./src/components/wx/f/TextField.vue"));
-};
-var JsonField = function JsonField() {
-  return Promise.all(/*! import() | fields */[__webpack_require__.e("vendor"), __webpack_require__.e("fields~widgets"), __webpack_require__.e("fields")]).then(__webpack_require__.bind(null, /*! @/components/wx/f/JSONField */ "./src/components/wx/f/JSONField.vue"));
-};
-var ChoiceField = function ChoiceField() {
-  return Promise.all(/*! import() | fields */[__webpack_require__.e("vendor"), __webpack_require__.e("fields~widgets"), __webpack_require__.e("fields")]).then(__webpack_require__.bind(null, /*! @/components/wx/f/ChoiceField */ "./src/components/wx/f/ChoiceField.vue"));
-};
-var TypedChoiceField = function TypedChoiceField() {
-  return Promise.all(/*! import() | fields */[__webpack_require__.e("vendor"), __webpack_require__.e("fields~widgets"), __webpack_require__.e("fields")]).then(__webpack_require__.bind(null, /*! @/components/wx/f/TypedChoiceField */ "./src/components/wx/f/TypedChoiceField.vue"));
-};
-var DateField = function DateField() {
-  return Promise.all(/*! import() | fields */[__webpack_require__.e("vendor"), __webpack_require__.e("fields~widgets"), __webpack_require__.e("fields")]).then(__webpack_require__.bind(null, /*! @/components/wx/f/DateField */ "./src/components/wx/f/DateField.vue"));
-};
-var DateTimeField = function DateTimeField() {
-  return Promise.all(/*! import() | fields */[__webpack_require__.e("vendor"), __webpack_require__.e("fields~widgets"), __webpack_require__.e("fields")]).then(__webpack_require__.bind(null, /*! @/components/wx/f/DateTimeField */ "./src/components/wx/f/DateTimeField.vue"));
-};
-var DecimalField = function DecimalField() {
-  return Promise.all(/*! import() | fields */[__webpack_require__.e("vendor"), __webpack_require__.e("fields~widgets"), __webpack_require__.e("fields")]).then(__webpack_require__.bind(null, /*! @/components/wx/f/DecimalField */ "./src/components/wx/f/DecimalField.vue"));
-};
-var DurationField = function DurationField() {
-  return Promise.all(/*! import() | fields */[__webpack_require__.e("vendor"), __webpack_require__.e("fields~widgets"), __webpack_require__.e("fields")]).then(__webpack_require__.bind(null, /*! @/components/wx/f/DurationField */ "./src/components/wx/f/DurationField.vue"));
-};
-var EmailField = function EmailField() {
-  return Promise.all(/*! import() | fields */[__webpack_require__.e("vendor"), __webpack_require__.e("fields~widgets"), __webpack_require__.e("fields")]).then(__webpack_require__.bind(null, /*! @/components/wx/f/EmailField */ "./src/components/wx/f/EmailField.vue"));
-};
-var FileField = function FileField() {
-  return Promise.all(/*! import() | fields */[__webpack_require__.e("vendor"), __webpack_require__.e("fields~widgets"), __webpack_require__.e("fields")]).then(__webpack_require__.bind(null, /*! @/components/wx/f/FileField */ "./src/components/wx/f/FileField.vue"));
-};
-var FilePathField = function FilePathField() {
-  return Promise.all(/*! import() | fields */[__webpack_require__.e("vendor"), __webpack_require__.e("fields~widgets"), __webpack_require__.e("fields")]).then(__webpack_require__.bind(null, /*! @/components/wx/f/FilePathField */ "./src/components/wx/f/FilePathField.vue"));
-};
-var FloatField = function FloatField() {
-  return Promise.all(/*! import() | fields */[__webpack_require__.e("vendor"), __webpack_require__.e("fields~widgets"), __webpack_require__.e("fields")]).then(__webpack_require__.bind(null, /*! @/components/wx/f/FloatField */ "./src/components/wx/f/FloatField.vue"));
-};
-var ImageField = function ImageField() {
-  return Promise.all(/*! import() | fields */[__webpack_require__.e("vendor"), __webpack_require__.e("fields~widgets"), __webpack_require__.e("fields")]).then(__webpack_require__.bind(null, /*! @/components/wx/f/ImageField */ "./src/components/wx/f/ImageField.vue"));
-};
-var IntegerField = function IntegerField() {
-  return Promise.all(/*! import() | fields */[__webpack_require__.e("vendor"), __webpack_require__.e("fields~widgets"), __webpack_require__.e("fields")]).then(__webpack_require__.bind(null, /*! @/components/wx/f/IntegerField */ "./src/components/wx/f/IntegerField.vue"));
-};
-var IpAddressField = function IpAddressField() {
-  return Promise.all(/*! import() | fields */[__webpack_require__.e("vendor"), __webpack_require__.e("fields~widgets"), __webpack_require__.e("fields")]).then(__webpack_require__.bind(null, /*! @/components/wx/f/IPAddressField */ "./src/components/wx/f/IPAddressField.vue"));
-};
-var MultipleChoiceField = function MultipleChoiceField() {
-  return Promise.all(/*! import() | fields */[__webpack_require__.e("vendor"), __webpack_require__.e("fields~widgets"), __webpack_require__.e("fields")]).then(__webpack_require__.bind(null, /*! @/components/wx/f/MultipleChoiceField */ "./src/components/wx/f/MultipleChoiceField.vue"));
-};
-var GenericIpAddressField = function GenericIpAddressField() {
-  return Promise.all(/*! import() | fields */[__webpack_require__.e("vendor"), __webpack_require__.e("fields~widgets"), __webpack_require__.e("fields")]).then(__webpack_require__.bind(null, /*! @/components/wx/f/GenericIPAddressField */ "./src/components/wx/f/GenericIPAddressField.vue"));
-};
-var TypedMultipleChoiceField = function TypedMultipleChoiceField() {
-  return Promise.all(/*! import() | fields */[__webpack_require__.e("vendor"), __webpack_require__.e("fields~widgets"), __webpack_require__.e("fields")]).then(__webpack_require__.bind(null, /*! @/components/wx/f/TypedMultipleChoiceField */ "./src/components/wx/f/TypedMultipleChoiceField.vue"));
-};
-var NullBooleanField = function NullBooleanField() {
-  return Promise.all(/*! import() | fields */[__webpack_require__.e("vendor"), __webpack_require__.e("fields~widgets"), __webpack_require__.e("fields")]).then(__webpack_require__.bind(null, /*! @/components/wx/f/NullBooleanField */ "./src/components/wx/f/NullBooleanField.vue"));
-};
-var RegexField = function RegexField() {
-  return Promise.all(/*! import() | fields */[__webpack_require__.e("vendor"), __webpack_require__.e("fields~widgets"), __webpack_require__.e("fields")]).then(__webpack_require__.bind(null, /*! @/components/wx/f/RegexField */ "./src/components/wx/f/RegexField.vue"));
-};
-var SlugField = function SlugField() {
-  return Promise.all(/*! import() | fields */[__webpack_require__.e("vendor"), __webpack_require__.e("fields~widgets"), __webpack_require__.e("fields")]).then(__webpack_require__.bind(null, /*! @/components/wx/f/SlugField */ "./src/components/wx/f/SlugField.vue"));
-};
-var TimeField = function TimeField() {
-  return Promise.all(/*! import() | fields */[__webpack_require__.e("vendor"), __webpack_require__.e("fields~widgets"), __webpack_require__.e("fields")]).then(__webpack_require__.bind(null, /*! @/components/wx/f/TimeField */ "./src/components/wx/f/TimeField.vue"));
-};
-var UrlField = function UrlField() {
-  return Promise.all(/*! import() | fields */[__webpack_require__.e("vendor"), __webpack_require__.e("fields~widgets"), __webpack_require__.e("fields")]).then(__webpack_require__.bind(null, /*! @/components/wx/f/URLField */ "./src/components/wx/f/URLField.vue"));
-};
-var UuidField = function UuidField() {
-  return Promise.all(/*! import() | fields */[__webpack_require__.e("vendor"), __webpack_require__.e("fields~widgets"), __webpack_require__.e("fields")]).then(__webpack_require__.bind(null, /*! @/components/wx/f/UUIDField */ "./src/components/wx/f/UUIDField.vue"));
-};
-var ComboField = function ComboField() {
-  return Promise.all(/*! import() | fields */[__webpack_require__.e("vendor"), __webpack_require__.e("fields~widgets"), __webpack_require__.e("fields")]).then(__webpack_require__.bind(null, /*! @/components/wx/f/ComboField */ "./src/components/wx/f/ComboField.vue"));
-};
-var MultiValueField = function MultiValueField() {
-  return Promise.all(/*! import() | fields */[__webpack_require__.e("vendor"), __webpack_require__.e("fields~widgets"), __webpack_require__.e("fields")]).then(__webpack_require__.bind(null, /*! @/components/wx/f/MultiValueField */ "./src/components/wx/f/MultiValueField.vue"));
-};
-var SplitDateTimeField = function SplitDateTimeField() {
-  return Promise.all(/*! import() | fields */[__webpack_require__.e("vendor"), __webpack_require__.e("fields~widgets"), __webpack_require__.e("fields")]).then(__webpack_require__.bind(null, /*! @/components/wx/f/SplitDateTimeField */ "./src/components/wx/f/SplitDateTimeField.vue"));
-};
-var ModelChoiceField = function ModelChoiceField() {
-  return Promise.all(/*! import() | fields */[__webpack_require__.e("vendor"), __webpack_require__.e("fields~widgets"), __webpack_require__.e("fields")]).then(__webpack_require__.bind(null, /*! @/components/wx/f/ModelChoiceField */ "./src/components/wx/f/ModelChoiceField.vue"));
-};
-var ModelMultipleChoiceField = function ModelMultipleChoiceField() {
-  return Promise.all(/*! import() | fields */[__webpack_require__.e("vendor"), __webpack_require__.e("fields~widgets"), __webpack_require__.e("fields")]).then(__webpack_require__.bind(null, /*! @/components/wx/f/ModelMultipleChoiceField */ "./src/components/wx/f/ModelMultipleChoiceField.vue"));
-};
-var ChoicesField = MultipleChoiceField;
-var TypedChoicesField = TypedMultipleChoiceField;
-var ModelField = ModelChoiceField;
-var ModelsField = ModelMultipleChoiceField;
-/* harmony default export */ __webpack_exports__["default"] = (_BooleanField$CharFie = {
-  BooleanField: BooleanField,
-  CharField: CharField,
-  TextField: TextField,
-  JsonField: JsonField,
-  ChoiceField: ChoiceField,
-  TypedChoiceField: TypedChoiceField,
-  DateField: DateField,
-  DateTimeField: DateTimeField,
-  DecimalField: DecimalField,
-  DurationField: DurationField,
-  EmailField: EmailField,
-  FileField: FileField,
-  FilePathField: FilePathField,
-  FloatField: FloatField,
-  ImageField: ImageField,
-  IntegerField: IntegerField,
-  IpAddressField: IpAddressField,
-  GenericIpAddressField: GenericIpAddressField,
-  MultipleChoiceField: MultipleChoiceField,
-  TypedMultipleChoiceField: TypedMultipleChoiceField,
-  NullBooleanField: NullBooleanField,
-  RegexField: RegexField,
-  SlugField: SlugField,
-  TimeField: TimeField,
-  UrlField: UrlField,
-  UuidField: UuidField,
-  ComboField: ComboField,
-  MultiValueField: MultiValueField,
-  SplitDateTimeField: SplitDateTimeField,
-  ModelChoiceField: ModelChoiceField,
-  ModelMultipleChoiceField: ModelMultipleChoiceField
-}, Object(_home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(_BooleanField$CharFie, "IpAddressField", IpAddressField), Object(_home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(_BooleanField$CharFie, "ChoicesField", ChoicesField), Object(_home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(_BooleanField$CharFie, "TypedChoicesField", TypedChoicesField), Object(_home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(_BooleanField$CharFie, "ModelField", ModelField), Object(_home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(_BooleanField$CharFie, "ModelsField", ModelsField), _BooleanField$CharFie);
 
 /***/ }),
 

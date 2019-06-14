@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "c5fa0941236382140ddb";
+/******/ 	var hotCurrentHash = "b103f62af228f550bb61";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -2331,178 +2331,193 @@ var render = function() {
       _c(
         "vk-nav",
         [
-          _c("div", { staticClass: "user-info" }, [
-            _vm.editUser
-              ? _c(
-                  "form",
-                  {
-                    staticClass: "uk-form-stacked uk-text-left",
-                    on: {
-                      submit: function($event) {
-                        $event.preventDefault()
-                        return _vm.submitUser($event)
-                      },
-                      reset: function($event) {
-                        $event.preventDefault()
-                        return _vm.resetUser($event)
-                      }
-                    }
-                  },
-                  [
-                    _c("div", { staticClass: "first-name field" }, [
-                      _c("label", [_vm._v("first name")]),
-                      _c("div", { staticClass: "uk-form-controls" }, [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.fname,
-                              expression: "fname"
-                            }
-                          ],
-                          staticClass: "uk-input",
-                          attrs: { type: "text" },
-                          domProps: { value: _vm.fname },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.fname = $event.target.value
-                            }
-                          }
-                        })
-                      ])
-                    ]),
-                    _c("div", { staticClass: "last-name field" }, [
-                      _c("label", [_vm._v("last name")]),
-                      _c("div", { staticClass: "uk-form-controls" }, [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.lname,
-                              expression: "lname"
-                            }
-                          ],
-                          staticClass: "uk-input",
-                          attrs: { type: "text" },
-                          domProps: { value: _vm.lname },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.lname = $event.target.value
-                            }
-                          }
-                        })
-                      ])
-                    ]),
-                    _c("div", { staticClass: "username field" }, [
-                      _c("label", [_vm._v("username")]),
-                      _c("div", { staticClass: "uk-form-controls" }, [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.username,
-                              expression: "username"
-                            }
-                          ],
-                          staticClass: "uk-input",
-                          attrs: { type: "text" },
-                          domProps: { value: _vm.username },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.username = $event.target.value
-                            }
-                          }
-                        })
-                      ])
-                    ]),
-                    _c("div", { staticClass: "email field" }, [
-                      _c("label", [_vm._v("email addres")]),
-                      _c("div", { staticClass: "uk-form-controls" }, [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.email,
-                              expression: "email"
-                            }
-                          ],
-                          staticClass: "uk-input",
-                          attrs: { type: "text" },
-                          domProps: { value: _vm.email },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.email = $event.target.value
-                            }
-                          }
-                        })
-                      ])
-                    ]),
-                    _c(
-                      "vk-btn",
-                      {
-                        staticClass: "btn-ok",
-                        attrs: {
-                          "html-type": "submit",
-                          type: "primary",
-                          size: "small"
-                        }
-                      },
-                      [_vm._v("done")]
-                    ),
-                    _c(
-                      "vk-btn",
-                      {
-                        staticClass: "btn-cancel",
-                        attrs: {
-                          "html-type": "reset",
-                          type: "link",
-                          size: "small"
-                        }
-                      },
-                      [_vm._v("cancel")]
-                    )
-                  ],
-                  1
-                )
-              : _c("div", { staticClass: "username" }, [
-                  _vm._v(
-                    _vm._s(_vm.user.fname) +
-                      " " +
-                      _vm._s(_vm.user.lname) +
-                      "\n        "
-                  ),
-                  _c(
-                    "a",
+          _c(
+            "div",
+            { staticClass: "user-info" },
+            [
+              _vm.editUser
+                ? _c(
+                    "form",
                     {
-                      attrs: { href: "#", title: "change name" },
+                      staticClass: "uk-form-stacked uk-text-left",
                       on: {
-                        click: function($event) {
+                        submit: function($event) {
                           $event.preventDefault()
-                          _vm.editUser = true
+                          return _vm.submitUser($event)
+                        },
+                        reset: function($event) {
+                          $event.preventDefault()
+                          return _vm.resetUser($event)
                         }
                       }
                     },
-                    [_c("font-awesome-icon", { attrs: { icon: "user-edit" } })],
+                    [
+                      _c("div", { staticClass: "first-name field" }, [
+                        _c("label", [_vm._v("first name")]),
+                        _c("div", { staticClass: "uk-form-controls" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.fname,
+                                expression: "fname"
+                              }
+                            ],
+                            staticClass: "uk-input",
+                            attrs: { type: "text" },
+                            domProps: { value: _vm.fname },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.fname = $event.target.value
+                              }
+                            }
+                          })
+                        ])
+                      ]),
+                      _c("div", { staticClass: "last-name field" }, [
+                        _c("label", [_vm._v("last name")]),
+                        _c("div", { staticClass: "uk-form-controls" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.lname,
+                                expression: "lname"
+                              }
+                            ],
+                            staticClass: "uk-input",
+                            attrs: { type: "text" },
+                            domProps: { value: _vm.lname },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.lname = $event.target.value
+                              }
+                            }
+                          })
+                        ])
+                      ]),
+                      _c("div", { staticClass: "username field" }, [
+                        _c("label", [_vm._v("username")]),
+                        _c("div", { staticClass: "uk-form-controls" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.username,
+                                expression: "username"
+                              }
+                            ],
+                            staticClass: "uk-input",
+                            attrs: { type: "text" },
+                            domProps: { value: _vm.username },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.username = $event.target.value
+                              }
+                            }
+                          })
+                        ])
+                      ]),
+                      _c("div", { staticClass: "email field" }, [
+                        _c("label", [_vm._v("email addres")]),
+                        _c("div", { staticClass: "uk-form-controls" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.email,
+                                expression: "email"
+                              }
+                            ],
+                            staticClass: "uk-input",
+                            attrs: { type: "text" },
+                            domProps: { value: _vm.email },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.email = $event.target.value
+                              }
+                            }
+                          })
+                        ])
+                      ]),
+                      _c(
+                        "vk-btn",
+                        {
+                          staticClass: "btn-ok",
+                          attrs: {
+                            "html-type": "submit",
+                            type: "primary",
+                            size: "small"
+                          }
+                        },
+                        [_vm._v("done")]
+                      ),
+                      _c(
+                        "vk-btn",
+                        {
+                          staticClass: "btn-cancel",
+                          attrs: {
+                            "html-type": "reset",
+                            type: "link",
+                            size: "small"
+                          }
+                        },
+                        [_vm._v("cancel")]
+                      )
+                    ],
                     1
                   )
-                ])
-          ]),
+                : [
+                    _c("div", { staticClass: "user-title" }, [
+                      _vm._v(
+                        _vm._s(_vm.user.fname) +
+                          " " +
+                          _vm._s(_vm.user.lname) +
+                          "\n          "
+                      ),
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#", title: "change name" },
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              _vm.editUser = true
+                            }
+                          }
+                        },
+                        [
+                          _c("font-awesome-icon", {
+                            attrs: { icon: "user-edit" }
+                          })
+                        ],
+                        1
+                      )
+                    ]),
+                    _c("div", { staticClass: "user-subtitle" }, [
+                      _c("div", [_vm._v("@" + _vm._s(_vm.user.username))]),
+                      _c("div", [_vm._v(_vm._s(_vm.user.email))])
+                    ])
+                  ]
+            ],
+            2
+          ),
           _vm.user.uid && !_vm.user.anonymous
             ? [
                 _c("vk-nav-item", {
@@ -2591,7 +2606,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560517079342
+      // 1560519141577
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -2609,7 +2624,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560517081923
+      // 1560519144301
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -2627,7 +2642,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560517082372
+      // 1560519144755
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -2645,7 +2660,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560517079824
+      // 1560519142050
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -2663,7 +2678,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560517081910
+      // 1560519144278
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -2681,7 +2696,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560517080826
+      // 1560519142974
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -2699,7 +2714,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560517083033
+      // 1560519145520
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -2717,7 +2732,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560517079347
+      // 1560519141584
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -2840,7 +2855,7 @@ __webpack_require__.r(__webpack_exports__);
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560517085492
+      // 1560519148102
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);

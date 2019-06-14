@@ -33,11 +33,17 @@
           <vk-btn class="btn-cancel"
                   html-type="reset" type="link" size="small">cancel</vk-btn>
         </form>
-        <div v-else class="username">{{ user.fname}} {{ user.lname }}
-          <a href="#" title="change name" @click.prevent="editUser=true">
-            <font-awesome-icon icon="user-edit" />
-          </a>
-        </div>
+        <template v-else>
+          <div class="user-title">{{ user.fname}} {{ user.lname }}
+            <a href="#" title="change name" @click.prevent="editUser=true">
+              <font-awesome-icon icon="user-edit" />
+            </a>
+          </div>
+          <div class="user-subtitle">
+            <div>@{{ user.username }}</div>
+            <div>{{ user.email }}</div>
+          </div>
+        </template>
       </div>
       <template v-if="user.uid && !user.anonymous">
         <vk-nav-item href="logout" title="logout" />
@@ -112,9 +118,8 @@ export default  {
 
 <style lang="scss">
 .user-menu {
-  .username {
+  .user-title {
     font-weight: bold;
-    color: steelblue;
     a {
       padding-left: 10px;
     }
@@ -124,13 +129,14 @@ export default  {
     padding: 12px;
     background: rgba(220,230,255,1);
     border-bottom: 1px solid rgba(0,0,0,0.05);
+    color: steelblue;
     .btn-ok, .btn-cancel {
       display: block;
       width: 100%;
-      margin-bottom: 10px;
+      margin-bottom: 4px;
     }
     .field {
-      margin-bottom: 20px;
+      margin-bottom: 8px;
     }
   }
 }

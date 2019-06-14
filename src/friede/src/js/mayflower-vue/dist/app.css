@@ -184,10 +184,15 @@ a[data-v-aae30ed8] {
   margin-top: -4px;
   padding: 12px;
   background: #dce6ff;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 .user-menu .user-info .btn-ok, .user-menu .user-info .btn-cancel {
+    display: block;
     width: 100%;
+    margin-bottom: 10px;
+}
+.user-menu .user-info .field {
+    margin-bottom: 20px;
 }
 
 #app[data-v-7ba5bd90] {
@@ -226,6 +231,9 @@ a[data-v-aae30ed8] {
       color: white;
       font-weight: bold;
       background: rgba(0, 0, 150, 0.3);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.7);
+      -webkit-box-shadow: inset 0 -1px 3px rgba(0, 0, 0, 0.2);
+              box-shadow: inset 0 -1px 3px rgba(0, 0, 0, 0.2);
 }
 #nav > a[data-v-7ba5bd90]:hover {
       /* background: rgba(255,255,255,0.25); */

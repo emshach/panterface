@@ -91,6 +91,8 @@ export default {
       color: white;
       font-weight: bold;
       background: rgba(0,0,150,0.3);
+      border-bottom: 1px solid rgba(255,255,255,0.7);
+      box-shadow: inset 0 -1px 3px rgba(0,0,0,0.2);
     }
     &:hover {
       /* background: rgba(255,255,255,0.25); */

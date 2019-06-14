@@ -4,22 +4,34 @@
       <div class="user-info">
         <form v-if="editUser" class="uk-form-stacked uk-text-left"
               @submit.prevent="submitUser" @reset.prevent="resetUser">
-          <div class="first-name uk-margin">
+          <div class="first-name field">
             <label>first name</label>
             <div class="uk-form-controls">
               <input class="uk-input" type="text" v-model="fname" />
             </div>
           </div>
-          <div class="last-name uk-margin">
+          <div class="last-name field">
             <label>last name</label>
             <div class="uk-form-controls">
               <input class="uk-input" type="text" v-model="lname" />
             </div>
           </div>
+          <div class="username field">
+            <label>username</label>
+            <div class="uk-form-controls">
+              <input class="uk-input" type="text" v-model="username" />
+            </div>
+          </div>
+          <div class="email field">
+            <label>email addres</label>
+            <div class="uk-form-controls">
+              <input class="uk-input" type="text" v-model="email" />
+            </div>
+          </div>
           <vk-btn class="btn-ok"
                   html-type="submit" type="primary" size="small">done</vk-btn>
           <vk-btn class="btn-cancel"
-                  html-type="reset" type="link" size="small">done</vk-btn>
+                  html-type="reset" type="link" size="small">cancel</vk-btn>
         </form>
         <div v-else class="username">{{ user.fname}} {{ user.lname }}
           <a href="#" title="change name" @click.prevent="editUser=true">
@@ -56,7 +68,6 @@ export default  {
     VkNav,
     VkDivider,
     VkNavItem,
-    
     VkNavParent,
   },
   props: {
@@ -112,10 +123,15 @@ export default  {
     margin-top: -4px;
     padding: 12px;
     background: rgba(220,230,255,1);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
     .btn-ok, .btn-cancel {
+      display: block;
       width: 100%;
+      margin-bottom: 10px;
     }
-    border-bottom: 1px solid rgba(0,0,0,0.1);
+    .field {
+      margin-bottom: 20px;
+    }
   }
 }
 </style>

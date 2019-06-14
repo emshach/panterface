@@ -3,14 +3,14 @@
     <vk-nav>
       <form v-if="editUsername" class="uk-form-stacked uk-text-left"
             @submit.prevent="submitUsername">
-        <div class="first-name">
-          <label class="uk-form-label">first name</label>
+        <div class="first-name uk-margin">
+          <label>first name</label>
           <div class="uk-form-controls">
             <input class="uk-input" type="text" />
           </div>
         </div>
-        <div class="last-name">
-          <label class="uk-form-label">last name</label>
+        <div class="last-name uk-margin">
+          <label>last name</label>
           <div class="uk-form-controls">
             <input class="uk-input" type="text" />
           </div>
@@ -22,6 +22,7 @@
           <font-awesome-icon icon="user-edit" />
         </a>
       </div>
+      <vk-divider />
       <template v-if="user.uid && !user.anonymous">
         <vk-nav-item href="logout" title="logout" />
       </template>
@@ -39,6 +40,7 @@ import { Dropdown as VkDropdown } from 'vuikit/lib/dropdown'
 import {
   NavDropdown as VkNav,
   NavItem as VkNavItem,
+  NavItemDivider as VkDivider,
   NavItemParent as VkNavParent,
 } from 'vuikit/lib/nav'
 export default  {
@@ -48,7 +50,9 @@ export default  {
     VkBtnLink,
     VkDropdown,
     VkNav,
+    VkDivider,
     VkNavItem,
+    
     VkNavParent,
   },
   props: {
@@ -79,6 +83,11 @@ export default  {
 <style lang="scss">
 .user-menu {
   .username {
+    font-weight: bold;
+    color: steelblue;
+    a {
+      padding-left: 10px;
+    }
   }
 }
 </style>

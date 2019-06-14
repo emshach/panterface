@@ -76,10 +76,6 @@ export default {
   z-index: 200;
   top: 0;
   right: 0;
-  .username {
-    font-weight: bold;
-    color: steelblue;
-  }
   > a {
     display: inline-block;
     font-size: 0.9rem;

@@ -10497,5 +10497,11 @@ html, body {
   bottom: 0;
   background: transparent; }
 
+.uk-input,
+.uk-select,
+.uk-textarea {
+  border: 1px solid #e5e5e5;
+  background: rgba(255, 255, 255, 0.3); }
+
 
 /*# sourceMappingURL=app.css.map*/

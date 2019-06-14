@@ -357,7 +357,7 @@ class App( Registry, DataMixin ):
     registries    = M.ManyToManyField( Registry, blank=True, through='AppEntry',
                                        related_name='_apps' )
     module        = M.CharField( max_length=128 )
-    rest          = M.CharField( max_length=32, default=True )
+    rest          = M.CharField( max_length=32 ) # TODO: default to name
     installed     = M.BooleanField( default=False )
     version       = M.CharField( max_length=32, default='0.0.0' )
     min_version   = M.CharField( max_length=32, default='0.0.0' )

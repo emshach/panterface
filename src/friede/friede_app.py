@@ -577,6 +577,12 @@ class App( app.App ):
                   ( 'default', dict( path='dashboard.user' ))))),
           ),
         ),
+        ( '0.2.1',
+          ( '#actions',
+            ( 'upgrade', dict( icon='fontawesome.level-up-alt' )),
+            ( 'downgrade', dict( icon='fontawesome.level-down-alt' )),
+          )
+        ),
     )
     @property
     def userdata( self ):

@@ -169,9 +169,6 @@ export default  {
       }
     }
   }
-  .uk-input, .uk-select, .uk-textarea {
-    border: 1px solid #e5e5e5;
-  }
   .uk-card-body {
     height: calc( 100% - 45px );
     box-sizing: border-box;

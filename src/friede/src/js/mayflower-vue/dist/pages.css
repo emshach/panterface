@@ -47,9 +47,6 @@
       border-top-right-radius: 2px;
       /* border-bottom-right-radius: 2px; */
 }
-.form-page .uk-input, .form-page .uk-select, .form-page .uk-textarea {
-    border: 1px solid #e5e5e5;
-}
 .form-page .uk-card-body {
     height: calc( 100% - 45px);
     -webkit-box-sizing: border-box;

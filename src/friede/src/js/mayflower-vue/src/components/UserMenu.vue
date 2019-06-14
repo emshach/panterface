@@ -3,21 +3,23 @@
     <vk-nav>
       <div class="user-info">
         <form v-if="editUser" class="uk-form-stacked uk-text-left"
-              @submit.prevent="submitUser">
+              @submit.prevent="submitUser" @reset.prevent="resetUser">
           <div class="first-name uk-margin">
             <label>first name</label>
             <div class="uk-form-controls">
-              <input class="uk-input" type="text" v-model="user.fname" />
+              <input class="uk-input" type="text" v-model="fname" />
             </div>
           </div>
           <div class="last-name uk-margin">
             <label>last name</label>
             <div class="uk-form-controls">
-              <input class="uk-input" type="text" v-model="user.lname" />
+              <input class="uk-input" type="text" v-model="lname" />
             </div>
           </div>
           <vk-btn class="btn-ok"
                   html-type="submit" type="primary" size="small">done</vk-btn>
+          <vk-btn class="btn-cancel"
+                  html-type="reset" type="link" size="small">done</vk-btn>
         </form>
         <div v-else class="username">{{ user.fname}} {{ user.lname }}
           <a href="#" title="change name" @click.prevent="editUser=true">
@@ -25,7 +27,6 @@
           </a>
         </div>
       </div>
-      <vk-divider />
       <template v-if="user.uid && !user.anonymous">
         <vk-nav-item href="logout" title="logout" />
       </template>
@@ -65,15 +66,30 @@ export default  {
     }
   },
   mounted() {
-    
+    this.resetUser();
   },
   data() {
     return {
-      editUser: false
+      editUser: false,
+      fname: '',
+      lname: '',
+      username: '',
+      email: '',
     }
   },
   methods: {
     submitUser() {
+      this.user.fname = this.fname;
+      this.user.lname = this.lname;
+      this.user.username = this.username;
+      this.user.email = this.email;
+      this.editUser = false;
+    },
+    resetUser() {
+      this.fname = this.user.fname;
+      this.lname = this.user.lname;
+      this.username = this.user.username;
+      this.email = this.user.email;
       this.editUser = false;
     }
   },
@@ -96,9 +112,10 @@ export default  {
     margin-top: -4px;
     padding: 12px;
     background: rgba(220,230,255,1);
-    .btn-ok {
+    .btn-ok, .btn-cancel {
       width: 100%;
     }
+    border-bottom: 1px solid rgba(0,0,0,0.1);
   }
 }
 </style>

@@ -108,6 +108,7 @@ def index( request ):
             username=user.username,
             fname=user.first_name,
             lname=user.last_name,
+            email=user.email,
             anonymous=user.anonymous,
         )),
         models=models

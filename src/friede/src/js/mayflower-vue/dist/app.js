@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "212c61d2d81d3fd5731b";
+/******/ 	var hotCurrentHash = "9405330f0f34f37b19d5";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1727,12 +1727,12 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {},
   data: function data() {
     return {
-      editUsername: false
+      editUser: false
     };
   },
   methods: {
-    submitUsername: function submitUsername() {
-      this.editUsername = false;
+    submitUser: function submitUser() {
+      this.editUser = false;
     }
   },
   computed: {}
@@ -2314,108 +2314,110 @@ var render = function() {
       _c(
         "vk-nav",
         [
-          _vm.editUsername
-            ? _c(
-                "form",
-                {
-                  staticClass: "uk-form-stacked uk-text-left",
-                  on: {
-                    submit: function($event) {
-                      $event.preventDefault()
-                      return _vm.submitUsername($event)
-                    }
-                  }
-                },
-                [
-                  _c("div", { staticClass: "first-name uk-margin" }, [
-                    _c("label", [_vm._v("first name")]),
-                    _c("div", { staticClass: "uk-form-controls" }, [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.user.fname,
-                            expression: "user.fname"
-                          }
-                        ],
-                        staticClass: "uk-input",
-                        attrs: { type: "text" },
-                        domProps: { value: _vm.user.fname },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(_vm.user, "fname", $event.target.value)
-                          }
-                        }
-                      })
-                    ])
-                  ]),
-                  _c("div", { staticClass: "last-name uk-margin" }, [
-                    _c("label", [_vm._v("last name")]),
-                    _c("div", { staticClass: "uk-form-controls" }, [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.user.lname,
-                            expression: "user.lname"
-                          }
-                        ],
-                        staticClass: "uk-input",
-                        attrs: { type: "text" },
-                        domProps: { value: _vm.user.lname },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(_vm.user, "lname", $event.target.value)
-                          }
-                        }
-                      })
-                    ])
-                  ]),
-                  _c(
-                    "vk-btn",
-                    {
-                      staticClass: "btn-ok",
-                      attrs: {
-                        "html-type": "submit",
-                        type: "primary",
-                        size: "small"
-                      }
-                    },
-                    [_vm._v("done")]
-                  )
-                ],
-                1
-              )
-            : _c("div", { staticClass: "username" }, [
-                _vm._v(
-                  _vm._s(_vm.user.fname) +
-                    " " +
-                    _vm._s(_vm.user.lname) +
-                    "\n      "
-                ),
-                _c(
-                  "a",
+          _c("div", { staticClass: "user-info" }, [
+            _vm.editUser
+              ? _c(
+                  "form",
                   {
-                    attrs: { href: "#" },
+                    staticClass: "uk-form-stacked uk-text-left",
                     on: {
-                      click: function($event) {
+                      submit: function($event) {
                         $event.preventDefault()
-                        _vm.editUsername = true
+                        return _vm.submitUser($event)
                       }
                     }
                   },
-                  [_c("font-awesome-icon", { attrs: { icon: "user-edit" } })],
+                  [
+                    _c("div", { staticClass: "first-name uk-margin" }, [
+                      _c("label", [_vm._v("first name")]),
+                      _c("div", { staticClass: "uk-form-controls" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.user.fname,
+                              expression: "user.fname"
+                            }
+                          ],
+                          staticClass: "uk-input",
+                          attrs: { type: "text" },
+                          domProps: { value: _vm.user.fname },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(_vm.user, "fname", $event.target.value)
+                            }
+                          }
+                        })
+                      ])
+                    ]),
+                    _c("div", { staticClass: "last-name uk-margin" }, [
+                      _c("label", [_vm._v("last name")]),
+                      _c("div", { staticClass: "uk-form-controls" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.user.lname,
+                              expression: "user.lname"
+                            }
+                          ],
+                          staticClass: "uk-input",
+                          attrs: { type: "text" },
+                          domProps: { value: _vm.user.lname },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(_vm.user, "lname", $event.target.value)
+                            }
+                          }
+                        })
+                      ])
+                    ]),
+                    _c(
+                      "vk-btn",
+                      {
+                        staticClass: "btn-ok",
+                        attrs: {
+                          "html-type": "submit",
+                          type: "primary",
+                          size: "small"
+                        }
+                      },
+                      [_vm._v("done")]
+                    )
+                  ],
                   1
                 )
-              ]),
+              : _c("div", { staticClass: "username" }, [
+                  _vm._v(
+                    _vm._s(_vm.user.fname) +
+                      " " +
+                      _vm._s(_vm.user.lname) +
+                      "\n        "
+                  ),
+                  _c(
+                    "a",
+                    {
+                      attrs: { href: "#", title: "change name" },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.editUser = true
+                        }
+                      }
+                    },
+                    [_c("font-awesome-icon", { attrs: { icon: "user-edit" } })],
+                    1
+                  )
+                ])
+          ]),
           _c("vk-divider"),
           _vm.user.uid && !_vm.user.anonymous
             ? [
@@ -2505,7 +2507,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560487727307
+      // 1560514528774
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -2523,7 +2525,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560487729380
+      // 1560514531285
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -2541,7 +2543,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560487729798
+      // 1560514531713
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -2559,7 +2561,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560487727781
+      // 1560514529232
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -2577,7 +2579,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560487729367
+      // 1560514531310
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -2595,7 +2597,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560487727693
+      // 1560514530084
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -2613,7 +2615,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560487730538
+      // 1560514532394
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -2631,7 +2633,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560487727312
+      // 1560514528780
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -2754,7 +2756,7 @@ __webpack_require__.r(__webpack_exports__);
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560487733250
+      // 1560514534866
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);

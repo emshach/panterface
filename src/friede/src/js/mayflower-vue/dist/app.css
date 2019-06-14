@@ -180,10 +180,12 @@ a[data-v-aae30ed8] {
 .user-menu .username a {
     padding-left: 10px;
 }
-.user-menu form {
+.user-menu .user-info {
+  margin-top: -4px;
   padding: 12px;
+  background: #dce6ff;
 }
-.user-menu form .btn-ok {
+.user-menu .user-info .btn-ok {
     width: 100%;
 }
 

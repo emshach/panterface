@@ -1,27 +1,29 @@
 <template lang="html">
   <vk-dropdown class="user-menu">
     <vk-nav>
-      <form v-if="editUsername" class="uk-form-stacked uk-text-left"
-            @submit.prevent="submitUsername">
-        <div class="first-name uk-margin">
-          <label>first name</label>
-          <div class="uk-form-controls">
-            <input class="uk-input" type="text" v-model="user.fname" />
+      <div class="user-info">
+        <form v-if="editUser" class="uk-form-stacked uk-text-left"
+              @submit.prevent="submitUser">
+          <div class="first-name uk-margin">
+            <label>first name</label>
+            <div class="uk-form-controls">
+              <input class="uk-input" type="text" v-model="user.fname" />
+            </div>
           </div>
-        </div>
-        <div class="last-name uk-margin">
-          <label>last name</label>
-          <div class="uk-form-controls">
-            <input class="uk-input" type="text" v-model="user.lname" />
+          <div class="last-name uk-margin">
+            <label>last name</label>
+            <div class="uk-form-controls">
+              <input class="uk-input" type="text" v-model="user.lname" />
+            </div>
           </div>
+          <vk-btn class="btn-ok"
+                  html-type="submit" type="primary" size="small">done</vk-btn>
+        </form>
+        <div v-else class="username">{{ user.fname}} {{ user.lname }}
+          <a href="#" title="change name" @click.prevent="editUser=true">
+            <font-awesome-icon icon="user-edit" />
+          </a>
         </div>
-        <vk-btn class="btn-ok"
-                html-type="submit" type="primary" size="small">done</vk-btn>
-      </form>
-      <div v-else class="username">{{ user.fname}} {{ user.lname }}
-        <a href="#" @click.prevent="editUsername=true">
-          <font-awesome-icon icon="user-edit" />
-        </a>
       </div>
       <vk-divider />
       <template v-if="user.uid && !user.anonymous">
@@ -67,12 +69,12 @@ export default  {
   },
   data() {
     return {
-      editUsername: false
+      editUser: false
     }
   },
   methods: {
-    submitUsername() {
-      this.editUsername = false;
+    submitUser() {
+      this.editUser = false;
     }
   },
   computed: {
@@ -90,8 +92,10 @@ export default  {
       padding-left: 10px;
     }
   }
-  form {
+  .user-info {
+    margin-top: -4px;
     padding: 12px;
+    background: rgba(220,230,255,1);
     .btn-ok {
       width: 100%;
     }

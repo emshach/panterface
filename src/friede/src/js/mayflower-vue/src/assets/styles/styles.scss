@@ -12,7 +12,8 @@
 //@import "theme/accordion-mixins.scss";
 
 // 4. Import UIkit.
-@import "~uikit/src/scss/uikit.scss";
+@import "~uikit/src/scss/uikit-theme.scss";
+
 html, body {
   position: relative;
   width: 100%;

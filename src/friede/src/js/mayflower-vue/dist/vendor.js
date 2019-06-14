@@ -20707,7 +20707,7 @@ module.exports = function (encodedURI) {
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560483529178
+      // 1560484292902
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -29036,24 +29036,6 @@ module.exports = function (str) {
 	});
 };
 
-
-/***/ }),
-
-/***/ "./node_modules/uikit/dist/css/uikit.min.css":
-/*!***************************************************!*\
-  !*** ./node_modules/uikit/dist/css/uikit.min.css ***!
-  \***************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-    if(true) {
-      // 1560483527097
-      var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
-      module.hot.dispose(cssReload);
-      module.hot.accept(undefined, cssReload);
-    }
-  
 
 /***/ }),
 
@@ -42573,7 +42555,7 @@ function normalizeComponent (
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560483527329
+      // 1560484290960
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);

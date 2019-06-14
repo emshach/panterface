@@ -5,7 +5,6 @@ import router from './router'
 import store from './store'
 import UIkit from 'uikit'
 import '@/assets/styles/styles.scss'
-import 'uikit/dist/css/uikit.min.css'
 import Icons from 'uikit/dist/js/uikit-icons'
 import axios from 'axios'
 

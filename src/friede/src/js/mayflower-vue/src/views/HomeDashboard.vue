@@ -6,7 +6,7 @@
 </template>
 
 <script lang="js">
-import DashboardPage from '@/views'
+import { DashboardPage } from '@/views'
 export default {
   name: 'HomeDashboard',
   extends: DashboardPage,

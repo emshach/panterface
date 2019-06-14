@@ -5,10 +5,10 @@
 </template>
 
 <script lang="js">
-import { BasicPage } from '@/views'
-export default async() => ({
+import PageMixin from '@/lib/mixins'
+export default {
   name: 'DashboardPage',
-  mixins: [ await BasicPage() ],
+  mixins: [ PageMixin ],
   props: [],
   mounted() {
     
@@ -24,7 +24,7 @@ export default async() => ({
   computed: {
     
   }
-})
+}
 </script>
 
 <style scoped lang="scss">

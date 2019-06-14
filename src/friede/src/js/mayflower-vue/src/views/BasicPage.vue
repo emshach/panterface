@@ -5,13 +5,11 @@
 </template>
 
 <script lang="js">
-import VuePerfectScrollbar from 'vue-perfect-scrollbar'
+import PageMixin from '@/lib/mixins'
 export default {
   name: 'BasicPage',
-  components: {
-    VuePerfectScrollbar,
-  },
-  props: [ 'blocks', 'widgets', 'source', 'model' ],
+  mixins: [ PageMixin ],
+  props: [],
   mounted() {
   },
   data() {

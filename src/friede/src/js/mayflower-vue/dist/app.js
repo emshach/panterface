@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "833100907e15d462181f";
+/******/ 	var hotCurrentHash = "097370181d2e714e32dd";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -768,7 +768,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"fields~widgets":"fields~widgets","widgets":"widgets","pages":"pages","json":"json","fields":"fields"}[chunkId]||chunkId) + ".js"
+/******/ 		return __webpack_require__.p + "" + ({"pages~widgets":"pages~widgets","pages":"pages","widgets":"widgets","json":"json","fields":"fields"}[chunkId]||chunkId) + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -805,11 +805,11 @@
 /******/
 /******/
 /******/ 		// mini-css-extract-plugin CSS loading
-/******/ 		var cssChunks = {"fields~widgets":1,"widgets":1,"pages":1,"json":1,"fields":1};
+/******/ 		var cssChunks = {"pages~widgets":1,"pages":1,"widgets":1,"json":1,"fields":1};
 /******/ 		if(installedCssChunks[chunkId]) promises.push(installedCssChunks[chunkId]);
 /******/ 		else if(installedCssChunks[chunkId] !== 0 && cssChunks[chunkId]) {
 /******/ 			promises.push(installedCssChunks[chunkId] = new Promise(function(resolve, reject) {
-/******/ 				var href = "" + ({"fields~widgets":"fields~widgets","widgets":"widgets","pages":"pages","json":"json","fields":"fields"}[chunkId]||chunkId) + ".css";
+/******/ 				var href = "" + ({"pages~widgets":"pages~widgets","pages":"pages","widgets":"widgets","json":"json","fields":"fields"}[chunkId]||chunkId) + ".css";
 /******/ 				var fullhref = __webpack_require__.p + href;
 /******/ 				var existingLinkTags = document.getElementsByTagName("link");
 /******/ 				for(var i = 0; i < existingLinkTags.length; i++) {
@@ -2623,7 +2623,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560541981604
+      // 1560542284295
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -2641,7 +2641,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560541984839
+      // 1560542286818
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -2659,7 +2659,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560541985230
+      // 1560542287752
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -2677,7 +2677,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560541982084
+      // 1560542284807
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -2695,7 +2695,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560541984102
+      // 1560542286808
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -2713,7 +2713,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560541981862
+      // 1560542284738
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -2731,7 +2731,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560541985942
+      // 1560542288819
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -2749,7 +2749,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560541981609
+      // 1560542284301
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -2872,7 +2872,7 @@ __webpack_require__.r(__webpack_exports__);
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560541988249
+      // 1560542291181
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -3421,16 +3421,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ViewModelWidget", function() { return ViewModelWidget; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Widget", function() { return Widget; });
 var DashboardWidget = function DashboardWidget() {
-  return Promise.all(/*! import() | widgets */[__webpack_require__.e("vendor"), __webpack_require__.e("fields~widgets"), __webpack_require__.e("widgets")]).then(__webpack_require__.bind(null, /*! @/components/wx/DashboardWidget */ "./src/components/wx/DashboardWidget.vue"));
+  return Promise.all(/*! import() | widgets */[__webpack_require__.e("vendor"), __webpack_require__.e("pages~widgets"), __webpack_require__.e("widgets")]).then(__webpack_require__.bind(null, /*! @/components/wx/DashboardWidget */ "./src/components/wx/DashboardWidget.vue"));
 };
 var InlineWidget = function InlineWidget() {
-  return Promise.all(/*! import() | widgets */[__webpack_require__.e("vendor"), __webpack_require__.e("fields~widgets"), __webpack_require__.e("widgets")]).then(__webpack_require__.bind(null, /*! @/components/wx/InlineWidget */ "./src/components/wx/InlineWidget.vue"));
+  return Promise.all(/*! import() | widgets */[__webpack_require__.e("vendor"), __webpack_require__.e("pages~widgets"), __webpack_require__.e("widgets")]).then(__webpack_require__.bind(null, /*! @/components/wx/InlineWidget */ "./src/components/wx/InlineWidget.vue"));
 };
 var AdaptiveWidget = function AdaptiveWidget() {
-  return Promise.all(/*! import() | widgets */[__webpack_require__.e("vendor"), __webpack_require__.e("fields~widgets"), __webpack_require__.e("widgets")]).then(__webpack_require__.bind(null, /*! @/components/wx/AdaptiveWidget */ "./src/components/wx/AdaptiveWidget.vue"));
+  return Promise.all(/*! import() | widgets */[__webpack_require__.e("vendor"), __webpack_require__.e("pages~widgets"), __webpack_require__.e("widgets")]).then(__webpack_require__.bind(null, /*! @/components/wx/AdaptiveWidget */ "./src/components/wx/AdaptiveWidget.vue"));
 };
 var ViewModelWidget = function ViewModelWidget() {
-  return Promise.all(/*! import() | widgets */[__webpack_require__.e("vendor"), __webpack_require__.e("fields~widgets"), __webpack_require__.e("widgets")]).then(__webpack_require__.bind(null, /*! @/components/wx/ViewModelWidget */ "./src/components/wx/ViewModelWidget.vue"));
+  return Promise.all(/*! import() | widgets */[__webpack_require__.e("vendor"), __webpack_require__.e("pages~widgets"), __webpack_require__.e("widgets")]).then(__webpack_require__.bind(null, /*! @/components/wx/ViewModelWidget */ "./src/components/wx/ViewModelWidget.vue"));
 }; // export const ListModelWidget = () =>
 //         import(/* webpackChunkName: "widgets" */ '@/components/wx/ListModelWidget' )
 // export const NewModelWidget = () =>
@@ -3447,7 +3447,7 @@ var ViewModelWidget = function ViewModelWidget() {
 //         import/* webpackChunkName: "widgets" */( '@/components/wx/RemoveModelWidget' )
 
 var Widget = function Widget() {
-  return Promise.all(/*! import() | widgets */[__webpack_require__.e("vendor"), __webpack_require__.e("fields~widgets"), __webpack_require__.e("widgets")]).then(__webpack_require__.bind(null, /*! @/components/wx/Widget */ "./src/components/wx/Widget.vue"));
+  return Promise.all(/*! import() | widgets */[__webpack_require__.e("vendor"), __webpack_require__.e("pages~widgets"), __webpack_require__.e("widgets")]).then(__webpack_require__.bind(null, /*! @/components/wx/Widget */ "./src/components/wx/Widget.vue"));
 };
 /* harmony default export */ __webpack_exports__["default"] = ({
   DashboardWidget: DashboardWidget,
@@ -4316,34 +4316,34 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UserDashboard", function() { return UserDashboard; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UserHomeDashboard", function() { return UserHomeDashboard; });
 var BasicPage = function BasicPage() {
-  return Promise.all(/*! import() | pages */[__webpack_require__.e("vendor"), __webpack_require__.e("pages")]).then(__webpack_require__.bind(null, /*! ./BasicPage */ "./src/views/BasicPage.vue"));
+  return Promise.all(/*! import() | pages */[__webpack_require__.e("vendor"), __webpack_require__.e("pages~widgets"), __webpack_require__.e("pages")]).then(__webpack_require__.bind(null, /*! ./BasicPage */ "./src/views/BasicPage.vue"));
 };
 var DashboardPage = function DashboardPage() {
-  return Promise.all(/*! import() | pages */[__webpack_require__.e("vendor"), __webpack_require__.e("pages")]).then(__webpack_require__.bind(null, /*! ./DashboardPage */ "./src/views/DashboardPage.vue"));
+  return Promise.all(/*! import() | pages */[__webpack_require__.e("vendor"), __webpack_require__.e("pages~widgets"), __webpack_require__.e("pages")]).then(__webpack_require__.bind(null, /*! ./DashboardPage */ "./src/views/DashboardPage.vue"));
 };
 var FormPage = function FormPage() {
-  return Promise.all(/*! import() | pages */[__webpack_require__.e("vendor"), __webpack_require__.e("pages")]).then(__webpack_require__.bind(null, /*! ./FormPage */ "./src/views/FormPage.vue"));
+  return Promise.all(/*! import() | pages */[__webpack_require__.e("vendor"), __webpack_require__.e("pages~widgets"), __webpack_require__.e("pages")]).then(__webpack_require__.bind(null, /*! ./FormPage */ "./src/views/FormPage.vue"));
 };
 var HomeDashboard = function HomeDashboard() {
-  return Promise.all(/*! import() | pages */[__webpack_require__.e("vendor"), __webpack_require__.e("pages")]).then(__webpack_require__.bind(null, /*! ./HomeDashboard */ "./src/views/HomeDashboard.vue"));
+  return Promise.all(/*! import() | pages */[__webpack_require__.e("vendor"), __webpack_require__.e("pages~widgets"), __webpack_require__.e("pages")]).then(__webpack_require__.bind(null, /*! ./HomeDashboard */ "./src/views/HomeDashboard.vue"));
 };
 var HomePage = function HomePage() {
-  return Promise.all(/*! import() | pages */[__webpack_require__.e("vendor"), __webpack_require__.e("pages")]).then(__webpack_require__.bind(null, /*! ./HomePage */ "./src/views/HomePage.vue"));
+  return Promise.all(/*! import() | pages */[__webpack_require__.e("vendor"), __webpack_require__.e("pages~widgets"), __webpack_require__.e("pages")]).then(__webpack_require__.bind(null, /*! ./HomePage */ "./src/views/HomePage.vue"));
 };
 var ListModelPage = function ListModelPage() {
-  return Promise.all(/*! import() | pages */[__webpack_require__.e("vendor"), __webpack_require__.e("pages")]).then(__webpack_require__.bind(null, /*! ./ListModelPage */ "./src/views/ListModelPage.vue"));
+  return Promise.all(/*! import() | pages */[__webpack_require__.e("vendor"), __webpack_require__.e("pages~widgets"), __webpack_require__.e("pages")]).then(__webpack_require__.bind(null, /*! ./ListModelPage */ "./src/views/ListModelPage.vue"));
 };
 var ModelDashboard = function ModelDashboard() {
-  return Promise.all(/*! import() | pages */[__webpack_require__.e("vendor"), __webpack_require__.e("pages")]).then(__webpack_require__.bind(null, /*! ./ModelDashboard */ "./src/views/ModelDashboard.vue"));
+  return Promise.all(/*! import() | pages */[__webpack_require__.e("vendor"), __webpack_require__.e("pages~widgets"), __webpack_require__.e("pages")]).then(__webpack_require__.bind(null, /*! ./ModelDashboard */ "./src/views/ModelDashboard.vue"));
 };
 var SearchResultsPage = function SearchResultsPage() {
-  return Promise.all(/*! import() | pages */[__webpack_require__.e("vendor"), __webpack_require__.e("pages")]).then(__webpack_require__.bind(null, /*! ./SearchResultsPage */ "./src/views/SearchResultsPage.vue"));
+  return Promise.all(/*! import() | pages */[__webpack_require__.e("vendor"), __webpack_require__.e("pages~widgets"), __webpack_require__.e("pages")]).then(__webpack_require__.bind(null, /*! ./SearchResultsPage */ "./src/views/SearchResultsPage.vue"));
 };
 var UserDashboard = function UserDashboard() {
-  return Promise.all(/*! import() | pages */[__webpack_require__.e("vendor"), __webpack_require__.e("pages")]).then(__webpack_require__.bind(null, /*! ./UserDashboard */ "./src/views/UserDashboard.vue"));
+  return Promise.all(/*! import() | pages */[__webpack_require__.e("vendor"), __webpack_require__.e("pages~widgets"), __webpack_require__.e("pages")]).then(__webpack_require__.bind(null, /*! ./UserDashboard */ "./src/views/UserDashboard.vue"));
 };
 var UserHomeDashboard = function UserHomeDashboard() {
-  return Promise.all(/*! import() | pages */[__webpack_require__.e("vendor"), __webpack_require__.e("pages")]).then(__webpack_require__.bind(null, /*! ./UserHomeDashboard */ "./src/views/UserHomeDashboard.vue"));
+  return Promise.all(/*! import() | pages */[__webpack_require__.e("vendor"), __webpack_require__.e("pages~widgets"), __webpack_require__.e("pages")]).then(__webpack_require__.bind(null, /*! ./UserHomeDashboard */ "./src/views/UserHomeDashboard.vue"));
 };
 /* harmony default export */ __webpack_exports__["default"] = ({
   BasicPage: BasicPage,

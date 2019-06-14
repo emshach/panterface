@@ -4,13 +4,14 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { Field } from '@/lib/objects'
 import JsonWidget from '@/components/wx/JsonWidget'
+import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 
 library.add( faPlus, faEdit )
 
-const ModelWidgetMixin = {
+export const ModelWidgetMixin = {
 }
 
-const ModelFieldMixin = {
+export const ModelFieldMixin = {
   components: { FontAwesomeIcon },
   props: {
     field: {
@@ -87,7 +88,7 @@ const ModelFieldMixin = {
   }
 }
 
-const ModelModelsFieldMixin = {
+export const ModelModelsFieldMixin = {
   components: {
     Multiselect
   },
@@ -144,7 +145,14 @@ const ModelModelsFieldMixin = {
   }
 };
 
-const JsonWidgetMixin = {
+export const PageMixin = {
+  components: {
+    VuePerfectScrollbar,
+  },
+  props: [ 'blocks', 'widgets', 'source', 'model' ],
+};
+
+export const JsonWidgetMixin = {
   components: { JsonWidget },
   props: {
     readonly: {
@@ -187,12 +195,13 @@ const JsonWidgetMixin = {
   }
 }
 
-const DurationOptions = []
+export const DurationOptions = []
 
-export {
+export default {
   ModelWidgetMixin,
   ModelFieldMixin,
   ModelModelsFieldMixin,
   JsonWidgetMixin,
+  PageMixin,
   DurationOptions,
 }

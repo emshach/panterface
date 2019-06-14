@@ -6,17 +6,17 @@
         <div class="first-name uk-margin">
           <label>first name</label>
           <div class="uk-form-controls">
-            <input class="uk-input" type="text" />
+            <input class="uk-input" type="text" v-model="user.fname" />
           </div>
         </div>
         <div class="last-name uk-margin">
           <label>last name</label>
           <div class="uk-form-controls">
-            <input class="uk-input" type="text" />
+            <input class="uk-input" type="text" v-model="user.lname" />
           </div>
         </div>
         <vk-btn class="btn-ok"
-                html-type="submit" variant="primary" size="small">done</vk-btn>
+                html-type="submit" type="primary" size="small">done</vk-btn>
       </form>
       <div v-else class="username">{{ user.fname}} {{ user.lname }}
         <a href="#" @click.prevent="editUsername=true">

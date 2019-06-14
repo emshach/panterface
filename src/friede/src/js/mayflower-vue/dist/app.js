@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "0ee8b487e40a6a41cb09";
+/******/ 	var hotCurrentHash = "1a69e1c1d281006bcbf4";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -2367,11 +2367,7 @@ var render = function() {
                       }
                     }
                   },
-                  [
-                    _c("font-awesome-icon", {
-                      attrs: { icon: _vm.user - _vm.edit }
-                    })
-                  ],
+                  [_c("font-awesome-icon", { attrs: { icon: "user-edit" } })],
                   1
                 )
               ]),

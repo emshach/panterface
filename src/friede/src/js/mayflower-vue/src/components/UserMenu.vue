@@ -19,7 +19,7 @@
       </form>
       <div v-else class="username">{{ user.fname}} {{ user.lname }}
         <a href="#" @click.prevent="editUsername=true">
-          <font-awesome-icon :icon="user-edit" />
+          <font-awesome-icon icon="user-edit" />
         </a>
       </div>
       <template v-if="user.uid && !user.anonymous">

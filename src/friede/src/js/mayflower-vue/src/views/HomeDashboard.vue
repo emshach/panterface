@@ -9,7 +9,7 @@
 import DashboardPage from '@/views'
 export default {
   name: 'HomeDashboard',
-  mixins: [ DashboardPage ],
+  extends: DashboardPage,
   props: [],
   mounted() {
     

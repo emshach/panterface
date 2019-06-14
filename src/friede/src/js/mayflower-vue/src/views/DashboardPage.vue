@@ -8,7 +8,7 @@
 import BasicPage from '@/views'
 export default {
   name: 'DashboardPage',
-  mixins: [ BasicPage ],
+  extends: BasicPage,
   props: [],
   mounted() {
     

@@ -380,7 +380,7 @@ var render = function() {
         ],
         1
       )
-    : _c("div", { class: ["field", "uk-fieldset", _vm.fieldClass] }, [
+    : _c("div", { class: ["field", _vm.fieldClass] }, [
         _c("label", { staticClass: "uk-form-label" }, [
           _vm._v(_vm._s(_vm.label))
         ]),

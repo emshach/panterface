@@ -9,18 +9,7 @@
         <font-awesome-icon :icon=" user.anonymous ? 'user-ninja': 'user'"
                            class="nav-icon" /> {{ user.fname }}
       </router-link>
-      <vk-dropdown>
-        <vk-nav>
-          <div class="username">{{ user.fname}} {{ user.lname }}</div>
-          <template v-if="user.uid && !user.anonymous">
-            <vk-nav-item href="logout" title="logout" />
-          </template>
-          <template v-else>
-            <vk-nav-item href="login" title="login" />
-            <vk-nav-item href="sign up" title="sign up" />
-          </template>
-        </vk-nav>
-      </vk-dropdown>
+      <user-menu />
     </div>
     <!-- <transition name="fade-fast" mode="out-in"> -->
     <!--   <search-results-page v-if="searching" /> -->
@@ -31,32 +20,20 @@
 </template>
 
 <script lang="js">
-import { ButtonLink as VkBtnLink } from 'vuikit/lib/button'
-import { Dropdown as VkDropdown } from 'vuikit/lib/dropdown'
-import { IconUser as VkIconUser } from '@vuikit/icons'
-import {
-  NavDropdown as VkNav,
-  NavItem as VkNavItem,
-  NavItemParent as VkNavParent,
-} from 'vuikit/lib/nav'
 import { faUserNinja, faUser } from '@fortawesome/free-solid-svg-icons'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import Prompt from '@/components/Prompt'
+import UserMenu from '@/components/UserMenu'
 
 library.add( faUserNinja, faUser )
 
 export default {
   name: 'App',
   components: {
-    VkBtnLink,
-    VkDropdown,
-    VkNav,
-    VkNavItem,
-    VkNavParent,
-    VkIconUser,
     FontAwesomeIcon,
     Prompt,
+    UserMenu,
   },
   data() {
     return {
@@ -67,7 +44,7 @@ export default {
     promptInput( route, context ) {
       this.$store.dispatch( 'setContext', context );
       this.$router.push( route || '/' );
-    }
+    },
   },
   computed: {
     context() {

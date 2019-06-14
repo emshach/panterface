@@ -1,10 +1,10 @@
 <template lang="html">
-  <div v-if="fieldset" :class="['field', 'uk-fieldset', fieldClass ]">
+  <div v-if="fieldset" :class="[ 'field', 'uk-fieldset', fieldClass ]">
     <h4>{{ label }}</h4>
     <hr class="titlesep" />
     <component :is="type" :name="name" :field="field" empty-value="None" />
   </div>
-  <div v-else :class="['field', 'uk-fieldset', fieldClass ]">
+  <div v-else :class="[ 'field', fieldClass ]">
     <label class="uk-form-label">{{ label }}</label>
     <div class="uk-form-controls">
       <component :is="type" :name="name" :field="field" />

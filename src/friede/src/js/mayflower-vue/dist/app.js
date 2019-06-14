@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "35c0a61779ede60da677";
+/******/ 	var hotCurrentHash = "1d3f28de5c54926d1378";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1812,6 +1812,11 @@ var render = function() {
               _c(
                 "vk-nav",
                 [
+                  _c("div", { staticClass: "username" }, [
+                    _vm._v(
+                      _vm._s(_vm.user.fname) + " " + _vm._s(_vm.user.lname)
+                    )
+                  ]),
                   _vm.user.uid && !_vm.user.anonymous
                     ? [
                         _c("vk-nav-item", {

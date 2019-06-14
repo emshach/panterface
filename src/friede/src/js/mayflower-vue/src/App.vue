@@ -11,6 +11,7 @@
       </router-link>
       <vk-dropdown>
         <vk-nav>
+          <div class="username">{{ user.fname}} {{ user.lname }}</div>
           <template v-if="user.uid && !user.anonymous">
             <vk-nav-item href="logout" title="logout" />
           </template>
@@ -98,6 +99,10 @@ export default {
   z-index: 200;
   top: 0;
   right: 0;
+  .username {
+    font-weight: bold;
+    color: steelblue;
+  }
   > a {
     display: inline-block;
     font-size: 0.9rem;

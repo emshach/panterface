@@ -27,7 +27,11 @@ export default  {
       return this.$store.getters.screen
     },
     component() {
-      return this.screen && this.screen.data.component || 'HomePage'
+      var screen = this.screen;
+      while ( screen && !this.screen.data.component
+              && screen.extends )
+        screen = screen.extends;
+      return screen && screen.data.component || 'HomePage'
     }
   }
 }

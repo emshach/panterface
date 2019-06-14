@@ -22,7 +22,6 @@ export const UserHomeDashboard = () =>
    import(/* webpackChunkName: "pages" */ './UserHomeDashboard')
 
 export default {
-  Page,
   BasicPage,
   DashboardPage,
   FormPage,

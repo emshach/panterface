@@ -28,7 +28,7 @@ export default  {
     },
     component() {
       var screen = this.screen;
-      while ( screen && !this.screen.data.component
+      while ( screen && !screen.data.component
               && screen.extends )
         screen = screen.extends;
       return screen && screen.data.component || 'HomePage'

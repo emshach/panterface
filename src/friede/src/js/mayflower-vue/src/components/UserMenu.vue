@@ -51,7 +51,12 @@ export default  {
     VkNavItem,
     VkNavParent,
   },
-  props: [],
+  props: {
+    user: {
+      type: Object,
+      default: () => ({})
+    }
+  },
   mounted() {
     
   },

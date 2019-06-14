@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "155df0cb9dfcb5df5bfe";
+/******/ 	var hotCurrentHash = "0ee8b487e40a6a41cb09";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1711,7 +1711,14 @@ __webpack_require__.r(__webpack_exports__);
     VkNavItem: vuikit_lib_nav__WEBPACK_IMPORTED_MODULE_2__["NavItem"],
     VkNavParent: vuikit_lib_nav__WEBPACK_IMPORTED_MODULE_2__["NavItemParent"]
   },
-  props: [],
+  props: {
+    user: {
+      type: Object,
+      default: function _default() {
+        return {};
+      }
+    }
+  },
   mounted: function mounted() {},
   data: function data() {
     return {
@@ -1837,7 +1844,7 @@ var render = function() {
             ],
             1
           ),
-          _c("user-menu")
+          _c("user-menu", { attrs: { user: _vm.user } })
         ],
         2
       ),

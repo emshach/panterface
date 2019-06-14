@@ -9,7 +9,7 @@
         <font-awesome-icon :icon=" user.anonymous ? 'user-ninja': 'user'"
                            class="nav-icon" /> {{ user.fname }}
       </router-link>
-      <user-menu />
+      <user-menu :user="user" />
     </div>
     <!-- <transition name="fade-fast" mode="out-in"> -->
     <!--   <search-results-page v-if="searching" /> -->

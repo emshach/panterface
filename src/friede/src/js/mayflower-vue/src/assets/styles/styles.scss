@@ -12,7 +12,7 @@
 //@import "theme/accordion-mixins.scss";
 
 // 4. Import UIkit.
-@import "~uikit/src/scss/uikit-theme.scss";
+@import "~uikit/src/scss/uikit.scss";
 
 html, body {
   position: relative;
@@ -28,4 +28,10 @@ html, body {
 .uk-input, .uk-select, .uk-textarea {
   border: 1px solid #e5e5e5;
   background: rgba(255,255,255,0.3);
+}
+.uk-dropdown {
+  padding: 4px 0;
+}
+form.uk-form-stacked label {
+  font-size: 0.8em;
 }

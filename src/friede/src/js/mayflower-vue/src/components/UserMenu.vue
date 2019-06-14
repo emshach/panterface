@@ -1,5 +1,5 @@
 <template lang="html">
-  <vk-dropdown>
+  <vk-dropdown class="user-menu">
     <vk-nav>
       <form v-if="editUsername" class="uk-form-stacked uk-text-left"
             @submit.prevent="submitUsername">
@@ -15,7 +15,8 @@
             <input class="uk-input" type="text" />
           </div>
         </div>
-        <vk-btn html-type="submit">done</vk-btn>
+        <vk-btn class="btn-ok"
+                html-type="submit" variant="primary" size="small">done</vk-btn>
       </form>
       <div v-else class="username">{{ user.fname}} {{ user.lname }}
         <a href="#" @click.prevent="editUsername=true">
@@ -87,6 +88,12 @@ export default  {
     color: steelblue;
     a {
       padding-left: 10px;
+    }
+  }
+  form {
+    padding: 12px;
+    .btn-ok {
+      width: 100%;
     }
   }
 }

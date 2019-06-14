@@ -180,6 +180,12 @@ a[data-v-aae30ed8] {
 .user-menu .username a {
     padding-left: 10px;
 }
+.user-menu form {
+  padding: 12px;
+}
+.user-menu form .btn-ok {
+    width: 100%;
+}
 
 #app[data-v-7ba5bd90] {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -10502,6 +10508,12 @@ html, body {
 .uk-textarea {
   border: 1px solid #e5e5e5;
   background: rgba(255, 255, 255, 0.3); }
+
+.uk-dropdown {
+  padding: 4px 0; }
+
+form.uk-form-stacked label {
+  font-size: 0.8em; }
 
 
 /*# sourceMappingURL=app.css.map*/

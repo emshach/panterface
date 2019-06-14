@@ -29,7 +29,9 @@ class F:
     size = ( 'min_x', 'min_y', 'max_x', 'max_y' )
     data = ( 'data', )
     templates = ( 'templates', 'template' )
-    app = ( 'module', 'rest', 'version' )
+    app = ( 'module', 'rest', 'installed', 'version', 'min_version', 'available',
+            'required', 'user_required', 'user_installable', 'auto_install',
+            'auto_user_install' )
     location = ( 'href', 'redirect_to' )
     link = ( 'location', )
     reference = ( 'target', )

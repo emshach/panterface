@@ -1,5 +1,3 @@
-import _Page from './Page'
-export const Page = _Page
 export const BasicPage = () =>
    import(/* webpackChunkName: "pages" */ './BasicPage')
 export const DashboardPage = () =>

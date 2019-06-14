@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import store from '@/store'
-import { Page } from '@/views'
+import Page from '@/views/Page'
 
 Vue.use( Router )
 

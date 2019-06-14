@@ -6,13 +6,13 @@
 
 <script lang="js">
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
-import FormPage from '@/views/FormPage'
+import pages from '@/views'
 export default {
   inheritAttrs: false,
   name: 'Page',
   components: {
     VuePerfectScrollbar,
-    FormPage,
+    ...pages
   },
   props: [],
   mounted() {

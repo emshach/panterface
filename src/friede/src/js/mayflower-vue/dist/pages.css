@@ -1,3 +1,4 @@
+
 .field .field-display > svg.svg-inline--fa, .field .field-display > .btn-edit svg.svg-inline--fa {
   margin-left: 6px;
   font-size: 0.875em;
@@ -78,6 +79,12 @@
 .form-page .btn-cancel:hover {
       color: darkred;
 }
+
+
+
+
+
+
 
 
 /*# sourceMappingURL=pages.css.map*/

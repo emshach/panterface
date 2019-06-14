@@ -6,7 +6,7 @@
 import Dashboard from '@/components/Dashboard'
 
 export default {
-  name: 'Home',
+  name: 'HomePage',
   components: {
     Dashboard
   }

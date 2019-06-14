@@ -18,6 +18,7 @@ module.exports = {
 	}
       }
     });
+    // config.resolve.mainFiles.add( 'index' );
   },
   publicPath: '/static/friede/mayflower/',
   outputDir: undefined,

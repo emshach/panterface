@@ -6,14 +6,12 @@
 
 <script lang="js">
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
-import Home from '@/views/Home'
-const FormPage = () => import(/* webpackChunkName: "pages" */ '@/views/FormPage' )
+import pages from '@/views'
 export default  {
   name: 'BasicPage',
   components: {
     VuePerfectScrollbar,
-    Home,
-    FormPage
+    ...pages
   },
   props: [],
   mounted() {
@@ -29,7 +27,7 @@ export default  {
       return this.$store.getters.screen
     },
     component() {
-      return this.screen && this.screen.data.component || 'Home'
+      return this.screen && this.screen.data.component || 'HomePage'
     }
   }
 }

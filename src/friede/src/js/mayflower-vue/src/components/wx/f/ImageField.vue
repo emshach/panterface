@@ -1,5 +1,5 @@
 <template lang="html">
-  <input v-if="editMode" type="file" v-model="field.wip"
+  <input v-if="editMode" type="file"
          :class="fieldClasses" @blur="commitField" />
   <a v-else v-html="html" @click.prevent="editField" @focus="editField"
        :class="fieldClasses" />

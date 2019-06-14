@@ -563,7 +563,9 @@ class App( app.App ):
               ( '#screens',
                 ( 'default', dict(
                     path='dashboard.apps',
-                    data=dict( model='friede.app' ))))),
+                    data=dict(
+                        model='friede.app'
+                    ))))),
             ( 'user',
               ( 'private', dict(
                   title='My Page',
@@ -581,7 +583,38 @@ class App( app.App ):
           ( '#actions',
             ( 'upgrade', dict( icon='fontawesome.level-up-alt' )),
             ( 'downgrade', dict( icon='fontawesome.level-down-alt' )),
-          )
+          ),
+          ( '#blocks',
+            ( 'menu.sidebar', dict(
+                component='SidebarMenu'
+            )),
+            ( 'feed', dict(
+                icon='fontawesome.rss',
+                data=dict(
+                    component='NewsFeed'
+                )),
+              ( 'site', dict(
+                  icon='fontawesome.newspaper',
+                  extends='feed',
+                  data=dict(
+                      source='site',
+                  ))),
+            ),
+          ),
+          ( '#screens',
+            ( 'dashboard',
+              ( 'home', {},
+                ( '#blocks',
+                  ( 'sidebar-left', dict(
+                      path='links',
+                      data=dict(
+                          menu='site'
+                      ))),
+                  ( 'main', dict( path='feed.site' )))),
+              ( 'apps', {},
+                ( '#blocks',
+                  ( 'content', dict( RenameTo='main' ))))),
+          ),
         ),
     )
     @property

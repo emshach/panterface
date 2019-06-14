@@ -1,3 +1,12 @@
+.basic-page[data-v-27467493] {
+  position: absolute;
+  top: 0;
+  bottom: 34px;
+  left: 0;
+  right: 0;
+  padding: 40px 20px 10px;
+}
+
 
 .field .field-display > svg.svg-inline--fa, .field .field-display > .btn-edit svg.svg-inline--fa {
   margin-left: 6px;

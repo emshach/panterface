@@ -1,34 +1,35 @@
 <template lang="html">
-
-  <section class="home-dashboard">
-    <h1>home-dashboard Component</h1>
-  </section>
-
+  <div :class="classes">
+    <vue-perfect-scrollbar>
+    </vue-perfect-scrollbar>
+  </div>
 </template>
 
 <script lang="js">
-  export default  {
-    name: 'home-dashboard',
-    props: [],
-    mounted() {
-
-    },
-    data() {
-      return {
-
-      }
-    },
-    methods: {
-
-    },
-    computed: {
-
+import DashboardPage from '@/views'
+export default {
+  name: 'HomeDashboard',
+  extends: DashboardPage,
+  props: [],
+  mounted() {
+    
+  },
+  data() {
+    return {
+      classes: [ 'home-dashboard' ]
     }
+  },
+  methods: {
+    
+  },
+  computed: {
+    
+  }
 }
 </script>
 
-<style scoped lang="scss">
-  .home-dashboard {
-
-  }
+<style lang="scss">
+.home-dashboard {
+  
+}
 </style>

@@ -1,3 +1,4 @@
+import Page from './Page'
 export const BasicPage = () =>
    import(/* webpackChunkName: "pages" */ './BasicPage')
 export const DashboardPage = () =>
@@ -19,7 +20,9 @@ export const UserDashboard = () =>
 export const UserHomeDashboard = () =>
    import(/* webpackChunkName: "pages" */ './UserHomeDashboard')
 
+export { Page }
 export default {
+  Page,
   BasicPage,
   DashboardPage,
   FormPage,

@@ -1,34 +1,34 @@
 <template lang="html">
-
-  <section class="dashboard-page">
-    <h1>dashboard-page Component</h1>
-  </section>
-
+  <div :class="classes">
+    <slot/>
+  </div>
 </template>
 
 <script lang="js">
-  export default  {
-    name: 'dashboard-page',
-    props: [],
-    mounted() {
-
-    },
-    data() {
-      return {
-
-      }
-    },
-    methods: {
-
-    },
-    computed: {
-
+import BasicPage from '@/views'
+export default {
+  name: 'DashboardPage',
+  extends: BasicPage,
+  props: [],
+  mounted() {
+    
+  },
+  data() {
+    return {
+      classes: [ 'dashboard-page' ]
     }
+  },
+  methods: {
+    
+  },
+  computed: {
+    
+  }
 }
 </script>
 
 <style scoped lang="scss">
-  .dashboard-page {
-
-  }
+.dashboard-page {
+  
+}
 </style>

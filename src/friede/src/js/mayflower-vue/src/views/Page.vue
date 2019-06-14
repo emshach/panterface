@@ -1,6 +1,6 @@
 <template lang="html">
-  <vue-perfect-scrollbar :class="classes">
-    <slot />
+  <vue-perfect-scrollbar class="page">
+    <component :is="component" v-bind="$attrs" />
   </vue-perfect-scrollbar>
 </template>
 
@@ -8,27 +8,39 @@
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 import pages from '@/views'
 export default {
-  name: 'BasicPage',
+  inheritAttrs: false,
+  name: 'Page',
   components: {
     VuePerfectScrollbar,
+    ...pages
   },
-  props: [ 'blocks', 'widgets', 'source', 'model' ],
+  props: [],
   mounted() {
   },
   data() {
     return {
-      classes: [ 'basic-page' ]
     }
   },
   methods: {
   },
   computed: {
+    screen() {
+      return this.$store.getters.screen
+
+    },
+    component() {
+      var screen = this.screen;
+      while ( screen && !screen.data.component
+              && screen.extends )
+        screen = screen.extends;
+      return screen && screen.data.component || 'HomePage'
+    }
   }
 }
 </script>
 
 <style scoped lang="scss">
-.basic-page {
+.page {
   position: absolute;
   top: 0;
   bottom: 34px;

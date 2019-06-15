@@ -185,7 +185,8 @@ def api_ls( request, path='', format=None ):
                     candidate, context=dict(
                         request= request,
                         detail=  True,
-                        expand=  [ '_widget_entries', '_screen_entries' ])).data )
+                        expand=  [ '_widget_entries', '_screen_entries',
+                                   '_block_entries' ])).data )
                 continue
             m2 = re.match( r'{([\w.]+)(\*)?(\+)?}', g )
             if m2:
@@ -240,7 +241,7 @@ def api_ls( request, path='', format=None ):
         expand, many=True, context=dict(
             request= request,
             detail=  True,
-            expand=  [ '_widget_entries', '_screen_entries' ]))
+            expand=  [ '_widget_entries', '_screen_entries', '_block_entries' ]))
     rest_serializer = LocationSerializer(
         rest, many=True, context={ 'request': request })
     return Response( dict(
@@ -368,7 +369,7 @@ def api_path( request, path=None, format=None ):
     lscontext = dict(
         request= request,
         detail=  True,
-        expand=  [ '_widget_entries', '_screen_entries' ]
+        expand=  [ '_widget_entries', '_screen_entries', '_block_entries' ]
     )
     out = [
         dict(

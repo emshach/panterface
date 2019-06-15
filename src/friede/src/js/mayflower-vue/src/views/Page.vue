@@ -7,6 +7,7 @@
 <script lang="js">
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 import pages from '@/views'
+import { resolve } from '@/lib/util'
 export default {
   inheritAttrs: false,
   name: 'Page',
@@ -25,15 +26,10 @@ export default {
   },
   computed: {
     screen() {
-      return this.$store.getters.screen
-
+      return resolve( this.$store.getters.screen )
     },
     component() {
-      var screen = this.screen;
-      while ( screen && !screen.data.component
-              && screen.extends )
-        screen = screen.extends;
-      return screen && screen.data.component || 'HomePage'
+      return screen.component || 'HomePage'
     }
   }
 }

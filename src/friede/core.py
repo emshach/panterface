@@ -482,7 +482,7 @@ def upgradeapp( app, data, upto=None ):
                         renamed = False
                         if 'rename' in updates:
                             renamed = updates[ 'rename' ];
-                            attached.name = renamed
+                            del updates[ 'rename' ]
                         for key, value in updates.items():
                             if not isinstance( value, basestring ):
                                 continue

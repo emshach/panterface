@@ -12,9 +12,9 @@ export function resolve( obj ) {
     var o = Object.assign( {}, obj.data );
     Object.keys( obj ).forEach( k => {
       if ( k.match( /_entries/ )) {
-        var k0 = k['$' + k.substr(1, k.length - 9 ) + 's' ];
+        var k0 = '$' + k.substr(1, k.length - 9 ) + 's';
         o[ k0 ] = {};
-        Object.keys( o[k] ).forEach( k1 => {
+        Object.keys( obj[k] ).forEach( k1 => {
           o[ k0 ][ k1 ] = resolve( obj[k][ k1 ])
         });
       }
@@ -24,3 +24,5 @@ export function resolve( obj ) {
   }
   return Object.assign.apply( {}, objects );
 }
+
+window.resolve = resolve;

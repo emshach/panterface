@@ -613,11 +613,10 @@ class App( app.App ):
                       data=dict(
                           menu='site'
                       ))),
-                  ( 'main', dict( path='feed.site' ))),
-                ( 'apps', {},
-                  ( '#blocks',
-                    ( 'content', dict( rename='main' )))),
-              ))
+                  ( 'main', dict( path='feed.site' )))),
+              ( 'apps', {},
+                ( '#blocks',
+                  ( 'content', dict( rename='main' )))))
           ),
         ),
     )

@@ -213,48 +213,54 @@ class Registry( Base, PathMixin ):
     N = Action
 
     def addcontainer( self, name, container ):
-        return ContainerEntry.objects.create( registry=self, name=name,
-                                              entry=container )
+        return ContainerEntry.objects.get_or_create( registry=self, name=name,
+                                                     entry=container )
 
     def addwidget( self, name, widget ):
-        return WidgetEntry.objects.create( registry=self, name=name, entry=widget )
+        return WidgetEntry.objects.get_or_create( registry=self, name=name,
+                                                  entry=widget )
 
     def addblock( self, name, block ):
-        return BlockEntry.objects.create( registry=self, name=name, entry=block )
+        return BlockEntry.objects.get_or_create( registry=self, name=name, entry=block )
 
     def addscreen( self, name, screen ):
-        return ScreenEntry.objects.create( registry=self, name=name, entry=screen )
+        return ScreenEntry.objects.get_or_create( registry=self, name=name,
+                                                  entry=screen )
 
     def addshell( self, name, shell ):
-        return ShellEntry.objects.create( registry=self, name=name, entry=shell )
+        return ShellEntry.objects.get_or_create( registry=self, name=name, entry=shell )
 
     def addtheme( self, name, theme ):
-        return ThemeEntry.objects.create( registry=self, name=name, entry=theme )
+        return ThemeEntry.objects.get_or_create( registry=self, name=name,
+                                                 entry=theme )
 
     def addslot( self, name, slot ):
-        return SlotEntry.objects.create( registry=self, name=name, entry=slot )
+        return SlotEntry.objects.get_or_create( registry=self, name=name, entry=slot )
 
     def addapp( self, name, app ):
-        return AppEntry.objects.create( registry=self, name=name, entry=app )
+        return AppEntry.objects.get_or_create( registry=self, name=name, entry=app )
 
     def addlocation( self, name, location ):
-        return LocationEntry.objects.create( registry=self, name=name,
-                                             entry=location )
+        return LocationEntry.objects.get_or_create( registry=self, name=name,
+                                                    entry=location )
 
     def addicon( self, name, icon ):
-        return IconEntry.objects.create( registry=self, name=name, entry=icon )
+        return IconEntry.objects.get_or_create( registry=self, name=name, entry=icon )
 
     def addlink( self, name, link ):
-        return LinkEntry.objects.create( registry=self, name=name, entry=link )
+        return LinkEntry.objects.get_or_create( registry=self, name=name, entry=link )
 
     def addreference( self, name, reference ):
-        return ReferenceEntry.objects.create( registry=self, name=name, entry=reference )
+        return ReferenceEntry.objects.get_or_create( registry=self, name=name,
+                                                     entry=reference )
 
     def addsetting( self, name, setting ):
-        return SettingEntry.objects.create( registry=self, name=name, entry=setting )
+        return SettingEntry.objects.get_or_create( registry=self, name=name,
+                                                   entry=setting )
 
     def addaction( self, name, action ):
-        return ActionEntry.objects.create( registry=self, name=name, entry=action )
+        return ActionEntry.objects.get_or_create( registry=self, name=name,
+                                                  entry=action )
 
     def to_dict( self ):
         if not self.active:

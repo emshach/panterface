@@ -29,7 +29,7 @@ export default {
       return resolve( this.$store.getters.screen )
     },
     component() {
-      return screen.component || 'HomePage'
+      return this.screen.component || 'HomePage'
     }
   }
 }

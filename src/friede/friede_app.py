@@ -23,7 +23,7 @@ class App( app.App ):
 
     links = { x: dict( via='entry' ) for x in _links }
 
-    min_version = '0.2.0'
+    min_version = '0.2.1'
     required = True
     user_required = True
 
@@ -610,12 +610,16 @@ class App( app.App ):
                       data=dict(
                           menu='site'
                       ))),
-                  ( 'main', dict( path='feed.site' )))),
-              ( 'apps', {},
-                ( '#blocks',
-                  ( 'content', dict( RenameTo='main' ))))),
+                  ( 'main', dict( path='feed.site' )))))),
           ),
-        ),
+          ( '0.2.2',
+            ( '#screens',
+              ( 'dashboard',
+                ( 'apps', {},
+                  ( '#blocks',
+                    ( 'content', dict( RenameTo='main' ))))),
+            ),
+          ),
     )
     @property
     def userdata( self ):

@@ -616,7 +616,9 @@ class App( app.App ):
                   ( 'main', dict( path='feed.site' )))),
               ( 'apps', {},
                 ( '#blocks',
-                  ( 'content', dict( rename='main' )))))
+                  ( 'content', dict(
+                      path='grid.filtered',
+                      rename='main' )))))
           ),
         ),
     )

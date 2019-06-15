@@ -516,9 +516,10 @@ def upgradeapp( app, data, upto=None ):
                             adder = getattr( parent, method, None )
                             if adder:
                                 attached, att_new = adder( path[0], obj )
+                        if attached and renamed:
+                            attached.name = renamed
+                            attached.save()
                         if not new:
-                            if attached and renamed:
-                                attached.name = renamed
                             for key, value in updates.items():
                                 setattr( obj, key, value )
                                 updated = True
@@ -540,7 +541,7 @@ def upgradeapp( app, data, upto=None ):
                                                           getattr( parent, 'name' )),\
                                     model[0]._meta.model_name, 'entry'
                                 path[0], 'to', renamed
-                            else:
+                            elif att_new:
                                 print 'attached', obj._meta.object_name, obj_name, 'to',\
                                     getattr( parent, 'path', getattr( parent, 'name' ))
                     elif callable( top ):

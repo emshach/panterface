@@ -479,6 +479,10 @@ def upgradeapp( app, data, upto=None ):
                                 search[ 'app' ] = app
                         except FieldDoesNotExist:
                             pass
+                        renamed = False
+                        if 'rename' in updates:
+                            renamed = updates[ 'rename' ];
+                            attached.name = renamed
                         for key, value in updates.items():
                             if not isinstance( value, basestring ):
                                 continue
@@ -506,7 +510,6 @@ def upgradeapp( app, data, upto=None ):
                             cr[0] = obj
                         updated = False
                         attached = False
-                        renamed = False
                         att_new = False
                         if parent:
                             method = "add%s" % model[0]._meta.model_name
@@ -514,9 +517,7 @@ def upgradeapp( app, data, upto=None ):
                             if adder:
                                 attached, att_new = adder( path[0], obj )
                         if not new:
-                            if attached and 'rename' in updates:
-                                renamed = updates[ 'rename' ];
-                                del updates[ 'rename' ]
+                            if attached and renamed:
                                 attached.name = renamed
                             for key, value in updates.items():
                                 setattr( obj, key, value )

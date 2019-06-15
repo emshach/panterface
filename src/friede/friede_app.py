@@ -586,8 +586,11 @@ class App( app.App ):
           ),
           ( '#blocks',
             ( 'menu.sidebar', dict(
-                component='SidebarMenu'
-            )),
+                icon='fontawesome',
+                data=(
+                    dict(
+                        component='SidebarMenu'
+                    )))),
             ( 'feed', dict(
                 icon='fontawesome.rss',
                 data=dict(
@@ -605,21 +608,18 @@ class App( app.App ):
             ( 'dashboard',
               ( 'home', {},
                 ( '#blocks',
-                  ( 'sidebar-left', dict(
-                      path='links',
+                  ( 'sidebar_left', dict(
+                      path='menu.sidebar',
                       data=dict(
                           menu='site'
                       ))),
-                  ( 'main', dict( path='feed.site' )))))),
-          ),
-          ( '0.2.2',
-            ( '#screens',
-              ( 'dashboard',
+                  ( 'main', dict( path='feed.site' ))),
                 ( 'apps', {},
                   ( '#blocks',
-                    ( 'content', dict( RenameTo='main' ))))),
-            ),
+                    ( 'content', dict( rename='main' )))),
+              ))
           ),
+        ),
     )
     @property
     def userdata( self ):

@@ -7,7 +7,7 @@ export function chunk( data, size ) {
 }
 
 export function resolve( obj ) {
-  var objects = [];
+  var objects = [{}];
   while ( obj ) {
     var o = Object.assign( {}, obj.data );
     Object.keys( obj ).forEach( k => {
@@ -22,7 +22,8 @@ export function resolve( obj ) {
     objects.unshift( o );
     obj = obj.extends;
   }
-  return Object.assign.apply( {}, objects );
+  objects.unshift({});
+  return Object.assign.apply( null, objects );
 }
 
 window.resolve = resolve;

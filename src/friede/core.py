@@ -506,13 +506,18 @@ def upgradeapp( app, data, upto=None ):
                             cr[0] = obj
                         updated = False
                         attached = False
+                        renamed = False
+                        att_new = False
                         if parent:
-                            method = "add%s" % model[0]._meta.verbose_name
+                            method = "add%s" % model[0]._meta.model_name
                             adder = getattr( parent, method, None )
                             if adder:
-                                adder( path[0], obj )
-                                attached = True
+                                attached, att_new = adder( path[0], obj )
                         if not new:
+                            if attached and 'rename' in updates:
+                                renamed = updates[ 'rename' ];
+                                del updates[ 'rename' ]
+                                attached.name = renamed
                             for key, value in updates.items():
                                 setattr( obj, key, value )
                                 updated = True
@@ -529,8 +534,14 @@ def upgradeapp( app, data, upto=None ):
                             print 'updated', app.name, obj._meta.object_name, \
                                 obj_name
                         if attached:
-                            print 'attached', obj._meta.object_name, obj_name, 'to',\
-                            getattr( parent, 'path', getattr( parent, 'name' ))
+                            if renamed:
+                                print 'renamed', getattr( parent, 'path',
+                                                          getattr( parent, 'name' )),\
+                                    model[0]._meta.model_name, 'entry'
+                                path[0], 'to', renamed
+                            else:
+                                print 'attached', obj._meta.object_name, obj_name, 'to',\
+                                    getattr( parent, 'path', getattr( parent, 'name' ))
                     elif callable( top ):
                         top()
             except Exception as e:

@@ -6,23 +6,25 @@
 </template>
 
 <script lang="js">
-  export default  {
-    name: 'ModelDashboard',
-    props: [],
-    mounted() {
-
-    },
-    data() {
-      return {
-
-      }
-    },
-    methods: {
-
-    },
-    computed: {
-
+import { PageMixin } from '@/lib/mixins'
+export default  {
+  name: 'ModelDashboard',
+  mixins: [ PageMixin ],
+  props: [],
+  mounted() {
+    
+  },
+  data() {
+    return {
+      
     }
+  },
+  methods: {
+    
+  },
+  computed: {
+    
+  }
 }
 </script>
 

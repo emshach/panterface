@@ -310,14 +310,19 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
+/* harmony import */ var _blocks__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/blocks */ "./src/blocks/index.js");
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'ModelDashboard',
   mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_0__["PageMixin"]],
+  components: _blocks__WEBPACK_IMPORTED_MODULE_1__["default"],
   props: [],
   mounted: function mounted() {},
   data: function data() {
-    return {};
+    return {
+      classes: ['model-dashboard']
+    };
   },
   methods: {},
   computed: {}
@@ -796,7 +801,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "model-dashboard" },
+    { class: _vm.classes },
     [
       _vm.blocks.breakfront
         ? _c(_vm.blocks.breakfront.component, { tag: "component" })
@@ -923,7 +928,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560719649761
+      // 1560720508190
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -941,7 +946,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560719647566
+      // 1560720506072
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -959,7 +964,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560719647575
+      // 1560720506081
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -977,7 +982,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560719648743
+      // 1560720507188
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -995,7 +1000,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560719648657
+      // 1560720508172
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1013,7 +1018,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560719648665
+      // 1560720507040
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1031,7 +1036,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560719649742
+      // 1560720508160
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1049,7 +1054,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560719648684
+      // 1560720507050
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1067,7 +1072,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560719648692
+      // 1560720507067
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1085,12 +1090,51 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560719648713
+      // 1560720507073
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
     }
   
+
+/***/ }),
+
+/***/ "./src/blocks/index.js":
+/*!*****************************!*\
+  !*** ./src/blocks/index.js ***!
+  \*****************************/
+/*! exports provided: Centerfold, ListDisplay, GridDisplay, FilterList, FilterGrid, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Centerfold", function() { return Centerfold; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ListDisplay", function() { return ListDisplay; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GridDisplay", function() { return GridDisplay; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FilterList", function() { return FilterList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FilterGrid", function() { return FilterGrid; });
+var Centerfold = function Centerfold() {
+  return __webpack_require__.e(/*! import() | blocks */ "blocks").then(__webpack_require__.bind(null, /*! ./Centerfold */ "./src/blocks/Centerfold.vue"));
+};
+var ListDisplay = function ListDisplay() {
+  return __webpack_require__.e(/*! import() | blocks */ "blocks").then(__webpack_require__.bind(null, /*! ./ListDisplay */ "./src/blocks/ListDisplay.vue"));
+};
+var GridDisplay = function GridDisplay() {
+  return __webpack_require__.e(/*! import() | blocks */ "blocks").then(__webpack_require__.bind(null, /*! ./GridDisplay */ "./src/blocks/GridDisplay.vue"));
+};
+var FilterList = function FilterList() {
+  return __webpack_require__.e(/*! import() | blocks */ "blocks").then(__webpack_require__.bind(null, /*! ./FilterList */ "./src/blocks/FilterList.vue"));
+};
+var FilterGrid = function FilterGrid() {
+  return __webpack_require__.e(/*! import() | blocks */ "blocks").then(__webpack_require__.bind(null, /*! ./FilterGrid */ "./src/blocks/FilterGrid.vue"));
+};
+/* harmony default export */ __webpack_exports__["default"] = ({
+  Centerfold: Centerfold,
+  ListDisplay: ListDisplay,
+  GridDisplay: GridDisplay,
+  FilterList: FilterList,
+  FilterGrid: FilterGrid
+});
 
 /***/ }),
 

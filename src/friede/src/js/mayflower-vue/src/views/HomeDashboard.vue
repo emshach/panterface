@@ -1,5 +1,5 @@
 <template lang="html">
-  <div :class="classes">
+  <div :class=classes>
     <vue-perfect-scrollbar>
     </vue-perfect-scrollbar>
   </div>

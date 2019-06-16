@@ -1,5 +1,5 @@
 <template lang="html">
-<div class="model-dashboard">
+<div :class=classes>
   <component :is=blocks.breakfront.component v-if=blocks.breakfront />
   <component :is=blocks.main.component v-if=blocks.main />
 </div>
@@ -7,16 +7,18 @@
 
 <script lang="js">
 import { PageMixin } from '@/lib/mixins'
+import blocks from '@/blocks'
 export default  {
   name: 'ModelDashboard',
   mixins: [ PageMixin ],
+  components: blocks,
   props: [],
   mounted() {
     
   },
   data() {
     return {
-      
+      classes: [ 'model-dashboard' ]
     }
   },
   methods: {

@@ -1,6 +1,6 @@
 <template lang="html">
   <vue-perfect-scrollbar class="page">
-    <component :is="component" v-bind="$attrs" />
+    <component :is=component v-bind=$attrs :model=model :blocks=blocks />
   </vue-perfect-scrollbar>
 </template>
 
@@ -30,6 +30,12 @@ export default {
     },
     component() {
       return this.screen.component || 'HomePage'
+    },
+    model() {
+      return this.screen.model || this.$store.model
+    },
+    blocks() {
+      return this.screen.$blocks || {}
     }
   }
 }

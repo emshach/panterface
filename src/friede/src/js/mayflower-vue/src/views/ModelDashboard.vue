@@ -1,14 +1,13 @@
 <template lang="html">
-
-  <section class="model-dashboard">
-    <h1>model-dashboard Component</h1>
-  </section>
-
+<div class="model-dashboard">
+  <component :is=blocks.breakfront.component v-if=blocks.breakfront />
+  <component :is=blocks.main.component v-if=blocks.main />
+</div>
 </template>
 
 <script lang="js">
   export default  {
-    name: 'model-dashboard',
+    name: 'ModelDashboard',
     props: [],
     mounted() {
 
@@ -28,7 +27,7 @@
 </script>
 
 <style scoped lang="scss">
-  .model-dashboard {
-
-  }
+.model-dashboard {
+  
+}
 </style>

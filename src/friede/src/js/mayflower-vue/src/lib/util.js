@@ -15,7 +15,7 @@ export function resolve( obj ) {
         var k0 = '$' + k.substr(1, k.length - 9 ) + 's';
         o[ k0 ] = {};
         Object.keys( obj[k] ).forEach( k1 => {
-          o[ k0 ][ k1 ] = resolve( obj[k][ k1 ])
+          o[ k0 ][ k1 ] = resolve( obj[k][ k1 ].entry )
         });
       }
     });

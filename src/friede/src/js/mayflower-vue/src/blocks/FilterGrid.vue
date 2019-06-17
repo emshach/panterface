@@ -1,34 +1,55 @@
 <template lang="html">
-  <vk-grid class="filter-grid">
-    <div>app 1</div>
-    <div>app 2</div>
-  </vk-grid>
+  <div class="filter-grid">
+    <filter-input v-model=filters />
+    <actions-input :actions=actions :operands=filtered />
+    <vk-grid class="content">
+      <dashboard-widget v-for="object in objects" :key=object.id >
+        <template v-for="( field, slot ) in itemLayout"
+                  v-slot:[slot]=o >{{ o[ field ]}}</template>
+      </dashboard-widget>
+    </vk-grid>
+  </div>
 </template>
 
 <script lang="js">
 import { Grid as VkGrid } from 'vuikit/lib/grid'
-import { Card as VkCard, CardTitle as VkCardTitle } from 'vuikit/lib/card'
+import { FilteredMixin, ActionsMixin } from '@/lib/mixins'
+import { DashboardWidget } from '@/widgets'
 export default  {
-  name: 'filter-grid',
+  name: 'FilterGrid',
+  mixins: [ FilteredMixin, ActionsMixin ],
   components: {
     VkGrid,
-    VkCard,
-    VkCardTitle,
+    DashboardWidget,
   },
-  props: [],
+  props: {
+    objects: {
+      type: Array,
+      default: () => []
+    },
+    actions: {
+      type: Array,
+      default: () => []
+    },
+    itemLayout: {
+      type: Object,
+      default: () => ({})
+    }
+  },
   mounted() {
     
   },
   data() {
     return {
-      
     }
   },
   methods: {
     
   },
   computed: {
-    
+    filtered() {
+      return this.filter( this.objects );
+    }
   }
 }
 </script>

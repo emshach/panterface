@@ -1,9 +1,11 @@
 <template lang="html">
 <div :class=classes>
   <component :is=blocks.breakfront.component v-if=blocks.breakfront
-             :content=content />
-  <component :is=blocks.main.component v-if=blocks.main :model=model
-             :actions=options.actions />
+             :content=featured />
+  <component :is=blocks.main.component v-if=blocks.main
+             :objects=objects
+             :actions=options.actions
+             :item-layout=options.layout />
 </div>
 </template>
 
@@ -16,12 +18,20 @@ export default  {
   components: blocks,
   props: [],
   mounted() {
-    
+    if ( this.model )
+      this.$store.dispatch( 'getModel', this.model ).then( m => {
+        if ( m.rest ) {
+          this.$api.get( r.rest ).then( r => { // TODO: paginate, filter?
+            this.objects = r.results || [];
+          });
+        }
+      });
   },
   data() {
     return {
       classes: [ 'model-dashboard' ],
-      content: [],
+      featured: [],
+      objects: []
     }
   },
   methods: {

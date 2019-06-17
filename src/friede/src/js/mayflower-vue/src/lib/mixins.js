@@ -3,7 +3,7 @@ import { faPlus, faEdit } from '@fortawesome/free-solid-svg-icons'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { Field } from '@/lib/objects'
-import { JsonInput } from '@/components'
+import { JsonInput, FilterInput } from '@/components'
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 
 library.add( faPlus, faEdit )
@@ -195,6 +195,22 @@ export const JsonWidgetMixin = {
   }
 }
 
+export const FilteredMixin = {
+  components: { FilterInput },
+  data() {
+    filters: []
+  },
+  methods: {
+    filter( input ) {
+      // TODO: this
+      return input;
+    }
+  }
+}
+
+export const ActionsMixin = {
+}
+
 export const DurationOptions = []
 
 export default {
@@ -203,5 +219,7 @@ export default {
   ModelModelsFieldMixin,
   JsonWidgetMixin,
   PageMixin,
+  FilteredMixin,
+  ActionsMixin,
   DurationOptions,
 }

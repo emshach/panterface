@@ -635,7 +635,11 @@ class App( app.App ):
                         )),
                     entry=dict(
                         data=dict(
-                            model='friede.app'
+                            model='friede.app',
+                            layout=dict(
+                                title='title',
+                                content='description'
+                            )
                         ))))))),
         ),
     )

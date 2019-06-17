@@ -3,12 +3,14 @@ import CloseButton  from './CloseButton'
 import Dashboard    from './Dashboard'
 import Field        from './Field'
 import Hud          from './Hud'
-import JsonInput    from './JsonInput'
 import Prompt       from './Prompt'
 import Switchboard  from './Switchboard'
 import Thing        from './Thing'
 import UserMenu     from './UserMenu'
 import Widget       from './Widget'
+import JsonInput    from './JsonInput'
+import FilterInput    from './FilterInput'
+import ActionsInput    from './ActionsInput'
 
 export {
   Breadcrumb,
@@ -16,12 +18,14 @@ export {
   Dashboard,
   Field,
   Hud,
-  JsonInput,
   Prompt,
   Switchboard,
   Thing,
   UserMenu,
   Widget,
+  JsonInput,
+  FilterInput,
+  ActionsInput,
 }
 
 export default {
@@ -30,10 +34,12 @@ export default {
   Dashboard,
   Field,
   Hud,
-  JsonInput,
   Prompt,
   Switchboard,
   Thing,
   UserMenu,
   Widget,
+  JsonInput,
+  FilterInput,
+  ActionsInput,
 }

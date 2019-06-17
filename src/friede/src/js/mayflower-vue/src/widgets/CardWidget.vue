@@ -1,16 +1,18 @@
 <template lang="html">
-  <vk-card :type="type" :padding="padding" :hover="context.hover"
+  <vk-card :type=type :padding=padding :hover=context.hover
            class="widget">
-    <close-button @click.prevent="close" v-if="context.closeable" />
-    <slot #header name="header" />
-    <slot #badge name="badge" />
-    <slot #media name="media" />
-    <slot #media-top name="media-top" />
-    <vk-card-title><slot name="title" /></vk-card-title>
-    <p class="uk-text-meta uk-margin-remove-top"><slot name="subtitle" /></p>
-    <slot name="content" />
-    <slot #media-bottom name="media-bottom" />
-    <slot #footer name="footer" />
+    <close-button @click.prevent=close v-if=context.closeable />
+    <slot #header name="header" :object=object />
+    <slot #badge name="badge" :object=object />
+    <slot #media name="media" :object=object />
+    <slot #media-top name="media-top" :object=object />
+    <vk-card-title><slot name="title" :object=object /></vk-card-title>
+    <p class="uk-text-meta uk-margin-remove-top">
+      <slot name="subtitle" :object=object />
+    </p>
+    <slot name="content" :object=object />
+    <slot #media-bottom name="media-bottom" :object=object />
+    <slot #footer name="footer" :object=object />
   </vk-card>
 </template>
 
@@ -20,13 +22,21 @@ import { CloseButton } from '@/components'
 export default  {
   name: 'CardWidget',
   props: {
+    object: {
+      type: Object,
+      required: true
+    },
     cardType: {
       type: Boolean,
       default: 'default'
     },
     context: {
       type: Object,
-      default: () => []
+      default: () => ({})
+    },
+    layout: {
+      type: Object,
+      default: () => ({})
     }
   },
   components: { VkCard, VkCardTitle, Closebutton },

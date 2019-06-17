@@ -3,7 +3,8 @@
     <filter-input v-model=filters />
     <actions-input :actions=actions :operands=filtered />
     <vk-grid class="content">
-      <dashboard-widget v-for="object in objects" :key=object.id >
+      <dashboard-widget v-for="object in objects" :key=object.id
+                        :object=object >
         <template v-for="( field, slot ) in itemLayout"
                   v-slot:[slot]=o >{{ o[ field ]}}</template>
       </dashboard-widget>

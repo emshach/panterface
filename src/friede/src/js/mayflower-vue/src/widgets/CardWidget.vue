@@ -28,7 +28,7 @@ export default  {
       required: true
     },
     cardType: {
-      type: Boolean,
+      type: String,
       default: 'default'
     },
     context: {
@@ -56,10 +56,10 @@ export default  {
       return true
     },
     type() {
-      return this.isInline() ? 'blank' : this.cardType
+      return this.isInline ? 'blank' : this.cardType
     },
     padding() {
-      return this.isInline() ? '' : 'small'
+      return this.isInline ? '' : 'small'
     }
   }
 }

@@ -17,11 +17,15 @@ export default {
   props: {
     object: {
       type: Object,
-      required: true
+      default: () => ({})
     },
     context: {
       type: Object,
-      default: {}
+      default: () => ({})
+    },
+    defaultAction: {
+      type: Function,
+      default: () => {}
     }
   },
   mounted() {

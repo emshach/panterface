@@ -150,7 +150,7 @@ def _process_location( location ):
             for x in v:
                 o[ x[ 'name' ]]=x[ 'entry' ]
                 if 'data' in x:
-                    x[ 'entry' ].data.update(x[ 'data' ])
+                    x[ 'entry' ][ 'data' ].update(x[ 'data' ])
         else:
             out[k] = v
     return out

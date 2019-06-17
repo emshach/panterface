@@ -11,8 +11,9 @@
 
 <script lang="js">
 import CardWidget from './CardWidget'
-export default  {
+export default {
   name: 'DefaultActionWidget',
+  components: { CardWidget },
   props: {
     object: {
       type: Object,
@@ -23,7 +24,6 @@ export default  {
       default: {}
     }
   },
-  components: { CardWidget },
   mounted() {
     
   },

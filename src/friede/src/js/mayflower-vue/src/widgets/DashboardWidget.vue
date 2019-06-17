@@ -9,10 +9,10 @@
 
 <script lang="js">
 import DefaultActionWidget from './DefaultActionWidget'
-export default  {
+export default {
   name: 'DashboardWidget',
-  props: [],
   components: { DefaultActionWidget },
+  props: [],
   mounted() {
     
   },
@@ -31,7 +31,7 @@ export default  {
 </script>
 
 <style scoped lang="scss">
-  .dashboard-widget {
-
-  }
+.dashboard-widget {
+  
+}
 </style>

@@ -198,7 +198,9 @@ export const JsonWidgetMixin = {
 export const FilteredMixin = {
   components: { FilterInput },
   data() {
-    filters: []
+    return {
+      filters: []
+    }
   },
   methods: {
     filter( input ) {

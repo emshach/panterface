@@ -21,7 +21,7 @@ export default  {
     if ( this.model )
       this.$store.dispatch( 'getModel', this.model ).then( m => {
         if ( m.rest ) {
-          this.$api.get( m.rest ).then( r => { // TODO: paginate, filter?
+          this.$api( m.rest ).then( r => { // TODO: paginate, filter?
             this.objects = r.results || [];
           });
         }

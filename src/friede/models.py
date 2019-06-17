@@ -210,59 +210,60 @@ class Registry( Base, PathMixin ):
     N = Action
 
     def addcontainer( self, name, container, defaults ):
-        return ContainerEntry.objects.update_or_create( registry=self, name=name,
-                                                        entry=container )
+        return ContainerEntry.objects.update_or_create(
+            registry=self, name=name, entry=container, defaults=defaults )
 
     def addwidget( self, name, widget, defaults ):
-        return WidgetEntry.objects.update_or_create( registry=self, name=name,
-                                                     entry=widget )
+        return WidgetEntry.objects.update_or_create(
+            registry=self, name=name, entry=widget, defaults=defaults )
 
     def addblock( self, name, block, defaults ):
-        return BlockEntry.objects.update_or_create( registry=self, name=name,
-                                                    entry=block )
+        return BlockEntry.objects.update_or_create(
+            registry=self, name=name, entry=block, defaults=defaults )
 
     def addscreen( self, name, screen, defaults ):
-        return ScreenEntry.objects.update_or_create( registry=self, name=name,
-                                                     entry=screen )
+        return ScreenEntry.objects.update_or_create(
+            registry=self, name=name, entry=screen, defaults=defaults )
 
     def addshell( self, name, shell, defaults ):
-        return ShellEntry.objects.update_or_create( registry=self, name=name,
-                                                    entry=shell )
+        return ShellEntry.objects.update_or_create(
+            registry=self, name=name, entry=shell, defaults=defaults )
 
     def addtheme( self, name, theme, defaults ):
-        return ThemeEntry.objects.update_or_create( registry=self, name=name,
-                                                    entry=theme )
+        return ThemeEntry.objects.update_or_create(
+            registry=self, name=name, entry=theme, defaults=defaults )
 
     def addslot( self, name, slot, defaults ):
-        return SlotEntry.objects.update_or_create( registry=self, name=name,
-                                                   entry=slot )
+        return SlotEntry.objects.update_or_create(
+            registry=self, name=name, entry=slot, defaults=defaults )
 
     def addapp( self, name, app, defaults ):
-        return AppEntry.objects.update_or_create( registry=self, name=name, entry=app )
+        return AppEntry.objects.update_or_create(
+            registry=self, name=name, entry=app, defaults=defaults )
 
     def addlocation( self, name, location, defaults ):
-        return LocationEntry.objects.update_or_create( registry=self, name=name,
-                                                       entry=location )
+        return LocationEntry.objects.update_or_create(
+            registry=self, name=name, entry=location, defaults=defaults )
 
     def addicon( self, name, icon, defaults ):
-        return IconEntry.objects.update_or_create( registry=self, name=name,
-                                                   entry=icon )
+        return IconEntry.objects.update_or_create(
+            registry=self, name=name, entry=icon, defaults=defaults )
 
     def addlink( self, name, link, defaults ):
-        return LinkEntry.objects.update_or_create( registry=self, name=name,
-                                                   entry=link )
+        return LinkEntry.objects.update_or_create(
+            registry=self, name=name, entry=link, defaults=defaults )
 
     def addreference( self, name, reference, defaults ):
-        return ReferenceEntry.objects.update_or_create( registry=self, name=name,
-                                                        entry=reference )
+        return ReferenceEntry.objects.update_or_create(
+            registry=self, name=name, entry=reference, defaults=defaults )
 
     def addsetting( self, name, setting, defaults ):
-        return SettingEntry.objects.update_or_create( registry=self, name=name,
-                                                      entry=setting )
+        return SettingEntry.objects.update_or_create(
+            registry=self, name=name, entry=setting, defaults=defaults )
 
     def addaction( self, name, action, defaults ):
-        return ActionEntry.objects.update_or_create( registry=self, name=name,
-                                                     entry=action )
+        return ActionEntry.objects.update_or_create(
+            registry=self, name=name, entry=action, defaults=defaults )
 
     def to_dict( self ):
         if not self.active:

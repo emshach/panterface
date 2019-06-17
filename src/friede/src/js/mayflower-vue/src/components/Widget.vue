@@ -1,10 +1,10 @@
 <template lang="html"></template>
 
 <script lang="js">
-import widgets from '@/components/widgets'
+import widgets from '@/widgets'
 import { Widget } from '@/lib/objects'
 export default  {
-  name: 'WidgetWidget',
+  name: 'Widget',
   functional: true,
   render( h, ref ) {
     var props = ref.props;

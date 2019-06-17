@@ -2,7 +2,7 @@
   <div class="dashboard">
     <slot name="title" />
     <vk-grid gutter="small" class="uk-margin uk-child-with-1-3">
-      <widget-widget v-for="( widget, index ) in displayWidgets" :key="index"
+      <widget v-for="( widget, index ) in displayWidgets" :key="index"
               :data="widget"/> 
     </vk-grid>
   </div>
@@ -10,7 +10,7 @@
 
 <script lang="js">
 import { Grid as VkGrid } from 'vuikit/lib/grid'
-import Widget from '@/components/wx/WidgetWidget'
+import Widget from './Widget'
 export default {
   name: 'Dashboard',
   props: {

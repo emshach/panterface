@@ -8,27 +8,6 @@
 }
 
 
-.field .field-display > svg.svg-inline--fa, .field .field-display > .btn-edit svg.svg-inline--fa {
-  margin-left: 6px;
-  font-size: 0.875em;
-  vertical-align: 0;
-}
-.field tr .field-display > svg.svg-inline--fa {
-  margin-left: 4px;
-  font-size: 10px;
-  vertical-align: 0.2em;
-}
-.uk-fieldset {
-  margin: 36px 0 20px;
-}
-.uk-fieldset h4 {
-    margin: 0;
-    text-transform: capitalize;
-}
-.uk-fieldset .titlesep {
-    margin: 0 0 12px;
-}
-
 .form-page {
   border-radius: 2px;
   height: 100%;

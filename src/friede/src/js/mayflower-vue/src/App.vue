@@ -23,8 +23,7 @@
 import { faUserNinja, faUser } from '@fortawesome/free-solid-svg-icons'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import Prompt from '@/components/Prompt'
-import UserMenu from '@/components/UserMenu'
+import { Prompt, UserMenu } from '@/components'
 
 library.add( faUserNinja, faUser )
 

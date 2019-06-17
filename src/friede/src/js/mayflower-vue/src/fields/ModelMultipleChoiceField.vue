@@ -76,7 +76,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { ModelFieldMixin, ModelModelsFieldMixin } from '@/lib/mixins'
-import fields from '@/components/fields'
+import fields from './'
 
 library.add( faTimes, faCheck, faPlus, faEdit );
 

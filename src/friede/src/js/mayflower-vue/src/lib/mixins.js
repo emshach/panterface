@@ -3,7 +3,7 @@ import { faPlus, faEdit } from '@fortawesome/free-solid-svg-icons'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { Field } from '@/lib/objects'
-import JsonWidget from '@/components/wx/JsonWidget'
+import { JsonInput } from '@/components'
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 
 library.add( faPlus, faEdit )
@@ -153,7 +153,7 @@ export const PageMixin = {
 };
 
 export const JsonWidgetMixin = {
-  components: { JsonWidget },
+  components: { JsonInput },
   props: {
     readonly: {
       type: Boolean,

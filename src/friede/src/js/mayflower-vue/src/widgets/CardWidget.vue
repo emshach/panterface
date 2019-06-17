@@ -16,7 +16,7 @@
 
 <script lang="js">
 import { Card as VkCard, CardTitle as VkCardTitle } from 'vuikit/lib/card'
-import CloseButton from '@/components/CloseButton'
+import { CloseButton } from '@/components'
 export default  {
   name: 'CardWidget',
   props: {

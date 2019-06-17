@@ -4,7 +4,7 @@
 
 <script lang="js">
 export default  {
-  name: 'widget',
+  name: 'BaseWidget',
   props: [ 'object' ],
   mounted() {
     

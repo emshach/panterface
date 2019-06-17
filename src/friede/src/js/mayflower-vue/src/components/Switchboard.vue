@@ -28,7 +28,7 @@
 <script lang="js">
 import { Grid as VkGrid } from 'vuikit/lib/grid'
 import { ButtonLink as VkButtonLink } from 'vuikit/lib/button'
-import Dashboard from '@/components/Dashboard'
+import Dashboard from './Dashboard'
 import { Widget } from '@/lib/objects'
 export default {
   name: 'Switchboard',

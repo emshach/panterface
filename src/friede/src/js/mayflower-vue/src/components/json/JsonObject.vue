@@ -25,7 +25,7 @@
 
 <script lang="js">
 import { ButtonLink as VkBtn } from 'vuikit/lib/button'
-import { JsonTuple } from './json'
+import { JsonTuple } from './'
 import { JsonWidgetMixin } from '@/lib/mixins'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons'

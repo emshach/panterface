@@ -3,7 +3,7 @@
 </template>
 
 <script lang="js">
-import Dashboard from '@/components/Dashboard'
+import { Dashboard } from '@/components'
 
 export default {
   name: 'HomePage',

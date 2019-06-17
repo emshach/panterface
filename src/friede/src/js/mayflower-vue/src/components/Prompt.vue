@@ -62,8 +62,8 @@
 </template>
 
 <script lang="js">
-import Switchboard from '@/components/Switchboard'
-import Breadcrumb from '@/components/Breadcrumb'
+import Switchboard from './Switchboard'
+import Breadcrumb from './Breadcrumb'
 import debounce from 'lodash/debounce'
 import Multiselect from 'vue-multiselect'
 import { library } from '@fortawesome/fontawesome-svg-core'

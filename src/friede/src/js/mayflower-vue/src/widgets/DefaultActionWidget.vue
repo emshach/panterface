@@ -5,7 +5,7 @@
 </template>
 
 <script lang="js">
-import CardWidget from '@/components/wx/CardWidget'
+import CardWidget from './CardWidget'
 export default  {
   name: 'DefaultActionWidget',
   props: {

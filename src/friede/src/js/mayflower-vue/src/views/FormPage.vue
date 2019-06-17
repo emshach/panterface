@@ -53,7 +53,7 @@ import {
 import { faCheck, faPlus, faTrash, faCog } from '@fortawesome/free-solid-svg-icons'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import Field from '@/components/Field'
+import { Field } from '@/components'
 import { Model } from '@/lib/objects'
 
 library.add( faCheck, faPlus, faTrash, faCog )

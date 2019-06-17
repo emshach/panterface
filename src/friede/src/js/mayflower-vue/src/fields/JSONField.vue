@@ -1,6 +1,6 @@
 <template lang="html">
   <div v-if="editMode" :class="fieldClasses">
-    <json-widget v-model="field.wip" :readonly="false" :edit="true" />
+    <json-input v-model="field.wip" :readonly="false" :edit="true" />
     <vk-btn-grp class="btn-ctrls">
       <vk-btn-link class="btn btn-confirm" size="small" @click.prevent="commitField">
         <font-awesome-icon icon="check" /> done
@@ -11,7 +11,7 @@
     </vk-btn-grp>
   </div>
   <div v-else :class="fieldClasses">
-    <json-widget :value="field.value" />
+    <json-input :value="field.value" />
     <a href="#" class="btn-edit" @click.prevent="editField" @focus="editField">
       <font-awesome-icon v-if="!readonly" :icon="isset ? 'edit': 'plus'"
                          @click="editField" />
@@ -29,7 +29,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faCheck, faTimes, faEdit, faPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { ModelFieldMixin } from '@/lib/mixins'
-import JsonWidget from '../JsonWidget'
+import { JsonInput } from '@/components'
 
 library.add( faCheck, faTimes, faEdit, faPlus );
 
@@ -39,7 +39,7 @@ export default {
   components: {
     VkBtnLink,
     VkBtnGrp,
-    JsonWidget,
+    JsonInput,
     FontAwesomeIcon,
   },
   props: {},

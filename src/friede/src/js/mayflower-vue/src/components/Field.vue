@@ -15,7 +15,7 @@
 <script lang="js">
 import kebabCase from 'lodash/kebabCase'
 import { Field } from '@/lib/objects'
-import fields from './fields'
+import fields from '@/fields'
 export default  {
   name: 'Field',
   components: fields,

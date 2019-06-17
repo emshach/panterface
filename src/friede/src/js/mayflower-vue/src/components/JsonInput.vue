@@ -30,8 +30,9 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 library.add( faRandom );
 
+export { components };
 export default  {
-  name: 'JsonWidget',
+  name: 'JsonInput',
   components: {
     VkBtn,
     VkDropdown,

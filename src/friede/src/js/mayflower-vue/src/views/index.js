@@ -1,23 +1,23 @@
 export const BasicPage = () =>
-   import(/* webpackChunkName: "pages" */ './BasicPage')
+   import(/* webpackChunkName: "pages" */ './BasicPage' )
 export const DashboardPage = () =>
-   import(/* webpackChunkName: "pages" */ './DashboardPage')
+   import(/* webpackChunkName: "pages" */ './DashboardPage' )
 export const FormPage = () =>
-   import(/* webpackChunkName: "pages" */ './FormPage')
+   import(/* webpackChunkName: "pages" */ './FormPage' )
 export const HomeDashboard = () =>
-   import(/* webpackChunkName: "pages" */ './HomeDashboard')
+   import(/* webpackChunkName: "pages" */ './HomeDashboard' )
 export const HomePage = () =>
-   import(/* webpackChunkName: "pages" */ './HomePage')
+   import(/* webpackChunkName: "pages" */ './HomePage' )
 export const ListModelPage = () =>
-   import(/* webpackChunkName: "pages" */ './ListModelPage')
+   import(/* webpackChunkName: "pages" */ './ListModelPage' )
 export const ModelDashboard = () =>
-   import(/* webpackChunkName: "pages" */ './ModelDashboard')
+   import(/* webpackChunkName: "pages" */ './ModelDashboard' )
 export const SearchResultsPage = () =>
-   import(/* webpackChunkName: "pages" */ './SearchResultsPage')
+   import(/* webpackChunkName: "pages" */ './SearchResultsPage' )
 export const UserDashboard = () =>
-   import(/* webpackChunkName: "pages" */ './UserDashboard')
+   import(/* webpackChunkName: "pages" */ './UserDashboard' )
 export const UserHomeDashboard = () =>
-   import(/* webpackChunkName: "pages" */ './UserHomeDashboard')
+   import(/* webpackChunkName: "pages" */ './UserHomeDashboard' )
 
 export default {
   BasicPage,

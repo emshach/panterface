@@ -303,7 +303,7 @@ def api_models( request, models=None, format=None ):
         if sr is None:
             return Response({ 'error': "found no seralizer for '%s'" % name },
                             status=status.HTTP_404_NOT_FOUND )
-        app_meta = app_obj.objects.get( meta.model_name )
+        app_meta = app_obj.relations.get( meta.model_name )
         if app_meta:
             rest = app_meta.get( 'rest', app_meta.get( 'plural' ))
             if rest:

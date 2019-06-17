@@ -50,12 +50,15 @@ Vue.use(vue_glide_js__WEBPACK_IMPORTED_MODULE_0__["Glide"]);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuikit_lib_grid__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuikit/lib/grid */ "./node_modules/vuikit/lib/grid.js");
+/* harmony import */ var vuikit_lib_card__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuikit/lib/card */ "./node_modules/vuikit/lib/card.js");
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'filter-grid',
-  comporents: {
-    VkGrid: vuikit_lib_grid__WEBPACK_IMPORTED_MODULE_0__["Grid"]
+  components: {
+    VkGrid: vuikit_lib_grid__WEBPACK_IMPORTED_MODULE_0__["Grid"],
+    VkCard: vuikit_lib_card__WEBPACK_IMPORTED_MODULE_1__["Card"],
+    VkCardTitle: vuikit_lib_card__WEBPACK_IMPORTED_MODULE_1__["CardTitle"]
   },
   props: [],
   mounted: function mounted() {},
@@ -295,7 +298,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560743950598
+      // 1560744188060
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -313,7 +316,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560743950619
+      // 1560744189039
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -331,7 +334,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560743950640
+      // 1560744188153
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -349,7 +352,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560743950626
+      // 1560744188134
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -367,7 +370,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560743950609
+      // 1560744188072
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);

@@ -7,10 +7,14 @@
 
 <script lang="js">
 import { Grid as VkGrid } from 'vuikit/lib/grid'
-import { Card as VkCard, CardTitle as VkCardTitle } from 'vuikit/lib/grid'
+import { Card as VkCard, CardTitle as VkCardTitle } from 'vuikit/lib/card'
 export default  {
   name: 'filter-grid',
-  comporents: { VkGrid },
+  components: {
+    VkGrid,
+    VkCard,
+    VkCardTitle,
+  },
   props: [],
   mounted() {
     

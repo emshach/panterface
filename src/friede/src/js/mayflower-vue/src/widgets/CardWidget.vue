@@ -38,6 +38,10 @@ export default  {
     layout: {
       type: Object,
       default: () => ({})
+    },
+    inline: {
+      type: Boolean,
+      default: true
     }
   },
   mounted() {
@@ -52,14 +56,11 @@ export default  {
     
   },
   computed: {
-    isInline() {
-      return true
-    },
     type() {
-      return this.isInline ? 'blank' : this.cardType
+      return this.inline ? 'blank' : this.cardType
     },
     padding() {
-      return this.isInline ? '' : 'small'
+      return this.inline ? '' : 'small'
     }
   }
 }

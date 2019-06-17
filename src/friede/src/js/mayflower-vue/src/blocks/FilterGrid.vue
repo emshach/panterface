@@ -6,8 +6,8 @@
       <dashboard-widget v-for="object in objects" :key=object.id
                         :object=object >
         <template v-for="( field, slot ) in itemLayout"
-                  v-slot:[slot]=o >
-          <div><div class="debug">field</div>{{ o[ field ]}}</div></template>
+                  v-slot:[slot]={object} >
+          <div><div class="debug">{{field}}</div>{{ object[ field ]}}</div></template>
       </dashboard-widget>
     </vk-grid>
   </div>

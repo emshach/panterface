@@ -21,6 +21,7 @@ import { Card as VkCard, CardTitle as VkCardTitle } from 'vuikit/lib/card'
 import { CloseButton } from '@/components'
 export default  {
   name: 'CardWidget',
+  components: { VkCard, VkCardTitle, CloseButton },
   props: {
     object: {
       type: Object,
@@ -39,7 +40,6 @@ export default  {
       default: () => ({})
     }
   },
-  components: { VkCard, VkCardTitle, Closebutton },
   mounted() {
     
   },

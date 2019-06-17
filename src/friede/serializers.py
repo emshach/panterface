@@ -77,7 +77,7 @@ class WidgetEntrySerializer( EntrySerializer ):
         return WidgetSerializer( obj.entry, context=self.context ).data
     class Meta:
         model = WidgetEntry
-        fields = F.entry + data
+        fields = F.entry + F.data
 
 
 class BlockEntrySerializer( EntrySerializer ):
@@ -85,7 +85,7 @@ class BlockEntrySerializer( EntrySerializer ):
         return BlockSerializer( obj.entry, context=self.context ).data
     class Meta:
         model = BlockEntry
-        fields = F.entry + data
+        fields = F.entry + F.data
 
 
 class ScreenEntrySerializer( EntrySerializer ):
@@ -93,7 +93,7 @@ class ScreenEntrySerializer( EntrySerializer ):
         return ScreenSerializer( obj.entry, context=self.context ).data
     class Meta:
         model = ScreenEntry
-        fields = F.entry + data
+        fields = F.entry + F.data
 
 
 class ShellEntrySerializer( EntrySerializer ):

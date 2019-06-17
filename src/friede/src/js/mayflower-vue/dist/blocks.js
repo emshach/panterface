@@ -52,18 +52,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuikit_lib_grid__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuikit/lib/grid */ "./node_modules/vuikit/lib/grid.js");
 /* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
 /* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components */ "./src/components/index.js");
-/* harmony import */ var _widgets_DashboardWidget__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/widgets/DashboardWidget */ "./src/widgets/DashboardWidget.vue");
+/* harmony import */ var _widgets__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/widgets */ "./src/widgets/index.js");
 
 
 
 
-console.log(_widgets_DashboardWidget__WEBPACK_IMPORTED_MODULE_3__["default"]);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'FilterGrid',
   mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_1__["FilteredMixin"], _lib_mixins__WEBPACK_IMPORTED_MODULE_1__["ActionsMixin"]],
   components: {
     VkGrid: vuikit_lib_grid__WEBPACK_IMPORTED_MODULE_0__["Grid"],
-    DashboardWidget: _widgets_DashboardWidget__WEBPACK_IMPORTED_MODULE_3__["default"],
+    DashboardWidget: _widgets__WEBPACK_IMPORTED_MODULE_3__["DashboardWidget"],
     FilterInput: _components__WEBPACK_IMPORTED_MODULE_2__["FilterInput"],
     ActionsInput: _components__WEBPACK_IMPORTED_MODULE_2__["ActionsInput"]
   },
@@ -532,7 +531,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560798329213
+      // 1560798504315
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -550,7 +549,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560798330584
+      // 1560798505608
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -568,7 +567,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560798329301
+      // 1560798504395
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -586,7 +585,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560798329240
+      // 1560798504337
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -604,7 +603,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560798329271
+      // 1560798504358
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -622,7 +621,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560798329260
+      // 1560798504366
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -640,7 +639,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560798329231
+      // 1560798504328
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -658,7 +657,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560798329220
+      // 1560798504307
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1502,55 +1501,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _cache_loader_cacheDirectory_node_modules_cache_vue_loader_cacheIdentifier_fd468c2e_vue_loader_template_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ListDisplay_vue_vue_type_template_id_08d30134_scoped_true_lang_html___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _cache_loader_cacheDirectory_node_modules_cache_vue_loader_cacheIdentifier_fd468c2e_vue_loader_template_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ListDisplay_vue_vue_type_template_id_08d30134_scoped_true_lang_html___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ "./src/widgets/DashboardWidget.vue":
-/*!*****************************************!*\
-  !*** ./src/widgets/DashboardWidget.vue ***!
-  \*****************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-/* harmony import */ var _DashboardWidget_vue_vue_type_custom_index_0_blockType_templaet_lang_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DashboardWidget.vue?vue&type=custom&index=0&blockType=templaet&lang=html */ "./src/widgets/DashboardWidget.vue?vue&type=custom&index=0&blockType=templaet&lang=html");
-/* harmony import */ var _DashboardWidget_vue_vue_type_custom_index_0_blockType_templaet_lang_html__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_DashboardWidget_vue_vue_type_custom_index_0_blockType_templaet_lang_html__WEBPACK_IMPORTED_MODULE_1__);
-var render, staticRenderFns
-var script = {}
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(
-  script,
-  render,
-  staticRenderFns,
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* custom blocks */
-
-if (typeof _DashboardWidget_vue_vue_type_custom_index_0_blockType_templaet_lang_html__WEBPACK_IMPORTED_MODULE_1___default.a === 'function') _DashboardWidget_vue_vue_type_custom_index_0_blockType_templaet_lang_html__WEBPACK_IMPORTED_MODULE_1___default()(component)
-
-component.options.__file = "src/widgets/DashboardWidget.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./src/widgets/DashboardWidget.vue?vue&type=custom&index=0&blockType=templaet&lang=html":
-/*!**********************************************************************************************!*\
-  !*** ./src/widgets/DashboardWidget.vue?vue&type=custom&index=0&blockType=templaet&lang=html ***!
-  \**********************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
 
 
 

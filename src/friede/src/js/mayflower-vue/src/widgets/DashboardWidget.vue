@@ -1,4 +1,4 @@
-<templaet lang="html">
+<template lang="html">
   <default-action-widget :object=object >
     <template v-for="( _, slot ) in $scopedSlots"
               v-slot:[slot]=scope>

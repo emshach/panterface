@@ -22,7 +22,7 @@ export default  {
       this.$store.dispatch( 'getModel', this.model ).then( m => {
         if ( m.rest ) {
           this.$api( m.rest, '' ).then( r => { // TODO: paginate, filter?
-            this.objects = r.results || [];
+            this.objects = r.data.results || [];
           });
         }
       });

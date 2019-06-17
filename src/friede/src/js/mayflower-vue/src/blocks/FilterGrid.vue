@@ -6,7 +6,7 @@
       <dashboard-widget v-for="object in objects" :key=object.id
                         :object=object >
         <template v-for="( field, slot ) in itemLayout"
-                  v-slot:[slot]=o >{{ console.log( o, field ), o[ field ]}}</template>
+                  v-slot:[slot]=o >{{ o[ field ]}}</template>
       </dashboard-widget>
     </vk-grid>
   </div>

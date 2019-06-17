@@ -7,7 +7,7 @@ class App( app.App ):
     name        =  'intrepid'
     icon        = 'fontawesome.gem'
     module      = 'intrepid'
-    title       = 'Project Intrepid',
+    title       = 'Project Intrepid'
     description = '''Time, task and finance management system
 
     Also includes goal-setting, strategizing, and teamwork tools.'''

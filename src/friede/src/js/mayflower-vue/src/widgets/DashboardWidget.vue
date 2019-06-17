@@ -12,7 +12,12 @@ import DefaultActionWidget from './DefaultActionWidget'
 export default {
   name: 'DashboardWidget',
   components: { DefaultActionWidget },
-  props: [],
+  props: {
+    object: {
+      type: Object,
+      required: true
+    },
+  },
   mounted() {
     
   },

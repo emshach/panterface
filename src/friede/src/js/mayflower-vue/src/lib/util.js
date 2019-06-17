@@ -6,8 +6,8 @@ export function chunk( data, size ) {
   return out
 }
 
-export function resolve( obj ) {
-  var objects = [{}];
+export function resolve( obj, defaults ) {
+  var objects = [ defaults || {}, {}];
   while ( obj ) {
     var o = Object.assign( {}, obj.data );
     Object.keys( obj ).forEach( k => {

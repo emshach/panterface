@@ -1,6 +1,7 @@
 <template lang="html">
   <vue-perfect-scrollbar class="page">
-    <component :is=component v-bind=$attrs :model=model :blocks=blocks />
+    <component :is=component v-bind=$attrs :model=model :blocks=blocks
+               :options=options />
   </vue-perfect-scrollbar>
 </template>
 
@@ -36,6 +37,16 @@ export default {
     },
     blocks() {
       return this.screen.$blocks || {}
+    },
+    options() {
+      const s = this.screen
+      var o = {}
+      if ( !s ) return {};
+      Object.keys( s ).forEach( x => {
+        if ( x[0] != '$' && x !== 'model' )
+          o[x] = s[x];
+      });
+      return o;
     }
   }
 }

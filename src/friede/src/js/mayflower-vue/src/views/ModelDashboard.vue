@@ -1,7 +1,9 @@
 <template lang="html">
 <div :class=classes>
-  <component :is=blocks.breakfront.component v-if=blocks.breakfront />
-  <component :is=blocks.main.component v-if=blocks.main />
+  <component :is=blocks.breakfront.component v-if=blocks.breakfront
+             :content=content />
+  <component :is=blocks.main.component v-if=blocks.main :model=model
+             :actions=options.actions />
 </div>
 </template>
 
@@ -18,7 +20,8 @@ export default  {
   },
   data() {
     return {
-      classes: [ 'model-dashboard' ]
+      classes: [ 'model-dashboard' ],
+      content: [],
     }
   },
   methods: {

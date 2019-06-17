@@ -1,34 +1,36 @@
 <template lang="html">
-
-  <section class="filter-grid">
-    <h1>filter-grid Component</h1>
-  </section>
-
+  <vk-grid class="filter-grid">
+    <div>app 1</div>
+    <div>app 2</div>
+  </vk-grid>
 </template>
 
 <script lang="js">
-  export default  {
-    name: 'filter-grid',
-    props: [],
-    mounted() {
-
-    },
-    data() {
-      return {
-
-      }
-    },
-    methods: {
-
-    },
-    computed: {
-
+import { Grid as VkGrid } from 'vuikit/lib/grid'
+import { Card as VkCard, CardTitle as VkCardTitle } from 'vuikit/lib/grid'
+export default  {
+  name: 'filter-grid',
+  comporents: { VkGrid },
+  props: [],
+  mounted() {
+    
+  },
+  data() {
+    return {
+      
     }
+  },
+  methods: {
+    
+  },
+  computed: {
+    
+  }
 }
 </script>
 
 <style scoped lang="scss">
-  .filter-grid {
-
-  }
+.filter-grid {
+  
+}
 </style>

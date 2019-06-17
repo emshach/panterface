@@ -149,7 +149,7 @@ export const PageMixin = {
   components: {
     VuePerfectScrollbar,
   },
-  props: [ 'blocks', 'widgets', 'source', 'model' ],
+  props: [ 'blocks', 'widgets', 'source', 'model', 'options' ],
 };
 
 export const JsonWidgetMixin = {

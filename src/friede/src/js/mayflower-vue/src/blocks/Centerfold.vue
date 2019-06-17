@@ -1,34 +1,43 @@
 <template lang="html">
-
-  <section class="centerfold">
-    <h1>centerfold Component</h1>
-  </section>
-
+  <vue-glide v-if="content.length" type="carousel">
+  </vue-glide>
+  <div v-else class="glide-slideshow empty" />
 </template>
 
 <script lang="js">
-  export default  {
-    name: 'centerfold',
-    props: [],
-    mounted() {
+import { Glide as VueGlide, GlideSlider } from 'vue-glide-js'
+import 'vue-glide-js/dist/vue-glide.css'
 
-    },
-    data() {
-      return {
+Vue.use( VueGlide );
 
-      }
-    },
-    methods: {
-
-    },
-    computed: {
-
+export default  {
+  name: 'centerfold',
+  components: { VueGlide, GlideSlider },
+  props: {
+    content: {
+      type: Array,
+      default: () => []
     }
+  },
+  mounted() {
+    
+  },
+  data() {
+    return {
+      
+    }
+  },
+  methods: {
+    
+  },
+  computed: {
+    
+  }
 }
 </script>
 
 <style scoped lang="scss">
-  .centerfold {
-
-  }
+.centerfold {
+  
+}
 </style>

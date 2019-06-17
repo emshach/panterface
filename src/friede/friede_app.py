@@ -621,6 +621,23 @@ class App( app.App ):
                       rename='main' )))))
           ),
         ),
+        ( '0.2.3',
+          ( '#locations',
+            ( 'apps', {},
+              ( '#screens',
+                ( 'default', dict(
+                    path='dashboard.apps',
+                    data=dict(
+                        actions=(
+                            'install',
+                            'activate',
+                            'update',
+                        )),
+                    entry=dict(
+                        data=dict(
+                            model='friede.app'
+                        ))))))),
+        ),
     )
     @property
     def userdata( self ):

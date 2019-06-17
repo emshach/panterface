@@ -472,6 +472,13 @@ def upgradeapp( app, data, upto=None ):
                         else:
                             top[ 'path' ] = path[0]
                         search, updates = split_dict( top, 'name', 'path' )
+                        entry_updates = updates.pop( 'entry', {} )
+                        append = updates.pop( 'APPEND', {} )
+                        prepend = updates.pop( 'PREPEND', {} )
+                        delete = updates.pop( 'DELETE', {} )
+                        updated = False
+                        attached = False
+                        att_new = False
                         relations = {}
                         try:
                             app_field = model[0]._meta.get_field( 'app' )
@@ -505,30 +512,48 @@ def upgradeapp( app, data, upto=None ):
                                 relations[ key ] = related
                                 # TODO; account for multiple ordinality
                         if not obj or type( obj ) is not model[0]:
-                            obj, new = model[0].objects.get_or_create(
+                            obj, new = model[0].objects.update_or_create(
                                 defaults=updates, **search )
                             cr[0] = obj
-                        updated = False
-                        attached = False
-                        att_new = False
+                        for key, value in relations.items():
+                            setattr( obj, key, value )
+                        if not new and updates:
+                            updated = True
+                        for key, value in append:
+                            pass # TODO: implement
+                        for key, value in prepend:
+                            pass # TODO: implement
+                        for key, value in delete:
+                            pass # TODO: implement
+                        if append or prepend or delete:
+                            updated = True
+                            obj.save()
+                        obj_name = getattr( obj, 'path', getattr( obj, 'name' ))
+                        if obj_name.startswith( registry[0] + '.' ):
+                            obj_name = obj_name[ (len( registry[0]) + 1): ]
+
                         if parent:
                             method = "add%s" % model[0]._meta.model_name
                             adder = getattr( parent, method, None )
                             if adder:
-                                attached, att_new = adder( path[0], obj )
-                        if attached and renamed:
-                            attached.name = renamed
-                            attached.save()
-                        if not new:
-                            for key, value in updates.items():
-                                setattr( obj, key, value )
-                                updated = True
-                        for key, value in relations.items():
-                            setattr( obj, key, value )
-                        obj.save()
-                        obj_name = getattr( obj, 'path', getattr( obj, 'name' ))
-                        if obj_name.startswith( registry[0] + '.' ):
-                            obj_name = obj_name[ (len( registry[0]) + 1): ]
+                                if entry_updates:
+                                    updates = entry_updates
+                                    append = updates.pop( 'APPEND', {} )
+                                    prepend = updates.pop( 'PREPEND', {} )
+                                    delete = updates.pop( 'DELETE', {} )
+                                attached, att_new = adder( path[0], obj, updates )
+                                if attached:
+                                    for key, value in append:
+                                        pass # TODO: implement
+                                    for key, value in prepend:
+                                        pass # TODO: implement
+                                    for key, value in delete:
+                                        pass # TODO: implement
+                                    if renamed:
+                                        attached.name = renamed
+                                    if append or prepend or delete or renamed:
+                                        attached.save()
+
                         if new:
                             print 'created', app.name, obj._meta.object_name, \
                                 obj_name

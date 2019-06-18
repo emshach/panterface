@@ -59,14 +59,14 @@ export default {
 
 <style lang="scss">
 .filter-input {
+  >.label {
+    line-height: 39px;
+    font-weight: bold;
+    color: cornflowerblue;
+  }
   .multiselect {
     background: transparent;
     border: 0 none;
-    >.label {
-      line-height: 39px;
-      font-weight: bold;
-      color: cornflowerblue;
-    }
     &__tags {
       display: flex;
       background: transparent;
@@ -75,10 +75,14 @@ export default {
       padding-bottom: 0;
       padding-left: 0;
       line-height: 39px;
+      &-wrap {
+        flex: 1;
+      }
     }
     &__tag {
       margin-top: 8px;
       margin-bottom: -3px;
+      background: transparent;
       color: #266d4d;
       &-icon:after {
         font-size: 16px;

@@ -311,14 +311,14 @@ a[data-v-aae30ed8] {
     margin: 0 2px;
 }
 
+.filter-input > .label {
+  line-height: 39px;
+  font-weight: bold;
+  color: cornflowerblue;
+}
 .filter-input .multiselect {
   background: transparent;
   border: 0 none;
-}
-.filter-input .multiselect > .label {
-    line-height: 39px;
-    font-weight: bold;
-    color: cornflowerblue;
 }
 .filter-input .multiselect__tags {
     display: -webkit-box;
@@ -331,9 +331,15 @@ a[data-v-aae30ed8] {
     padding-left: 0;
     line-height: 39px;
 }
+.filter-input .multiselect__tags-wrap {
+      -webkit-box-flex: 1;
+          -ms-flex: 1;
+              flex: 1;
+}
 .filter-input .multiselect__tag {
     margin-top: 8px;
     margin-bottom: -3px;
+    background: transparent;
     color: #266d4d;
 }
 .filter-input .multiselect__tag-icon:after {

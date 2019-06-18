@@ -2,8 +2,7 @@
   <div class="filter-grid">
     <div class="header uk-flex">
       <actions-input :actions=actions :operands=filtered />
-      <filter-input class="uk-margin-left" v-model=filters
-                    :filters=presets @add=addOption />
+      <filter-input v-model=filters :filters=presets @add=addOption />
     </div>
     <vk-grid matched :class=classes >
       <div v-for="object in objects" :key=object.id >
@@ -76,6 +75,9 @@ export default  {
 .filter-grid {
   .header {
     margin-bottom: 4px;
+  }
+  .filter-input {
+    margin-left: 4px;
   }
 }
 </style>

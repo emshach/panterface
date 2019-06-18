@@ -12,7 +12,7 @@
     name: 'actions-input',
     props: {
       actions: {
-        type: array,
+        type: Array,
         default: () => []
       }
     },

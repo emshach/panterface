@@ -1,8 +1,8 @@
 <template lang="html">
   <div class="filter-grid">
-    <div class="header uk-flex-1 uk-margin">
+    <div class="header uk-flex uk-margin">
       <actions-input :actions=actions :operands=filtered />
-      <filter-input class="uk-flex-1 uk-margin-left" v-model=filters
+      <filter-input class="uk-margin-left" v-model=filters
                     :filters=presets />
     </div>
     <vk-grid matched :class=classes >

@@ -1,8 +1,8 @@
 <template lang="html">
   <div class="actions-input">
-    <a href="#" class="dropdown-trigger">
-      <font-awesome-icon icon="walking" />actions
-    </a>
+    <vk-btn type="light" href="#" class="dropdown-trigger">
+      <font-awesome-icon icon="walking" class="btn-icon" />actions
+    </vk-btn>
     <vk-dropdown>
       <vk-nav>
         <vk-nav-item v-for="action in actions" :key=action :title=action
@@ -14,6 +14,7 @@
 </template>
 
 <script lang="js">
+import { ButtonLink as VkBtn } from 'vuikit/lib/button'
 import { Dropdown as VkDropdown } from 'vuikit/lib/dropdown'
 import {
   NavDropdown as VkNav,
@@ -28,6 +29,7 @@ library.add( faWalking )
 export default {
   name: 'ActionsInput',
   components: {
+    VkBtn,
     VkDropdown,
     VkNav,
     VkNavItem,
@@ -59,7 +61,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  .actions-input {
-
+.actions-input {
+  .dropdown-trigger {
+    padding: 0;
   }
+}
 </style>

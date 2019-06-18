@@ -20,18 +20,18 @@
           placeholder="filter"
           tag-placeholder="add filter"
           tag-position="bottom"
-          :options="slotOptions"
-          :close-on-select="false"
-          :hide-selected="true"
-          :show-labels="false"
-          :internal-search="false"
-          :loading="loading"
-          :multiple="searching.multiple"
-          :taggable="true"
-          @input="focusSlot"
-          @search-change="getObjects"
-          @tag="addFilter"
-          @select="searchSelect"
+          :options=slotOptions
+          :close-on-select=false
+          :hide-selected=true
+          :show-labels=false
+          :internal-search=false
+          :loading=loading
+          :multiple=searching.multiple
+          :taggable=true
+          @input=focusSlot
+          @search-change=getObjects
+          @tag=addFilter
+          @select=searchSelect
           @keydown="processSlotKey( $event )"
           >
           <template #noOptions>All {{ searching.plural }}</template>

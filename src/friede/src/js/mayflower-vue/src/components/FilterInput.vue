@@ -34,10 +34,6 @@ export default {
     this.iValue = this.value.slice();
     this.ifilters = this.filters.slice();
   },
-  updated() {
-    this.iValue = this.value.slice();
-    this.iFilters = this.filters.slice();
-  },
   data() {
     return {
       iValue: [],

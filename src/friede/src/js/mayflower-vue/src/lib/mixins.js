@@ -226,7 +226,7 @@ export const FilteredMixin = {
       return filters.length ? x => filters.find( f => f(x) ) : x => true;
     },
     filtered() {
-      return this.objects( this.filterFunction );
+      return this.objects.filter( this.filterFunction );
     }
   }
 }

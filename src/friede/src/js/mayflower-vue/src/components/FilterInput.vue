@@ -2,7 +2,7 @@
   <div class="filter-input">
     <multiselect
       placeholder="filter"
-      :options="[]"
+      :options=filters
       :value=value
       :multiple=true
       :taggable=true
@@ -24,7 +24,9 @@ export default {
   },
   mounted() {},
   data() {
-    return {}
+    return {
+      filters: [],
+    }
   },
   methods: {
     input( val ) {

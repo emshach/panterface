@@ -38,3 +38,11 @@ form.uk-form-stacked label {
 .debug {
   display: none !important;
 }
+.uk-dropdown-nav > li > a {
+  padding: 5px 10px;
+  background: transparent;
+  transition: 0.3s;
+  &:hover {
+    background: rgba(135, 206, 250, 0.3);
+  }
+}

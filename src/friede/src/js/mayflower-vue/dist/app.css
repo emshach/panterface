@@ -196,45 +196,33 @@ a[data-v-aae30ed8] {
 }
 
 
-.user-menu {
-  text-align: left;
-}
 .user-menu .user-title {
-    font-weight: bold;
-    font-size: 1.2em;
+  font-weight: bold;
+  font-size: 1.2em;
 }
 .user-menu .user-title a {
-      padding-left: 10px;
+    padding-left: 10px;
 }
 .user-menu .user-subtitle {
-    font-size: 0.9em;
+  font-size: 0.9em;
 }
 .user-menu .note {
-    margin-top: 2px;
+  margin-top: 2px;
 }
 .user-menu .user-info {
-    margin-top: -4px;
-    padding: 12px;
-    background: #dce6ff;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    color: steelblue;
+  margin-top: -4px;
+  padding: 12px;
+  background: #dce6ff;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  color: steelblue;
 }
 .user-menu .user-info .btn-ok, .user-menu .user-info .btn-cancel {
-      display: block;
-      width: 100%;
-      margin-bottom: 4px;
+    display: block;
+    width: 100%;
+    margin-bottom: 4px;
 }
 .user-menu .user-info .field {
-      margin-bottom: 8px;
-}
-.user-menu .uk-dropdown-nav > li > a {
-    padding: 5px 10px;
-    background: transparent;
-    -webkit-transition: 0.3s;
-    transition: 0.3s;
-}
-.user-menu .uk-dropdown-nav > li > a:hover {
-      background: rgba(135, 206, 250, 0.3);
+    margin-bottom: 8px;
 }
 
 .json-object .json-object-content.single .json-tuple {
@@ -10657,6 +10645,14 @@ form.uk-form-stacked label {
 
 .debug {
   display: none !important; }
+
+.uk-dropdown-nav > li > a {
+  padding: 5px 10px;
+  background: transparent;
+  -webkit-transition: 0.3s;
+  transition: 0.3s; }
+  .uk-dropdown-nav > li > a:hover {
+    background: rgba(135, 206, 250, 0.3); }
 
 
 /*# sourceMappingURL=app.css.map*/

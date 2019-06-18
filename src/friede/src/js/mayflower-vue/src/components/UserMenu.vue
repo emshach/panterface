@@ -121,7 +121,6 @@ export default  {
 
 <style lang="scss">
 .user-menu {
-  text-align: left;
   .user-title {
     font-weight: bold;
     font-size: 1.2em;
@@ -148,14 +147,6 @@ export default  {
     }
     .field {
       margin-bottom: 8px;
-    }
-  }
-  .uk-dropdown-nav > li > a {
-    padding: 5px 10px;
-    background: transparent;
-    transition: 0.3s;
-    &:hover {
-      background: rgba(135, 206, 250, 0.3);
     }
   }
 }

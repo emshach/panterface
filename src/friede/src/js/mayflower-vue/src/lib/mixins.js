@@ -217,12 +217,12 @@ export const FilteredMixin = {
         var match = f.match || f.key;
         if ( !match ) return false;
         match = new RegExp( match, 'i' );
-        const search = f.search || this.searchFields;
+        var search = f.search || this.searchFields;
         if ( !isArray( search ))
           search = [ search ];
         return search && search.length ? x => {
-          search.find( f => {
-            var field = x[f];
+          return search.find( sf => {
+            var field = x[ sf ];
             if ( field === undefined || field === null )
               return false;
             return JSON.stringify( field ).match( match );

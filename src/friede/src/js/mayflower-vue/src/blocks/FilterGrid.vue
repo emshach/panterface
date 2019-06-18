@@ -5,7 +5,7 @@
       <filter-input v-model=filters :filters=presets @add=addOption />
     </div>
     <vk-grid matched :class=classes >
-      <div v-for="object in objects" :key=object.id >
+      <div v-for="object in filtered" :key=object.id >
         <dashboard-widget :object=object >
           <template v-for="( field, slot ) in itemLayout"
                     v-slot:[slot]={object} >

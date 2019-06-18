@@ -5,7 +5,7 @@
     </a>
     <vk-dropdown>
       <vk-nav>
-        <vk-nav-item v-for"action in actions" :key=action @click="input(action)">
+        <vk-nav-item v-for="action in actions" :key=action @click="input(action)">
           {{ action }}
         </vk-nav-item>
       </vk-nav>

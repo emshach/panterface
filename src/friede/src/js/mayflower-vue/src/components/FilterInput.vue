@@ -1,34 +1,39 @@
 <template lang="html">
-
-  <section class="filter-input">
-    <h1>filter-input Component</h1>
-  </section>
-
+  <div class="filter-input">
+    <multiselect
+      placeholder="filter"
+      :value=value
+      :multiple=true
+      :taggable=true
+      @input=input
+      />
+  </div>
 </template>
 
 <script lang="js">
-  export default  {
-    name: 'filter-input',
-    props: [],
-    mounted() {
-
-    },
-    data() {
-      return {
-
-      }
-    },
-    methods: {
-
-    },
-    computed: {
-
+import Multiselect from 'vue-multiselect'
+export default {
+  name: 'filter-input',
+  props: {
+    value: {
+      type: Array,
+      default: () => []
     }
+  },
+  mounted() {},
+  data() {
+    return {}
+  },
+  methods: {
+    input( val ) {
+      this.$emit( 'input', val );
+    }
+  },
+  computed: {}
 }
 </script>
 
 <style scoped lang="scss">
-  .filter-input {
-
-  }
+.filter-input {
+}
 </style>

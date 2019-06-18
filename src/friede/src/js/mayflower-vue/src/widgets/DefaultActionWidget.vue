@@ -1,6 +1,5 @@
 <template lang="html">
-  <a :href="defaultAction">
-    <card-widget :object=object :inline=inline >
+    <card-widget @click.self=defaultAction :object=object :inline=inline >
       <template v-for="( _, slot ) in $scopedSlots"
                 v-slot:[slot]=scope >
         <slot :name=slot v-bind=scope />
@@ -32,20 +31,12 @@ export default {
       default: false
     }
   },
-  mounted() {
-    
-  },
+  mounted() {},
   data() {
-    return {
-      
-    }
+    return {}
   },
-  methods: {
-    
-  },
-  computed: {
-    
-  }
+  methods: {},
+  computed: {}
 }
 </script>
 

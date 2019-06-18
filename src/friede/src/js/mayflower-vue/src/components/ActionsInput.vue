@@ -1,29 +1,34 @@
 <template lang="html">
-
-  <section class="actions-input">
-    <h1>actions-input Component</h1>
-  </section>
-
+  <div class="actions-input">
+    <select @select.native=input v-model=action >
+      <option value="">do something</option>
+      <option v-for="a in actions" :key=a :value=a >{{a}}</option>
+    </select>
+  </div>
 </template>
 
 <script lang="js">
-  export default  {
+  export default {
     name: 'actions-input',
-    props: [],
+    props: {
+      actions: {
+        type: array,
+        default: () => []
+      }
+    },
     mounted() {
-
     },
     data() {
       return {
-
+        action: ''
       }
     },
     methods: {
-
+      input(e) {
+        this.$emit( this.action );
+      }
     },
-    computed: {
-
-    }
+    computed: {}
 }
 </script>
 

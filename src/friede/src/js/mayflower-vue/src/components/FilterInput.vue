@@ -2,6 +2,7 @@
   <div class="filter-input">
     <multiselect
       placeholder="filter"
+      :options="[]"
       :value=value
       :multiple=true
       :taggable=true

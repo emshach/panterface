@@ -1,13 +1,12 @@
 <template lang="html">
   <div class="actions-input">
     <a href="#" class="dropdown-trigger">
-      <font-awesome-icon :icon="walking" />actions
+      <font-awesome-icon icon="walking" />actions
     </a>
     <vk-dropdown>
       <vk-nav>
-        <vk-nav-item v-for="action in actions" :key=action @click="input(action)">
-          {{ action }}
-        </vk-nav-item>
+        <vk-nav-item v-for="action in actions" :key=action :title=action
+                     @click="input(action)" />
       </vk-nav>
     </vk-dropdown>
     </select>

@@ -43,7 +43,7 @@ export default {
       this.$emit( 'input', val );
     },
     addFilter( tag ) {
-      if ( this.iFilters.find( x => x.key === tag ))
+      if ( this.filters.find( x => x.key === tag ))
         return;
       const filter = {
         key: tag,

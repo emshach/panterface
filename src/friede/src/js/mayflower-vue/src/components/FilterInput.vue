@@ -39,7 +39,6 @@ export default {
   },
   methods: {
     input( val ) {
-      console.log( 'input val', val );
       this.$emit( 'input', val );
     },
     addFilter( tag ) {

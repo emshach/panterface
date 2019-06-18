@@ -54,7 +54,9 @@ export default  {
         'content',
         'uk-child-width-1-1@s',
         'uk-child-width-1-3@m',
-        'uk-child-width-expand@m'
+        'uk-child-width-1-5@l',
+        'uk-child-width-1-7@xl',
+        'uk-grid-match',
       ]
     }
   },

@@ -1,12 +1,9 @@
 <template lang="html">
-  <vue-perfect-scrollbar class="page">
-    <component :is=component v-bind=$attrs :model=model :blocks=blocks
-               :options=options />
-  </vue-perfect-scrollbar>
+  <component :is=component v-bind=$attrs :model=model :blocks=blocks
+             :options=options />
 </template>
 
 <script lang="js">
-import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 import pages from '@/views'
 import { resolve } from '@/lib/util'
 export default {

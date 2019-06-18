@@ -1,26 +1,31 @@
 <template lang="html">
   <div>
-    <template v-if="editMode">
+    <template v-if=editMode >
       <vk-table v-if="field.wip && field.wip.length" responsive hoverable striped 
-                class="edit-view" :selected-rows.sync="selected"
-                :divided="false" :data="field.wip">
+                class="edit-view"
+                :selected-rows.sync=selected
+                :divided=false
+                :data=field.wip >
         <vk-col-select/>
-        <vk-column v-for="c in columns"
-                   :key="c.name" :title="c.name" :cell="c.name">
-          <component slot-scope="{ cell }"
-                     :is="cell.meta.type" :name="cell.meta.name"
-                     :type="cell.meta.type" :field="cell" empty-value="not set" />
+        <vk-column v-for="c in columns" :key=c.name :title=c.name :cell=c.name >
+          <component slot-scope="{ cell }" :is=cell.meta.type
+                     empty-value="not set"
+                     :name=cell.meta.name
+                     :type=cell.meta.type
+                     :field=cell />
         </vk-column>
       </vk-table>
     </template>
-    <vk-table v-else-if="isset" responsive hoverable striped
-              :divided="false"
-              :data="field.value||[]">
-      <vk-column v-for="c in columns"
-                 :key="c.name" :title="c.name" :cell="c.name">
-          <component slot-scope="{ cell }" :readonly="true"
-                     :is="cell.meta.type" :name="cell.meta.name"
-                     :type="cell.meta.type" :field="cell" empty-value="not set" />
+    <vk-table v-else-if=isset responsive hoverable striped
+              :divided=false
+              :data="field.value || []">
+      <vk-column v-for="c in columns" :key=c.name :title=c.name :cell=c.name >
+        <component slot-scope="{ cell }" :is=cell.meta.type
+                   empty-value="not set"
+                   :readonly=true
+                   :name=cell.meta.name
+                   :type=cell.meta.type
+                   :field=cell />
       </vk-column>
     </vk-table>
     <div v-else v-html="html" @click="editField" @focus="editField"
@@ -29,14 +34,13 @@
       <template v-if="editMode">
         <label class="uk-flex">
           <span class="uk-margin-right">add</span>
-          <multiselect v-model="values" ref="inputV"
-                       :options="options"
-                       :multiple="true"
+          <multiselect v-model=values ref="inputV"
                        label="title"
                        track-by="path"
                        open-direction="bottom"
-                       @search-change="getObjects"
-                       />
+                       :options=options
+                       :multiple=true
+                       @search-change=getObjects />
           <vk-btn-grp class="uk-align-right">
             <vk-btn-link class="btn btn-confirm" @click.prevent="commit">
               <font-awesome-icon icon="check" /> done
@@ -48,7 +52,7 @@
         </label>
       </template>
       <vk-btn-link v-else class="btn btn-add" type="light" size="small"
-                   @click="editField" @focus="editField">
+                   @click=editField @focus=editField >
         <font-awesome-icon :icon="isset ? 'edit' : 'plus'" />
         add{{ isset? '/edit' : '' }}
       </vk-btn-link>
@@ -79,7 +83,6 @@ import { ModelFieldMixin, ModelModelsFieldMixin } from '@/lib/mixins'
 import fields from './'
 
 library.add( faTimes, faCheck, faPlus, faEdit );
-
 VkBtnLink.props.type.validator = val => !val || /^(light|primary|secondary|danger|text|link)$/.test( val );
 
 export default {

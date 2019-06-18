@@ -53,9 +53,9 @@ export default  {
       classes: [
         'content',
         'uk-child-width-1-1@s',
-        'uk-child-width-1-3@m',
-        'uk-child-width-1-5@l',
-        'uk-child-width-1-7@xl',
+        'uk-child-width-1-2@m',
+        'uk-child-width-1-3@l',
+        'uk-child-width-1-5@xl',
         'uk-grid-match',
       ]
     }

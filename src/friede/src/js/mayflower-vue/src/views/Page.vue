@@ -1,6 +1,8 @@
 <template lang="html">
-  <component :is=component v-bind=$attrs :model=model :blocks=blocks
-             :options=options />
+  <div class="page">
+    <component :is=component v-bind=$attrs :model=model :blocks=blocks
+               :options=options />
+  </div>
 </template>
 
 <script lang="js">

@@ -1,9 +1,9 @@
 <template lang="html">
   <div class="filter-grid">
-    <div class="header uk-flex uk-margin">
+    <div class="header uk-flex">
       <actions-input :actions=actions :operands=filtered />
       <filter-input class="uk-margin-left" v-model=filters
-                    :filters=presets />
+                    :filters=presets @add=addOption />
     </div>
     <vk-grid matched :class=classes >
       <div v-for="object in objects" :key=object.id >
@@ -60,7 +60,9 @@ export default  {
     }
   },
   methods: {
-    
+    addOption( filter ) {
+      this.presets.push( filter );
+    }
   },
   computed: {
     filtered() {
@@ -72,6 +74,8 @@ export default  {
 
 <style scoped lang="scss">
 .filter-grid {
-  
+  .header {
+    margin-bottom: 4px;
+  }
 }
 </style>

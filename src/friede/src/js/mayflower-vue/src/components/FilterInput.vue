@@ -1,11 +1,12 @@
 <template lang="html">
-  <div class="filter-input">
+  <div class="filter-input uk-flex">
+    <div v-if=value.length class="label">:</div>
     <multiselect
       placeholder="filter"
       track-by="key"
       label="label"
-      :options=iFilters
-      :value=iValue
+      :options=filters
+      :value=value
       :multiple=true
       :taggable=true
       :close-on-select=false
@@ -31,13 +32,9 @@ export default {
     }
   },
   mounted() {
-    this.iValue = this.value.slice();
-    this.ifilters = this.filters.slice();
   },
   data() {
     return {
-      iValue: [],
-      iFilters: [],
     }
   },
   methods: {
@@ -46,15 +43,14 @@ export default {
       this.$emit( 'input', val );
     },
     addFilter( tag ) {
-      if ( this.iFilters.find( x => x.key === key ))
+      if ( this.iFilters.find( x => x.key === tag ))
         return;
       const filter = {
         key: tag,
         label: tag
       }
-      this.iFilters.push( filter );
-      this.iValue.push( filter );
-      this.$emit( 'input', this.iValue );
+      this.$emit( 'input', this.value.concat([ filter ]));
+      this.$emit( 'add', filter );
     },
   },
   computed: {}
@@ -66,12 +62,28 @@ export default {
   .multiselect {
     background: transparent;
     border: 0 none;
+    >.label {
+      line-height: 39px;
+      font-weight: bold;
+      color: cornflowerblue;
+    }
     &__tags {
+      display: flex;
       background: transparent;
       border: 0 none;
       padding-top: 0;
       padding-bottom: 0;
+      padding-left: 0;
       line-height: 39px;
+    }
+    &__tag {
+      margin-top: 8px;
+      margin-bottom: -3px;
+      color: #266d4d;
+      &-icon:after {
+        font-size: 16px;
+        vertical-align: -2px;
+      }
     }
     &__select {
       padding-bottom: 8px;

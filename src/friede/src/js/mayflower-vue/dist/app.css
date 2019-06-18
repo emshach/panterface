@@ -315,12 +315,30 @@ a[data-v-aae30ed8] {
   background: transparent;
   border: 0 none;
 }
+.filter-input .multiselect > .label {
+    line-height: 39px;
+    font-weight: bold;
+    color: cornflowerblue;
+}
 .filter-input .multiselect__tags {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
     background: transparent;
     border: 0 none;
     padding-top: 0;
     padding-bottom: 0;
+    padding-left: 0;
     line-height: 39px;
+}
+.filter-input .multiselect__tag {
+    margin-top: 8px;
+    margin-bottom: -3px;
+    color: #266d4d;
+}
+.filter-input .multiselect__tag-icon:after {
+      font-size: 16px;
+      vertical-align: -2px;
 }
 .filter-input .multiselect__select {
     padding-bottom: 8px;

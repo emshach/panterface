@@ -1,14 +1,19 @@
 <template lang="html">
   <div class="filter-grid">
-    <filter-input v-model=filters />
-    <actions-input :actions=actions :operands=filtered />
-    <vk-grid class="content">
-      <dashboard-widget v-for="object in objects" :key=object.id
-                        :object=object >
-        <template v-for="( field, slot ) in itemLayout"
-                  v-slot:[slot]={object} >
-          <div><div class="debug">{{field}}</div>{{ object[ field ]}}</div></template>
-      </dashboard-widget>
+    <div class="header uk-flex-1 uk-margin">
+      <actions-input :actions=actions :operands=filtered />
+      <filter-input class="uk-flex-1 uk-margin-left" v-model=filters
+                    :filters=presets />
+    </div>
+    <vk-grid matched :class=classes >
+      <div v-for="object in objects" :key=object.id >
+        <dashboard-widget :object=object >
+          <template v-for="( field, slot ) in itemLayout"
+                    v-slot:[slot]={object} >
+            {{ object[ field ]}}
+          </template>
+        </dashboard-widget>
+      </div>
     </vk-grid>
   </div>
 </template>
@@ -46,6 +51,12 @@ export default  {
   },
   data() {
     return {
+      classes: [
+        'content',
+        'uk-child-width-1-1@s',
+        'uk-child-width-1-3@m',
+        'uk-child-width-expand@m'
+      ]
     }
   },
   methods: {

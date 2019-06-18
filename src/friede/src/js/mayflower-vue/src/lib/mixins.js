@@ -199,7 +199,8 @@ export const FilteredMixin = {
   components: { FilterInput },
   data() {
     return {
-      filters: []
+      filters: [],
+      presets: []
     }
   },
   methods: {

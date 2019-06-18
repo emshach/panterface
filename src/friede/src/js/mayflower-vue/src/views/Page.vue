@@ -9,10 +9,7 @@ import { resolve } from '@/lib/util'
 export default {
   inheritAttrs: false,
   name: 'Page',
-  components: {
-    VuePerfectScrollbar,
-    ...pages
-  },
+  components: pages,
   props: [],
   mounted() {
   },

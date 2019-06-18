@@ -14,6 +14,7 @@
 import Multiselect from 'vue-multiselect'
 export default {
   name: 'filter-input',
+  components: { Multiselect },
   props: {
     value: {
       type: Array,

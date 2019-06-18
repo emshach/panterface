@@ -203,10 +203,30 @@ export const FilteredMixin = {
       presets: []
     }
   },
-  methods: {
-    filter( input ) {
-      // TODO: this
-      return input;
+  computed: {
+    filterFunction() {
+      const filters = this.filters.map( f => {
+        if (!f) return false;
+        var match = f.match || f.key;
+        if ( !match ) return false;
+        match = new RegExp( match, 'i' );
+        return f.search ? x => {
+          var field = x[ f.search ];
+          if ( field === undefined || field === null )
+            return false;
+          return JSON.stringify( field ).match( match );
+        } : x => {
+          return Object.values(x).find( field => {
+            if ( field === undefined || field === null )
+              return false;
+            return JSON.stringify( field ).match( match );
+          });
+        };
+      }).filter( f => f );
+      return filters.length ? x => filters.find( f => f(x) ) : x => true;
+    },
+    filtered() {
+      return this.objects( this.filterFunction );
     }
   }
 }

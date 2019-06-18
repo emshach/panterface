@@ -62,6 +62,9 @@ export default {
 
 <style scoped lang="scss">
 .actions-input {
+  flex-wrap: nowrap;
+  flex-shrink: 0;
+  height: 40px;
   .dropdown-trigger {
     padding: 0;
   }

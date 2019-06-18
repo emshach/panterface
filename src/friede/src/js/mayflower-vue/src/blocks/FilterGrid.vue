@@ -63,11 +63,7 @@ export default  {
       this.presets.push( filter );
     }
   },
-  computed: {
-    filtered() {
-      return this.filter( this.objects );
-    }
-  }
+  computed: {}
 }
 </script>
 
@@ -77,7 +73,7 @@ export default  {
     margin-bottom: 4px;
   }
   .filter-input {
-    margin-left: 4px;
+    margin-left: 8px;
   }
 }
 </style>

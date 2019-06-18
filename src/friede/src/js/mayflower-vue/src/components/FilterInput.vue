@@ -68,7 +68,7 @@ export default {
     background: transparent;
     border: 0 none;
     &__tags {
-      display: flex;
+      display: inline;
       background: transparent;
       border: 0 none;
       padding-top: 0;
@@ -77,22 +77,25 @@ export default {
       line-height: 39px;
       &-wrap {
         flex: 1;
+        flex-basis: 100%;
       }
     }
     &__tag {
       margin-top: 8px;
       margin-bottom: -3px;
+      margin-right: 4px;
       background: transparent;
       color: #266d4d;
       &-icon:after {
-        font-size: 16px;
-        vertical-align: -2px;
+        font-size: 14px;
+        vertical-align: -1px;
       }
     }
     &__select {
       padding-bottom: 8px;
     }
     &__input {
+      max-width: 6em;
       background: transparent;
       border: 0 none;
       margin: 0;

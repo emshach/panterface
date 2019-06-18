@@ -4,8 +4,8 @@
       placeholder="filter"
       track-by="key"
       label="label"
-      :options=_filters
-      :value=_value
+      :options=iFilters
+      :value=iValue
       :multiple=true
       :taggable=true
       :close-on-select=false
@@ -31,17 +31,17 @@ export default {
     }
   },
   mounted() {
-    this._value = this.value.slice();
-    this._filters = this.filters.slice();
+    this.iValue = this.value.slice();
+    this.ifilters = this.filters.slice();
   },
   updated() {
-    this._value = this.value.slice();
-    this._filters = this.filters.slice();
+    this.iValue = this.value.slice();
+    this.iFilters = this.filters.slice();
   },
   data() {
     return {
-      _value: [],
-      _filters: [],
+      iValue: [],
+      iFilters: [],
     }
   },
   methods: {
@@ -50,15 +50,15 @@ export default {
       this.$emit( 'input', val );
     },
     addFilter( tag ) {
-      if ( this._filters.find( x => x.key === key ))
+      if ( this.iFilters.find( x => x.key === key ))
         return;
       const filter = {
         key: tag,
         label: tag
       }
-      this._filters.push( filter );
-      this._value.push( filter );
-      this.$emit( 'input', this._value );
+      this.iFilters.push( filter );
+      this.iValue.push( filter );
+      this.$emit( 'input', this.iValue );
     },
   },
   computed: {}

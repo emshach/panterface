@@ -5,7 +5,8 @@
   <component :is=blocks.main.component v-if=blocks.main
              :objects=objects
              :actions=options.actions
-             :item-layout=options.layout />
+             :item-layout=options.layout
+             :search-fields=options.search />
 </div>
 </template>
 

@@ -639,7 +639,8 @@ class App( app.App ):
                             layout=dict(
                                 title='title',
                                 content='description'
-                            )
+                            ),
+                            search='name title description'.split()
                         ))))))),
         ),
     )

@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { Field } from '@/lib/objects'
 import { JsonInput, FilterInput } from '@/components'
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
+import isArray from 'lodash/isArray'
 
 library.add( faPlus, faEdit )
 
@@ -197,10 +198,16 @@ export const JsonWidgetMixin = {
 
 export const FilteredMixin = {
   components: { FilterInput },
+  props: {
+    searchFields: {
+      type: Array,
+      default: () => []
+    }
+  },
   data() {
     return {
       filters: [],
-      presets: []
+      presets: [],
     }
   },
   computed: {
@@ -210,11 +217,16 @@ export const FilteredMixin = {
         var match = f.match || f.key;
         if ( !match ) return false;
         match = new RegExp( match, 'i' );
-        return f.search ? x => {
-          var field = x[ f.search ];
-          if ( field === undefined || field === null )
-            return false;
-          return JSON.stringify( field ).match( match );
+        const search = f.search || this.searchFields;
+        if ( !isArray( search ))
+          search = [ search ];
+        return search && search.length ? x => {
+          search.find( f => {
+            var field = x[f];
+            if ( field === undefined || field === null )
+              return false;
+            return JSON.stringify( field ).match( match );
+          })
         } : x => {
           return Object.values(x).find( field => {
             if ( field === undefined || field === null )

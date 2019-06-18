@@ -61,7 +61,7 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .filter-input {
   .multiselect {
     background: transparent;

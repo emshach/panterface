@@ -311,28 +311,28 @@ a[data-v-aae30ed8] {
     margin: 0 2px;
 }
 
-.filter-input .multiselect[data-v-38ef479c] {
+.filter-input .multiselect {
   background: transparent;
   border: 0 none;
 }
-.filter-input .multiselect__tags[data-v-38ef479c] {
+.filter-input .multiselect__tags {
     background: transparent;
     border: 0 none;
     padding-top: 0;
     padding-bottom: 0;
     line-height: 39px;
 }
-.filter-input .multiselect__select[data-v-38ef479c] {
+.filter-input .multiselect__select {
     padding-bottom: 8px;
 }
-.filter-input .multiselect__input[data-v-38ef479c] {
+.filter-input .multiselect__input {
     background: transparent;
     border: 0 none;
     margin: 0;
     line-height: 40px;
     vertical-align: middle;
 }
-.filter-input .multiselect__placeholder[data-v-38ef479c] {
+.filter-input .multiselect__placeholder {
     color: darkslateblue;
     margin: 0;
     padding: 0 0 0 5px;

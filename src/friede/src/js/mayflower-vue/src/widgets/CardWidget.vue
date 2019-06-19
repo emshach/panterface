@@ -16,7 +16,9 @@
       <slot name="subtitle" :object=object />
     </p>
     <slot name="content" :object=object />
-    <slot name="content-actions" :object=object />
+    <div class="item-actions">
+      <slot name="content-actions" :object=object />
+    </div>
     <slot #media-bottom name="media-bottom" :object=object />
     <slot #footer name="footer" :object=object />
   </vk-card>

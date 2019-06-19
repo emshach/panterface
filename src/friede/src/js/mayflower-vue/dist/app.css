@@ -10746,5 +10746,12 @@ form.uk-form-stacked label {
   .uk-card.selected .selector {
     color: forestgreen; }
 
+.uk-card .item-actions {
+  float: right;
+  position: relative;
+  bottom: -16px;
+  right: -10px;
+  margin-top: 20px; }
+
 
 /*# sourceMappingURL=app.css.map*/

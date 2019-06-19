@@ -63,7 +63,20 @@
 
 
 
+.installer.widget {
+  float: left;
+  color: lightgrey;
+}
 
+.activator.widget {
+  float: left;
+}
+.activator.widget .activator-enabled {
+    color: cornflowerblue;
+}
+.activator.widget .activator-disabled {
+    color: lightgrey;
+}
 
 
 

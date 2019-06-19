@@ -9,17 +9,29 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vuikit_lib_modal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuikit/lib/modal */ "./node_modules/vuikit/lib/modal.js");
-/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
+/* harmony import */ var vuikit_lib_button__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuikit/lib/button */ "./node_modules/vuikit/lib/button.js");
+/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+/* harmony import */ var _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @fortawesome/fontawesome-svg-core */ "./node_modules/@fortawesome/fontawesome-svg-core/index.es.js");
+/* harmony import */ var _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @fortawesome/vue-fontawesome */ "./node_modules/@fortawesome/vue-fontawesome/index.es.js");
+/* harmony import */ var vuikit_lib_modal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuikit/lib/modal */ "./node_modules/vuikit/lib/modal.js");
+/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
+
+
+
+
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_2__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faToggleOn"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faToggleOff"]);
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Activator',
-  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_1__["ActorsMixin"]],
+  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_5__["ActorsMixin"]],
   components: {
-    VkModal: vuikit_lib_modal__WEBPACK_IMPORTED_MODULE_0__["Modal"],
-    VkClose: vuikit_lib_modal__WEBPACK_IMPORTED_MODULE_0__["ModalClose"],
-    VkModaTitle: vuikit_lib_modal__WEBPACK_IMPORTED_MODULE_0__["ModalTitle"]
+    VkBtn: vuikit_lib_button__WEBPACK_IMPORTED_MODULE_0__["Button"],
+    VkBtnLink: vuikit_lib_button__WEBPACK_IMPORTED_MODULE_0__["ButtonLink"],
+    VkModal: vuikit_lib_modal__WEBPACK_IMPORTED_MODULE_4__["Modal"],
+    VkClose: vuikit_lib_modal__WEBPACK_IMPORTED_MODULE_4__["ModalClose"],
+    VkModaTitle: vuikit_lib_modal__WEBPACK_IMPORTED_MODULE_4__["ModalTitle"],
+    FontAwesomeIcon: _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_3__["FontAwesomeIcon"]
   },
   props: [],
   mounted: function mounted() {},
@@ -44,9 +56,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuikit_lib_button__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuikit/lib/button */ "./node_modules/vuikit/lib/button.js");
 /* harmony import */ var vuikit_lib_modal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuikit/lib/modal */ "./node_modules/vuikit/lib/modal.js");
 /* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
+/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+/* harmony import */ var _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @fortawesome/fontawesome-svg-core */ "./node_modules/@fortawesome/fontawesome-svg-core/index.es.js");
+/* harmony import */ var _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @fortawesome/vue-fontawesome */ "./node_modules/@fortawesome/vue-fontawesome/index.es.js");
 
 
 
+
+
+
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_4__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faLevelUpAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faDownload"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faTrash"]);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Installer',
   mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_2__["ActorsMixin"]],
@@ -55,7 +74,8 @@ __webpack_require__.r(__webpack_exports__);
     VkBtnLink: vuikit_lib_button__WEBPACK_IMPORTED_MODULE_0__["ButtonLink"],
     VkModal: vuikit_lib_modal__WEBPACK_IMPORTED_MODULE_1__["Modal"],
     VkClose: vuikit_lib_modal__WEBPACK_IMPORTED_MODULE_1__["ModalClose"],
-    VkModaTitle: vuikit_lib_modal__WEBPACK_IMPORTED_MODULE_1__["ModalTitle"]
+    VkModaTitle: vuikit_lib_modal__WEBPACK_IMPORTED_MODULE_1__["ModalTitle"],
+    FontAwesomeIcon: _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"]
   },
   props: [],
   mounted: function mounted() {},
@@ -552,7 +572,74 @@ var render = function() {
         ],
         1
       )
-    : _c("div")
+    : _c(
+        "div",
+        { staticClass: "activator widget" },
+        [
+          _vm.object.installed
+            ? [
+                _vm.object.active
+                  ? _c(
+                      "vk-btn-link",
+                      {
+                        directives: [
+                          {
+                            name: "vk-tooltip",
+                            rawName: "v-vk-tooltip.bottom",
+                            value: "disable",
+                            expression: "'disable'",
+                            modifiers: { bottom: true }
+                          }
+                        ],
+                        staticClass: "activator-enabled",
+                        attrs: { type: "text" },
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            return _vm.act(_vm.object, "disable")
+                          }
+                        }
+                      },
+                      [
+                        _c("font-awesome-icon", {
+                          attrs: { icon: "toggle-on" }
+                        })
+                      ],
+                      1
+                    )
+                  : _c(
+                      "vk-btn-link",
+                      {
+                        directives: [
+                          {
+                            name: "vk-tooltip",
+                            rawName: "v-vk-tooltip.bottom",
+                            value: "activate",
+                            expression: "'activate'",
+                            modifiers: { bottom: true }
+                          }
+                        ],
+                        staticClass: "activator-enabled",
+                        attrs: { type: "text" },
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            return _vm.act(_vm.object, "enable")
+                          }
+                        }
+                      },
+                      [
+                        _c("font-awesome-icon", {
+                          attrs: { icon: "toggle-off" }
+                        })
+                      ],
+                      1
+                    )
+              ]
+            : _vm._e()
+        ],
+        2
+      )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -593,36 +680,95 @@ var render = function() {
       )
     : _c(
         "div",
+        { staticClass: "installer widget" },
         [
           _vm.object.installed
-            ? _c(
+            ? [
+                _vm.object.installed !== _vm.object.available
+                  ? _c(
+                      "vk-btn-link",
+                      {
+                        directives: [
+                          {
+                            name: "vk-tooltip",
+                            rawName: "v-vk-tooltip.bottom",
+                            value: "update",
+                            expression: "'update'",
+                            modifiers: { bottom: true }
+                          }
+                        ],
+                        attrs: { type: "text" },
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            return _vm.act(_vm.object, "update")
+                          }
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n      v" +
+                            _vm._s(_vm.object.version) +
+                            " installed\n      "
+                        ),
+                        _c("font-awesome-icon", {
+                          attrs: { icon: "level-up-alt" }
+                        })
+                      ],
+                      1
+                    )
+                  : _c("span", [
+                      _vm._v("v" + _vm._s(_vm.object.version) + " installed")
+                    ]),
+                _c(
+                  "vk-btn-link",
+                  {
+                    directives: [
+                      {
+                        name: "vk-tooltip",
+                        rawName: "v-vk-tooltip.bottom",
+                        value: "uninstall",
+                        expression: "'uninstall'",
+                        modifiers: { bottom: true }
+                      }
+                    ],
+                    attrs: { type: "text" },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.act(_vm.object, "uninstall")
+                      }
+                    }
+                  },
+                  [_c("font-awesome-icon", { attrs: { icon: "trash" } })],
+                  1
+                )
+              ]
+            : _c(
                 "vk-btn-link",
                 {
                   directives: [
                     {
                       name: "vk-tooltip",
-                      rawName: "v-vk-tooltip",
-                      value: "update",
-                      expression: "'update'"
+                      rawName: "v-vk-tooltip.bottom",
+                      value: "install",
+                      expression: "'install'",
+                      modifiers: { bottom: true }
                     }
                   ],
                   attrs: { type: "text" },
                   on: {
                     click: function($event) {
                       $event.preventDefault()
-                      return _vm.act(_vm.object)
+                      return _vm.act(_vm.object, "install")
                     }
                   }
                 },
-                [
-                  _vm._v(
-                    "\n    v" + _vm._s(_vm.object.version) + " installed\n  "
-                  )
-                ]
+                [_c("font-awesome-icon", { attrs: { icon: "download" } })],
+                1
               )
-            : _vm._e()
         ],
-        1
+        2
       )
 }
 var staticRenderFns = []
@@ -1197,7 +1343,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560976683648
+      // 1560979963168
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1215,7 +1361,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560976683639
+      // 1560979962446
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1233,7 +1379,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560976680274
+      // 1560979959972
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1251,7 +1397,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560976682630
+      // 1560979959999
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1269,7 +1415,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560976682655
+      // 1560979960862
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1287,7 +1433,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560976682620
+      // 1560979960829
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1305,7 +1451,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560976682610
+      // 1560979960821
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1323,7 +1469,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560976682521
+      // 1560979960797
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1341,7 +1487,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560976680292
+      // 1560979959983
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1359,7 +1505,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560976682512
+      // 1560979960807
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1377,7 +1523,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560976681019
+      // 1560979960010
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1395,7 +1541,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560976681011
+      // 1560979960038
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);

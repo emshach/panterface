@@ -9,11 +9,11 @@ import {
   ModalClose as VkClose,
   ModalTitle as VkModaTitle
 } from 'vuikit/lib/modal'
-import { ActionsMixin } from '@/lib/mixins'
+import { ActorsMixin } from '@/lib/mixins'
 
 export default {
   name: 'Installer',
-  mixins: [ ActionsMixin ],
+  mixins: [ ActorsMixin ],
   components: {
     VkModal,
     VkClose,

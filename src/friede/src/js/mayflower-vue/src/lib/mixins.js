@@ -264,12 +264,16 @@ export const FilteredMixin = {
   }
 }
 
-export const ActionsMixin = {
+export const ActorsMixin = {
   props: {
     mode: {
       type: String,
       default: 'widget',
       // validator: val => !val || /^(widget|modal)$/.test( val )
+    },
+    actions: {
+      type: Object,
+      default: () => ({})
     },
     operands: {
       type: Object,
@@ -277,6 +281,8 @@ export const ActionsMixin = {
     }
   }
 }
+
+export const ActionsMixin = {}
 
 export const DurationOptions = []
 
@@ -287,6 +293,7 @@ export default {
   JsonWidgetMixin,
   PageMixin,
   FilteredMixin,
+  ActorsMixin,
   ActionsMixin,
   DurationOptions,
 }

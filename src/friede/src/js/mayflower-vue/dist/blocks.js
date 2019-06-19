@@ -119,11 +119,11 @@ vuikit_lib_button__WEBPACK_IMPORTED_MODULE_1__["ButtonLink"].props.type.validato
       if (action === 'select') {
         switch (arg) {
           case 'all':
-            this.selected = this.objects;
+            this.selected = this.objects.slice();
             break;
 
           case 'filtered':
-            this.selected = this.filtered;
+            this.selected = this.filtered.slice();
             break;
 
           case 'none':
@@ -649,7 +649,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560951519422
+      // 1560951669785
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -667,7 +667,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560951519437
+      // 1560951671134
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -685,7 +685,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560951519520
+      // 1560951669845
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -703,7 +703,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560951519512
+      // 1560951669835
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -721,7 +721,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560951519458
+      // 1560951669797
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -739,7 +739,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560951519450
+      // 1560951669821
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -757,7 +757,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560951520045
+      // 1560951671165
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -775,7 +775,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560951520182
+      // 1560951671171
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);

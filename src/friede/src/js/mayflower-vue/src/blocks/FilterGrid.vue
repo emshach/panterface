@@ -95,10 +95,10 @@ export default  {
       if ( action === 'select' ) {
         switch ( arg ) {
         case 'all':
-          this.selected = this.objects;
+          this.selected = this.objects.slice();
           break;
         case 'filtered':
-          this.selected = this.filtered;
+          this.selected = this.filtered.slice();
           break;
         case 'none':
           this.selected = [];

@@ -1,6 +1,6 @@
 <template lang="html">
   <vk-modal class="installer" v-if="mode === 'modal'" :show.sync=show >
-    <vk-close @click="show = false"></vk-close>
+    <vk-close @click="hideModal" />
   </vk-modal>
   <div v-else>
     <vk-btn-link v-if=object.installed @click.prevent="act( object )"

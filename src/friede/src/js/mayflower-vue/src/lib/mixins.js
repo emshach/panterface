@@ -291,6 +291,9 @@ export const ActorsMixin = {
   methods: {
     act( object, actions ) {
       this.$emit( 'act', object, actions );
+    },
+    hideModal() {
+      this.$emit( 'update:show', false );
     }
   }
 }

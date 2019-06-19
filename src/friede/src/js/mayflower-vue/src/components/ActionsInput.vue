@@ -2,6 +2,7 @@
   <div class="actions-input">
     <vk-btn type="light" href="#" class="dropdown-trigger">
       <font-awesome-icon icon="walking" class="btn-icon" />actions
+      {{ count ? '('+count+' objects)' : ''}}
     </vk-btn>
     <vk-dropdown>
       <vk-nav>
@@ -46,6 +47,10 @@ export default {
     operands: {
       type: Array,
       default: () => []
+    },
+    count: {
+      type: Number,
+      default: 0
     }
   },
   mounted() {

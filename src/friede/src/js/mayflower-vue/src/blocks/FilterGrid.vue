@@ -1,10 +1,10 @@
 <template lang="html">
   <div class="filter-grid uk-flex uk-flex-column uk-flex-1">
     <div class="header uk-flex">
-      <actions-input :actions=actions :operands=filtered />
+      <actions-input :actions=actions :operands=filtered :count=activeObjects />
       <filter-input v-model=filters :filters=presets @add=addOption />
     </div>
-    <vue-perfect-scrollbar class="uk-flex-1">
+    <vue-perfect-scrollbar class="scroller uk-flex-1">
       <vk-grid matched :class=classes >
         <div v-for="object in filtered" :key=object.id >
           <dashboard-widget :object=object
@@ -86,7 +86,11 @@ export default  {
       this.presets.push( filter );
     }
   },
-  computed: {}
+  computed: {
+    activeObjects() {
+      return this.selected.length || ( this.filters.length && this.filtered.length ) || 0;
+    }
+  }
 }
 </script>
 
@@ -97,6 +101,9 @@ export default  {
   }
   .filter-input {
     margin-left: 8px;
+  }
+  >.scroller {
+    padding: 3px;
   }
 }
 </style>

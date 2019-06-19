@@ -42,19 +42,19 @@ class IdsFilter( filters.BaseFilterBackend ):
 
 class PathFilter( filters.BaseFilterBackend ):
     """
-    Filter for retrieving multiple objects by ID
+    Filter for retrieving multiple objects by path
     """
     def filter_queryset( self, request, queryset, view ):
-        path = request.query_params.get( 'path' )
-        if path is None:
+        path = request.query_params.getlist( 'path' )
+        if not path:
             return queryset
         rpath = request.path.split('/')
         while len( rpath ) and not rpath[-1]:
             rpath.pop()
         name = rpath[-1]
-        if not path.startswith( name + '.' ):
-            path = "{}.{}".format( name, path )
-        return queryset.filter( path=path )
+        paths = [ "{}.{}".format( name, p ) if not p.startswith( name + '.' ) else p
+                  for p in path ]
+        return queryset.filter( path__in=paths )
 
 
 routes = OrderedDict()

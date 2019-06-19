@@ -359,10 +359,10 @@ shortcuts = dict(
     settings=mksettings,
 )
 
-@transaction.atomic
 def upgradeapp( app, data, upto=None ):
     app_version = version_parse( app.version )
     max_version = None
+    min_version = version_parse( app.min_version )
     if upto:
         upto = version_parse( upto )
 
@@ -379,7 +379,10 @@ def upgradeapp( app, data, upto=None ):
             version = version_parse(v)
             if app_version >= version :
                 continue
-            if upto and version >= upto :
+            if upto:
+                if version >= upto :
+                    break
+            elif min_version and app_version >= min_version:
                 break
             transaction.on_commit( update_version )
             stack = deque([ tree ])
@@ -574,3 +577,4 @@ def upgradeapp( app, data, upto=None ):
             except Exception as e:
                 print >> sys.stderr, "got exception", type(e), e
                 raise
+        app_version = version

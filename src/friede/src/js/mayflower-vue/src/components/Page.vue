@@ -1,4 +1,4 @@
-<template lang="html"></template>
+<template functional></template>
 
 <script lang="js">
 import store from '@/store'
@@ -6,7 +6,6 @@ import pages from '@/views'
 import { resolve } from '@/lib/util'
 export default {
   name: 'Page',
-  functional: true,
   render( h, ref ) {
     const screen = resolve( store.getters.screen );
     const model = screen.model || store.model;
@@ -18,7 +17,7 @@ export default {
         if ( x[0] != '$' && x !== 'model' )
           options[x] = screen[x];
       });
-    ref.props.options = {};
+    ref.props.options = options;
     return h( tag, ref );
   }
 }

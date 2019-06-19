@@ -3,7 +3,7 @@
 <script lang="js">
 import widgets from '@/widgets'
 import { Widget } from '@/lib/objects'
-export default  {
+export default {
   name: 'Widget',
   functional: true,
   render( h, ref ) {

@@ -2,8 +2,8 @@
 <div :class=classes>
   <component :is=tag mode="modal" :key=tag
              v-for="( actor, tag ) in actors"
-             :operands="actorOperands[ tag ]"
-             :actions=actor.actions />
+             :actions=actor.actions
+             :operands=actor.operands />
   <component :is=blocks.breakfront.component v-if=blocks.breakfront
              :content=featured />
   <component :is=blocks.main.component v-if=blocks.main
@@ -69,26 +69,17 @@ export default  {
   computed: {
     actors() {
       const actions = this.actions;
+      const args = this.operands;
       var actors = {};
       Object.values( actions ).forEach( a => {
         const tag = a.data.component;
         if ( !actors[ tag ])
-          actors[ tag ] = { actions: {} };
+          actors[ tag ] = {
+            actions: {},
+            operands: {},
+          };
         actors[ tag ].actions[ a.name ] = a;
-      });
-      return actors;
-    },
-    actorOperands() {
-      const args = this.operands;
-      var actors = {};
-      Object.keys( args ).forEach( k => {
-        const operands = args[k];
-        if ( this.actions[k] && this.actions[k].data.component ) {
-          const tag = this.actions[k].data.component
-          if ( !actors[ tag ])
-            actors[ tag ] = {};
-          actors[ tag ][k] = operands;
-        }
+        actors[ tag ].operands[ a.name ] = args[ a.name ];
       });
       return actors;
     }

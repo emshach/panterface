@@ -58,6 +58,7 @@ export default  {
       objects: [],
       actions: {},
       operands: {},
+      actors: {},
     }
   },
   methods: {},

@@ -6,11 +6,11 @@ import { resolve } from '@/lib/util'
 export default {
   name: 'Page',
   functional: true,
-  render( h, ref) {
+  render( h, ref ) {
     const screen = resolve( this.$store.getters.screen );
-    const tag = this.screen.component || 'HomePage';
     const model = this.screen.model || this.$store.model;
     const blocks = this.screen.$blocks || {};
+    const tag = pages[ this.screen.component ] || pages.HomePage;
     var options = {};
     if ( screen )
       Object.keys( screen ).forEach( x => {

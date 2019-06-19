@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import store from '@/store'
-import Page from '@/views/Page'
+import { Page } from '@/components'
 
 Vue.use( Router )
 
@@ -43,12 +43,12 @@ router.beforeResolve( async ( to, from, next ) => {
         }
       });
     }
-    if ( to.fullPath != store.getters.route ) {
+    if ( to.fullPath !== store.getters.route ) {
       store.dispatch( 'setPath', to.fullPath );
     }
     return next()
   }
-  if ( to.fullPath != store.getters.route ) {
+  if ( to.fullPath !== store.getters.route ) {
     store.dispatch( 'setPath', to.fullPath );
   }
   return next()

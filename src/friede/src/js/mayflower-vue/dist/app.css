@@ -1,3 +1,12 @@
+.page {
+  position: absolute;
+  top: 0;
+  bottom: 34px;
+  left: 0;
+  right: 0;
+  padding: 40px 20px 10px;
+}
+
 
 
 
@@ -423,15 +432,6 @@ a[data-v-aae30ed8] {
 }
 #nav > a .nav-icon[data-v-7ba5bd90] {
       margin-right: 2px;
-}
-
-.page {
-  position: absolute;
-  top: 0;
-  bottom: 34px;
-  left: 0;
-  right: 0;
-  padding: 40px 20px 10px;
 }
 
 /* ========================================================================

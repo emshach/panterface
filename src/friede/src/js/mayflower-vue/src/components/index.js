@@ -1,3 +1,4 @@
+import Page         from './Page'
 import Breadcrumb   from './Breadcrumb'
 import CloseButton  from './CloseButton'
 import Dashboard    from './Dashboard'
@@ -9,10 +10,11 @@ import Thing        from './Thing'
 import UserMenu     from './UserMenu'
 import Widget       from './Widget'
 import JsonInput    from './JsonInput'
-import FilterInput    from './FilterInput'
-import ActionsInput    from './ActionsInput'
+import FilterInput  from './FilterInput'
+import ActionsInput from './ActionsInput'
 
 export {
+  Page,
   Breadcrumb,
   CloseButton,
   Dashboard,
@@ -29,6 +31,7 @@ export {
 }
 
 export default {
+  Page,
   Breadcrumb,
   CloseButton,
   Dashboard,

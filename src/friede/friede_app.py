@@ -643,6 +643,44 @@ class App( app.App ):
                             search='name title description'.split()
                         ))))))),
         ),
+        ( '0.2.4',
+          ( '#actions',
+            ( 'install', dict(
+                data=dict(
+                    reverse='uninstall',
+                    component='Installer',
+                ))),
+            ( 'uninstall', dict(
+                data=dict(
+                    reverse='install',
+                    component='Installer',
+                ))),
+            ( 'activate', dict(
+                data=dict(
+                    reverse='deactivate',
+                    component='Activator',
+                ))),
+            ( 'deactivate', dict(
+                data=dict(
+                    reverse='activate',
+                    component='Activator',
+                ))),
+            ( 'update', dict(
+                data=dict(
+                    implies='upgrade',
+                    component='Installer',
+                ))),
+            ( 'upgrade', dict(
+                data=dict(
+                    reverse='downgrade',
+                    component='Installer',
+                ))),
+            ( 'downgrade', dict(
+                data=dict(
+                    reverse='upgrade',
+                    component='Installer',
+                ))),
+          )),
     )
     @property
     def userdata( self ):

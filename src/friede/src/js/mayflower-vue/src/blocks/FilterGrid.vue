@@ -1,7 +1,8 @@
 <template lang="html">
   <div class="filter-grid uk-flex uk-flex-column uk-flex-1">
     <div class="header uk-flex">
-      <actions-input :actions=actions :operands=filtered :count=activeObjects />
+      <actions-input :actions=actions :operands=filtered :count=activeObjects
+                     :visible=filtered.length :total=objects.length />
       <filter-input v-model=filters :filters=presets @add=addOption />
     </div>
     <vue-perfect-scrollbar class="scroller uk-flex-1">

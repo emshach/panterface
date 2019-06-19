@@ -10737,6 +10737,9 @@ form.uk-form-stacked label {
     height: auto;
     line-height: normal; }
 
+.uk-card .selector {
+  color: lightgrey; }
+
 .uk-card.selected {
   background-image: -webkit-gradient(linear, right top, left bottom, from(skyblue), color-stop(60%, transparent));
   background-image: linear-gradient(to bottom left, skyblue 0%, transparent 60%); }

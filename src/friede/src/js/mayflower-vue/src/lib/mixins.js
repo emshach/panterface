@@ -213,14 +213,14 @@ export const FilteredMixin = {
   },
   methods: {
     toggleSelect( object ) {
-      var index = this.selected.findIndex( object );
+      var index = this.selected.indexOf( object );
       if ( index > -1 )
         this.selected.push( object );
       else
         this.selected.splice( index, 1 );
     },
     isSelected( object ) {
-      return this.selected.find( object );
+      return this.selected.indexOf( object ) > -1;
     }
   },
   computed: {

@@ -288,11 +288,6 @@ export const ActorsMixin = {
       default: false
     }
   },
-  data() {
-    return {
-      show: false
-    }
-  },
   methods: {
     act( object, actions ) {
       this.$emit( 'act', object, actions );

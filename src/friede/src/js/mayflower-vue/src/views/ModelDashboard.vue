@@ -79,11 +79,12 @@ export default  {
     }
   },
   methods: {
-    act( actor, object, actions ) {
+    act( tag, object, actions ) {
+      const actor = this.actors[ tag ];
       Object.keys( actor.actions ).forEach( k => {
         this.operands[k] = [ object ];
       });
-      this.showModals[actor].show = true;
+      this.showModals[ tag ].show = true;
     }
   },
   computed: {

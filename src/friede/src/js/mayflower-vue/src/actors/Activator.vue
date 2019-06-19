@@ -10,7 +10,7 @@
         <font-awesome-icon icon="toggle-on" />
       </vk-btn-link>
       <vk-btn-link v-else v-vk-tooltip.bottom="'activate'"
-                   type="text" class="activator-enabled"
+                   type="text" class="activator-disabled"
                    @click.prevent="act( object, 'enable' )" >
         <font-awesome-icon icon="toggle-off" />
       </vk-btn-link>
@@ -62,6 +62,9 @@ export default {
     }
     .activator-disabled {
       color: lightgrey;
+    }
+    .uk-button {
+      padding: 0 6px;
     }
   }
 }

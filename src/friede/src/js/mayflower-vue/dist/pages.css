@@ -67,6 +67,9 @@
   float: left;
   color: lightgrey;
 }
+.installer.widget .uk-button {
+    padding: 0 6px;
+}
 
 .activator.widget {
   float: left;
@@ -76,6 +79,9 @@
 }
 .activator.widget .activator-disabled {
     color: lightgrey;
+}
+.activator.widget .uk-button {
+    padding: 0 6px;
 }
 
 

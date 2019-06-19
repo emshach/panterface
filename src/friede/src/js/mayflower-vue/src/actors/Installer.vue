@@ -4,7 +4,7 @@
   </vk-modal>
   <div v-else class="installer widget">
     <template v-if=object.installed >
-      <vk-btn-link v-if="object.installed !== object.available"
+      <vk-btn-link v-if="object.version !== object.available"
                    v-vk-tooltip.bottom="'update'"
                    type="text" @click.prevent="act( object, 'update' )" >
         v{{ object.version }} installed
@@ -63,6 +63,9 @@ export default {
   &.widget {
     float: left;
     color: lightgrey;
+    .uk-button {
+      padding: 0 6px;
+    }
   }
 }
 </style>

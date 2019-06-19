@@ -56,6 +56,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { Field } from '@/components'
 import { Model } from '@/lib/objects'
+import { PageMixin } from '@/lib/mixins'
 
 library.add( faCheck, faPlus, faTrash, faCog )
 

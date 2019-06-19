@@ -4,8 +4,7 @@
              v-for="( actor, tag ) in actors"
              :actions=actor.actions
              :operands=actor.operands
-             :show.sync=actor.show
-             @act="act( actor, object, actions )" />
+             :show.sync=actor.show />
   <component :is=blocks.breakfront.component v-if=blocks.breakfront
              :content=featured />
   <component :is=blocks.main.component v-if=blocks.main
@@ -16,7 +15,8 @@
     <template #item-actions={object} >
       <component :is=tag mode="widget" :key=tag
                  v-for="( actor, tag ) in actors"
-                 :object=object />
+                 :object=object
+                 @act="act( $event, actor, object, actions )" />
     </template>
   </component>
 </div>
@@ -75,6 +75,7 @@ export default  {
   },
   methods: {
     act( actor, object, actions ) {
+      console.log( arguments );
       Object.keys( actor.actions ).forEach( k => {
         this.operands[k] = [ object ];
       });

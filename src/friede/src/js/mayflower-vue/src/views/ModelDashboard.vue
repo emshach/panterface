@@ -1,6 +1,7 @@
 <template lang="html">
 <div :class=classes>
-  <component :is=action.data.component mode="modal" :args=operands[action.name]
+  <component :is=action.data.component mode="modal"
+             :args="operands[ action.name ]"
              :key=action.name
              v-for="( action ) in actions" />
   <component :is=blocks.breakfront.component v-if=blocks.breakfront
@@ -40,6 +41,7 @@ export default  {
            if ( res.length )
              res.forEach( a => {
                this.actions[ a.name ] = a;
+               this.operands[ a.name ] = [];
              });
          })
          .catch ( err => {
@@ -56,6 +58,7 @@ export default  {
       featured: [],
       objects: [],
       actions: {},
+      operands: {}
     }
   },
   methods: {

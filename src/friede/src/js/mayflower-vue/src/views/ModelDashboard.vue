@@ -42,7 +42,7 @@ export default  {
            if ( res.length )
              res.forEach( a => {
                _actions[ a.name ] = a;
-               _.operands[ a.name ] = [];
+               _operands[ a.name ] = [];
              });
            this.actions = _actions;
            this.operands = _operands;

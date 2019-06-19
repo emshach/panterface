@@ -14,6 +14,11 @@ import { ActionsMixin } from '@/lib/mixins'
 export default {
   name: 'Activator',
   mixins: [ ActionsMixin ],
+  components: {
+    VkModal,
+    VkClose,
+    VkModaTitle
+  },
   props: [],
   mounted() {},
   data() {

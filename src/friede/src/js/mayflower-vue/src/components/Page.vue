@@ -1,17 +1,17 @@
 <template lang="html"></template>
 
 <script lang="js">
+import store from '@/store'
 import pages from '@/views'
 import { resolve } from '@/lib/util'
 export default {
   name: 'Page',
   functional: true,
   render( h, ref ) {
-    const screen = resolve( this.$store.getters.screen );
-    const model = this.screen.model || this.$store.model;
-    const blocks = this.screen.$blocks || {};
-    const tag = pages[ this.screen.component ] || pages.HomePage;
-    console.log( 'page tag', tag );
+    const screen = resolve( store.getters.screen );
+    const model = screen.model || store.model;
+    const blocks = screen.$blocks || {};
+    const tag = pages[ screen.component ] || pages.HomePage;
     var options = {};
     if ( screen )
       Object.keys( screen ).forEach( x => {

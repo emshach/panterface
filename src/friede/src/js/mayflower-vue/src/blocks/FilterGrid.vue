@@ -110,7 +110,7 @@ export default  {
   },
   computed: {
     visibleSelected() {
-      return this.filtered.filter( x => isSelected(x) ).length
+      return this.filtered.filter( x => this.isSelected(x) ).length
     }
   }
 }

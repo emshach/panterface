@@ -7,7 +7,7 @@
       <template v-if=object.required >
         <font-awesome-icon v-if=object.active
                            icon="toggle-on" v-vk-tooltip.bottom="'required'"
-                           class="activator-enabled" />
+                           class="icon activator-enabled" />
         <vk-btn-link v-else v-vk-tooltip.bottom="'activate'"
                      type="text" class="activator-disabled danger"
                      @click.prevent="act( object, 'enable' )" >
@@ -72,11 +72,11 @@ export default {
     }
     .activator-disabled {
       color: grey;
-      &.error {
+      &.danger {
         color: darkred;
       }
     }
-    .uk-button {
+    .uk-button, .icon {
       padding: 0 6px;
     }
   }

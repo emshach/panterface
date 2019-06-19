@@ -63,7 +63,7 @@ export default {
   &.widget {
     float: left;
     color: grey;
-    .uk-button {
+    .uk-button, .icon {
       padding: 0 6px;
     }
   }

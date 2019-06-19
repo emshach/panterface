@@ -67,7 +67,7 @@
   float: left;
   color: grey;
 }
-.installer.widget .uk-button {
+.installer.widget .uk-button, .installer.widget .icon {
     padding: 0 6px;
 }
 
@@ -80,10 +80,10 @@
 .activator.widget .activator-disabled {
     color: grey;
 }
-.activator.widget .activator-disabled.error {
+.activator.widget .activator-disabled.danger {
       color: darkred;
 }
-.activator.widget .uk-button {
+.activator.widget .uk-button, .activator.widget .icon {
     padding: 0 6px;
 }
 

@@ -30,7 +30,7 @@ export default  {
   },
   data() {
     return {
-      classes: [ 'model-dashboard' ],
+      classes: [ 'model-dashboard', 'uk-flex', 'uk-flex-column' ],
       featured: [],
       objects: []
     }

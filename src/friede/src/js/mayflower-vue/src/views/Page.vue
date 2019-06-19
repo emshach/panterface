@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="page">
+  <div class="page uk-flex">
     <component :is=component v-bind=$attrs :model=model :blocks=blocks
                :options=options />
   </div>

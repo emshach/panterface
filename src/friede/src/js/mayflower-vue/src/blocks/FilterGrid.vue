@@ -1,19 +1,21 @@
 <template lang="html">
-  <div class="filter-grid">
+  <div class="filter-grid uk-flex uk-flex-column uk-flex-1">
     <div class="header uk-flex">
       <actions-input :actions=actions :operands=filtered />
       <filter-input v-model=filters :filters=presets @add=addOption />
     </div>
-    <vk-grid matched :class=classes >
-      <div v-for="object in filtered" :key=object.id >
-        <dashboard-widget :object=object >
-          <template v-for="( field, slot ) in itemLayout"
-                    v-slot:[slot]={object} >
-            {{ object[ field ]}}
-          </template>
-        </dashboard-widget>
-      </div>
+    <vue-perfect-scrollbar class="uk-flex-1">
+      <vk-grid matched :class=classes >
+        <div v-for="object in filtered" :key=object.id >
+          <dashboard-widget :object=object >
+            <template v-for="( field, slot ) in itemLayout"
+                      v-slot:[slot]={object} >
+              {{ object[ field ]}}
+            </template>
+          </dashboard-widget>
+        </div>
     </vk-grid>
+    </vue-perfect-scrollbar>
   </div>
 </template>
 

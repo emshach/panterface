@@ -1,11 +1,12 @@
 <template lang="html">
-    <card-widget @click.self=defaultAction :object=object :inline=inline >
-      <template v-for="( _, slot ) in $scopedSlots"
-                v-slot:[slot]=scope >
-        <slot :name=slot v-bind=scope />
-      </template>
-    </card-widget>      
-  </a>
+  <card-widget :object=object :inline=inline :context=context
+               @click.self=defaultAction >
+    <template v-for="( _, slot ) in $scopedSlots"
+              v-slot:[slot]=scope >
+      <slot :name=slot v-bind=scope />
+    </template>
+  </card-widget>      
+</a>
 </template>
 
 <script lang="js">

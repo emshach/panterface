@@ -213,6 +213,7 @@ export const FilteredMixin = {
   },
   methods: {
     toggleSelect( object ) {
+      console.log( 'toggleSelect', object );
       var index = this.selected.indexOf( object );
       if ( index > -1 )
         this.selected.push( object );

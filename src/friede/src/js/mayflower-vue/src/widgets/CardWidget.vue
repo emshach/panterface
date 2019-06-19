@@ -1,16 +1,16 @@
 <template lang="html">
   <vk-card :type=type :padding=padding :hover=context.hover
            class="widget">
-    <close-button @click.prevent=close v-if=context.closeable />
+      <div class="title-actions uk-align-right">
+        <slot name="title-actions" :object=object />
+        <close-button @click.prevent=close v-if=context.closeable />
+      </div>
     <slot #header name="header" :object=object />
     <slot #badge name="badge" :object=object />
     <slot #media name="media" :object=object />
     <slot #media-top name="media-top" :object=object />
     <vk-card-title>
       <slot name="title" :object=object />
-      <div class="title-actions uk-align-right">
-        <slot name="title-actions" :object=object />
-      </div>
     </vk-card-title>
     <p class="uk-text-meta uk-margin-remove-top">
       <slot name="subtitle" :object=object />

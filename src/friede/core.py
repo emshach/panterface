@@ -159,7 +159,7 @@ def installapp( name, module, title, description, icon='', rest=True,
         ))
         if data:
             upgradeapp( app, data, upto=version )
-        app.installed = true
+        app.installed = True
         app.save()
         return app, new
     except Exception as e:

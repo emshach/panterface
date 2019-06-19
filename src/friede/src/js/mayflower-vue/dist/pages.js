@@ -41,17 +41,22 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vuikit_lib_modal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuikit/lib/modal */ "./node_modules/vuikit/lib/modal.js");
-/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
+/* harmony import */ var vuikit_lib_button__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuikit/lib/button */ "./node_modules/vuikit/lib/button.js");
+/* harmony import */ var vuikit_lib_modal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuikit/lib/modal */ "./node_modules/vuikit/lib/modal.js");
+/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Installer',
-  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_1__["ActorsMixin"]],
+  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_2__["ActorsMixin"]],
   components: {
-    VkModal: vuikit_lib_modal__WEBPACK_IMPORTED_MODULE_0__["Modal"],
-    VkClose: vuikit_lib_modal__WEBPACK_IMPORTED_MODULE_0__["ModalClose"],
-    VkModaTitle: vuikit_lib_modal__WEBPACK_IMPORTED_MODULE_0__["ModalTitle"]
+    VkButton: VkButton,
+    VkButtonLink: VkButtonLink,
+    VkTooltip: VkTooltip,
+    VkModal: vuikit_lib_modal__WEBPACK_IMPORTED_MODULE_1__["Modal"],
+    VkClose: vuikit_lib_modal__WEBPACK_IMPORTED_MODULE_1__["ModalClose"],
+    VkModaTitle: vuikit_lib_modal__WEBPACK_IMPORTED_MODULE_1__["ModalTitle"]
   },
   props: [],
   mounted: function mounted() {},
@@ -313,14 +318,17 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es7_object_values__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es7.object.values */ "./node_modules/core-js/modules/es7.object.values.js");
 /* harmony import */ var core_js_modules_es7_object_values__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es7_object_values__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es6_function_name__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es6.function.name */ "./node_modules/core-js/modules/es6.function.name.js");
-/* harmony import */ var core_js_modules_es6_function_name__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_function_name__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/web.dom.iterable */ "./node_modules/core-js/modules/web.dom.iterable.js");
-/* harmony import */ var core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js");
-/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
-/* harmony import */ var _blocks__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/blocks */ "./src/blocks/index.js");
-/* harmony import */ var _actors__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/actors */ "./src/actors/index.js");
+/* harmony import */ var core_js_modules_es6_object_keys__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es6.object.keys */ "./node_modules/core-js/modules/es6.object.keys.js");
+/* harmony import */ var core_js_modules_es6_object_keys__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_object_keys__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_es6_function_name__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es6.function.name */ "./node_modules/core-js/modules/es6.function.name.js");
+/* harmony import */ var core_js_modules_es6_function_name__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_function_name__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/web.dom.iterable */ "./node_modules/core-js/modules/web.dom.iterable.js");
+/* harmony import */ var core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js");
+/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
+/* harmony import */ var _blocks__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/blocks */ "./src/blocks/index.js");
+/* harmony import */ var _actors__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/actors */ "./src/actors/index.js");
+
 
 
 
@@ -330,8 +338,8 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'ModelDashboard',
-  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_4__["PageMixin"]],
-  components: Object(_home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_3__["default"])({}, _blocks__WEBPACK_IMPORTED_MODULE_5__["default"], _actors__WEBPACK_IMPORTED_MODULE_6__["default"]),
+  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_5__["PageMixin"]],
+  components: Object(_home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_4__["default"])({}, _blocks__WEBPACK_IMPORTED_MODULE_6__["default"], _actors__WEBPACK_IMPORTED_MODULE_7__["default"]),
   props: [],
   mounted: function mounted() {
     var _this = this;
@@ -376,7 +384,16 @@ __webpack_require__.r(__webpack_exports__);
       operands: {}
     };
   },
-  methods: {},
+  methods: {
+    act: function act(actor, object, actions) {
+      var _this2 = this;
+
+      Object.keys(actor.actions).forEach(function (k) {
+        _this2.operands[k] = [object];
+      });
+      actor.show = true;
+    }
+  },
   computed: {
     actors: function actors() {
       var actions = this.actions;
@@ -385,6 +402,7 @@ __webpack_require__.r(__webpack_exports__);
       Object.values(actions).forEach(function (a) {
         var tag = a.data.component;
         if (!actors[tag]) actors[tag] = {
+          show: false,
           actions: {},
           operands: {}
         };
@@ -509,8 +527,21 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _vm.mode === "modal"
-    ? _c("vk-modal", { staticClass: "activator" })
-    : _vm._e()
+    ? _c(
+        "vk-modal",
+        { staticClass: "activator", attrs: { "show-sync": _vm.show } },
+        [
+          _c("vk-modal-close", {
+            on: {
+              click: function($event) {
+                _vm.show = false
+              }
+            }
+          })
+        ],
+        1
+      )
+    : _c("div")
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -535,8 +566,44 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _vm.mode === "modal"
-    ? _c("vk-modal", { staticClass: "installer" })
-    : _vm._e()
+    ? _c(
+        "vk-modal",
+        { staticClass: "installer", attrs: { "show-sync": _vm.show } },
+        [
+          _c("vk-modal-close", {
+            on: {
+              click: function($event) {
+                _vm.show = false
+              }
+            }
+          })
+        ],
+        1
+      )
+    : _c(
+        "div",
+        [
+          _vm.object.installed
+            ? _c(
+                "vk-button-link",
+                {
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.act(_vm.object)
+                    }
+                  }
+                },
+                [
+                  _vm._v(
+                    "\n    v" + _vm._s(_vm.object.version) + " installed\n  "
+                  )
+                ]
+              )
+            : _vm._e()
+        ],
+        1
+      )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -910,7 +977,16 @@ var render = function() {
           attrs: {
             mode: "modal",
             actions: actor.actions,
-            operands: actor.operands
+            operands: actor.operands,
+            show: actor.show
+          },
+          on: {
+            "update:show": function($event) {
+              return _vm.$set(actor, "show", $event)
+            },
+            act: function($event) {
+              return _vm.act(actor, _vm.object, _vm.actions)
+            }
           }
         })
       }),
@@ -928,7 +1004,27 @@ var render = function() {
               actions: _vm.options.actions,
               "item-layout": _vm.options.layout,
               "search-fields": _vm.options.search
-            }
+            },
+            scopedSlots: _vm._u(
+              [
+                {
+                  key: "item-actions",
+                  fn: function(ref) {
+                    var object = ref.object
+                    return _vm._l(_vm.actors, function(actor, tag) {
+                      return _c(tag, {
+                        key: tag,
+                        tag: "component",
+                        attrs: { mode: "widget", object: object }
+                      })
+                    })
+                  }
+                }
+              ],
+              null,
+              false,
+              433378758
+            )
           })
         : _vm._e()
     ],
@@ -1079,7 +1175,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560972145876
+      // 1560974548435
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1097,7 +1193,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560972145882
+      // 1560974548720
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1115,7 +1211,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560972145263
+      // 1560974546735
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1133,7 +1229,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560972145218
+      // 1560974547627
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1151,7 +1247,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560972145254
+      // 1560974547653
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1169,7 +1265,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560972145211
+      // 1560974547617
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1187,7 +1283,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560972145170
+      // 1560974547605
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1205,7 +1301,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560972145155
+      // 1560974547507
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1223,7 +1319,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560972145236
+      // 1560974546747
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1241,7 +1337,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560972145135
+      // 1560974547498
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1259,7 +1355,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560972145053
+      // 1560974546792
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1277,7 +1373,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560972143101
+      // 1560974546783
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);

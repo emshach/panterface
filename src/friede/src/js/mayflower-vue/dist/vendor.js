@@ -20707,7 +20707,7 @@ module.exports = function (encodedURI) {
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560972145427
+      // 1560974547799
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -29048,7 +29048,7 @@ module.exports = function (str) {
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560972142503
+      // 1560974546066
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -46468,7 +46468,7 @@ var component = normalizeComponent(
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560972145949
+      // 1560974548424
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -46875,7 +46875,7 @@ function normalizeComponent (
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560972141164
+      // 1560974544623
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -62204,6 +62204,315 @@ var table_ColumnTree = {
 }
 
 
+
+
+/***/ }),
+
+/***/ "./node_modules/vuikit/lib/tooltip.js":
+/*!********************************************!*\
+  !*** ./node_modules/vuikit/lib/tooltip.js ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _util_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./util/core */ "./node_modules/vuikit/lib/util/core.js");
+/* harmony import */ var _util_style__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./util/style */ "./node_modules/vuikit/lib/util/style.js");
+/* harmony import */ var _util_debug__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./util/debug */ "./node_modules/vuikit/lib/util/debug.js");
+/* harmony import */ var _util_touch__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./util/touch */ "./node_modules/vuikit/lib/util/touch.js");
+/* harmony import */ var _util_promise__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./util/promise */ "./node_modules/vuikit/lib/util/promise.js");
+/* harmony import */ var _util_selector__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./util/selector */ "./node_modules/vuikit/lib/util/selector.js");
+/* harmony import */ var _util_animation__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./util/animation */ "./node_modules/vuikit/lib/util/animation.js");
+/* harmony import */ var _util_filter__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./util/filter */ "./node_modules/vuikit/lib/util/filter.js");
+/* harmony import */ var _util_event__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./util/event */ "./node_modules/vuikit/lib/util/event.js");
+/* harmony import */ var _util_attr__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./util/attr */ "./node_modules/vuikit/lib/util/attr.js");
+/* harmony import */ var _util_dom__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./util/dom */ "./node_modules/vuikit/lib/util/dom.js");
+/* harmony import */ var _util_env__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./util/env */ "./node_modules/vuikit/lib/util/env.js");
+/* harmony import */ var _util_lang__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./util/lang */ "./node_modules/vuikit/lib/util/lang.js");
+/* harmony import */ var _util_dimensions__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./util/dimensions */ "./node_modules/vuikit/lib/util/dimensions.js");
+/* harmony import */ var _util_class__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./util/class */ "./node_modules/vuikit/lib/util/class.js");
+/**
+ * Vuikit 0.8.10
+ * (c) 2018 Miljan Aleksic
+ * @license MIT
+**/
+
+/* Substantial part of the code is adapted from UIkit,
+  Copyright (c) 2013-2018 YOOtheme GmbH, getuikit.com */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var NAMESPACE = '__vkTooltip';
+var index = {
+  bind: function bind (el, binding, vnode) {
+    el[NAMESPACE] = {
+      vnode: vnode,
+      state: null,
+      options: getOptions({ binding: binding })
+    };
+    if (Object(_util_attr__WEBPACK_IMPORTED_MODULE_9__["hasAttr"])(el, 'title')) {
+      el[NAMESPACE].attrTitle = Object(_util_attr__WEBPACK_IMPORTED_MODULE_9__["attr"])(el, 'title');
+      Object(_util_attr__WEBPACK_IMPORTED_MODULE_9__["attr"])(el, { title: '' });
+    }
+    el[NAMESPACE].title = el[NAMESPACE].options.title || el[NAMESPACE].attrTitle;
+  },
+  inserted: function inserted (el, binding, vnode) {
+    bindEvents(el);
+  },
+  componentUpdated: function componentUpdated (el, binding, vnode) {
+    el[NAMESPACE].options = getOptions({ binding: binding });
+    el[NAMESPACE].title = el[NAMESPACE].options.title || el[NAMESPACE].attrTitle;
+  },
+  unbind: function unbind (el, binding, vnode) {
+    if (!el[NAMESPACE]) {
+      return
+    }
+    _hide(el);
+    Object(_util_attr__WEBPACK_IMPORTED_MODULE_9__["attr"])(el, { title: el[NAMESPACE].attrTitle || null });
+    el[NAMESPACE].unbindEvents();
+    delete el[NAMESPACE];
+  }
+}
+function bindEvents (el) {
+  var events = [
+    Object(_util_event__WEBPACK_IMPORTED_MODULE_8__["on"])(el, ("focus " + _util_env__WEBPACK_IMPORTED_MODULE_11__["pointerEnter"] + " " + _util_env__WEBPACK_IMPORTED_MODULE_11__["pointerDown"]), function (e) {
+      if (e.type !== _util_env__WEBPACK_IMPORTED_MODULE_11__["pointerDown"] || !Object(_util_touch__WEBPACK_IMPORTED_MODULE_3__["isTouch"])(e)) {
+        show(el);
+      }
+    }),
+    Object(_util_event__WEBPACK_IMPORTED_MODULE_8__["on"])(el, 'blur', function (e) { return hide(el); }),
+    Object(_util_event__WEBPACK_IMPORTED_MODULE_8__["on"])(el, _util_env__WEBPACK_IMPORTED_MODULE_11__["pointerLeave"], function (e) {
+      if (!Object(_util_touch__WEBPACK_IMPORTED_MODULE_3__["isTouch"])(e)) {
+        hide(el);
+      }
+    })
+  ];
+  el[NAMESPACE].unbindEvents = function () { return events.forEach(function (unbind) { return unbind(); }); };
+}
+function toggleIn (el) {
+  var ref = el[NAMESPACE].options;
+  var cls = ref.cls;
+  var position = ref.position;
+  var animation = ref.animation;
+  var duration = ref.duration;
+  if (!Object(_util_event__WEBPACK_IMPORTED_MODULE_8__["trigger"])(el, 'beforeShow')) {
+    return _util_promise__WEBPACK_IMPORTED_MODULE_4__["Promise"].reject()
+  }
+  var origin = el[NAMESPACE].origin = getOrigin(position);
+  var tooltip = el[NAMESPACE].tooltip = createTooltip(el);
+  positionTooltip(el);
+  Object(_util_class__WEBPACK_IMPORTED_MODULE_14__["addClass"])(tooltip, cls);
+  el[NAMESPACE].hideTimer = setInterval(function () {
+    if (!Object(_util_filter__WEBPACK_IMPORTED_MODULE_7__["isVisible"])(el)) {
+      hide(el);
+    }
+  }, 150);
+  el[NAMESPACE].state = 'in';
+  Object(_util_event__WEBPACK_IMPORTED_MODULE_8__["trigger"])(el, 'show');
+  return _util_animation__WEBPACK_IMPORTED_MODULE_6__["Animation"]
+    .in(tooltip, ("uk-animation-" + (animation[0])), duration, origin)
+    .then(function () {
+      el[NAMESPACE].state = 'active';
+      Object(_util_event__WEBPACK_IMPORTED_MODULE_8__["trigger"])(el, 'shown');
+    })
+    .catch(function () {})
+}
+function toggleOut (el) {
+  var ref = el[NAMESPACE];
+  var tooltip = ref.tooltip;
+  var ref$1 = el[NAMESPACE].options;
+  var animation = ref$1.animation;
+  var duration = ref$1.duration;
+  if (!Object(_util_event__WEBPACK_IMPORTED_MODULE_8__["trigger"])(el, 'beforeHide')) {
+    return _util_promise__WEBPACK_IMPORTED_MODULE_4__["Promise"].reject()
+  }
+  _util_animation__WEBPACK_IMPORTED_MODULE_6__["Animation"].cancel(tooltip);
+  el[NAMESPACE].state = 'out';
+  Object(_util_event__WEBPACK_IMPORTED_MODULE_8__["trigger"])(el, 'hide');
+  if (!animation[1]) {
+    return _util_promise__WEBPACK_IMPORTED_MODULE_4__["Promise"].resolve().then(function () { return _hide(el); })
+  }
+  return _util_animation__WEBPACK_IMPORTED_MODULE_6__["Animation"]
+    .out(tooltip, ("uk-animation-" + (animation[1])), duration, origin)
+    .then(function () { return _hide(el); })
+    .catch(function () {})
+}
+function show (el) {
+  var ref = el[NAMESPACE].options;
+  var delay = ref.delay;
+  var ref$1 = el[NAMESPACE];
+  var state = ref$1.state;
+  var title = ref$1.title;
+  if (!title || state === 'active' || el[NAMESPACE].showTimer) {
+    return
+  }
+  if (state === 'out') {
+    _util_animation__WEBPACK_IMPORTED_MODULE_6__["Animation"].cancel(el);
+    _hide(el);
+  }
+  el[NAMESPACE].showTimer = setTimeout(function () { return toggleIn(el); }, delay);
+}
+function hide (el) {
+  if (!el[NAMESPACE]) {
+    return
+  }
+  var ref = el[NAMESPACE];
+  var state = ref.state;
+  clearAllTimers(el);
+  if (state === 'out' || (Object(_util_selector__WEBPACK_IMPORTED_MODULE_5__["matches"])(el, 'input') && isFocused(el))) {
+    return
+  }
+  toggleOut(el);
+}
+function _hide (el) {
+  if (!el[NAMESPACE]) {
+    return
+  }
+  var ref = el[NAMESPACE];
+  var tooltip = ref.tooltip;
+  var ref$1 = el[NAMESPACE].options;
+  var cls = ref$1.cls;
+  Object(_util_attr__WEBPACK_IMPORTED_MODULE_9__["attr"])(el, 'aria-expanded', false);
+  Object(_util_class__WEBPACK_IMPORTED_MODULE_14__["removeClass"])(tooltip, cls);
+  tooltip && Object(_util_dom__WEBPACK_IMPORTED_MODULE_10__["remove"])(tooltip);
+  el[NAMESPACE].state = null;
+  el[NAMESPACE].tooltip = null;
+  Object(_util_event__WEBPACK_IMPORTED_MODULE_8__["trigger"])(el, 'hidden');
+}
+function clearAllTimers (el) {
+  clearTimeout(el[NAMESPACE].showTimer);
+  clearTimeout(el[NAMESPACE].hideTimer);
+  el[NAMESPACE].showTimer = null;
+  el[NAMESPACE].hideTimer = null;
+}
+function positionTooltip (el) {
+  var target = el;
+  var ref = el[NAMESPACE];
+  var tooltip = ref.tooltip;
+  var ref$1 = el[NAMESPACE].options;
+  var clsPos = ref$1.clsPos;
+  var position = ref$1.position;
+  var ref$2 = el[NAMESPACE].options;
+  var offset$$1 = ref$2.offset;
+  var node;
+  var ref$3 = position.split('-');
+  var dir = ref$3[0];
+  var align = ref$3[1]; if ( align === void 0 ) align = 'center';
+  Object(_util_class__WEBPACK_IMPORTED_MODULE_14__["removeClasses"])(tooltip, (clsPos + "-(top|bottom|left|right)(-[a-z]+)?"));
+  Object(_util_style__WEBPACK_IMPORTED_MODULE_1__["css"])(tooltip, { top: '', left: '' });
+  var axis = getAxis(position);
+  offset$$1 = Object(_util_lang__WEBPACK_IMPORTED_MODULE_12__["isNumeric"])(offset$$1)
+    ? offset$$1
+    : (node = Object(_util_core__WEBPACK_IMPORTED_MODULE_0__["$"])(offset$$1))
+      ? Object(_util_dimensions__WEBPACK_IMPORTED_MODULE_13__["offset"])(node)[axis === 'x' ? 'left' : 'top'] - Object(_util_dimensions__WEBPACK_IMPORTED_MODULE_13__["offset"])(target)[axis === 'x' ? 'right' : 'bottom']
+      : 0;
+  var elAttach = axis === 'x'
+    ? ((Object(_util_dimensions__WEBPACK_IMPORTED_MODULE_13__["flipPosition"])(dir)) + " " + align)
+    : (align + " " + (Object(_util_dimensions__WEBPACK_IMPORTED_MODULE_13__["flipPosition"])(dir)));
+  var targetAttach = axis === 'x'
+    ? (dir + " " + align)
+    : (align + " " + dir);
+  var elOffset = axis === 'x'
+    ? ("" + (dir === 'left' ? -1 * offset$$1 : offset$$1))
+    : ("" + (dir === 'top' ? -1 * offset$$1 : offset$$1));
+  var targetOffset = null;
+  var ref$4 = Object(_util_dimensions__WEBPACK_IMPORTED_MODULE_13__["positionAt"])(
+    tooltip,
+    target,
+    elAttach,
+    targetAttach,
+    elOffset,
+    targetOffset,
+    true
+  ).target;
+  var x = ref$4.x;
+  var y = ref$4.y;
+  dir = axis === 'x' ? x : y;
+  align = axis === 'x' ? y : x;
+  Object(_util_class__WEBPACK_IMPORTED_MODULE_14__["toggleClass"])(tooltip, (clsPos + "-" + dir + "-" + align), el[NAMESPACE].options.offset === false);
+  return {
+    dir: dir,
+    align: align
+  }
+}
+function getOptions (ctx) {
+  var ref = ctx.binding;
+  var value = ref.value;
+  var modifiers = ref.modifiers;
+  if (Object(_util_lang__WEBPACK_IMPORTED_MODULE_12__["isString"])(value)) {
+    value = { title: value };
+  }
+  if (Object.keys(modifiers).length) {
+    var firstKey = Object.keys(modifiers)[0];
+    modifiers = { position: firstKey };
+  }
+  var options = Object(_util_lang__WEBPACK_IMPORTED_MODULE_12__["assign"])({
+    delay: 0,
+    title: '',
+    offset: false,
+    duration: 100,
+    position: 'top',
+    container: true,
+    cls: 'uk-active',
+    clsPos: 'uk-tooltip',
+    animation: 'scale-up'
+  }, modifiers, value);
+  options.position = Object(_util_lang__WEBPACK_IMPORTED_MODULE_12__["hyphenate"])(options.position);
+  options.animation = options.animation.split(' ');
+  if (true) {
+    var pos = options.position;
+    if (!(/^(top|bottom)-(left|right)$/.test(pos) || /^(top|bottom|left|right)$/.test(pos))) {
+      Object(_util_debug__WEBPACK_IMPORTED_MODULE_2__["warn"])(("v-vk-tooltip -> '" + pos + "' is not a valid position value"), ctx.vnode);
+    }
+  }
+  return options
+}
+function getAxis (position) {
+  var ref = position.split('-');
+  var dir = ref[0];
+  return dir === 'top' || dir === 'bottom' ? 'y' : 'x'
+}
+function getContainer (el) {
+  var ref = el[NAMESPACE];
+  var vnode = ref.vnode;
+  var ref$1 = el[NAMESPACE].options;
+  var container = ref$1.container;
+  return (container === true && vnode.context.$root.$el) || (container && Object(_util_core__WEBPACK_IMPORTED_MODULE_0__["$"])(container))
+}
+function createTooltip (el) {
+  var ref = el[NAMESPACE];
+  var title = ref.title;
+  var ref$1 = el[NAMESPACE].options;
+  var clsPos = ref$1.clsPos;
+  return Object(_util_dom__WEBPACK_IMPORTED_MODULE_10__["append"])(getContainer(el), ("<div class=\"" + clsPos + "\" aria-hidden>\n    <div class=\"" + clsPos + "-inner\">" + title + "</div>\n  </div>"))
+}
+function getOrigin (position) {
+  var dir = position[0];
+  var align = position[1];
+  return getAxis(position) === 'y'
+    ? ((Object(_util_dimensions__WEBPACK_IMPORTED_MODULE_13__["flipPosition"])(dir)) + "-" + align)
+    : (align + "-" + (Object(_util_dimensions__WEBPACK_IMPORTED_MODULE_13__["flipPosition"])(dir)))
+}
+function isFocused (el) {
+  return el === document.activeElement
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (index);
 
 
 /***/ }),

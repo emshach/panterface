@@ -25,6 +25,9 @@
                                    class="selector" />
               </vk-btn>
             </template>
+            <template #content-actions={object} >
+              <slot name=item-actions :object=object />
+            </template>
           </dashboard-widget>
         </div>
     </vk-grid>

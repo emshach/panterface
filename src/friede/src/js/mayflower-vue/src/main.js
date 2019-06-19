@@ -8,9 +8,11 @@ import 'uikit/dist/css/uikit.min.css'
 import '@/assets/styles/styles.scss'
 import Icons from 'uikit/dist/js/uikit-icons'
 import axios from 'axios'
+import Tooltip from 'vuikit/lib/tooltip'
 
 UIkit.use(Icons)
 window.UIkit = UIkit
+Vue.use( Tooltip )
 
 Vue.config.productionTip = false
 Vue.prototype.$api = function() {
@@ -31,7 +33,7 @@ function Mayflower( args ) {
   return this;
 }
 Mayflower.prototype.init = function () {
-  if (! this.vm )
+  if ( !this.vm )
     this.vm = new Vue( this.options ).$mount( this.mountpoint );
 };
 

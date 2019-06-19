@@ -1,6 +1,8 @@
 <template lang="html">
-  <vk-modal class="activator" v-if="mode === 'modal'">
+  <vk-modal class="activator" v-if="mode === 'modal'" :show-sync=show >
+    <vk-modal-close @click="show = false"></vk-modal-close>
   </vk-modal>
+  <div v-else></div>
 </template>
 
 <script lang="js">

@@ -278,6 +278,20 @@ export const ActorsMixin = {
     operands: {
       type: Object,
       default: () => ({})
+    },
+    object: {
+      type: Object,
+      default: () => ({})
+    }
+  },
+  data() {
+    return {
+      show: false
+    }
+  },
+  methods: {
+    act( object, actions ) {
+      this.$emit( 'act', object, actions );
     }
   }
 }

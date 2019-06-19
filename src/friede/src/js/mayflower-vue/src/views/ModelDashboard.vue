@@ -3,14 +3,22 @@
   <component :is=tag mode="modal" :key=tag
              v-for="( actor, tag ) in actors"
              :actions=actor.actions
-             :operands=actor.operands />
+             :operands=actor.operands
+             :show.sync=actor.show
+             @act="act( actor, object, actions )" />
   <component :is=blocks.breakfront.component v-if=blocks.breakfront
              :content=featured />
   <component :is=blocks.main.component v-if=blocks.main
              :objects=objects
              :actions=options.actions
              :item-layout=options.layout
-             :search-fields=options.search />
+             :search-fields=options.search>
+    <template #item-actions={object} >
+      <component :is=tag mode="widget" :key=tag
+                 v-for="( actor, tag ) in actors"
+                 :object=object />
+    </template>
+  </component>
 </div>
 </template>
 
@@ -65,7 +73,14 @@ export default  {
       operands: {},
     }
   },
-  methods: {},
+  methods: {
+    act( actor, object, actions ) {
+      Object.keys( actor.actions ).forEach( k => {
+        this.operands[k] = [ object ];
+      });
+      actor.show = true;
+    }
+  },
   computed: {
     actors() {
       const actions = this.actions;
@@ -75,6 +90,7 @@ export default  {
         const tag = a.data.component;
         if ( !actors[ tag ])
           actors[ tag ] = {
+            show: false,
             actions: {},
             operands: {},
           };

@@ -3,9 +3,9 @@
     <vk-modal-close @click="show = false"></vk-modal-close>
   </vk-modal>
   <div v-else>
-    <vk-button-link v-if=object.installed @click.prevent="act( object )">
+    <vk-btn-link v-if=object.installed @click.prevent="act( object )">
       v{{ object.version }} installed
-    </vk-button-link>
+    </vk-btn-link>
   </div>
 </template>
 
@@ -22,8 +22,8 @@ export default {
   name: 'Installer',
   mixins: [ ActorsMixin ],
   components: {
-    VkButton,
-    VkButtonLink,
+    VkBtn,
+    VkBtnLink,
     VkTooltip,
     VkModal,
     VkClose,

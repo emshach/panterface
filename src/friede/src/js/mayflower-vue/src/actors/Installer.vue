@@ -11,7 +11,7 @@
         <font-awesome-icon icon="level-up-alt" />
       </vk-btn-link>
       <span v-else>v{{ object.version }} installed</span>
-      <vk-btn-link v-vk-tooltip.bottom="'uninstall'"
+      <vk-btn-link v-if="!object.required" v-vk-tooltip.bottom="'uninstall'"
                    type="text" @click.prevent="act( object, 'uninstall' )" >
         <font-awesome-icon icon="trash" />
       </vk-btn-link>
@@ -62,7 +62,7 @@ export default {
 .installer {
   &.widget {
     float: left;
-    color: lightgrey;
+    color: grey;
     .uk-button {
       padding: 0 6px;
     }

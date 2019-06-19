@@ -9,11 +9,13 @@
                    @click.prevent="act( object, 'disable' )" >
         <font-awesome-icon icon="toggle-on" />
       </vk-btn-link>
-      <vk-btn-link v-else v-vk-tooltip.bottom="'activate'"
-                   type="text" class="activator-disabled"
+      <vk-btn-link v-else-if="object.required" v-vk-tooltip.bottom="'activate'"
+                   type="text" class="activator-disabled danger"
                    @click.prevent="act( object, 'enable' )" >
         <font-awesome-icon icon="toggle-off" />
       </vk-btn-link>
+      <font-awesome-icon icon="toggle-on" v-vk-tooltip.bottom="'required'"
+                         class="activator-enabled" />
     </template>
   </div>
 </template>
@@ -61,7 +63,10 @@ export default {
       color: cornflowerblue;
     }
     .activator-disabled {
-      color: lightgrey;
+      color: grey;
+      &.error {
+        color: darkred;
+      }
     }
     .uk-button {
       padding: 0 6px;

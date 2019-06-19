@@ -607,7 +607,8 @@ var render = function() {
                       ],
                       1
                     )
-                  : _c(
+                  : _vm.object.required
+                  ? _c(
                       "vk-btn-link",
                       {
                         directives: [
@@ -619,7 +620,7 @@ var render = function() {
                             modifiers: { bottom: true }
                           }
                         ],
-                        staticClass: "activator-disabled",
+                        staticClass: "activator-disabled danger",
                         attrs: { type: "text" },
                         on: {
                           click: function($event) {
@@ -635,6 +636,20 @@ var render = function() {
                       ],
                       1
                     )
+                  : _vm._e(),
+                _c("font-awesome-icon", {
+                  directives: [
+                    {
+                      name: "vk-tooltip",
+                      rawName: "v-vk-tooltip.bottom",
+                      value: "required",
+                      expression: "'required'",
+                      modifiers: { bottom: true }
+                    }
+                  ],
+                  staticClass: "activator-enabled",
+                  attrs: { icon: "toggle-on" }
+                })
               ]
             : _vm._e()
         ],
@@ -720,29 +735,31 @@ var render = function() {
                   : _c("span", [
                       _vm._v("v" + _vm._s(_vm.object.version) + " installed")
                     ]),
-                _c(
-                  "vk-btn-link",
-                  {
-                    directives: [
+                !_vm.object.required
+                  ? _c(
+                      "vk-btn-link",
                       {
-                        name: "vk-tooltip",
-                        rawName: "v-vk-tooltip.bottom",
-                        value: "uninstall",
-                        expression: "'uninstall'",
-                        modifiers: { bottom: true }
-                      }
-                    ],
-                    attrs: { type: "text" },
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        return _vm.act(_vm.object, "uninstall")
-                      }
-                    }
-                  },
-                  [_c("font-awesome-icon", { attrs: { icon: "trash" } })],
-                  1
-                )
+                        directives: [
+                          {
+                            name: "vk-tooltip",
+                            rawName: "v-vk-tooltip.bottom",
+                            value: "uninstall",
+                            expression: "'uninstall'",
+                            modifiers: { bottom: true }
+                          }
+                        ],
+                        attrs: { type: "text" },
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            return _vm.act(_vm.object, "uninstall")
+                          }
+                        }
+                      },
+                      [_c("font-awesome-icon", { attrs: { icon: "trash" } })],
+                      1
+                    )
+                  : _vm._e()
               ]
             : _c(
                 "vk-btn-link",
@@ -1343,7 +1360,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560980859630
+      // 1560981708163
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1361,7 +1378,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560980859641
+      // 1560981708152
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1379,7 +1396,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560980856533
+      // 1560981705131
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1397,7 +1414,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560980856566
+      // 1560981705177
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1415,7 +1432,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560980857351
+      // 1560981705841
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1433,7 +1450,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560980857246
+      // 1560981705811
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1451,7 +1468,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560980857234
+      // 1560981705197
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1469,7 +1486,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560980857365
+      // 1560981705804
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1487,7 +1504,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560980856543
+      // 1560981705144
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1505,7 +1522,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560980857219
+      // 1560981705794
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1523,7 +1540,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560980856572
+      // 1560981705204
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1541,7 +1558,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560980856595
+      // 1560981705183
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);

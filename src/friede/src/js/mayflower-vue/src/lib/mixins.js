@@ -49,7 +49,7 @@ export const ModelFieldMixin = {
       this.$nextTick(() => {
         if ( this.$refs.input )
           this.$refs.input.focus();
-        else if( this.$refs.inputV )
+        else if ( this.$refs.inputV )
           this.$refs.inputV.$el.focus();
       });
     },
@@ -67,7 +67,7 @@ export const ModelFieldMixin = {
       return this.classes.concat(
         this.editMode ? this.editClass : this.viewClass,
         [
-          this.isset ? '' : 'no-data' ,
+          this.isset ? '' : 'no-data',
           this.readonly ? 'readonly' : '',
         ])
     },
@@ -81,7 +81,7 @@ export const ModelFieldMixin = {
       return true;
     },
     html() {
-      if (! this.isset)
+      if ( !this.isset )
         return this.emptyValue;
       const v = this.field.value;
       return v.label || v.title || v.path || v;
@@ -109,7 +109,7 @@ export const ModelModelsFieldMixin = {
       this.$nextTick(() => {
         if ( this.$refs.input )
           this.$refs.input.focus();
-        else if( this.$refs.inputV )
+        else if ( this.$refs.inputV )
           this.$refs.inputV.$el.focus();
       });
     },
@@ -124,7 +124,7 @@ export const ModelModelsFieldMixin = {
       const app = m.split('.')[0];
       const model = await this.$store.dispatch( 'getModel', m );
       this.loading = true;
-      this.$api( app, model.plural, '?search='+query ).then( r => {
+      this.$api( app, model.plural, '?search=' + query ).then( r => {
         this.loading = false;
         this.options = r.data.results.map( x => {
           if ( !x.title )
@@ -151,6 +151,11 @@ export const PageMixin = {
     VuePerfectScrollbar,
   },
   props: [ 'blocks', 'widgets', 'source', 'model', 'options' ],
+  data() {
+    return {
+      classes: [ 'page', 'uk-flex' ]
+    }
+  }
 };
 
 export const JsonWidgetMixin = {

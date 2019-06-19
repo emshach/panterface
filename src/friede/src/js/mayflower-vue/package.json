@@ -69,6 +69,9 @@
       "space-in-parens": "off",
       "space-before-function-paren": "off",
       "semi": "off",
+      "comma-dangle": "off",
+      "curly": "off",
+      "operator-linebreak": "off",
       "vue/html-closing-bracket-newline": "off",
       "vue/singleline-html-element-content-newline": "off"
     }

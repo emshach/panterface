@@ -2,14 +2,17 @@
 
 
 
+.filter-grid[data-v-6246d91e] {
+  width: 100%;
+}
 .filter-grid .header[data-v-6246d91e] {
-  margin-bottom: 4px;
+    margin-bottom: 4px;
 }
 .filter-grid .filter-input[data-v-6246d91e] {
-  margin-left: 8px;
+    margin-left: 8px;
 }
 .filter-grid > .scroller[data-v-6246d91e] {
-  padding: 3px;
+    padding: 3px;
 }
 
 

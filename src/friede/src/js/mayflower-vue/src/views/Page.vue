@@ -1,54 +1,29 @@
-<template lang="html">
-  <div class="page uk-flex">
-    <component :is=component v-bind=$attrs :model=model :blocks=blocks
-               :options=options />
-  </div>
-</template>
+<template lang="html"></template>
 
 <script lang="js">
 import pages from '@/views'
 import { resolve } from '@/lib/util'
 export default {
-  inheritAttrs: false,
   name: 'Page',
-  components: pages,
-  props: [],
-  mounted() {
-  },
-  data() {
-    return {
-    }
-  },
-  methods: {
-  },
-  computed: {
-    screen() {
-      return resolve( this.$store.getters.screen )
-    },
-    component() {
-      return this.screen.component || 'HomePage'
-    },
-    model() {
-      return this.screen.model || this.$store.model
-    },
-    blocks() {
-      return this.screen.$blocks || {}
-    },
-    options() {
-      const s = this.screen
-      var o = {}
-      if ( !s ) return {};
-      Object.keys( s ).forEach( x => {
+  functional: true,
+  render( h, ref) {
+    const screen = resolve( this.$store.getters.screen );
+    const tag = this.screen.component || 'HomePage';
+    const model = this.screen.model || this.$store.model;
+    const blocks = this.screen.$blocks || {};
+    var options = {};
+    if ( screen )
+      Object.keys( screen ).forEach( x => {
         if ( x[0] != '$' && x !== 'model' )
-          o[x] = s[x];
+          options[x] = screen[x];
       });
-      return o;
-    }
+    ref.props.options = {};
+    return h( pages[ tag ], ref );
   }
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .page {
   position: absolute;
   top: 0;

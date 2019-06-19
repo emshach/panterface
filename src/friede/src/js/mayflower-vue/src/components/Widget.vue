@@ -7,11 +7,10 @@ export default  {
   name: 'Widget',
   functional: true,
   render( h, ref ) {
-    var props = ref.props;
-    var object = Widget( props.object || {} );
-    props.object = object;
-    var data = object.data || {};
-    var tag = widgets[ data.component ] || widgets.Widget;
+    const object = Widget( ref.props.object || {} );
+    const data = object.data || {};
+    const tag = widgets[ data.component ] || widgets.Widget;
+    ref.props.object = object;
     return h( tag, ref );
   },
 }

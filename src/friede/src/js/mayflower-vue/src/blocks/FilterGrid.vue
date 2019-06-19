@@ -119,6 +119,7 @@ export default  {
 
 <style scoped lang="scss">
 .filter-grid {
+  width: 100%;
   .header {
     margin-bottom: 4px;
   }

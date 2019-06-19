@@ -159,6 +159,8 @@ def installapp( name, module, title, description, icon='', rest=True,
         ))
         if data:
             upgradeapp( app, data, upto=version )
+        app.installed = true
+        app.save()
         return app, new
     except Exception as e:
         print >> sys.stderr, "got exception", type(e), e, 'in installapp'

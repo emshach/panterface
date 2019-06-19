@@ -4,6 +4,9 @@
 .form-page {
   border-radius: 2px;
   height: 100%;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
 }
 .form-page > .uk-card-header {
     padding: 0;
@@ -57,6 +60,8 @@
 .form-page .btn-cancel:hover {
       color: darkred;
 }
+
+
 
 
 

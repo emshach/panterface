@@ -265,6 +265,17 @@ export const FilteredMixin = {
 }
 
 export const ActionsMixin = {
+  props: {
+    mode: {
+      type: String,
+      default: 'widget',
+      // validator: val => !val || /^(widget|modal)$/.test( val )
+    },
+    operands: {
+      type: Array,
+      default: () => []
+    }
+  }
 }
 
 export const DurationOptions = []

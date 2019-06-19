@@ -143,6 +143,7 @@ export default  {
 .form-page {
   border-radius: 2px;
   height: 100%;
+  flex: 1;
   > .uk-card-header {
     padding: 0;
     border-bottom: none;

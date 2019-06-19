@@ -1,5 +1,5 @@
 <template lang="html">
-  <vk-modal class="installer" v-if="mode === 'modal'" :show-sync=show >
+  <vk-modal class="installer" v-if="mode === 'modal'" :show.sync=show >
     <vk-close @click="show = false"></vk-close>
   </vk-modal>
   <div v-else>

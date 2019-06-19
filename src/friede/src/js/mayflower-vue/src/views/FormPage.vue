@@ -1,49 +1,50 @@
 <template lang="html">
-  <vk-card :class="[ 'form-page', scrolled ]">
-    <div slot="header">
-      <div class="form-controls uk-align-right uk-text-right">
-        <vk-btn type="text" @click.prevent="settings">
-          <font-awesome-icon icon="cog" />
-        </vk-btn>
-        <vk-btn type="text" @click.prevent="discard">
-          <font-awesome-icon icon="trash" /> discard
-        </vk-btn>
-        <vk-btn-grp>
-          <vk-btn v-if="editList.length && editing" type="primary"
-                  @click.prevent="prev">
-            <vk-icon-left />
+  <div :class=classes >
+    <vk-card :class="[ 'form-page', scrolled ]" >
+      <div slot="header">
+        <div class="form-controls uk-align-right uk-text-right">
+          <vk-btn type="text" @click.prevent="settings">
+            <font-awesome-icon icon="cog" />
           </vk-btn>
-          <vk-btn type="primary" @click.prevent="submit">
-            <font-awesome-icon icon="check" /> done
+          <vk-btn type="text" @click.prevent="discard">
+            <font-awesome-icon icon="trash" /> discard
           </vk-btn>
-          <vk-btn v-if="mode==='new'" type="primary" @click.prevent="submitAndRedo">
-            <font-awesome-icon icon="plus" /> and another
-          </vk-btn>
-          <vk-btn v-else-if="editList.length && editing < editList.length - 1 "
-                  type="primary" @click.prevent="next">
-            <vk-icon-right />
-          </vk-btn>
-        </vk-btn-grp>
+          <vk-btn-grp>
+            <vk-btn v-if="editList.length && editing" type="primary"
+                    @click.prevent="prev">
+              <vk-icon-left />
+            </vk-btn>
+            <vk-btn type="primary" @click.prevent="submit">
+              <font-awesome-icon icon="check" /> done
+            </vk-btn>
+            <vk-btn v-if="mode==='new'" type="primary" @click.prevent="submitAndRedo">
+              <font-awesome-icon icon="plus" /> and another
+            </vk-btn>
+            <vk-btn v-else-if="editList.length && editing < editList.length - 1 "
+                    type="primary" @click.prevent="next">
+              <vk-icon-right />
+            </vk-btn>
+          </vk-btn-grp>
+        </div>
+        <vk-card-title class="uk-align-left">{{ location.title }}</vk-card-title>
       </div>
-      <vk-card-title class="uk-align-left">{{ location.title }}</vk-card-title>
-    </div>
-    <vue-perfect-scrollbar class="scroller" slot="body"
-                           @ps-scroll-down="scrolled='scrolled'"
-                           @ps-y-reach-start="scrolled=''">
-      <form v-if="model" class="uk-form-horizontal uk-text-left">
-        <field v-for="field in simpleFields" :key="field.meta.name"
-               :type="field.meta.type" :name="field.meta.name" :data="field"
-               class="uk-margin" />
-        <field v-for="field in complexFields" :key="field.meta.name"
-               :type="field.meta.type" :name="field.meta.name" :data="field"
-               :fieldset="true" />
+      <vue-perfect-scrollbar class="scroller" slot="body"
+                             @ps-scroll-down="scrolled='scrolled'"
+                             @ps-y-reach-start="scrolled=''">
+        <form v-if="model" class="uk-form-horizontal uk-text-left">
+          <field v-for="field in simpleFields" :key="field.meta.name"
+                 :type="field.meta.type" :name="field.meta.name" :data="field"
+                 class="uk-margin" />
+          <field v-for="field in complexFields" :key="field.meta.name"
+                 :type="field.meta.type" :name="field.meta.name" :data="field"
+                 :fieldset="true" />
       </form>
-    </vue-perfect-scrollbar>
-  </vk-card>
+      </vue-perfect-scrollbar>
+    </vk-card>
+  </div>
 </template>
 
 <script lang="js">
-import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 import { Card as VkCard, CardTitle as VkCardTitle } from 'vuikit/lib/card'
 import { Button as VkBtn, ButtonGroup as VkBtnGrp } from 'vuikit/lib/button'
 import {
@@ -60,8 +61,8 @@ library.add( faCheck, faPlus, faTrash, faCog )
 
 export default  {
   name: 'FormPage',
+  mixins: [ PageMixin ],
   components: {
-    VuePerfectScrollbar,
     VkCard,
     VkCardTitle,
     VkBtn,
@@ -113,9 +114,6 @@ export default  {
     }
   },
   computed: {
-    model() {
-      return this.$store.state.model;
-    },
     modelData() {
       if ( this.data )
         return this.data;

@@ -1,7 +1,7 @@
 <template lang="html">
-  <vue-perfect-scrollbar :class="classes">
+  <div :class=classes >
     <slot />
-  </vue-perfect-scrollbar>
+  </div>
 </template>
 
 <script lang="js">
@@ -17,20 +17,12 @@ export default {
       classes: { 'basic-page': true }
     }
   },
-  methods: {
-  },
-  computed: {
-  }
+  methods: {},
+  computed: {}
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .basic-page {
-  position: absolute;
-  top: 0;
-  bottom: 34px;
-  left: 0;
-  right: 0;
-  padding: 40px 20px 10px;
 }
 </style>

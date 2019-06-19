@@ -1,5 +1,7 @@
 export const BasicPage = () =>
    import(/* webpackChunkName: "pages" */ './BasicPage' )
+export const ScrollPage = () =>
+   import(/* webpackChunkName: "pages" */ './ScrollPage' )
 export const DashboardPage = () =>
    import(/* webpackChunkName: "pages" */ './DashboardPage' )
 export const FormPage = () =>
@@ -21,6 +23,7 @@ export const UserHomeDashboard = () =>
 
 export default {
   BasicPage,
+  ScrollPage,
   DashboardPage,
   FormPage,
   HomeDashboard,

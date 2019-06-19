@@ -11,6 +11,7 @@ export default {
     const model = this.screen.model || this.$store.model;
     const blocks = this.screen.$blocks || {};
     const tag = pages[ this.screen.component ] || pages.HomePage;
+    console.log( 'page tag', tag );
     var options = {};
     if ( screen )
       Object.keys( screen ).forEach( x => {
@@ -18,7 +19,7 @@ export default {
           options[x] = screen[x];
       });
     ref.props.options = {};
-    return h( pages[ tag ], ref );
+    return h( tag, ref );
   }
 }
 </script>

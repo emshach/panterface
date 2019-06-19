@@ -1,11 +1,10 @@
-<template functional></template>
-
 <script lang="js">
 import store from '@/store'
 import pages from '@/views'
 import { resolve } from '@/lib/util'
 export default {
   name: 'Page',
+  functional: true,
   render( h, ref ) {
     const screen = resolve( store.getters.screen );
     const model = screen.model || store.model;

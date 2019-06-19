@@ -10721,5 +10721,17 @@ form.uk-form-stacked label {
 .btn-icon {
   margin-right: 6px; }
 
+.uk-card .uk-card-title {
+  margin-top: 0; }
+
+.uk-card .title-actions {
+  position: absolute;
+  top: 0;
+  right: 0; }
+  .uk-card .title-actions .uk-button {
+    padding: 8px;
+    height: auto;
+    line-height: normal; }
+
 
 /*# sourceMappingURL=app.css.map*/

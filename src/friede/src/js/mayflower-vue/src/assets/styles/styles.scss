@@ -49,3 +49,18 @@ form.uk-form-stacked label {
 .btn-icon {
   margin-right: 6px;
 }
+.uk-card {
+  .uk-card-title {
+    margin-top: 0;
+  }
+  .title-actions {
+    position: absolute;
+    top: 0;
+    right: 0;
+    .uk-button {
+      padding: 8px;
+      height: auto;
+      line-height: normal;
+    }
+  }
+}

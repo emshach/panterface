@@ -1,5 +1,3 @@
-<template lang="html"></template>
-
 <script lang="js">
 import widgets from '@/widgets'
 import { Widget } from '@/lib/objects'
@@ -17,7 +15,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  .widget-widget {
-
-  }
+.widget-widget {
+  
+}
 </style>

@@ -14,7 +14,7 @@ export default {
   },
   data() {
     return {
-      classes: [ 'basic-page' ]
+      classes: { 'basic-page': true }
     }
   },
   methods: {

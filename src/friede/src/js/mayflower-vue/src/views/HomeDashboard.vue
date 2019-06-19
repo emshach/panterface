@@ -16,7 +16,7 @@ export default {
   },
   data() {
     return {
-      classes: [ 'home-dashboard' ]
+      classes: { 'home-dashboard': true }
     }
   },
   methods: {

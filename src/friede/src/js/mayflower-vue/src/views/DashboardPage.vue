@@ -15,7 +15,7 @@ export default {
   },
   data() {
     return {
-      classes: [ 'dashboard-page' ]
+      classes: { 'dashboard-page': true }
     }
   },
   methods: {

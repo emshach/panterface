@@ -34,7 +34,7 @@ export const ModelFieldMixin = {
   },
   data() {
     return {
-      classes: [],
+      classes: {},
       editClass: [],
       viewClass: [ 'field-display' ],
       editMode: false,
@@ -64,12 +64,12 @@ export const ModelFieldMixin = {
   },
   computed: {
     fieldClasses() {
-      return this.classes.concat(
+      return [
+        this.classes,
         this.editMode ? this.editClass : this.viewClass,
-        [
-          this.isset ? '' : 'no-data',
-          this.readonly ? 'readonly' : '',
-        ])
+        this.isset ? '' : 'no-data',
+        this.readonly ? 'readonly' : '',
+      ]
     },
     isset() {
       if ( this.field.value === undefined

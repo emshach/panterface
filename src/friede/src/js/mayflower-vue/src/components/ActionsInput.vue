@@ -9,7 +9,7 @@
         <vk-nav-item v-for="action in actions" :key=action :title=action
                      @click.prevent="input( action )" />
         <vk-divider v-if=total />
-        <vk-nav-item v-if="countV < visible"
+        <vk-nav-item v-if="visible < total && countV < visible"
           title="select all visible" @click.prevent="input( 'select', 'filtered' )" />
         <vk-nav-item v-if="count < total"
           title="select all" @click.prevent="input( 'select', 'all' )" />
@@ -81,8 +81,8 @@ export default {
     }
   },
   methods: {
-    input( action ) {
-      this.$emit( 'input', action );
+    input( action, arg ) {
+      this.$emit( 'input', action, arg );
     }
   },
   computed: {}

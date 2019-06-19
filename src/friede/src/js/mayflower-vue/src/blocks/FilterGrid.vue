@@ -4,7 +4,7 @@
       <actions-input :actions=actions
                      :operands=filtered
                      :count=selected.length
-                     :countV=visibleSelected
+                     :count-v=visibleSelected
                      :visible=filtered.length
                      :total=objects.length
                      @input=doAction />

@@ -153,7 +153,10 @@ export const PageMixin = {
   props: [ 'blocks', 'widgets', 'source', 'model', 'options' ],
   data() {
     return {
-      classes: [ 'page', 'uk-flex' ]
+      classes: {
+        'page': true,
+        'uk-flex': true,
+      }
     }
   }
 };

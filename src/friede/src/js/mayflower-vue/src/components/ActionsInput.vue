@@ -24,8 +24,9 @@ import { faWalking } from '@fortawesome/free-solid-svg-icons'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-library.add( faWalking )
-VkBtn.props.type.validator = val => !val || /^(light|primary|secondary|danger|text|link)$/.test( val );
+library.add( faWalking );
+VkBtn.props.type.validator = val =>
+   !val || /^(light|primary|secondary|danger|text|link)$/.test( val );
 
 export default {
   name: 'ActionsInput',
@@ -34,6 +35,7 @@ export default {
     VkDropdown,
     VkNav,
     VkNavItem,
+    FontAwesomeIcon,
   },
   props: {
     actions: {

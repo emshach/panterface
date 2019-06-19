@@ -6,11 +6,17 @@
     <slot #badge name="badge" :object=object />
     <slot #media name="media" :object=object />
     <slot #media-top name="media-top" :object=object />
-    <vk-card-title><slot name="title" :object=object /></vk-card-title>
+    <vk-card-title>
+      <slot name="title" :object=object />
+      <div class="title-actions uk-align-right">
+        <slot name="title-actions" :object=object />
+      </div>
+    </vk-card-title>
     <p class="uk-text-meta uk-margin-remove-top">
       <slot name="subtitle" :object=object />
     </p>
     <slot name="content" :object=object />
+    <slot name="content-actions" :object=object />
     <slot #media-bottom name="media-bottom" :object=object />
     <slot #footer name="footer" :object=object />
   </vk-card>
@@ -66,8 +72,8 @@ export default  {
 }
 </script>
 
-<style scoped lang="scss">
-  .card-widget {
+<style lang="scss">
+.card-widget {
 
-  }
+}
 </style>

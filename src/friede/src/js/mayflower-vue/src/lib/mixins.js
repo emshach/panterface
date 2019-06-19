@@ -208,6 +208,19 @@ export const FilteredMixin = {
     return {
       filters: [],
       presets: [],
+      selected: [],
+    }
+  },
+  methods: {
+    toggleSelect( object ) {
+      var index = this.selected.findIndex( object );
+      if ( index > -1 )
+        this.selected.push( object );
+      else
+        this.selected.splice( index, 1 );
+    },
+    isSelected( object ) {
+      return this.selected.find( object );
     }
   },
   computed: {

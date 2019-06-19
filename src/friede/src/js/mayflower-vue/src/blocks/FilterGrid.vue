@@ -12,6 +12,11 @@
                       v-slot:[slot]={object} >
               {{ object[ field ]}}
             </template>
+            <template #title-actions={object} >
+              <vk-btn type="light" @click.prevent="toggleSelect( object )">
+                <font-awesome-icon :icon="isSelected( object ) ? 'check' : 'plus'" />
+              </vk-btn>
+            </template>
           </dashboard-widget>
         </div>
     </vk-grid>
@@ -20,14 +25,26 @@
 </template>
 
 <script lang="js">
+import VuePerfectScrollbar from 'vue-perfect-scrollbar'
+import { ButtonLink as VkBtn } from 'vuikit/lib/button'
 import { Grid as VkGrid } from 'vuikit/lib/grid'
 import { FilteredMixin, ActionsMixin } from '@/lib/mixins'
 import { FilterInput, ActionsInput } from '@/components'
 import { DashboardWidget } from '@/widgets'
+import { faPlus, faCheck } from '@fortawesome/free-solid-svg-icons'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+library.add( faPlus, faCheck );
+VkBtn.props.type.validator = val =>
+   !val || /^(light|primary|secondary|danger|text|link)$/.test( val );
+
 export default  {
   name: 'FilterGrid',
   mixins: [ FilteredMixin, ActionsMixin ],
   components: {
+    VuePerfectScrollbar,
+    VkBtn,
     VkGrid,
     DashboardWidget,
     FilterInput,

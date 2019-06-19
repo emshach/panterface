@@ -36,7 +36,7 @@ class F:
     link = ( 'location', )
     reference = ( 'target', )
     setting = ( 'type', 'default' )
-    action = ( 'data' )
+    action = ( 'data', )
 
     entry = ( 'url', 'id', 'name', 'title', 'description', 'active', 'icon',
               'name', 'entry', 'position' )

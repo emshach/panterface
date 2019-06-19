@@ -16,7 +16,7 @@ export default {
         if ( x[0] != '$' && x !== 'model' )
           options[x] = screen[x];
       });
-    ref.props.options = options;
+    Object.assign( ref.props,{ model, blocks, options });
     return h( tag, ref );
   }
 }

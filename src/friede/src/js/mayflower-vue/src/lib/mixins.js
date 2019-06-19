@@ -272,8 +272,8 @@ export const ActionsMixin = {
       // validator: val => !val || /^(widget|modal)$/.test( val )
     },
     operands: {
-      type: Array,
-      default: () => []
+      type: Object,
+      default: () => ({})
     }
   }
 }

@@ -98,7 +98,8 @@ export default  {
           this.selected = this.objects.slice();
           break;
         case 'filtered':
-          this.selected = this.filtered.slice();
+          this.selected = this.selected.concat(
+            this.filtered.filter( x => !this.isSelected(x) ));
           break;
         case 'none':
           this.selected = [];

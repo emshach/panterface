@@ -7,14 +7,16 @@
     <vue-perfect-scrollbar class="uk-flex-1">
       <vk-grid matched :class=classes >
         <div v-for="object in filtered" :key=object.id >
-          <dashboard-widget :object=object >
+          <dashboard-widget :object=object
+                            :class=" isSelected( object ) ? 'selected' : ''" >
             <template v-for="( field, slot ) in itemLayout"
                       v-slot:[slot]={object} >
               {{ object[ field ]}}
             </template>
             <template #title-actions={object} >
               <vk-btn type="light" @click.prevent="toggleSelect( object )">
-                <font-awesome-icon :icon="isSelected( object ) ? 'check' : 'plus'" />
+                <font-awesome-icon :icon="isSelected( object ) ? 'check' : 'plus'"
+                                   class="selector" />
               </vk-btn>
             </template>
           </dashboard-widget>

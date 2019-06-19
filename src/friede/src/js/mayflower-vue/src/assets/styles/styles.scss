@@ -63,4 +63,10 @@ form.uk-form-stacked label {
       line-height: normal;
     }
   }
+  &.selected {
+    background-image: linear-gradient(to bottom left, skyblue 0%, transparent 60%);
+    .selector {
+      color: forestgreen;
+    }
+  }
 }

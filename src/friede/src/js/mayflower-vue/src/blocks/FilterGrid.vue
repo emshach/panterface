@@ -1,8 +1,13 @@
 <template lang="html">
   <div class="filter-grid uk-flex uk-flex-column uk-flex-1">
     <div class="header uk-flex">
-      <actions-input :actions=actions :operands=filtered :count=activeObjects
-                     :visible=filtered.length :total=objects.length />
+      <actions-input :actions=actions
+                     :operands=filtered
+                     :count=selected.length
+                     :countV=visibleSelected
+                     :visible=filtered.length
+                     :total=objects.length
+                     @input=doAction />
       <filter-input v-model=filters :filters=presets @add=addOption />
     </div>
     <vue-perfect-scrollbar class="scroller uk-flex-1">
@@ -85,11 +90,27 @@ export default  {
   methods: {
     addOption( filter ) {
       this.presets.push( filter );
+    },
+    doAction( action, arg ) {
+      if ( action === 'select' ) {
+        switch ( arg ) {
+        case 'all':
+          this.selected = this.objects;
+          break;
+        case 'filtered':
+          this.selected = this.filtered;
+          break;
+        case 'none':
+          this.selected = [];
+          break;
+        }
+        return;
+      }
     }
   },
   computed: {
-    activeObjects() {
-      return this.selected.length || ( this.filters.length && this.filtered.length ) || 0;
+    visibleSelected() {
+      return this.filtered.filter( x => isSelected(x) ).length
     }
   }
 }

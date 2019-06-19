@@ -58,14 +58,13 @@ export default  {
       objects: [],
       actions: {},
       operands: {},
-      actors: {},
     }
   },
   methods: {},
   computed: {
     actors() {
       const actions = this.actions;
-      const actors = {};
+      var actors = {};
       Object.values( actions ).forEach( a => {
         const tag = a.data.component;
         if ( !actors[ tag ])

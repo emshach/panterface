@@ -84,7 +84,7 @@ export default  {
       Object.keys( actor.actions ).forEach( k => {
         this.operands[k] = [ object ];
       });
-      this.showModals[ tag ].show = true;
+      this.showModals[ tag ] = true;
     }
   },
   computed: {

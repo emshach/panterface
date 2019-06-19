@@ -32,6 +32,8 @@ export default  {
           });
         }
       });
+    var _actions = {};
+    var _operands = {};
     if ( actions && actions.length ) {
       this.$api( 'friede', 'actions', '?' + this.options.actions.map(
         action => 'path=' + action ).join('&'))
@@ -39,9 +41,11 @@ export default  {
            var res = r.data.results;
            if ( res.length )
              res.forEach( a => {
-               this.actions[ a.name ] = a;
-               this.operands[ a.name ] = [];
+               _actions[ a.name ] = a;
+               _.operands[ a.name ] = [];
              });
+           this.actions = _actions;
+           this.operands = _operands;
          })
          .catch ( err => {
            console.warn( 'couldnt get actions', actions, err );

@@ -2,7 +2,7 @@
   <div class="actions-input">
     <vk-btn type="light" href="#" class="dropdown-trigger">
       <font-awesome-icon icon="walking" class="btn-icon" />actions
-      {{ count ? '('+count+' objects)' : ''}}
+      {{ count ? '(' + count + ' object' + ( count > 1 ? 's' : '' ) + ')' : '' }}
     </vk-btn>
     <vk-dropdown>
       <vk-nav>

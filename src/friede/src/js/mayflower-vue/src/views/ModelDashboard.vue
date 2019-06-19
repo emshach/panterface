@@ -4,7 +4,7 @@
              v-for="( actor, tag ) in actors"
              :actions=actor.actions
              :operands=actor.operands
-             :show.sync=actor.show />
+             :show.sync=showModals[tag] />
   <component :is=blocks.breakfront.component v-if=blocks.breakfront
              :content=featured />
   <component :is=blocks.main.component v-if=blocks.main
@@ -16,7 +16,7 @@
       <component :is=tag mode="widget" :key=tag
                  v-for="( actor, tag ) in actors"
                  :object=object
-                 @act="act( actor, object, actions )" />
+                 @act="act( tag, object, actions )" />
     </template>
   </component>
 </div>
@@ -43,6 +43,7 @@ export default  {
       });
     var _actions = {};
     var _operands = {};
+    var show = {};
     if ( actions && actions.length ) {
       this.$api( 'friede', 'actions', '?' + this.options.actions.map(
         action => 'path=' + action ).join('&'))
@@ -52,9 +53,11 @@ export default  {
              res.forEach( a => {
                _actions[ a.name ] = a;
                _operands[ a.name ] = [];
+               show[ a.data.component ] = false;
              });
            this.actions = _actions;
            this.operands = _operands;
+           this.showModals = show;
          })
          .catch ( err => {
            console.warn( 'couldnt get actions', actions, err );
@@ -71,6 +74,8 @@ export default  {
       objects: [],
       actions: {},
       operands: {},
+      showModals: {
+      }
     }
   },
   methods: {
@@ -78,7 +83,7 @@ export default  {
       Object.keys( actor.actions ).forEach( k => {
         this.operands[k] = [ object ];
       });
-      actor.show = true;
+      this.showModals[actor].show = true;
     }
   },
   computed: {
@@ -90,7 +95,6 @@ export default  {
         const tag = a.data.component;
         if ( !actors[ tag ])
           actors[ tag ] = {
-            show: false,
             actions: {},
             operands: {},
           };

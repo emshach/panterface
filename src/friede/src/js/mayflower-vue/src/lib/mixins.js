@@ -282,6 +282,10 @@ export const ActorsMixin = {
     object: {
       type: Object,
       default: () => ({})
+    },
+    show: {
+      type: Boolean,
+      default: false
     }
   },
   data() {

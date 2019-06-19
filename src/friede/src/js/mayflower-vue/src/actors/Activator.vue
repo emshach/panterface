@@ -4,18 +4,26 @@
   </vk-modal>
   <div v-else class="activator widget">
     <template v-if=object.installed >
-      <vk-btn-link v-if=object.active v-vk-tooltip.bottom="'disable'"
+      <template v-if=object.required >
+        <font-awesome-icon v-if=object.active
+                           icon="toggle-on" v-vk-tooltip.bottom="'required'"
+                           class="activator-enabled" />
+        <vk-btn-link v-else v-vk-tooltip.bottom="'activate'"
+                     type="text" class="activator-disabled danger"
+                     @click.prevent="act( object, 'enable' )" >
+          <font-awesome-icon icon="toggle-off" />
+        </vk-btn-link>
+      </template>
+      <vk-btn-link v-else-if=object.active v-vk-tooltip.bottom="'disable'"
                    type="text" class="activator-enabled"
                    @click.prevent="act( object, 'disable' )" >
         <font-awesome-icon icon="toggle-on" />
       </vk-btn-link>
-      <vk-btn-link v-else-if="object.required" v-vk-tooltip.bottom="'activate'"
-                   type="text" class="activator-disabled danger"
+      <vk-btn-link v-else v-vk-tooltip.bottom="'disable'"
+                   type="text" class="activator-disabled"
                    @click.prevent="act( object, 'enable' )" >
         <font-awesome-icon icon="toggle-off" />
       </vk-btn-link>
-      <font-awesome-icon icon="toggle-on" v-vk-tooltip.bottom="'required'"
-                         class="activator-enabled" />
     </template>
   </div>
 </template>

@@ -578,7 +578,52 @@ var render = function() {
         [
           _vm.object.installed
             ? [
-                _vm.object.active
+                _vm.object.required
+                  ? [
+                      _vm.object.active
+                        ? _c("font-awesome-icon", {
+                            directives: [
+                              {
+                                name: "vk-tooltip",
+                                rawName: "v-vk-tooltip.bottom",
+                                value: "required",
+                                expression: "'required'",
+                                modifiers: { bottom: true }
+                              }
+                            ],
+                            staticClass: "activator-enabled",
+                            attrs: { icon: "toggle-on" }
+                          })
+                        : _c(
+                            "vk-btn-link",
+                            {
+                              directives: [
+                                {
+                                  name: "vk-tooltip",
+                                  rawName: "v-vk-tooltip.bottom",
+                                  value: "activate",
+                                  expression: "'activate'",
+                                  modifiers: { bottom: true }
+                                }
+                              ],
+                              staticClass: "activator-disabled danger",
+                              attrs: { type: "text" },
+                              on: {
+                                click: function($event) {
+                                  $event.preventDefault()
+                                  return _vm.act(_vm.object, "enable")
+                                }
+                              }
+                            },
+                            [
+                              _c("font-awesome-icon", {
+                                attrs: { icon: "toggle-off" }
+                              })
+                            ],
+                            1
+                          )
+                    ]
+                  : _vm.object.active
                   ? _c(
                       "vk-btn-link",
                       {
@@ -607,20 +652,19 @@ var render = function() {
                       ],
                       1
                     )
-                  : _vm.object.required
-                  ? _c(
+                  : _c(
                       "vk-btn-link",
                       {
                         directives: [
                           {
                             name: "vk-tooltip",
                             rawName: "v-vk-tooltip.bottom",
-                            value: "activate",
-                            expression: "'activate'",
+                            value: "disable",
+                            expression: "'disable'",
                             modifiers: { bottom: true }
                           }
                         ],
-                        staticClass: "activator-disabled danger",
+                        staticClass: "activator-disabled",
                         attrs: { type: "text" },
                         on: {
                           click: function($event) {
@@ -636,20 +680,6 @@ var render = function() {
                       ],
                       1
                     )
-                  : _vm._e(),
-                _c("font-awesome-icon", {
-                  directives: [
-                    {
-                      name: "vk-tooltip",
-                      rawName: "v-vk-tooltip.bottom",
-                      value: "required",
-                      expression: "'required'",
-                      modifiers: { bottom: true }
-                    }
-                  ],
-                  staticClass: "activator-enabled",
-                  attrs: { icon: "toggle-on" }
-                })
               ]
             : _vm._e()
         ],
@@ -1360,7 +1390,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560981708163
+      // 1560982161275
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1378,7 +1408,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560981708152
+      // 1560982160473
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1396,7 +1426,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560981705131
+      // 1560982158841
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1414,7 +1444,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560981705177
+      // 1560982158102
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1432,7 +1462,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560981705841
+      // 1560982158864
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1450,7 +1480,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560981705811
+      // 1560982158830
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1468,7 +1498,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560981705197
+      // 1560982158805
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1486,7 +1516,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560981705804
+      // 1560982158817
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1504,7 +1534,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560981705144
+      // 1560982158114
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1522,7 +1552,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560981705794
+      // 1560982158719
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1540,7 +1570,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560981705204
+      // 1560982158129
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1558,7 +1588,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1560981705183
+      // 1560982158137
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);

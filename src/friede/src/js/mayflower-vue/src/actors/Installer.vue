@@ -1,10 +1,10 @@
 <template lang="html">
   <vk-modal class="installer" v-if="mode === 'modal'" :show-sync=show >
-    <vk-modal-close @click="show = false"></vk-modal-close>
+    <vk-close @click="show = false"></vk-close>
   </vk-modal>
   <div v-else>
     <vk-btn-link v-if=object.installed @click.prevent="act( object )"
-                 v-vk-tooltip="'update'">
+                 v-vk-tooltip="'update'" type="text">
       v{{ object.version }} installed
     </vk-btn-link>
   </div>

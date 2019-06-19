@@ -10,9 +10,9 @@ import Icons from 'uikit/dist/js/uikit-icons'
 import axios from 'axios'
 import Tooltip from 'vuikit/lib/tooltip'
 
-UIkit.use(Icons)
+UIkit.use( Icons )
 window.UIkit = UIkit
-Vue.use( Tooltip )
+Vue.directive( 'vk-tooltip', Tooltip );
 
 Vue.config.productionTip = false
 Vue.prototype.$api = function() {

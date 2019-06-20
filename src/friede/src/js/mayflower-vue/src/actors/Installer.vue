@@ -61,7 +61,6 @@ export default {
 <style lang="scss">
 .installer {
   &.widget {
-    float: left;
     color: grey;
     .uk-button, .icon {
       padding: 0 6px;

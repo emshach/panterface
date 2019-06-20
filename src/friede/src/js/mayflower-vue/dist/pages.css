@@ -64,27 +64,23 @@
 
 
 .installer.widget {
-  float: left;
   color: grey;
 }
 .installer.widget .uk-button, .installer.widget .icon {
     padding: 0 6px;
 }
 
-.activator.widget {
-  float: left;
-}
 .activator.widget .activator-enabled {
-    color: cornflowerblue;
+  color: cornflowerblue;
 }
 .activator.widget .activator-disabled {
-    color: grey;
+  color: grey;
 }
 .activator.widget .activator-disabled.danger {
-      color: darkred;
+    color: darkred;
 }
 .activator.widget .uk-button, .activator.widget .icon {
-    padding: 0 6px;
+  padding: 0 6px;
 }
 
 

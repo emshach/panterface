@@ -66,7 +66,6 @@ export default {
 <style lang="scss">
 .activator {
   &.widget {
-    float: left;
     .activator-enabled {
       color: cornflowerblue;
     }

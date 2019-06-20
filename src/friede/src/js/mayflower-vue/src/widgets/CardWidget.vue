@@ -88,10 +88,10 @@ export default  {
 .card-widget {
   position: relative;
   .uk-card-body {
-    heaght: 100%;
+    height: 100%;
     box-sizing: border-box;
     display: flex;
-    display-direction: column;
+    flex-direction: column;
     .content {
       flex: 1;
     }

@@ -106,6 +106,8 @@ def index( request ):
         user=json.dumps( dict(
             uid=user.id,
             username=user.username,
+            staff=user.is_staff,
+            su=user.is_superuser,
             fname=user.first_name,
             lname=user.last_name,
             email=user.email,

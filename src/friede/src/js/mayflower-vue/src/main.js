@@ -7,17 +7,14 @@ import UIkit from 'uikit'
 import 'uikit/dist/css/uikit.min.css'
 import '@/assets/styles/styles.scss'
 import Icons from 'uikit/dist/js/uikit-icons'
-import axios from 'axios'
+import API from '@/lib/api'
 import Tooltip from 'vuikit/lib/tooltip'
 
-UIkit.use( Icons )
-window.UIkit = UIkit
+UIkit.use( Icons );
+window.UIkit = UIkit;
 Vue.directive( 'vk-tooltip', Tooltip );
-
-Vue.config.productionTip = false
-Vue.prototype.$api = function() {
-  return axios.get( '/api/' + Array.prototype.join.call( arguments, '/' ))
-}
+Vue.use( API );
+Vue.config.productionTip = false;
 
 function Mayflower( args ) {
   this.options = {

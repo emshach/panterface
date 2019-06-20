@@ -10728,6 +10728,12 @@ form.uk-form-stacked label {
 .uk-card .uk-card-title {
   margin-top: 0; }
 
+.uk-card .card-subtitle {
+  position: relative;
+  margin: 0;
+  top: -1.5em;
+  font-style: italic; }
+
 .uk-card .title-actions {
   position: absolute;
   top: 0;
@@ -10744,14 +10750,12 @@ form.uk-form-stacked label {
   background-image: -webkit-gradient(linear, right top, left bottom, from(skyblue), color-stop(60%, transparent));
   background-image: linear-gradient(to bottom left, skyblue 0%, transparent 60%); }
   .uk-card.selected .selector {
-    color: forestgreen; }
+    color: palegreen; }
 
 .uk-card .item-actions {
-  float: right;
-  position: relative;
-  bottom: -16px;
-  right: -10px;
-  margin-top: 20px; }
+  margin: 16px -10px -16px; }
+  .uk-card .item-actions > * {
+    float: right; }
 
 
 /*# sourceMappingURL=app.css.map*/

@@ -1,6 +1,6 @@
 <template lang="html">
   <vk-card :type=type :padding=padding :hover=context.hover
-           class="widget">
+           class="widget card-widget">
       <div class="title-actions uk-align-right">
         <slot name="title-actions" :object=object />
         <close-button @click.prevent=close v-if=context.closeable />
@@ -12,10 +12,14 @@
     <vk-card-title>
       <slot name="title" :object=object />
     </vk-card-title>
-    <p class="uk-text-meta uk-margin-remove-top">
+    <p class="uk-text-meta card-subtitle">
       <slot name="subtitle" :object=object />
     </p>
-    <slot name="content" :object=object />
+    <div class="content">
+      <vue-perfect-scrollbar>
+        <slot name="content" :object=object />
+      </vue-perfect-scrollbar>
+    </div>
     <div class="item-actions">
       <slot name="content-actions" :object=object />
     </div>
@@ -25,11 +29,17 @@
 </template>
 
 <script lang="js">
+import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 import { Card as VkCard, CardTitle as VkCardTitle } from 'vuikit/lib/card'
 import { CloseButton } from '@/components'
 export default  {
   name: 'CardWidget',
-  components: { VkCard, VkCardTitle, CloseButton },
+  components: {
+    VuePerfectScrollbar,
+    VkCard,
+    VkCardTitle,
+    CloseButton
+  },
   props: {
     object: {
       type: Object,
@@ -76,6 +86,15 @@ export default  {
 
 <style lang="scss">
 .card-widget {
-
+  position: relative;
+  .uk-card-body {
+    heaght: 100%;
+    box-sizing: border-box;
+    display: flex;
+    display-direction: column;
+    .content {
+      flex: 1;
+    }
+  }
 }
 </style>

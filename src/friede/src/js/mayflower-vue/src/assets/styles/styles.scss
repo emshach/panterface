@@ -56,6 +56,12 @@ form.uk-form-stacked label {
   .uk-card-title {
     margin-top: 0;
   }
+  .card-subtitle {
+    position: relative;
+    margin: 0;
+    top: -1.5em;
+    font-style: italic
+  }
   .title-actions {
     position: absolute;
     top: 0;
@@ -72,14 +78,13 @@ form.uk-form-stacked label {
   &.selected {
     background-image: linear-gradient(to bottom left, skyblue 0%, transparent 60%);
     .selector {
-      color: forestgreen;
+      color: palegreen;
     }
   }
   .item-actions {
-    float: right;
-    position: relative;
-    bottom: -16px;
-    right: -10px;
-    margin-top: 20px;
+    margin: 16px -10px -16px;
+    > * {
+      float: right;
+    }
   }
 }

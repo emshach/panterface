@@ -23,7 +23,7 @@ class App( app.App ):
 
     links = { x: dict( via='entry' ) for x in _links }
 
-    min_version = '0.2.4'
+    min_version = '0.2.5'
     required = True
     user_required = True
 
@@ -680,7 +680,26 @@ class App( app.App ):
                     reverse='upgrade',
                     component='Installer',
                 ))),
-          )),
+          )
+        ),
+        ( '0.2.5',
+          ( '#locations',
+            ( 'apps', {},
+              ( '#screens',
+                ( 'default', dict(
+                    path='dashboard.apps' ,
+                    entry=dict(
+                        data=dict(
+                            model='friede.app',
+                            layout=dict(
+                                title='title',
+                                subtitle='available',
+                                content='description'
+                            ),
+                            search='name title description'.split()
+                        ))))))
+          ),
+        )
     )
     @property
     def userdata( self ):

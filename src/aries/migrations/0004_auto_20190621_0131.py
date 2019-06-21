@@ -4,6 +4,16 @@ from __future__ import unicode_literals
 
 from django.db import migrations
 
+def create_types(apps, schema_editor):
+    db_alias = schema_editor.connection.alias
+    AuthPerms = apps.get_model( 'auth', 'Permission' )
+    Permission = apps.get_model( 'aries', 'Permission' )
+    for p in AuthPerms.objects.all():
+        try:
+            Permission.objects.get( pk=p.pk )
+        except Permission.DoesNotExist:
+            p0 = Permission.objects.using( db_alias ).create( auth_ptr=p.pk )
+            p0.save_base( raw=True )
 
 class Migration(migrations.Migration):
 
@@ -12,4 +22,5 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
+        migrations.RunPython( create_types, migrations.RunPython.noop )
     ]

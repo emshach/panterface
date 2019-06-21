@@ -12,7 +12,7 @@ from django.contrib.auth import get_user_model
 
 
 def AutoChildModel():
-    class Base( M.base.ModelBase, Model ):
+    class Base( M.base.ModelBase ):
         class Meta:
             abstract = True
         def __new__( mcs, name, bases, attrs ):

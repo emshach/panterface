@@ -100,7 +100,8 @@ class App( app.App ):
                 icon='fontawesome.expand',
                 data=dict(
                     component='DashboardWidget'
-            ( 'from relations', self.objects, self.relations ))))),
+                )))
+            ( 'from relations', self.objects, self.relations )),
           ( '#blocks',
             ( 'form',
               ( 'group', dict(

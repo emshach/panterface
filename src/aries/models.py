@@ -13,7 +13,7 @@ from django.contrib.auth import get_user_model
 
 class AutoChildMixin( M.base.ModelBase ):
     def __new__( mcs, name, bases, attrs ):
-        model = super( Base, mcs ).__new__( mcs, name, bases, attrs )
+        model = super( AutoChildMixin, mcs ).__new__( mcs, name, bases, attrs )
 
         if model._meta.abstract:
             return model

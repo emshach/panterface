@@ -1,12 +1,60 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from django.utils.encoding import python_2_unicode_compatible
+import six
 from django.db import models as M
 from django.contrib.postgres.fields import JSONField
 from django.contrib.auth import models as auth
-from django_auto_one_to_one import AutoOneToOneModel
 
 Model = M.Model
+
+from django.db.models.signals import post_save, pre_delete
+from django.contrib.auth import get_user_model
+
+
+def AutoChildModel( parent, attr, related_name ):
+
+    class Base( M.base.ModelBase ):
+        def __new__( mcs, name, bases, attrs ):
+            model = super( Base, mcs ).__new__( mcs, name, bases, attrs )
+
+            if model._meta.abstract:
+                return model
+
+            # Avoid virtual models (for, for instance, deferred fields)
+            if model._meta.concrete_model is not model:
+                return model
+
+            def on_create_cb( sender, instance, created, *args, **kwargs ):
+                if created:
+                    model.objects.create(**{ attr: instance })\
+                                 .save_base( raw=True )
+
+            # def on_delete_cb(sender, instance, *args, **kwargs):
+            #     model.objects.filter(pk=instance).delete()
+
+            post_save.connect(on_create_cb, sender=parent, weak=False)
+            # pre_delete.connect(on_delete_cb, sender=parent, weak=False)
+
+            return model
+
+    @six.python_2_unicode_compatible
+    class Parent(six.with_metaclass( Base, Model )):
+        locals()[attr] = M.OneToOneField(
+            parent,
+            on_delete=M.CASCADE,
+            parent_link=True,
+            related_name=related_name,
+        )
+
+        class Meta:
+            abstract = True
+
+        def __str__(self):
+            return "{}={}".format(attr, getattr(self, attr))
+
+    return Parent
+
+
 
 class _Base( Model ):
     class Meta:
@@ -16,7 +64,7 @@ class _Base( Model ):
     active       = M.BooleanField( default=True )
 
 
-@python_2_unicode_compatible
+@six.python_2_unicode_compatible
 class Base( _Base ):
     class Meta:
         abstract = True
@@ -31,11 +79,9 @@ class DataMixin( Model ):
     data = JSONField( default=dict )
 
 
-class Permission( AutoOneToOneModel( auth.Permission, related_name='aries_data',
-                                     attr='auth_ptr'), Base, DataMixin ):
-    auth_ptr  = M.OneToOneField( auth.Permission, M.CASCADE, parent_link=True,
-                                 related_name='aries_data' )
-
+class Permission( AutoChildModel( auth.Permission, 'auth_ptr', 'aries_data'),
+                  Base, DataMixin ):
+    pass
 
 class Policy( Base, DataMixin ):
     class Types:
@@ -61,10 +107,7 @@ class User( auth.AbstractUser, _Base, DataMixin ):
     policies = M.ManyToManyField( Policy, blank=True, related_name='users' )
 
 
-class Group( AutoOneToOneModel( auth.Group, related_name='aries_data',
-                                attr='auth_ptr' ), Base, DataMixin ):
-    auth_ptr  = M.OneToOneField( auth.Group, M.CASCADE, parent_link=True,
-                                 related_name='aries_data' )
+class Group( AutoChildModel( auth.Group, 'auth_ptr', 'aries_data' ), Base, DataMixin ):
     roles = M.ManyToManyField( Role, blank=True, related_name='groups' )
     permissions = M.ManyToManyField( Permission, blank=True, related_name='groups' )
     policies = M.ManyToManyField( Policy, blank=True, related_name='groups' )

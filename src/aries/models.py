@@ -41,8 +41,8 @@ class Policy( Base, DataMixin ):
         ALLOW = 'allow'
         DENY = 'deny'
         ALL = (
-            ALLOW, 'Allow',
-            DENY,  'Deny',
+            ( ALLOW, 'Allow' ),
+            ( DENY,  'Deny' ),
         )
     type = M.CharField( max_length=16, choices=Types.ALL, default=Types.ALLOW )
     permissions = M.ManyToManyField( Permission, blank=True, related_name='policies' )

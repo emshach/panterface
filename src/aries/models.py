@@ -33,7 +33,8 @@ class DataMixin( Model ):
 
 class Permission( AutoOneToOneModel( auth.Permission, related_name='aries_data',
                                      attr='auth_ptr'), Base, DataMixin ):
-    pass
+    auth_ptr  = M.OneToOneField( auth.Permission, M.CASCADE, parent_link=True,
+                                 related_name='aries_data' )
 
 
 class Policy( Base, DataMixin ):
@@ -62,6 +63,8 @@ class User( auth.AbstractUser, _Base, DataMixin ):
 
 class Group( AutoOneToOneModel( auth.Group, related_name='aries_data',
                                 attr='auth_ptr' ), Base, DataMixin ):
+    auth_ptr  = M.OneToOneField( auth.Group, M.CASCADE, parent_link=True,
+                                 related_name='aries_data' )
     roles = M.ManyToManyField( Role, blank=True, related_name='groups' )
     permissions = M.ManyToManyField( Permission, blank=True, related_name='groups' )
     policies = M.ManyToManyField( Policy, blank=True, related_name='groups' )

@@ -12,8 +12,9 @@ def create_types(apps, schema_editor):
         try:
             Permission.objects.get( pk=p.pk )
         except Permission.DoesNotExist:
-            p0 = Permission.objects.using( db_alias ).create( auth_ptr=p.pk )
+            p0 = Permission.objects.using( db_alias ).create( auth_ptr=p )
             p0.save_base( raw=True )
+            print 'attached', p.name
 
 class Migration(migrations.Migration):
 

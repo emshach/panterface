@@ -7,7 +7,6 @@ from django_auto_one_to_one import AutoOneToOneModel
 
 Model = M.Model
 
-@python_2_unicode_compatible
 class _Base( Model ):
     class Meta:
         abstract = True
@@ -16,6 +15,7 @@ class _Base( Model ):
     active       = M.BooleanField( default=True )
 
 
+@python_2_unicode_compatible
 class Base( _Base ):
     class Meta:
         abstract = True

@@ -566,17 +566,6 @@ class App( app.App ):
                     data=dict(
                         model='friede.app'
                     ))))),
-            ( 'user',
-              ( 'private', dict(
-                  title='My Page',
-                  href='/me' ),
-                ( '#screens',
-                  ( 'default', dict( path='dashboard.user.home' )))),
-              ( 'public', dict(
-                  title='User Profile',
-                  href='/{user}' ),
-                ( '#screens',
-                  ( 'default', dict( path='dashboard.user' ))))),
           ),
         ),
         ( '0.2.1',

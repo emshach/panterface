@@ -31,8 +31,7 @@ def AutoChildModel():
 
             def on_create_cb( sender, instance, created, *args, **kwargs ):
                 if created:
-                    model.objects.create(**{ pk.name: instance })\
-                                 .save_base( raw=True )
+                    model(**{ pk.name: instance }).save_base( raw=True )
 
             # def on_delete_cb(sender, instance, *args, **kwargs):
             #     model.objects.filter(pk=instance).delete()

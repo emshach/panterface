@@ -5,6 +5,8 @@ from django.db import models as M
 from django.contrib.auth import models as auth
 from django_auto_one_to_one import AutoOneToOneModel
 
+Model = M.Model
+
 @python_2_unicode_compatible
 class _Base( Model ):
     class Meta:

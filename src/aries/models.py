@@ -11,35 +11,42 @@ from django.db.models.signals import post_save, pre_delete
 from django.contrib.auth import get_user_model
 
 
-class AutoChildMixin( M.base.ModelBase, Model ):
-    class Meta:
-        abstract = True
-    def __new__( mcs, name, bases, attrs ):
-        model = super( AutoChildMixin, mcs ).__new__( mcs, name, bases, attrs )
+def AutoChildModel():
+    class Base( M.base.ModelBase, Model ):
+        class Meta:
+            abstract = True
+        def __new__( mcs, name, bases, attrs ):
+            model = super( Base, mcs ).__new__( mcs, name, bases, attrs )
 
-        if model._meta.abstract:
+            if model._meta.abstract:
+                return model
+
+            # Avoid virtual models (for, for instance, deferred fields)
+            if model._meta.concrete_model is not model:
+                return model
+
+            pk = model._meta.pk
+            parents = model._meta.parents
+            parent = filter( lambda x: x[1] is pk, parents.items())[0][0]
+
+            def on_create_cb( sender, instance, created, *args, **kwargs ):
+                if created:
+                    model.objects.create(**{ attr: instance })\
+                                 .save_base( raw=True )
+
+            # def on_delete_cb(sender, instance, *args, **kwargs):
+            #     model.objects.filter(pk=instance).delete()
+
+            post_save.connect(on_create_cb, sender=parent, weak=False)
+            # pre_delete.connect(on_delete_cb, sender=parent, weak=False)
+
             return model
 
-        # Avoid virtual models (for, for instance, deferred fields)
-        if model._meta.concrete_model is not model:
-            return model
+    class AutoChild( six.with_metaclass( Base, Model )):
+        class Meta:
+            abstract = True
 
-        pk = model._meta.pk
-        parents = model._meta.parents
-        parent = filter( lambda x: x[1] is pk, parents.items())[0][0]
-
-        def on_create_cb( sender, instance, created, *args, **kwargs ):
-            if created:
-                model.objects.create(**{ attr: instance })\
-                             .save_base( raw=True )
-
-        # def on_delete_cb(sender, instance, *args, **kwargs):
-        #     model.objects.filter(pk=instance).delete()
-
-        post_save.connect(on_create_cb, sender=parent, weak=False)
-        # pre_delete.connect(on_delete_cb, sender=parent, weak=False)
-
-        return model
+    return AutoChild
 
 
 class _Base( Model ):
@@ -65,7 +72,7 @@ class DataMixin( Model ):
     data = JSONField( default=dict )
 
 
-class Permission( AutoChildMixin, auth.Permission, Base, DataMixin ):
+class Permission( AutoChildModel(), auth.Permission, Base, DataMixin ):
     auth_ptr  = M.OneToOneField( auth.Permission, M.CASCADE, parent_link=True,
                                  related_name='aries_data' )
 
@@ -93,7 +100,7 @@ class User( auth.AbstractUser, _Base, DataMixin ):
     policies = M.ManyToManyField( Policy, blank=True, related_name='users' )
 
 
-class Group( AutoChildMixin, auth.Group, Base, DataMixin ):
+class Group( AutoChildModel(), auth.Group, Base, DataMixin ):
     auth_ptr  = M.OneToOneField( auth.Group, M.CASCADE, parent_link=True,
                                  related_name='aries_data' )
     roles = M.ManyToManyField( Role, blank=True, related_name='groups' )

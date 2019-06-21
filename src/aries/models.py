@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 from django.utils.encoding import python_2_unicode_compatible
 from django.db import models as M
+from django.contrib.postgres.fields import JSONField
 from django.contrib.auth import models as auth
 from django_auto_one_to_one import AutoOneToOneModel
 

@@ -104,7 +104,6 @@ class Group( AutoChildModel(), auth.Group, Base, DataMixin ):
     auth_ptr  = M.OneToOneField( auth.Group, M.CASCADE, parent_link=True,
                                  related_name='aries_data' )
     roles = M.ManyToManyField( Role, blank=True, related_name='groups' )
-    permissions = M.ManyToManyField( Permission, blank=True, related_name='groups' )
     policies = M.ManyToManyField( Policy, blank=True, related_name='groups' )
 
 

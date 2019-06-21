@@ -11,7 +11,9 @@ from django.db.models.signals import post_save, pre_delete
 from django.contrib.auth import get_user_model
 
 
-class AutoChildMixin( M.base.ModelBase ):
+class AutoChildMixin( M.base.ModelBase, Model ):
+    class Meta:
+        abstract = True
     def __new__( mcs, name, bases, attrs ):
         model = super( AutoChildMixin, mcs ).__new__( mcs, name, bases, attrs )
 

@@ -45,11 +45,11 @@ class Policy( Base, DataMixin ):
             DENY,  'Deny',
         )
     type = M.CharField( max_length=16, choices=Types.ALL, default=Types.ALLOW )
-    permissions = M.ManyToManyField( Permissions, blank=True, related_name='policies' )
+    permissions = M.ManyToManyField( Permission, blank=True, related_name='policies' )
 
 
 class Role( Base, DataMixin ):
-    permissions = M.ManyToManyField( Permissions, blank=True, related_name='roles' )
+    permissions = M.ManyToManyField( Permission, blank=True, related_name='roles' )
     policies = M.ManyToManyField( Policy, blank=True, related_name='roles' )
     pass
 
@@ -63,7 +63,7 @@ class User( auth.AbstractUser, _Base, DataMixin ):
 class Group( AutoOneToOneModel( auth.Group, related_name='aries_data',
                                 attr='auth_ptr' ), Base, DataMixin ):
     roles = M.ManyToManyField( Role, blank=True, related_name='groups' )
-    permissions = M.ManyToManyField( Permissions, blank=True, related_name='groups' )
+    permissions = M.ManyToManyField( Permission, blank=True, related_name='groups' )
     policies = M.ManyToManyField( Policy, blank=True, related_name='groups' )
 
 

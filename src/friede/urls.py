@@ -29,8 +29,7 @@ try:
                 app = app.App()
                 apps[ app.name ] = app
                 if app.installed:
-                    app.init( register=registrar(
-                                  router=router, routes=routes, module=app ),
+                    app.init( register=registrar( router=router, routes=routes ),
                               router=router,
                               urlpatterns=urlpatterns )
             except ( ImportError, AttributeError ) as e:

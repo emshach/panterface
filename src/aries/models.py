@@ -4,11 +4,10 @@ import six
 from django.db import models as M
 from django.contrib.postgres.fields import JSONField
 from django.contrib.auth import models as auth
+from django.db.models.signals import post_save
 
 Model = M.Model
 
-from django.db.models.signals import post_save, pre_delete
-from django.contrib.auth import get_user_model
 
 
 def AutoChildModel():
@@ -35,12 +34,7 @@ def AutoChildModel():
                     m.save_base( raw=True )
                     m.refresh_from_db()
 
-            # def on_delete_cb(sender, instance, *args, **kwargs):
-            #     model.objects.filter(pk=instance).delete()
-
             post_save.connect(on_create_cb, sender=parent, weak=False)
-            # pre_delete.connect(on_delete_cb, sender=parent, weak=False)
-
             return model
 
     class AutoChild( six.with_metaclass( Base, Model )):

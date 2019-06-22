@@ -1,6 +1,6 @@
 from __future__ import unicode_literals
 from friede import app
-# from . import views, serializers
+from . import views, serializers
 
 class App( app.App ):
     name        = 'aries'
@@ -59,20 +59,20 @@ class App( app.App ):
             'links'  : (),
         },
     )
-    # routes=(
-    #     ( 'users',       views.UserViewSet       ),
-    #     ( 'groups',      views.GroupViewSet      ),
-    #     ( 'policies',    views.PolicyViewSet     ),
-    #     ( 'permissions', views.PermissionViewSet ),
-    #     ( 'roles',       views.RoleViewSet       ),
-    # )
-    # serializers=(
-    #     ( 'users',       views.UserSerializer       ),
-    #     ( 'groups',      views.GroupSerializer      ),
-    #     ( 'policies',    views.PolicySerializer     ),
-    #     ( 'permissions', views.PermissionSerializer ),
-    #     ( 'roles',       views.RoleSerializer       ),
-    # )
+    routes=(
+        ( 'users',       views.UserViewSet       ),
+        ( 'groups',      views.GroupViewSet      ),
+        ( 'policies',    views.PolicyViewSet     ),
+        ( 'permissions', views.PermissionViewSet ),
+        ( 'roles',       views.RoleViewSet       ),
+    )
+    serializers=(
+        ( 'users',       serializers.UserSerializer       ),
+        ( 'groups',      serializers.GroupSerializer      ),
+        ( 'policies',    serializers.PolicySerializer     ),
+        ( 'permissions', serializers.PermissionSerializer ),
+        ( 'roles',       serializers.RoleSerializer       ),
+    )
     @property
     def data( self ):
         return (

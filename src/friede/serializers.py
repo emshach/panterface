@@ -308,28 +308,28 @@ class LocationSerializer( RegistrySerializer ):
         expandable_fields = RegistrySerializer.Meta.expandable_fields
 
 
-class LinkSerializer( HyperlinkedModelSerializer ):
+class LinkSerializer( HyperlinkedModelSerializer, IconMixin ):
     class Meta:
         model = Link
         fields = F.base + F.link
         expandable_fields = RegistrySerializer.Meta.expandable_fields
 
 
-class ReferenceSerializer( HyperlinkedModelSerializer ):
+class ReferenceSerializer( HyperlinkedModelSerializer, IconMixin ):
     class Meta:
         model = Reference
         fields = F.base + F.reference
         expandable_fields = RegistrySerializer.Meta.expandable_fields
 
 
-class SettingSerializer( HyperlinkedModelSerializer ):
+class SettingSerializer( HyperlinkedModelSerializer, IconMixin ):
     class Meta:
         model = Setting
         fields = F.base + F.setting
         expandable_fields = RegistrySerializer.Meta.expandable_fields
 
 
-class ActionSerializer( HyperlinkedModelSerializer ):
+class ActionSerializer( HyperlinkedModelSerializer, IconMixin ):
     class Meta:
         model = Action
         fields = F.base + F.action

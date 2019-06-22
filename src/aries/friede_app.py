@@ -76,7 +76,25 @@ class App( app.App ):
     @property
     def data( self ):
         return (
-            ( '0.0.1', )
+        ( '0.0.1',
+          ( '#actions',
+            ( 'grant', dict(
+                icon='fontawesome.user-check',
+                title='Grant permission(s) to a user',
+                description='''''',
+                data=dict(
+                    reverse='revoke',
+                    widget='Gatekeeper',
+            ))),
+            ( 'revoke', dict(
+                icon='fontawesome.list',
+                title='Revoke a user\'s permission(s)',
+                description='''''',
+                data=dict(
+                    reverse='grant',
+                    widget='Gatekeeper',
+            ))),
+          )),
         # ( '0.1.0',
         #   ( '#actions',
         #     ( 'list', dict(

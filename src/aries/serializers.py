@@ -47,12 +47,12 @@ class GroupSerializer( HyperlinkedModelSerializer ):
             'description',
             'active',
             'data',
-            'user',
+            'user_set',
             'permissions',
             'policies'
             'roles',
         )
-    user = UserSerializer( many=True )
+    user_set = UserSerializer( many=True )
 
 
 class RoleSerializer( HyperlinkedModelSerializer ):
@@ -105,13 +105,13 @@ class PermissionSerializer( HyperlinkedModelSerializer ):
             'description',
             'active',
             'data',
-            'user',
-            'group',
+            'user_set',
+            'group_set',
             'policies',
             'roles',
         )
-    user = UserSerializer( many=True )
-    group = GroupSerializer( many=True )
+    user_set = UserSerializer( many=True )
+    group_set = GroupSerializer( many=True )
     policies = PolicySerializer( many=True )
     roles = RoleSerializer( many=True )
 

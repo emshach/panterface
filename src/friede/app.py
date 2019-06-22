@@ -90,6 +90,11 @@ class App( object ) :
             module=self.module,
             title=self.title,
             description=self.description,
+            min_version=self.min_version,
+            required=self.required,
+            user_required=self.user_required,
+            user_installable=self.user_installable,
+            auto_install=self.auto_install,
         )
 
     def postinstallheader( self ):

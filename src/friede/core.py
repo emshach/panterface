@@ -110,6 +110,10 @@ def setuptheme( shell=None ):
     return theme
 
 def installappheader( name, module, title, description, icon='', rest=True,
+                      required=False,
+                      user_required=False,
+                      user_installable=False,
+                      auto_install=False,
                       router=None ):
     try:
         path = name
@@ -130,6 +134,10 @@ def installappheader( name, module, title, description, icon='', rest=True,
             rest=rest,
             active=False,
             version='0.0.0',
+            required=required,
+            user_required=user_required,
+            user_installable=user_installable,
+            auto_install=auto_install,
         ))
 
     except Exception as e:

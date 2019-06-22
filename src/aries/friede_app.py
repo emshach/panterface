@@ -87,7 +87,7 @@ class App( app.App ):
                     widget='Gatekeeper',
             ))),
             ( 'revoke', dict(
-                icon='fontawesome.list',
+                icon='fontawesome.user-times',
                 title='Revoke a user\'s permission(s)',
                 description='''''',
                 data=dict(

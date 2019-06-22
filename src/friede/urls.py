@@ -34,8 +34,8 @@ try:
                               router=router,
                               urlpatterns=urlpatterns )
             except ( ImportError, AttributeError ) as e:
-                print >> sys.stderr, "got exception", type(e), e, 'in friede.urls'
-                traceback.print_exc()
+                # print >> sys.stderr, "got exception", type(e), e, 'in friede.urls'
+                # traceback.print_exc()
                 continue        # TODO: maybe warn
 except Exception:
     # pass                        # TODO: handle

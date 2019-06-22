@@ -11,7 +11,6 @@ import API from '@/lib/api'
 import Tooltip from 'vuikit/lib/tooltip'
 
 UIkit.use( Icons );
-window.UIkit = UIkit;
 Vue.directive( 'vk-tooltip', Tooltip );
 Vue.use( API );
 Vue.config.productionTip = false;
@@ -20,7 +19,7 @@ function Mayflower( args ) {
   this.options = {
     router,
     store,
-    render: h => h(App)
+    render: h => h( App )
   };
   if ( args ) {
     Object.assign( this.options, args );
@@ -35,5 +34,6 @@ Mayflower.prototype.init = function () {
 };
 
 window.Vue = Vue;
+window.UIkit = UIkit;
 window.Mayflower = Mayflower;
 window.MayflowerApp = new Mayflower();

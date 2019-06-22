@@ -7,6 +7,7 @@ from . import views
 from . import friede_app
 from .app import router, registrar, routes, apps
 from .models import App
+import traceback
 
 app_name = 'friede'
 urlpatterns = []
@@ -31,7 +32,9 @@ try:
                                   router=router, routes=routes, module=app ),
                               router=router,
                               urlpatterns=urlpatterns )
-            except ImportError, AttributeError:
+            except ( ImportError, AttributeError ) as e:
+                print >> sys.stderr, "got exception", type(e), e, 'in friede.urls'
+                traceback.print_exc()
                 continue        # TODO: maybe warn
 except Exception:
     # pass                        # TODO: handle

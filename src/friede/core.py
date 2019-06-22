@@ -203,7 +203,7 @@ def updateapp( name, data=None, obj=None ):
         return app
 
     except Exception as e:
-        print >> sys.stderr, "got exception", type(e), e, 'in installapp'
+        print >> sys.stderr, "got exception", type(e), e, 'in updateapp'
         traceback.print_exc()
         return None
 

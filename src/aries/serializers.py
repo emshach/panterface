@@ -99,7 +99,7 @@ class PermissionSerializer( HyperlinkedModelSerializer ):
         fields = (
             'id',
             'name',
-            'content_type',
+            # 'content_type',
             'codename',
             'title',
             'description',

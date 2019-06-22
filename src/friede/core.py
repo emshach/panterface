@@ -148,7 +148,7 @@ def installappheader( name, module, title, description, icon='', rest=True,
         return None, None
 
 def installapp( name, module, title, description, icon='', rest=True,
-                active=True, version=None, router=None, data=None ):
+                active=True, version=None, router=None, data=None, obj=None ):
     try:
         path = name
         if not path.startswith( 'apps.' ):
@@ -158,15 +158,16 @@ def installapp( name, module, title, description, icon='', rest=True,
         if isinstance( icon, basestring ):
             icon, new = Icon.objects.get_or_create( path=icon )
 
-        app, new = App.objects.get_or_create( path=path, defaults=dict(
-            title=title,
-            module=module,
-            description=description,
-            icon=icon,
-            rest=rest,
-            active=active,
-            version='0.0.0',
-        ))
+        app, new = ( obj.model, False ) if obj and obj.model \
+            else App.objects.get_or_create( path=path, defaults=dict(
+                    title=title,
+                    module=module,
+                    description=description,
+                    icon=icon,
+                    rest=rest,
+                    active=active,
+                    version='0.0.0',
+            ))
         if data:
             upgradeapp( app, data, upto=version )
         app.installed = True

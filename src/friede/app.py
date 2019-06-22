@@ -110,7 +110,8 @@ class App( object ) :
             module=self.module,
             title=self.title,
             description=self.description,
-            data=self.data
+            data=self.data,
+            obj=self
         )
 
     def postinstall( self ):

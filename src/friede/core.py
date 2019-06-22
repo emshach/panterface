@@ -192,7 +192,7 @@ def updateapp( name, data=None, obj=None ):
 
         print path, v, 'available'
 
-        app = obj.model if obs and obj.model else App.objects.get( path=path )
+        app = obj.model if obj and obj.model else App.objects.get( path=path )
         app.available = str( available )
         if obj:
             app.min_version = obj.min_version

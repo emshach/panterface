@@ -76,23 +76,23 @@ class App( app.App ):
     @property
     def data( self ):
         return (
-        ( '0.0.1',
+        ( '0.0.2',
           ( '#actions',
             ( 'grant', dict(
                 icon='fontawesome.user-check',
                 title='Grant permission(s) to a user',
-                description='''''',
+                description='''Attach permissions to a user, giving them access''',
                 data=dict(
                     reverse='revoke',
-                    widget='Gatekeeper',
+                    component='Gatekeeper',
             ))),
             ( 'revoke', dict(
                 icon='fontawesome.user-times',
                 title='Revoke a user\'s permission(s)',
-                description='''''',
+                description='''Detach permissions from a user, revoking access''',
                 data=dict(
                     reverse='grant',
-                    widget='Gatekeeper',
+                    component='Gatekeeper',
             ))),
           )),
         # ( '0.1.0',

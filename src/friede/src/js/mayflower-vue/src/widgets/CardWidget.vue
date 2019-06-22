@@ -92,6 +92,9 @@ export default  {
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
+    border: 1px solid rgba(255,255,255,0.25);
+    border-left-color: rgba(255,255,255,0.1);
+    border-right-color: rgba(255,255,255,0.15);
     .content {
       flex: 1;
     }

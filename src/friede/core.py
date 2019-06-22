@@ -110,6 +110,7 @@ def setuptheme( shell=None ):
     return theme
 
 def installappheader( name, module, title, description, icon='', rest=True,
+                      min_version='0.0.1',
                       required=False,
                       user_required=False,
                       user_installable=False,
@@ -134,6 +135,7 @@ def installappheader( name, module, title, description, icon='', rest=True,
             rest=rest,
             active=False,
             version='0.0.0',
+            min_version=min_version,
             required=required,
             user_required=user_required,
             user_installable=user_installable,

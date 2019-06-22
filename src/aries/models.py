@@ -86,7 +86,6 @@ class Policy( Base, DataMixin ):
 class Role( Base, DataMixin ):
     permissions = M.ManyToManyField( Permission, blank=True, related_name='roles' )
     policies = M.ManyToManyField( Policy, blank=True, related_name='roles' )
-    pass
 
 
 class User( auth.AbstractUser, _Base, DataMixin ):

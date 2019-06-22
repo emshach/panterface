@@ -69,8 +69,8 @@ class RoleSerializer( HyperlinkedModelSerializer ):
             'permissions',
             'policies'
         )
-    user = UserSerializer( many=True )
-    group = GroupSerializer( many=True )
+    users = UserSerializer( many=True )
+    groups = GroupSerializer( many=True )
 
 
 class PolicySerializer( HyperlinkedModelSerializer ):
@@ -88,9 +88,9 @@ class PolicySerializer( HyperlinkedModelSerializer ):
             'permissions'
             'roles',
         )
-    user = UserSerializer( many=True )
-    group = GroupSerializer( many=True )
-    role = RoleSerializer( many=True )
+    users = UserSerializer( many=True )
+    groups = GroupSerializer( many=True )
+    roles = RoleSerializer( many=True )
 
 
 class PermissionSerializer( HyperlinkedModelSerializer ):
@@ -112,8 +112,8 @@ class PermissionSerializer( HyperlinkedModelSerializer ):
         )
     user = UserSerializer( many=True )
     group = GroupSerializer( many=True )
-    policy = PolicySerializer( many=True )
-    role = RoleSerializer( many=True )
+    policies = PolicySerializer( many=True )
+    roles = RoleSerializer( many=True )
 
 
 by_model = dict(

@@ -34,12 +34,16 @@ try:
                               router=router,
                               urlpatterns=urlpatterns )
             except ( ImportError, AttributeError ) as e:
-                print >> sys.stderr, "got exception", type(e), e, 'in friede.urls'
-                traceback.print_exc()
+                msg = str( e )
+                if 'No module named friede_app' not in msg:
+                    print >> sys.stderr, 'got exception', type(e), e,\
+                        "in friede.urls/%s" % module
+                    traceback.print_exc()
                 continue        # TODO: maybe warn
 except Exception:
     # pass                        # TODO: handle
     raise
+print routes
 urlpatterns += [ url( r"^api/%s/" % k, include( v.urls ))
                  for k, v in routes.items() ]
 views.routes[ 'ls' ] = ( 'ls', [''] )

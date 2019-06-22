@@ -52,7 +52,7 @@ class GroupSerializer( HyperlinkedModelSerializer ):
             'policies'
             'roles',
         )
-        user = HyperlinkedRelatedField( many=True, view_name='user-detail' )
+        user = HyperlinkedRelatedField( many=True, read_only=True, view_name='user-detail' )
 
 
 class PolicySerializer( HyperlinkedModelSerializer ):
@@ -70,9 +70,9 @@ class PolicySerializer( HyperlinkedModelSerializer ):
             'permissions'
             'roles',
         )
-        user = HyperlinkedRelatedField( many=True, view_name='user-detail' )
-        group = HyperlinkedRelatedField( many=True, view_name='group-detail' )
-        role = HyperlinkedRelatedField( many=True, view_name='role-detail' )
+        user = HyperlinkedRelatedField( many=True, read_only=True, view_name='user-detail' )
+        group = HyperlinkedRelatedField( many=True, read_only=True, view_name='group-detail' )
+        role = HyperlinkedRelatedField( many=True, read_only=True, view_name='role-detail' )
 
 
 class RoleSerializer( HyperlinkedModelSerializer ):
@@ -89,8 +89,8 @@ class RoleSerializer( HyperlinkedModelSerializer ):
             'permissions',
             'policies'
         )
-        user = HyperlinkedRelatedField( many=True, view_name='user-detail' )
-        group = HyperlinkedRelatedField( many=True, view_name='group-detail' )
+        user = HyperlinkedRelatedField( many=True, read_only=True, view_name='user-detail' )
+        group = HyperlinkedRelatedField( many=True, read_only=True, view_name='group-detail' )
 
 
 class PermissionSerializer( HyperlinkedModelSerializer ):
@@ -110,10 +110,10 @@ class PermissionSerializer( HyperlinkedModelSerializer ):
             'policies',
             'roles',
         )
-        user = HyperlinkedRelatedField( many=True, view_name='user-detail' )
-        group = HyperlinkedRelatedField( many=True, view_name='group-detail' )
-        policy = HyperlinkedRelatedField( many=True, view_name='policy-detail' )
-        role = HyperlinkedRelatedField( many=True, view_name='role-detail' )
+        user = HyperlinkedRelatedField( many=True, read_only=True, view_name='user-detail' )
+        group = HyperlinkedRelatedField( many=True, read_only=True, view_name='group-detail' )
+        policy = HyperlinkedRelatedField( many=True, read_only=True, view_name='policy-detail' )
+        role = HyperlinkedRelatedField( many=True, read_only=True, view_name='role-detail' )
 
 
 by_model = dict(

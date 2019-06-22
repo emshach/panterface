@@ -8,6 +8,7 @@ from . import friede_app
 from .app import router, registrar, routes, apps
 from .models import App
 import traceback
+import sys
 
 app_name = 'friede'
 urlpatterns = []

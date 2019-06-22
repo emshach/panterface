@@ -190,8 +190,10 @@ def updateapp( name, data=None, obj=None ):
                 if v > available:
                     available = v
 
+        print path, v, 'available'
+
         app = App.objects.get( path=path )
-        app.available = available
+        app.available = str( available )
         if obj:
             app.min_version = obj.min_version
             app.required = obj.required

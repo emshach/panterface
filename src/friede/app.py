@@ -104,7 +104,7 @@ class App( object ) :
         pass
 
     def install( self ):
-        return installapp(
+        ret = installapp(
             name=self.name,
             icon=self.icon,
             module=self.module,
@@ -113,6 +113,8 @@ class App( object ) :
             data=self.data,
             obj=self
         )
+        self.installed = True
+        return ret
 
     def postinstall( self ):
         pass

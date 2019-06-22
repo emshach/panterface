@@ -42,7 +42,7 @@ try:
 except Exception:
     # pass                        # TODO: handle
     raise
-print routes
+
 urlpatterns += [ url( r"^api/%s/" % k, include( v.urls ))
                  for k, v in routes.items() ]
 views.routes[ 'ls' ] = ( 'ls', [''] )

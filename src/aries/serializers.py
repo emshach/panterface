@@ -52,6 +52,7 @@ class GroupSerializer( HyperlinkedModelSerializer ):
             'policies'
             'roles',
         )
+        user = HyperlinkedRelatedField()
 
 
 class PolicySerializer( HyperlinkedModelSerializer ):
@@ -69,6 +70,27 @@ class PolicySerializer( HyperlinkedModelSerializer ):
             'permissions'
             'roles',
         )
+        user = HyperlinkedRelatedField()
+        group = HyperlinkedRelatedField()
+        role = HyperlinkedRelatedField()
+
+
+class RoleSerializer( HyperlinkedModelSerializer ):
+    class Meta:
+        model = Role
+        fields = (
+            'id',
+            'title',
+            'description',
+            'active',
+            'data',
+            'users',
+            'groups',
+            'permissions',
+            'policies'
+        )
+        user = HyperlinkedRelatedField()
+        group = HyperlinkedRelatedField()
 
 
 class PermissionSerializer( HyperlinkedModelSerializer ):
@@ -88,22 +110,10 @@ class PermissionSerializer( HyperlinkedModelSerializer ):
             'policies',
             'roles',
         )
-
-
-class RoleSerializer( HyperlinkedModelSerializer ):
-    class Meta:
-        model = Role
-        fields = (
-            'id',
-            'title',
-            'description',
-            'active',
-            'data',
-            'users',
-            'groups',
-            'permissions',
-            'policies'
-        )
+        user = HyperlinkedRelatedField()
+        group = HyperlinkedRelatedField()
+        policy = HyperlinkedRelatedField()
+        role = HyperlinkedRelatedField()
 
 
 by_model = dict(

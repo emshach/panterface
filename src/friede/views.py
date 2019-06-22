@@ -130,7 +130,7 @@ def _normalize_lookup( lookup ):
         lookup.append([])
     if len( lookup ) < 3:
         lookup.append({})
-    return lookup
+    return lookup[:3]
 
 @api_view([ 'GET' ])
 @permission_classes(( permissions.AllowAny, ))
@@ -138,9 +138,9 @@ def api_root( request, format=None ):
     "Root view for Friede system REST API"
     out = {}
     for k, v in routes.items():
-        v = _normalize_lookup(v)
+        route, args, kw = _normalize_lookup(v)
         # out[k] = reverse( "friede:%s" % v[0], args=v[1], kwargs=v[2],
-        out[k] = reverse( v[0], args=v[1], kwargs=v[2], request=request, format=None )
+        out[k] = reverse( route, args=args, kwargs=kw, request=request, format=None )
     return Response( out )
 
 def _process_location( location ):

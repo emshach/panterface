@@ -14,8 +14,8 @@ class App( app.App ):
     objects = 'user group policy permission role'.split()
 
     min_version = '0.0.1'
-    # required = True
-    # user_required = True
+    required = True
+    user_required = True
 
     relations = dict(
         user={
@@ -76,81 +76,82 @@ class App( app.App ):
     @property
     def data( self ):
         return (
-        ( '0.1.0',
-          ( '#actions',
-            ( 'list', dict(
-                icon='fontawesome.list',
-                title='List Object Data in Table Form',
-                description='''''',
-                data=dict(
-                    reverse='uninstall',
-                    widget='Installer',
-                ))),
-          ),
-          ( '#widgets',
-            ( 'help',
-              ( 'list', dict(
-                  icon='fontawesome.list',
-                  data=dict(
-                      component='ActionHelpWidget',
-                      action='list'
-                  ))),
-            ),
-            ( 'dashboard', dict (
-                icon='fontawesome.expand',
-                data=dict(
-                    component='DashboardWidget'
-                ))),
-            ( 'from relations', self.objects, self.relations )),
-          ( '#blocks',
-            ( 'form',
-              ( 'group', dict(
-                  icon='fontawesome.object-group',
-                  data=dict(
-                      component='FormGroup'
-                  ))),
-            )),
-          ( '#screens',
-            ( 'form.single', dict(
-                icon='fontawesome.file-alt',
-                data=dict(
-                    component='FormPage'
-                ))),
-          ),
-          ( '#locations',
-            ( 'user',
-              ( 'private', dict(
-                  title='My Page',
-                  href='/me' ),
-                ( '#screens',
-                  ( 'default', dict( path='dashboard.user.home' )))),
-              ( 'public', dict(
-                  title='User Profile',
-                  href='/{user}' ),
-                ( '#screens',
-                  ( 'default', dict( path='dashboard.user' ))))),
-            ( 'from relations', self.objects, self.relations )),
-          ( '#settings',
-            ( 'from relations', self.objects, self.relations ),
-          ),
-          ( '#containers',
-            ( 'links.menu',
-              ( 'user', dict(
-                  title='User Menu',
-                  description='Main User Menu'
-              )))),
-          ( '#links',
-            ( 'menu.user',
-              ( 'home', dict(
-                  title='User Home Page',
-                  icon='fontawesome.home',
-                  location='home' )),
-              ( 'profile', dict(
-                  title='Profile Page',
-                  icon='fontawesome.user-cog',
-                  location='apps' )),
-            )),
-        ),
+            ( '0.0.1', )
+        # ( '0.1.0',
+        #   ( '#actions',
+        #     ( 'list', dict(
+        #         icon='fontawesome.list',
+        #         title='List Object Data in Table Form',
+        #         description='''''',
+        #         data=dict(
+        #             reverse='uninstall',
+        #             widget='Installer',
+        #         ))),
+        #   ),
+        #   ( '#widgets',
+        #     ( 'help',
+        #       ( 'list', dict(
+        #           icon='fontawesome.list',
+        #           data=dict(
+        #               component='ActionHelpWidget',
+        #               action='list'
+        #           ))),
+        #     ),
+        #     ( 'dashboard', dict (
+        #         icon='fontawesome.expand',
+        #         data=dict(
+        #             component='DashboardWidget'
+        #         ))),
+        #     ( 'from relations', self.objects, self.relations )),
+        #   ( '#blocks',
+        #     ( 'form',
+        #       ( 'group', dict(
+        #           icon='fontawesome.object-group',
+        #           data=dict(
+        #               component='FormGroup'
+        #           ))),
+        #     )),
+        #   ( '#screens',
+        #     ( 'form.single', dict(
+        #         icon='fontawesome.file-alt',
+        #         data=dict(
+        #             component='FormPage'
+        #         ))),
+        #   ),
+        #   ( '#locations',
+        #     ( 'user',
+        #       ( 'private', dict(
+        #           title='My Page',
+        #           href='/me' ),
+        #         ( '#screens',
+        #           ( 'default', dict( path='dashboard.user.home' )))),
+        #       ( 'public', dict(
+        #           title='User Profile',
+        #           href='/{user}' ),
+        #         ( '#screens',
+        #           ( 'default', dict( path='dashboard.user' ))))),
+        #     ( 'from relations', self.objects, self.relations )),
+        #   ( '#settings',
+        #     ( 'from relations', self.objects, self.relations ),
+        #   ),
+        #   ( '#containers',
+        #     ( 'links.menu',
+        #       ( 'user', dict(
+        #           title='User Menu',
+        #           description='Main User Menu'
+        #       )))),
+        #   ( '#links',
+        #     ( 'menu.user',
+        #       ( 'home', dict(
+        #           title='User Home Page',
+        #           icon='fontawesome.home',
+        #           location='home' )),
+        #       ( 'profile', dict(
+        #           title='Profile Page',
+        #           icon='fontawesome.user-cog',
+        #           location='apps' )),
+        #     )),
+        # ),
     )
     @property
     def userdata( self ):

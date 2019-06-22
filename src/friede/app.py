@@ -74,6 +74,8 @@ class App( object ) :
             self.postupdate()
         if self.required or self.auto_install:
             self.install()
+        if self.required:
+            self.activate()
         # TODO: else raise exception
 
     def __nonzero__( self ): return True
@@ -108,6 +110,11 @@ class App( object ) :
 
     def postinstall( self ):
         pass
+
+    def activate( self ):
+        if self.model:
+            self.model.active = True
+            self.model.save()
 
     def preinit( self ):
         pass

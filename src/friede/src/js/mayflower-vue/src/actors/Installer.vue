@@ -62,9 +62,6 @@ export default {
 .installer {
   &.widget {
     color: grey;
-    .uk-button, .icon {
-      padding: 0 6px;
-    }
   }
 }
 </style>

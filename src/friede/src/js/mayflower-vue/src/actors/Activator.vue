@@ -75,9 +75,6 @@ export default {
         color: darkred;
       }
     }
-    .uk-button, .icon {
-      padding: 0 6px;
-    }
   }
 }
 </style>

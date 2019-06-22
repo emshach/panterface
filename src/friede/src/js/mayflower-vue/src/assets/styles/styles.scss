@@ -86,5 +86,13 @@ form.uk-form-stacked label {
     > * {
       float: right;
     }
+    .widget {
+      .uk-button, .icon {
+        padding: 0 6px;
+      }
+      .icon {
+        box-sizing: content-box;
+      }
+    }
   }
 }

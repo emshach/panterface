@@ -66,9 +66,6 @@
 .installer.widget {
   color: grey;
 }
-.installer.widget .uk-button, .installer.widget .icon {
-    padding: 0 6px;
-}
 
 .activator.widget .activator-enabled {
   color: cornflowerblue;
@@ -78,9 +75,6 @@
 }
 .activator.widget .activator-disabled.danger {
     color: darkred;
-}
-.activator.widget .uk-button, .activator.widget .icon {
-  padding: 0 6px;
 }
 
 

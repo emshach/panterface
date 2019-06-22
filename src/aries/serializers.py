@@ -52,7 +52,25 @@ class GroupSerializer( HyperlinkedModelSerializer ):
             'policies'
             'roles',
         )
-        user = HyperlinkedRelatedField( many=True, read_only=True, view_name='user-detail' )
+    user = UserSerializer( many=True )
+
+
+class RoleSerializer( HyperlinkedModelSerializer ):
+    class Meta:
+        model = Role
+        fields = (
+            'id',
+            'title',
+            'description',
+            'active',
+            'data',
+            'users',
+            'groups',
+            'permissions',
+            'policies'
+        )
+    user = UserSerializer( many=True )
+    group = GroupSerializer( many=True )
 
 
 class PolicySerializer( HyperlinkedModelSerializer ):
@@ -70,27 +88,9 @@ class PolicySerializer( HyperlinkedModelSerializer ):
             'permissions'
             'roles',
         )
-        user = HyperlinkedRelatedField( many=True, read_only=True, view_name='user-detail' )
-        group = HyperlinkedRelatedField( many=True, read_only=True, view_name='group-detail' )
-        role = HyperlinkedRelatedField( many=True, read_only=True, view_name='role-detail' )
-
-
-class RoleSerializer( HyperlinkedModelSerializer ):
-    class Meta:
-        model = Role
-        fields = (
-            'id',
-            'title',
-            'description',
-            'active',
-            'data',
-            'users',
-            'groups',
-            'permissions',
-            'policies'
-        )
-        user = HyperlinkedRelatedField( many=True, read_only=True, view_name='user-detail' )
-        group = HyperlinkedRelatedField( many=True, read_only=True, view_name='group-detail' )
+    user = UserSerializer( many=True )
+    group = GroupSerializer( many=True )
+    role = RoleSerializer( many=True )
 
 
 class PermissionSerializer( HyperlinkedModelSerializer ):
@@ -110,10 +110,10 @@ class PermissionSerializer( HyperlinkedModelSerializer ):
             'policies',
             'roles',
         )
-        user = HyperlinkedRelatedField( many=True, read_only=True, view_name='user-detail' )
-        group = HyperlinkedRelatedField( many=True, read_only=True, view_name='group-detail' )
-        policy = HyperlinkedRelatedField( many=True, read_only=True, view_name='policy-detail' )
-        role = HyperlinkedRelatedField( many=True, read_only=True, view_name='role-detail' )
+    user = UserSerializer( many=True )
+    group = GroupSerializer( many=True )
+    policy = PolicySerializer( many=True )
+    role = RoleSerializer( many=True )
 
 
 by_model = dict(

@@ -30,7 +30,6 @@ ALLOWED_HOSTS = [ 'app.sandbox0.com' ]
 # Application definition
 
 INSTALLED_APPS = [
-    'aries',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -43,6 +42,7 @@ INSTALLED_APPS = [
     # 'guardian',
     'rest_framework',
     'friede',
+    'aries',
     # 'allauth',
     # 'allauth.social',
     # # 'allauth.socialaccount.providers.agave',

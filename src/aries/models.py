@@ -8,6 +8,7 @@ from django.db.models.signals import post_save
 from django.contrib.contenttypes.models import ContentType
 
 Model = M.Model
+owned = set()
 
 class _AutoChildBase( M.base.ModelBase ):
     class Meta:
@@ -102,33 +103,7 @@ class _AutoOwnedBase( M.base.ModelBase ):
 
         if model._meta.abstract or model._meta.concrete_model is not model:
             return model
-        name = model._meta.model_name
-        verbose = model._meta.verbose_name
-        ct = ContentType.objects.get_for_model( model )
-        Permission.objects.get_or_create(
-            defaults=dict( name="Can change own {}".format( verbose )),
-            codename="change_own_{}".format( name ),
-            content_type=ct )
-        Permission.objects.get_or_create(
-            defaults=dict( name="Can delete own {}".format( verbose )),
-            codename="delete_own_{}".format( name ),
-            content_type=ct )
-        Permission.objects.get_or_create(
-            defaults=dict( name="Can see {}".format( verbose )),
-            codename="see_{}".format( name ),
-            content_type=ct )
-        Permission.objects.get_or_create(
-            defaults=dict( name="Can see own {}".format( verbose )),
-            codename="see_own_{}".format( name ),
-            content_type=ct )
-        Permission.objects.get_or_create(
-            defaults=dict( name="Can view {}".format( verbose )),
-            codename="view_{}".format( name ),
-            content_type=ct )
-        Permission.objects.get_or_create(
-            defaults=dict( name="Can view own {}".format( verbose )),
-            codename="view_own_{}".format( name ),
-            content_type=ct )
+        owned.add( model )
         return model
 
 

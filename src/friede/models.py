@@ -7,7 +7,7 @@ from datetime import date
 from django.utils.timezone import now
 from django.contrib.auth import get_user_model
 from model_utils.managers import InheritanceManager
-from aries import AutoOwnedModel
+from aries.models import AutoOwnedModel
 from .util import snake_case
 
 

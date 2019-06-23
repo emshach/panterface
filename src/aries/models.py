@@ -10,38 +10,36 @@ Model = M.Model
 
 
 
-def AutoChildModel():
-    class Base( M.base.ModelBase ):
-        class Meta:
-            abstract = True
-        def __new__( mcs, name, bases, attrs ):
-            model = super( Base, mcs ).__new__( mcs, name, bases, attrs )
+class AutoBaseModel( M.base.ModelBase ):
+    class Meta:
+        abstract = True
+    def __new__( mcs, name, bases, attrs ):
+        model = super( Base, mcs ).__new__( mcs, name, bases, attrs )
 
-            if model._meta.abstract:
-                return model
-
-            # Avoid virtual models (for, for instance, deferred fields)
-            if model._meta.concrete_model is not model:
-                return model
-
-            pk = model._meta.pk
-            parents = model._meta.parents
-            parent = filter( lambda x: x[1] is pk, parents.items())[0][0]
-
-            def on_create_cb( sender, instance, created, *args, **kwargs ):
-                if created:
-                    m = model(**{ pk.name: instance })
-                    m.save_base( raw=True )
-                    m.refresh_from_db()
-
-            post_save.connect(on_create_cb, sender=parent, weak=False)
+        if model._meta.abstract:
             return model
 
-    class AutoChild( six.with_metaclass( Base, Model )):
-        class Meta:
-            abstract = True
+        # Avoid virtual models (for, for instance, deferred fields)
+        if model._meta.concrete_model is not model:
+            return model
 
-    return AutoChild
+        pk = model._meta.pk
+        parents = model._meta.parents
+        parent = filter( lambda x: x[1] is pk, parents.items())[0][0]
+
+        def on_create_cb( sender, instance, created, *args, **kwargs ):
+            if created:
+                m = model(**{ pk.name: instance })
+                m.save_base( raw=True )
+                m.refresh_from_db()
+
+        post_save.connect(on_create_cb, sender=parent, weak=False)
+        return model
+
+
+class AutoChildModel( six.with_metaclass( Base, Model )):
+    class Meta:
+        abstract = True
 
 
 class _Base( Model ):
@@ -67,7 +65,7 @@ class DataMixin( Model ):
     data = JSONField( default=dict )
 
 
-class Permission( AutoChildModel(), auth.Permission, Base, DataMixin ):
+class Permission( AutoChildModel, auth.Permission, Base, DataMixin ):
     auth_ptr  = M.OneToOneField( auth.Permission, M.CASCADE, parent_link=True,
                                  related_name='aries_data' )
 
@@ -94,7 +92,7 @@ class User( auth.AbstractUser, _Base, DataMixin ):
     policies = M.ManyToManyField( Policy, blank=True, related_name='users' )
 
 
-class Group( AutoChildModel(), auth.Group, Base, DataMixin ):
+class Group( AutoChildModel, auth.Group, Base, DataMixin ):
     auth_ptr  = M.OneToOneField( auth.Group, M.CASCADE, parent_link=True,
                                  related_name='aries_data' )
     roles = M.ManyToManyField( Role, blank=True, related_name='groups' )

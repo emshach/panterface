@@ -8,19 +8,13 @@ from django.db.models.signals import post_save
 
 Model = M.Model
 
-
-
-class AutoBaseModel( M.base.ModelBase ):
+class _AutoChildBase( M.base.ModelBase ):
     class Meta:
         abstract = True
     def __new__( mcs, name, bases, attrs ):
-        model = super( AutoBaseModel, mcs ).__new__( mcs, name, bases, attrs )
+        model = super( _AutoChildBase, mcs ).__new__( mcs, name, bases, attrs )
 
-        if model._meta.abstract:
-            return model
-
-        # Avoid virtual models (for, for instance, deferred fields)
-        if model._meta.concrete_model is not model:
+        if model._meta.abstract or model._meta.concrete_model is not model:
             return model
 
         pk = model._meta.pk
@@ -37,7 +31,7 @@ class AutoBaseModel( M.base.ModelBase ):
         return model
 
 
-class AutoChildModel( six.with_metaclass( AutoBaseModel, Model )):
+class AutoChildModel( six.with_metaclass( _AutoChildBase, Model )):
     class Meta:
         abstract = True
 
@@ -97,5 +91,26 @@ class Group( AutoChildModel, auth.Group, Base, DataMixin ):
                                  related_name='aries_data' )
     roles = M.ManyToManyField( Role, blank=True, related_name='groups' )
     policies = M.ManyToManyField( Policy, blank=True, related_name='groups' )
+
+
+class _AutoOwnedBase( M.base.ModelBase ):
+    class Meta:
+        abstract = True
+    def __new__( mcs, name, bases, attrs ):
+        model = super( _AutoOwnedBase, mcs ).__new__( mcs, name, bases, attrs )
+
+        if model._meta.abstract or model._meta.concrete_model is not model:
+            return model
+
+
+class AutoOwnedModel( six.with_metaclass( _AutoOwnedBase, Model )):
+    class Meta:
+        abstract = True
+    owner  = M.ForeignKey( User, related_name="%(app_label)s_%(class)s_set",
+                           on_delete=M.CASCADE,
+                           blank=True, null=True )
+    creator  = M.ForeignKey( User, related_name="%(app_label)s_%(class)s_created_set",
+                             on_delete=M.CASCADE,
+                             blank=True, null=True )
 
 

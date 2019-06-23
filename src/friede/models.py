@@ -7,6 +7,7 @@ from datetime import date
 from django.utils.timezone import now
 from django.contrib.auth import get_user_model
 from model_utils.managers import InheritanceManager
+from aries import AutoOwnedModel
 from .util import snake_case
 
 
@@ -108,19 +109,13 @@ class AppMixin( Model ):
     app = M.ForeignKey( 'App', M.CASCADE )
 
 
-class Registry( Base, PathMixin ):
+class Registry( AutoOwnedModel, Base, PathMixin ):
     class Meta:
         verbose_name_plural = 'registries'
     format = JSONField( default=dict )
     default = JSONField( default=dict )
     parent = M.ForeignKey( 'self', M.CASCADE, blank=True, null=True,
                            related_name='_elements' )
-    owner  = M.ForeignKey( get_user_model(), related_name='friede_registries',
-                           on_delete=M.CASCADE,
-                           blank=True, null=True )
-    creator  = M.ForeignKey( get_user_model(), related_name='created_friede_registries',
-                           on_delete=M.CASCADE,
-                           blank=True, null=True )
 
     objects = InheritanceManager()
 
@@ -421,19 +416,13 @@ class Icon( _Base, PathMixin ):
                                     related_name='_icons' )
 
 
-class Link( Base, PathMixin ):
+class Link( AutoOwnedModel, Base, PathMixin ):
     parent = M.ForeignKey( Registry, M.CASCADE, blank=True, null=True,
                            related_name='_link_elements' )
     registries = M.ManyToManyField( Registry, blank=True, through='LinkEntry',
                                     related_name='links' )
     location = M.ForeignKey( Location, M.SET_NULL, blank=True, null=True,
                              related_name='_links' )
-    owner  = M.ForeignKey( get_user_model(), related_name='friede_links',
-                           on_delete=M.CASCADE,
-                           blank=True, null=True )
-    creator  = M.ForeignKey( get_user_model(), related_name='created_friede_links',
-                           on_delete=M.CASCADE,
-                           blank=True, null=True )
 
     def to_dict( self ):
         out = super( Link, self).to_dict()
@@ -462,7 +451,7 @@ class Reference( Base, PathMixin ):
         return out
 
 
-class Setting( Base, PathMixin, DataMixin, ExtendsMixin ):
+class Setting( AutoOwnedModel, Base, PathMixin, DataMixin, ExtendsMixin ):
     class Types:
         BOOLEAN             = 'BooleanField'
         CHAR                = 'CharField'
@@ -529,12 +518,6 @@ class Setting( Base, PathMixin, DataMixin, ExtendsMixin ):
                                     related_name='_settings' )
     type     = M.CharField( max_length=32, choices=Types.ALL, default=Types.CHAR )
     default  = JSONField( default=dict )
-    owner  = M.ForeignKey( get_user_model(), related_name='friede_settings',
-                           on_delete=M.CASCADE,
-                           blank=True, null=True )
-    creator  = M.ForeignKey( get_user_model(), related_name='created_friede_settings',
-                           on_delete=M.CASCADE,
-                           blank=True, null=True )
 
     def to_dict( self ):
         out = super( Setting, self).to_dict()
@@ -545,17 +528,11 @@ class Setting( Base, PathMixin, DataMixin, ExtendsMixin ):
         return out
 
 
-class Action( Base, PathMixin, DataMixin ):
+class Action( AutoOwnedModel, Base, PathMixin, DataMixin ):
     parent = M.ForeignKey( Registry, M.CASCADE, blank=True, null=True,
                            related_name='_action_elements' )
     registries = M.ManyToManyField( Registry, blank=True, through='ActionEntry',
                                     related_name='_actions' )
-    owner  = M.ForeignKey( get_user_model(), related_name='friede_actions',
-                           on_delete=M.CASCADE,
-                           blank=True, null=True )
-    creator  = M.ForeignKey( get_user_model(), related_name='created_friede_actions',
-                           on_delete=M.CASCADE,
-                           blank=True, null=True )
 
 
 

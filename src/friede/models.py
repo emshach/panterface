@@ -109,7 +109,7 @@ class AppMixin( Model ):
     app = M.ForeignKey( 'App', M.CASCADE )
 
 
-class Registry( Base, PathMixin ):
+class Registry( AutoOwnedModel, Base, PathMixin ):
     class Meta:
         verbose_name_plural = 'registries'
     format = JSONField( default=dict )
@@ -416,7 +416,7 @@ class Icon( _Base, PathMixin ):
                                     related_name='_icons' )
 
 
-class Link( Base, PathMixin ):
+class Link( AutoOwnedModel, Base, PathMixin ):
     parent = M.ForeignKey( Registry, M.CASCADE, blank=True, null=True,
                            related_name='_link_elements' )
     registries = M.ManyToManyField( Registry, blank=True, through='LinkEntry',
@@ -451,7 +451,7 @@ class Reference( Base, PathMixin ):
         return out
 
 
-class Setting( Base, PathMixin, DataMixin, ExtendsMixin ):
+class Setting( AutoOwnedModel, Base, PathMixin, DataMixin, ExtendsMixin ):
     class Types:
         BOOLEAN             = 'BooleanField'
         CHAR                = 'CharField'
@@ -528,7 +528,7 @@ class Setting( Base, PathMixin, DataMixin, ExtendsMixin ):
         return out
 
 
-class Action( Base, PathMixin, DataMixin ):
+class Action( AutoOwnedModel, Base, PathMixin, DataMixin ):
     parent = M.ForeignKey( Registry, M.CASCADE, blank=True, null=True,
                            related_name='_action_elements' )
     registries = M.ManyToManyField( Registry, blank=True, through='ActionEntry',

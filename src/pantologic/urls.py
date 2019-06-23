@@ -19,6 +19,7 @@ from django.contrib.auth import get_user_model
 
 # init aries permissions FIXME: feels hackish
 from aries.models import owned, Permission
+from django.contrib.contenttypes.models import ContentType
 for model in owned:
     name = model._meta.model_name
     verbose = model._meta.verbose_name

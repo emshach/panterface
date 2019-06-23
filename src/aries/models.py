@@ -37,7 +37,7 @@ class AutoBaseModel( M.base.ModelBase ):
         return model
 
 
-class AutoChildModel( six.with_metaclass( Base, Model )):
+class AutoChildModel( six.with_metaclass( AutoBaseModel, Model )):
     class Meta:
         abstract = True
 

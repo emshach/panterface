@@ -101,6 +101,7 @@ class _AutoOwnedBase( M.base.ModelBase ):
 
         if model._meta.abstract or model._meta.concrete_model is not model:
             return model
+        return model
 
 
 class AutoOwnedModel( six.with_metaclass( _AutoOwnedBase, Model )):

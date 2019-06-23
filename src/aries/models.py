@@ -14,7 +14,7 @@ class AutoBaseModel( M.base.ModelBase ):
     class Meta:
         abstract = True
     def __new__( mcs, name, bases, attrs ):
-        model = super( Base, mcs ).__new__( mcs, name, bases, attrs )
+        model = super( AutoBaseModel, mcs ).__new__( mcs, name, bases, attrs )
 
         if model._meta.abstract:
             return model

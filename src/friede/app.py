@@ -24,7 +24,7 @@ apps = OrderedDict()
 
 class NamedDefaultRouter( routers.DefaultRouter ):
     def __init__( self, name, *args, **kwargs ):
-        self.root_view_name = "api-root-%s" % name
+        # self.root_view_name = "api-root-%s" % name
         super( NamedDefaultRouter, self ).__init__( *args, **kwargs )
 
 class App( object ) :
@@ -117,7 +117,7 @@ class App( object ) :
     def init( self, routes, viewroutes, router=None, urlpatterns=None ):
         name = self.name
         self.router = routes[ name ] = NamedDefaultRouter( name )
-        viewroutes[ name ] = "api-root-%s" % name
+        viewroutes[ name ] = 'api-root'
 
         for k, v in self.api:
             routes[k] = v[ 0 : 2 ]

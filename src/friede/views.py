@@ -141,7 +141,7 @@ def api_root( request, format=None ):
     out = {}
     for k, v in routes.items():
         route, args, kw = _normalize_lookup(v)
-        route = "friede:%s" % route
+        route = "friede:{}:{}".format( k, route )
         out[k] = reverse( route, args=args, kwargs=kw, request=request, format=None )
     return Response( out )
 

@@ -42,7 +42,7 @@ except Exception:
     raise
 
 urlpatterns += [ u for x in tuple (
-    ( url( r"^api/%s/" % k, include( v.urls )),
+    ( url( r"^api/%s/" % k, include( v.urls, namespace=k )),
       url( r"^api/%s" % k, RedirectView.as_view(
           url=reverse_lazy( "friede:api-root-%s" % k ),
           permanent=True ))) if hasattr( v, 'urls' )

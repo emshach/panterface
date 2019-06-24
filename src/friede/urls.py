@@ -7,6 +7,7 @@ from . import views
 from . import friede_app
 from .app import router, registrar, routes, apps
 from .models import App
+import friede.urls
 import traceback
 import sys
 

@@ -56,9 +56,9 @@ for ns, urls in routes.items():
                     url=reverse_lazy( "friede:{}:{}".format( ns, v.root_view_name )),
                     permanent=True ))]
         else:
-           chunk.append( url( r"^%s" % k, v[0], name=v[2] ))
+           chunk.append( url( r"^%s" % k, v[0], name=v[1] ))
 
-    urlpatterns.append(( chunk, ns ))
+    urlpatterns.append( url( r'^api/', include(( chunk, ns ))))
 
 urlpatterns += [
     url( r'^api/?$', views.api_root, name='api-root' ),

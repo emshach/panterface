@@ -118,14 +118,14 @@ class App( object ) :
     def preinit( self ):
         pass
 
-    def init( self, routes, viewroutes, router=None, urlpatterns=None ):
+    def init( self, routes, lookup, router=None, urlpatterns=None ):
         name = self.name
         self.router = routes[ name ] = NamedDefaultRouter( name )
-        viewroutes[ name ] = 'api-root'
+        lookup[ name ] = 'api-root'
 
         for k, v in self.api:
             routes[k] = v[ 0 : 2 ]
-            viewroutes[ v[1] ] = v[ 1: ]
+            lookup[ v[1] ] = v[ 1: ]
 
         for k, v in self.routes:
             self.router.register( k, v )

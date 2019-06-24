@@ -121,7 +121,7 @@ class App( object ) :
 
         for k, v in self.api:
             routes[k] = v[ 0 : 2 ]
-            viewroutes[ v[1] ] = v[ :1 ]
+            viewroutes[ v[1] ] = v[ 1: ]
 
         for k, v in self.routes:
             self.router.register( k, v )

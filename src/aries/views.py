@@ -20,12 +20,12 @@ def register( request ):
 @api_view([ 'GET' ])
 @permission_classes(( permissions.AllowAny, ))
 def api_can( request, perm='any', format=None ):
-    return Response( null )
+    return Response( None )
 
 @api_view([ 'GET' ])
 @permission_classes(( permissions.AllowAny, ))
 def api_which_can( request, format=None ):
-    return Response( null )
+    return Response( None )
 
 class UserViewSet( viewsets.ModelViewSet ):
     queryset = User.objects.all()

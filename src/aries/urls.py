@@ -36,7 +36,7 @@ for model in owned:
         content_type=ct )
 
 urlpatterns = [
-    # url( r'^register/', login, name='register' ),
-    # url( r'^login/', login, name='login' ),
-    # url( r'^logout/', login, name='logout' ),
+    url( r'^register/', login, name='register' ),
+    url( r'^login/', login, name='login' ),
+    url( r'^logout/', login, name='logout' ),
 ]

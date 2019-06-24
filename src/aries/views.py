@@ -6,6 +6,15 @@ from rest_framework import status, viewsets, permissions, filters
 from .models import *
 from .serializers import *
 
+def login( request ):
+    pass
+
+def logout( request ):
+    pass
+
+def register( request ):
+    pass
+
 class UserViewSet( viewsets.ModelViewSet ):
     queryset = User.objects.all()
     serializer_class = UserSerializer

@@ -59,7 +59,7 @@ class App( app.App ):
             'links'  : (),
         },
     )
-    views=(
+    api=(
         ( r'can/(?P<perm>.+$)', ( views.api_can,       'can', [ 'any' ])),
         ( r'can/$)',            ( views.api_which_can, 'which_can' )),
     )

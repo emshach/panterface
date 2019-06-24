@@ -37,7 +37,7 @@ class App( object ) :
     objects = ()
     relations = ()
     actions = ()
-    views = ()
+    api = ()
     routes = ()
     router = None
     serializers = ()
@@ -119,7 +119,7 @@ class App( object ) :
         self.router = routes[ name ] = NamedDefaultRouter( name )
         viewroutes[ name ] = "api-root-%s" % name
 
-        for k, v in self.views:
+        for k, v in self.api:
             routes[k] = v[ 0 : 2 ]
             viewroutes[ v[1] ] = v[ :1 ]
 

@@ -46,9 +46,9 @@ except Exception:
     # pass                        # TODO: handle
     raise
 
-for ns, urls in routes:
+for ns, urls in routes.items():
     chunk = []
-    for k, v in urls:
+    for k, v in urls.items():
         if hasattr( v, 'urls' ):
             chunk += [
                 url( r"^%s/" % k, include( v.urls )),

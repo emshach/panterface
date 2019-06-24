@@ -27,21 +27,6 @@ class NamedDefaultRouter( routers.DefaultRouter ):
         self.root_view_name = "api-root-%s" % name
         super( NamedDefaultRouter, self ).__init__( *args, **kwargs )
 
-def registrar( router, routes, app ):
-    name = app.name
-    myrouter = None
-    try:
-        myrouter = routes[ name ]
-    except KeyError:
-        myrouter = routes[ name ] = NamedDefaultRouter( name )
-        view_routes[ name ] = "api-root-%s" % name
-        # myrouter.root_view_name = "api-root-%s" % name
-
-    def register( prefix, viewset ):
-        myrouter.register( prefix , viewset )
-    return register
-
-
 class App( object ) :
     installed = False
     name = ''
@@ -52,7 +37,9 @@ class App( object ) :
     objects = ()
     relations = ()
     actions = ()
+    views = ()
     routes = ()
+    router = None
     serializers = ()
     model=None
     version='0.0.0'
@@ -127,9 +114,17 @@ class App( object ) :
     def preinit( self ):
         pass
 
-    def init( self, register, router=None, urlpatterns=None ):
+    def init( self, routes, viewroutes, router=None, urlpatterns=None ):
+        name = self.name
+        self.router = routes[ name ] = NamedDefaultRouter( name )
+        viewroutes[ name ] = "api-root-%s" % name
+
+        for k, v in self.views:
+            routes[k] = v[ 0 : 2 ]
+            viewroutes[ v[1] ] = v[ :1 ]
+
         for k, v in self.routes:
-            register( k, v )
+            self.router.register( k, v )
 
     def preupdate( self ):
         pass

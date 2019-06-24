@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render
 from rest_framework import status, viewsets, permissions, filters
+from rest_framework.response import Response
 from .models import *
 from .serializers import *
 
@@ -14,6 +15,16 @@ def logout( request ):
 
 def register( request ):
     pass
+
+@api_view([ 'GET' ])
+@permission_classes(( permissions.AllowAny, ))
+def api_can( request, perm='any', format=None ):
+    return Response( null )
+
+@api_view([ 'GET' ])
+@permission_classes(( permissions.AllowAny, ))
+def api_which_can( request, format=None ):
+    return Response( null )
 
 class UserViewSet( viewsets.ModelViewSet ):
     queryset = User.objects.all()

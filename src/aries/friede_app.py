@@ -59,6 +59,10 @@ class App( app.App ):
             'links'  : (),
         },
     )
+    views=(
+        ( r'can/(?P<perm>.+$)', ( views.api_can,       'can', [ 'any' ])),
+        ( r'can/$)',            ( views.api_which_can, 'which_can' )),
+    )
     routes=(
         ( 'users',       views.UserViewSet       ),
         ( 'groups',      views.GroupViewSet      ),

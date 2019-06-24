@@ -142,8 +142,9 @@ def api_root( request, format=None ):
     for ns, chunk in lookup.items():
         for k, v in chunk.items():
             route, args, kw = _normalize_lookup(v)
-            route = "friede:{}:{}".format( ns, route )
-            out[ "{}:{}".format( ns, k )] = reverse(
+            key = "{}:{}".format( ns, route )
+            route = 'friede:' + key
+            out[ key ] = reverse(
                 route, args=args, kwargs=kw, request=request, format=None )
     return Response( out )
 

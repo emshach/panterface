@@ -27,7 +27,7 @@ def namespace( thing, name ):
     return thing[ name ]
 
 def nameclass( name ):
-    classname = "%sAPIRootView"
+    classname = "%sAPIRootView".encode( 'ascii' )
     doc = """
     Root Friede view for the %s app API
     """ % name

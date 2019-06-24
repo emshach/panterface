@@ -8,11 +8,13 @@ import 'uikit/dist/css/uikit.min.css'
 import '@/assets/styles/styles.scss'
 import Icons from 'uikit/dist/js/uikit-icons'
 import API from '@/lib/api'
+import security from '@/lib/security'
 import Tooltip from 'vuikit/lib/tooltip'
 
 UIkit.use( Icons );
 Vue.directive( 'vk-tooltip', Tooltip );
 Vue.use( API );
+Vue.use( security );
 Vue.config.productionTip = false;
 
 function Mayflower( args ) {

@@ -139,7 +139,7 @@ def _normalize_lookup( lookup ):
 def api_root( request, format=None ):
     "Root view for Friede system REST API"
     out = {}
-    for ns, chunk in lookup:
+    for ns, chunk in lookup.items():
         for k, v in chunk.items():
             route, args, kw = _normalize_lookup(v)
             route = "friede:{}:{}".format( ns, route )

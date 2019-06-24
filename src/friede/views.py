@@ -13,6 +13,7 @@ from rest_framework_serializer_extensions.views import SerializerExtensionsAPIVi
 from collections import OrderedDict
 from importlib import import_module
 from aries.auth import get_user
+from aries.core import setup as aries_setup
 from .objects import getregistries, getenv, Locations
 from .core import setup, setupshell, setuptheme, setupmenus
 from .models import *
@@ -62,6 +63,7 @@ routes = OrderedDict()
 ### route views
 
 def index( request ):
+    aries_setup()
     env = getenv()
     # # get the shell
     menus = env.C.menus()

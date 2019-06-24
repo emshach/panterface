@@ -5,7 +5,7 @@ from django.conf import settings
 from importlib import import_module
 from . import views
 from . import friede_app
-from .app import router, registrar, routes, apps
+from .app import router, routes, apps
 from .models import App
 import traceback
 import sys

@@ -34,7 +34,7 @@ try:
                 if app.installed:
                     myroutes = namespace( routes, app.name )
                     mylookup = namespace( lookup, app.name )
-                    app.init( routes, lookup, router, urlpatterns )
+                    app.init( myroutes, mylookup, router, urlpatterns )
             except ( ImportError, AttributeError ) as e:
                 msg = str(e)
                 if 'No module named friede_app' not in msg:

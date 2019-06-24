@@ -22,6 +22,11 @@ router = routers.DefaultRouter()
 routes = OrderedDict()
 apps = OrderedDict()
 
+def namespace( thing, name ):
+    if name not in thing:
+        thing[ name ] = OrderedDict()
+    return thing[ name ]
+
 class NamedDefaultRouter( routers.DefaultRouter ):
     def __init__( self, name, *args, **kwargs ):
         # self.root_view_name = "api-root-%s" % name

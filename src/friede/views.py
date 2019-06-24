@@ -58,7 +58,7 @@ class PathFilter( filters.BaseFilterBackend ):
         return queryset.filter( path__in=paths )
 
 
-routes = OrderedDict()
+lookup = OrderedDict()
 
 ### route views
 
@@ -139,10 +139,12 @@ def _normalize_lookup( lookup ):
 def api_root( request, format=None ):
     "Root view for Friede system REST API"
     out = {}
-    for k, v in routes.items():
-        route, args, kw = _normalize_lookup(v)
-        route = "friede:{}:{}".format( k, route )
-        out[k] = reverse( route, args=args, kwargs=kw, request=request, format=None )
+    for ns, chunk in lookup:
+        for k, v in chunk.items():
+            route, args, kw = _normalize_lookup(v)
+            route = "friede:{}:{}".format( ns, route )
+            out[ "{}:{}".format( ns, k )] = reverse(
+                route, args=args, kwargs=kw, request=request, format=None )
     return Response( out )
 
 def _process_location( location ):

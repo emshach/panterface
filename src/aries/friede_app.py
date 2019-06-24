@@ -61,7 +61,7 @@ class App( app.App ):
     )
     api=(
         ( r'can/(?P<perm>.+$)', ( views.api_can,       'can', [ 'any' ])),
-        ( r'can/$)',            ( views.api_which_can, 'which_can' )),
+        ( r'can/$',            ( views.api_which_can, 'which_can' )),
     )
     routes=(
         ( 'users',       views.UserViewSet       ),

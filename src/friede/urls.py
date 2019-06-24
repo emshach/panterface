@@ -43,7 +43,7 @@ except Exception:
 
 urlpatterns += [ u for x in tuple (
     ( url( r"^api/%s/" % k, include( v.urls )),
-      url( r"^api/%s" % k, Redirect.as_view( url=reverse_lazy(
+      url( r"^api/%s" % k, RedirectView.as_view( url=reverse_lazy(
           "api-root-%s" % k, permanent=True )))) if hasattr( v, 'urls' )
     else ( url( r"^api/%s" % k, v[0], name=v[1] ), )
     for k, v in routes.items() )

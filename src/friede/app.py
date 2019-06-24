@@ -26,9 +26,23 @@ def namespace( thing, name ):
         thing[ name ] = OrderedDict()
     return thing[ name ]
 
+def nameclass( name ):
+    classname = "%sAPIRootView"
+    doc = """
+    Root Friede view for the %s app API
+    """ % name
+    def dec( cls ):
+        cls.__name__ = classname
+        cls.__doc__ = doc
+    return dec
+
 class NamedDefaultRouter( routers.DefaultRouter ):
     def __init__( self, name, *args, **kwargs ):
         # self.root_view_name = "api-root-%s" % name
+        @nameclass( name )
+        class NamedAPIRootView( routers.APIRootView ):
+            pass
+        self.APIRootView = NamedAPIRootView
         super( NamedDefaultRouter, self ).__init__( *args, **kwargs )
 
 class App( object ) :

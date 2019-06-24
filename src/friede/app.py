@@ -28,12 +28,8 @@ def namespace( thing, name ):
 
 def nameclass( name ):
     classname = "%sAPIRootView".encode( 'ascii' )
-    doc = """
-    Root Friede view for the %s app API
-    """ % name
     def dec( cls ):
         cls.__name__ = classname
-        cls.__doc__ = doc
     return dec
 
 class NamedDefaultRouter( routers.DefaultRouter ):
@@ -41,6 +37,9 @@ class NamedDefaultRouter( routers.DefaultRouter ):
         # self.root_view_name = "api-root-%s" % name
         @nameclass( name )
         class NamedAPIRootView( routers.APIRootView ):
+            """
+            App API root
+            """
             pass
         self.APIRootView = NamedAPIRootView
         super( NamedDefaultRouter, self ).__init__( *args, **kwargs )

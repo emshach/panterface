@@ -126,7 +126,6 @@ class App( app.App ):
         ( r'ls/(?P<path>.*$)',       ( views.api_ls,     'ls',     [''] )),
         ( r'models/(?P<models>.*$)', ( views.api_models, 'models', [''] )),
         ( r'path/(?P<path>.*$)',     ( views.api_path,   'path',   [''] )),
-        ( r'?$',                     ( views.api_root,   'api-root'     )),
     )
     routes=(
         ( 'registries',       views.RegistryViewSet       ),

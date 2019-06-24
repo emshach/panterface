@@ -39,7 +39,10 @@ except Exception:
     # pass                        # TODO: handle
     raise
 
-urlpatterns += [ url( r"^api/%s/?$" % k, include( v.urls )) if hasattr( v, 'urls' )
+urlpatterns += [ url( r"^api/%s(?:/|$)" % k, include( v.urls )) if hasattr( v, 'urls' )
                  else url( r"^api/%s" % k, v[0], name=v[1] )
                  for k, v in routes.items()]
-urlpatterns.append( url( r'^.*', views.index, name='index' ))
+urlpatterns += [
+    url( r'^api(?:/|$)', views.api_root, name='api-root' ),
+    url( r'^.*',     views.index,    name='index'    ),
+]

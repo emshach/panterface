@@ -7,7 +7,6 @@ from packaging.version import parse as version_parse
 from . import views
 from .core import installappheader, installapp, updateapp, upgradeapp
 from .models import App, Setting
-from .views import routes as view_routes
 
 original_reverse = relations.reverse
 

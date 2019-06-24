@@ -2,6 +2,8 @@
 from __future__ import unicode_literals
 from django.conf.urls import url, include
 from django.conf import settings
+from django.core.urlresolvers import reverse_lazy
+from django.views.generic import RedirectView
 from importlib import import_module
 from . import views
 from . import friede_app
@@ -39,9 +41,13 @@ except Exception:
     # pass                        # TODO: handle
     raise
 
-urlpatterns += [ url( r"^api/%s/?" % k, include( v.urls )) if hasattr( v, 'urls' )
-                 else url( r"^api/%s" % k, v[0], name=v[1] )
-                 for k, v in routes.items()]
+urlpatterns += [ u for x in tuple (
+    ( url( r"^api/%s/" % k, include( v.urls )),
+      url( r"^api/%s" % k, Redirect.as_view( url=reverse_lazy(
+          "api-root-%s" % k, permanent=True )))) if hasattr( v, 'urls' )
+    else ( url( r"^api/%s" % k, v[0], name=v[1] ), )
+    for k, v in routes.items() )
+                 for u in x ]
 urlpatterns += [
     url( r'^api/?$', views.api_root, name='api-root' ),
     url( r'^.*',     views.index,    name='index'    ),

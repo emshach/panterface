@@ -15,9 +15,9 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from aries.core import setup as aries_setup
+from aries.core import setup_permissions
 
-aries_setup()
+setup_permissions()
 
 urlpatterns = [
     url( r'^api-auth/', include( 'rest_framework.urls', namespace='rest_framework' )),

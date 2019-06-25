@@ -6,15 +6,28 @@ from django.db import migrations
 
 def create_types(apps, schema_editor):
     db_alias = schema_editor.connection.alias
-    AuthPerms = apps.get_model( 'auth', 'Permission' )
+    AuthPerm = apps.get_model( 'auth', 'Permission' )
     Permission = apps.get_model( 'aries', 'Permission' )
-    for p in AuthPerms.objects.all():
+    AuthGroup = apps.get_model( 'auth', 'Group' )
+    Group = apps.get_model( 'aries', 'Group' )
+    for p in AuthPerm.objects.all():
         try:
             Permission.objects.get( pk=p.pk )
         except Permission.DoesNotExist:
-            p0 = Permission.objects.using( db_alias ).create( auth_ptr=p )
-            p0.save_base( raw=True )
-            print 'attached', p.name
+            Permission.objects\
+                      .using( db_alias )\
+                      .create( auth_ptr=p )\
+                      .save_base( raw=True )
+            print 'attached permission', p.name
+    for g in AuthGroup.objects.all():
+        try:
+            Group.objects.get( pk=p.pk )
+        except Group.DoesNotExist:
+            Group.objects\
+                 .using( db_alias )\
+                 .create( auth_ptr=p, title=g.name.title().replace( '_', ' ' ))\
+                 .save_base( raw=True )
+            print 'attached group', g.name
 
 class Migration(migrations.Migration):
 

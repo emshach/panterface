@@ -4,6 +4,7 @@ from importlib import import_module
 from rest_framework import routers, relations
 from collections import OrderedDict
 from packaging.version import parse as version_parse
+from django.conf import settings
 from . import views
 from .core import installappheader, installapp, updateapp, upgradeapp
 from .models import App, Setting
@@ -25,6 +26,38 @@ def namespace( thing, name ):
     if name not in thing:
         thing[ name ] = OrderedDict()
     return thing[ name ]
+
+def setup( friede_app, lookup, urlpattens ):
+    try:
+        friede = friede_app.App()
+        apps[ 'friede' ] = friede
+        friede.install()
+        myroutes = namespace( routes, 'friede' )
+        mylookup = namespace( lookup, 'friede' )
+        friede.init( myroutes, mylookup, router, urlpatterns )
+        for app_name in settings.INSTALLED_APPS:
+            if app_name == 'friede': continue
+            name = app_name
+            module = app_name
+            if module:
+                try:
+                    app = import_module( "%s.friede_app" % module )
+                    app = app.App()
+                    apps[ app.name ] = app
+                    if app.installed:
+                        myroutes = namespace( routes, app.name )
+                        mylookup = namespace( lookup, app.name )
+                        app.init( myroutes, mylookup, router, urlpatterns )
+                except ( ImportError, AttributeError ) as e:
+                    msg = str(e)
+                    if 'No module named friede_app' not in msg:
+                        print >> sys.stderr, 'got exception', type(e), e,\
+                            "in friede.urls/%s" % module
+                        traceback.print_exc()
+                    continue        # TODO: maybe warn
+    except Exception:
+        # pass                        # TODO: handle
+        raise
 
 class NamedDefaultRouter( routers.DefaultRouter ):
     def __init__( self, name, *args, **kwargs ):

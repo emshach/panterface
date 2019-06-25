@@ -73,7 +73,7 @@ class Policy( Base, DataMixin ):
             ( ALLOW, 'Allow' ),
             ( DENY,  'Deny' ),
         )
-    type = M.CharField( max_length=16, choices=Types.ALL, default=Types.ALLOW )
+    type        = M.CharField( max_length=16, choices=Types.ALL, default=Types.ALLOW )
     permissions = M.ManyToManyField( Permission, blank=True, related_name='policies' )
 
 
@@ -84,15 +84,16 @@ class Role( Base, DataMixin ):
 
 class User( auth.AbstractUser, _Base, DataMixin ):
     anonymous = M.BooleanField( default=False )
-    roles = M.ManyToManyField( Role, blank=True, related_name='users' )
-    policies = M.ManyToManyField( Policy, blank=True, related_name='users' )
+    roles     = M.ManyToManyField( Role, blank=True, related_name='users' )
+    policies  = M.ManyToManyField( Policy, blank=True, related_name='users' )
 
 
 class Group( AutoChildModel, auth.Group, Base, DataMixin ):
     auth_ptr  = M.OneToOneField( auth.Group, M.CASCADE, parent_link=True,
                                  related_name='aries_data' )
-    roles = M.ManyToManyField( Role, blank=True, related_name='groups' )
-    policies = M.ManyToManyField( Policy, blank=True, related_name='groups' )
+    title     = M.CharField( blank=True, max_length=255 )
+    roles     = M.ManyToManyField( Role, blank=True, related_name='groups' )
+    policies  = M.ManyToManyField( Policy, blank=True, related_name='groups' )
 
 
 class _AutoOwnedBase( M.base.ModelBase ):
@@ -110,11 +111,9 @@ class _AutoOwnedBase( M.base.ModelBase ):
 class AutoOwnedModel( six.with_metaclass( _AutoOwnedBase, Model )):
     class Meta:
         abstract = True
-    owner  = M.ForeignKey( User, related_name="%(app_label)s_%(class)s_set",
-                           on_delete=M.CASCADE,
-                           blank=True, null=True )
+    owner    = M.ForeignKey( User, related_name="%(app_label)s_%(class)s_set",
+                             on_delete=M.CASCADE, blank=True, null=True )
     creator  = M.ForeignKey( User, related_name="%(app_label)s_%(class)s_created_set",
-                             on_delete=M.CASCADE,
-                             blank=True, null=True )
+                             on_delete=M.CASCADE, blank=True, null=True )
 
 

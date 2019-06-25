@@ -27,7 +27,7 @@ def namespace( thing, name ):
         thing[ name ] = OrderedDict()
     return thing[ name ]
 
-def setup( friede_app, lookup, urlpattens ):
+def setup( friede_app, lookup, urlpatterns ):
     try:
         friede = friede_app.App()
         apps[ 'friede' ] = friede

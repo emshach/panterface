@@ -140,10 +140,10 @@ def api_root( request, format=None ):
     for ns, chunk in lookup.items():
         out[ ns ] = {}
         for k, v in chunk.items():
-            route, args, kw = _normalize_lookup(v)
-            route = "friede:{}:{}".format( ns, route )
-            out[ ns ][k] = reverse(
-                route, args=args, kwargs=kw, request=request, format=None )
+            r, args, kw = _normalize_lookup(v)
+            route = "friede:{}:{}".format( ns, r )
+            out[ ns ][r] = reverse( route, args=args, kwargs=kw, request=request,
+                                    format=None )
     return Response( out )
 
 def _process_location( location ):

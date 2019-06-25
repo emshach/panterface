@@ -8,6 +8,8 @@ from django.conf import settings
 from . import views
 from .core import installappheader, installapp, updateapp, upgradeapp
 from .models import App, Setting
+import traceback
+import sys
 
 original_reverse = relations.reverse
 
@@ -88,6 +90,7 @@ class App( object ) :
     auto_user_install = False
 
     def __init__( self ):
+        super( App, self ).__init__()
         self.preinstallheader()
         self.model, _ = self.installheader()
         self.version = self.model.version

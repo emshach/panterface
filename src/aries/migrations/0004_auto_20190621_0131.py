@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 
 from django.db import migrations
 
-def create_types(apps, schema_editor):
+def create_types( apps, schema_editor ):
     db_alias = schema_editor.connection.alias
     AuthPerm = apps.get_model( 'auth', 'Permission' )
     Permission = apps.get_model( 'aries', 'Permission' )
@@ -29,10 +29,10 @@ def create_types(apps, schema_editor):
                  .save_base( raw=True )
             print 'attached group', g.name
 
-class Migration(migrations.Migration):
+class Migration( migrations.Migration ):
 
     dependencies = [
-        ('aries', '0003_auto_20190621_0131'),
+        ( 'aries', '0003_auto_20190621_0131' ),
     ]
 
     operations = [

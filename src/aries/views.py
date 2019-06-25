@@ -20,6 +20,8 @@ def register( request ):
 @api_view([ 'GET' ])
 @permission_classes(( permissions.AllowAny, ))
 def api_can( request, perm='any', format=None ):
+    if request.user.is_superuser:
+        return Response( True )
     try:
         op, app, model = perm.split('.')
     except ValueError:
@@ -32,6 +34,8 @@ def api_which_can( request, format=None ):
     user = request.user
     perms = set( request.query_params.getlist( 'op' ))
     out = {}
+    if request.user.is_superuser:
+        return Response({ x: True for x in perms })
     for p in perms:
         op, app, model = p.split('.')
         out[p] = user.has_perm( "{}.{}_{}".format( app, op, model ))

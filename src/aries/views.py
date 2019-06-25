@@ -32,7 +32,7 @@ def api_which_can( request, format=None ):
     user = request.user
     perms = set( request.query_params.getlist( 'op' ))
     out = {}
-    for p in perm:
+    for p in perms:
         op, app, model = p.split('.')
         out[p] = user.has_perm( "{}.{}_{}".format( app, op, model ))
     return Response( out )

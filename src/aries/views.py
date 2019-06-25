@@ -20,13 +20,22 @@ def register( request ):
 @api_view([ 'GET' ])
 @permission_classes(( permissions.AllowAny, ))
 def api_can( request, perm='any', format=None ):
-    return Response( None )
+    try:
+        op, app, model = perm.split('.')
+    except ValueError:
+        return Response( None )
+    return Response( request.user.has_perm( "{}.{}_{}".format( app, op, model )))
 
 @api_view([ 'GET' ])
 @permission_classes(( permissions.AllowAny, ))
 def api_which_can( request, format=None ):
+    user = request.user
     perms = set( request.query_params.getlist( 'op' ))
-    return Response( None )
+    out = {}
+    for p in perm:
+        op, app, model = p.split('.')
+        out[p] = user.has_perm( "{}.{}_{}".format( app, op, model ))
+    return Response( out )
 
 class UserViewSet( viewsets.ModelViewSet ):
     queryset = User.objects.all()

@@ -25,6 +25,7 @@ def api_can( request, perm='any', format=None ):
 @api_view([ 'GET' ])
 @permission_classes(( permissions.AllowAny, ))
 def api_which_can( request, format=None ):
+    perms = set( request.query_params.getlist( 'op' ))
     return Response( None )
 
 class UserViewSet( viewsets.ModelViewSet ):

@@ -4,10 +4,31 @@ import isArray from 'lodash/isArray'
 const permissions = {};
 
 export async function canI( op, arg ) {
-  if ( isArray( op )) {
+  var ops;
+  if ( arg ) {
+    if ( isArray( arg )) {
+      arg = arg.map( a => a.fullname || a );
+      if (! isArray( op ))
+        op = [ op ];
+      ops = [];
+      op.forEach( o => {
+        arg.forEach( a => {
+          ops.push( o + '.' + a );
+        });
+      })
+    } else if ( arg.fullname ) {
+      arg = arg.fullname;
+      if ( isArray( op )) {
+        ops = op.map( o => o + '.' + arg );
+      } else {
+        ops = op + '.' + arg;
+      }
+    }
+  }
+  if ( isArray( ops )) {
     const ask = [];
     const out = [];
-    op.forEach( o => {
+    ops.forEach( o => {
       if ( o in permissions ) {
         if ( permissions[o] )
           out.push(o);
@@ -17,7 +38,7 @@ export async function canI( op, arg ) {
     if ( ask.length ) {
       const res = await API( 'can', '?' + ask.map( o => 'op=' + o ).join('&') )
             .then( r => r.data ).catch( err => {
-              console.warn( 'error getting permissions', op, arg, err );
+              console.warn( 'error getting permissions', op, arg, ops, err );
               return {};
             });
       Object.assign( permissions, res );
@@ -25,14 +46,14 @@ export async function canI( op, arg ) {
     }
     return out
   } else {
-    if ( op in permissions && permissions[op] !== null )
-      return permissions[ op ];
-    const res = await API( 'can', op ).then( r => r.data )
+    if ( ops in permissions && permissions[ ops ] !== null )
+      return permissions[ ops ];
+    const res = await API( 'can', ops ).then( r => r.data )
           .catch( err => {
-            console.warn( 'error getting permission', op, arg, err );
+            console.warn( 'error getting permission', op, arg, ops, err );
             return null;
           });
-    permissions[ op ] = res;
+    permissions[ ops ] = res;
     return res;
   }
 }

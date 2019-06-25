@@ -4,7 +4,7 @@ from django.conf.urls import url, include
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import RedirectView
 from . import views, friede_app
-from .app import setup
+from .app import setup, routes
 from .models import App
 from .views import lookup
 import traceback

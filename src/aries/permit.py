@@ -5,6 +5,8 @@ from packaging.version import parse as version_parse
 from django.conf import settings
 from collections import OrderedDict, deque
 from django.db import transaction
+from django.db.models import Model
+from django.contrib.contenttypes.models import ContentType
 from . import models as M
 import traceback
 import sys
@@ -107,6 +109,23 @@ class Permit( object ):
                     if isinstance( name, ( tuple, list )):
                         name = names[ tag ]( name )
                     print 'creating/updating', Type._meta.model_name, name
+                    if tag == 'permissions' and 'ct' in data:
+                        ct = data.pop( 'ct' )
+                        if isinstance( ct, basestring ):
+                            if '.' in ct:
+                                app, mod = ct.split('.')
+                                data[ 'content_type' ] = \
+                                    ContentType.objects.get( app_label=app, model=mod )
+                            elif ct in types:
+                                data[ 'content_type' ] = \
+                                    ContentType.objects.get_for_model( types[ ct ])
+                            else:
+                                raise KeyError( "no content type for '%s'" % ct )
+                        elif hasattr( ct, '__class__' ) and issubclass( ct, Model ):
+                            data[ 'content_type' ] = \
+                                    ContentType.objects.get_for_model( ct )
+                        else:
+                            raise ValueError( "bad content-type: %s" % ct )
                     obj, new = Type.objects.update_or_create(
                         defaults=data,
                         **{ namefields[ tag ]: name })

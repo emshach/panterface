@@ -147,49 +147,49 @@ class Permit( object ):
 
                 def popdata():
                     data.popleft()
-            try:
-                while stack:
-                    top = stack.pop()
-                    if isinstance( top, tuple ):
-                        if not len( top ):
-                            continue
-                        tag = top[0]
-                        body = top[1:]
-                        if isinstance( tag, basestring ):
-                            if tag.startswith('#'):
-                                tag = tag[1:]
-                                mkobjects()
-                                if tag in ops:
-                                    if cr[0]:
-                                        ops[tag]( cr[0] )
-                                elif tag in types:
-                                    model.appendleft( tag )
-                                    cr.appendleft( None )
-                                    data.appendleft()
-                                    stack.extend(( popdata, popmodel, popcr ))
-                                    stack.extend( body[::-1] )
+                try:
+                    while stack:
+                        top = stack.pop()
+                        if isinstance( top, tuple ):
+                            if not len( top ):
+                                continue
+                            tag = top[0]
+                            body = top[1:]
+                            if isinstance( tag, basestring ):
+                                if tag.startswith('#'):
+                                    tag = tag[1:]
+                                    mkobjects()
+                                    if tag in ops:
+                                        if cr[0]:
+                                            ops[tag]( cr[0] )
+                                    elif tag in types:
+                                        model.appendleft( tag )
+                                        cr.appendleft( None )
+                                        data.appendleft()
+                                        stack.extend(( popdata, popmodel, popcr ))
+                                        stack.extend( body[::-1] )
 
-                            else:
-                                tag = map( lambda x: (x,),
-                                           filter( lambda x: x, tag.split()))
-                        if isinstance( tag, list ):
-                            items = tuple(
-                                x + y for x in data[0] for y in tag
-                            ) if len( data ) else tag
-                            data.appendleft( items )
-                            stack.append( popdata if len( body ) else poperate )
-                    elif isinstance( top, list ):
-                        stack.extend( tuple(( x, {} ) for x in top[ ::-1 ]))
-                    elif isinstance( top, dict ):
-                        pass
-                    elif isinstance( top, basestring ):
-                        stack.append(( top, ))
-                    elif callable( top ):
-                        top()
-            except Exception as e:
-                print >> sys.stderr, "got exception", type(e), e
-                traceback.print_exc()
-                return
+                                else:
+                                    tag = map( lambda x: (x,),
+                                               filter( lambda x: x, tag.split()))
+                            if isinstance( tag, list ):
+                                items = tuple(
+                                    x + y for x in data[0] for y in tag
+                                ) if len( data ) else tag
+                                data.appendleft( items )
+                                stack.append( popdata if len( body ) else poperate )
+                        elif isinstance( top, list ):
+                            stack.extend( tuple(( x, {} ) for x in top[ ::-1 ]))
+                        elif isinstance( top, dict ):
+                            mkobjects( top )
+                        elif isinstance( top, basestring ):
+                            stack.append(( top, ))
+                        elif callable( top ):
+                            top()
+                except Exception as e:
+                    print >> sys.stderr, "got exception", type(e), e
+                    traceback.print_exc()
+                    return
 
                 transaction.commit()
 

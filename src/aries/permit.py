@@ -100,6 +100,7 @@ class Permit( object ):
                 cr = deque([()])
 
                 def mkobject( Type, name=None, data={}):
+                    data = dict( data ) # copy
                     if data.get( 'name' ):
                         if callable( data[ 'name' ]):
                             name = data['name']( name )

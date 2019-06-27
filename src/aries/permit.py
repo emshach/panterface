@@ -85,6 +85,7 @@ class Permit( object ):
 
         for tree in self.data:
             v = version_parse( tree[0] )
+            print 'installing permit', v
             available = v
             if error or v >= version:
                 continue
@@ -190,7 +191,8 @@ class Permit( object ):
                 except Exception as e:
                     print >> sys.stderr, "got exception", type(e), e
                     traceback.print_exc()
-                    return
+                    error = True
+                    break
 
                 transaction.commit()
 

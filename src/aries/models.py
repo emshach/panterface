@@ -185,7 +185,6 @@ class Group( AutoChildModel, auth.Group, _Base, DataMixin ):
 
 
 class Permit( Base ):
-    app = M.CharField( required=True )
     version   = M.CharField( max_length=32, default='0.0.0' )
     available = M.CharField( max_length=32, default='0.0.0' )
 

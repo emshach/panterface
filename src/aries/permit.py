@@ -142,7 +142,7 @@ class Permit( object ):
                         print 'added', objects, 'to', p
 
                 def poperate():
-                    mkobject()
+                    mkobjects()
                     path.popleft()
                     data.popleft()
 
@@ -151,6 +151,7 @@ class Permit( object ):
                 try:
                     while stack:
                         top = stack.pop()
+                        print 'top=', top
                         if isinstance( top, tuple ):
                             if not len( top ):
                                 continue

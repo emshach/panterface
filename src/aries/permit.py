@@ -106,6 +106,7 @@ class Permit( object ):
                     tag = model[0]
                     if isinstance( name, ( tuple, list )):
                         name = names[ tag ]( name )
+                    print 'creating/updating', Type._meta.model_name, name
                     obj, new = Type.objects.update_or_create(
                         defaults=data,
                         **{ namefields[ tag ]: name })

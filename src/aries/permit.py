@@ -193,8 +193,6 @@ class Permit( object ):
                     error = True
                     break
 
-                transaction.commit()
-
         self.available = available
 
     @property

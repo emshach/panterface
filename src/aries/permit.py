@@ -103,12 +103,12 @@ class Permit( object ):
                             name = data['name']( name )
                         else:
                             name = data.pop( 'name' )
-                    reg = registry[0]
+                    tag = model[0]
                     if isinstance( name, ( tuple, list )):
-                        name = names[ reg ]( name )
+                        name = names[ tag ]( name )
                     obj, new = Type.objects.update_or_create(
                         defaults=data,
-                        **{ namefields[ reg ]: name })
+                        **{ namefields[ tag ]: name })
                     print 'created' if new else 'updated', Type._meta.model_name,\
                         name
                     return obj

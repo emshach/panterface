@@ -195,7 +195,7 @@ class Permit( object ):
                     print >> sys.stderr, "got exception", type(e), e
                     traceback.print_exc()
                     error = True
-                    break
+                    raise
 
         self.available = available
 

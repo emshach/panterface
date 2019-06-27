@@ -180,6 +180,9 @@ class Permit( object ):
                                 ) if len( data ) else tag
                                 data.appendleft( items )
                                 stack.append( popdata if len( body ) else poperate )
+                            else:
+                                # flatten tuples
+                                stack.extend( top[ ::-1 ])
                         elif isinstance( top, list ):
                             stack.extend( tuple(( x, {} ) for x in top[ ::-1 ]))
                         elif isinstance( top, dict ):

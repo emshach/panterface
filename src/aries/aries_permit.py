@@ -18,7 +18,7 @@ class Permit( permit.Permit ):
                 title='Internal Staff',
                 is_staff=True
             ),
-              ( '#permmissions',
+              ( '#permissions',
                 ( 'add change delete',
                   'user group role permission policy' ))),
             ( 'admin', dict(

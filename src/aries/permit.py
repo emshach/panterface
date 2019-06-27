@@ -114,7 +114,6 @@ class Permit( object ):
                     if isinstance( name, ( tuple, list )):
                         name = names[ tag ]( name )
                     search = { namefields[ tag ]: name }
-                    print 'creating/updating', Type._meta.model_name, name
                     if tag == 'permissions' and 'ct' in data:
                         ct = data.pop( 'ct' )
                         if isinstance( ct, basestring ):
@@ -177,7 +176,6 @@ class Permit( object ):
                 try:
                     while stack:
                         top = stack.pop()
-                        print 'top=', top
                         if isinstance( top, tuple ):
                             if not len( top ):
                                 continue

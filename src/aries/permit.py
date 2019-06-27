@@ -22,11 +22,11 @@ def setup():
             module = app_name
             if module:
                 try:
-                    permit = import_module( "%s.friede_permit" % module )
+                    permit = import_module( "%s.aries_permit" % module )
                     permits[ module ] = permit.Permit()
                 except ( ImportError, AttributeError ) as e:
                     msg = str(e)
-                    if 'No module named friede_app' not in msg:
+                    if 'No module named aries_permit' not in msg:
                         print >> sys.stderr, 'got exception', type(e), e,\
                             "in friede.urls/%s" % module
                         traceback.print_exc()

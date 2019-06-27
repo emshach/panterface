@@ -150,6 +150,7 @@ class Permit( object ):
                 try:
                     while stack:
                         top = stack.pop()
+                        print 'top=', top
                         if isinstance( top, tuple ):
                             if not len( top ):
                                 continue

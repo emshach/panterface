@@ -134,7 +134,7 @@ class Permit( object ):
                     return obj
 
                 def mkobjects( attrs={} ):
-                    if cr[0] or not model[0] or not data[0]:
+                    if not model[0] or not data[0]:
                         return
                     cr[0] = tuple( map(
                         lambda x: mkobject( types[ model[0] ], x, attrs ),
@@ -152,7 +152,7 @@ class Permit( object ):
                 def popcr():
                     objects = cr.popleft()
                     parents = cr[0]
-                    if not parents: return
+                    if not parents or not objects: return
                     tag = model[0]
                     rel = 'user_permissions' \
                         if tag == 'permissions' and model[1] == 'users' \
@@ -180,10 +180,10 @@ class Permit( object ):
                             if isinstance( tag, basestring ):
                                 if tag.startswith('#'):
                                     tag = tag[1:]
-                                    mkobjects()
                                     if tag in ops:
-                                        if cr[0]:
-                                            ops[tag]( cr[0] )
+                                        if not cr[0]: mkobjects()
+                                        for obj in cr[0]:
+                                            ops[ tag ]( obj )
                                     elif tag in types:
                                         model.appendleft( tag )
                                         cr.appendleft( None )

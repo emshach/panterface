@@ -139,30 +139,6 @@ class Permit( object ):
                     cr[0] = tuple( map(
                         lambda x: mkobject( types[ model[0] ], x, attrs ),
                         data[0] ))
-
-                def popstack():
-                    stack.pop()
-
-                def poppath():
-                    path.popleft()
-
-                def popmodel():
-                    model.popleft()
-
-                def popcr():
-                    objects = cr.popleft()
-                    parents = cr[0]
-                    if not parents or not objects: return
-                    tag = model[0]
-                    rel = 'user_permissions' \
-                        if tag == 'permissions' and model[1] == 'users' \
-                        else tag
-                    for p in parents:
-                        getattr( p, rel ).add( *objects )
-                        print 'added', objects, 'to', p
-
-                def poperate():
-                    mkobjects()
                     if len(cr) > 1:
                         objects = cr[0]
                         parents = cr[1]
@@ -174,6 +150,21 @@ class Permit( object ):
                             for p in parents:
                                 getattr( p, rel ).add( *objects )
                                 print 'added', objects, 'to', p
+
+                def popstack():
+                    stack.pop()
+
+                def poppath():
+                    path.popleft()
+
+                def popmodel():
+                    model.popleft()
+
+                def popcr():
+                    cr.popleft()
+
+                def poperate():
+                    mkobjects()
                     path.popleft()
                     data.popleft()
 
@@ -197,7 +188,7 @@ class Permit( object ):
                                             ops[ tag ]( obj )
                                     elif tag in types:
                                         model.appendleft( tag )
-                                        cr.appendleft( None )
+                                        cr.appendleft(())
                                         data.appendleft( None )
                                         stack.extend(( popdata, popmodel, popcr ))
                                         stack.extend( body[::-1] )

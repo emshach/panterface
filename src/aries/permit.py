@@ -87,7 +87,7 @@ class Permit( object ):
             v = version_parse( tree[0] )
             print 'installing permit', v
             available = v
-            if error or v >= version:
+            if error or v <= version:
                 continue
             with transaction.atomic():
                 transaction.on_commit( update_version )
@@ -97,7 +97,6 @@ class Permit( object ):
                 model = deque()
                 cr = deque([()])
 
-                print 'stack=', stack
                 def mkobject( Type, name=None, data={}):
                     if data.get( 'name' ):
                         if callable( data[ 'name' ]):
@@ -152,7 +151,6 @@ class Permit( object ):
                 try:
                     while stack:
                         top = stack.pop()
-                        print 'top=', top
                         if isinstance( top, tuple ):
                             if not len( top ):
                                 continue

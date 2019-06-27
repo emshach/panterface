@@ -97,6 +97,7 @@ class Permit( object ):
                 model = deque()
                 cr = deque([()])
 
+                print 'stack=', stack
                 def mkobject( Type, name=None, data={}):
                     if data.get( 'name' ):
                         if callable( data[ 'name' ]):

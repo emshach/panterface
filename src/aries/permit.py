@@ -12,7 +12,7 @@ import sys
 rules = []
 permits = OrderedDict()
 
-def setup( urlpatterns ):
+def setup():
     from . import aries_permit
     try:
         permits[ 'aries' ] = aries_permit.Permit()

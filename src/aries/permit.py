@@ -171,7 +171,9 @@ class Permit( object ):
                                         stack.extend(( popdata, popmodel, popcr ))
                                         stack.extend( body[::-1] )
                                         continue
-
+                                    else:
+                                        raise NameError(
+                                            "unknown instruction '#%s'" % tag )
                                 else:
                                     tag = map( lambda x: (x,),
                                                filter( lambda x: x, tag.split()))

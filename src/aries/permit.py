@@ -170,6 +170,7 @@ class Permit( object ):
                                         data.appendleft( None )
                                         stack.extend(( popdata, popmodel, popcr ))
                                         stack.extend( body[::-1] )
+                                        continue
 
                                 else:
                                     tag = map( lambda x: (x,),

@@ -5,7 +5,7 @@ class Permit( permit.Permit ):
     rules = (( lambda u: u.anonymous,
                (( 'addgroup', 'anonymous' )),
                (( 'rmgroup',  'anonymous' ),
-                ( 'addgroup', 'authenticated' ))))
+                ( 'addgroup', 'authenticated' ))),)
     data = (
         ( '0.0.1',
           ( '#groups',

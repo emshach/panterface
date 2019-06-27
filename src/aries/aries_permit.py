@@ -1,6 +1,6 @@
 from . import permit
 
-class Permit( permit.Premit ):
+class Permit( permit.Permit ):
     name = 'aries'
     rules = (( lambda u: u.anonymous,
                (( 'addgroup', 'anonymous' )),

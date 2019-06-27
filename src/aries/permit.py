@@ -47,8 +47,7 @@ class Permit( object ):
         self.installdata()
 
     def installrules( self ):
-        rules += [ tuple( rule ) + ((),) if len( rule ) < 3 else rule[:3]
-                   for rule in self.rules ]
+        rules.extend([ (r,) + ((),) if len(r) < 3 else r[:3] for r in self.rules ])
 
     def installdata( self ):
         version = self.version

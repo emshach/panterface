@@ -84,9 +84,9 @@ class Permit( object ):
             self.version = available
 
         for tree in self.data:
-            v = version_parse( dset[0] )
+            v = version_parse( tree[0] )
             available = v
-            if error or dset[0] >= version:
+            if error or v >= version:
                 continue
             with transaction.atomic():
                 transaction.on_commit( update_version )

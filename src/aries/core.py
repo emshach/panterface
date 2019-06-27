@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 from django.contrib.contenttypes.models import ContentType
 from .models import owned, Permission
+from . import permit
 
 def setup_permissions():
     for model in owned:
@@ -32,3 +33,4 @@ def setup_permissions():
             defaults=dict( name="Can view own {}".format( verbose )),
             codename="view_own_{}".format( name ),
             content_type=ct )
+    permit.setup()

@@ -20,7 +20,7 @@ class Permit( permit.Permit ):
             ( 'authenticated', dict( title='Authenticated Users' )),
             ( 'confirmed', dict( title='Confirmed Users' )),
             ( 'verified', dict( title='Verified Users' )),
-            ( 'power', dict( title='Power-Users' )),
+            ( 'power', dict( title='Power-users' )),
             ( 'staff', dict(
                 title='Internal Staff',
                 is_staff=True
@@ -35,6 +35,7 @@ class Permit( permit.Permit ):
                 ))),
             ( 'admin', dict(
                 title='Admin Staff',
+                is_staff=True,
                 is_superuser=True
             )),
           ),

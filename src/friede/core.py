@@ -388,19 +388,18 @@ def upgradeapp( app, data, upto=None ):
 
     for tree in data:
         v = tree[0]
-        tree = tree[1:]
-        with transaction.atomic():
-            max_version = v
-            version = version_parse(v)
-            if app_version >= version :
-                continue
-            if upto:
-                if version >= upto :
-                    break
-            elif min_version and app_version >= min_version:
+        max_version = v
+        version = version_parse(v)
+        if app_version >= version :
+            continue
+        if upto:
+            if version >= upto :
                 break
+        elif min_version and app_version >= min_version:
+            break
+        with transaction.atomic():
             transaction.on_commit( update_version )
-            stack = deque([ tree ])
+            stack = deque([ tree[1:] ])
             path = deque([''])
             model = deque([ Container ])
             registry = deque([ 'containers' ])
@@ -476,7 +475,7 @@ def upgradeapp( app, data, upto=None ):
                             # flatten tuples
                             stack.extend( top[ ::-1 ])
                     elif isinstance( top, list ):
-                        stack.extend( tuple( (x, {}) for x in top[ ::-1 ]))
+                        stack.extend( tuple(( x, {} ) for x in top[ ::-1 ]))
                     elif isinstance( top, dict ):
                         parent = None
                         if top.get( 'path', None ):

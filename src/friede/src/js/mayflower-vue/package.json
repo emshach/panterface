@@ -74,7 +74,10 @@
       "operator-linebreak": "off",
       "vue/html-closing-bracket-newline": "off",
       "vue/singleline-html-element-content-newline": "off"
-    }
+    },
+    "plugins": [
+      "json"
+    ]
   },
   "postcss": {
     "plugins": {

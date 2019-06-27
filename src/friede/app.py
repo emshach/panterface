@@ -5,9 +5,10 @@ from rest_framework import routers, relations
 from collections import OrderedDict
 from packaging.version import parse as version_parse
 from django.conf import settings
-from . import views
 from .core import installappheader, installapp, updateapp, upgradeapp
 from .models import App, Setting
+from .views import lookup
+from . import views
 import traceback
 import sys
 
@@ -29,7 +30,8 @@ def namespace( thing, name ):
         thing[ name ] = OrderedDict()
     return thing[ name ]
 
-def setup( friede_app, lookup, urlpatterns ):
+def setup( urlpatterns ):
+    from . import friede_app
     try:
         friede = friede_app.App()
         apps[ 'friede' ] = friede

@@ -3,14 +3,13 @@ from __future__ import unicode_literals
 from django.conf.urls import url, include
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import RedirectView
-from . import views, friede_app
 from .app import setup, routes
-from .views import lookup
+from .views import api_root, index
 
 app_name = 'friede'
 urlpatterns = []
 
-setup( friede_app, lookup, urlpatterns )
+setup( urlpatterns )
 
 for ns, urls in routes.items():
     chunk = []
@@ -27,6 +26,6 @@ for ns, urls in routes.items():
     urlpatterns.append( url( r'^api/', include(( chunk, ns ))))
 
 urlpatterns += [
-    url( r'^api/?$', views.api_root, name='api-root' ),
-    url( r'^.*',     views.index,    name='index'    ),
+    url( r'^api/?$', api_root, name='api-root' ),
+    url( r'^.*',     index,    name='index'    ),
 ]

@@ -101,11 +101,15 @@ class Permit( object ):
 
                 def mkobject( Type, name=None, data={}):
                     data = dict( data ) # copy
-                    if data.get( 'name' ):
-                        if callable( data[ 'name' ]):
-                            name = data['name']( name )
-                        else:
-                            name = data.pop( 'name' )
+                    if not name:
+                        if data.get( 'name' ):
+                            if callable( data[ 'name' ]):
+                                name = data['name']( name )
+                            else:
+                                name = data.pop( 'name' )
+                    for k, v in data.items():
+                        if callable(v):
+                            data[k] = v( name, data )
                     tag = model[0]
                     if isinstance( name, ( tuple, list )):
                         name = names[ tag ]( name )

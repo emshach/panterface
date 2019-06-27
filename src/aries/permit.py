@@ -163,6 +163,17 @@ class Permit( object ):
 
                 def poperate():
                     mkobjects()
+                    if len(cr) > 1:
+                        objects = cr[0]
+                        parents = cr[1]
+                        if parents and objects:
+                            tag = model[0]
+                            rel = 'user_permissions' \
+                                if tag == 'permissions' and model[1] == 'users' \
+                                else tag
+                            for p in parents:
+                                getattr( p, rel ).add( *objects )
+                                print 'added', objects, 'to', p
                     path.popleft()
                     data.popleft()
 

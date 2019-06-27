@@ -42,7 +42,7 @@ class Permit( object ):
     name = ''
     def __init__( self ):
         super( Permit, self ).__init__()
-        self.model, _ = M.Permit.get_or_create( name=self.name )
+        self.model, _ = M.Permit.objects.get_or_create( name=self.name )
         self.installrules()
         self.installdata()
 

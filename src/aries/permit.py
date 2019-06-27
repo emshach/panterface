@@ -87,7 +87,7 @@ class Permit( object ):
 
         for tree in self.data:
             v = version_parse( tree[0] )
-            print 'installing permit', v
+            print 'installing', self.name, 'security permit', v
             available = v
             if error or v <= version:
                 continue

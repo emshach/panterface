@@ -93,8 +93,8 @@ class Permit( object ):
                 transaction.on_commit( update_version )
                 stack = deque([ tree[1:] ])
                 name = deque([''])
-                data = deque()
-                model = deque()
+                data = deque([ None ])
+                model = deque([ None ])
                 cr = deque([()])
 
                 def mkobject( Type, name=None, data={}):
@@ -167,7 +167,7 @@ class Permit( object ):
                                     elif tag in types:
                                         model.appendleft( tag )
                                         cr.appendleft( None )
-                                        data.appendleft()
+                                        data.appendleft( None )
                                         stack.extend(( popdata, popmodel, popcr ))
                                         stack.extend( body[::-1] )
 
@@ -177,7 +177,7 @@ class Permit( object ):
                             if isinstance( tag, list ):
                                 items = tuple(
                                     x + y for x in data[0] for y in tag
-                                ) if len( data ) else tag
+                                ) if data[0] else tag
                                 data.appendleft( items )
                                 stack.append( popdata if len( body ) else poperate )
                             else:

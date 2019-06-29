@@ -70,12 +70,29 @@ class Permission( AutoChildModel, auth.Permission, _Base, DataMixin ):
 class Policy( Base, DataMixin ):
     class Types:
         ALLOW = 'allow'
-        DENY = 'deny'
-        ALL = (
+        DENY  = 'deny'
+        ALL   = (
             ( ALLOW, 'Allow' ),
             ( DENY,  'Deny' ),
         )
+    class Functions:
+        BASIC      = 'basic'
+        UNION      = 'union'
+        INTERSECT  = 'intersect'
+        USERS      = 'users'
+        PERMISSION = 'permission'
+        CUSTOM     = 'custom'
+        ALL = (
+            ( BASIC, 'Basic' ),
+            ( UNION, 'Union' ),
+            ( INTERSECT, 'Intersection' ),
+            ( USERS, 'Users/Groups/Roles' ),
+            ( PERMISSION, 'Permissions' ),
+            ( CUSTOM, 'Custom' ),
+        )
     type        = M.CharField( max_length=16, choices=Types.ALL, default=Types.ALLOW )
+    function    = M.CharField( max_length=16, choices=Functions.ALL,
+                               default=Functions.BASIC )
     permissions = M.ManyToManyField( Permission, blank=True, related_name='policies' )
 
 

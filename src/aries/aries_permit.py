@@ -3,6 +3,9 @@ from . import permit
 def _perm_name( name, data={} ):
     return "Can {} {}".format(*( name[:2] ))
 
+def _aries_model( ct, data={} ):
+    return 'aries.'+ct
+
 def _perm_name_trans_1( name, data={} ):
     op, arg1, arg2 = name
     return "Can {} {} {}".format( op, arg2, arg1 )
@@ -27,12 +30,8 @@ class Permit( permit.Permit ):
             ),
               ( '#permissions',
                 ( 'add change delete',
-                  ( 'user', dict( ct='users', name=_perm_name )),
-                  ( 'group', dict( ct='groups', name=_perm_name )),
-                  ( 'role', dict( ct='roles', name=_perm_name )),
-                  ( 'policy', dict( ct='policies', name=_perm_name )),
-                  ( 'permission', dict( ct='permissions', name=_perm_name )),
-                ))),
+                  'user group role policy permission',
+                  dict( ct=_aries_model, name=_perm_name )))),
             ( 'admin', dict(
                 title='Admin Staff',
                 is_staff=True,
@@ -50,29 +49,19 @@ class Permit( permit.Permit ):
               ( 'security', dict( title='Security Manager' ),
                 ( '#permissions',
                   ( 'add change delete',
-                    ( 'user', dict( ct='users', name=_perm_name )),
-                    ( 'group', dict( ct='groups', name=_perm_name )),
-                    ( 'role', dict( ct='roles', name=_perm_name )),
-                    ( 'policy', dict( ct='policies', name=_perm_name )),
-                    ( 'permission', dict( ct='permissions', name=_perm_name )),
+                    ( 'user group role policy permission',
+                      dict( ct=_aries_model, name=_perm_name )),
                     ( 'permissions',
-                      ( 'user', dict( ct='users', name=_perm_name_trans_1 )),
-                      ( 'group', dict( ct='groups', name=_perm_name_trans_1 )),
-                      ( 'role', dict( ct='roles', name=_perm_name_trans_1 )),
-                      ( 'policy', dict( ct='policies', name=_perm_name_trans_1 )),
-                    ),
+                      'user group role policy',
+                      dict( ct=_aries_model, name=_perm_name_trans_1 )),
                     ( 'policy',
-                      ( 'user', dict( ct='users', name=_perm_name_trans_1 )),
-                      ( 'group', dict( ct='groups', name=_perm_name_trans_1 )),
-                      ( 'role', dict( ct='roles', name=_perm_name_trans_1 )),
-                    ),
+                      'user group role',
+                      dict( ct=_aries_model, name=_perm_name_trans_1 )),
                     ( 'role',
-                      ( 'user', dict( ct='users', name=_perm_name_trans_1 )),
-                      ( 'group', dict( ct='groups', name=_perm_name_trans_1 )),
-                    ),
+                      'user group',
+                      dict( ct=_aries_model, name=_perm_name_trans_1 )),
                     ( 'group',
-                      ( 'user', dict( ct='users', name=_perm_name_trans_1 )),
-                    ),
+                      'user', dict( ct='users', name=_perm_name_trans_1 )),
                   ))),
             )),
           ( '#permissions', ),

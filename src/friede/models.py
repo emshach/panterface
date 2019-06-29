@@ -481,7 +481,6 @@ class Setting( AutoOwnedModel, Base, PathMixin, DataMixin, ExtendsMixin ):
         SPLITDATETIME       = 'SplitDateTimeField'
         MODEL               = 'ModelChoiceField'
         MODELS              = 'ModelMultipleChoiceField'
-
         ALL = (
             ( BOOLEAN,             'True/False' ),
             ( CHAR,                'String' ),

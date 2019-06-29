@@ -17,7 +17,7 @@
       <component :is=tag mode="widget" :key=tag
                  v-for="( actor, tag ) in actors"
                  :object=object
-                 @act="act( tag, object, actions )" />
+                 @act="act( $event, tag, object, actions )" />
     </template>
   </component>
 </div>
@@ -81,7 +81,8 @@ export default  {
     }
   },
   methods: {
-    act( tag, object, actions ) {
+    act( $event, tag, object, actions ) {
+      console.log( 'act', $event );
       const actor = this.actors[ tag ];
       Object.keys( actor.actions ).forEach( k => {
         this.operands[k] = [ object ];

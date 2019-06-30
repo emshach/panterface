@@ -2,7 +2,7 @@
 <div :class=classes>
   <component :is=tag mode="modal" :key=tag
              v-for="( actor, tag ) in actors"
-             :ops=ops
+             :op=op
              :actions=actor.actions
              :operands=actor.operands
              :show.sync=showModals[tag] />
@@ -71,7 +71,7 @@ export default  {
         'model-dashboard': true,
         'uk-flex-column': true,
       },
-      ops: null,
+      op: '',
       featured: [],
       objects: [],
       actions: {},
@@ -84,10 +84,8 @@ export default  {
     act( action, object ) {
       const tag = this.actions[ action ].data.component;
       const actor = this.actors[ tag ];
-      Object.keys( actor.actions ).forEach( k => {
-        this.operands[k] = k === action ? [ object ] : [];
-      });
-      this.opts = [ action ];
+      this.operands = [ object ];
+      this.op = action;
       this.showModals[ tag ] = true;
     }
   },

@@ -1,6 +1,9 @@
 <template lang="html">
   <vk-modal class="installer" v-if="mode === 'modal'" :show.sync=show >
     <vk-close @click="hideModal" />
+    <vk-modal-title>{{ op }}
+      <template v-if="operands.length == 1"> {{ operands[0].title }}</template>
+    </vk-modal-title>
   </vk-modal>
   <div v-else class="installer widget">
     <template v-if=object.installed >

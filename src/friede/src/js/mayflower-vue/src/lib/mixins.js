@@ -293,8 +293,8 @@ export const ActorsMixin = {
     }
   },
   methods: {
-    act( object, actions ) {
-      this.$emit( 'act', object, actions );
+    act( action, object ) {
+      this.$emit( 'act', action, object );
     },
     hideModal() {
       this.$emit( 'update:show', false );

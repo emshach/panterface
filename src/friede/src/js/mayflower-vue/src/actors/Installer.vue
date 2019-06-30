@@ -6,18 +6,18 @@
     <template v-if=object.installed >
       <vk-btn-link v-if="object.version !== object.available"
                    v-vk-tooltip.bottom="'update'"
-                   type="text" @click.prevent="act( object, 'update' )" >
+                   type="text" @click.prevent="act( 'update', object )" >
         v{{ object.version }} installed
         <font-awesome-icon icon="level-up-alt" />
       </vk-btn-link>
       <span v-else>v{{ object.version }} installed</span>
       <vk-btn-link v-if="!object.required" v-vk-tooltip.bottom="'uninstall'"
-                   type="text" @click.prevent="act( object, 'uninstall' )" >
+                   type="text" @click.prevent="act( 'uninstall', object )" >
         <font-awesome-icon icon="trash" />
       </vk-btn-link>
     </template>
     <vk-btn-link v-else v-vk-tooltip.bottom="'install'"
-                 type="text" @click.prevent="act( object, 'install' )" >
+                 type="text" @click.prevent="act( 'install', object )" >
       <font-awesome-icon icon="download" />
     </vk-btn-link>
   </div>

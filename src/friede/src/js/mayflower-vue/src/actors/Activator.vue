@@ -10,18 +10,18 @@
                            class="icon activator-enabled" />
         <vk-btn-link v-else v-vk-tooltip.bottom="'activate'"
                      type="text" class="activator-disabled danger"
-                     @click.prevent="act( object, 'enable' )" >
+                     @click.prevent="act( 'enable', object )" >
           <font-awesome-icon icon="toggle-off" />
         </vk-btn-link>
       </template>
       <vk-btn-link v-else-if=object.active v-vk-tooltip.bottom="'disable'"
                    type="text" class="activator-enabled"
-                   @click.prevent="act( object, 'disable' )" >
+                   @click.prevent="act( 'disable', object )" >
         <font-awesome-icon icon="toggle-on" />
       </vk-btn-link>
       <vk-btn-link v-else v-vk-tooltip.bottom="'disable'"
                    type="text" class="activator-disabled"
-                   @click.prevent="act( object, 'enable' )" >
+                   @click.prevent="act( 'enable', object )" >
         <font-awesome-icon icon="toggle-off" />
       </vk-btn-link>
     </template>

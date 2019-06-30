@@ -17,7 +17,7 @@
       <component :is=tag mode="widget" :key=tag
                  v-for="( actor, tag ) in actors"
                  :object=object
-                 @act="act( $event, tag, object, actions )" />
+                 @act=act />
     </template>
   </component>
 </div>
@@ -81,13 +81,13 @@ export default  {
     }
   },
   methods: {
-    act( $event, tag, object, actions ) {
-      console.log( 'act', $event );
+    act( action, object ) {
+      const tag = this.actions[ action ].data.component;
       const actor = this.actors[ tag ];
       Object.keys( actor.actions ).forEach( k => {
-        this.operands[k] = [ object ];
+        this.operands[k] = k === action ? [ object ] : [];
       });
-      this.ops = actions;
+      this.opts = [ action ];
       this.showModals[ tag ] = true;
     }
   },

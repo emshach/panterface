@@ -31,7 +31,7 @@ import { Button as VkBtn, ButtonLink as VkBtnLink } from 'vuikit/lib/button'
 import {
   Modal as VkModal,
   ModalClose as VkClose,
-  ModalTitle as VkModaTitle
+  ModalTitle as VkModalTitle
 } from 'vuikit/lib/modal'
 import { ActorsMixin } from '@/lib/mixins'
 import { faLevelUpAlt, faDownload, faTrash } from '@fortawesome/free-solid-svg-icons'
@@ -48,7 +48,7 @@ export default {
     VkBtnLink,
     VkModal,
     VkClose,
-    VkModaTitle,
+    VkModalTitle,
     FontAwesomeIcon,
   },
   props: [],

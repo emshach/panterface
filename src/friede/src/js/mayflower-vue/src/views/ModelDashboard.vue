@@ -53,7 +53,7 @@ export default  {
            if ( res.length )
              res.forEach( a => {
                _actions[ a.name ] = a;
-               _operands[ a.name ] = [];
+               _operands[ a.data.component ] = [];
                show[ a.data.component ] = false;
              });
            this.actions = _actions;
@@ -75,7 +75,7 @@ export default  {
       featured: [],
       objects: [],
       actions: {},
-      operands: {},
+      operands: [],
       showModals: {
       }
     }
@@ -84,7 +84,7 @@ export default  {
     act( action, object ) {
       const tag = this.actions[ action ].data.component;
       const actor = this.actors[ tag ];
-      this.operands = [ object ];
+      this.operands[ tag ] = [ object ];
       this.op = action;
       this.showModals[ tag ] = true;
     }
@@ -99,10 +99,9 @@ export default  {
         if ( !actors[ tag ])
           actors[ tag ] = {
             actions: {},
-            operands: {},
           };
         actors[ tag ].actions[ a.name ] = a;
-        actors[ tag ].operands[ a.name ] = args[ a.name ];
+        actors[ tag ].operands = args[ tag ];
       });
       return actors;
     }

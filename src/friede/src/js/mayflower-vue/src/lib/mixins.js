@@ -280,8 +280,8 @@ export const ActorsMixin = {
       default: () => ({})
     },
     operands: {
-      type: Object,
-      default: () => ({})
+      type: Array,
+      default: () => []
     },
     object: {
       type: Object,

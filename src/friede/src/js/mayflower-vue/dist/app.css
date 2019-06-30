@@ -10767,5 +10767,17 @@ form.uk-form-stacked label {
 .uk-modal-title {
   text-transform: capitalize; }
 
+.actor-modal {
+  min-width: 75%; }
+  .actor-modal .modal-actions {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: end;
+        -ms-flex-pack: end;
+            justify-content: flex-end; }
+    .actor-modal .modal-actions .uk-button {
+      padding: 0 15px; }
+
 
 /*# sourceMappingURL=app.css.map*/

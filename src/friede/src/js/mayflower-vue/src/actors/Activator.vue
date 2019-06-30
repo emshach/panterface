@@ -1,5 +1,5 @@
 <template lang="html">
-  <vk-modal class="activator" v-if="mode === 'modal'" :show.sync=show >
+  <vk-modal :class=classes v-if="mode === 'modal'" :show.sync=show >
     <vk-close @click="show = false" />
   </vk-modal>
   <div v-else class="activator widget">
@@ -56,7 +56,9 @@ export default {
   props: [],
   mounted() {},
   data() {
-    return {}
+    return {
+      classes: { installer: true }
+    }
   },
   methods: {},
   computed: {}

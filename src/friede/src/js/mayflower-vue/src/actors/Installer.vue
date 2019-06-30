@@ -1,5 +1,5 @@
 <template lang="html">
-  <vk-modal class="installer" v-if="mode === 'modal'" :show.sync=show >
+  <vk-modal :class=classes v-if="mode === 'modal'" :show.sync=show >
     <vk-close @click=hideModal />
     <vk-modal-title>{{ op }}
       <template v-if="operands.length == 1"> {{ operands[0].title }}</template>
@@ -60,7 +60,9 @@ export default {
   props: [],
   mounted() {},
   data() {
-    return {}
+    return {
+      classes: { installer: true }
+    }
   },
   methods: {},
   computed: {}

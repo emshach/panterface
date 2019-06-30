@@ -99,3 +99,13 @@ form.uk-form-stacked label {
 .uk-modal-title {
   text-transform: capitalize;
 }
+.actor-modal {
+  min-width: 75%;
+  .modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    .uk-button {
+      padding: 0 15px;
+    }
+  }
+}

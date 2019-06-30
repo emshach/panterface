@@ -292,6 +292,11 @@ export const ActorsMixin = {
       default: false
     }
   },
+  data() {
+    return {
+      classes: { actorModal: true }
+    }
+  },
   methods: {
     act( action, object ) {
       this.$emit( 'act', action, object );

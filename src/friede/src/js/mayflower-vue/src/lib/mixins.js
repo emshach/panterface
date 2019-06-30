@@ -294,7 +294,7 @@ export const ActorsMixin = {
   },
   data() {
     return {
-      classes: { actorModal: true }
+      classes: { 'actor-modal': true }
     }
   },
   methods: {

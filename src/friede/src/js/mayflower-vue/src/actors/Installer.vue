@@ -1,9 +1,15 @@
 <template lang="html">
   <vk-modal class="installer" v-if="mode === 'modal'" :show.sync=show >
-    <vk-close @click="hideModal" />
+    <vk-close @click=hideModal />
     <vk-modal-title>{{ op }}
       <template v-if="operands.length == 1"> {{ operands[0].title }}</template>
     </vk-modal-title>
+    <div class="modal-actions">
+      <vk-btn class="btn-cancel" type="link" size="small"
+              @click.prevent=hideModal >cancel</vk-btn>
+      <vk-btn class="btn-ok" type="primary" size="small"
+              @clitk.prevent=execute >{{ op }}</vk-btn>
+    </div>
   </vk-modal>
   <div v-else class="installer widget">
     <template v-if=object.installed >

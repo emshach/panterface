@@ -298,6 +298,8 @@ export const ActorsMixin = {
     },
     hideModal() {
       this.$emit( 'update:show', false );
+    },
+    execute() {
     }
   }
 }

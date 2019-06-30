@@ -31,10 +31,10 @@
               <input class="uk-input" type="text" v-model="email" />
             </div>
           </div>
-          <vk-btn class="btn-ok"
-                  html-type="submit" type="primary" size="small">done</vk-btn>
           <vk-btn class="btn-cancel"
                   html-type="reset" type="link" size="small">cancel</vk-btn>
+          <vk-btn class="btn-ok"
+                  html-type="submit" type="primary" size="small">done</vk-btn>
         </form>
         <template v-else>
           <div class="user-title">{{ user.fname}} {{ user.lname }}
@@ -141,9 +141,11 @@ export default  {
     border-bottom: 1px solid rgba(0,0,0,0.05);
     color: steelblue;
     .btn-ok, .btn-cancel {
-      display: block;
-      width: 100%;
-      margin-bottom: 4px;
+      display: inline-block;
+      width: 40%;
+    }
+    .btn-ok {
+      width: 60%;
     }
     .field {
       margin-bottom: 8px;

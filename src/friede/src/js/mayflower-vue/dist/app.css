@@ -226,9 +226,11 @@ a[data-v-aae30ed8] {
   color: steelblue;
 }
 .user-menu .user-info .btn-ok, .user-menu .user-info .btn-cancel {
-    display: block;
-    width: 100%;
-    margin-bottom: 4px;
+    display: inline-block;
+    width: 40%;
+}
+.user-menu .user-info .btn-ok {
+    width: 60%;
 }
 .user-menu .user-info .field {
     margin-bottom: 8px;
@@ -10761,6 +10763,9 @@ form.uk-form-stacked label {
   .uk-card .item-actions .widget .icon {
     -webkit-box-sizing: content-box;
             box-sizing: content-box; }
+
+.uk-modal-title {
+  text-transform: capitalize; }
 
 
 /*# sourceMappingURL=app.css.map*/

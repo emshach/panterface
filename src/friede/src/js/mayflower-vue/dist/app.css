@@ -10788,5 +10788,11 @@ form.uk-form-stacked label {
               box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.25);
       padding: 0 24px; }
 
+.uk-table-striped > tr:nth-of-type(odd).uk-active, tbody tr:nth-of-type(odd).uk-active {
+  background: #ffb; }
+
+.uk-table-hover > tr:nth-of-type(odd):hover, tbody tr:nth-of-type(odd):hover {
+  background: #ffb; }
+
 
 /*# sourceMappingURL=app.css.map*/

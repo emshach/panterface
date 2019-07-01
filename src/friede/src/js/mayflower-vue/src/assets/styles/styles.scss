@@ -119,3 +119,13 @@ form.uk-form-stacked label {
     }
   }
 }
+.uk-table-striped > tr:nth-of-type(odd), tbody tr:nth-of-type(odd) {
+  &.uk-active {
+    background: #ffb;
+  }
+}
+.uk-table-hover > tr:nth-of-type(odd), tbody tr:nth-of-type(odd) {
+  &:hover {
+    background: #ffb;
+  }
+}

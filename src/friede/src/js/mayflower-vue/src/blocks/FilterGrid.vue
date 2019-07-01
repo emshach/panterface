@@ -107,6 +107,8 @@ export default  {
         case 'none':
           this.selected = [];
           break;
+        default:
+          this.$emit( 'act', action, this.selected );
         }
         return;
       }

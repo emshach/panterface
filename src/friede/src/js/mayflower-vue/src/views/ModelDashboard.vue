@@ -27,6 +27,7 @@
 import { PageMixin } from '@/lib/mixins'
 import blocks from '@/blocks'
 import actors from '@/actors'
+import isArray from 'lodash/isArray'
 export default  {
   name: 'ModelDashboard',
   mixins: [ PageMixin ],
@@ -81,10 +82,10 @@ export default  {
     }
   },
   methods: {
-    act( action, object ) {
+    act( action, objects ) {
       const tag = this.actions[ action ].data.component;
       const actor = this.actors[ tag ];
-      this.operands[ tag ] = [ object ];
+      this.operands[ tag ] = isArray( objects ) ? objects : [ objects ];
       this.op = action;
       this.showModals[ tag ] = true;
     }

@@ -8,6 +8,15 @@
       <div v-if="arg.installed" class="info">
         <strong>current: </strong>{{ arg.version }}</div>
     </template>
+    <template v-else>
+      <vk-table responsive hoverable striped 
+                :divided=false
+                :data=operands >
+        <vk-column title="installed" cell="version" />
+        <vk-column title="available" cell="available" />
+        <vk-column title="app" cell="title" />
+      </vk-table>
+    </template>
     <div class="modal-actions">
       <vk-btn class="btn-cancel" type="link" size="small"
               @click.prevent=hideModal >cancel</vk-btn>
@@ -43,6 +52,11 @@ import {
   ModalClose as VkClose,
   ModalTitle as VkTitle
 } from 'vuikit/lib/modal'
+import {
+  Table as VkTable,
+  TableColumn as VkColumn,
+  TableColumnSelect as VkColSelect
+} from 'vuikit/lib/table'
 import { ActorsMixin } from '@/lib/mixins'
 import { faLevelUpAlt, faDownload, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -59,6 +73,9 @@ export default {
     VkModal,
     VkClose,
     VkTitle,
+    VkTable,
+    VkColumn,
+    VkColSelect,
     FontAwesomeIcon,
   },
   props: [],

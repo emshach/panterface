@@ -1,7 +1,8 @@
 <template lang="html">
   <vk-modal :class=classes v-if="mode === 'modal'" :show.sync=show >
     <vk-close @click=hideModal />
-    <vk-title>{{ op }}<template v-if="arg">: {{ arg.title }}</template></vk-title>
+    <vk-title>{{ op }}<template v-if="arg">: {{ arg.title }}</template>
+      <template v-else>{{ model ? model.plural : '' }}</template></vk-title>
     <template v-if="arg">
       <div class="description uk-margin">{{ arg.description }}</div>
       <div class="info"><strong>version: </strong>{{ arg.available }}</div>
@@ -12,9 +13,9 @@
       <vk-table responsive hoverable striped 
                 :divided=false
                 :data=operands >
+        <vk-column :title="model ? model.singular : 'object'" cell="title" />
         <vk-column title="installed" cell="version" />
         <vk-column title="available" cell="available" />
-        <vk-column title="app" cell="title" />
       </vk-table>
     </template>
     <div class="modal-actions">

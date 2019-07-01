@@ -3,6 +3,7 @@
   <component :is=tag mode="modal" :key=tag
              v-for="( actor, tag ) in actors"
              :op=op
+             :model=modelObj
              :actions=actor.actions
              :operands=actor.operands
              :show.sync=showModals[tag] />
@@ -74,6 +75,7 @@ export default  {
         'uk-flex-column': true,
       },
       op: '',
+      modelObj: null,
       featured: [],
       objects: [],
       actions: {},

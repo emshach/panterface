@@ -275,6 +275,10 @@ export const ActorsMixin = {
       type: String,
       default: ''
     },
+    model: {
+      type: Object,
+      default: () => ({})
+    },
     actions: {
       type: Object,
       default: () => ({})

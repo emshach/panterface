@@ -17,24 +17,37 @@ Vue.use( API );
 Vue.use( security );
 Vue.config.productionTip = false;
 
-function Mayflower( args ) {
-  this.options = {
-    router,
-    store,
-    render: h => h( App )
-  };
-  if ( args ) {
-    Object.assign( this.options, args );
+class Mayflower{
+  constructor ( args ) {
+    this.options = {
+      router,
+      store,
+      render: h => h( App )
+    };
+    if ( args ) {
+      Object.assign( this.options, args );
+    }
+    this.mountpoint = '#app';
+    this.vm = null;
+    return this;
   }
-  this.mountpoint = '#app';
-  this.vm = null;
-  return this;
+  init() {
+    if ( !this.vm )
+      this.vm = new Vue( this.options ).$mount( this.mountpoint );
+  }
+  findComponent( tag ) {
+    if ( !this.vm ) return null;
+    const stack = this.vm.$children.slice();
+    const out = [];
+    while ( stack.length ) {
+      const comp = stack.shift();
+      if ( comp.$options.name === tag )
+        out.push( comp );
+      stack.unshift.apply( stack, comp.$children );
+    }
+    return out;
+  }
 }
-Mayflower.prototype.init = function () {
-  if ( !this.vm )
-    this.vm = new Vue( this.options ).$mount( this.mountpoint );
-};
-
 window.Vue = Vue;
 window.UIkit = UIkit;
 window.Mayflower = Mayflower;

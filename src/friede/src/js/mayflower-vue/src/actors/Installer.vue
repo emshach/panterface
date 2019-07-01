@@ -2,7 +2,7 @@
   <vk-modal :class=classes v-if="mode === 'modal'" :show.sync=show >
     <vk-close @click=hideModal />
     <vk-title>{{ op }}<template v-if="arg">: {{ arg.title }}</template>
-      <template v-else>{{ model ? model.plural : '' }}</template></vk-title>
+      <template v-else> {{ model ? model.plural : '' }}</template></vk-title>
     <template v-if="arg">
       <div class="description uk-margin">{{ arg.description }}</div>
       <div class="info"><strong>version: </strong>{{ arg.available }}</div>

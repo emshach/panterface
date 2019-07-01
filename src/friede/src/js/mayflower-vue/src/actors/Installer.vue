@@ -10,7 +10,8 @@
         <strong>current: </strong>{{ arg.version }}</div>
     </template>
     <template v-else>
-      <vk-table responsive hoverable striped 
+      <vk-table responsive hoverable striped
+                :rows-selected=selected
                 :divided=false
                 :data=operands >
         <vk-column :title="model ? model.singular : 'object'" cell="title" />
@@ -87,11 +88,20 @@ export default {
   mounted() {},
   data() {
     return {
-      classes: { installer: true }
+      classes: { installer: true },
+      applicable: {
+        intall: x => !x.installed,
+        uninstall: x => x.installed,
+        update: x => x.installed
+      }
     }
   },
   methods: {},
-  computed: {}
+  computed: {
+    selected() {
+      this.objects.filter( this.applicable[ this.action ]);
+    }
+  }
 }
 </script>
 

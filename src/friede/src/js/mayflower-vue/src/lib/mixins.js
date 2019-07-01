@@ -271,7 +271,7 @@ export const ActorsMixin = {
       default: 'widget',
       // validator: val => !val || /^(widget|modal)$/.test( val )
     },
-    op: {
+    action: {
       type: String,
       default: ''
     },

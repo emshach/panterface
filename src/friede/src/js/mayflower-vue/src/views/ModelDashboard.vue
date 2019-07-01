@@ -2,7 +2,7 @@
 <div :class=classes>
   <component :is=tag mode="modal" :key=tag
              v-for="( actor, tag ) in actors"
-             :op=op
+             :action=op
              :model=modelObj
              :actions=actor.actions
              :operands=actor.operands
@@ -75,10 +75,10 @@ export default  {
         'model-dashboard': true,
         'uk-flex-column': true,
       },
-      op: '',
       modelObj: null,
       featured: [],
       objects: [],
+      action: '',
       actions: {},
       operands: [],
       showModals: {
@@ -90,7 +90,7 @@ export default  {
       const tag = this.actions[ action ].data.component;
       const actor = this.actors[ tag ];
       this.operands[ tag ] = isArray( objects ) ? objects : [ objects ];
-      this.op = action;
+      this.action = action;
       this.showModals[ tag ] = true;
     }
   },

@@ -12,7 +12,8 @@
              :objects=objects
              :actions=options.actions
              :item-layout=options.layout
-             :search-fields=options.search>
+             :search-fields=options.search
+             @act=act >
     <template #item-actions={object} >
       <component :is=tag mode="widget" :key=tag
                  v-for="( actor, tag ) in actors"

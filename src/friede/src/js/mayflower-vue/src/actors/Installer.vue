@@ -90,16 +90,16 @@ export default {
     return {
       classes: { installer: true },
       applicable: {
-        intall: x => !x.installed,
+        intall:    x => !x.installed,
         uninstall: x => x.installed,
-        update: x => x.installed
+        update:    x => x.installed
       }
     }
   },
   methods: {},
   computed: {
     selected() {
-      this.operands.filter( this.applicable[ this.action ]);
+      this.action ? this.operands.filter( this.applicable[ this.action ]) : [];
     }
   }
 }

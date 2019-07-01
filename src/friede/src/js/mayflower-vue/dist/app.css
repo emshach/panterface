@@ -10767,7 +10767,7 @@ form.uk-form-stacked label {
 .uk-modal-title {
   text-transform: capitalize; }
 
-.actor-modal .up-modal-dialog {
+.actor-modal .uk-modal-dialog {
   min-width: 75%; }
 
 .actor-modal .uk-modal-body {

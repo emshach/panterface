@@ -11,8 +11,7 @@
     </template>
     <template v-else>
       <vk-table responsive hoverable striped
-                :rows-selectable=true
-                :selected-rows=selected
+                :row-class=showApplicable
                 :divided=false
                 :data=operands >
         <vk-column :title="model ? model.singular : 'object'" cell="title" />
@@ -90,16 +89,22 @@ export default {
   data() {
     return {
       classes: { installer: true },
-      applicable: {
-        install:    x => !x.installed,
-        uninstall: x => x.installed,
-        update:    x => x.installed
-      }
     }
   },
-  methods: {},
+  methods: {
+    verify( x, action ) {
+      return ({
+        install:   x => !x.installed,
+        uninstall: x => x.installed,
+        update:    x => x.installed
+      })[ action ](x);
+    },
+    showApplicable(x) {
+      return this.action ? this.verify( x, this.action ) ? 'uk-active' : [] : []
+    }
+  },
   computed: {
-    selected() {
+    applicable() {
       return this.action ? this.operands.filter( this.applicable[ this.action ]) : [];
     }
   }

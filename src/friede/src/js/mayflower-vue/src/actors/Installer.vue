@@ -99,7 +99,7 @@ export default {
   methods: {},
   computed: {
     selected() {
-      this.objects.filter( this.applicable[ this.action ]);
+      this.operands.filter( this.applicable[ this.action ]);
     }
   }
 }

@@ -14,7 +14,11 @@
                 :divided=false
                 :data=operands >
         <vk-column :title="model ? model.singular : 'object'" cell="title" />
-        <vk-column title="installed" cell="version" />
+        <vk-column title="installed" cell="version" >
+          <template #default="{ cell, row }">
+            {{ row.installed ? cell : 'no' }}
+          </template>
+        </vk-column>
         <vk-column title="available" cell="available" />
       </vk-table>
     </template>

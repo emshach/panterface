@@ -1,7 +1,7 @@
 <template lang="html">
   <vk-modal :class=classes v-if="mode === 'modal'" :show.sync=show >
     <vk-close @click=hideModal />
-    <vk-title>{{ op }}<template v-if="arg">: {{ arg.title }}</template>
+    <vk-title>{{ action }}<template v-if="arg">: {{ arg.title }}</template>
       <template v-else> {{ model ? model.plural : '' }}</template></vk-title>
     <template v-if="arg">
       <div class="description uk-margin">{{ arg.description }}</div>
@@ -27,7 +27,7 @@
       <vk-btn class="btn-cancel" type="link" size="small"
               @click.prevent=hideModal >cancel</vk-btn>
       <vk-btn class="btn-ok" type="primary" size="small"
-              @clitk.prevent=execute >{{ op }}</vk-btn>
+              @clitk.prevent=execute >{{ action }}</vk-btn>
     </div>
   </vk-modal>
   <div v-else class="installer widget">

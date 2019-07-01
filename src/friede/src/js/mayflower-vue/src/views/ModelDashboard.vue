@@ -2,7 +2,7 @@
 <div :class=classes>
   <component :is=tag mode="modal" :key=tag
              v-for="( actor, tag ) in actors"
-             :action=op
+             :action=action
              :model=modelObj
              :actions=actor.actions
              :operands=actor.operands

@@ -11,6 +11,7 @@
     </template>
     <template v-else>
       <vk-table responsive hoverable striped
+                :rows-selectable=true
                 :selected-rows=selected
                 :divided=false
                 :data=operands >

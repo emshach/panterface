@@ -2,8 +2,14 @@
   <vk-modal :class=classes v-if="mode === 'modal'" :show.sync=show >
     <vk-close @click=hideModal />
     <vk-modal-title>{{ op }}
-      <template v-if="operands.length == 1"> {{ operands[0].title }}</template>
+      <template v-if="arg">: {{ arg.title }}</template>
     </vk-modal-title>
+    <template v-if="arg">
+      <div class="description">{{ arg.description }}</div>
+      <div class="info"><strong>version:</strong>{{ arg.available }}</div>
+      <div v-if="arg.installed" class="info">
+        <strong>current:</strong>{{ arg.available }}</div>
+    </template>
     <div class="modal-actions">
       <vk-btn class="btn-cancel" type="link" size="small"
               @click.prevent=hideModal >cancel</vk-btn>

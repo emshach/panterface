@@ -100,10 +100,16 @@ form.uk-form-stacked label {
   text-transform: capitalize;
 }
 .actor-modal {
-  min-width: 75%;
+  .up-modal-dialog {
+    min-width: 75%;
+  }
+  .uk-modal-body {
+    padding: 16px;
+  }
   .modal-actions {
     display: flex;
     justify-content: flex-end;
+    margin: 12px -16px -16px;
     .uk-button {
       padding: 0 15px;
     }

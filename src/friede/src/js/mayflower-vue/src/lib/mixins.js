@@ -306,6 +306,11 @@ export const ActorsMixin = {
     },
     execute() {
     }
+  },
+  computed: {
+    arg() {
+      return this.operands.length === 1 && this.operands[0];
+    }
   }
 }
 

@@ -11,7 +11,7 @@
     </template>
     <template v-else>
       <vk-table responsive hoverable striped
-                :rows-selected=selected
+                :selected-rows=selected
                 :divided=false
                 :data=operands >
         <vk-column :title="model ? model.singular : 'object'" cell="title" />
@@ -90,7 +90,7 @@ export default {
     return {
       classes: { installer: true },
       applicable: {
-        intall:    x => !x.installed,
+        install:    x => !x.installed,
         uninstall: x => x.installed,
         update:    x => x.installed
       }

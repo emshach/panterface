@@ -34,7 +34,8 @@
   </vk-modal>
   <div v-else class="installer widget">
     <template v-if=object.installed >
-      <vk-btn-link v-if="object.version !== object.available"
+      <vk-btn-link v-if="object.version !== object.available 
+                         && permissions.update === true"
                    v-vk-tooltip.bottom="'update'"
                    type="text" @click.prevent="act( 'update', object )" >
         v{{ object.version }} installed

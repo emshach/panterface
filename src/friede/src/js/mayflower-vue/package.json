@@ -70,6 +70,7 @@
       "space-in-parens": "off",
       "space-before-function-paren": "off",
       "semi": "off",
+      "indent": "off",
       "comma-dangle": "off",
       "curly": "off",
       "operator-linebreak": "off",

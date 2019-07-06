@@ -1,8 +1,10 @@
 <template lang="html">
-  <vk-modal :class=classes v-if="mode === 'modal'" :show.sync=show >
+  <vk-modal :class=classes v-if="mode === 'modal'" :show=show >
     <vk-close @click=hideModal />
     <vk-title>{{ action }}<template v-if="arg">: {{ arg.title }}</template>
-      <template v-else> {{ model ? model.plural : '' }}</template></vk-title>
+      <template v-else> {{ model ? model.plural : '' }}</template>
+      <template v-if="permissions[ action ] === 'own'"> User-data</template>
+    </vk-title>
     <template v-if="arg">
       <div class="description uk-margin">{{ arg.description }}</div>
       <div class="info"><strong>version: </strong>{{ arg.available }}</div>
@@ -44,7 +46,8 @@
         <font-awesome-icon icon="trash" />
       </vk-btn-link>
     </template>
-    <vk-btn-link v-else v-vk-tooltip.bottom="'install'"
+    <vk-btn-link v-else-if="permissions.install === true"
+                 v-vk-tooltip.bottom="'install'"
                  type="text" @click.prevent="act( 'install', object )" >
       <font-awesome-icon icon="download" />
     </vk-btn-link>
@@ -89,25 +92,19 @@ export default {
   data() {
     return {
       classes: { installer: true },
-    }
-  },
-  methods: {
-    verify( x, action ) {
-      return ({
+      verify: {
         install:   x => !x.installed,
         uninstall: x => x.installed,
         update:    x => x.installed
-      })[ action ](x);
-    },
-    showApplicable(x) {
-      return this.action ? this.verify( x, this.action ) ? 'uk-active' : [] : []
+      },
     }
   },
-  computed: {
-    applicable() {
-      return this.action ? this.operands.filter( this.applicable[ this.action ]) : [];
+  methods: {
+    showApplicable(x) {
+      return this.action ? this.verify[ this.action ](x) ? 'uk-active' : [] : []
     }
-  }
+  },
+  computed: {}
 }
 </script>
 

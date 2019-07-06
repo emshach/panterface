@@ -19,6 +19,7 @@
       <component :is=tag mode="widget" :key=tag
                  v-for="( actor, tag ) in actors"
                  :object=object
+                 :model=modelObj
                  @act=act />
     </template>
   </component>

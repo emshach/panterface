@@ -298,8 +298,19 @@ export const ActorsMixin = {
   },
   data() {
     return {
-      classes: { 'actor-modal': true }
+      classes: { 'actor-modal': true },
+      verify: {},
+      permissions: {}
     }
+  },
+  created() {
+    const model = this.model;
+    const actions = Object.keys( this.actions );
+    if ( !model || !model.fullname || !actions || !actions.length )
+      return;
+    this.$canI( actions, model ).then( r => {
+      this.permissions = r;
+    });
   },
   methods: {
     act( action, object ) {
@@ -309,11 +320,18 @@ export const ActorsMixin = {
       this.$emit( 'update:show', false );
     },
     execute() {
+      return this.$api( 'do', this.action, this.model.fullname,
+                      this.applicable.map( x => x.id ).join('+'))
     }
   },
   computed: {
     arg() {
       return this.operands.length === 1 && this.operands[0];
+    },
+    applicable() {
+      return ( this.action
+               ? this.operands.filter( this.verify[ this.action ] || ( x => false ))
+               : []);
     }
   }
 }

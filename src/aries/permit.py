@@ -157,9 +157,6 @@ class Permit( object ):
                 def popstack():
                     stack.pop()
 
-                def poppath():
-                    path.popleft()
-
                 def popmodel():
                     model.popleft()
 
@@ -168,7 +165,6 @@ class Permit( object ):
 
                 def poperate():
                     mkobjects()
-                    path.popleft()
                     data.popleft()
 
                 def popdata():

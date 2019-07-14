@@ -27,4 +27,5 @@ class Permit( permit.Permit ):
                 dict( ct=_friede_model, name=_perm_name )))))),
       ( '#groups', 'power staff',
         ( '#roles', ( 'manager', 'app site' ))),
-    ))
+    ),
+    )

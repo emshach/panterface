@@ -328,7 +328,7 @@ export const ActorsMixin = {
                       this.applicable.map( x => x.id ).join('+'))
     },
     can( action ) {
-      const perm = this.permission[ action ];
+      const perm = this.permissions[ action ];
       if ( !perm )
         return false;
       const min = this.actionType;

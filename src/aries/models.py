@@ -236,9 +236,9 @@ class Creation( Model ):
 class AutoOwnedModel( six.with_metaclass( _AutoOwnedBase, Model )):
     class Meta:
         abstract = True
-    owner   = M.GenericRelation( Ownership,
-                                 related_query_name="%(app_label)s_%(class)s" )
-    creator = M.GenericRelation( Creation,
-                                 related_query_name="%(app_label)s_%(class)s_created" )
+    owner   = GenericRelation( Ownership,
+                               related_query_name="%(app_label)s_%(class)s" )
+    creator = GenericRelation( Creation,
+                               related_query_name="%(app_label)s_%(class)s_created" )
 
 

@@ -123,7 +123,7 @@ def _normalize_list( Type, things, name='name' ):
                    tuple( _normalize( Type, thing, name ) for thing in things ))
 
 class User( auth.AbstractUser, _Base, DataMixin ):
-    phone     = M.CharField( blank=True, null=True )
+    phone     = M.CharField( max_length=32, blank=True, null=True )
     anonymous = M.BooleanField( default=False )
     roles     = M.ManyToManyField( Role, blank=True, related_name='users' )
     policies  = M.ManyToManyField( Policy, blank=True, related_name='users' )

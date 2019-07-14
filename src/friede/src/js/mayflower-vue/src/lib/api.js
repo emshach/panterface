@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export function process_args( args ) {
+export function process_args( args, data ) {
   var str_args = [ '/api' ];
   var obj_args = [{}];
   Array.prototype.forEach.call( args, f => {
@@ -8,7 +8,12 @@ export function process_args( args ) {
   });
   var out_args = [ str_args.join('/') ];
   if ( obj_args.length > 1 )
-    out_args.push( Object.assign.apply( null, obj_args ))
+    out_args.push( Object.assign(
+      { xsrfCookieName: 'csrftoken',
+        xsrfHeaderName: 'X-CSRFToken' },
+      data ? { data: Object.assign.apply( null, obj_args )}
+      : { params: Object.assign.apply( null, obj_args )}))
+  // TODO: make more sophisticated
   return out_args;
 }
 
@@ -27,7 +32,7 @@ Object.assign( API, {
 
   // axios.post(url[, data[, config]])
   post() {
-    return axios.post.apply( null, process_args( arguments ));
+    return axios.post.apply( null, process_args( arguments, true ));
   },
 
   // axios.head(url[, config])
@@ -42,12 +47,12 @@ Object.assign( API, {
 
   // axios.put(url[, data[, config]])
   put() {
-    return axios.put.apply( null, process_args( arguments ));
+    return axios.put.apply( null, process_args( arguments, true ));
   },
 
   // axios.patch(url[, data[, config]])
   patch() {
-    return axios.patch.apply( null, process_args( arguments ));
+    return axios.patch.apply( null, process_args( arguments, true ));
   },
 
   // axios.delete(url[, config])

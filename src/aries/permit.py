@@ -202,8 +202,14 @@ class Permit( object ):
                                     x + y for x in data[0] for y in tag
                                 ) if data[0] else tag
                                 data.appendleft( items )
-                                stack.append( popdata if len( body ) else poperate )
-                                stack.extend( body[ ::-1 ])
+                                if len( body ):
+                                    stack.append( popdata )
+                                    if isinstance( body[0], basestring ):
+                                        stack.append( body )
+                                    else:
+                                        stack.extend( body[ ::-1 ])
+                                else:
+                                    stack.append( poperate )
                             else:
                                 # flatten tuples
                                 stack.extend( top[ ::-1 ])

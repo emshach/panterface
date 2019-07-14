@@ -7,6 +7,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from .models import *
 from .serializers import *
+import json
 import time
 import base64
 import re
@@ -24,11 +25,12 @@ def register( request ):
 @permission_classes(( permissions.AllowAny, ))
 def api_login( request ):
     time.sleep(5)
-    user = request.user
-    username = request.params.get( 'username' )
-    email = request.params.get( 'email' )
-    phone = request.params.get( 'phone' )
-    password = request.params.get( 'password' )
+    user     = request.user
+    params   = json.loads( request.body.decode( 'utf-8' ))
+    username = params.get( 'username' )
+    email    = params.get( 'email' )
+    phone    = params.get( 'phone' )
+    password = params.get( 'password' )
     try:
         applicant = User.objects.get( username=username ) if username \
             else User.objects.get( email=email ) if email \
@@ -55,13 +57,14 @@ def api_logout( request ):
 @api_view([ 'POST' ])
 @permission_classes(( permissions.AllowAny, ))
 def api_register( request ):
-    user = request.user
-    username = request.params.get( 'username' )
-    fname = request.params.get( 'fname' )
-    lname = request.params.get( 'lname' )
-    email = request.params.get( 'email' )
-    phone = request.params.get( 'phone' )
-    password = request.params.get( 'password' )
+    user     = request.user
+    params   = json.loads( request.body.decode( 'utf-8' ))
+    username = params.get( 'username' )
+    fname    = params.get( 'fname' )
+    lname    = params.get( 'lname' )
+    email    = params.get( 'email' )
+    phone    = params.get( 'phone' )
+    password = params.get( 'password' )
     try:
         found = User.objects.get( username=username ) if username else None
         if found:

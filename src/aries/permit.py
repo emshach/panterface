@@ -30,7 +30,7 @@ def setup():
                     msg = str(e)
                     if 'No module named aries_permit' not in msg:
                         print >> sys.stderr, 'got exception', type(e), e,\
-                            "in friede.urls/%s" % module
+                            "in aries.permit/%s" % module
                         traceback.print_exc()
                     continue        # TODO: maybe warn
     except Exception:

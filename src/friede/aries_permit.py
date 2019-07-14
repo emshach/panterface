@@ -6,7 +6,7 @@ def _friede_model( ct, data={} ):
 def _perm_name( name, data={} ):
     return "Can {} {}".format(*( name[:2] ))
 
-class Permit( permit.permit ):
+class Permit( permit.Permit ):
     name = 'friede'
     data = (
     ( '0.0.1',

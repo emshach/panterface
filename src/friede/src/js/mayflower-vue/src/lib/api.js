@@ -7,12 +7,21 @@ export function process_args( args, data ) {
     ( typeof f === 'string' ? str_args : obj_args ).push(f);
   });
   var out_args = [ str_args.join('/') ];
-  if ( obj_args.length > 1 )
-    out_args.push( Object.assign(
-      { xsrfCookieName: 'csrftoken',
-        xsrfHeaderName: 'X-CSRFToken' },
-      data ? { data: Object.assign.apply( null, obj_args )}
-      : { params: Object.assign.apply( null, obj_args )}))
+  if ( obj_args.length > 1 ) {
+    if ( data ) {
+      out_args.push( Object.assign.apply( null, obj_args ));
+      out_args.push({
+        xsrfCookieName: 'csrftoken',
+        xsrfHeaderName: 'X-CSRFToken'
+      });
+    } else {
+      out_args.push({
+        xsrfCookieName: 'csrftoken',
+        xsrfHeaderName: 'X-CSRFToken',
+        params: Object.assign.apply( null, obj_args )
+      });
+    }
+  }
   // TODO: make more sophisticated
   return out_args;
 }

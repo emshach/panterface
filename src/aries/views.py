@@ -26,7 +26,7 @@ def register( request ):
 def api_login( request ):
     time.sleep(5)
     user     = request.user
-    params   = json.loads( request.body.decode( 'utf-8' ))
+    params   = request.data
     username = params.get( 'username' )
     email    = params.get( 'email' )
     phone    = params.get( 'phone' )
@@ -58,7 +58,7 @@ def api_logout( request ):
 @permission_classes(( permissions.AllowAny, ))
 def api_register( request ):
     user     = request.user
-    params   = json.loads( request.body.decode( 'utf-8' ))
+    params   = request.data
     username = params.get( 'username' )
     fname    = params.get( 'fname' )
     lname    = params.get( 'lname' )

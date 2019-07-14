@@ -661,10 +661,12 @@ class ActionEntry( Entry ):
 
 @python_2_unicode_compatible
 class UserApp( DataMixin ):
-    user = M.ForeignKey( get_user_model(), M.CASCADE, related_name='friede_apps_use' )
-    app = M.ForeignKey( App, M.CASCADE, related_name='use' )
+    owner     = M.ForeignKey( get_user_model(), M.CASCADE,
+                              related_name='friede_apps_use' )
+    app       = M.ForeignKey( App, M.CASCADE, related_name='use' )
     installed = M.BooleanField( default=False )
-    active = M.BooleanField( default=False )
+    active    = M.BooleanField( default=False )
+    version   = M.CharField( max_length=32, default='0.0.0' )
 
     def __str__( self ):
         return self.app

@@ -6,6 +6,7 @@ from django.contrib.postgres.fields import JSONField
 from django.contrib.auth import models as auth
 from django.db.models.signals import post_save
 from django.contrib.contenttypes.models import ContentType
+from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 
 Model = M.Model
 owned = set()
@@ -122,6 +123,7 @@ def _normalize_list( Type, things, name='name' ):
                    tuple( _normalize( Type, thing, name ) for thing in things ))
 
 class User( auth.AbstractUser, _Base, DataMixin ):
+    phone     = M.CharField( blank=True, null=True )
     anonymous = M.BooleanField( default=False )
     roles     = M.ManyToManyField( Role, blank=True, related_name='users' )
     policies  = M.ManyToManyField( Policy, blank=True, related_name='users' )
@@ -217,12 +219,26 @@ class _AutoOwnedBase( M.base.ModelBase ):
         return model
 
 
+class Ownership( Model ):
+    user         = M.ForeignKey( User, related_name='owned', on_delete=M.CASCADE )
+    content_type = M.ForeignKey( ContentType, on_delete=M.CASCADE )
+    object_id    = M.PositiveIntegerField()
+    owned        = GenericForeignKey( 'content_type', 'object_id' )
+
+
+class Creation( Model ):
+    user         = M.ForeignKey( User, related_name='created', on_delete=M.CASCADE )
+    content_type = M.ForeignKey( ContentType, on_delete=M.CASCADE )
+    object_id    = M.PositiveIntegerField()
+    owned        = GenericForeignKey( 'content_type', 'object_id' )
+
+
 class AutoOwnedModel( six.with_metaclass( _AutoOwnedBase, Model )):
     class Meta:
         abstract = True
-    owner    = M.ForeignKey( User, related_name="%(app_label)s_%(class)s_set",
-                             on_delete=M.CASCADE, blank=True, null=True )
-    creator  = M.ForeignKey( User, related_name="%(app_label)s_%(class)s_created_set",
-                             on_delete=M.CASCADE, blank=True, null=True )
+    owner   = M.GenericRelation( Ownership,
+                                 related_query_name="%(app_label)s_%(class)s" )
+    creator = M.GenericRelation( Creation,
+                                 related_query_name="%(app_label)s_%(class)s_created" )
 
 

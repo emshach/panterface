@@ -8,22 +8,36 @@
         <font-awesome-icon v-if=object.active
                            icon="toggle-on" v-vk-tooltip.bottom="'required'"
                            class="icon activator-enabled" />
-        <vk-btn-link v-else v-vk-tooltip.bottom="'activate'"
+        <vk-btn-link v-else-if="can( 'activate' )"
+                     v-vk-tooltip.bottom="'activate'"
                      type="text" class="activator-disabled danger"
                      @click.prevent="act( 'enable', object )" >
           <font-awesome-icon icon="toggle-off" />
         </vk-btn-link>
+        <font-awesome-icon v-else
+                           icon="toggle-off" v-vk-tooltip.bottom="'required'"
+                           class="icon activator-disabled danger" />
       </template>
-      <vk-btn-link v-else-if=object.active v-vk-tooltip.bottom="'disable'"
-                   type="text" class="activator-enabled"
-                   @click.prevent="act( 'disable', object )" >
-        <font-awesome-icon icon="toggle-on" />
-      </vk-btn-link>
-      <vk-btn-link v-else v-vk-tooltip.bottom="'disable'"
-                   type="text" class="activator-disabled"
-                   @click.prevent="act( 'enable', object )" >
-        <font-awesome-icon icon="toggle-off" />
-      </vk-btn-link>
+      <template v-else-if="can( 'activate' )">
+        <vk-btn-link v-if=object.active v-vk-tooltip.bottom="'disable'"
+                     type="text" class="activator-enabled"
+                     @click.prevent="act( 'disable', object )" >
+          <font-awesome-icon icon="toggle-on" />
+        </vk-btn-link>
+        <vk-btn-link v-else v-vk-tooltip.bottom="'disable'"
+                     type="text" class="activator-disabled"
+                     @click.prevent="act( 'enable', object )" >
+          <font-awesome-icon icon="toggle-off" />
+        </vk-btn-link>
+      </template>
+      <template v-else>
+        <font-awesome-icon v-if=object.active
+                           icon="toggle-on" v-vk-tooltip.bottom="'active'"
+                           class="icon activator-enabled" />
+        <font-awesome-icon v-else
+                           icon="toggle-off" v-vk-tooltip.bottom="'disabled'"
+                           class="icon activator-disabled" />
+      </template>
     </template>
   </div>
 </template>
@@ -33,14 +47,14 @@ import { Button as VkBtn, ButtonLink as VkBtnLink } from 'vuikit/lib/button'
 import { faToggleOn, faToggleOff } from '@fortawesome/free-solid-svg-icons'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-
-library.add( faToggleOn, faToggleOff );
 import {
   Modal as VkModal,
   ModalClose as VkClose,
   ModalTitle as VkModaTitle
 } from 'vuikit/lib/modal'
 import { ActorsMixin } from '@/lib/mixins'
+
+library.add( faToggleOn, faToggleOff );
 
 export default {
   name: 'Activator',

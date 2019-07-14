@@ -7,6 +7,9 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from .models import *
 from .serializers import *
+import time
+import base64
+import re
 
 def login( request ):
     pass
@@ -17,16 +20,113 @@ def logout( request ):
 def register( request ):
     pass
 
+@api_view([ 'POST' ])
+@permission_classes(( permissions.AllowAny, ))
+def api_login( request ):
+    time.sleep(5)
+    user = request.user
+    username = request.params.get( 'username' )
+    email = request.params.get( 'email' )
+    phone = request.params.get( 'phone' )
+    password = request.params.get( 'password' )
+    try:
+        applicant = User.objects.get( username=username ) if username \
+            else User.objects.get( email=email ) if email \
+                 else User.objects.get( phone=phone ) if phone else None
+    except User.DoesNotExist:
+        return Response( dict( error='Invalid credentials'), status=401 )
+    if not applicant.anonymous:
+        applicant = authenticate( request, username=applicant.username,
+                                  password=password )
+
+    if not applicant:
+        return Response( dict( error='Invalid credentials'), status=401 )
+    else:
+        login( request, applicant )
+        return Response( dict(
+            success='logged in',
+            user=UserSerializer( applicant, context=dict( request=request )).data ))
+
+@api_view([ 'GET', 'POST' ])
+@permission_classes(( permissions.AllowAny, ))
+def api_logout( request ):
+    pass
+
+@api_view([ 'POST' ])
+@permission_classes(( permissions.AllowAny, ))
+def api_register( request ):
+    user = request.user
+    username = request.params.get( 'username' )
+    fname = request.params.get( 'fname' )
+    lname = request.params.get( 'lname' )
+    email = request.params.get( 'email' )
+    phone = request.params.get( 'phone' )
+    password = request.params.get( 'password' )
+    try:
+        found = User.objects.get( username=username ) if username else None
+        if found:
+            return Response( dict( error="username '{}' is alraedy in use" ))
+    except User.DoesNotExist:
+        pass
+    try:
+        found = User.objects.get( email=email ) if email else None
+        if found:
+            return Response( dict( error="email '{}' is alraedy in use" ))
+    except User.DoesNotExist:
+        pass
+    try:
+        found = User.objects.get( phone=phone ) if phone else None
+        if found:
+            return Response( dict( error="phone number '{}' is alraedy in use" ))
+    except User.DoesNotExist:
+        pass
+
+    uname = username or re.sub( r'[+/=]', '+',
+                                base64.urlsafe_b64encode( str( randint( 0, 10000000 ))))
+
+    applicant = user if user.anonymous \
+    else User.objects.create( username=uname, email=email, first_name=fname,
+                              last_name=lname, phone=phone )
+
+    if password:
+        applicant.set_password( password )
+        applicant.save()
+    if applicant.anonymous:
+        applicant.anonymous = False
+        applicant.set_password( ' '.join([ re.sub(
+            r'[+/=]', '', base64.urlsafe_b64encode(
+                str( randint( 0, randint( 1, 10000000 ))))) for x in range(4) ]))
+        applicant.save()
+        # TODO clear password
+    elif not username:
+        applicant.username = "user%d" % applicant.id
+        applicant.save()
+
+    return Response( dict(
+        success='signed up',
+        user=UserSerializer( applicant, context=dict( request=request )).data ))
+
+@api_view([ 'GET' ])
+@permission_classes(( permissions.AllowAny, ))
+def api_auth_status( request ):
+    pass
+
+
 @api_view([ 'GET' ])
 @permission_classes(( permissions.AllowAny, ))
 def api_can( request, perm='any', format=None ):
-    if request.user.is_superuser:
+    user = request.user
+    if user.is_superuser:
         return Response( True )
     try:
         op, app, model = perm.split('.')
     except ValueError:
         return Response( None )
-    return Response( request.user.has_perm( "{}.{}_{}".format( app, op, model )))
+
+    perm = user.has_perm( "{}.{}_{}".format( app, op, model )) and 'global'
+    if not perm and user.has_perm( "{}.{}_own_{}".format( app, op, model )):
+        perm = 'user'
+    return Response( perm )
 
 @api_view([ 'GET' ])
 @permission_classes(( permissions.AllowAny, ))
@@ -34,11 +134,13 @@ def api_which_can( request, format=None ):
     user = request.user
     perms = set( request.query_params.getlist( 'op' ))
     out = {}
-    if request.user.is_superuser:
+    if user.is_superuser:
         return Response({ x: True for x in perms })
     for p in perms:
         op, app, model = p.split('.')
-        out[p] = user.has_perm( "{}.{}_{}".format( app, op, model ))
+        out[p] = user.has_perm( "{}.{}_{}".format( app, op, model )) and 'global'
+        if not out[p]:
+            out[p] = user.has_perm( "{}.{}_own_{}".format( app, op, model )) and 'user'
     return Response( out )
 
 class UserViewSet( viewsets.ModelViewSet ):

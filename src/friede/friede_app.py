@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from . import views, serializers, app
-from .models import Setting
+from .app import action
+from .models import Setting, App as AppModel, UserApp
+
 
 _links = '''_container_entries _widget_entries _block_entries _screen_entries
                _shell_entries _theme_entries _slot_entries _app_entries
@@ -126,6 +128,8 @@ class App( app.App ):
         ( r'ls/(?P<path>.*$)',       ( views.api_ls,     'ls',     [''] )),
         ( r'models/(?P<models>.*$)', ( views.api_models, 'models', [''] )),
         ( r'path/(?P<path>.*$)',     ( views.api_path,   'path',   [''] )),
+        ( r'do/(?P<action>.+)/(?P<model>.+)/(?P<ids>.*)$',
+                   ( views.api_do, 'do', [ 'list', 'friede.action', '' ])),
     )
     routes=(
         ( 'registries',       views.RegistryViewSet       ),
@@ -700,3 +704,60 @@ class App( app.App ):
     @property
     def userdata( self ):
         return ()
+
+@action
+def install( user, thing, userdata=True, **kw ):
+    if not isinstance( thing, AppModel ):
+        return                  # TODO: raise TypeError
+    app = App.get_for_object( thing )
+    app.install()
+    if userdata:
+        user_install( user, thing )
+
+@action
+def user_install( user, thing, **kw ):
+    if isinstance( thing, UserApp ):
+        thing = UserApp.app
+    if not isinstance( thing, AppModel ):
+        return                  # TODO: raise TypeError
+    app = App.get_for_object( thing )
+    if not app.installed:
+        return                  # TODO: raise TypeError
+    app.installuserdata( user )
+
+@action
+def uninstall( user, thing, **kw ):
+    pass
+
+@action
+def user_uninstall( user, thing, **kw ):
+    pass
+
+@action
+def update( user, thing, **kw ):
+    pass
+
+@action
+def upgrade( user, thing, **kw ):
+    pass
+
+@action
+def downgrade( user, thing, **kw ):
+    pass
+
+@action
+def activate( user, thing, **kw ):
+    pass
+
+@action
+def user_activate( user, thing, **kw ):
+    pass
+
+@action
+def deactivate( user, thing, **kw ):
+    pass
+
+@action
+def user_deactivate( user, thing, **kw ):
+    pass
+

@@ -19,9 +19,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
 _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_2__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faToggleOn"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faToggleOff"]);
-
-
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Activator',
   mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_5__["ActorsMixin"]],
@@ -623,7 +623,8 @@ var render = function() {
                             staticClass: "icon activator-enabled",
                             attrs: { icon: "toggle-on" }
                           })
-                        : _c(
+                        : _vm.can("activate")
+                        ? _c(
                             "vk-btn-link",
                             {
                               directives: [
@@ -651,64 +652,109 @@ var render = function() {
                             ],
                             1
                           )
+                        : _c("font-awesome-icon", {
+                            directives: [
+                              {
+                                name: "vk-tooltip",
+                                rawName: "v-vk-tooltip.bottom",
+                                value: "required",
+                                expression: "'required'",
+                                modifiers: { bottom: true }
+                              }
+                            ],
+                            staticClass: "icon activator-disabled danger",
+                            attrs: { icon: "toggle-off" }
+                          })
                     ]
-                  : _vm.object.active
-                  ? _c(
-                      "vk-btn-link",
-                      {
-                        directives: [
-                          {
-                            name: "vk-tooltip",
-                            rawName: "v-vk-tooltip.bottom",
-                            value: "disable",
-                            expression: "'disable'",
-                            modifiers: { bottom: true }
-                          }
-                        ],
-                        staticClass: "activator-enabled",
-                        attrs: { type: "text" },
-                        on: {
-                          click: function($event) {
-                            $event.preventDefault()
-                            return _vm.act("disable", _vm.object)
-                          }
-                        }
-                      },
-                      [
-                        _c("font-awesome-icon", {
-                          attrs: { icon: "toggle-on" }
-                        })
-                      ],
-                      1
-                    )
-                  : _c(
-                      "vk-btn-link",
-                      {
-                        directives: [
-                          {
-                            name: "vk-tooltip",
-                            rawName: "v-vk-tooltip.bottom",
-                            value: "disable",
-                            expression: "'disable'",
-                            modifiers: { bottom: true }
-                          }
-                        ],
-                        staticClass: "activator-disabled",
-                        attrs: { type: "text" },
-                        on: {
-                          click: function($event) {
-                            $event.preventDefault()
-                            return _vm.act("enable", _vm.object)
-                          }
-                        }
-                      },
-                      [
-                        _c("font-awesome-icon", {
-                          attrs: { icon: "toggle-off" }
-                        })
-                      ],
-                      1
-                    )
+                  : _vm.can("activate")
+                  ? [
+                      _vm.object.active
+                        ? _c(
+                            "vk-btn-link",
+                            {
+                              directives: [
+                                {
+                                  name: "vk-tooltip",
+                                  rawName: "v-vk-tooltip.bottom",
+                                  value: "disable",
+                                  expression: "'disable'",
+                                  modifiers: { bottom: true }
+                                }
+                              ],
+                              staticClass: "activator-enabled",
+                              attrs: { type: "text" },
+                              on: {
+                                click: function($event) {
+                                  $event.preventDefault()
+                                  return _vm.act("disable", _vm.object)
+                                }
+                              }
+                            },
+                            [
+                              _c("font-awesome-icon", {
+                                attrs: { icon: "toggle-on" }
+                              })
+                            ],
+                            1
+                          )
+                        : _c(
+                            "vk-btn-link",
+                            {
+                              directives: [
+                                {
+                                  name: "vk-tooltip",
+                                  rawName: "v-vk-tooltip.bottom",
+                                  value: "disable",
+                                  expression: "'disable'",
+                                  modifiers: { bottom: true }
+                                }
+                              ],
+                              staticClass: "activator-disabled",
+                              attrs: { type: "text" },
+                              on: {
+                                click: function($event) {
+                                  $event.preventDefault()
+                                  return _vm.act("enable", _vm.object)
+                                }
+                              }
+                            },
+                            [
+                              _c("font-awesome-icon", {
+                                attrs: { icon: "toggle-off" }
+                              })
+                            ],
+                            1
+                          )
+                    ]
+                  : [
+                      _vm.object.active
+                        ? _c("font-awesome-icon", {
+                            directives: [
+                              {
+                                name: "vk-tooltip",
+                                rawName: "v-vk-tooltip.bottom",
+                                value: "active",
+                                expression: "'active'",
+                                modifiers: { bottom: true }
+                              }
+                            ],
+                            staticClass: "icon activator-enabled",
+                            attrs: { icon: "toggle-on" }
+                          })
+                        : _c("font-awesome-icon", {
+                            directives: [
+                              {
+                                name: "vk-tooltip",
+                                rawName: "v-vk-tooltip.bottom",
+                                value: "disabled",
+                                expression: "'disabled'",
+                                modifiers: { bottom: true }
+                              }
+                            ],
+                            staticClass: "icon activator-disabled",
+                            attrs: { icon: "toggle-off" }
+                          })
+                    ]
               ]
             : _vm._e()
         ],
@@ -749,10 +795,7 @@ var render = function() {
               _vm._v(_vm._s(_vm.action)),
               _vm.arg
                 ? [_vm._v(": " + _vm._s(_vm.arg.title))]
-                : [_vm._v(" " + _vm._s(_vm.model ? _vm.model.plural : ""))],
-              _vm.permissions[_vm.action] === "own"
-                ? [_vm._v(" User-data")]
-                : _vm._e()
+                : [_vm._v(" " + _vm._s(_vm.model ? _vm.model.plural : ""))]
             ],
             2
           ),
@@ -867,8 +910,7 @@ var render = function() {
         [
           _vm.object.installed
             ? [
-                _vm.object.version !== _vm.object.available &&
-                _vm.permissions.update === true
+                _vm.object.version !== _vm.object.available && _vm.can("update")
                   ? _c(
                       "vk-btn-link",
                       {
@@ -930,7 +972,7 @@ var render = function() {
                     )
                   : _vm._e()
               ]
-            : _vm.permissions.install === true
+            : _vm.can("install")
             ? _c(
                 "vk-btn-link",
                 {
@@ -1534,7 +1576,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1562422237252
+      // 1563074228042
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1552,7 +1594,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1562422238149
+      // 1563074228066
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1570,7 +1612,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1562422235024
+      // 1563074223202
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1588,7 +1630,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1562422235031
+      // 1563074223214
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1606,7 +1648,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1562422236927
+      // 1563074223778
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1624,7 +1666,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1562422235048
+      // 1563074223290
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1642,7 +1684,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1562422235070
+      // 1563074226284
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1660,7 +1702,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1562422235076
+      // 1563074223613
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1678,7 +1720,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1562422235055
+      // 1563074223269
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1696,7 +1738,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1562422235089
+      // 1563074223712
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1714,7 +1756,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1562422235095
+      // 1563074223693
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1732,7 +1774,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1562422235108
+      // 1563074223661
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);

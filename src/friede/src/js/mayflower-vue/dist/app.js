@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "1ce6279ead0503030c6b";
+/******/ 	var hotCurrentHash = "ce587c3df4654b128588";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -2674,26 +2674,76 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       editUser: false,
+      loginUser: false,
+      registerUser: false,
+      changePassword: false,
+      username: '',
       fname: '',
       lname: '',
-      username: '',
-      email: ''
+      email: '',
+      phone: '',
+      password: '',
+      error: ''
     };
   },
   methods: {
     submitUser: function submitUser() {
-      this.user.fname = this.fname;
-      this.user.lname = this.lname;
-      this.user.username = this.username;
-      this.user.email = this.email;
-      this.editUser = false;
+      var _this = this;
+
+      if (loginUser) {
+        this.$api('login', {
+          username: this.username,
+          email: this.email,
+          phone: this.phone,
+          password: this.password
+        }).then(function (r) {
+          _this.user = r.data.user;
+
+          _this.resetUser();
+        }).catch(function (e) {
+          _this.error = e.data.error;
+        });
+      } else if (registerUser) {
+        this.$api('register', {
+          username: this.username,
+          email: this.email,
+          phone: this.phone,
+          password: this.password,
+          fname: this.fname,
+          lname: this.lname
+        }).then(function (r) {
+          _this.user = r.data.user;
+
+          _this.resetUser();
+        }).catch(function (e) {
+          _this.error = e.data.error;
+        });
+      } else {
+        this.$api.post('aries', 'users', this.user.id, {
+          username: this.username,
+          fname: this.fname,
+          lname: this.lname,
+          email: this.email,
+          phone: this.phone
+        }).then(function (r) {
+          _this.user = r.data.user;
+
+          _this.resetUser();
+        }).catch(function (e) {
+          _this.error = e.data.error;
+        });
+      }
     },
     resetUser: function resetUser() {
+      this.username = this.user.username;
       this.fname = this.user.fname;
       this.lname = this.user.lname;
-      this.username = this.user.username;
       this.email = this.user.email;
+      this.phone = this.user.phone;
       this.editUser = false;
+      this.loginUser = false;
+      this.registerUser = false;
+      this.error = '';
     }
   },
   computed: {}
@@ -4067,7 +4117,7 @@ var render = function() {
             "div",
             { staticClass: "user-info" },
             [
-              _vm.editUser
+              _vm.editUser || _vm.loginUser || _vm.registerUser
                 ? _c(
                     "form",
                     {
@@ -4084,62 +4134,72 @@ var render = function() {
                       }
                     },
                     [
-                      _c("div", { staticClass: "first-name field" }, [
-                        _c("label", [
-                          _vm._v("first name (or last name required)")
-                        ]),
-                        _c("div", { staticClass: "uk-form-controls" }, [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.fname,
-                                expression: "fname"
-                              }
-                            ],
-                            staticClass: "uk-input",
-                            attrs: { type: "text" },
-                            domProps: { value: _vm.fname },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.fname = $event.target.value
-                              }
-                            }
+                      _vm.error
+                        ? _c("div", {
+                            staticClass: "uk-text-danger uk-text-small",
+                            domProps: { innerHTML: _vm._s(_vm.error) }
                           })
-                        ])
-                      ]),
-                      _c("div", { staticClass: "last-name field" }, [
-                        _c("label", [_vm._v("last name")]),
-                        _c("div", { staticClass: "uk-form-controls" }, [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.lname,
-                                expression: "lname"
-                              }
-                            ],
-                            staticClass: "uk-input",
-                            attrs: { type: "text" },
-                            domProps: { value: _vm.lname },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.lname = $event.target.value
-                              }
-                            }
-                          })
-                        ])
-                      ]),
+                        : _vm._e(),
+                      !_vm.loginUser
+                        ? [
+                            _c("div", { staticClass: "first-name field" }, [
+                              _c("label", [
+                                _vm._v("first name (or last name required)")
+                              ]),
+                              _c("div", { staticClass: "uk-form-controls" }, [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.fname,
+                                      expression: "fname"
+                                    }
+                                  ],
+                                  staticClass: "uk-input",
+                                  attrs: { type: "text" },
+                                  domProps: { value: _vm.fname },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.fname = $event.target.value
+                                    }
+                                  }
+                                })
+                              ])
+                            ]),
+                            _c("div", { staticClass: "last-name field" }, [
+                              _c("label", [_vm._v("last name")]),
+                              _c("div", { staticClass: "uk-form-controls" }, [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.lname,
+                                      expression: "lname"
+                                    }
+                                  ],
+                                  staticClass: "uk-input",
+                                  attrs: { type: "text" },
+                                  domProps: { value: _vm.lname },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.lname = $event.target.value
+                                    }
+                                  }
+                                })
+                              ])
+                            ])
+                          ]
+                        : _vm._e(),
                       _c("div", { staticClass: "username field" }, [
-                        _c("label", [_vm._v("username (required)")]),
+                        _c("label", [_vm._v("username (or email required)")]),
                         _c("div", { staticClass: "uk-form-controls" }, [
                           _c("input", {
                             directives: [
@@ -4165,7 +4225,7 @@ var render = function() {
                         ])
                       ]),
                       _c("div", { staticClass: "email field" }, [
-                        _c("label", [_vm._v("email address")]),
+                        _c("label", [_vm._v("email address (recommended)")]),
                         _c("div", { staticClass: "uk-form-controls" }, [
                           _c("input", {
                             directives: [
@@ -4190,6 +4250,62 @@ var render = function() {
                           })
                         ])
                       ]),
+                      _c("div", { staticClass: "phone field" }, [
+                        _c("label", [_vm._v("phone number")]),
+                        _c("div", { staticClass: "uk-form-controls" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.phone,
+                                expression: "phone"
+                              }
+                            ],
+                            staticClass: "uk-input",
+                            attrs: { type: "text" },
+                            domProps: { value: _vm.phone },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.phone = $event.target.value
+                              }
+                            }
+                          })
+                        ])
+                      ]),
+                      _vm.editUser
+                        ? _c("vk-btn", { attrs: { type: "link" } }, [
+                            _vm._v("change password")
+                          ])
+                        : _c("div", { staticClass: "password field" }, [
+                            _c("label", [_vm._v("password")]),
+                            _c("div", { staticClass: "uk-form-controls" }, [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.password,
+                                    expression: "password"
+                                  }
+                                ],
+                                staticClass: "uk-password",
+                                attrs: { type: "password" },
+                                domProps: { value: _vm.password },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.password = $event.target.value
+                                  }
+                                }
+                              })
+                            ])
+                          ]),
                       _c(
                         "vk-btn",
                         {
@@ -4212,10 +4328,20 @@ var render = function() {
                             size: "small"
                           }
                         },
-                        [_vm._v("done")]
+                        [
+                          _vm._v(
+                            _vm._s(
+                              _vm.loginUser
+                                ? "login"
+                                : _vm.registerUser
+                                ? "sign up"
+                                : "done"
+                            )
+                          )
+                        ]
                       )
                     ],
-                    1
+                    2
                   )
                 : [
                     _c("div", { staticClass: "user-title" }, [
@@ -4259,9 +4385,23 @@ var render = function() {
                 })
               ]
             : [
-                _c("vk-nav-item", { attrs: { href: "login", title: "login" } }),
                 _c("vk-nav-item", {
-                  attrs: { href: "sign up", title: "sign up" }
+                  attrs: { href: "login", title: "login" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      _vm.loginUser = true
+                    }
+                  }
+                }),
+                _c("vk-nav-item", {
+                  attrs: { href: "sign up", title: "sign up" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      _vm.registerUser = true
+                    }
+                  }
                 })
               ]
         ],
@@ -4779,7 +4919,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1562422232301
+      // 1563074214655
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -4797,7 +4937,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1562422232466
+      // 1563074215009
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -4815,7 +4955,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1562422232311
+      // 1563074214742
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -4833,7 +4973,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1562422232315
+      // 1563074214722
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -4851,7 +4991,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1562422232319
+      // 1563074214735
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -4869,7 +5009,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1562422232342
+      // 1563074214771
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -4887,7 +5027,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1562422232451
+      // 1563074214969
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -4905,7 +5045,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1562422232533
+      // 1563074215143
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -4923,7 +5063,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1562422232307
+      // 1563074214697
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -4941,7 +5081,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1562422232508
+      // 1563074215094
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -4959,7 +5099,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1562422232363
+      // 1563074214889
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -4977,7 +5117,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1562422232388
+      // 1563074214805
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -4995,7 +5135,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1562422232408
+      // 1563074218202
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -5013,7 +5153,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1562422232424
+      // 1563074214912
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -5031,7 +5171,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1562422235413
+      // 1563074225020
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -5049,7 +5189,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1562422235342
+      // 1563074225229
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -5067,7 +5207,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1562422235379
+      // 1563074225065
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -5085,7 +5225,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1562422235372
+      // 1563074225143
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -5103,7 +5243,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1562422235404
+      // 1563074225262
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -5121,7 +5261,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1562422235445
+      // 1563074225162
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -5139,7 +5279,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1562422235296
+      // 1563074225304
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -5157,7 +5297,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1562422235331
+      // 1563074224933
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -5280,7 +5420,7 @@ __webpack_require__.r(__webpack_exports__);
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1562422239566
+      // 1563074231035
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -8306,6 +8446,10 @@ var ActorsMixin = {
     show: {
       type: Boolean,
       default: false
+    },
+    actionType: {
+      type: String,
+      default: 'global'
     }
   },
   data: function data() {
@@ -8338,6 +8482,25 @@ var ActorsMixin = {
       return this.$api('do', this.action, this.model.fullname, this.applicable.map(function (x) {
         return x.id;
       }).join('+'));
+    },
+    can: function can(action) {
+      var perm = this.permission[action];
+      if (!perm) return false;
+      var min = this.actionType;
+      if (perm === true) return true;
+
+      if (min === 'owner') {
+        if (perm === 'owner' || perm === 'global') {
+          return perm;
+        }
+      } else if (min === 'global' && perm === 'global') {
+        return 'global';
+      }
+
+      return false;
+    },
+    canUser: function canUser(action) {
+      return this.can(action) === 'user';
     }
   },
   computed: {

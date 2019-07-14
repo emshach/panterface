@@ -24,6 +24,8 @@ relations.reverse = hack_reverse
 router = routers.DefaultRouter()
 routes = OrderedDict()
 apps = OrderedDict()
+actions = OrderedDict()
+user_actions = OrderedDict()
 
 def namespace( thing, name ):
     if name not in thing:
@@ -62,6 +64,16 @@ def setup( urlpatterns ):
     except Exception:
         # pass                        # TODO: handle
         raise
+
+def action(f):
+    "decorator defining a class method as a site action"
+    name = f.__name__
+    r = actions
+    if name.startswith( 'user_' ):
+        r = user_actions
+        name = name[5:]
+    r[ name ] = f
+    return f
 
 class NamedDefaultRouter( routers.DefaultRouter ):
     def __init__( self, name, *args, **kwargs ):
@@ -108,6 +120,13 @@ class App( object ) :
         # TODO: else raise exception
 
     def __nonzero__( self ): return True
+
+    @staticmethod
+    def get_for_object( cls, obj ):
+        try:
+            return apps[ obj.name ]
+        except KeyError:
+            return null
 
     def preinstallheader( self ):
         pass
@@ -218,6 +237,15 @@ class App( object ) :
         pass
 
     def postremove( self ):
+        pass
+
+    def installuserdata( self, user ):
+        pass
+
+    def updateuserdata( self, user ):
+        pass
+
+    def clearuserdata( self, user ):
         pass
 
     @property

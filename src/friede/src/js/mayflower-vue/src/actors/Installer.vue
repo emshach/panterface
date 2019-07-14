@@ -3,7 +3,6 @@
     <vk-close @click=hideModal />
     <vk-title>{{ action }}<template v-if="arg">: {{ arg.title }}</template>
       <template v-else> {{ model ? model.plural : '' }}</template>
-      <template v-if="permissions[ action ] === 'own'"> User-data</template>
     </vk-title>
     <template v-if="arg">
       <div class="description uk-margin">{{ arg.description }}</div>
@@ -34,8 +33,7 @@
   </vk-modal>
   <div v-else class="installer widget">
     <template v-if=object.installed >
-      <vk-btn-link v-if="object.version !== object.available 
-                         && permissions.update === true"
+      <vk-btn-link v-if="object.version !== object.available  && can( 'update' )"
                    v-vk-tooltip.bottom="'update'"
                    type="text" @click.prevent="act( 'update', object )" >
         v{{ object.version }} installed
@@ -47,7 +45,7 @@
         <font-awesome-icon icon="trash" />
       </vk-btn-link>
     </template>
-    <vk-btn-link v-else-if="permissions.install === true"
+    <vk-btn-link v-else-if="can( 'install' )"
                  v-vk-tooltip.bottom="'install'"
                  type="text" @click.prevent="act( 'install', object )" >
       <font-awesome-icon icon="download" />

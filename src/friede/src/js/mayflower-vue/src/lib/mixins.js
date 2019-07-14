@@ -294,6 +294,10 @@ export const ActorsMixin = {
     show: {
       type: Boolean,
       default: false
+    },
+    actionType: {
+      type: String,
+      default: 'global'
     }
   },
   data() {
@@ -322,6 +326,25 @@ export const ActorsMixin = {
     execute() {
       return this.$api( 'do', this.action, this.model.fullname,
                       this.applicable.map( x => x.id ).join('+'))
+    },
+    can( action ) {
+      const perm = this.permission[ action ];
+      if ( !perm )
+        return false;
+      const min = this.actionType;
+      if ( perm === true )
+        return true;
+      if ( min === 'owner' ) {
+        if ( perm === 'owner' || perm === 'global' ) {
+          return perm;
+        }
+      } else if ( min === 'global' && perm === 'global' ) {
+        return 'global';
+      }
+      return false;
+    },
+    canUser( action ) {
+      return this.can( action ) === 'user'
     }
   },
   computed: {

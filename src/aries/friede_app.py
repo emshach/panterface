@@ -60,8 +60,12 @@ class App( app.App ):
         },
     )
     api=(
-        ( r'can/(?P<perm>.+$)', ( views.api_can,       'can', [ 'any' ])),
-        ( r'can/$',             ( views.api_which_can, 'which_can' )),
+        ( r'can/(?P<perm>.+$)', ( views.api_can,         'can', [ 'any' ])),
+        ( r'can/$',             ( views.api_which_can,   'which_can'     )),
+        ( r'login/$',           ( views.api_login,       ''              )),
+        ( r'logout/$',          ( views.api_logout,      ''              )),
+        ( r'register/$',        ( views.api_register,    ''              )),
+        ( r'auth-status/$',     ( views.api_auth_status, ''              )),
     )
     routes=(
         ( 'users',       views.UserViewSet       ),

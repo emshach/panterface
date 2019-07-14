@@ -6,13 +6,14 @@ from django.db import models as M
 from django.contrib.postgres.fields import JSONField
 from datetime import date
 from django.utils.timezone import now
+from aries.models import AutoOwnedModel
 
 Model = M.Model
 
 ### Base
 
 @python_2_unicode_compatible
-class Base( Model ):
+class Base( AutoOwnedModel ):
     class Meta:
         abstract = True
     name         = M.SlugField( blank=True )

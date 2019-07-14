@@ -5,40 +5,60 @@
                :offset="0">
     <vk-nav>
       <div class="user-info">
-        <form v-if="editUser" class="uk-form-stacked uk-text-left"
+        <form v-if="editUser || loginUser || registerUser"
+              class="uk-form-stacked uk-text-left"
               @submit.prevent="submitUser" @reset.prevent="resetUser">
-          <div class="first-name field">
-            <label>first name (or last name required)</label>
-            <div class="uk-form-controls">
-              <input class="uk-input" type="text" v-model="fname" />
+          <div v-if="error" class="uk-text-danger uk-text-small" v-html="error" />
+          <template v-if="!loginUser">
+            <div class="first-name field">
+              <label>first name (or last name required)</label>
+              <div class="uk-form-controls">
+                <input class="uk-input" type="text" v-model="fname" />
+              </div>
             </div>
-          </div>
-          <div class="last-name field">
-            <label>last name</label>
-            <div class="uk-form-controls">
-              <input class="uk-input" type="text" v-model="lname" />
+            <div class="last-name field">
+              <label>last name</label>
+              <div class="uk-form-controls">
+                <input class="uk-input" type="text" v-model="lname" />
+              </div>
             </div>
-          </div>
+          </template>
           <div class="username field">
-            <label>username (required)</label>
+            <label>username (or email required)</label>
             <div class="uk-form-controls">
               <input class="uk-input" type="text" v-model="username" />
             </div>
           </div>
           <div class="email field">
-            <label>email address</label>
+            <label>email address (recommended)</label>
             <div class="uk-form-controls">
               <input class="uk-input" type="text" v-model="email" />
+            </div>
+          </div>
+          <div class="phone field">
+            <label>phone number</label>
+            <div class="uk-form-controls">
+              <input class="uk-input" type="text" v-model="phone" />
+            </div>
+          </div>
+          <vk-btn v-if="editUser" type="link">change password</vk-btn>
+          <div v-else class="password field">
+            <label>password</label>
+            <div class="uk-form-controls">
+              <input class="uk-password" type="password" v-model="password" />
             </div>
           </div>
           <vk-btn class="btn-cancel"
                   html-type="reset" type="link" size="small">cancel</vk-btn>
           <vk-btn class="btn-ok"
-                  html-type="submit" type="primary" size="small">done</vk-btn>
+                  html-type="submit" type="primary" size="small">{{
+              loginUser ? 'login' : registerUser ? 'sign up' : 'done'
+            }}</vk-btn>
         </form>
         <template v-else>
           <div class="user-title">{{ user.fname}} {{ user.lname }}
-            <a href="#" title="edit info" @click.prevent="editUser=true">
+            <a href="#" title="edit info"
+               @click.prevent="editUser = true">
               <font-awesome-icon icon="user-edit" />
             </a>
           </div>
@@ -52,8 +72,10 @@
         <vk-nav-item href="logout" title="logout" />
       </template>
       <template v-else>
-        <vk-nav-item href="login" title="login" />
-        <vk-nav-item href="sign up" title="sign up" />
+        <vk-nav-item href="login" title="login"
+                     @click.prevent="loginUser = true" />
+        <vk-nav-item href="sign up" title="sign up"
+                     @click.prevent="registerUser = true" />
       </template>
     </vk-nav>
   </vk-dropdown>
@@ -91,31 +113,74 @@ export default  {
   data() {
     return {
       editUser: false,
+      loginUser: false,
+      registerUser: false,
+      changePassword: false,
+      username: '',
       fname: '',
       lname: '',
-      username: '',
       email: '',
+      phone: '',
+      password: '',
+      error: ''
     }
   },
   methods: {
     submitUser() {
-      this.user.fname = this.fname;
-      this.user.lname = this.lname;
-      this.user.username = this.username;
-      this.user.email = this.email;
-      this.editUser = false;
+      if ( loginUser ) {
+        this.$api( 'login', {
+          username: this.username,
+          email: this.email,
+          phone: this.phone,
+          password: this.password
+        }).then( r => {
+          this.user = r.data.user;
+          this.resetUser();
+        }).catch( e => {
+          this.error = e.data.error;
+        });
+      } else if ( registerUser ) {
+        this.$api( 'register', {
+          username: this.username,
+          email: this.email,
+          phone: this.phone,
+          password: this.password,
+          fname: this.fname,
+          lname: this.lname,
+        }).then( r => {
+          this.user = r.data.user;
+          this.resetUser();
+        }).catch( e => {
+          this.error = e.data.error;
+        });
+      } else {
+        this.$api.post( 'aries', 'users', this.user.id, {
+          username: this.username,
+          fname: this.fname,
+          lname: this.lname,
+          email: this.email,
+          phone: this.phone,
+        }).then( r => {
+          this.user = r.data.user;
+          this.resetUser();
+        }).catch( e => {
+          this.error = e.data.error;
+        });
+      }
     },
     resetUser() {
+      this.username = this.user.username;
       this.fname = this.user.fname;
       this.lname = this.user.lname;
-      this.username = this.user.username;
       this.email = this.user.email;
+      this.phone = this.user.phone;
       this.editUser = false;
+      this.loginUser = false;
+      this.registerUser = false;
+      this.error = '';
     }
   },
-  computed: {
-    
-  }
+  computed: {}
 }
 </script>
 

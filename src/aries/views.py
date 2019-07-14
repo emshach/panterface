@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import render
+from django.contrib.auth import authenticate, login
 from rest_framework import status, viewsets, permissions, filters
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
@@ -24,7 +25,7 @@ def register( request ):
 @api_view([ 'POST' ])
 @permission_classes(( permissions.AllowAny, ))
 def api_login( request ):
-    time.sleep(5)
+    time.sleep(3)
     user     = request.user
     params   = request.data
     username = params.get( 'username' )
@@ -57,6 +58,7 @@ def api_logout( request ):
 @api_view([ 'POST' ])
 @permission_classes(( permissions.AllowAny, ))
 def api_register( request ):
+    time.sleep(3)
     user     = request.user
     params   = request.data
     username = params.get( 'username' )

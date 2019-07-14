@@ -128,7 +128,7 @@ export default  {
   methods: {
     submitUser() {
       if ( this.loginUser ) {
-        this.$api( 'login', {
+        this.$api.post( 'login', {
           username: this.username,
           email: this.email,
           phone: this.phone,
@@ -140,7 +140,7 @@ export default  {
           this.error = e.data.error;
         });
       } else if ( this.registerUser ) {
-        this.$api( 'register', {
+        this.$api.post( 'register', {
           username: this.username,
           email: this.email,
           phone: this.phone,

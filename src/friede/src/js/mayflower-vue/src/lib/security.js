@@ -61,12 +61,13 @@ export async function canI( op, arg ) {
   }
 }
 export const security = {
+  permit: 0,
   refresh() {
     const perms = Object.keys( permissions ).map( x => {
       delete permissions[x];
       return x;
     });
-    canI( perms );
+    canI( perms ).then(() => { this.permit++ });
   }
 }
 window.__DEBUG__permissions = permissions; // TODO: REMOVE SOON

@@ -332,9 +332,6 @@ export const ActorsMixin = {
     },
   },
   computed: {
-    user() {
-      return this.$store.state.user;
-    },
     arg() {
       return this.operands.length === 1 && this.operands[0];
     },
@@ -363,7 +360,7 @@ export const ActorsMixin = {
     }
   },
   watch: {
-    user( val ) {
+    '$security.permit': function( val ) {
       this.getPerms();
     },
     model( val ) {

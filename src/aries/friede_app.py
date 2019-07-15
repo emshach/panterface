@@ -60,7 +60,7 @@ class App( app.App ):
         },
     )
     api=(
-        ( r'can/(?P<perm>.+$)', ( views.api_can,         'can', [ 'any' ])),
+        ( r'can/(?P<perm>.+$)',  ( views.api_can,         'can', [ 'any' ])),
         ( r'can/?$',             ( views.api_which_can,   'which_can'     )),
         ( r'login/?$',           ( views.api_login,       'login'         )),
         ( r'logout/?$',          ( views.api_logout,      'logout'        )),

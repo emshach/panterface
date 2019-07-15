@@ -30,11 +30,12 @@ class UserSerializer( HyperlinkedModelSerializer ):
             'active',
             'data',
             'anonymous',
-            # 'groups',
-            # 'user_permissions',
-            # 'policies',
-            # 'roles',
+            'groups',
+            'user_permissions',
+            'policies',
+            'roles',
         )
+    url = HyperlinkedIdentityField( view_name='aries:user-detail')
 
 
 class GroupSerializer( HyperlinkedModelSerializer ):

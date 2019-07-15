@@ -7,7 +7,7 @@
       </router-link>
       <router-link to="/me">
         <font-awesome-icon :icon=" user.anonymous ? 'user-ninja': 'user'"
-                           class="nav-icon" /> {{ user.fname }}
+                           class="nav-icon" /> {{ user.first_name || user.username }}
       </router-link>
       <user-menu :user="user" />
     </div>

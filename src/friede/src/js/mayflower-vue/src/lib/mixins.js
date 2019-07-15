@@ -329,7 +329,7 @@ export const ActorsMixin = {
     },
     can( action ) {
       const op = `${action}.${this.model.fullname}`;
-      const perm = this.permissions[ action ];
+      const perm = this.permissions[ op ];
       if ( !perm )
         return false;
       const min = this.actionType;

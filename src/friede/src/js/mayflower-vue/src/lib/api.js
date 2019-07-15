@@ -21,6 +21,11 @@ export function process_args( args, data ) {
         params: Object.assign.apply( null, obj_args )
       });
     }
+  } else {
+    out_args.push({
+      xsrfCookieName: 'csrftoken',
+      xsrfHeaderName: 'X-CSRFToken'
+    });
   }
   // TODO: make more sophisticated
   return out_args;

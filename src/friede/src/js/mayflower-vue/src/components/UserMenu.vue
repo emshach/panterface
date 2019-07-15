@@ -68,7 +68,7 @@
           </div>
         </template>
       </div>
-      <template v-if="user.uid && !user.anonymous">
+      <template v-if="user.id && !user.anonymous">
         <vk-nav-item href="logout" title="logout" />
       </template>
       <template v-else>
@@ -134,7 +134,7 @@ export default  {
           phone: this.phone,
           password: this.password
         }).then( r => {
-          this.user = r.data.user;
+          this.$store.commit( 'setUser', r.data.user );
           this.resetUser();
         }).catch( e => {
           if ( e.response )
@@ -149,7 +149,7 @@ export default  {
           fname: this.fname,
           lname: this.lname,
         }).then( r => {
-          this.user = r.data.user;
+          this.$store.commit( 'setUser', r.data.user );
           this.resetUser();
         }).catch( e => {
           if ( e.response )
@@ -163,7 +163,7 @@ export default  {
           email: this.email,
           phone: this.phone,
         }).then( r => {
-          this.user = r.data.user;
+          this.$store.commit( 'setUser', r.data.user );
           this.resetUser();
         }).catch( e => {
           if ( e.response )
@@ -178,7 +178,7 @@ export default  {
       this.email = this.user.email;
       this.phone = this.user.phone;
       this.editUser = false;
-      this.loginUser = false;
+      this.loginUser = false;   // 
       this.registerUser = false;
       this.error = '';
     }

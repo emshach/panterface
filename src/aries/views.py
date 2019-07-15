@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import render
-from django.contrib.auth import authenticate, login as authlogin
+from django.contrib.auth import authenticate, login as authlogin, logout as authlogout
 from rest_framework import status, viewsets, permissions, filters
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
@@ -47,13 +47,16 @@ def api_login( request ):
     else:
         authlogin( request, applicant )
         return Response( dict(
-            success='logged in',
+            success='logged in!',
             user=UserSerializer( applicant, context=dict( request=request )).data ))
 
 @api_view([ 'GET', 'POST' ])
 @permission_classes(( permissions.AllowAny, ))
 def api_logout( request ):
-    pass
+    logout( request )
+    return Response( dict(
+        success='logged out!',
+        user=authenticate() ))
 
 @api_view([ 'POST' ])
 @permission_classes(( permissions.AllowAny, ))
@@ -107,7 +110,7 @@ def api_register( request ):
                               password=password )
     login( request, applicant )
     return Response( dict(
-        success='signed up',
+        success='signed up!',
         user=UserSerializer( applicant, context=dict( request=request )).data ))
 
 @api_view([ 'GET' ])

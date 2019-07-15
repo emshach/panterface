@@ -183,7 +183,7 @@ export default  {
       this.error = '';
     },
     logout() {
-      this.$api.post( 'logout' ).then( r => {
+      this.$api( 'logout' ).then( r => {
         this.$store.commit( 'setUser', r.data.user );
         this.resetUser();
       }).catch( e => {

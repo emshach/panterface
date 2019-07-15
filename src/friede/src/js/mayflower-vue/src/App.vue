@@ -50,7 +50,7 @@ export default {
       return this.$store.state.context;
     },
     menus: () => Friede.menus,
-    user: () => Friede.user,
+    user: () => this.$store.state.user,
   }
 }
 </script>

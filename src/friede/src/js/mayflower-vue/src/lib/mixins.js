@@ -308,13 +308,7 @@ export const ActorsMixin = {
     }
   },
   created() {
-    const model = this.model;
-    const actions = Object.keys( this.actions );
-    if ( !model || !model.fullname || !actions || !Object.keys( actions ).length )
-      return;
-    this.$canI( actions, model ).then( r => {
-      this.permissions = r;
-    });
+    this.getPerms();
   },
   methods: {
     act( action, object ) {
@@ -327,28 +321,20 @@ export const ActorsMixin = {
       return this.$api( 'do', this.action, this.model.fullname,
                       this.applicable.map( x => x.id ).join('+'))
     },
-    can( action ) {
-      const op = `${action}.${this.model.fullname}`;
-      const perm = this.permissions[ op ];
-      if ( !perm )
-        return false;
-      const min = this.actionType;
-      if ( perm === true )
-        return true;
-      if ( min === 'owner' ) {
-        if ( perm === 'owner' || perm === 'global' ) {
-          return perm;
-        }
-      } else if ( min === 'global' && perm === 'global' ) {
-        return 'global';
-      }
-      return false;
+    getPerms() {
+      const model = this.model;
+      const actions = Object.keys( this.actions );
+      if ( !model || !model.fullname || !actions || !actions.length )
+        return;
+      this.$canI( actions, model ).then( r => {
+        this.permissions = r;
+      });
     },
-    canUser( action ) {
-      return this.can( action ) === 'user'
-    }
   },
   computed: {
+    user() {
+      return this.$store.state.user;
+    },
     arg() {
       return this.operands.length === 1 && this.operands[0];
     },
@@ -356,6 +342,35 @@ export const ActorsMixin = {
       return ( this.action
                ? this.operands.filter( this.verify[ this.action ] || ( x => false ))
                : []);
+    },
+    can() {
+      if ( !this.model ) return {};
+      const p = this.permissions;
+      const fn = '.' + this.model.fullname
+      const min = this.actionType;
+      const out = {};
+      Object.keys(p).forEach( x => {
+        const key = x.replace( fn, '' );
+        const perm = p[x];
+        out[ key ] = (
+          perm === true
+             ? true
+             : min === 'owner'
+             ? ( perm === 'owner' || perm === 'global' ? perm : false )
+             : ( min === 'global' && perm === 'global' ) ? 'global' : false);
+      });
+      return out;
+    }
+  },
+  watch: {
+    user( val ) {
+      this.getPerms();
+    },
+    model( val ) {
+      this.getPerms();
+    },
+    actions( val ) {
+      this.getPerms();
     }
   }
 }

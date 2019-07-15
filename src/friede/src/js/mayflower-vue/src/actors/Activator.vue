@@ -8,7 +8,7 @@
         <font-awesome-icon v-if=object.active
                            icon="toggle-on" v-vk-tooltip.bottom="'required'"
                            class="icon activator-enabled" />
-        <vk-btn-link v-else-if="can( 'activate' )"
+        <vk-btn-link v-else-if="can.activate"
                      v-vk-tooltip.bottom="'activate'"
                      type="text" class="activator-disabled danger"
                      @click.prevent="act( 'enable', object )" >
@@ -18,7 +18,7 @@
                            icon="toggle-off" v-vk-tooltip.bottom="'required'"
                            class="icon activator-disabled danger" />
       </template>
-      <template v-else-if="can( 'activate' )">
+      <template v-else-if="can.activate">
         <vk-btn-link v-if=object.active v-vk-tooltip.bottom="'disable'"
                      type="text" class="activator-enabled"
                      @click.prevent="act( 'disable', object )" >

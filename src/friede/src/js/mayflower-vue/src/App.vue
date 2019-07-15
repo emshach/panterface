@@ -13,7 +13,7 @@
     </div>
     <!-- <transition name="fade-fast" mode="out-in"> -->
     <!--   <search-results-page v-if="searching" /> -->
-      <router-view />
+      <router-view :key="user.username" />
     <!-- </transition> -->
     <prompt :breadcrumb="context" @update="promptInput" />
   </div>

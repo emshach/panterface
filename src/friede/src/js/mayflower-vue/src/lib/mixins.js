@@ -310,7 +310,7 @@ export const ActorsMixin = {
   created() {
     const model = this.model;
     const actions = Object.keys( this.actions );
-    if ( !model || !model.fullname || !actions || !actions.length )
+    if ( !model || !model.fullname || !actions || !Object.keys( actions ).length )
       return;
     this.$canI( actions, model ).then( r => {
       this.permissions = r;

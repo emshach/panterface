@@ -27,11 +27,11 @@ export async function canI( op, arg ) {
   }
   if ( isArray( ops )) {
     const ask = [];
-    const out = [];
+    const out = {};
     ops.forEach( o => {
       if ( o in permissions ) {
         if ( permissions[o] )
-          out.push(o);
+          out[o] = true;
       } else
         ask.push(o);
     });
@@ -42,7 +42,7 @@ export async function canI( op, arg ) {
               return {};
             });
       Object.assign( permissions, res );
-      return out.concat( Object.keys( res ).filter( k => res[k] ));
+      return Object.assign( out, res );
     }
     return out
   } else {

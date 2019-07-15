@@ -1,3 +1,4 @@
+import Vue from 'vue'
 import { API } from './api'
 import isArray from 'lodash/isArray'
 
@@ -60,16 +61,21 @@ export async function canI( op, arg ) {
     return res;
   }
 }
-export const security = {
-  permit: 0,
-  refresh() {
-    const perms = Object.keys( permissions ).map( x => {
-      delete permissions[x];
-      return x;
-    });
-    canI( perms ).then(() => { this.permit++ });
+export const security = new Vue({
+  data: {
+    permit: 0
+  },
+  methods: {
+    refresh() {
+      const perms = Object.keys( permissions ).map( x => {
+        delete permissions[x];
+        return x;
+      });
+      canI( perms ).then(() => { this.permit++ });
+    }
   }
-}
+});
+
 window.__DEBUG__permissions = permissions; // TODO: REMOVE SOON
 
 export default {

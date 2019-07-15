@@ -35,7 +35,7 @@ class UserSerializer( HyperlinkedModelSerializer ):
             'policies',
             'roles',
         )
-    url = HyperlinkedIdentityField( view_name='aries:user-detail')
+    url = HyperlinkedIdentityField( view_name='friede:aries:user-detail')
 
 
 class GroupSerializer( HyperlinkedModelSerializer ):

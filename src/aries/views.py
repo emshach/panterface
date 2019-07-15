@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import render
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login as authlogin
 from rest_framework import status, viewsets, permissions, filters
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
@@ -45,7 +45,7 @@ def api_login( request ):
     if not applicant:
         return Response( dict( error='Invalid credentials'), status=401 )
     else:
-        login( request, applicant )
+        authlogin( request, applicant )
         return Response( dict(
             success='logged in',
             user=UserSerializer( applicant, context=dict( request=request )).data ))
@@ -68,7 +68,8 @@ def api_register( request ):
     phone    = params.get( 'phone' )
     password = params.get( 'password' )
     try:
-        found = User.objects.get( username=username ) if username else None
+        found = User.objects.get( username=username, anonymous=False )\
+            if username and username != user.username else None
         if found:
             return Response( dict( error="username '{}' is alraedy in use" ))
     except User.DoesNotExist:
@@ -88,25 +89,23 @@ def api_register( request ):
 
     uname = username or re.sub( r'[+/=]', '+',
                                 base64.urlsafe_b64encode( str( randint( 0, 10000000 ))))
-
     applicant = user if user.anonymous \
     else User.objects.create( username=uname, email=email, first_name=fname,
                               last_name=lname, phone=phone )
 
-    if password:
-        applicant.set_password( password )
-        applicant.save()
+    if not password:
+        password = ' '.join([ re.sub(
+            r'[+/=]', '', base64.urlsafe_b64encode(
+                str( randint( 0, randint( 1, 10000000 ))))) for x in range(4) ])
     if applicant.anonymous:
         applicant.anonymous = False
-        applicant.set_password( ' '.join([ re.sub(
-            r'[+/=]', '', base64.urlsafe_b64encode(
-                str( randint( 0, randint( 1, 10000000 ))))) for x in range(4) ]))
-        applicant.save()
-        # TODO clear password
-    elif not username:
+    if not username:
         applicant.username = "user%d" % applicant.id
-        applicant.save()
-
+    applicant.set_password( password )
+    applicant.save()
+    applicant = authenticate( request, username=applicant.username,
+                              password=password )
+    login( request, applicant )
     return Response( dict(
         success='signed up',
         user=UserSerializer( applicant, context=dict( request=request )).data ))

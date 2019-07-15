@@ -137,7 +137,8 @@ export default  {
           this.user = r.data.user;
           this.resetUser();
         }).catch( e => {
-          this.error = e.data.error;
+          if ( e.response )
+            this.error = e.response.data.error;
         });
       } else if ( this.registerUser ) {
         this.$api.post( 'register', {
@@ -151,7 +152,8 @@ export default  {
           this.user = r.data.user;
           this.resetUser();
         }).catch( e => {
-          this.error = e.data.error;
+          if ( e.response )
+            this.error = e.response.data.error;
         });
       } else {
         this.$api.post( 'aries', 'users', this.user.id, {
@@ -164,7 +166,8 @@ export default  {
           this.user = r.data.user;
           this.resetUser();
         }).catch( e => {
-          this.error = e.data.error;
+          if ( e.response )
+            this.error = e.response.data.error;
         });
       }
     },

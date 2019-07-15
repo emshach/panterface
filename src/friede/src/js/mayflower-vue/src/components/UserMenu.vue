@@ -69,7 +69,7 @@
         </template>
       </div>
       <template v-if="user.id && !user.anonymous">
-        <vk-nav-item href="logout" title="logout" />
+        <vk-nav-item href="logout" title="logout" @click.prevent="logout" />
       </template>
       <template v-else>
         <vk-nav-item href="login" title="login"
@@ -181,6 +181,15 @@ export default  {
       this.loginUser = false;   // 
       this.registerUser = false;
       this.error = '';
+    },
+    logout() {
+      this.$api.post( 'logout' ).then( r => {
+        this.$store.commit( 'setUser', r.data.user );
+        this.resetUser();
+      }).catch( e => {
+        if ( e.response )
+          this.error = e.response.data.error;
+      });
     }
   },
   computed: {}

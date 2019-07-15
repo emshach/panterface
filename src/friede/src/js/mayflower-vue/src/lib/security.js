@@ -24,7 +24,10 @@ export async function canI( op, arg ) {
         ops = op + '.' + arg;
       }
     }
+  } else {
+    ops = op;
   }
+  
   if ( isArray( ops )) {
     const ask = [];
     const out = {};
@@ -57,13 +60,19 @@ export async function canI( op, arg ) {
     return res;
   }
 }
-
+export const security = {
+  refresh() {
+    canI( Object.keys( permissions ));
+  }
+}
 window.__DEBUG__permissions = permissions; // TODO: REMOVE SOON
 
 export default {
   canI,
   install( Vue ) {
     Vue.$canI = canI;
+    Vue.$security = security;
     Vue.prototype.$canI = canI;
+    Vue.prototype.$security = security;
   }
 }

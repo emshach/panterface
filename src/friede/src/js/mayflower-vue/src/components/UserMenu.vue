@@ -181,6 +181,7 @@ export default  {
       this.loginUser = false;   // 
       this.registerUser = false;
       this.error = '';
+      this.$security.refresh();
     },
     logout() {
       this.$api( 'logout' ).then( r => {

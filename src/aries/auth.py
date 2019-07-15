@@ -35,7 +35,7 @@ class AnonymousAuthBackend:
     '''
     This is for automatically signing in the user after signup etc.
     '''
-    def authenticate( self, user=None, username=None ):
+    def authenticate( self, request=None, user=None, username=None ):
         # make sure they have a profile and that they are anonymous
         # if you're not using profiles you can just return user
         if not user:

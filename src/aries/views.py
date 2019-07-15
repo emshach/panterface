@@ -6,6 +6,7 @@ from django.contrib.auth import authenticate, login as authlogin, logout as auth
 from rest_framework import status, viewsets, permissions, filters
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
+from .auth import get_user
 from .models import *
 from .serializers import *
 import json
@@ -56,7 +57,7 @@ def api_logout( request ):
     logout( request )
     return Response( dict(
         success='logged out!',
-        user=authenticate() ))
+        user=get_user( request )))
 
 @api_view([ 'POST' ])
 @permission_classes(( permissions.AllowAny, ))

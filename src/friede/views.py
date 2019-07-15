@@ -13,6 +13,7 @@ from rest_framework_serializer_extensions.views import SerializerExtensionsAPIVi
 from collections import OrderedDict
 from importlib import import_module
 from aries.auth import get_user
+from aries.serializers import UserSerializer
 from .objects import getregistries, getenv, Locations
 from .core import setup, setupshell, setuptheme, setupmenus
 from .models import *
@@ -103,16 +104,8 @@ def index( request ):
         shell=shell,
         theme=theme,
         menus=json.dumps( menus ),
-        user=json.dumps( dict(
-            uid=user.id,
-            username=user.username,
-            staff=user.is_staff,
-            su=user.is_superuser,
-            fname=user.first_name,
-            lname=user.last_name,
-            email=user.email,
-            anonymous=user.anonymous,
-        )),
+        user=json.dumps(
+            UserSerializer( applicant, context=dict( request=request )).data ),
         models=models
     )
     for registry in getregistries():

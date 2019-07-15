@@ -56,7 +56,7 @@
             }}</vk-btn>
         </form>
         <template v-else>
-          <div class="user-title">{{ user.fname}} {{ user.lname }}
+          <div class="user-title">{{ user.first_name}} {{ user.last_name }}
             <a href="#" title="edit info"
                @click.prevent="editUser = true">
               <font-awesome-icon icon="user-edit" />
@@ -173,8 +173,8 @@ export default  {
     },
     resetUser() {
       this.username = this.user.username;
-      this.fname = this.user.fname;
-      this.lname = this.user.lname;
+      this.fname = this.user.first_name;
+      this.lname = this.user.last_name;
       this.email = this.user.email;
       this.phone = this.user.phone;
       this.editUser = false;

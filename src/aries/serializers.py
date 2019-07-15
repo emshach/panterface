@@ -30,10 +30,10 @@ class UserSerializer( HyperlinkedModelSerializer ):
             'active',
             'data',
             'anonymous',
-            'groups',
-            'user_permissions',
-            'policies',
-            'roles',
+            # 'groups',
+            # 'user_permissions',
+            # 'policies',
+            # 'roles',
         )
 
 

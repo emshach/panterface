@@ -10,6 +10,28 @@ from collections import OrderedDict
 
 from .models import *
 
+class BaseUserSerializer( ModelSerializer ):
+    class Meta:
+        model = User
+        fields = (
+            'id',
+            'last_login',
+            'is_superuser',
+            'username',
+            'first_name',
+            'last_name',
+            'email',
+            'is_staff',
+            'is_active',
+            'date_joined',
+            'title',
+            'description',
+            'active',
+            'data',
+            'anonymous',
+        )
+
+
 class UserSerializer( HyperlinkedModelSerializer ):
     class Meta:
         model = User
@@ -35,7 +57,6 @@ class UserSerializer( HyperlinkedModelSerializer ):
             'policies',
             'roles',
         )
-    url = HyperlinkedIdentityField( view_name='friede:aries:user-detail')
 
 
 class GroupSerializer( HyperlinkedModelSerializer ):

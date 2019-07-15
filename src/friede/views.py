@@ -105,7 +105,7 @@ def index( request ):
         theme=theme,
         menus=json.dumps( menus ),
         user=json.dumps(
-            UserSerializer( applicant, context=dict( request=request )).data ),
+            UserSerializer( user, context=dict( request=request )).data ),
         models=models
     )
     for registry in getregistries():

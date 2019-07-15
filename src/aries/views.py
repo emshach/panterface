@@ -57,7 +57,8 @@ def api_logout( request ):
     logout( request )
     return Response( dict(
         success='logged out!',
-        user=get_user( request )))
+        user=UserSerializer( authenticate( request ),
+                             context=dict( request=request )).data))
 
 @api_view([ 'POST' ])
 @permission_classes(( permissions.AllowAny, ))

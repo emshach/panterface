@@ -328,6 +328,7 @@ export const ActorsMixin = {
                       this.applicable.map( x => x.id ).join('+'))
     },
     can( action ) {
+      const op = `${action}.${this.model.fullname}`;
       const perm = this.permissions[ action ];
       if ( !perm )
         return false;

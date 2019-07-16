@@ -55,10 +55,12 @@ def api_login( request ):
 @permission_classes(( permissions.AllowAny, ))
 def api_logout( request ):
     authlogout( request )
+    anon = authenticate( request )
+    if anon and anon.anonymous:
+        authlogin( request, anon )
     return Response( dict(
         success='logged out!',
-        user=UserSerializer( authenticate( request ),
-                             context=dict( request=request )).data))
+        user=UserSerializer( anon, context=dict( request=request )).data ))
 
 @api_view([ 'POST' ])
 @permission_classes(( permissions.AllowAny, ))

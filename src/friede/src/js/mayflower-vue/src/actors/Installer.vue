@@ -33,7 +33,7 @@
       <vk-btn class="btn-cancel" type="link" size="small"
               @click.prevent=hideModal >cancel</vk-btn>
       <vk-btn class="btn-ok" type="primary" size="small"
-              @clitk.prevent=execute >{{ action }}</vk-btn>
+              @click.prevent=execute >{{ action }}</vk-btn>
     </div>
   </vk-modal>
   <div v-else class="installer widget">

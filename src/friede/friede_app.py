@@ -754,7 +754,7 @@ def update( user, thing, to='latest', **kw ):
     v = version_parse( to )
     app.upgrade( to=app.available if to == 'latest' else to if v.release
                  else app.versions.get( to ))
-    
+
 
 @action
 def upgrade( user, thing, **kw ):

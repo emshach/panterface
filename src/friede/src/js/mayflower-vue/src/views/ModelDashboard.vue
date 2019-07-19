@@ -7,7 +7,7 @@
              :actions=actor.actions
              :operands=actor.operands
              :show.sync=showModals[tag]
-             @act=act '/>
+             @act=act />
   <component :is=blocks.breakfront.component v-if=blocks.breakfront
              :content=featured />
   <component :is=blocks.main.component v-if=blocks.main

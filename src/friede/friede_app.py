@@ -744,7 +744,7 @@ def user_uninstall( user, thing, **kw ):
     pass
 
 @action
-def update( user, thing, to='latest' **kw ):
+def update( user, thing, to='latest', **kw ):
     if not isinstance( thing, AppModel ):
         return                  # TODO: raise TypeError
     app = App.get_for_object( thing )

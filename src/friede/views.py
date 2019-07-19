@@ -465,46 +465,32 @@ def api_do( request, action, model, ids, format=None ):
     perm = "{}.{}_{}".format( app, action, mod )
     userperm = "{}.{}_own_{}".format( app, action, mod )
     user = request.user
+    f = None
     if user.has_perm( perm ):
         "then do possibly system-wide action"
         f = actions.get( action )
-        if f:
-            stdout = sys.stdout
-            stderr = sys.stderr
-            sys.stdout = StringIO()
-            sys.stderr = StringIO()
-            res = Response({
-                action : dict(
-                    result={ o.pk : dict(
-                        res=f( o, **request.data ),
-                        out=stdout.getvalue(),
-                        err=stderr.getvalue(),
-                    ) for o in m.objects.filter( pk__in=ids )}
-                )
-            })
-            sys.stderr = stderr
-            sys.stdout = stdout
-            return res
     elif user.has_perm( userperm ):
         "then do user-version of action"
         f = user_actions.get( action )
-        if f:
-            stdout = sys.stdout
-            stderr = sys.stderr
-            sys.stdout = StringIO()
-            sys.stderr = StringIO()
-            res = Response({
-                action : dict(
-                    result={ o.pk : (
-                        f( user, o, **request.data ),
-                        stdout.getvalue(),
-                        stderr.getvalue(),
-                    ) for o in m.objects.filter( pk__in=ids )})})
-            sys.stderr = stderr
-            sys.stdout = stdout
-            return res
     else:
         return Response(dict( error='Access denied' ))
+
+    stdout = sys.stdout
+    stderr = sys.stderr
+    sys.stdout = StringIO()
+    sys.stderr = StringIO()
+    res = Response({
+        action : dict(
+            result={ o.pk : dict(
+                res=f( user, o, **request.data ),
+                out=stdout.getvalue(),
+                err=stderr.getvalue(),
+            ) for o in m.objects.filter( pk__in=ids )}
+        )
+    })
+    sys.stderr = stderr
+    sys.stdout = stdout
+    return res
 
 class SearchViewSet( viewsets.ModelViewSet ):
     filter_backends = ( IdsFilter, PathFilter, filters.SearchFilter, )

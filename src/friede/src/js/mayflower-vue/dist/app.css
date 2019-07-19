@@ -388,6 +388,10 @@ a[data-v-aae30ed8] {
     padding: 0;
 }
 
+.action-result > h3[data-v-611394a3] {
+  text-transform: capitalize;
+}
+
 #app[data-v-7ba5bd90] {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

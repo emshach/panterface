@@ -72,6 +72,7 @@ export const security = new Vue({
         return x;
       });
       canI( perms ).then(() => { this.permit++ });
+      // TODO: catch
     }
   }
 });

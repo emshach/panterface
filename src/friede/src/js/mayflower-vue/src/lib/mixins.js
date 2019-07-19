@@ -304,7 +304,8 @@ export const ActorsMixin = {
     return {
       classes: { 'actor-modal': true },
       verify: {},
-      permissions: {}
+      permissions: {},
+      results: null
     }
   },
   created() {
@@ -315,11 +316,19 @@ export const ActorsMixin = {
       this.$emit( 'act', action, object );
     },
     hideModal() {
+      this.results = null;
       this.$emit( 'update:show', false );
     },
     execute() {
-      return this.$api( 'do', this.action, this.model.fullname,
-                      this.applicable.map( x => x.id ).join('+'))
+      const action = this.action;
+      return this.$api( 'do', action, this.model.fullname,
+                        this.applicable.map( x => x.id ).join('+'))
+         .then( r => {
+           this.results = r.data[ action ];
+           const action = this.actions[ this.action ];
+           if ( action.data.next )
+             this.$emit( 'act', action.data.next, this.operands );
+         });
     },
     getPerms() {
       const model = this.model;
@@ -357,10 +366,17 @@ export const ActorsMixin = {
              : ( min === 'global' && perm === 'global' ) ? 'global' : false);
       });
       return out;
+    },
+    objects() {
+      const out = {};
+      this.operands.forEach( x => {
+        out[ x.id ] = x;
+      });
+      return out;
     }
   },
   watch: {
-    '$security.permit': function( val ) {
+    '$security.permit'( val ) {
       this.getPerms();
     },
     model( val ) {

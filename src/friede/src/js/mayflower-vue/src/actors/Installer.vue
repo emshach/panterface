@@ -24,6 +24,7 @@
         <vk-column title="available" cell="available" />
       </vk-table>
     </template>
+    <action-result v-if="results" :action=action :objects=objects :results=results />
     <div class="modal-actions">
       <vk-btn class="btn-cancel" type="link" size="small"
               @click.prevent=hideModal >cancel</vk-btn>
@@ -69,6 +70,7 @@ import { ActorsMixin } from '@/lib/mixins'
 import { faLevelUpAlt, faDownload, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { ActionResult } from '@/components'
 
 library.add( faLevelUpAlt, faDownload, faTrash );
 
@@ -85,6 +87,7 @@ export default {
     VkColumn,
     VkColSelect,
     FontAwesomeIcon,
+    ActionResult,
   },
   props: [],
   mounted() {},

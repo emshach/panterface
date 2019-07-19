@@ -695,8 +695,16 @@ class App( app.App ):
                                 content='description'
                             ),
                             search='name title description'.split()
-                        ))))))
+                        )))))),
           ),
+          ( '#actions',
+            ( 'install', dict(
+                data=dict(
+                    reverse='uninstall',
+                    component='Installer',
+                    next='activate',
+                ))),
+          )
         ),
         ( '0.2.6',            # empty version can be used to tag for update
         )

@@ -12,6 +12,7 @@ import Widget       from './Widget'
 import JsonInput    from './JsonInput'
 import FilterInput  from './FilterInput'
 import ActionsInput from './ActionsInput'
+import ActionResult from './ActionResult'
 
 export {
   Page,
@@ -28,6 +29,7 @@ export {
   JsonInput,
   FilterInput,
   ActionsInput,
+  ActionResult,
 }
 
 export default {
@@ -45,4 +47,5 @@ export default {
   JsonInput,
   FilterInput,
   ActionsInput,
+  ActionResult,
 }

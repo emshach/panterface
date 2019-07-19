@@ -12,6 +12,7 @@ from rest_framework.exceptions import ValidationError
 from rest_framework_serializer_extensions.views import SerializerExtensionsAPIViewMixin
 from collections import OrderedDict
 from importlib import import_module
+from cStringIO import StringIO
 from aries.auth import get_user
 from aries.serializers import BaseUserSerializer
 from .objects import getregistries, getenv, Locations
@@ -20,6 +21,7 @@ from .models import *
 from .serializers import *
 from .util import as_tree, form_field_mappings
 import json
+import sys
 import re
 
 ### custom filters
@@ -452,7 +454,7 @@ def api_path( request, path=None, format=None ):
         out.append( node )
     return Response( dict( route=out, endpoint=endpoint ))
 
-@api_view([ 'GET' ])
+@api_view([ 'GET', 'POST' ])
 @permission_classes(( permissions.AllowAny, ))
 def api_do( request, action, model, ids, format=None ):
     "Execute action requested by client"
@@ -467,18 +469,40 @@ def api_do( request, action, model, ids, format=None ):
         "then do possibly system-wide action"
         f = actions.get( action )
         if f:
-            return Response({
+            stdout = sys.stdout
+            stderr = sys.stderr
+            sys.stdout = StringIO()
+            sys.stderr = StringIO()
+            res = Response({
                 action : dict(
-                    result={ o.pk : f( o, **request.params )
-                             for o in model.objects.filter( pk__in=ids )})})
+                    result={ o.pk : dict(
+                        res=f( o, **request.params ),
+                        out=stdout.getvalue(),
+                        err=stderr.getvalue(),
+                    ) for o in model.objects.filter( pk__in=ids )}
+                )
+            })
+            sys.stderr = stderr
+            sys.stdout = stdout
+            return res
     elif user.has_perm( userperm ):
         "then do user-version of action"
         f = user_actions.get( action )
         if f:
-            return Response({
+            stdout = sys.stdout
+            stderr = sys.stderr
+            sys.stdout = StringIO()
+            sys.stderr = StringIO()
+            res = Response({
                 action : dict(
-                    result={ o.pk : f( user, o, **request.params )
-                             for o in model.objects.filter( pk__in=ids )})})
+                    result={ o.pk : (
+                        f( user, o, **request.params ),
+                        stdout.getvalue(),
+                        stderr.getvalue(),
+                    ) for o in model.objects.filter( pk__in=ids )})})
+            sys.stderr = stderr
+            sys.stdout = stdout
+            return res
     else:
         return Response(dict( error='Access denied' ))
 

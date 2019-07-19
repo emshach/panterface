@@ -698,6 +698,8 @@ class App( app.App ):
                             search='name title description'.split()
                         )))))),
           ),
+        ),
+        ( '0.2.6',
           ( '#actions',
             ( 'install', dict(
                 data=dict(
@@ -707,8 +709,6 @@ class App( app.App ):
                     args=[ 'install_userdata' ]
                 ))),
           )
-        ),
-        ( '0.2.6',            # empty version can be used to tag for update
         )
     )
     @property

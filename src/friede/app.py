@@ -123,7 +123,7 @@ class App( object ) :
     def __nonzero__( self ): return True
 
     @staticmethod
-    def get_for_object( cls, obj ):
+    def get_for_object( obj ):
         try:
             return apps[ obj.name ]
         except KeyError:

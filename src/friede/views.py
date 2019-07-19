@@ -476,7 +476,7 @@ def api_do( request, action, model, ids, format=None ):
             res = Response({
                 action : dict(
                     result={ o.pk : dict(
-                        res=f( o, **request.params ),
+                        res=f( o, **request.data ),
                         out=stdout.getvalue(),
                         err=stderr.getvalue(),
                     ) for o in m.objects.filter( pk__in=ids )}
@@ -496,7 +496,7 @@ def api_do( request, action, model, ids, format=None ):
             res = Response({
                 action : dict(
                     result={ o.pk : (
-                        f( user, o, **request.params ),
+                        f( user, o, **request.data ),
                         stdout.getvalue(),
                         stderr.getvalue(),
                     ) for o in m.objects.filter( pk__in=ids )})})

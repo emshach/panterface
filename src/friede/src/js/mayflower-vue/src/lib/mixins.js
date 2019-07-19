@@ -321,13 +321,16 @@ export const ActorsMixin = {
     },
     execute() {
       const action = this.action;
-      return this.$api( 'do', action, this.model.fullname,
-                        this.applicable.map( x => x.id ).join('+'))
+      const data = this.actions[ action ].data;
+      const args = {}
+      if ( data.args )
+        data.args.forEach( a => { args[a] = this[a] });
+      return this.$api.post( 'do', action, this.model.fullname,
+                             this.applicable.map( x => x.id ).join('+'), args )
          .then( r => {
            this.results = r.data[ action ];
-           const action = this.actions[ this.action ];
-           if ( action.data.next )
-             this.$emit( 'act', action.data.next, this.operands );
+           if ( data.next )
+             this.$emit( 'act', data.next, this.operands );
          });
     },
     getPerms() {

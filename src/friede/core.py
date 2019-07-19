@@ -393,7 +393,7 @@ def upgradeapp( app, data, upto=None ):
         if app_version >= version :
             continue
         if upto:
-            if version >= upto :
+            if version > upto :
                 break
         elif min_version and app_version >= min_version:
             break

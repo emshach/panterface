@@ -250,5 +250,9 @@ class App( object ) :
         pass
 
     @property
+    def available( self ):
+        return self.model.available
+
+    @property
     def data( self ):
         return None

@@ -479,7 +479,7 @@ def api_do( request, action, model, ids, format=None ):
                         res=f( o, **request.params ),
                         out=stdout.getvalue(),
                         err=stderr.getvalue(),
-                    ) for o in model.objects.filter( pk__in=ids )}
+                    ) for o in m.objects.filter( pk__in=ids )}
                 )
             })
             sys.stderr = stderr
@@ -499,7 +499,7 @@ def api_do( request, action, model, ids, format=None ):
                         f( user, o, **request.params ),
                         stdout.getvalue(),
                         stderr.getvalue(),
-                    ) for o in model.objects.filter( pk__in=ids )})})
+                    ) for o in m.objects.filter( pk__in=ids )})})
             sys.stderr = stderr
             sys.stdout = stdout
             return res

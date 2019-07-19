@@ -475,22 +475,25 @@ def api_do( request, action, model, ids, format=None ):
     else:
         return Response(dict( error='Access denied' ))
 
+    out = {}
     stdout = sys.stdout
     stderr = sys.stderr
     sys.stdout = StringIO()
     sys.stderr = StringIO()
-    res = Response({
-        action : dict(
-            result={ o.pk : dict(
-                res=f( user, o, **request.data ),
-                out=stdout.getvalue(),
-                err=stderr.getvalue(),
-            ) for o in m.objects.filter( pk__in=ids )}
+
+    for o in m.objects.filter( pk__in=ids ):
+        sys.stdout.reset()
+        sys.stdout.truncate()
+        sys.stderr.reset()
+        sys.stdout.truncate()
+        out[ o.pk ] = dict( res=f( user, o, **request.data ))
+        out[ o.pk ].update(
+            out=sys.stdout.getvalue(),
+            err=sys.stderr.getvalue()
         )
-    })
     sys.stderr = stderr
     sys.stdout = stdout
-    return res
+    return Response({ action : out })
 
 class SearchViewSet( viewsets.ModelViewSet ):
     filter_backends = ( IdsFilter, PathFilter, filters.SearchFilter, )

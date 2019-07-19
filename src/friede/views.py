@@ -460,7 +460,7 @@ def api_do( request, action, model, ids, format=None ):
     "Execute action requested by client"
     from friede.app import actions, user_actions
     ids = ids.split('+');       # TODO: if no ids?
-    app, mod = model.split('')
+    app, mod = model.split('.')
     m = _get_model( model )
     perm = "{}.{}_{}".format( app, action, mod )
     userperm = "{}.{}_own_{}".format( app, action, mod )

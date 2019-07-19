@@ -95,6 +95,7 @@ class App( object ) :
     router = None
     serializers = ()
     model=None
+    versions=dict()
     version='0.0.0'
     min_version='0.0.1'
     required = False

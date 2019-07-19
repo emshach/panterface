@@ -4,6 +4,10 @@
     <vk-title>{{ action }}<template v-if="arg">: {{ arg.title }}</template>
       <template v-else> {{ model ? model.plural : '' }}</template>
     </vk-title>
+    <label v-if="action === 'install'">
+      <input class="uk-checkbox" type="checkbox" v-model=install_userdata >
+      Install user-data
+    </label>
     <template v-if="arg">
       <div class="description uk-margin">{{ arg.description }}</div>
       <div class="info"><strong>version: </strong>{{ arg.available }}</div>
@@ -99,6 +103,7 @@ export default {
         uninstall: x => x.installed,
         update:    x => x.installed
       },
+      install_userdata: true
     }
   },
   methods: {

@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from . import views, serializers, app
 from .app import action
 from .models import Setting, App as AppModel, UserApp
+from packaging.version import parse as version_parse
 
 
 _links = '''_container_entries _widget_entries _block_entries _screen_entries
@@ -703,6 +704,7 @@ class App( app.App ):
                     reverse='uninstall',
                     component='Installer',
                     next='activate',
+                    args=[ 'install_userdata' ]
                 ))),
           )
         ),
@@ -742,8 +744,17 @@ def user_uninstall( user, thing, **kw ):
     pass
 
 @action
-def update( user, thing, **kw ):
-    pass
+def update( user, thing, to='latest' **kw ):
+    if not isinstance( thing, AppModel ):
+        return                  # TODO: raise TypeError
+    app = App.get_for_object( thing )
+    if not app.installed:
+        return                  # todo raise TypeError
+    app.update()
+    v = version_parse( to )
+    app.upgrade( to=app.available if to == 'latest' else to if v.release
+                 else app.versions.get( to ))
+    
 
 @action
 def upgrade( user, thing, **kw ):

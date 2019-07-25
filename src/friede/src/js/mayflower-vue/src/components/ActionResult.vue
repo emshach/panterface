@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="action-result">
-    <h3>{{ action.name }} Results</h3>
+    <h4>{{ action.name }} Results</h4>
     <ul uk-accordion>
       <li v-for="( result, id ) in results" class="action-operand">
         <a class="uk-accordion-title" href="#">{{ objects[ id ].path }}</a>
@@ -36,7 +36,7 @@ export default  {
       default: () => ({})
     },
     results: {
-      type: Array,
+      type: Object,
       default: () => ({})
     }
   },

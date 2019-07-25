@@ -232,6 +232,14 @@ def mklocations( app, objects, relations, actions=None ):
     rs = relations
     if not actions:
         actions = 'list view new edit report delete'.split()
+        screens = dict(
+            list='list.from_model',
+            view='view.object',
+            new='form.single',
+            edit='form.single',
+            report='report.from_model',
+            delete='delete.from_model',
+        )
     return (
         ( 'new.' + name,
           tuple (
@@ -240,7 +248,7 @@ def mklocations( app, objects, relations, actions=None ):
                   href="/new/{}".format(o),
                   data=dict( model="{}.{}".format( name, o ))),
                 ( '#widgets', ( 'card', dict( path="new.{}_{}".format( name, o )))),
-                ( '#screens', ( 'default', dict( path='form.single' ))))
+                ( '#screens', ( 'default', dict( path=screens[ 'new' ]))))
               for o in objects )),
         ( 'delete.' + name,
           tuple (
@@ -256,7 +264,8 @@ def mklocations( app, objects, relations, actions=None ):
                       title="{} {}".format( action, rs[o][ 'plural' ]).title(),
                       href="/{}/{{{}.{}*+}}".format( action, name, o )),
                     ( 'widgets', ( 'card', dict(
-                        path="{}.{}_{}".format( action, name, o )))))
+                        path="{}.{}_{}".format( action, name, o )))),
+                  ( 'screens', ( 'default', dict( path=screens[ action ]))))
                                     for o in objects ))
             for action in actions if action not in ( 'new', 'delete' )),
         ( '.' + name,
@@ -383,6 +392,7 @@ def upgradeapp( app, data, upto=None ):
 
     def update_version():
         if max_version :
+            print "now at version", max_version
             app.version = max_version
             app.save()
 

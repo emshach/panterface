@@ -1,7 +1,8 @@
 <template lang="html">
   <vk-modal :class=classes v-if="mode === 'modal'" :show.sync=show >
     <vk-close @click=hideModal />
-    <action-result v-if="results" :action=action :objects=objects :results=results />
+    <action-result v-if="results" :action="actions[ action ]"
+                   :objects=objects :results=results />
     <div class="modal-actions">
       <vk-btn class="btn-cancel" type="link" size="small"
               @click.prevent=hideModal >cancel</vk-btn>

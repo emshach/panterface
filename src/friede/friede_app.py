@@ -709,6 +709,27 @@ class App( app.App ):
                     args=[ 'install_userdata' ]
                 ))),
           )
+        ),
+        ( '0.2.7',
+          ( '#screens',
+            ( 'view.object', dict(
+                icon='fontawesome.',
+                data=dict(
+                    component='ViewObjectPage'
+                ))),
+            ( 'report.from_model', dict(
+                icon='fontawesome.',
+                data=dict(
+                    component='ReportModelPage'
+                ))),
+            ( 'delete.from_model', dict(
+                icon='fontawesome.',
+                data=dict(
+                    component='DeleteModelPage'
+                ))),
+          ),
+          ( '#locations',
+            ( 'from relations', self.objects, self.relations ))
         )
     )
     @property

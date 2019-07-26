@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from django.shortcuts import render
 from django.contrib.contenttypes.models import ContentType
 from django.db.models.fields import NOT_PROVIDED
+from django.urls import resolve
 from rest_framework import status, viewsets, permissions, filters
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
@@ -70,12 +71,16 @@ def index( request ):
     menus = env.C.menus()
     if not menus:
         menus = setupmenus()
+    menuns = resolve( '/api/friede/containers' ).namespace
+    ons = request.resolver_match.namespace
+    request.namespace = menuns
     menus = ContainerSerializer( menus, context=dict(
         request=request,
         detail=True,
         expand=[
             '_container_entries', '_link_entries'
         ])).data
+    request.resolver_match.namespace = ons
     shell = env.H.current()
     if not shell:
         shell = setupshell( env )

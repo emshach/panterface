@@ -56,7 +56,7 @@ export default {
     siteLinks() {
       const links = this.menus.nav.$links;
       const out = {};
-      return Object.keys( links ).forEach( l => {
+      Object.keys( links ).forEach( l => {
         if ( links[l].location && links[l].location.$href )
           out[l] = links[l];
       });

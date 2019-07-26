@@ -77,6 +77,9 @@
 .installer .loading:not(.active) {
     height: 0;
 }
+.installer .loading .label {
+    margin-left: 16px;
+}
 
 .activator.widget .activator-enabled {
   color: cornflowerblue;

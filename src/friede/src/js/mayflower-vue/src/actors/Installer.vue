@@ -144,6 +144,9 @@ export default {
     &:not(.active) {
       height: 0;
     }
+    .label {
+      margin-left: 16px;
+    }
   }
 }
 </style>

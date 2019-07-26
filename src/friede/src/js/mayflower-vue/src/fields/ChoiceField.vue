@@ -1,6 +1,6 @@
 <template lang="html">
   <multiselect v-if="editMode" v-model="field.wip" ref="inputV"
-               :options="field.meta.options"
+               :options="field.meta.options" track-by=key label="label"
                :class="fieldClasses" @input="commitField" @blur="revertField" />
   <a v-else v-html="html" @click.click="editField" @focus="editField"
        :class="fieldClasses" />

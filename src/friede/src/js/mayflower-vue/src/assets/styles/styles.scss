@@ -167,6 +167,14 @@ form.uk-form-stacked label {
     
   }
   .content-outcome, .content-log, .content-error  {
-    whitespace: pre
+    white-space: pre
+  }
+  .content-outcome {
+    .success {
+      color: green;
+    }
+    .error {
+      color: darkred;
+    }
   }
 }

@@ -10832,7 +10832,13 @@ form.uk-form-stacked label {
           box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); }
 
 .action-result .content-outcome, .action-result .content-log, .action-result .content-error {
-  whitespace: pre; }
+  white-space: pre; }
+
+.action-result .content-outcome .success {
+  color: green; }
+
+.action-result .content-outcome .error {
+  color: darkred; }
 
 
 /*# sourceMappingURL=app.css.map*/

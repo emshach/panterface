@@ -169,9 +169,12 @@ def installapp( name, module, title, description, icon='', rest=True,
                     version='0.0.0',
             ))
         if data:
-            upgradeapp( app, data, upto=version )
-        app.installed = True
-        app.save()
+            if upgradeapp( app, data, upto=version ):
+                app.installed = True
+                app.save()
+        else:
+            app.installed = True
+            app.save()
         return app, new
     except Exception as e:
         print >> sys.stderr, "got exception", type(e), e, 'in installapp'
@@ -387,6 +390,7 @@ def upgradeapp( app, data, upto=None ):
     app_version = version_parse( app.version )
     max_version = None
     min_version = version_parse( app.min_version )
+    upgraded = False
     if upto:
         upto = version_parse( upto )
 
@@ -395,6 +399,7 @@ def upgradeapp( app, data, upto=None ):
             print "now at version", max_version
             app.version = max_version
             app.save()
+            upgraded = True
 
     for tree in data:
         v = tree[0]
@@ -602,3 +607,4 @@ def upgradeapp( app, data, upto=None ):
                 print >> sys.stderr, "got exception", type(e), e
                 raise
         app_version = version
+    return upgraded

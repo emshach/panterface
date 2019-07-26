@@ -731,7 +731,7 @@ class App( app.App ):
           ( '#locations',
             ( 'from relations', self.objects, self.relations ))
         ),
-        ( '0.2.7',
+        ( '0.2.8',
          ( '#actions',
             ( 'reinstall', dict(
                 data=dict(

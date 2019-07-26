@@ -17,7 +17,7 @@ Model = M.Model
 class _Base( Model ):
     class Meta:
         abstract = True
-    name         = M.SlugField()
+    name         = M.SlugField( max_length=255 )
     title        = M.CharField( blank=True, max_length=255 )
     description  = M.TextField( blank=True )
     active       = M.BooleanField( default=True )

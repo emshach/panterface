@@ -1,5 +1,5 @@
 <template lang="html">
-  <vk-modal :class=classes v-if="mode === 'modal'" :show=show >
+  <vk-modal :class=classes v-if="mode === 'modal'" :show=show @shown=autoExecute >
     <vk-close @click=hideModal />
     <vk-title>{{ action }}<template v-if="arg">: {{ arg.title }}</template>
       <template v-else> {{ model ? model.plural : '' }}</template>

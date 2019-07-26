@@ -347,6 +347,10 @@ export const ActorsMixin = {
            console.warn( 'error performing action', err );
          });
     },
+    autoExecute() {
+      if ( this.now )
+        this.execute();
+    },
     doNext() {
       this.$emit( 'act', this.next, this.operands, true );
       this.hideModal();

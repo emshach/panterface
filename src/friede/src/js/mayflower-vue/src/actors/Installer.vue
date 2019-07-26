@@ -139,13 +139,10 @@ export default {
     color: #39f;
     overflow: hidden;
     transition: 1s;
+    margin-left: -16px;
+    margin-right: -16px;
     &:not(.active) {
       height: 0;
-    }
-    .spinner {
-      width: calc( 100% + 32px );
-      margin-left: -16px;
-      margin-right: -16px;
     }
   }
 }

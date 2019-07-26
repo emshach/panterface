@@ -390,7 +390,7 @@ def upgradeapp( app, data, upto=None ):
     app_version = version_parse( app.version )
     max_version = None
     min_version = version_parse( app.min_version )
-    upgraded = False
+    upgraded = dict(val=False)
     if upto:
         upto = version_parse( upto )
 
@@ -399,7 +399,7 @@ def upgradeapp( app, data, upto=None ):
             print "now at version", max_version
             app.version = max_version
             app.save()
-            upgraded = True
+            upgraded[ 'val' ] = True
 
     for tree in data:
         v = tree[0]
@@ -607,4 +607,4 @@ def upgradeapp( app, data, upto=None ):
                 print >> sys.stderr, "got exception", type(e), e
                 raise
         app_version = version
-    return upgraded
+    return upgraded[ 'val' ]

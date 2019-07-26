@@ -342,8 +342,8 @@ export const ActorsMixin = {
            const res = r.data[ action ];
            this.loading = false;
            if ( !res || res.error ) {
-             this.result = res || r.data;
-             return this.result;
+             this.results = res || r.data;
+             return this.results;
            }
            if ( data.next )
              this.next = data.next;

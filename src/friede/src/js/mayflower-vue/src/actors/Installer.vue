@@ -113,6 +113,7 @@ export default {
       classes: { installer: true },
       verify: {
         install:   x => !x.installed,
+        reinstall: x => x.installed,
         uninstall: x => x.installed,
         update:    x => x.installed && x.version !== x.available
       },

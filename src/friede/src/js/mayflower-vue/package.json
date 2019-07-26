@@ -12,6 +12,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.19",
     "@fortawesome/free-solid-svg-icons": "^5.9.0",
     "@fortawesome/vue-fontawesome": "^0.1.5",
+    "@saeris/vue-spinners": "^1.0.8",
     "@vuikit/icons": "^0.8.1",
     "@vuikit/theme": "^0.8.1",
     "axios": "^0.18.1",

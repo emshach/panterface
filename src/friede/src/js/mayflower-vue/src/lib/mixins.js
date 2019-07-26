@@ -310,6 +310,7 @@ export const ActorsMixin = {
       verify: {},
       permissions: {},
       results: null,
+      loading: false,
       next: ''
     }
   },
@@ -321,6 +322,7 @@ export const ActorsMixin = {
       this.$emit( 'act', action, object );
     },
     hideModal() {
+      if ( this.loading ) return;
       this.results = null;
       this.next = '';
       this.$emit( 'update:now', false );
@@ -332,12 +334,17 @@ export const ActorsMixin = {
       const args = {}
       if ( data.args )
         data.args.forEach( a => { args[a] = this[a] });
+      this.loading = true;
       return this.$api.post( 'do', action, this.model.fullname,
                              this.applicable.map( x => x.id ).join('+'), args )
          .then( r => {
+           this.loading = false;
            this.results = r.data[ action ];
            if ( data.next )
              this.next = data.next;
+         }).catch( err => {
+           this.loading = false;
+           console.warn( 'error performing action', err );
          });
     },
     doNext() {

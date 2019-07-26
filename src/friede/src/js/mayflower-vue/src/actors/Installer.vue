@@ -30,17 +30,23 @@
     </template>
     <action-result v-if="results" :action="actions[ action ]"
                    :objects=objects :results=results />
+    <div v-if="loading" class="loading">
+      <div class="label">{{ action.replace( /e$/,'' ) + 'ing' }}</div>
+      <bar-loader :width=100 widthUnit="%" :height=1 :size=50 sizeUnit="%"
+                  :loading=loading />
+    </div>
     <div class="modal-actions">
       <vk-btn v-if="!results || next" class="btn-cancel" type="link"
-              size="small" @click.prevent=hideModal >cancel</vk-btn>
+              size="small" :disabled=loading
+              @click.prevent=hideModal >cancel</vk-btn>
       <template v-if="results">
         <vk-btn v-if="next" class="btn-ok" type="primary" size="small"
-                @click.prevent=doNext >{{ next }}</vk-btn>
+                :disabled=loading @click.prevent=doNext >{{ next }}</vk-btn>
         <vk-btn v-else class="btn-ok" type="primary" size="small"
-                @click.prevent=hideModal >Done</vk-btn>
+                :disabled=loading @click.prevent=hideModal >Done</vk-btn>
       </template>
       <vk-btn v-else class="btn-ok" type="primary" size="small"
-              @click.prevent=execute >{{ action }}</vk-btn>
+              :disabled=loading @click.prevent=execute >{{ action }}</vk-btn>
     </div>
   </vk-modal>
   <div v-else class="installer widget">
@@ -82,6 +88,7 @@ import { faLevelUpAlt, faDownload, faTrash } from '@fortawesome/free-solid-svg-i
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { ActionResult } from '@/components'
+import { BarLoader } from '@saeris/vue-spinners'
 
 library.add( faLevelUpAlt, faDownload, faTrash );
 
@@ -99,6 +106,7 @@ export default {
     VkColSelect,
     FontAwesomeIcon,
     ActionResult,
+    BarLoader,
   },
   props: [],
   mounted() {},
@@ -126,6 +134,9 @@ export default {
 .installer {
   &.widget {
     color: grey;
+  }
+  .loading {
+    color: #39f;
   }
 }
 </style>

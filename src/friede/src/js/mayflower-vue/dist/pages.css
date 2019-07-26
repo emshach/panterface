@@ -66,6 +66,9 @@
 .installer.widget {
   color: grey;
 }
+.installer .loading {
+  color: #39f;
+}
 
 .activator.widget .activator-enabled {
   color: cornflowerblue;

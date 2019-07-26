@@ -341,6 +341,8 @@ export const ActorsMixin = {
          .then( r => {
            const res = r.data[ action ];
            this.loading = false;
+           if ( !res || res.error )
+             return res;
            if ( data.next )
              this.next = data.next;
            if ( Object.values( res ).find( x => !x.res || !x.res.error )) {
@@ -357,6 +359,7 @@ export const ActorsMixin = {
              } else
                this.results = res;
            }
+           return res;
          }).catch( err => {
            this.loading = false;
            console.warn( 'error performing action', err, err.response );

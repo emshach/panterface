@@ -58,7 +58,8 @@
         <font-awesome-icon icon="level-up-alt" />
       </vk-btn-link>
       <span v-else>v{{ object.version }} installed</span>
-      <vk-btn-link v-if="!object.required" v-vk-tooltip.bottom="'uninstall'"
+      <vk-btn-link v-if="can.uninstall && !object.required"
+                   v-vk-tooltip.bottom="'uninstall'"
                    type="text" @click.prevent="act( 'uninstall', object )" >
         <font-awesome-icon icon="trash" />
       </vk-btn-link>

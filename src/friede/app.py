@@ -95,8 +95,6 @@ class App( object ) :
     serializers = ()
     model=None
     versions=dict()
-    version='0.0.0'
-    min_version='0.0.1'
     required = False
     user_required = False
     user_installable = True
@@ -270,3 +268,24 @@ class App( object ) :
     @property
     def data( self ):
         return None
+
+    @property
+    def version( self ):
+        return self.model.version if self.model else '0.0.0'
+
+    @version.setter
+    def version( self, version ):
+        if self.model:
+            self.model.version = version
+            self.model.save()
+
+    @property
+    def min_version( self ):
+        return self.model.min_version if self.model else '0.0.0'
+
+    @version.setter
+    def min_version( self, min_version ):
+        if self.model:
+            self.model.min_version = min_version
+            self.model.save()
+

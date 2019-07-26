@@ -730,7 +730,15 @@ class App( app.App ):
           ),
           ( '#locations',
             ( 'from relations', self.objects, self.relations ))
-        )
+        ),
+        ( '0.2.7',
+         ( '#actions',
+            ( 'reinstall', dict(
+                data=dict(
+                    component='Installer',
+                    args=[ 'install_userdata' ]
+                ))),
+          ))
     )
     @property
     def userdata( self ):
@@ -744,8 +752,26 @@ def install( user, thing, userdata=True, **kw ):
     app.install()
     if userdata:
         user_install( user, thing )
-    return dict( success="App {} installed!".format( app.name ))\
-        if app.installed else dict( error='Install failed' )
+    return dict( status='installed', success="App {} installed!".format( app.name ))\
+        if app.installed else dict( status='failed', error='Install failed' )
+
+@action
+def reinstall( user, thing, userdata=True, **kw ):
+    if not isinstance( thing, AppModel ):
+        return                  # TODO: raise TypeError
+    app = App.get_for_object( thing )
+    version = app.version
+    app.version = '0.0.0'
+    app.update()
+    if app.installed:
+        app.upgrade( to=version )
+    else:
+        app.install()
+    # if userdata:
+    #     user_reinstall( user, thing )
+    # TODO: ^^^ this
+    return dict( status='reinstalled', success="App {} reinstalled!".format( app.name ))\
+        if app.version == version else dict( status='failed', error='reinstall failed' )
 
 @action
 def user_install( user, thing, **kw ):
@@ -775,8 +801,11 @@ def update( user, thing, to='latest', **kw ):
         return                  # todo raise TypeError
     app.update()
     v = version_parse( to )
-    app.upgrade( to=app.available if to == 'latest' else to if v.release
-                 else app.versions.get( to ))
+    target = app.available if to == 'latest' else to if v.release\
+                 else app.versions.get( to )
+    app.upgrade( to=target )
+    return dict( status='updated', success="App {} updated!".format( app.name ))\
+        if app.version == target else dict( status='failed', error='update failed' )
 
 
 @action
@@ -793,8 +822,8 @@ def activate( user, thing, **kw ):
         return                  # TODO: raise TypeError
     app = App.get_for_object( thing )
     app.activate()
-    return dict( success="App {} activated!".format( app.name ))\
-        if app.active else dict( error='Activation failed' )
+    return dict( status='active', success="App {} activated!".format( app.name ))\
+        if app.active else dict( 'failed', error='Activation failed' )
 
 @action
 def user_activate( user, thing, **kw ):
@@ -806,8 +835,8 @@ def deactivate( user, thing, **kw ):
         return                  # TODO: raise TypeError
     app = App.get_for_object( thing )
     app.deactivate()
-    return dict( success="App {} disabled".format( app.name ))\
-        if not app.active else dict( error='deactivation failed' )
+    return dict( status='disabled', success="App {} disabled".format( app.name ))\
+        if not app.active else dict( status='failed', error='deactivation failed' )
 
 @action
 def user_deactivate( user, thing, **kw ):

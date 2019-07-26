@@ -290,13 +290,15 @@ def mklocations( app, objects, relations, actions=None ):
                 ( "{0}_{1}.{0}_{2}".format( name, o, x ), dict(
                     title="add to {}: {}".format( o, x ).title(),
                     href="/add/to/{{{0}.{1}+}}/{{{0}.{2}+}}".format(
-                        name, o, x )))
+                        name, o, x )),
+                ( '#screens', ( 'default', dict( path=screens[ 'add' ]))))
                 for o in objects
                 for x in rs[o][ 'has' ])),
           tuple(
               ( "{0}_{1}.{0}_{2}".format( name, o, x ), dict(
                   title="add {} to {}".format( o, x ).title(),
-                  href="/add/{{{0}.{1}+}}/{{{0}.{2}+}}".format( name, o, x )))
+                  href="/add/{{{0}.{1}+}}/{{{0}.{2}+}}".format( name, o, x )),
+                ( '#screens', ( 'default', dict( path=screens[ 'add' ]))))
               for o in objects
               for x in rs[o][ 'in' ])),
         ( 'remove',
@@ -305,21 +307,24 @@ def mklocations( app, objects, relations, actions=None ):
                 ( "{0}_{1}.{0}_{2}".format( name, o, x ), dict(
                     title="remove from {}: {}".format( o, x ).title(),
                     href="/remove/from/{{{0}.{1}+}}/{{{0}.{2}}}".format(
-                        name, o, x )))
+                        name, o, x )),
+                  ( '#screens', ( 'default', dict( path=screens[ 'remove' ]))))
                 for o in objects
                 for x in rs[o][ 'has' ] )),
           tuple(
               ( "{0}_{1}.{0}_{2}".format( name, o, x ), dict(
                   title="remove {} from {}".format( o, x ).title(),
                   href="/remove/{{{}.{}+}}/{{{}.{}+}}".format(
-                      name, o, name, x )))
+                      name, o, name, x )),
+                ( '#screens', ( 'default', dict( path=screens[ 'remove' ]))))
               for o in objects
               for x in rs[o][ 'in' ])),
         tuple(
             ( "{}_{}".format( name, o ),
               ( 'edit', dict(
                   title="edit {}".format( rs[o][ 'plural' ]).title(),
-                  href="{{{}.{}*""+}}/edit".format( name, o ))),
+                  href="{{{}.{}*""+}}/edit".format( name, o )),
+                ( '#screens', ( 'default', dict( path=screens[ 'edit' ])))),
               tuple(
                   (( "add.{}_{}".format( name, x ),
                      dict(

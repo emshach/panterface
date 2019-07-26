@@ -596,7 +596,7 @@ def upgradeapp( app, data, upto=None ):
                                         except IntegrityError:
                                             print >> sys.stderr,\
                                                 "Update failed, could not rename\
- '{}' to '{}': there is already an entry with that name".format( name, rename )
+ '{}' to '{}': there is already an entry with that name".format( name, renamed )
 
                         if new:
                             print 'created', app.name, obj._meta.object_name, \

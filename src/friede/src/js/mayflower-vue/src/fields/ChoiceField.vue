@@ -31,7 +31,7 @@ export default {
   },
   computed: {
     html() {
-      return this.meta.options ? this.meta.options[ this.value ]
+      return this.field.meta.options ? this.field.meta.options[ this.value ]
       : this.value;
     }
   }

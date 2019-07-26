@@ -57,6 +57,7 @@ export default new Vuex.Store({
         var model = await dispatch( 'getModel' );
         commit( 'setModel', model );
       }).catch( err => {
+        console.warn( `error getting '${path}'`, err, err.response );
         commit( 'setError', `Error getting '${path}'<br/>/` + err + '<br/>'
                 + err.response );
       });
@@ -72,11 +73,12 @@ export default new Vuex.Store({
       }
       const have = Object.keys( state.models );
       var models = await getModel( model, have ).catch( err => {
-        commit( 'setError', `Error getting model '${model}'<br/>/` + err + '<br/>'
+        console.warn( `error getting model '${model}'`, err, err.response );
+        commit( 'setError', `Error getting model '${model}'<br/>` + err + '<br/>'
                 + ( err.response && err.response.msg ? err.response.msg
-                : err.response && err.response.message ? err.response.message
-                : err.response && err.response.error ? err.response.error
-                : err.response ));
+                    : err.response && err.response.message ? err.response.message
+                    : err.response && err.response.error ? err.response.error
+                    : err.response ));
       });
       commit( 'addModels', models );
       return models[ model ];

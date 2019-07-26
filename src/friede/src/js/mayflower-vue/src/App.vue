@@ -71,12 +71,14 @@ export default {
       return this.$store.state.user;
     },
     siteLinks() {
-      if ( !this.menus )
+      if ( !this.menus || !this.menus.active )
         return
       const links = this.menus.containers.nav.entry.links;
       const out = {};
       Object.keys( links ).forEach( l => {
-        if ( links[l].entry.location && links[l].entry.location.href )
+        if ( links[l].active && links[l].entry.active
+             && links[l].entry.location && links[l].entry.location.active
+             && links[l].entry.location.href )
           out[l] = links[l];
       });
       return out;

@@ -311,7 +311,8 @@ export const ActorsMixin = {
       permissions: {},
       results: null,
       loading: false,
-      next: ''
+      next: '',
+      autoClose: false,
     }
   },
   created() {
@@ -338,11 +339,24 @@ export const ActorsMixin = {
       return this.$api.post( 'do', action, this.model.fullname,
                              this.applicable.map( x => x.id ).join('+'), args )
          .then( r => {
+           const res = r.data[ action ];
            this.loading = false;
-           this.results = r.data[ action ];
            if ( data.next )
              this.next = data.next;
-           this.$emit( 'success', this.results );
+           if ( Object.values( res ).find( x => !x.res || !x.res.error )) {
+             this.$emit( 'success', res );
+             if ( this.autoClose && this.applicable.length === 1 ) {
+               const out = Object.values( res )[0];
+               if ( !out.out && !out.err ) {
+                 if ( this.next )
+                   this.doNext();
+                 else
+                   this.hideModal();
+               } else
+                 this.results = res;
+             } else
+               this.results = res;
+           }
          }).catch( err => {
            this.loading = false;
            console.warn( 'error performing action', err, err.response );
@@ -350,8 +364,11 @@ export const ActorsMixin = {
          });
     },
     autoExecute() {
-      if ( this.now )
+      if ( this.now ) {
+        this.autoClose = true;
+        setTimeout(() => { this.autoClose = false }, 3000 );
         this.execute();
+      }
     },
     doNext() {
       this.$emit( 'act', this.next, this.operands, true );

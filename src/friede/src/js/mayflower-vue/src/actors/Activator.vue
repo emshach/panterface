@@ -54,7 +54,7 @@
         <vk-btn-link v-else-if="can.activate"
                      v-vk-tooltip.bottom="'activate'"
                      type="text" class="activator-disabled danger"
-                     @click.prevent="act( 'activate', object )" >
+                     @click.prevent="act( 'activate', object, true )" >
           <font-awesome-icon icon="toggle-off" />
         </vk-btn-link>
         <font-awesome-icon v-else
@@ -64,12 +64,12 @@
       <template v-else-if="can.activate">
         <vk-btn-link v-if=object.active v-vk-tooltip.bottom="'disable'"
                      type="text" class="activator-enabled"
-                     @click.prevent="act( 'deactivate', object )" >
+                     @click.prevent="act( 'deactivate', object, true )" >
           <font-awesome-icon icon="toggle-on" />
         </vk-btn-link>
         <vk-btn-link v-else v-vk-tooltip.bottom="'activate'"
                      type="text" class="activator-disabled"
-                     @click.prevent="act( 'activate', object )" >
+                     @click.prevent="act( 'activate', object, true )" >
           <font-awesome-icon icon="toggle-off" />
         </vk-btn-link>
       </template>

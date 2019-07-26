@@ -70,9 +70,12 @@ def index( request ):
     menus = env.C.menus()
     if not menus:
         menus = setupmenus()
-    menus = ContainerSerializer( menus, expand=[
-        '_container_entries', '_link_entries'
-    ], context=dict( request=request )).data
+    menus = ContainerSerializer( menus, context=dict(
+        request=request,
+        detail=True,
+        expand=[
+            '_container_entries', '_link_entries'
+        ])).data
     shell = env.H.current()
     if not shell:
         shell = setupshell( env )

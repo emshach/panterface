@@ -7,10 +7,8 @@ Vue.use( Vuex );
 
 async function getModel( model, have ) {
   return Vue.prototype.$api(
-    'models', model,
-    have ? '?' +  have.map( x => 'have=' + x ).join('&') : '' ).then( r => {
-    return r.data.models;
-  })
+    'models', model, have ? '?' + have.map( x => 'have=' + x ).join('&') : '' )
+     .then( r => r.data.models );
 }
 
 export default new Vuex.Store({
@@ -75,7 +73,10 @@ export default new Vuex.Store({
       const have = Object.keys( state.models );
       var models = await getModel( model, have ).catch( err => {
         commit( 'setError', `Error getting model '${model}'<br/>/` + err + '<br/>'
-                + err.response );
+                + ( err.response && err.response.msg ? err.response.msg
+                : err.response && err.response.message ? err.response.message
+                : err.response && err.response.error ? err.response.error
+                : err.response ));
       });
       commit( 'addModels', models );
       return models[ model ];

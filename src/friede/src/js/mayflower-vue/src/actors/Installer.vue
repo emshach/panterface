@@ -108,8 +108,6 @@ export default {
     ActionResult,
     BarLoader,
   },
-  props: [],
-  mounted() {},
   data() {
     return {
       classes: { installer: true },
@@ -121,12 +119,6 @@ export default {
       install_userdata: true
     }
   },
-  methods: {
-    showApplicable(x) {
-      return this.action ? this.verify[ this.action ](x) ? 'uk-active' : [] : []
-    }
-  },
-  computed: {}
 }
 </script>
 

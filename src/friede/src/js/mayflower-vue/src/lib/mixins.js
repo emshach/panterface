@@ -360,6 +360,9 @@ export const ActorsMixin = {
         this.permissions = r;
       });
     },
+    showApplicable(x) {
+      return this.action ? this.verify[ this.action ](x) ? 'uk-active' : [] : []
+    },
   },
   computed: {
     arg() {

@@ -33,17 +33,21 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_2__["library"].add(_f
     VkModaTitle: vuikit_lib_modal__WEBPACK_IMPORTED_MODULE_4__["ModalTitle"],
     FontAwesomeIcon: _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_3__["FontAwesomeIcon"]
   },
-  props: [],
-  mounted: function mounted() {},
   data: function data() {
     return {
       classes: {
-        installer: true
+        activator: true
+      },
+      verify: {
+        activate: function activate(x) {
+          return !x.active;
+        },
+        deactivate: function deactivate(x) {
+          return x.active;
+        }
       }
     };
-  },
-  methods: {},
-  computed: {}
+  }
 });
 
 /***/ }),
@@ -93,8 +97,6 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_5__["library"].add(_f
     ActionResult: _components__WEBPACK_IMPORTED_MODULE_7__["ActionResult"],
     BarLoader: _saeris_vue_spinners__WEBPACK_IMPORTED_MODULE_8__["BarLoader"]
   },
-  props: [],
-  mounted: function mounted() {},
   data: function data() {
     return {
       classes: {
@@ -113,13 +115,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_5__["library"].add(_f
       },
       install_userdata: true
     };
-  },
-  methods: {
-    showApplicable: function showApplicable(x) {
-      return this.action ? this.verify[this.action](x) ? 'uk-active' : [] : [];
-    }
-  },
-  computed: {}
+  }
 });
 
 /***/ }),
@@ -594,17 +590,86 @@ var render = function() {
   return _vm.mode === "modal"
     ? _c(
         "vk-modal",
-        {
-          class: _vm.classes,
-          attrs: { show: _vm.show },
-          on: {
-            "update:show": function($event) {
-              _vm.show = $event
-            }
-          }
-        },
+        { class: _vm.classes, attrs: { show: _vm.show } },
         [
           _c("vk-close", { on: { click: _vm.hideModal } }),
+          _c(
+            "vk-title",
+            [
+              _vm._v(_vm._s(_vm.action)),
+              _vm.arg
+                ? [_vm._v(": " + _vm._s(_vm.arg.title))]
+                : [_vm._v(" " + _vm._s(_vm.model ? _vm.model.plural : ""))]
+            ],
+            2
+          ),
+          _vm.arg
+            ? [
+                _c("div", { staticClass: "description uk-margin" }, [
+                  _vm._v(_vm._s(_vm.arg.description))
+                ]),
+                _c("div", { staticClass: "info" }, [
+                  _c("strong", [_vm._v("version: ")]),
+                  _vm._v(_vm._s(_vm.arg.available))
+                ]),
+                _vm.arg.installed
+                  ? _c("div", { staticClass: "info" }, [
+                      _c("strong", [_vm._v("current: ")]),
+                      _vm._v(_vm._s(_vm.arg.version))
+                    ])
+                  : _vm._e()
+              ]
+            : [
+                _c(
+                  "vk-table",
+                  {
+                    attrs: {
+                      responsive: "",
+                      hoverable: "",
+                      striped: "",
+                      "row-class": _vm.showApplicable,
+                      divided: false,
+                      data: _vm.operands
+                    }
+                  },
+                  [
+                    _c("vk-column", {
+                      attrs: {
+                        title: _vm.model ? _vm.model.singular : "object",
+                        cell: "title"
+                      }
+                    }),
+                    _c("vk-column", {
+                      attrs: { title: "version", cell: "version" }
+                    }),
+                    _c("vk-column", {
+                      attrs: { title: "active", cell: "active" },
+                      scopedSlots: _vm._u(
+                        [
+                          {
+                            key: "default",
+                            fn: function(ref) {
+                              var cell = ref.cell
+                              var row = ref.row
+                              return [
+                                _vm._v(
+                                  "\n          " +
+                                    _vm._s(cell ? "yes" : "no") +
+                                    "\n        "
+                                )
+                              ]
+                            }
+                          }
+                        ],
+                        null,
+                        false,
+                        4085456284
+                      )
+                    })
+                  ],
+                  1
+                )
+              ],
           _vm.results
             ? _c("action-result", {
                 attrs: {
@@ -616,41 +681,113 @@ var render = function() {
             : _vm._e(),
           _c(
             "div",
-            { staticClass: "modal-actions" },
+            { class: ["loading", _vm.loading ? "active" : ""] },
             [
-              _c(
-                "vk-btn",
-                {
-                  staticClass: "btn-cancel",
-                  attrs: { type: "link", size: "small" },
-                  on: {
-                    click: function($event) {
-                      $event.preventDefault()
-                      return _vm.hideModal($event)
-                    }
-                  }
-                },
-                [_vm._v("cancel")]
-              ),
-              _c(
-                "vk-btn",
-                {
-                  staticClass: "btn-ok",
-                  attrs: { type: "primary", size: "small" },
-                  on: {
-                    click: function($event) {
-                      $event.preventDefault()
-                      return _vm.execute($event)
-                    }
-                  }
-                },
-                [_vm._v(_vm._s(_vm.action))]
-              )
+              _c("div", { staticClass: "label" }, [
+                _vm._v(_vm._s(_vm.action.replace(/e$/, "") + "ing"))
+              ]),
+              _c("bar-loader", {
+                staticClass: "spinner",
+                attrs: {
+                  width: 100,
+                  widthUnit: "%",
+                  height: 1,
+                  size: 50,
+                  sizeUnit: "%",
+                  loading: _vm.loading,
+                  color: "#39f"
+                }
+              })
             ],
             1
+          ),
+          _c(
+            "div",
+            { staticClass: "modal-actions" },
+            [
+              !_vm.results || _vm.next
+                ? _c(
+                    "vk-btn",
+                    {
+                      staticClass: "btn-cancel",
+                      attrs: {
+                        type: "link",
+                        size: "small",
+                        disabled: _vm.loading
+                      },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          return _vm.hideModal($event)
+                        }
+                      }
+                    },
+                    [_vm._v("cancel")]
+                  )
+                : _vm._e(),
+              _vm.results
+                ? [
+                    _vm.next
+                      ? _c(
+                          "vk-btn",
+                          {
+                            staticClass: "btn-ok",
+                            attrs: {
+                              type: "primary",
+                              size: "small",
+                              disabled: _vm.loading
+                            },
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                return _vm.doNext($event)
+                              }
+                            }
+                          },
+                          [_vm._v(_vm._s(_vm.next))]
+                        )
+                      : _c(
+                          "vk-btn",
+                          {
+                            staticClass: "btn-ok",
+                            attrs: {
+                              type: "primary",
+                              size: "small",
+                              disabled: _vm.loading
+                            },
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                return _vm.hideModal($event)
+                              }
+                            }
+                          },
+                          [_vm._v("Done")]
+                        )
+                  ]
+                : _c(
+                    "vk-btn",
+                    {
+                      staticClass: "btn-ok",
+                      attrs: {
+                        type: "primary",
+                        size: "small",
+                        disabled: _vm.loading
+                      },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          return _vm.execute($event)
+                        }
+                      }
+                    },
+                    [_vm._v(_vm._s(_vm.action))]
+                  )
+            ],
+            2
           )
         ],
-        1
+        2
       )
     : _c(
         "div",
@@ -1757,7 +1894,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1564144225317
+      // 1564147136687
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1775,7 +1912,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1564144224428
+      // 1564147135749
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1793,7 +1930,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1564144221536
+      // 1564147133204
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1811,7 +1948,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1564144221571
+      // 1564147133223
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1829,7 +1966,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1564144221684
+      // 1564147133320
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1847,7 +1984,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1564144221581
+      // 1564147133231
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1865,7 +2002,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1564144222560
+      // 1564147134255
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1883,7 +2020,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1564144221641
+      // 1564147134243
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1901,7 +2038,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1564144221542
+      // 1564147133194
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1919,7 +2056,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1564144221612
+      // 1564147133252
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1937,7 +2074,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1564144221604
+      // 1564147133261
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1955,7 +2092,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1564144221626
+      // 1564147133275
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);

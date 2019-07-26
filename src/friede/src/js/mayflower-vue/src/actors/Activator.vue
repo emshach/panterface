@@ -1,13 +1,48 @@
 <template lang="html">
-  <vk-modal :class=classes v-if="mode === 'modal'" :show.sync=show >
+  <vk-modal :class=classes v-if="mode === 'modal'" :show=show >
     <vk-close @click=hideModal />
+    <vk-title>{{ action }}<template v-if="arg">: {{ arg.title }}</template>
+      <template v-else> {{ model ? model.plural : '' }}</template>
+    </vk-title>
+    <template v-if="arg">
+      <div class="description uk-margin">{{ arg.description }}</div>
+      <div class="info"><strong>version: </strong>{{ arg.available }}</div>
+      <div v-if="arg.installed" class="info">
+        <strong>current: </strong>{{ arg.version }}</div>
+    </template>
+    <template v-else>
+      <vk-table responsive hoverable striped
+                :row-class=showApplicable
+                :divided=false
+                :data=operands >
+        <vk-column :title="model ? model.singular : 'object'" cell="title" />
+        <vk-column title="version" cell="version" />
+        <vk-column title="active" cell="active" >
+          <template #default="{ cell, row }">
+            {{ cell ? 'yes' : 'no' }}
+          </template>
+        </vk-column>
+      </vk-table>
+    </template>
     <action-result v-if="results" :action="actions[ action ]"
                    :objects=objects :results=results />
+    <div :class="[ 'loading', loading ? 'active' : '' ]">
+      <div class="label">{{ action.replace( /e$/,'' ) + 'ing' }}</div>
+      <bar-loader :width=100 widthUnit="%" :height=1 :size=50 sizeUnit="%"
+                  :loading=loading color="#39f" class="spinner" />
+    </div>
     <div class="modal-actions">
-      <vk-btn class="btn-cancel" type="link" size="small"
+      <vk-btn v-if="!results || next" class="btn-cancel" type="link"
+              size="small" :disabled=loading
               @click.prevent=hideModal >cancel</vk-btn>
-      <vk-btn class="btn-ok" type="primary" size="small"
-              @click.prevent=execute >{{ action }}</vk-btn>
+      <template v-if="results">
+        <vk-btn v-if="next" class="btn-ok" type="primary" size="small"
+                :disabled=loading @click.prevent=doNext >{{ next }}</vk-btn>
+        <vk-btn v-else class="btn-ok" type="primary" size="small"
+                :disabled=loading @click.prevent=hideModal >Done</vk-btn>
+      </template>
+      <vk-btn v-else class="btn-ok" type="primary" size="small"
+              :disabled=loading @click.prevent=execute >{{ action }}</vk-btn>
     </div>
   </vk-modal>
   <div v-else class="activator widget">
@@ -75,15 +110,15 @@ export default {
     VkModaTitle,
     FontAwesomeIcon,
   },
-  props: [],
-  mounted() {},
   data() {
     return {
-      classes: { installer: true }
+      classes: { activator: true },
+      verify: {
+        activate:   x => !x.active,
+        deactivate: x => x.active,
+      }
     }
   },
-  methods: {},
-  computed: {}
 }
 </script>
 

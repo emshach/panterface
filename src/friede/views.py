@@ -67,6 +67,7 @@ lookup = OrderedDict()
 ### route views
 
 def _get_menus( request ):
+    env = getenv()
     menus = env.C.menus()
     if not menus:
         menus = setupmenus()

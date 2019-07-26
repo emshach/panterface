@@ -171,6 +171,11 @@ class App( object ) :
             self.model.active = True
             self.model.save()
 
+    def deactivate( self ):
+        if self.model:
+            self.model.active = False
+            self.model.save()
+
     def preinit( self ):
         pass
 

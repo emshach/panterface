@@ -90,11 +90,18 @@ import { Button as VkBtn, ButtonLink as VkBtnLink } from 'vuikit/lib/button'
 import { faToggleOn, faToggleOff } from '@fortawesome/free-solid-svg-icons'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { BarLoader } from '@saeris/vue-spinners'
 import {
   Modal as VkModal,
   ModalClose as VkClose,
   ModalTitle as VkModaTitle
 } from 'vuikit/lib/modal'
+import {
+  Table as VkTable,
+  TableColumn as VkColumn,
+  TableColumnSelect as VkColSelect
+} from 'vuikit/lib/table'
+import { ActionResult } from '@/components'
 import { ActorsMixin } from '@/lib/mixins'
 
 library.add( faToggleOn, faToggleOff );
@@ -108,7 +115,12 @@ export default {
     VkModal,
     VkClose,
     VkModaTitle,
+    VkTable,
+    VkColumn,
+    VkColSelect,
     FontAwesomeIcon,
+    ActionResult,
+    BarLoader,
   },
   data() {
     return {

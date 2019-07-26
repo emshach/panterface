@@ -73,6 +73,10 @@
 
 <script lang="js">
 import { Button as VkBtn, ButtonLink as VkBtnLink } from 'vuikit/lib/button'
+import { faLevelUpAlt, faDownload, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { BarLoader } from '@saeris/vue-spinners'
 import {
   Modal as VkModal,
   ModalClose as VkClose,
@@ -84,11 +88,7 @@ import {
   TableColumnSelect as VkColSelect
 } from 'vuikit/lib/table'
 import { ActorsMixin } from '@/lib/mixins'
-import { faLevelUpAlt, faDownload, faTrash } from '@fortawesome/free-solid-svg-icons'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { ActionResult } from '@/components'
-import { BarLoader } from '@saeris/vue-spinners'
 
 library.add( faLevelUpAlt, faDownload, faTrash );
 

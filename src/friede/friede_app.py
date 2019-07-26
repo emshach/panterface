@@ -802,7 +802,12 @@ def user_activate( user, thing, **kw ):
 
 @action
 def deactivate( user, thing, **kw ):
-    pass
+    if not isinstance( thing, AppModel ):
+        return                  # TODO: raise TypeError
+    app = App.get_for_object( thing )
+    app.deactivate()
+    return dict( success="App {} disabled".format( app.name ))\
+        if not app.active else dict( error='deactivation failed' )
 
 @action
 def user_deactivate( user, thing, **kw ):

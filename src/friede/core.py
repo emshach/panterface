@@ -581,7 +581,7 @@ def upgradeapp( app, data, upto=None ):
                                     delete = updates.pop( 'DELETE', {} )
                                 attached, att_new = adder( path[0], obj, updates )
                                 if attached:
-                                    attname = attached = name
+                                    name = attached.name
                                     for key, value in append:
                                         pass # TODO: implement
                                     for key, value in prepend:
@@ -596,7 +596,7 @@ def upgradeapp( app, data, upto=None ):
                                         except IntegrityError:
                                             print >> stderr,\
                                                 "Update failed, could not rename\
- '{}' to '{}': there is already an entry with that name".format( attname, rename )
+ '{}' to '{}': there is already an entry with that name".format( name, rename )
 
                         if new:
                             print 'created', app.name, obj._meta.object_name, \

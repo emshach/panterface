@@ -75,10 +75,12 @@ export default new Vuex.Store({
       var models = await getModel( model, have ).catch( err => {
         console.warn( `error getting model '${model}'`, err, err.response );
         commit( 'setError', `Error getting model '${model}'<br/>` + err + '<br/>'
-                + ( err.response && err.response.msg ? err.response.msg
-                    : err.response && err.response.message ? err.response.message
-                    : err.response && err.response.error ? err.response.error
-                    : err.response ));
+                +  ( err.response
+                     ? ( err.response.data.msg ? err.response.data.msg
+                         : err.response.data.message ? err.response.data.message
+                         : err.response.data.error ? err.response.data.error
+                         : err.response.data )
+                     : '' ));
       });
       commit( 'addModels', models );
       return models[ model ];

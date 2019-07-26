@@ -594,7 +594,7 @@ def upgradeapp( app, data, upto=None ):
                                         try:
                                             attached.save()
                                         except IntegrityError:
-                                            print >> stderr,\
+                                            print >> sys.stderr,\
                                                 "Update failed, could not rename\
  '{}' to '{}': there is already an entry with that name".format( name, rename )
 

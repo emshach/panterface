@@ -300,6 +300,7 @@ def api_models( request, models=None, format=None ):
             return Response({ 'error': "found no app '%s'" % meta.app_label },
                             status=status.HTTP_404_NOT_FOUND )
         sr = dict( app_obj.serializers ).get( meta.model_name )
+        srf = sr().get_fields()
         if sr is None:
             return Response({ 'error': "found no seralizer for '%s'" % name },
                             status=status.HTTP_404_NOT_FOUND )
@@ -315,7 +316,12 @@ def api_models( request, models=None, format=None ):
                 continue
             ftype0 = f.__class__.__name__
             ftype = ftype0
-            if ftype in form_field_mappings:
+            srffield = srf.get( f.name )
+            srfname = srffield.__class__.__name__ if srffield else None
+            if srfname and srfname.endswith( 'Field' )\
+               and not srfname.endswith( 'RelatedField' ):
+                ftype = srfname
+            elif ftype in form_field_mappings:
                 ftype = form_field_mappings[ ftype ]
                 if not ftype: continue
             dflt = None
@@ -326,6 +332,10 @@ def api_models( request, models=None, format=None ):
                 type=ftype,
                 default=dflt,
             )
+            if ftype == 'ChoiceField' and getattr( srffield, 'choices' ):
+                field[ 'options' ] = [
+                    dict( key=k, label=v ) for k, v in srffield.choices.items()
+                ]
             if field.get( 'default' ) is None:
                 try:
                     dflt = getattr( f, 'default' )

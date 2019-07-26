@@ -8,7 +8,8 @@
              :operands=actor.operands
              :show.sync=showModals[tag]
              :now.sync=now[tag]
-             @act=act />
+             @act=act
+             @success=success() />
   <component :is=blocks.breakfront.component v-if=blocks.breakfront
              :content=featured />
   <component :is=blocks.main.component v-if=blocks.main
@@ -41,15 +42,7 @@ export default  {
   props: [],
   mounted() {
     const actions = this.options.actions;
-    if ( this.model )
-      this.$store.dispatch( 'getModel', this.model ).then( m => {
-        this.modelObj = m;
-        if ( m.rest ) {
-          this.$api( m.rest, '' ).then( r => { // TODO: paginate, filter?
-            this.objects = r.data.results || [];
-          });
-        }
-      });
+    this.getData();
     var ops = {};
     var operands = {};
     var show = {};
@@ -117,6 +110,17 @@ export default  {
     }
   },
   methods: {
+    getData() {
+      if ( this.model )
+        this.$store.dispatch( 'getModel', this.model ).then( m => {
+          this.modelObj = m;
+          if ( m.rest ) {
+            this.$api( m.rest, '' ).then( r => { // TODO: paginate, filter?
+              this.objects = r.data.results || [];
+            });
+          }
+        });
+    },
     act( action, objects, now ) {
       const tag = this.actions[ action ].data.component;
       const actor = this.actors[ tag ];
@@ -124,6 +128,11 @@ export default  {
       this.action = action;
       this.showModals[ tag ] = true;
       this.now[ tag ] = now || false;
+    },
+    success( results ) {
+      this.getData();
+      if ( this.model === 'friede.app' )
+        this.$store.dispatch( 'refresh' );
     }
   },
   computed: {

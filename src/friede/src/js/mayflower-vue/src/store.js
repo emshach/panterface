@@ -51,6 +51,9 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    refresh({ comit, state, dispatch }) {
+      dispatch( 'getMenus' );
+    },
     getMenus({ commit, state }) {
       API( 'menus' ).then( r => {
         commit( 'setMenus', r.data );

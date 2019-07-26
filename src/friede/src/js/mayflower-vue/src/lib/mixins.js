@@ -342,6 +342,7 @@ export const ActorsMixin = {
            this.results = r.data[ action ];
            if ( data.next )
              this.next = data.next;
+           this.$emit( 'success', this.results );
          }).catch( err => {
            this.loading = false;
            console.warn( 'error performing action', err, err.response );

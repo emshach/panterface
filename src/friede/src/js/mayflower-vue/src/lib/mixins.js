@@ -319,8 +319,8 @@ export const ActorsMixin = {
     this.getPerms();
   },
   methods: {
-    act( action, object ) {
-      this.$emit( 'act', action, object );
+    act( action, object, now ) {
+      this.$emit( 'act', action, object, now );
     },
     hideModal() {
       if ( this.loading ) return;

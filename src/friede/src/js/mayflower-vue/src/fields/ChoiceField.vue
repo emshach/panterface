@@ -31,8 +31,12 @@ export default {
   },
   computed: {
     html() {
-      return this.field.meta.options ? this.field.meta.options[ this.value ]
-      : this.value;
+      if ( this.field.meta.options ) {
+        let v = this.field.meta.options.find( x => x.key === this.value );
+        if (v)
+          return v.label;
+      }
+      return this.value;
     }
   }
 }

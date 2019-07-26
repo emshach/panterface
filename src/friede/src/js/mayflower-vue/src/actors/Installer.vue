@@ -31,7 +31,7 @@
     <action-result v-if="results" :action="actions[ action ]"
                    :objects=objects :results=results />
     <div class="modal-actions">
-      <vk-btn v-if="!results || !next" class="btn-cancel" type="link"
+      <vk-btn v-if="!results || next" class="btn-cancel" type="link"
               size="small" @click.prevent=hideModal >cancel</vk-btn>
       <template v-if="results">
         <vk-btn v-if="next" class="btn-ok" type="primary" size="small"

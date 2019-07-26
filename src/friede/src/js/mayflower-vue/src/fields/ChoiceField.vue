@@ -32,11 +32,11 @@ export default {
   computed: {
     html() {
       if ( this.field.meta.options ) {
-        let v = this.field.meta.options.find( x => x.key === this.value );
+        let v = this.field.meta.options.find( x => x.key === this.field.value );
         if (v)
           return v.label;
       }
-      return this.value;
+      return this.field.value;
     }
   }
 }

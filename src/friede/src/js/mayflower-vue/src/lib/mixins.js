@@ -348,8 +348,9 @@ export const ActorsMixin = {
          });
     },
     doNext() {
+      this.$emit( 'act', this.next, this.operands, true );
       this.hideModal();
-      setTimeout(() => this.$emit( 'act', this.next, this.operands, true ), 250 );
+      // setTimeout(() => this.$emit( 'act', this.next, this.operands, true ), 250 );
     },
     getPerms() {
       const model = this.model;

@@ -20,12 +20,15 @@
 </template>
 
 <script lang="js">
+import Vue from 'vue'
+import VueToastr from 'vue-toastr'
 import { faUserNinja, faUser } from '@fortawesome/free-solid-svg-icons'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { Prompt, UserMenu } from '@/components'
 
 library.add( faUserNinja, faUser )
+Vue.use( VueToastr, { defaultPosition: 'toast-bottom-right' });
 
 export default {
   name: 'App',

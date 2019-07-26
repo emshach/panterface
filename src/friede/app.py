@@ -161,7 +161,7 @@ class App( object ) :
             data=self.data,
             obj=self
         )
-        if self.model.version == self.model.available:
+        if self.model.version != '0.0.0':
             self.model.installed = True
             self.model.save()
         return ret

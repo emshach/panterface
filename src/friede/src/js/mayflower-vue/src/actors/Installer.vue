@@ -127,18 +127,5 @@ export default {
   &.widget {
     color: grey;
   }
-  .loading {
-    color: #39f;
-    overflow: hidden;
-    transition: 1s;
-    margin-left: -16px;
-    margin-right: -16px;
-    &:not(.active) {
-      height: 0;
-    }
-    .label {
-      margin-left: 16px;
-    }
-  }
 }
 </style>

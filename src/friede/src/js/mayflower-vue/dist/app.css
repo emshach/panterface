@@ -10792,6 +10792,18 @@ form.uk-form-stacked label {
               box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.25);
       padding: 0 24px; }
 
+.actor-modal .loading {
+  color: #39f;
+  overflow: hidden;
+  -webkit-transition: 1s;
+  transition: 1s;
+  margin-left: -16px;
+  margin-right: -16px; }
+  .actor-modal .loading:not(.active) {
+    height: 0; }
+  .actor-modal .loading .label {
+    margin-left: 16px; }
+
 .uk-table-striped > tr:nth-of-type(odd).uk-active, tbody tr:nth-of-type(odd).uk-active {
   background: #ffb; }
 

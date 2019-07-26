@@ -118,6 +118,19 @@ form.uk-form-stacked label {
       }
     }
   }
+  .loading {
+    color: #39f;
+    overflow: hidden;
+    transition: 1s;
+    margin-left: -16px;
+    margin-right: -16px;
+    &:not(.active) {
+      height: 0;
+    }
+    .label {
+      margin-left: 16px;
+    }
+  }
 }
 .uk-table-striped > tr:nth-of-type(odd), tbody tr:nth-of-type(odd) {
   &.uk-active {

@@ -74,9 +74,12 @@ export default {
       return out;
     },
     error() {
-      const err = this.$store.state.error;
+      return this.$store.state.error;
+    }
+  },
+  watch: {
+    error( err ) {
       this.$toastr.e( err );
-      return err;
     }
   }
 }

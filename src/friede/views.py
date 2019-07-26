@@ -95,7 +95,12 @@ def _get_menus( request ):
         if entries:
             top[ 'links' ] = {}
             for e in entries:
-                top[ 'links' ][ e[ 'name' ]] = e
+                l = e[ 'entry'][ 'location' ];
+                if not l:
+                    continue
+                l = Location.objects.get( pk=l[ 'id' ])
+                if l.app and l.app.active:
+                    top[ 'links' ][ e[ 'name' ]] = e
     request.resolver_match.namespace = ons
     return menus
 

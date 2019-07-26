@@ -6,7 +6,14 @@
         <a class="uk-accordion-title" href="#">{{ objects[ id ].path }}</a>
         <div class="uk-accordion-content">
           <h5>Outcome</h5>
-          <div class="content-outcome" >{{ result.res || 'None' }}</div>
+          <template v-if="result.res">
+            <div v-if="result.res.success" class="content-outcome success" >{{
+              result.res.success }}</div>
+            <div v-else-if="result.res.error" class="content-outcome error" >{{
+              result.res.error }}</div>
+            <div v-else class="content-outcome" >{{ result.res }}</div>
+          </template>
+          <div v-else class="content-outcome" >None</div>
           <h5>Log</h5>
           <div class="content-log">{{ result.out || 'None' }}</div>
           <h5>Errors/Warnings</h5>

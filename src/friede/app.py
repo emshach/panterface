@@ -81,7 +81,6 @@ class NamedDefaultRouter( routers.DefaultRouter ):
         super( NamedDefaultRouter, self ).__init__( *args, **kwargs )
 
 class App( object ) :
-    installed = False
     name = ''
     icon = ''
     module = ''
@@ -162,7 +161,6 @@ class App( object ) :
             data=self.data,
             obj=self
         )
-        self.installed = True
         return ret
 
     def postinstall( self ):
@@ -252,6 +250,10 @@ class App( object ) :
     @property
     def available( self ):
         return self.model.available
+
+    @property
+    def installed( self ):
+        return self.model.installed
 
     @property
     def data( self ):

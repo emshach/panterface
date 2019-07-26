@@ -73,7 +73,7 @@ def index( request ):
         menus = setupmenus()
     menuns = resolve( '/api/friede/containers' ).namespace
     ons = request.resolver_match.namespace
-    request.namespace = menuns
+    request.resolver_match.namespace = menuns
     menus = ContainerSerializer( menus, context=dict(
         request=request,
         detail=True,

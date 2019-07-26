@@ -738,7 +738,30 @@ class App( app.App ):
                     component='Installer',
                     args=[ 'install_userdata' ]
                 ))),
-          ))
+          )),
+        ( '0.2.9',
+          ( '#locations',
+            ( 'apps', {},
+              ( '#screens',
+                ( 'default', dict(
+                    path='dashboard.apps',
+                    data=dict(
+                        actions=(
+                            'install',
+                            'reinstall',
+                            'activate',
+                            'update',
+                        )),
+                    entry=dict(
+                        data=dict(
+                            model='friede.app',
+                            layout=dict(
+                                title='title',
+                                content='description'
+                            ),
+                            search='name title description'.split()
+                        ))))))),
+        ),
     )
     @property
     def userdata( self ):

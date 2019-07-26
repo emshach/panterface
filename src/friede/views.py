@@ -89,7 +89,7 @@ def _get_menus( request ):
             top[ 'containers' ] = {}
             for e in entries:
                 top[ 'containers' ][ e[ 'name' ]] = e[ 'entry' ]
-                nextset.push( e[ 'entry' ] )
+                nextset.append( e[ 'entry' ] )
             stack.extend( nextset[ ::-1 ])
         entries = top.get( '_link_entries' )
         if entries:

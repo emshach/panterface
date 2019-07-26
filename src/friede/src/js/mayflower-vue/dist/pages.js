@@ -74,15 +74,15 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_2__["library"].add(_f
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuikit_lib_button__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuikit/lib/button */ "./node_modules/vuikit/lib/button.js");
-/* harmony import */ var vuikit_lib_modal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuikit/lib/modal */ "./node_modules/vuikit/lib/modal.js");
-/* harmony import */ var vuikit_lib_table__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuikit/lib/table */ "./node_modules/vuikit/lib/table.js");
-/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
-/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
-/* harmony import */ var _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @fortawesome/fontawesome-svg-core */ "./node_modules/@fortawesome/fontawesome-svg-core/index.es.js");
-/* harmony import */ var _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @fortawesome/vue-fontawesome */ "./node_modules/@fortawesome/vue-fontawesome/index.es.js");
-/* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/components */ "./src/components/index.js");
-/* harmony import */ var _saeris_vue_spinners__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @saeris/vue-spinners */ "./node_modules/@saeris/vue-spinners/lib/@saeris/vue-spinners.common.js");
-/* harmony import */ var _saeris_vue_spinners__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_saeris_vue_spinners__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+/* harmony import */ var _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @fortawesome/fontawesome-svg-core */ "./node_modules/@fortawesome/fontawesome-svg-core/index.es.js");
+/* harmony import */ var _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @fortawesome/vue-fontawesome */ "./node_modules/@fortawesome/vue-fontawesome/index.es.js");
+/* harmony import */ var _saeris_vue_spinners__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @saeris/vue-spinners */ "./node_modules/@saeris/vue-spinners/lib/@saeris/vue-spinners.common.js");
+/* harmony import */ var _saeris_vue_spinners__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_saeris_vue_spinners__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var vuikit_lib_modal__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vuikit/lib/modal */ "./node_modules/vuikit/lib/modal.js");
+/* harmony import */ var vuikit_lib_table__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vuikit/lib/table */ "./node_modules/vuikit/lib/table.js");
+/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
+/* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/components */ "./src/components/index.js");
 
 
 
@@ -92,22 +92,22 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_5__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__["faLevelUpAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__["faDownload"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__["faTrash"]);
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_2__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faLevelUpAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faDownload"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faTrash"]);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Installer',
-  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_3__["ActorsMixin"]],
+  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_7__["ActorsMixin"]],
   components: {
     VkBtn: vuikit_lib_button__WEBPACK_IMPORTED_MODULE_0__["Button"],
     VkBtnLink: vuikit_lib_button__WEBPACK_IMPORTED_MODULE_0__["ButtonLink"],
-    VkModal: vuikit_lib_modal__WEBPACK_IMPORTED_MODULE_1__["Modal"],
-    VkClose: vuikit_lib_modal__WEBPACK_IMPORTED_MODULE_1__["ModalClose"],
-    VkTitle: vuikit_lib_modal__WEBPACK_IMPORTED_MODULE_1__["ModalTitle"],
-    VkTable: vuikit_lib_table__WEBPACK_IMPORTED_MODULE_2__["Table"],
-    VkColumn: vuikit_lib_table__WEBPACK_IMPORTED_MODULE_2__["TableColumn"],
-    VkColSelect: vuikit_lib_table__WEBPACK_IMPORTED_MODULE_2__["TableColumnSelect"],
-    FontAwesomeIcon: _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_6__["FontAwesomeIcon"],
-    ActionResult: _components__WEBPACK_IMPORTED_MODULE_7__["ActionResult"],
-    BarLoader: _saeris_vue_spinners__WEBPACK_IMPORTED_MODULE_8__["BarLoader"]
+    VkModal: vuikit_lib_modal__WEBPACK_IMPORTED_MODULE_5__["Modal"],
+    VkClose: vuikit_lib_modal__WEBPACK_IMPORTED_MODULE_5__["ModalClose"],
+    VkTitle: vuikit_lib_modal__WEBPACK_IMPORTED_MODULE_5__["ModalTitle"],
+    VkTable: vuikit_lib_table__WEBPACK_IMPORTED_MODULE_6__["Table"],
+    VkColumn: vuikit_lib_table__WEBPACK_IMPORTED_MODULE_6__["TableColumn"],
+    VkColSelect: vuikit_lib_table__WEBPACK_IMPORTED_MODULE_6__["TableColumnSelect"],
+    FontAwesomeIcon: _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_3__["FontAwesomeIcon"],
+    ActionResult: _components__WEBPACK_IMPORTED_MODULE_8__["ActionResult"],
+    BarLoader: _saeris_vue_spinners__WEBPACK_IMPORTED_MODULE_4__["BarLoader"]
   },
   data: function data() {
     return {
@@ -424,20 +424,41 @@ __webpack_require__.r(__webpack_exports__);
     var now = {};
 
     if (actions && actions.length) {
-      this.$api('friede', 'actions', '?' + this.options.actions.map(function (action) {
+      var reverse = [];
+      this.$api('friede', 'actions', '?' + actions.map(function (action) {
         return 'path=' + action;
       }).join('&')).then(function (r) {
         var res = r.data.results;
         if (res.length) res.forEach(function (a) {
+          if (a.data.reverse) reverse.push(a.data.reverse);
           ops[a.name] = a;
           operands[a.data.component] = [];
           show[a.data.component] = false;
           now[a.data.component] = false;
         });
-        _this.actions = ops;
-        _this.operands = operands;
-        _this.showModals = show;
-        _this.now = now;
+
+        if (reverse.length) {
+          _this.$api('friede', 'actions', '?' + reverse.map(function (action) {
+            return 'path=' + action;
+          }).join('&')).then(function (r) {
+            var res = r.data.results;
+            if (res.length) res.forEach(function (a) {
+              if (a.data.reverse) ops[a.name] = a;
+              operands[a.data.component] = [];
+              show[a.data.component] = false;
+              now[a.data.component] = false;
+            });
+            _this.actions = ops;
+            _this.operands = operands;
+            _this.showModals = show;
+            _this.now = now;
+          });
+        } else {
+          _this.actions = ops;
+          _this.operands = operands;
+          _this.showModals = show;
+          _this.now = now;
+        }
       }).catch(function (err) {
         console.warn('couldnt get actions', actions, err);
       });
@@ -1906,7 +1927,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1564147446174
+      // 1564148994887
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1924,7 +1945,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1564147445274
+      // 1564148994947
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1942,7 +1963,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1564147442391
+      // 1564148992069
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1960,7 +1981,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1564147442416
+      // 1564148992106
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1978,7 +1999,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1564147442513
+      // 1564148992897
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1996,7 +2017,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1564147442428
+      // 1564148992118
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -2014,7 +2035,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1564147443428
+      // 1564148993923
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -2032,7 +2053,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1564147443274
+      // 1564148993896
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -2050,7 +2071,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1564147442398
+      // 1564148992076
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -2068,7 +2089,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1564147442449
+      // 1564148992133
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -2086,7 +2107,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1564147442459
+      // 1564148992139
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -2104,7 +2125,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1564147442471
+      // 1564148992850
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);

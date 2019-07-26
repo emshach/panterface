@@ -55,21 +55,45 @@ export default  {
     var show = {};
     var now = {};
     if ( actions && actions.length ) {
-      this.$api( 'friede', 'actions', '?' + this.options.actions.map(
+      var reverse = [];
+      this.$api( 'friede', 'actions', '?' + actions.map(
         action => 'path=' + action ).join('&'))
          .then( r => {
            var res = r.data.results;
            if ( res.length )
              res.forEach( a => {
+               if ( a.data.reverse )
+                 reverse.push( a.data.reverse );
                ops[ a.name ] = a;
                operands[ a.data.component ] = [];
                show[ a.data.component ] = false;
                now[ a.data.component ] = false;
              });
-           this.actions = ops;
-           this.operands = operands;
-           this.showModals = show;
-           this.now = now;
+           if ( reverse.length ) {
+             this.$api( 'friede', 'actions', '?' + reverse.map(
+               action => 'path=' + action ).join('&'))
+                .then( r => {
+                  var res = r.data.results;
+                  if ( res.length )
+                    res.forEach( a => {
+                      if ( a.data.reverse )
+                        ops[ a.name ] = a;
+                      operands[ a.data.component ] = [];
+                      show[ a.data.component ] = false;
+                      now[ a.data.component ] = false;
+                    });
+                  this.actions = ops;
+                  this.operands = operands;
+                  this.showModals = show;
+                  this.now = now;
+                });
+           }
+           else {
+             this.actions = ops;
+             this.operands = operands;
+             this.showModals = show;
+             this.now = now;
+           }
          })
          .catch ( err => {
            console.warn( 'couldnt get actions', actions, err );

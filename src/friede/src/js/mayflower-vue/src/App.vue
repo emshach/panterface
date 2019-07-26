@@ -61,6 +61,11 @@ export default {
           out[l] = links[l];
       });
       return out;
+    },
+    error() {
+      const err = this.$store.state.error;
+      this.$toastr.e( err );
+      return err;
     }
   }
 }

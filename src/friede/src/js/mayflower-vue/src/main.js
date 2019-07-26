@@ -10,11 +10,13 @@ import Icons from 'uikit/dist/js/uikit-icons'
 import API from '@/lib/api'
 import security from '@/lib/security'
 import Tooltip from 'vuikit/lib/tooltip'
+import VueToastr from 'vue-toastr'
 
 UIkit.use( Icons );
 Vue.directive( 'vk-tooltip', Tooltip );
 Vue.use( API );
 Vue.use( security );
+Vue.use( VueToastr, { defaultPosition: 'toast-bottom-right' });
 Vue.config.productionTip = false;
 
 class Mayflower{

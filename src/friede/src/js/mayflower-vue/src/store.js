@@ -8,7 +8,7 @@ Vue.use( Vuex );
 async function getModel( model, have ) {
   return Vue.prototype.$api(
     'models', model,
-    have ? '?'+ have.map( x => 'have='+x ).join('&') : '' ).then( r => {
+    have ? '?' +  have.map( x => 'have=' + x ).join('&') : '' ).then( r => {
     return r.data.models;
   })
 }
@@ -24,6 +24,7 @@ export default new Vuex.Store({
     modelsRequested: {},
     model: null,
     modelData: null,
+    error: ''
   },
   mutations: {
     setUser( state, user ) {
@@ -31,7 +32,7 @@ export default new Vuex.Store({
     },
     setContext( state, context, debug ) {
       state.context = context;
-      state.location = context.length && context[ context.length-1 ].location;
+      state.location = context.length && context[ context.length - 1 ].location;
       if ( state.location ) {
         state.lastLocation = state.location;
       }
@@ -41,6 +42,9 @@ export default new Vuex.Store({
     },
     setModel( state, model ) {
       state.model = model;
+    },
+    setError( state, err ) {
+      state.error = err;
     }
   },
   actions: {
@@ -54,21 +58,25 @@ export default new Vuex.Store({
         commit( 'setContext', r.data.route );
         var model = await dispatch( 'getModel' );
         commit( 'setModel', model );
-      }).catch( x => {
-        // TODO: handle
+      }).catch( err => {
+        commit( 'setError', `Error getting '${path}'<br/>/` + err + '<br/>'
+                + err.response );
       });
     },
     async getModel({ commit, state }, model ) {
       if ( !model ) {
         model = state.lastLocation && state.lastLocation.data.model;
-        if ( !model ) 
+        if ( !model )
           return null;
       }
       if ( model in state.models ) {
         return state.models[ model ];
       }
       const have = Object.keys( state.models );
-      var models = await getModel( model, have );
+      var models = await getModel( model, have ).catch( err => {
+        commit( 'setError', `Error getting model '${model}'<br/>/` + err + '<br/>'
+                + err.response );
+      });
       commit( 'addModels', models );
       return models[ model ];
     }

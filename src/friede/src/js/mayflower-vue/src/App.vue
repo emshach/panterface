@@ -3,7 +3,8 @@
     <div id="nav">
       <router-link
         v-for="( link, key ) in siteLinks" :key="key"
-        :to="link.location.$href">{{ link.$title || link.location.$title }}
+        :to="link.entry.location.href">{{
+        link.entry.title || link.entry.location.$title }}
       </router-link>
       <router-link to="/me">
         <font-awesome-icon :icon=" user.anonymous ? 'user-ninja': 'user'"
@@ -60,15 +61,19 @@ export default {
     context() {
       return this.$store.state.context;
     },
-    menus: () => Friede.menus,
+    menus() {
+      return this.$store.state.menus;
+    },
     user() {
       return this.$store.state.user;
     },
     siteLinks() {
-      const links = this.menus.nav.$links;
+      if ( !this.menus )
+        return
+      const links = this.menus.containers.nav.entry.links;
       const out = {};
       Object.keys( links ).forEach( l => {
-        if ( links[l].location && links[l].location.$href )
+        if ( links[l].entry.location && links[l].entry.location.href )
           out[l] = links[l];
       });
       return out;

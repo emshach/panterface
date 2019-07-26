@@ -1,18 +1,20 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import { API } from '@/lib/api'
 
 const Friede = window.Friede;
 
 Vue.use( Vuex );
 
 async function getModel( model, have ) {
-  return Vue.prototype.$api(
+  return API(
     'models', model, have ? '?' + have.map( x => 'have=' + x ).join('&') : '' )
      .then( r => r.data.models );
 }
 
 export default new Vuex.Store({
   state: {
+    menus: Friede.menu,
     user: Friede.user,
     context: [],
     location: null,
@@ -43,16 +45,28 @@ export default new Vuex.Store({
     },
     setError( state, err ) {
       state.error = err;
+    },
+    setMenus( state, menus ) {
+      state.menus = menus;
     }
   },
   actions: {
+    getMenus({ commit, state }) {
+      API( 'menus' ).then( r => {
+        commit( 'setMenus', r.data );
+      }).catch( err => {
+        console.warn( `error getting menus`, err, err.response );
+        commit( 'setError', `Error getting menus<br/>/` + err + '<br/>'
+                + err.response );
+      })
+    },
     async setContext({ commit, state, dispatch }, context ) {
       commit( 'setContext', context );
       var model = await dispatch( 'getModel' );
       commit( 'setModel', model );
     },
     async setPath({ commit, state, dispatch }, path ) {
-      Vue.prototype.$api( 'path', path ).then( async r => {
+      API( 'path', path ).then( async r => {
         commit( 'setContext', r.data.route );
         var model = await dispatch( 'getModel' );
         commit( 'setModel', model );

@@ -128,6 +128,7 @@ class App( app.App ):
     api=(
         ( r'ls/(?P<path>.*$)',       ( views.api_ls,     'ls',     [''] )),
         ( r'models/(?P<models>.*$)', ( views.api_models, 'models', [''] )),
+        ( r'menus/?$)',              ( views.api_menus,  'menus',       )),
         ( r'path/(?P<path>.*$)',     ( views.api_path,   'path',   [''] )),
         ( r'do/(?P<action>.+)/(?P<model>.+)/(?P<ids>.*)$',
                    ( views.api_do, 'do', [ 'list', 'friede.action', '' ])),

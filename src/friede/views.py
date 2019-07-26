@@ -14,6 +14,7 @@ from rest_framework_serializer_extensions.views import SerializerExtensionsAPIVi
 from collections import OrderedDict
 from importlib import import_module
 from cStringIO import StringIO
+from collections import deque
 from aries.auth import get_user
 from aries.serializers import BaseUserSerializer
 from .objects import getregistries, getenv, Locations
@@ -65,9 +66,7 @@ lookup = OrderedDict()
 
 ### route views
 
-def index( request ):
-    env = getenv()
-    # # get the shell
+def _get_menus( request ):
     menus = env.C.menus()
     if not menus:
         menus = setupmenus()
@@ -80,7 +79,29 @@ def index( request ):
         expand=[
             '_container_entries', '_link_entries'
         ])).data
+    stack = deque([ menus ])
+    while stack:
+        top = stack.pop()
+        entries = top.get( '_container_entries' )
+        nextset = []
+        if entries:
+            top[ 'containers' ] = {}
+            for e in entries:
+                top[ 'containers' ][ e.name ] = e.entry
+                nextset.push( e.entry )
+            stack.extend( nextset[ ::-1 ])
+        entries = top.get( '_link_entries' )
+        if entries:
+            top[ 'links' ] = {}
+            for e in entries:
+                top[ 'links' ][ e.name ] = e.entry
     request.resolver_match.namespace = ons
+    return menus
+
+def index( request ):
+    env = getenv()
+    # # get the shell
+    menus = _get_menus( request )
     shell = env.H.current()
     if not shell:
         shell = setupshell( env )
@@ -167,6 +188,11 @@ def _process_location( location ):
 
 def _process_locations( locations ):
     return [ _process_location(l) for l in locations ]
+
+@api_view([ 'GET' ])
+@permission_classes(( permissions.AllowAny, ))
+def api_menus( request, format=None ):
+    return Response( _get_menus( request ))
 
 @api_view([ 'GET' ])
 @permission_classes(( permissions.AllowAny, ))

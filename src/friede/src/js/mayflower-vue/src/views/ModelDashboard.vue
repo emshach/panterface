@@ -13,7 +13,7 @@
              :content=featured />
   <component :is=blocks.main.component v-if=blocks.main
              :objects=objects
-             :actions=options.actions
+             :actions=allActions
              :item-layout=options.layout
              :search-fields=options.search
              @act=act >
@@ -127,6 +127,9 @@ export default  {
     }
   },
   computed: {
+    allActions() {
+      return Object.keys( this.actions );
+    },
     actors() {
       const actions = this.actions;
       const args = this.operands;

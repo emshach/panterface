@@ -28,7 +28,15 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { Prompt, UserMenu } from '@/components'
 
 library.add( faUserNinja, faUser )
-Vue.use( VueToastr, { defaultPosition: 'toast-bottom-right' });
+
+let toastcheck;
+toastcheck = setInterval(() => {
+  if ( !document.body )
+    return;
+  Vue.use( VueToastr, { defaultPosition: 'toast-bottom-right' });
+  clearInterval( toastcheck );
+  toastcheck = null;
+});
 
 export default {
   name: 'App',

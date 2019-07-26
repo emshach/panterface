@@ -81,7 +81,7 @@ export default {
     error( err ) {
       this.$toastr.Add({
         type: 'error',
-        message: err,
+        msg: err,
         timeout: 0
       });
     }

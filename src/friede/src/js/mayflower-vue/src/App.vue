@@ -60,6 +60,7 @@ export default {
         if ( links[l].location && links[l].location.$href )
           out[l] = links[l];
       });
+      return out;
     }
   }
 }

@@ -451,9 +451,9 @@ def upgradeapp( app, data, upto=None ):
                             if tag == 'from relations' :
                                 try:
                                     bundle = shortcuts[ registry[0] ]( app, *( top[1:] ))
-                                    print 'bundle', path[0], '=',\
-                                        pprint.pformat( bundle, indent=0, depth=3 )\
-                                        .replace( "\n", ' ' )
+                                    # print 'bundle', path[0], '=',\
+                                    #     pprint.pformat( bundle, indent=0, depth=3 )\
+                                    #     .replace( "\n", ' ' )
                                     stack.append( bundle )
                                 except KeyError as e:
                                     print >> sys.stderr, e

@@ -10834,10 +10834,10 @@ form.uk-form-stacked label {
 .action-result .content-outcome, .action-result .content-log, .action-result .content-error {
   white-space: pre; }
 
-.action-result .content-outcome .success {
+.action-result .content-outcome.success {
   color: green; }
 
-.action-result .content-outcome .error {
+.action-result .content-outcome.error {
   color: darkred; }
 
 

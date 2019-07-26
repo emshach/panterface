@@ -2,7 +2,7 @@
   <div id="app">
     <div id="nav">
       <router-link
-        v-for="( link, key ) in menus.nav.$links" :key="key"
+        v-for="( link, key ) in siteLinks" :key="key"
         :to="link.location.$href">{{ link.$title || link.location.$title }}
       </router-link>
       <router-link to="/me">
@@ -53,6 +53,9 @@ export default {
     user() {
       return this.$store.state.user;
     },
+    siteLinks() {
+      return menus.nav.$links.filter( l => l.location && l.location.href );
+    }
   }
 }
 </script>

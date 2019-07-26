@@ -401,6 +401,8 @@ class Location( Registry, AppMixin, DataMixin ):
                                 related_name='redirect_from' )
 
     def to_dict( self ):
+        if this.app and not this.app.active:
+            return {}
         out = super( Location, self).to_dict()
         out.update({
             '$href'        : self.href,

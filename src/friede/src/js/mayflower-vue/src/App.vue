@@ -54,7 +54,7 @@ export default {
       return this.$store.state.user;
     },
     siteLinks() {
-      return menus.nav.$links.filter( l => l.location && l.location.href );
+      return this.menus.nav.$links.filter( l => l.location && l.location.href );
     }
   }
 }

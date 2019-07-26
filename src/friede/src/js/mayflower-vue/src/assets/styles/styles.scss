@@ -14,6 +14,9 @@
 // 4. Import UIkit.
 @import "~uikit/src/scss/uikit.scss";
 
+// toastr style stolen from architect-ui
+@import "components/toastr";
+
 html, body {
   position: relative;
   width: 100%;

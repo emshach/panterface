@@ -79,7 +79,11 @@ export default {
   },
   watch: {
     error( err ) {
-      this.$toastr.e( err );
+      this.$toastr.add({
+        type: 'error',
+        message: err,
+        timeout: 0
+      });
     }
   }
 }

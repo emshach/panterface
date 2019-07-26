@@ -94,7 +94,7 @@ import { BarLoader } from '@saeris/vue-spinners'
 import {
   Modal as VkModal,
   ModalClose as VkClose,
-  ModalTitle as VkModaTitle
+  ModalTitle as VkTitle
 } from 'vuikit/lib/modal'
 import {
   Table as VkTable,
@@ -114,7 +114,7 @@ export default {
     VkBtnLink,
     VkModal,
     VkClose,
-    VkModaTitle,
+    VkTitle,
     VkTable,
     VkColumn,
     VkColSelect,

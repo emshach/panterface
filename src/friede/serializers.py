@@ -313,7 +313,7 @@ class LinkSerializer( HyperlinkedModelSerializer, IconMixin ):
         model = Link
         fields = F.base + F.link
         expandable_fields = RegistrySerializer.Meta.expandable_fields
-
+    location = LocationSerializer()
 
 class ReferenceSerializer( HyperlinkedModelSerializer, IconMixin ):
     class Meta:

@@ -161,6 +161,9 @@ class App( object ) :
             data=self.data,
             obj=self
         )
+        if self.model.version == self.model.available:
+            self.model.installed = True
+            self.model.save()
         return ret
 
     def postinstall( self ):

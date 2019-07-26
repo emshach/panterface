@@ -115,7 +115,7 @@ export default {
       verify: {
         install:   x => !x.installed,
         reinstall: x => x.installed,
-        uninstall: x => x.installed,
+        uninstall: x => x.installed && !x.required,
         update:    x => x.installed && x.version !== x.available
       },
       install_userdata: true

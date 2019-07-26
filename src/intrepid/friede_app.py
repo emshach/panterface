@@ -391,7 +391,7 @@ class App( app.App ):
         ( '0.1.0',
           ( '#widgets', ( 'from relations', self.objects, self.relations )),
           ( '#locations',
-            ( 'projects', dict( titl="Projects", href='/projects' )),
+            ( 'projects', dict( title="Projects", href='/projects' )),
             ( 'from relations', self.objects, self.relations )),
           ( '#settings', ( 'from relations', self.objects, self.relations )),
           ( '#links',

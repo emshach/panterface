@@ -744,6 +744,8 @@ def install( user, thing, userdata=True, **kw ):
     app.install()
     if userdata:
         user_install( user, thing )
+    return dict( success="App {} installed!".format( app.name ))\
+        if app.installed else dict( error='Install Failed!' )
 
 @action
 def user_install( user, thing, **kw ):

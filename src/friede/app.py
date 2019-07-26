@@ -256,5 +256,9 @@ class App( object ) :
         return self.model.installed
 
     @property
+    def active( self ):
+        return self.model.active
+
+    @property
     def data( self ):
         return None

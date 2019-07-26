@@ -32,7 +32,7 @@
                      @click.prevent="act( 'disable', object )" >
           <font-awesome-icon icon="toggle-on" />
         </vk-btn-link>
-        <vk-btn-link v-else v-vk-tooltip.bottom="'disable'"
+        <vk-btn-link v-else v-vk-tooltip.bottom="'activate'"
                      type="text" class="activator-disabled"
                      @click.prevent="act( 'enable', object )" >
           <font-awesome-icon icon="toggle-off" />

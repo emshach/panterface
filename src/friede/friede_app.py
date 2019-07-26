@@ -789,7 +789,12 @@ def downgrade( user, thing, **kw ):
 
 @action
 def activate( user, thing, **kw ):
-    pass
+    if not isinstance( thing, AppModel ):
+        return                  # TODO: raise TypeError
+    app = App.get_for_object( thing )
+    app.activate()
+    return dict( success="App {} activated!".format( app.name ))\
+        if app.active else dict( error='Activation failed' )
 
 @action
 def user_activate( user, thing, **kw ):

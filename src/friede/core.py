@@ -5,6 +5,7 @@ from .models import *
 from .util import split_dict
 from django.db import transaction
 from django.core.exceptions import FieldDoesNotExist
+from django.db import IntegrityError
 from importlib import import_module
 from collections import deque
 from packaging.version import parse as version_parse
@@ -580,6 +581,7 @@ def upgradeapp( app, data, upto=None ):
                                     delete = updates.pop( 'DELETE', {} )
                                 attached, att_new = adder( path[0], obj, updates )
                                 if attached:
+                                    name = attached = name
                                     for key, value in append:
                                         pass # TODO: implement
                                     for key, value in prepend:
@@ -589,7 +591,12 @@ def upgradeapp( app, data, upto=None ):
                                     if renamed:
                                         attached.name = renamed
                                     if append or prepend or delete or renamed:
-                                        attached.save()
+                                        try:
+                                            attached.save()
+                                        except IntegrityError:
+                                            print >> stderr,\
+                                                "Could not rename '{}' to '{}': \
+there is already an entry with that name"
 
                         if new:
                             print 'created', app.name, obj._meta.object_name, \

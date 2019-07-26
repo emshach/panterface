@@ -342,7 +342,7 @@ export const ActorsMixin = {
            const res = r.data[ action ];
            this.loading = false;
            if ( !res || res.error )
-             return res;
+             return res || r.data;
            if ( data.next )
              this.next = data.next;
            if ( Object.values( res ).find( x => !x.res || !x.res.error )) {

@@ -344,7 +344,8 @@ export const ActorsMixin = {
              this.next = data.next;
          }).catch( err => {
            this.loading = false;
-           console.warn( 'error performing action', err );
+           console.warn( 'error performing action', err, err.response );
+           this.results = { error: err.response };
          });
     },
     autoExecute() {

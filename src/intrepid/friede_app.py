@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from . import views
+from . import views, serializers
 from friede import app
 
 class App( app.App ):
@@ -384,6 +384,53 @@ class App( app.App ):
         (  'users',            views.UserViewSet           ),
         (  'taxonomies',       views.TaxonomyViewSet       ),
         (  'terms',            views.TermViewSet           ),
+    )
+    serializers=(
+        (  'note',            serializers.NoteSerializer           ),
+        (  'resource',        serializers.ResourceSerializer       ),
+        (  'product',         serializers.ProductSerializer        ),
+        (  'goal',            serializers.GoalSerializer           ),
+        (  'objective',       serializers.ObjectiveSerializer      ),
+        (  'target',          serializers.TargetSerializer         ),
+        (  'strategy',        serializers.StrategySerializer       ),
+        (  'plan',            serializers.PlanSerializer           ),
+        (  'phase',           serializers.PhaseSerializer          ),
+        (  'step',            serializers.StepSerializer           ),
+        (  'project',         serializers.ProjectSerializer        ),
+        (  'task',            serializers.TaskSerializer           ),
+        (  'action',          serializers.ActionSerializer         ),
+        (  'currency',        serializers.CurrencySerializer       ),
+        (  'account',         serializers.AccountSerializer        ),
+        (  'pool',            serializers.PoolSerializer           ),
+        (  'allotment',       serializers.AllotmentSerializer      ),
+        (  'allocation',      serializers.AllocationSerializer     ),
+        (  'income',          serializers.IncomeSerializer         ),
+        (  'expense',         serializers.ExpenseSerializer        ),
+        (  'asset',           serializers.AssetSerializer          ),
+        (  'donation',        serializers.DonationSerializer       ),
+        (  'service',         serializers.ServiceSerializer        ),
+        (  'rental',          serializers.RentalSerializer         ),
+        (  'liability',       serializers.LiabilitySerializer      ),
+        (  'contribution',    serializers.ContributionSerializer   ),
+        (  'commission',      serializers.CommissionSerializer     ),
+        (  'employment',      serializers.EmploymentSerializer     ),
+        (  'investment',      serializers.InvestmentSerializer     ),
+        (  'receipt',         serializers.ReceiptSerializer        ),
+        (  'deposit',         serializers.DepositSerializer        ),
+        (  'payment',         serializers.PaymentSerializer        ),
+        (  'budget',          serializers.BudgetSerializer         ),
+        (  'transfer',        serializers.TransferSerializer       ),
+        (  'relocation',      serializers.RelocationSerializer     ),
+        (  'earning',         serializers.EarningSerializer        ),
+        (  'purchase',        serializers.PurchaseSerializer       ),
+        (  'team',            serializers.TeamSerializer           ),
+        (  'position',        serializers.PositionSerializer       ),
+        (  'role',            serializers.RoleSerializer           ),
+        (  'responsibility',  serializers.ResponsibilitySerializer ),
+        (  'capacity',        serializers.CapacitySerializer       ),
+        (  'user',            serializers.UserSerializer           ),
+        (  'taxonomy',        serializers.TaxonomySerializer       ),
+        (  'term',            serializers.TermSerializer           ),
     )
     @property
     def data( self ):

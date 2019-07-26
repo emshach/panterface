@@ -30,10 +30,10 @@
     </template>
     <action-result v-if="results" :action="actions[ action ]"
                    :objects=objects :results=results />
-    <div v-if="loading" class="loading">
+    <div :class="[ 'loading', loading ? 'active' : '' ]">
       <div class="label">{{ action.replace( /e$/,'' ) + 'ing' }}</div>
       <bar-loader :width=100 widthUnit="%" :height=1 :size=50 sizeUnit="%"
-                  :loading=loading color="#39f" />
+                  :loading=loading color="#39f" class="spinner" />
     </div>
     <div class="modal-actions">
       <vk-btn v-if="!results || next" class="btn-cancel" type="link"
@@ -137,6 +137,16 @@ export default {
   }
   .loading {
     color: #39f;
+    overflow: hidden;
+    transition: 1s;
+    &:not(.active) {
+      height: 0;
+    }
+    .spinner {
+      width: calc( 100% + 32px );
+      margin-left: -16px;
+      margin-right: -16px;
+    }
   }
 }
 </style>

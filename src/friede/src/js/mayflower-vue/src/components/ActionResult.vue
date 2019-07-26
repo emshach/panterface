@@ -46,9 +46,11 @@ export default {
   },
   methods: {},
   computed: {
-    itemClass: {
-      'action-operand': true,
-      'uk-open': Object.keys( this.results ).length === 1
+    itemClass() {
+      return {
+        'action-operand': true,
+        'uk-open': Object.keys( this.results ).length === 1
+      };
     }
   }
 }

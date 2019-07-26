@@ -401,7 +401,7 @@ class Location( Registry, AppMixin, DataMixin ):
                                 related_name='redirect_from' )
 
     def to_dict( self ):
-        if this.app and not this.app.active:
+        if self.app and not self.app.active:
             return {}
         out = super( Location, self).to_dict()
         out.update({

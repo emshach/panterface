@@ -88,14 +88,14 @@ def _get_menus( request ):
         if entries:
             top[ 'containers' ] = {}
             for e in entries:
-                top[ 'containers' ][ e[ 'name' ]] = e[ 'entry' ]
+                top[ 'containers' ][ e[ 'name' ]] = e
                 nextset.append( e[ 'entry' ] )
             stack.extend( nextset[ ::-1 ])
         entries = top.get( '_link_entries' )
         if entries:
             top[ 'links' ] = {}
             for e in entries:
-                top[ 'links' ][ e[ 'name' ]] = e[ 'entry' ]
+                top[ 'links' ][ e[ 'name' ]] = e
     request.resolver_match.namespace = ons
     return menus
 

@@ -33,7 +33,7 @@
     <div v-if="loading" class="loading">
       <div class="label">{{ action.replace( /e$/,'' ) + 'ing' }}</div>
       <bar-loader :width=100 widthUnit="%" :height=1 :size=50 sizeUnit="%"
-                  :loading=loading />
+                  :loading=loading color="#39f" />
     </div>
     <div class="modal-actions">
       <vk-btn v-if="!results || next" class="btn-cancel" type="link"

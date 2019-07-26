@@ -2,7 +2,7 @@
   <div class="action-result">
     <h4>{{ action.name }} Results</h4>
     <ul uk-accordion>
-      <li v-for="( result, id ) in results" class="action-operand">
+      <li v-for="( result, id ) in results" :class=itemClass>
         <a class="uk-accordion-title" href="#">{{ objects[ id ].path }}</a>
         <div class="uk-accordion-content">
           <h5>Outcome</h5>
@@ -21,7 +21,7 @@
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-export default  {
+export default {
   name: 'ActionResult',
   components: {
     FontAwesomeIcon
@@ -40,19 +40,16 @@ export default  {
       default: () => ({})
     }
   },
-  mounted() {
-    
-  },
+  mounted() {},
   data() {
-    return {
-      
-    }
+    return {}
   },
-  methods: {
-    
-  },
+  methods: {},
   computed: {
-    
+    itemClass: {
+      'action-operand': true,
+      'uk-open': Object.keys( this.results ).length === 1
+    }
   }
 }
 </script>

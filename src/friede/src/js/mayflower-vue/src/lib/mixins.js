@@ -298,6 +298,10 @@ export const ActorsMixin = {
     actionType: {
       type: String,
       default: 'global'
+    },
+    now: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -305,7 +309,8 @@ export const ActorsMixin = {
       classes: { 'actor-modal': true },
       verify: {},
       permissions: {},
-      results: null
+      results: null,
+      next: ''
     }
   },
   created() {
@@ -317,6 +322,8 @@ export const ActorsMixin = {
     },
     hideModal() {
       this.results = null;
+      this.next = '';
+      this.$emit( 'update:now', false );
       this.$emit( 'update:show', false );
     },
     execute() {
@@ -330,8 +337,12 @@ export const ActorsMixin = {
          .then( r => {
            this.results = r.data[ action ];
            if ( data.next )
-             this.$emit( 'act', data.next, this.operands );
+             this.next = data.next;
          });
+    },
+    doNext() {
+      this.hideModal();
+      this.$nextTick(() => this.$emit( 'act', this.next, this.operands, true ));
     },
     getPerms() {
       const model = this.model;

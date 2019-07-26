@@ -7,6 +7,7 @@
              :actions=actor.actions
              :operands=actor.operands
              :show.sync=showModals[tag]
+             :now.sync=now[tag]
              @act=act />
   <component :is=blocks.breakfront.component v-if=blocks.breakfront
              :content=featured />
@@ -49,9 +50,10 @@ export default  {
           });
         }
       });
-    var _actions = {};
-    var _operands = {};
+    var ops = {};
+    var operands = {};
     var show = {};
+    var now = {};
     if ( actions && actions.length ) {
       this.$api( 'friede', 'actions', '?' + this.options.actions.map(
         action => 'path=' + action ).join('&'))
@@ -59,13 +61,15 @@ export default  {
            var res = r.data.results;
            if ( res.length )
              res.forEach( a => {
-               _actions[ a.name ] = a;
-               _operands[ a.data.component ] = [];
+               ops[ a.name ] = a;
+               operands[ a.data.component ] = [];
                show[ a.data.component ] = false;
+               now[ a.data.component ] = false;
              });
-           this.actions = _actions;
-           this.operands = _operands;
+           this.actions = ops;
+           this.operands = operands;
            this.showModals = show;
+           this.now = now;
          })
          .catch ( err => {
            console.warn( 'couldnt get actions', actions, err );
@@ -84,17 +88,18 @@ export default  {
       action: '',
       actions: {},
       operands: [],
-      showModals: {
-      }
+      showModals: {},
+      now: {}
     }
   },
   methods: {
-    act( action, objects ) {
+    act( action, objects, now ) {
       const tag = this.actions[ action ].data.component;
       const actor = this.actors[ tag ];
       this.operands[ tag ] = isArray( objects ) ? objects : [ objects ];
       this.action = action;
       this.showModals[ tag ] = true;
+      this.now[ tag ] = now || false;
     }
   },
   computed: {

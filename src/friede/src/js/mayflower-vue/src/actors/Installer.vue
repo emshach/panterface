@@ -31,9 +31,15 @@
     <action-result v-if="results" :action="actions[ action ]"
                    :objects=objects :results=results />
     <div class="modal-actions">
-      <vk-btn class="btn-cancel" type="link" size="small"
-              @click.prevent=hideModal >cancel</vk-btn>
-      <vk-btn class="btn-ok" type="primary" size="small"
+      <vk-btn v-if="!results || !next" class="btn-cancel" type="link"
+              size="small" @click.prevent=hideModal >cancel</vk-btn>
+      <template v-if="results">
+        <vk-btn v-if="next" class="btn-ok" type="primary" size="small"
+                @click.prevent=doNext >{{ next }}</vk-btn>
+        <vk-btn v-else class="btn-ok" type="primary" size="small"
+                @click.prevent=hideModal >Done</vk-btn>
+      </template>
+      <vk-btn v-else class="btn-ok" type="primary" size="small"
               @click.prevent=execute >{{ action }}</vk-btn>
     </div>
   </vk-modal>

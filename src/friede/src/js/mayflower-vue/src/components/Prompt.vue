@@ -224,9 +224,7 @@ export default {
       this.submit()
     },
     processKey( $event ) {
-      const char = String.fromCharCode( $event.charCode );
-      console.log( 'keypress', $event, char );
-      if ( char === '/' ) {
+      if ( $event.key === '/' ) {
         $event.preventDefault();
         if ( this.all.length === 1 ) {
           this.update( this.all[0] );

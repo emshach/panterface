@@ -492,16 +492,18 @@ def api_path( request, path=None, format=None ):
             rx1 = r"(?:{}/)?{}".format( rx1, n )
             loc0 = Location.objects.filter( href__regex=rx0+r'/?$' )
             if len( loc0 ):
+                loc0 = loc0.first()
                 node['location'] = _process_location(
-                    LocationSerializer( loc0.first(), context=lscontext ).data )
+                    LocationSerializer( loc0, context=lscontext ).data )
                 node[ 'href' ] = loc0.href
                 node[ 'title' ] = loc0.title
                 endpoint = True
             else:
                 loc1 = Location.objects.filter( href__regex=rx1+r'/?$' )
                 if len ( loc1 ):
+                    loc1 = loc1.first()
                     node[ 'location' ] = _process_location(
-                        LocationSerializer( loc1.first(), context=lscontext ).data )
+                        LocationSerializer( loc1, context=lscontext ).data )
                     node[ 'href' ] = loc1.href
                     node[ 'title' ] = loc1.title
                     endpoint = True

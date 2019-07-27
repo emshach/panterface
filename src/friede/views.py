@@ -279,15 +279,15 @@ def api_ls( request, path='', format=None ):
             w[ 'label' ]= w['plural' if w[ 'multiple'] else 'singular' ].title()
             w[ 'search' ] = list( w[ 'search' ])
 
-    expand = locations[ :1 ]
-    rest = locations[ 1: ]
+    expand = locations
+    rest = ()  # locations[ 1: ]
     expanded_serializer = LocationSerializer(
         expand, many=True, context=dict(
             request= request,
             detail=  True,
-            expand=  [ '_widget_entries', '_screen_entries', '_block_entries' ]))
-    rest_serializer = LocationSerializer(
-        rest, many=True, context={ 'request': request })
+            expand=  [  '_screen_entries' ]))
+    # rest_serializer = LocationSerializer(
+    #     rest, many=True, context={ 'request': request })
     return Response( dict(
         debug=dict(
             path=path,
@@ -298,7 +298,7 @@ def api_ls( request, path='', format=None ):
         base=rx,
         matches=tuple( matches ),
         slots=slots.values(),
-        locations=_process_locations( expanded_serializer.data ) + rest_serializer.data
+        locations=_process_locations( expanded_serializer.data ) # + rest_serializer.data
     ))
 
 def _get_model( name ):

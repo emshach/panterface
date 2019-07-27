@@ -134,7 +134,7 @@ export default {
           this.prospect.push({
             href: this.selected,
             title: this.selected,
-            hash: this.selected.href.replace( baseRx, '' ),
+            hash: this.selected.href.replace( this.baseRx, '' ),
             location: this.selected
           });
           this.selected = null;

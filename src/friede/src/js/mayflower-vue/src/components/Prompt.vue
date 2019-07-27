@@ -226,7 +226,7 @@ export default {
     processKey( $event ) {
       if ( $event.key === '/' ) {
         $event.preventDefault();
-        let l = this.all.filter( x => x.path && /^locations./.test( xpath ));
+        let l = this.all.filter( x => x.path && /^locations./.test( x.path ));
         if ( l.length === 1 ) {
           this.update( l[0] );
           return;

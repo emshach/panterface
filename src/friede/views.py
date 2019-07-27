@@ -494,15 +494,21 @@ def api_path( request, path=None, format=None ):
             if len( loc0 ):
                 node['location'] = _process_location(
                     LocationSerializer( loc0.first(), context=lscontext ).data )
+                node[ 'href' ] = loc0.href
+                node[ 'title' ] = loc0.title
                 endpoint = True
             else:
                 loc1 = Location.objects.filter( href__regex=rx1+r'/?$' )
                 if len ( loc1 ):
                     node[ 'location' ] = _process_location(
                         LocationSerializer( loc1.first(), context=lscontext ).data )
+                    node[ 'href' ] = loc1.href
+                    node[ 'title' ] = loc1.title
                     endpoint = True
-            if 'href' not in node:
-                node.update( href=n, title=n )
+            if nede.get( 'href' ) is None:
+                node[ 'href' ] = n
+            if nede.get( 'title' ) is None:
+                node[ 'title' ] = n
         out.append( node )
     return Response( dict( route=out, endpoint=endpoint ))
 

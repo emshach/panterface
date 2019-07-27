@@ -132,8 +132,8 @@ export default {
       if ( this.selected ) {
         if ( this.selected.href ) { // TODO: go to location
           this.prospect.push({
-            href: this.selected,
-            title: this.selected,
+            href: this.selected.href,
+            title: this.selected.title,
             hash: this.selected.href.replace( this.baseRx, '' ),
             location: this.selected
           });

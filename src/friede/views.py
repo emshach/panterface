@@ -285,7 +285,7 @@ def api_ls( request, path='', format=None ):
         expand, many=True, context=dict(
             request= request,
             detail=  True,
-            expand=  [  '_screen_entries' ]))
+            expand=  [  '_widget_entries', '_screen_entries', '_block_entries' ]))
     # rest_serializer = LocationSerializer(
     #     rest, many=True, context={ 'request': request })
     return Response( dict(

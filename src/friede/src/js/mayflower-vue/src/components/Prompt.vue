@@ -124,6 +124,7 @@ export default {
       myBreadcrumb: [],
       endpoint: false,
       completing: false,
+      exactMatch: false,
     }
   },
   methods: {
@@ -218,11 +219,24 @@ export default {
       }
     },
     update( match ) {
+      this.exactMatch = false;
       this.select( match );
       this.submit()
     },
     processKey( $event ) {
-      if ( $event.keyCode === 9 )  { // <TAB>
+      const char = String.fromCharCode( $event.charCode )
+      if ( char === '/' ) {
+        $event.preventDefault();
+        if ( this.all.length === 1 ) {
+          this.update( this.all[0] );
+          return
+        }
+        this.exactMatch = !this.exactMatch;
+        this.$nextTick(() => {
+          if ( this.all.length === 1 )
+            this.update( this.all[0] );
+        });
+      } else if ( $event.keyCode === 9 )  { // <TAB>
         $event.preventDefault();
         if ( this.all.length ) {
           if ( this.all.length === 1 ) {

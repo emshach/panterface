@@ -505,9 +505,9 @@ def api_path( request, path=None, format=None ):
                     node[ 'href' ] = loc1.href
                     node[ 'title' ] = loc1.title
                     endpoint = True
-            if nede.get( 'href' ) is None:
+            if node.get( 'href' ) is None:
                 node[ 'href' ] = n
-            if nede.get( 'title' ) is None:
+            if node.get( 'title' ) is None:
                 node[ 'title' ] = n
         out.append( node )
     return Response( dict( route=out, endpoint=endpoint ))

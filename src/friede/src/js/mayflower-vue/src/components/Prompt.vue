@@ -226,17 +226,15 @@ export default {
     processKey( $event ) {
       if ( $event.key === '/' ) {
         $event.preventDefault();
-        if ( this.all.length === 1 ) {
-          let l = this.all.filter( x => x.path && /^locations./.test( xpath ));
+        let l = this.all.filter( x => x.path && /^locations./.test( xpath ));
+        if ( l.length === 1 ) {
+          this.update( l[0] );
+          return;
+        } else {
+          let l = this.all.filter( x =>  typeof x === 'string' );
           if ( l.length === 1 ) {
             this.update( l[0] );
             return;
-          } else {
-            let l = this.all.filter( x =>  typeof x === 'string' );
-            if ( l.length === 1 ) {
-              this.update( l[0] );
-              return;
-            }
           }
         }
         this.exactMatch = !this.exactMatch;

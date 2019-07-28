@@ -11,7 +11,7 @@ class App( app.App ):
     description = '''Time, task and finance management system
 
     Also includes goal-setting, strategizing, and teamwork tools.'''
-
+    min_version = '0.2.5'
     objects = '''note resource product goal objective target strategy plan phase
             step project task action currency account pool allotment allocation
             income expense asset donation service rental liability contribution

@@ -232,7 +232,7 @@ def api_ls( request, path='', format=None ):
             if not g and \
                ( not endpoint or len( endpoint[ 'match' ]) < len( m.group(0) )):
                 endpoint = _process_location( LocationSerializer(
-                    candidate, context=lsctx ).data )
+                    candidate, context=lctx ).data )
                 endpoint[ 'match' ] = m.group(0)
                 continue
             m2 = re.match( r'{([\w.]+)(\*)?(\+)?}', g )

@@ -106,15 +106,16 @@ class ExtendsMixin( Model ):
 class AppMixin( Model ):
     class Meta:
         abstract = True
-    app = M.ForeignKey( 'App', M.CASCADE )
+    app = M.ForeignKey( 'App', M.CASCADE, related_name='' )
 
 
 class Registry( AutoOwnedModel, Base, PathMixin ):
     class Meta:
         verbose_name_plural = 'registries'
-    format = JSONField( default=dict )
+    app     = M.ForeignKey( 'App', M.CASCADE, related_name='registries' )
+    format  = JSONField( default=dict )
     default = JSONField( default=dict )
-    parent = M.ForeignKey( 'self', M.CASCADE, blank=True, null=True,
+    parent  = M.ForeignKey( 'self', M.CASCADE, blank=True, null=True,
                            related_name='_elements' )
 
     objects = InheritanceManager()
@@ -393,7 +394,8 @@ class App( Registry, DataMixin ):
         return out
 
 
-class Location( Registry, AppMixin, DataMixin ):
+class Location( Registry, DataMixin ):
+    app         = M.ForeignKey( 'App', M.CASCADE, related_name='locations' )
     registries = M.ManyToManyField( Registry, blank=True, through='LocationEntry',
                                     related_name='_locations' )
     href = M.CharField( max_length=255, default='#' )
@@ -410,6 +412,7 @@ class Location( Registry, AppMixin, DataMixin ):
 
 
 class Icon( _Base, PathMixin ):
+    app = M.ForeignKey( 'App', M.CASCADE, related_name='icons' )
     parent = M.ForeignKey( Registry, M.CASCADE, blank=True, null=True,
                            related_name='_icon_elements' )
     registries = M.ManyToManyField( Registry, blank=True, through='LocationEntry',
@@ -417,6 +420,7 @@ class Icon( _Base, PathMixin ):
 
 
 class Link( AutoOwnedModel, Base, PathMixin ):
+    app = M.ForeignKey( 'App', M.CASCADE, related_name='links' )
     parent = M.ForeignKey( Registry, M.CASCADE, blank=True, null=True,
                            related_name='_link_elements' )
     registries = M.ManyToManyField( Registry, blank=True, through='LinkEntry',
@@ -433,6 +437,7 @@ class Link( AutoOwnedModel, Base, PathMixin ):
 
 
 class Reference( Base, PathMixin ):
+    app = M.ForeignKey( 'App', M.CASCADE, related_name='references' )
     parent = M.ForeignKey( Registry, M.CASCADE, blank=True, null=True,
                            related_name='_registry_elements' )
     registries = M.ManyToManyField( Registry, blank=True, through='ReferenceEntry',
@@ -511,6 +516,7 @@ class Setting( AutoOwnedModel, Base, PathMixin, DataMixin, ExtendsMixin ):
             ( MODEL,               'Model Choice' ),
             ( MODELS,              'Multiple Model Choice' ),
         )
+    app = M.ForeignKey( 'App', M.CASCADE, related_name='settings' )
     parent = M.ForeignKey( Registry, M.CASCADE, blank=True, null=True,
                            related_name='_setting_elements' )
     registries = M.ManyToManyField( Registry, blank=True, through='SettingEntry',
@@ -528,6 +534,7 @@ class Setting( AutoOwnedModel, Base, PathMixin, DataMixin, ExtendsMixin ):
 
 
 class Action( AutoOwnedModel, Base, PathMixin, DataMixin ):
+    app = M.ForeignKey( 'App', M.CASCADE, related_name='actions' )
     parent = M.ForeignKey( Registry, M.CASCADE, blank=True, null=True,
                            related_name='_action_elements' )
     registries = M.ManyToManyField( Registry, blank=True, through='ActionEntry',

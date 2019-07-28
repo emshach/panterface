@@ -269,8 +269,8 @@ def mklocations( app, objects, relations, actions=None ):
                       href="/{}/{{{}.{}*+}}".format( action, name, o )),
                     ( 'widgets', ( 'card', dict(
                         path="{}.{}_{}".format( action, name, o )))),
-                  ( 'screens', ( 'default', dict( path=screens[ action ]))))
-                                    for o in objects ))
+                    ( 'screens', ( 'default', dict( path=screens[ action ]))))
+                  for o in objects ))
             for action in actions if action not in ( 'new', 'delete' )),
         ( '.' + name,
           tuple (
@@ -285,72 +285,11 @@ def mklocations( app, objects, relations, actions=None ):
                       href="/{}/{}".format( name, rs[o][ 'plural' ] ),
                       redirect_to="list.{}_{}".format( name, o )))
               for o in objects )),
-        ( 'add',
-          ( 'to',
-            tuple(
-                ( "{0}_{1}.{0}_{2}".format( name, o, x ), dict(
-                    title="add to {}: {}".format( o, x ).title(),
-                    href="/add/to/{{{0}.{1}+}}/{{{0}.{2}+}}".format(
-                        name, o, x )),
-                ( '#screens', ( 'default', dict( path=screens[ 'add' ]))))
-                for o in objects
-                for x in rs[o][ 'has' ])),
-          tuple(
-              ( "{0}_{1}.{0}_{2}".format( name, o, x ), dict(
-                  title="add {} to {}".format( o, x ).title(),
-                  href="/add/{{{0}.{1}+}}/{{{0}.{2}+}}".format( name, o, x )),
-                ( '#screens', ( 'default', dict( path=screens[ 'add' ]))))
-              for o in objects
-              for x in rs[o][ 'in' ])),
-        ( 'remove',
-          ( 'from',
-            tuple(
-                ( "{0}_{1}.{0}_{2}".format( name, o, x ), dict(
-                    title="remove from {}: {}".format( o, x ).title(),
-                    href="/remove/from/{{{0}.{1}+}}/{{{0}.{2}}}".format(
-                        name, o, x )),
-                  ( '#screens', ( 'default', dict( path=screens[ 'remove' ]))))
-                for o in objects
-                for x in rs[o][ 'has' ] )),
-          tuple(
-              ( "{0}_{1}.{0}_{2}".format( name, o, x ), dict(
-                  title="remove {} from {}".format( o, x ).title(),
-                  href="/remove/{{{}.{}+}}/{{{}.{}+}}".format(
-                      name, o, name, x )),
-                ( '#screens', ( 'default', dict( path=screens[ 'remove' ]))))
-              for o in objects
-              for x in rs[o][ 'in' ])),
         tuple(
-            ( "{}_{}".format( name, o ),
-              ( 'edit', dict(
-                  title="edit {}".format( rs[o][ 'plural' ]).title(),
-                  href="{{{}.{}*""+}}/edit".format( name, o )),
-                ( '#screens', ( 'default', dict( path=screens[ 'edit' ])))),
-              tuple(
-                  (( "add.{}_{}".format( name, x ),
-                     dict(
-                         title="add to {}: {}".format( o, x ).title(),
-                         href="{{{0}.{1}+}}/add/{{{0}.{2}+}}".format( name, o, x ),
-                         redirect_to="add.to.{0}_{1}.{0}_{2}".format( name, o, x ))),
-                   ( "remove.{}_{}".format( name, x),
-                     dict(
-                         title="remove from {}: {}".format( o, x ).title(),
-                         href="{{{0}.{1}+}}/remove/{{{0}.{2}}}".format( name, o, x ),
-                         redirect_to="remove.from.{0}_{1}.{0}_{2}".format(
-                             name, o, x ))))
-                  for x in rs[o][ 'has' ]),
-              tuple(
-                  (( ".add.to.{}_{}".format( name, x ),
-                     dict(
-                         title="add {} to {}".format( o, x ).title(),
-                         href="{{{0}.{1}+}}/add/to/{{{0}.{2}+}}".format( name, o, x ),
-                         redirect_to="add.{0}_{1}.{0}_{2}".format( name, o, x ))),
-                   ( ".remove.from.{}_{}".format( name, x ),
-                     dict(
-                         title="remove {} from {}".format( o, x ).title(),
-                         href="{{{0}.{1}}}/remove/from/{{{0}.{2}}}".format( name, o, x ),
-                         redirect_to="remove.{0}_{1}.{0}_{2}".format( name, o, x ))))
-                  for x in rs[o][ 'in' ]))
+            ( "{}_{}.edit".format( name, o ), dict(
+                title="edit {}".format( rs[o][ 'plural' ]).title(),
+                href="{{{}.{}*""+}}/edit".format( name, o )),
+              ( '#screens', ( 'default', dict( path=screens[ 'edit' ]))))
             for o in objects ))
 
 def getsimplefields( app, name, plural, model, exclude=( 'id' )):
@@ -518,7 +457,7 @@ def upgradeapp( app, data, upto=None ):
                         attached = False
                         att_new = False
                         relations = {}
-                        try:
+                        try:    # BWAHAHAHAHA!
                             app_field = model[0]._meta.get_field( 'app' )
                             if app_field.related_model is App:
                                 search[ 'app' ] = app

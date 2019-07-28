@@ -9,7 +9,7 @@ from .views import api_root, index
 app_name = 'friede'
 urlpatterns = []
 
-setup( urlpatterns )
+# setup( urlpatterns )
 
 for ns, urls in routes.items():
     chunk = []

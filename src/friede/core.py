@@ -495,8 +495,10 @@ def upgradeapp( app, data, upto=None ):
                             cr[0] = obj
                         for key, value in relations.items():
                             setattr( obj, key, value )
-                        if not new and updates:
+                        if not new and ( updates or relations ):
                             updated = True
+                        if relations:
+                            obj.save()
                         for key, value in append:
                             pass # TODO: implement
                         for key, value in prepend:

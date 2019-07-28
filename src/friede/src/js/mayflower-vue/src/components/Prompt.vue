@@ -407,6 +407,7 @@ export default {
     breadcrumb( val ) {
       this.myBreadcrumb = val.slice();
       this.prospect = [];
+      this.base = '';
       this.getCompletions();
     }
   }

@@ -347,7 +347,7 @@ export const ActorsMixin = {
            }
            if ( data.next )
              this.next = data.next;
-           if ( Object.values( res ).find( x => !x.res || !x.res.error )) {
+           if ( Object.values( res ).find( x => !x.res || !x.res.error ).length ) {
              this.$emit( 'success', res );
              if ( this.autoClose && this.applicable.length === 1 ) {
                const out = Object.values( res )[0];
@@ -360,7 +360,8 @@ export const ActorsMixin = {
                  this.results = res;
              } else
                this.results = res;
-           }
+           } else
+               this.results = res;
            return res;
          }).catch( err => {
            this.loading = false;

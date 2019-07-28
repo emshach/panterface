@@ -13,7 +13,7 @@ export const HomePage = () =>
 export const ListModelPage = () =>
    import(/* webpackChunkName: "pages" */ './ListModelPage' )
 export const ReportModelPage = () =>
-   import(/* webpackChunkName: "pages" */ './ReporttModelPage' )
+   import(/* webpackChunkName: "pages" */ './ReportModelPage' )
 export const DeleteModelPage = () =>
    import(/* webpackChunkName: "pages" */ './DeleteModelPage' )
 export const ViewObjectPage = () =>

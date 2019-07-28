@@ -559,7 +559,7 @@ class App( app.App ):
                       ))),
                 ( '#blocks',
                   ( 'breakfront', dict( path='featured' )),
-                  ( 'content', dict( path='grid.filtered' ))),
+                  ( 'main', dict( path='grid.filtered' ))),
               ),
               ( 'home', dict(
                   icon='fontawesome.home',
@@ -628,12 +628,7 @@ class App( app.App ):
                       data=dict(
                           menu='site'
                       ))),
-                  ( 'main', dict( path='feed.site' )))),
-              ( 'apps', {},
-                ( '#blocks',
-                  ( 'content', dict(
-                      path='grid.filtered',
-                      rename='main' )))))
+                  ( 'main', dict( path='feed.site' )))))
           ),
         ),
         ( '0.2.3',

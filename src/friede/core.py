@@ -480,6 +480,7 @@ def upgradeapp( app, data, upto=None ):
                                             value = "{}.{}".format(
                                                 registries[ rm ], value )
                                     related = rm.objects.get( path=value )
+                                    print key, '=', related
                                 except rm.DoesNotExist:
                                     if rm in auto_create:
                                         related = rm.objects.create( path=value )

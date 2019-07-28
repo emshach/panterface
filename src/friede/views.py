@@ -272,7 +272,7 @@ def api_ls( request, path='', format=None ):
     for k, v in by_label.items():
         if len(v) > 1:
             for w in v:
-                w[ 'append' ]= " ({})".format( w.app )
+                w[ 'append' ]= " ({})".format( w[ 'app' ])
                 w[ 'label' ]= ( w['plural' if w[ 'multiple'] else 'singular' ]
                                + w[ 'append' ]).title()
                 w[ 'search' ] = list( w[ 'search' ])

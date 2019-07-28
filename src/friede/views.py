@@ -218,6 +218,11 @@ def api_ls( request, path='', format=None ):
     by_label = {}
     locations = []
     endpoint = False
+    lctx = dict(
+        request= request,
+        detail=  True,
+        expand=  [  '_widget_entries', '_screen_entries', '_block_entries' ]
+    )
     for candidate in candidates:
         if not candidate.href:
             continue
@@ -256,6 +261,8 @@ def api_ls( request, path='', format=None ):
                         append='',
                         create=False,
                         multiple=False,
+                        location=_process_location( LocationSerializer(
+                            candidate, context=lctx ).data ),
                         search=set(( app, model )))
                     if singular not in by_label:
                         by_label[ singular ] = []
@@ -284,10 +291,7 @@ def api_ls( request, path='', format=None ):
     expand = locations
     rest = ()  # locations[ 1: ]
     expanded_serializer = LocationSerializer(
-        expand, many=True, context=dict(
-            request= request,
-            detail=  True,
-            expand=  [  '_widget_entries', '_screen_entries', '_block_entries' ]))
+        expand, many=True, context=lctx )
     # rest_serializer = LocationSerializer(
     #     rest, many=True, context={ 'request': request })
     return Response( dict(

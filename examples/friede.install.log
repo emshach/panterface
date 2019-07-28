@@ -1,0 +1,521 @@
+apps.friede 0.2.9 available
+updated friede Action list
+updated friede Action view
+updated friede Action new
+updated friede Action edit
+updated friede Action report
+updated friede Action delete
+updated friede Action add
+updated friede Action remove
+updated friede Widget help.list
+updated friede Widget help.view
+updated friede Widget help.new
+updated friede Widget help.edit
+updated friede Widget help.report
+updated friede Widget help.delete
+updated friede Widget help.add
+updated friede Widget help.remove
+updated friede Widget dashboard
+updated friede Widget inline
+updated friede Widget adaptive
+updated friede Widget view.from_model
+updated friede Widget list.from_model
+updated friede Widget new.from_model
+updated friede Widget edit.from_model
+updated friede Widget report.from_model
+updated friede Widget delete.from_model
+updated friede Widget add.from_model
+updated friede Widget remove.from_model
+updated friede Widget list.friede_container
+updated friede Widget list.friede_widget
+updated friede Widget list.friede_block
+updated friede Widget list.friede_screen
+updated friede Widget list.friede_shell
+updated friede Widget list.friede_theme
+updated friede Widget list.friede_slot
+updated friede Widget list.friede_app
+updated friede Widget list.friede_location
+updated friede Widget list.friede_link
+updated friede Widget list.friede_reference
+updated friede Widget list.friede_setting
+updated friede Widget view.friede_container
+updated friede Widget view.friede_widget
+updated friede Widget view.friede_block
+updated friede Widget view.friede_screen
+updated friede Widget view.friede_shell
+updated friede Widget view.friede_theme
+updated friede Widget view.friede_slot
+updated friede Widget view.friede_app
+updated friede Widget view.friede_location
+updated friede Widget view.friede_link
+updated friede Widget view.friede_reference
+updated friede Widget view.friede_setting
+updated friede Widget new.friede_container
+updated friede Widget new.friede_widget
+updated friede Widget new.friede_block
+updated friede Widget new.friede_screen
+updated friede Widget new.friede_shell
+updated friede Widget new.friede_theme
+updated friede Widget new.friede_slot
+updated friede Widget new.friede_app
+updated friede Widget new.friede_location
+updated friede Widget new.friede_link
+updated friede Widget new.friede_reference
+updated friede Widget new.friede_setting
+updated friede Widget edit.friede_container
+updated friede Widget edit.friede_widget
+updated friede Widget edit.friede_block
+updated friede Widget edit.friede_screen
+updated friede Widget edit.friede_shell
+updated friede Widget edit.friede_theme
+updated friede Widget edit.friede_slot
+updated friede Widget edit.friede_app
+updated friede Widget edit.friede_location
+updated friede Widget edit.friede_link
+updated friede Widget edit.friede_reference
+updated friede Widget edit.friede_setting
+updated friede Widget report.friede_container
+updated friede Widget report.friede_widget
+updated friede Widget report.friede_block
+updated friede Widget report.friede_screen
+updated friede Widget report.friede_shell
+updated friede Widget report.friede_theme
+updated friede Widget report.friede_slot
+updated friede Widget report.friede_app
+updated friede Widget report.friede_location
+updated friede Widget report.friede_link
+updated friede Widget report.friede_reference
+updated friede Widget report.friede_setting
+updated friede Widget delete.friede_container
+updated friede Widget delete.friede_widget
+updated friede Widget delete.friede_block
+updated friede Widget delete.friede_screen
+updated friede Widget delete.friede_shell
+updated friede Widget delete.friede_theme
+updated friede Widget delete.friede_slot
+updated friede Widget delete.friede_app
+updated friede Widget delete.friede_location
+updated friede Widget delete.friede_link
+updated friede Widget delete.friede_reference
+updated friede Widget delete.friede_setting
+updated friede Widget add.friede_container
+updated friede Widget add.friede_widget
+updated friede Widget add.friede_block
+updated friede Widget add.friede_screen
+updated friede Widget add.friede_shell
+updated friede Widget add.friede_theme
+updated friede Widget add.friede_slot
+updated friede Widget add.friede_app
+updated friede Widget add.friede_location
+updated friede Widget add.friede_link
+updated friede Widget add.friede_reference
+updated friede Widget add.friede_setting
+updated friede Widget remove.friede_container
+updated friede Widget remove.friede_widget
+updated friede Widget remove.friede_block
+updated friede Widget remove.friede_screen
+updated friede Widget remove.friede_shell
+updated friede Widget remove.friede_theme
+updated friede Widget remove.friede_slot
+updated friede Widget remove.friede_app
+updated friede Widget remove.friede_location
+updated friede Widget remove.friede_link
+updated friede Widget remove.friede_reference
+updated friede Widget remove.friede_setting
+updated friede Block form.group
+updated friede Block form.section
+updated friede Block form.calendar
+updated friede Screen form.single
+updated friede Screen list.from_model
+updated friede Screen report.from_model
+updated friede Screen delete.from_model
+updated friede Screen view.object
+updated friede Location home
+updated friede Location apps
+updated friede Location about
+updated friede Location contact
+updated friede Location new.friede_container
+updated friede Location new.friede_widget
+updated friede Location new.friede_block
+updated friede Location new.friede_screen
+updated friede Location new.friede_shell
+updated friede Location new.friede_theme
+updated friede Location new.friede_slot
+updated friede Location new.friede_app
+updated friede Location new.friede_location
+updated friede Location new.friede_link
+updated friede Location new.friede_reference
+updated friede Location new.friede_setting
+updated friede Location delete.friede_container
+updated friede Location delete.friede_widget
+updated friede Location delete.friede_block
+updated friede Location delete.friede_screen
+updated friede Location delete.friede_shell
+updated friede Location delete.friede_theme
+updated friede Location delete.friede_slot
+updated friede Location delete.friede_app
+updated friede Location delete.friede_location
+updated friede Location delete.friede_link
+updated friede Location delete.friede_reference
+updated friede Location delete.friede_setting
+updated friede Location list.friede_container
+attached Widget list.friede_container to locations.list.friede_container
+attached Screen list.from_model to locations.list.friede_container
+updated friede Location list.friede_widget
+attached Widget list.friede_widget to locations.list.friede_widget
+attached Screen list.from_model to locations.list.friede_widget
+updated friede Location list.friede_block
+attached Widget list.friede_block to locations.list.friede_block
+attached Screen list.from_model to locations.list.friede_block
+updated friede Location list.friede_screen
+attached Widget list.friede_screen to locations.list.friede_screen
+attached Screen list.from_model to locations.list.friede_screen
+updated friede Location list.friede_shell
+attached Widget list.friede_shell to locations.list.friede_shell
+attached Screen list.from_model to locations.list.friede_shell
+updated friede Location list.friede_theme
+attached Widget list.friede_theme to locations.list.friede_theme
+attached Screen list.from_model to locations.list.friede_theme
+updated friede Location list.friede_slot
+attached Widget list.friede_slot to locations.list.friede_slot
+attached Screen list.from_model to locations.list.friede_slot
+updated friede Location list.friede_app
+attached Widget list.friede_app to locations.list.friede_app
+attached Screen list.from_model to locations.list.friede_app
+updated friede Location list.friede_location
+attached Widget list.friede_location to locations.list.friede_location
+attached Screen list.from_model to locations.list.friede_location
+updated friede Location list.friede_link
+attached Widget list.friede_link to locations.list.friede_link
+attached Screen list.from_model to locations.list.friede_link
+updated friede Location list.friede_reference
+attached Widget list.friede_reference to locations.list.friede_reference
+attached Screen list.from_model to locations.list.friede_reference
+updated friede Location list.friede_setting
+attached Widget list.friede_setting to locations.list.friede_setting
+attached Screen list.from_model to locations.list.friede_setting
+updated friede Location view.friede_container
+attached Widget view.friede_container to locations.view.friede_container
+attached Screen view.object to locations.view.friede_container
+updated friede Location view.friede_widget
+attached Widget view.friede_widget to locations.view.friede_widget
+attached Screen view.object to locations.view.friede_widget
+updated friede Location view.friede_block
+attached Widget view.friede_block to locations.view.friede_block
+attached Screen view.object to locations.view.friede_block
+updated friede Location view.friede_screen
+attached Widget view.friede_screen to locations.view.friede_screen
+attached Screen view.object to locations.view.friede_screen
+updated friede Location view.friede_shell
+attached Widget view.friede_shell to locations.view.friede_shell
+attached Screen view.object to locations.view.friede_shell
+updated friede Location view.friede_theme
+attached Widget view.friede_theme to locations.view.friede_theme
+attached Screen view.object to locations.view.friede_theme
+updated friede Location view.friede_slot
+attached Widget view.friede_slot to locations.view.friede_slot
+attached Screen view.object to locations.view.friede_slot
+updated friede Location view.friede_app
+attached Widget view.friede_app to locations.view.friede_app
+attached Screen view.object to locations.view.friede_app
+updated friede Location view.friede_location
+attached Widget view.friede_location to locations.view.friede_location
+attached Screen view.object to locations.view.friede_location
+updated friede Location view.friede_link
+attached Widget view.friede_link to locations.view.friede_link
+attached Screen view.object to locations.view.friede_link
+updated friede Location view.friede_reference
+attached Widget view.friede_reference to locations.view.friede_reference
+attached Screen view.object to locations.view.friede_reference
+updated friede Location view.friede_setting
+attached Widget view.friede_setting to locations.view.friede_setting
+attached Screen view.object to locations.view.friede_setting
+updated friede Location edit.friede_container
+attached Widget edit.friede_container to locations.edit.friede_container
+attached Screen form.single to locations.edit.friede_container
+updated friede Location edit.friede_widget
+attached Widget edit.friede_widget to locations.edit.friede_widget
+attached Screen form.single to locations.edit.friede_widget
+updated friede Location edit.friede_block
+attached Widget edit.friede_block to locations.edit.friede_block
+attached Screen form.single to locations.edit.friede_block
+updated friede Location edit.friede_screen
+attached Widget edit.friede_screen to locations.edit.friede_screen
+attached Screen form.single to locations.edit.friede_screen
+updated friede Location edit.friede_shell
+attached Widget edit.friede_shell to locations.edit.friede_shell
+attached Screen form.single to locations.edit.friede_shell
+updated friede Location edit.friede_theme
+attached Widget edit.friede_theme to locations.edit.friede_theme
+attached Screen form.single to locations.edit.friede_theme
+updated friede Location edit.friede_slot
+attached Widget edit.friede_slot to locations.edit.friede_slot
+attached Screen form.single to locations.edit.friede_slot
+updated friede Location edit.friede_app
+attached Widget edit.friede_app to locations.edit.friede_app
+attached Screen form.single to locations.edit.friede_app
+updated friede Location edit.friede_location
+attached Widget edit.friede_location to locations.edit.friede_location
+attached Screen form.single to locations.edit.friede_location
+updated friede Location edit.friede_link
+attached Widget edit.friede_link to locations.edit.friede_link
+attached Screen form.single to locations.edit.friede_link
+updated friede Location edit.friede_reference
+attached Widget edit.friede_reference to locations.edit.friede_reference
+attached Screen form.single to locations.edit.friede_reference
+updated friede Location edit.friede_setting
+attached Widget edit.friede_setting to locations.edit.friede_setting
+attached Screen form.single to locations.edit.friede_setting
+updated friede Location report.friede_container
+attached Widget report.friede_container to locations.report.friede_container
+attached Screen report.from_model to locations.report.friede_container
+updated friede Location report.friede_widget
+attached Widget report.friede_widget to locations.report.friede_widget
+attached Screen report.from_model to locations.report.friede_widget
+updated friede Location report.friede_block
+attached Widget report.friede_block to locations.report.friede_block
+attached Screen report.from_model to locations.report.friede_block
+updated friede Location report.friede_screen
+attached Widget report.friede_screen to locations.report.friede_screen
+attached Screen report.from_model to locations.report.friede_screen
+updated friede Location report.friede_shell
+attached Widget report.friede_shell to locations.report.friede_shell
+attached Screen report.from_model to locations.report.friede_shell
+updated friede Location report.friede_theme
+attached Widget report.friede_theme to locations.report.friede_theme
+attached Screen report.from_model to locations.report.friede_theme
+updated friede Location report.friede_slot
+attached Widget report.friede_slot to locations.report.friede_slot
+attached Screen report.from_model to locations.report.friede_slot
+updated friede Location report.friede_app
+attached Widget report.friede_app to locations.report.friede_app
+attached Screen report.from_model to locations.report.friede_app
+updated friede Location report.friede_location
+attached Widget report.friede_location to locations.report.friede_location
+attached Screen report.from_model to locations.report.friede_location
+updated friede Location report.friede_link
+attached Widget report.friede_link to locations.report.friede_link
+attached Screen report.from_model to locations.report.friede_link
+updated friede Location report.friede_reference
+attached Widget report.friede_reference to locations.report.friede_reference
+attached Screen report.from_model to locations.report.friede_reference
+updated friede Location report.friede_setting
+attached Widget report.friede_setting to locations.report.friede_setting
+attached Screen report.from_model to locations.report.friede_setting
+updated friede Location friede_container
+updated friede Location friede_widget
+updated friede Location friede_block
+updated friede Location friede_screen
+updated friede Location friede_shell
+updated friede Location friede_theme
+updated friede Location friede_slot
+updated friede Location friede_app
+updated friede Location friede_location
+updated friede Location friede_link
+updated friede Location friede_reference
+updated friede Location friede_setting
+updated friede Location friede.containers
+updated friede Location friede.widgets
+updated friede Location friede.blocks
+updated friede Location friede.screens
+updated friede Location friede.shells
+updated friede Location friede.themes
+updated friede Location friede.slots
+updated friede Location friede.apps
+updated friede Location friede.locations
+updated friede Location friede.links
+updated friede Location friede.references
+updated friede Location friede.settings
+updated friede Location friede_container.edit
+updated friede Location friede_widget.edit
+updated friede Location friede_block.edit
+updated friede Location friede_screen.edit
+updated friede Location friede_shell.edit
+updated friede Location friede_theme.edit
+updated friede Location friede_slot.edit
+updated friede Location friede_app.edit
+updated friede Location friede_location.edit
+updated friede Location friede_link.edit
+updated friede Location friede_reference.edit
+updated friede Location friede_setting.edit
+updated friede Setting views.list.fields.friede.containers
+updated friede Setting views.list.fields.friede.widgets
+updated friede Setting views.list.fields.friede.blocks
+updated friede Setting views.list.fields.friede.screens
+updated friede Setting views.list.fields.friede.shells
+updated friede Setting views.list.fields.friede.themes
+updated friede Setting views.list.fields.friede.slots
+updated friede Setting views.list.fields.friede.apps
+updated friede Setting views.list.fields.friede.locations
+updated friede Setting views.list.fields.friede.links
+updated friede Setting views.list.fields.friede.references
+updated friede Setting views.list.fields.friede.settings
+updated friede Setting sys
+updated friede Setting sys.ui
+updated friede Setting sys.ui.shell
+updated friede Setting sys.ui.theme
+updated friede Container links.menu
+updated friede Container links.menu.nav
+updated friede Link menu.nav.home
+updated friede Link menu.nav.apps
+updated friede Link menu.nav.about
+updated friede Link menu.nav.contact
+updated friede Theme mayflower.acamar
+updated friede Shell mayflower
+now at version 0.1.0
+updated friede Action install
+updated friede Action uninstall
+updated friede Action activate
+updated friede Action deactivate
+updated friede Action update
+updated friede Action upgrade
+updated friede Action downgrade
+updated friede Block featured
+updated friede Block grid
+updated friede Block grid.filtered
+updated friede Block list
+updated friede Block list.filtered
+updated friede Screen dashboard
+updated friede Screen dashboard.from_model
+updated friede Screen dashboard.apps
+updated friede Screen dashboard.home
+updated friede Screen dashboard.user
+updated friede Screen dashboard.user.home
+updated friede Screen dashboard.apps
+now at version 0.2.0
+updated friede Action upgrade
+updated friede Action downgrade
+updated friede Block menu.sidebar
+updated friede Block feed
+updated friede Block feed.site
+updated friede Block menu.sidebar
+now at version 0.2.1
+updated friede Screen dashboard.apps
+now at version 0.2.3
+updated friede Action install
+updated friede Action uninstall
+updated friede Action activate
+updated friede Action deactivate
+updated friede Action update
+updated friede Action upgrade
+updated friede Action downgrade
+now at version 0.2.4
+now at version 0.2.5
+updated friede Action install
+now at version 0.2.6
+updated friede Screen view.object
+updated friede Screen report.from_model
+updated friede Screen delete.from_model
+updated friede Location new.friede_container
+updated friede Location new.friede_widget
+updated friede Location new.friede_block
+updated friede Location new.friede_screen
+updated friede Location new.friede_shell
+updated friede Location new.friede_theme
+updated friede Location new.friede_slot
+updated friede Location new.friede_app
+updated friede Location new.friede_location
+updated friede Location new.friede_link
+updated friede Location new.friede_reference
+updated friede Location new.friede_setting
+updated friede Location delete.friede_container
+updated friede Location delete.friede_widget
+updated friede Location delete.friede_block
+updated friede Location delete.friede_screen
+updated friede Location delete.friede_shell
+updated friede Location delete.friede_theme
+updated friede Location delete.friede_slot
+updated friede Location delete.friede_app
+updated friede Location delete.friede_location
+updated friede Location delete.friede_link
+updated friede Location delete.friede_reference
+updated friede Location delete.friede_setting
+updated friede Location list.friede_container
+updated friede Location list.friede_widget
+updated friede Location list.friede_block
+updated friede Location list.friede_screen
+updated friede Location list.friede_shell
+updated friede Location list.friede_theme
+updated friede Location list.friede_slot
+updated friede Location list.friede_app
+updated friede Location list.friede_location
+updated friede Location list.friede_link
+updated friede Location list.friede_reference
+updated friede Location list.friede_setting
+updated friede Location view.friede_container
+updated friede Location view.friede_widget
+updated friede Location view.friede_block
+updated friede Location view.friede_screen
+updated friede Location view.friede_shell
+updated friede Location view.friede_theme
+updated friede Location view.friede_slot
+updated friede Location view.friede_app
+updated friede Location view.friede_location
+updated friede Location view.friede_link
+updated friede Location view.friede_reference
+updated friede Location view.friede_setting
+updated friede Location edit.friede_container
+updated friede Location edit.friede_widget
+updated friede Location edit.friede_block
+updated friede Location edit.friede_screen
+updated friede Location edit.friede_shell
+updated friede Location edit.friede_theme
+updated friede Location edit.friede_slot
+updated friede Location edit.friede_app
+updated friede Location edit.friede_location
+updated friede Location edit.friede_link
+updated friede Location edit.friede_reference
+updated friede Location edit.friede_setting
+updated friede Location report.friede_container
+updated friede Location report.friede_widget
+updated friede Location report.friede_block
+updated friede Location report.friede_screen
+updated friede Location report.friede_shell
+updated friede Location report.friede_theme
+updated friede Location report.friede_slot
+updated friede Location report.friede_app
+updated friede Location report.friede_location
+updated friede Location report.friede_link
+updated friede Location report.friede_reference
+updated friede Location report.friede_setting
+updated friede Location friede_container
+updated friede Location friede_widget
+updated friede Location friede_block
+updated friede Location friede_screen
+updated friede Location friede_shell
+updated friede Location friede_theme
+updated friede Location friede_slot
+updated friede Location friede_app
+updated friede Location friede_location
+updated friede Location friede_link
+updated friede Location friede_reference
+updated friede Location friede_setting
+updated friede Location friede.containers
+updated friede Location friede.widgets
+updated friede Location friede.blocks
+updated friede Location friede.screens
+updated friede Location friede.shells
+updated friede Location friede.themes
+updated friede Location friede.slots
+updated friede Location friede.apps
+updated friede Location friede.locations
+updated friede Location friede.links
+updated friede Location friede.references
+updated friede Location friede.settings
+updated friede Location friede_container.edit
+updated friede Location friede_widget.edit
+updated friede Location friede_block.edit
+updated friede Location friede_screen.edit
+updated friede Location friede_shell.edit
+updated friede Location friede_theme.edit
+updated friede Location friede_slot.edit
+updated friede Location friede_app.edit
+updated friede Location friede_location.edit
+updated friede Location friede_link.edit
+updated friede Location friede_reference.edit
+updated friede Location friede_setting.edit
+now at version 0.2.7
+updated friede Action reinstall
+now at version 0.2.8
+updated friede Screen dashboard.apps
+now at version 0.2.9

@@ -11,7 +11,7 @@ class App( app.App ):
     description = '''Time, task and finance management system
 
     Also includes goal-setting, strategizing, and teamwork tools.'''
-    min_version = '0.2.5'
+    min_version = '0.1.0'
     objects = '''note resource product goal objective target strategy plan phase
             step project task action currency account pool allotment allocation
             income expense asset donation service rental liability contribution
@@ -439,6 +439,7 @@ class App( app.App ):
           ( '#widgets', ( 'from relations', self.objects, self.relations )),
           ( '#locations',
             ( 'projects', dict( title="Projects", href='/projects' )),
+
             ( 'from relations', self.objects, self.relations )),
           ( '#settings', ( 'from relations', self.objects, self.relations )),
           ( '#links',

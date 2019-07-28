@@ -237,7 +237,8 @@ def api_ls( request, path='', format=None ):
                 slot = m2.group(1)
                 if slot in ( 'user', 'users' ):
                     continue    # for now
-                if slot not in slots:
+                if slot not in slots\
+                   or len( slots[ slot ][ 'match' ]) < len( m.group(0) ):
                     app, model = slot.split('.')
                     try:
                         obj = ContentType.objects.get( app_label=app, model=model )
@@ -247,6 +248,7 @@ def api_ls( request, path='', format=None ):
                     singular = obj._meta.verbose_name
                     plural = obj._meta.verbose_name_plural
                     slots[ slot ] = dict(
+                        match=m.group(0),
                         app=app,
                         model=model,
                         singular=singular,

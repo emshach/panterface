@@ -395,7 +395,8 @@ class App( Registry, DataMixin ):
 
 
 class Location( Registry, DataMixin ):
-    app         = M.ForeignKey( 'App', M.CASCADE, related_name='locations' )
+    registry_ptr  = M.OneToOneField( Registry, M.CASCADE, parent_link=True,
+                                     related_name='_location' )
     registries = M.ManyToManyField( Registry, blank=True, through='LocationEntry',
                                     related_name='_locations' )
     href = M.CharField( max_length=255, default='#' )

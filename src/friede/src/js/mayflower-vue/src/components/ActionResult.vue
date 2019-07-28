@@ -2,7 +2,7 @@
   <div class="action-result">
     <h4>{{ action.name }} Results</h4>
     <div v-if="!results" class="error">No response</div>
-    <div v-else-if="results.error" class="error" v-html="results.error" />
+    <div v-else-if="'error' in results" class="error" v-html="results.error" />
     <ul v-else uk-accordion>
       <li v-for="( result, id ) in results" :class=itemClass>
         <a class="uk-accordion-title" href="#">{{ objects[ id ].path }}</a>

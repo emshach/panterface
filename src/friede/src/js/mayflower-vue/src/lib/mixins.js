@@ -345,7 +345,7 @@ export const ActorsMixin = {
              this.results = res || r.data;
              return this.results;
            }
-           if ( data.next )
+           if ( Object.values( res ).find( x => !x.res || x.res.error ) && data.next )
              this.next = data.next;
            if ( Object.values( res ).find( x => !x.res || !x.res.error )) {
              this.$emit( 'success', res );

@@ -12,6 +12,12 @@ export const HomePage = () =>
    import(/* webpackChunkName: "pages" */ './HomePage' )
 export const ListModelPage = () =>
    import(/* webpackChunkName: "pages" */ './ListModelPage' )
+export const ReportModelPage = () =>
+   import(/* webpackChunkName: "pages" */ './ReporttModelPage' )
+export const DeleteModelPage = () =>
+   import(/* webpackChunkName: "pages" */ './DeleteModelPage' )
+export const ViewObjectPage = () =>
+   import(/* webpackChunkName: "pages" */ './ViewObjectPage' )
 export const ModelDashboard = () =>
    import(/* webpackChunkName: "pages" */ './ModelDashboard' )
 export const SearchResultsPage = () =>
@@ -29,6 +35,9 @@ export default {
   HomeDashboard,
   HomePage,
   ListModelPage,
+  ReportModelPage,
+  DeleteModelPage,
+  ViewObjectPage,
   ModelDashboard,
   SearchResultsPage,
   UserDashboard,

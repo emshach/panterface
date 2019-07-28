@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="list-model-page">
+  <div class="delete-model-page">
     
   </div>
 </template>
@@ -8,7 +8,7 @@
 import { PageMixin } from '@/lib/mixins'
 
 export default {
-  name: "ListModelPage",
+  name: "DeleteModelPage",
   mixins: [ PageMixin ],
   components: {},
   props: {},
@@ -24,7 +24,7 @@ export default {
 </script>
 
 <style lang="scss">
-.list-model-page {
+.delete-model-page {
   
 }
 </style>

@@ -1,34 +1,30 @@
 <template lang="html">
-
-  <section class="user-home-dashboard">
-    <h1>user-home-dashboard Component</h1>
-  </section>
-
+  <div class="user-home-dashboard">
+    
+  </div>
 </template>
 
 <script lang="js">
-  export default  {
-    name: 'user-home-dashboard',
-    props: [],
-    mounted() {
+import { PageMixin } from '@/lib/mixins'
 
-    },
-    data() {
-      return {
-
-      }
-    },
-    methods: {
-
-    },
-    computed: {
-
-    }
+export default {
+  name: "UserHomeDashboard",
+  mixins: [ PageMixin ],
+  components: {},
+  props: {},
+  data() {
+    return {
+    };
+  },
+  created() {},
+  mounted() {},
+  methods: {},
+  computed: {}
 }
 </script>
 
-<style scoped lang="scss">
-  .user-home-dashboard {
-
-  }
+<style lang="scss">
+.user-home-dashboard {
+  
+}
 </style>

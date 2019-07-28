@@ -375,6 +375,21 @@ class App( app.App ):
                 data=dict(
                     component='ListModelPage'
                 ))),
+            ( 'report.from_model', dict(
+                icon='fontawesome.',
+                data=dict(
+                    component='ReportModelPage'
+                ))),
+            ( 'delete.from_model', dict(
+                icon='fontawesome.',
+                data=dict(
+                    component='DeleteModelPage'
+                ))),
+            ( 'view.object', dict(
+                icon='fontawesome.',
+                data=dict(
+                    component='ViewObjectPage'
+                ))),
           ),
           ( '#locations',
             ( 'home',    dict( title='Home',       href='/'        )),

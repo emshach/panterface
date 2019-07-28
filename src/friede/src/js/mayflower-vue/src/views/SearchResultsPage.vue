@@ -1,34 +1,30 @@
 <template lang="html">
-
-  <section class="search-results-page">
-    <h1>search-results-page Component</h1>
-  </section>
-
+  <div class="search-results-page">
+    
+  </div>
 </template>
 
 <script lang="js">
-  export default  {
-    name: 'search-results-page',
-    props: [],
-    mounted() {
+import { PageMixin } from '@/lib/mixins'
 
-    },
-    data() {
-      return {
-
-      }
-    },
-    methods: {
-
-    },
-    computed: {
-
-    }
+export default {
+  name: "SearchResultsPage",
+  mixins: [ PageMixin ],
+  components: {},
+  props: {},
+  data() {
+    return {
+    };
+  },
+  created() {},
+  mounted() {},
+  methods: {},
+  computed: {}
 }
 </script>
 
-<style scoped lang="scss">
-  .search-results-page {
-
-  }
+<style lang="scss">
+.search-results-page {
+  
+}
 </style>

@@ -738,9 +738,7 @@ class App( app.App ):
                 data=dict(
                     component='DeleteModelPage'
                 ))),
-          ),
-          ( '#locations',
-            ( 'from relations', self.objects, self.relations ))
+          )
         ),
         ( '0.2.8',
          ( '#actions',

@@ -258,7 +258,8 @@ def mklocations( app, objects, relations, actions=None ):
           tuple (
               ( '_' + o, dict(
                   title="delete {}".format( rs[o][ 'plural' ]).title(),
-                  href="/delete/{{{}.{}*}}".format( name, o )),
+                  href="/delete/{{{}.{}*}}".format( name, o ),
+                  data=dict( model="{}.{}".format( name, o ))),
                 ( '#widgets', ( 'card', dict( path="delete.{}_{}".format( name, o )))))
               for o in objects )),
         tuple (
@@ -266,7 +267,8 @@ def mklocations( app, objects, relations, actions=None ):
               tuple (
                   ( '_' + o, dict(
                       title="{} {}".format( action, rs[o][ 'plural' ]).title(),
-                      href="/{}/{{{}.{}*+}}".format( action, name, o )),
+                      href="/{}/{{{}.{}*+}}".format( action, name, o ),
+                      data=dict( model="{}.{}".format( name, o ))),
                     ( '#widgets', ( 'card', dict(
                         path="{}.{}_{}".format( action, name, o )))),
                     ( '#screens', ( 'default', dict( path=screens[ action ]))))
@@ -288,7 +290,8 @@ def mklocations( app, objects, relations, actions=None ):
         tuple(
             ( "{}_{}.edit".format( name, o ), dict(
                 title="edit {}".format( rs[o][ 'plural' ]).title(),
-                href="{{{}.{}*""+}}/edit".format( name, o )),
+                href="{{{}.{}*""+}}/edit".format( name, o ),
+                data=dict( model="{}.{}".format( name, o ))),
               ( '#screens', ( 'default', dict( path=screens[ 'edit' ]))))
             for o in objects ))
 

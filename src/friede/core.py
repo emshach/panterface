@@ -267,9 +267,9 @@ def mklocations( app, objects, relations, actions=None ):
                   ( '_' + o, dict(
                       title="{} {}".format( action, rs[o][ 'plural' ]).title(),
                       href="/{}/{{{}.{}*+}}".format( action, name, o )),
-                    ( 'widgets', ( 'card', dict(
+                    ( '#widgets', ( 'card', dict(
                         path="{}.{}_{}".format( action, name, o )))),
-                    ( 'screens', ( 'default', dict( path=screens[ action ]))))
+                    ( '#screens', ( 'default', dict( path=screens[ action ]))))
                   for o in objects ))
             for action in actions if action not in ( 'new', 'delete' )),
         ( '.' + name,

@@ -261,8 +261,8 @@ class Registry( AutoOwnedModel, Base, PathMixin ):
             return
         out = super( Registry, self ).to_dict()
         out.update({
-            '$default'     : self.default,
-            '$format'      : self.format,
+            '$default' : self.default,
+            '$format'  : self.format,
         })
 
         for x in self._container_entries.all():

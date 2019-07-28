@@ -229,13 +229,15 @@ def api_ls( request, path='', format=None ):
         m = completions.match( candidate.href )
         if m:
             g = m.group(1)
-            if not g:
+            if not g and \
+               ( not endpoint or len( endpoint[ 'match' ]) < len( m.group(0) )):
                 endpoint = _process_location( LocationSerializer(
                     candidate, context=dict(
                         request= request,
                         detail=  True,
                         expand=  [ '_widget_entries', '_screen_entries',
                                    '_block_entries' ])).data )
+                endpoint[ 'match' ] = m.group(0)
                 continue
             m2 = re.match( r'{([\w.]+)(\*)?(\+)?}', g )
             if m2:

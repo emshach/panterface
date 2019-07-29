@@ -42,7 +42,6 @@ export default  {
   props: [],
   mounted() {
     const actions = this.options.actions;
-    this.getData();
     var ops = {};
     var operands = {};
     var show = {};
@@ -99,9 +98,7 @@ export default  {
         'model-dashboard': true,
         'uk-flex-column': true,
       },
-      modelObj: null,
       featured: [],
-      objects: [],
       action: '',
       actions: {},
       operands: [],
@@ -110,17 +107,6 @@ export default  {
     }
   },
   methods: {
-    getData() {
-      if ( this.model )
-        this.$store.dispatch( 'getModel', this.model ).then( m => {
-          this.modelObj = m;
-          if ( m.rest ) {
-            this.$api( m.rest, '' ).then( r => { // TODO: paginate, filter?
-              this.objects = r.data.results || [];
-            });
-          }
-        });
-    },
     act( action, objects, now ) {
       const tag = this.actions[ action ].data.component;
       const actor = this.actors[ tag ];

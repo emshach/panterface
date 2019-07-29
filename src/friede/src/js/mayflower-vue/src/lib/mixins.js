@@ -156,7 +156,25 @@ export const PageMixin = {
       classes: {
         'page': true,
         'uk-flex': true,
-      }
+      },
+      modelObj: null,
+      objects: [],
+    }
+  },
+  created() {
+    this.getData();
+  },
+  method: {
+    getData() {
+      if ( this.model )
+        this.$store.dispatch( 'getModel', this.model ).then( m => {
+          this.modelObj = m;
+          if ( m.rest ) {
+            this.$api( m.rest, '' ).then( r => { // TODO: paginate, filter?
+              this.objects = r.data.results || [];
+            });
+          }
+        });
     }
   }
 };

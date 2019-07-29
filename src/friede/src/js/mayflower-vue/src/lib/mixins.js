@@ -164,10 +164,6 @@ export const PageMixin = {
   created() {
     this.getData();
   },
-  mounted() {
-    if ( !this.modelObj )
-      this.getData();
-  },
   methods: {
     getData() {
       if ( this.model )
@@ -179,6 +175,11 @@ export const PageMixin = {
             });
           }
         });
+    }
+  },
+  watch: {
+    model() {
+      this.getData();
     }
   }
 };

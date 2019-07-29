@@ -59,7 +59,7 @@ export default {
   },
   methods: {
     getColWidths() {
-      if ( !this.$el || !this.$refs || this.$refs.header )
+      if ( !this.$el || !this.$refs || !this.$refs.header )
         return;
       let tr = this.$refs.header.children[0];
       if ( tr.tagName === 'THEAD' )

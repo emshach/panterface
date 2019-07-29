@@ -10992,7 +10992,7 @@ form.uk-form-stacked label {
 .uk-table-striped > tr:nth-of-type(odd),
 .uk-table-striped tbody tr:nth-of-type(odd) {
   background: rgba(0, 0, 0, 0.05);
-  border-top: 1px solid rgba(0, 0, 0, 0.45);
+  border-top: 1px solid rgba(0, 0, 0, 0.04);
   border-bottom: 1px solid rgba(0, 0, 0, 0.08); }
 
 .uk-table > tr.active, .uk-table tbody tr.active {

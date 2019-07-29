@@ -463,7 +463,10 @@ def upgradeapp( app, data, upto=None ):
                         try:    # BWAHAHAHAHA!
                             app_field = model[0]._meta.get_field( 'app' )
                             if app_field.related_model is App:
-                                search[ 'app' ] = app
+                                if model[0] in ( Location, ):
+                                    search[ 'app' ] = app
+                                else:
+                                    updates[ 'app' ] = app
                         except FieldDoesNotExist:
                             pass
                         renamed = False

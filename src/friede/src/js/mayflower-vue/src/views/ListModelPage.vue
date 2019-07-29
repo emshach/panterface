@@ -1,10 +1,11 @@
 <template lang="html">
   <div class="list-model-page">
-      <vk-table responsive hoverable striped
-                :row-class=showApplicable
-                :divided=false
-                :data=operands >
-      </vk-table>
+    <vk-table v-if="model" responsive hoverable striped
+              :divided=false
+              :data=objects >
+      <vk-column v-for="field in model.fields" :key=field.name
+                 :title=field.name :cell=field.name />
+    </vk-table>
   </div>
 </template>
 

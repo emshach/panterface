@@ -156,6 +156,7 @@ export const PageMixin = {
       classes: {
         'page': true,
         'uk-flex': true,
+        'uk-flex-column': true,
       },
       modelObj: null,
       objects: [],

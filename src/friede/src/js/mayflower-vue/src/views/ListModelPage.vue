@@ -54,6 +54,8 @@ export default {
   },
   created() {},
   mounted() {
+    if ( this.pageFilters )
+      this.filters = this.pageFilters.map( x => ({ key: x, label: x }));
     setInterval(() => this.getColWidths(), 200 );
   },
   methods: {

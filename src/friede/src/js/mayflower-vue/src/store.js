@@ -32,7 +32,10 @@ export default new Vuex.Store({
     },
     setContext( state, context, debug ) {
       state.context = context;
-      state.location = context.length && context[ context.length - 1 ].location;
+    },
+    setLocation( state, location ) {
+      const ctx = state.context;
+      state.location = ctx.length && ctx[ ctx.length - 1 ].location;
       if ( state.location ) {
         state.lastLocation = state.location;
       }
@@ -64,18 +67,20 @@ export default new Vuex.Store({
       })
     },
     async setContext({ commit, state, dispatch }, context ) {
+      commit( 'setContext', context );
       if ( context && context.length && context[ context.length - 1 ].location ) {
-        const location = await API( 'ls', context[ context.length - 1].location.id )
+        const location = await API( 'ls', context[ context.length - 1 ].location.id )
               .then( r => r.data.location )
               .catch( err => {
                 console.warn( `error getting location`, err, err.response );
                 commit( 'setError', `Error getting location<br/>/` + err + '<br/>'
                         + err.response );
               });
-        if ( location )
-          context[ context.length - 1].location = location;
+        if ( location ) {
+          context[ context.length - 1 ].location = location;
+          dispatch( 'setLocation' );
+        }
       }
-      commit( 'setContext', context );
       var model = await dispatch( 'getModel' );
       commit( 'setModel', model );
     },
@@ -103,12 +108,12 @@ export default new Vuex.Store({
       var models = await getModel( model, have ).catch( err => {
         console.warn( `error getting model '${model}'`, err, err.response );
         commit( 'setError', `Error getting model '${model}'<br/>` + err + '<br/>'
-                +  ( err.response
-                     ? ( err.response.data.msg ? err.response.data.msg
-                         : err.response.data.message ? err.response.data.message
-                         : err.response.data.error ? err.response.data.error
-                         : err.response.data )
-                     : '' ));
+                + ( err.response
+                    ? ( err.response.data.msg ? err.response.data.msg
+                        : err.response.data.message ? err.response.data.message
+                        : err.response.data.error ? err.response.data.error
+                        : err.response.data )
+                    : '' ));
       });
       commit( 'addModels', models );
       return models[ model ];

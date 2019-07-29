@@ -55,8 +55,8 @@ export default {
     this.$store.commit( 'setMenus', Friede.menus );
   },
   methods: {
-    promptInput( route, context ) {
-      this.$store.dispatch( 'setContext', context );
+    async promptInput( route, context ) {
+      await this.$store.dispatch( 'setContext', context );
       this.$router.push( route || '/' );
     },
   },

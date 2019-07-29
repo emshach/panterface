@@ -99,6 +99,7 @@ export default {
   .uk-table {
     margin-top: 0;
     width: 100%;
+    font-size: 98%;
     th {
       background: white;
     }
@@ -108,6 +109,10 @@ export default {
     &.sticky-header {
       position: fixed;
       z-index: 10;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.2)
+      tr {
+        display: flex;
+      }
     }
   } 
 }

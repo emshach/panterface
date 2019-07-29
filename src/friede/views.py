@@ -455,6 +455,7 @@ def api_path( request, path=None, format=None ):
         if n[0] == '-':
             ndata = n[1:].split('+')
             odata = ndata[0].split('-')
+            ndata = filter( lambda x:x, ndata[1:] )
             app = odata[0]
             reg = odata[1]
             ids = [ int(x) for x in odata[2:] ] # TODO: validationerror
@@ -478,12 +479,12 @@ def api_path( request, path=None, format=None ):
                 singular=meta.verbose_name,
                 plural=meta.verbose_name_plural,
                 objects=data.data,
-                filter='+'.join( ndata[1:] ),
-                filters= ndata[1:],
+                filter='+'.join( ndata ),
+                filters= ndata,
                 href="{{{}\.{}\*?\+?}}".format( app, meta.model_name ),
                 title=( meta.verbose_name if len( data.data ) == 1
                         else meta.verbose_name_plural )\
-                + ( ' + '.join( filter( lambda x: x, ( '+'.join( ndata[1:] ),
+                + ( ' + '.join( filter( lambda x: x, ( '+'.join( ndata ),
                                                        len( data.data ))))
                     if data.data or len( ndata ) > 1 else '' )
             )

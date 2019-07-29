@@ -29,11 +29,12 @@ import {
   TableColumn as VkColumn,
   TableColumnSelect as VkColSelect
 } from 'vuikit/lib/table'
+import { FilteredMixin, ActionsMixin } from '@/lib/mixins'
 import { FilterInput, ActionsInput } from '@/components'
 
 export default {
   name: "ListModelPage",
-  mixins: [ PageMixin ],
+  mixins: [ PageMixin , FilteredMixin ],
   components: {
     VkTable,
     VkColumn,

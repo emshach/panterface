@@ -60,10 +60,11 @@ export default {
   methods: {
     getColWidths() {
       if ( !this.$el || !this.$refs || !this.$refs.data || !this.$refs.header
-         || !this.$refs.data.children || !this.$refs.header.children )
+           || !this.$refs.data.$el || !this.$refs.header.$el
+           || !this.$refs.data.$el.children || !this.$refs.header.$el.children)
         return;
-      let dtr = this.$refs.data.children[0];
-      let htr = this.$refs.header.children[0];
+      let dtr = this.$refs.data.$el.children[0];
+      let htr = this.$refs.header.$el.children[0];
       if ( dtr.tagName === 'THEAD' )
         if ( !dtr.children )
           return;

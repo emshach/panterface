@@ -32,6 +32,10 @@ export default new Vuex.Store({
     },
     setContext( state, context, debug ) {
       state.context = context;
+      state.location = context.length && context[ context.length - 1 ].location;
+      if ( state.location ) {
+        state.lastLocation = state.location;
+      }
     },
     setLocation( state, location ) {
       const ctx = state.context;

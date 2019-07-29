@@ -64,6 +64,17 @@ export default new Vuex.Store({
       })
     },
     async setContext({ commit, state, dispatch }, context ) {
+      if ( context && context.length && context[ context.length - 1 ].location ) {
+        const location = await API( 'ls', context[ context.length - 1].location.id )
+              .then( r => r.data.location )
+              .catch( err => {
+                console.warn( `error getting location`, err, err.response );
+                commit( 'setError', `Error getting location<br/>/` + err + '<br/>'
+                        + err.response );
+              });
+        if ( location )
+          context[ context.length - 1].location = location;
+      }
       commit( 'setContext', context );
       var model = await dispatch( 'getModel' );
       commit( 'setModel', model );

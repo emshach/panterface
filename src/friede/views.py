@@ -203,6 +203,21 @@ def api_menus( request, format=None ):
 @api_view([ 'GET' ])
 @permission_classes(( permissions.AllowAny, ))
 def api_ls( request, path='', format=None ):
+    lid = None
+    try:
+        lid = int( path )
+        return Response( dict(
+            location=_process_location(
+                LocationSerializer(
+                    context=dict(
+                        request=request,
+                        detail=True,
+                        expand=[  '_widget_entries', '_screen_entries',
+                                  '_block_entries' ]
+                    )).data )))
+    except ValueError:
+        pass
+
     ptree = path.split('/')
     rx = r'/?'
     for d in ptree:
@@ -218,11 +233,7 @@ def api_ls( request, path='', format=None ):
     by_label = {}
     locations = []
     endpoint = False
-    lctx = dict(
-        request= request,
-        detail=  True,
-        expand=  [  '_widget_entries', '_screen_entries', '_block_entries' ]
-    )
+    lctx = dict( request=request )
     for candidate in candidates:
         if not candidate.href:
             continue
@@ -286,12 +297,7 @@ def api_ls( request, path='', format=None ):
             w[ 'label' ]= w['plural' if w[ 'multiple'] else 'singular' ].title()
             w[ 'search' ] = list( w[ 'search' ])
 
-    expand = locations
-    rest = ()  # locations[ 1: ]
-    expanded_serializer = LocationSerializer(
-        expand, many=True, context=lctx )
-    # rest_serializer = LocationSerializer(
-    #     rest, many=True, context={ 'request': request })
+    serializer = LocationSerializer( locations, many=True, context=lctx )
     return Response( dict(
         debug=dict(
             path=path,
@@ -302,7 +308,7 @@ def api_ls( request, path='', format=None ):
         base=rx,
         matches=tuple( matches ),
         slots=slots.values(),
-        locations=_process_locations( expanded_serializer.data ) # + rest_serializer.data
+        locations=_process_locations( serializer.data )
     ))
 
 def _get_model( name ):

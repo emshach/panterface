@@ -484,9 +484,9 @@ def api_path( request, path=None, format=None ):
                 href="{{{}\.{}\*?\+?}}".format( app, meta.model_name ),
                 title=( meta.verbose_name if len( data.data ) == 1
                         else meta.verbose_name_plural )\
-                + ( ' + '.join( filter( lambda x: x, ( '+'.join( ndata ),
+                + ( ': ' + ' + '.join( filter( lambda x: x, ( '+'.join( ndata ),
                                                        len( data.data ))))
-                    if data.data or len( ndata ) > 1 else '' )
+                    if data.data or len( ndata ) else '' )
             )
             rx0 = r"{}/{}".format( rx0, node[ 'href' ])
             rx1 = r"(?:{}/)?{}".format( rx1, node[ 'href' ])

@@ -165,7 +165,7 @@ class AssetSerializer( serializers.HyperlinkedModelSerializer ):
         model = Asset
         fields = ( 'url', 'id', 'name', 'title', 'description', 'active',
                    'valid', 'cost', 'expense', 'value', 'intended_own',
-                   'actual_own', 'notes' )
+                   'effective_own', 'notes' )
 
 
 class DonationSerializer( serializers.HyperlinkedModelSerializer ):

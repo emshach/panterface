@@ -3,7 +3,7 @@
     <vue-perfect-scrollbar class="scroll" @ps-scroll-x="scrollHeader" ref="scroll">
       <vk-table v-if="modelObj" responsive hoverable striped
                 :divided=false :data=[]
-                class="sticky-header" ref="header">
+                class="sticky-header" ref="header" :style=headStyle >
         <vk-column v-for="field in fields" :key=field.name
                    :title=field.name :cell=field.name >
           <template #default={cell} >{{ cell || '' }}</template>
@@ -41,10 +41,10 @@ export default {
   data() {
     return {
       classes: {
-        'list-model-page': true,
-        headStyle: {
-          left: 0
-        }
+        'list-model-page': true
+      },
+      headStyle: {
+        left: 0
       }
     };
   },

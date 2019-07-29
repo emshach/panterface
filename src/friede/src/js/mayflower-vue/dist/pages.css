@@ -68,6 +68,7 @@
 }
 .list-model-page .uk-table {
     margin-top: 0;
+    width: 100%;
 }
 .list-model-page .uk-table th {
       background: white;

@@ -54,6 +54,7 @@ export default {
   padding-right: 1px;
   .uk-table {
     margin-top: 0;
+    width: 100%;
     th {
       background: white;
     }

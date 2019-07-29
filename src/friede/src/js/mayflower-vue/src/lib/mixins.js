@@ -166,20 +166,22 @@ export const PageMixin = {
   },
   methods: {
     getData() {
-      if ( this.model )
-        this.$store.dispatch( 'getModel', this.model ).then( m => {
-          this.modelObj = m;
-          if ( m.rest ) {
-            this.$api( m.rest, '' ).then( r => { // TODO: paginate, filter?
-              this.objects = r.data.results || [];
-            });
-          }
-        });
+      if ( !this.model )
+        return;
+      const model = this.model;
+      this.$store.dispatch( 'getModel', this.model ).then( m => {
+        this.modelObj = m;
+        if ( model == this.model && m.rest ) {
+          this.$api( m.rest, '' ).then( r => { // TODO: paginate, filter?
+            this.objects = r.data.results || [];
+          });
+        }
+      });
     }
   },
   watch: {
     model() {
-      this.getData();
+      this.$nextTick(() => this.getData());
     }
   }
 };

@@ -168,6 +168,7 @@ export const PageMixin = {
     getData() {
       if ( this.model )
         this.$store.dispatch( 'getModel', this.model ).then( m => {
+          console.log( 'getmodel', this, m );
           this.modelObj = m;
           if ( m.rest ) {
             this.$api( m.rest, '' ).then( r => { // TODO: paginate, filter?

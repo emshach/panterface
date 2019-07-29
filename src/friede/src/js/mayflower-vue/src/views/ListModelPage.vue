@@ -1,9 +1,9 @@
 <template lang="html">
   <div class="list-model-page">
-    <vk-table v-if="model" responsive hoverable striped
+    <vk-table v-if="modelObj" responsive hoverable striped
               :divided=false
               :data=objects >
-      <vk-column v-for="field in model.fields" :key=field.name
+      <vk-column v-for="field in modelObj.fields" :key=field.name
                  :title=field.name :cell=field.name />
     </vk-table>
   </div>

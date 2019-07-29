@@ -38,6 +38,7 @@ export default {
     VkTable,
     VkColumn,
     VkColSelect,
+    FilterInput,
   },
   props: {},
   data() {

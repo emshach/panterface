@@ -73,7 +73,7 @@ export default {
         if ( !htr.children )
           return;
         htr = htr.children[0];
-      Array.prottype.forEach.call( htr, ( th, i ) => {
+      Array.prototype.forEach.call( htr, ( th, i ) => {
         dtr[i].style.width = th.clientWidth + 'px';
       });
       

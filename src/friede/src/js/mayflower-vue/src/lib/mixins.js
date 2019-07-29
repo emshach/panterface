@@ -169,14 +169,12 @@ export const PageMixin = {
       if ( !this.model )
         return;
       const model = this.model;
-      const objects = this.$store.getters.objects;
-      if ( objects && !( this.filters && this.filters.length )) {
-        this.objects = objects;
-        return;
-      }
       this.$store.dispatch( 'getModel', this.model ).then( m => {
         this.modelObj = m;
-        if ( m.rest ) {
+      const objects = this.$store.getters.objects;
+        if ( objects && !( this.filters && this.filters.length )) {
+          this.objects = objects;
+        } else if ( m.rest ) {
           this.$api( m.rest, '' ).then( r => { // TODO: paginate, filter?
             if ( model === this.model )
               this.objects = r.data.results || [];

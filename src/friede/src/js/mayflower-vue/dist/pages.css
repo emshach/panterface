@@ -66,6 +66,9 @@
   padding-left: 1px;
   padding-right: 1px;
 }
+.list-model-page .scroll {
+    width: 100%;
+}
 .list-model-page .uk-table {
     margin-top: 0;
     width: 100%;
@@ -75,6 +78,10 @@
 }
 .list-model-page .uk-table th, .list-model-page .uk-table td {
       padding: 8px;
+}
+.list-model-page .uk-table.sticky-header {
+      position: fixed;
+      z-index: 10;
 }
 
 

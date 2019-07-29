@@ -477,11 +477,11 @@ def upgradeapp( app, data, upto=None ):
                             if field.is_relation:
                                 rm = field.related_model
                                 updates.pop( key, None )
+                                if rm in registries:
+                                    if not value.startswith( registries[ rm ]+'.' ):
+                                        value = "{}.{}".format(
+                                            registries[ rm ], value )
                                 try:
-                                    if rm in registries:
-                                        if not value.startswith( registries[ rm ]+'.' ):
-                                            value = "{}.{}".format(
-                                                registries[ rm ], value )
                                     related = rm.objects.get( path=value )
                                 except rm.DoesNotExist:
                                     if rm in auto_create:

@@ -199,7 +199,8 @@ class App( object ) :
         return updateapp( self.name, self.data, self )
 
     def postupdate( self ):
-        if version_parse( self.version ) < version_parse( self.min_version ):
+        if version_parse( self.version ) < version_parse( self.min_version )\
+           and self.auto_install:
             self.preupgrade()
             self.upgrade( to=self.min_version )
             self.postupgrade()

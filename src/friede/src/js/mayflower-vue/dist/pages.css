@@ -66,11 +66,14 @@
   padding-left: 1px;
   padding-right: 1px;
 }
+.list-model-page .uk-table {
+    margin-top: 0;
+}
 .list-model-page .uk-table th {
-    background: white;
+      background: white;
 }
 .list-model-page .uk-table th, .list-model-page .uk-table td {
-    padding: 8px;
+      padding: 8px;
 }
 
 

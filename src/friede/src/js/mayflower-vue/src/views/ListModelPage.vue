@@ -51,20 +51,26 @@ export default {
     const cw = {};
     this.fields.forEach( f => { ct[f] = 0 });
     this.colWidths = cw;
-    this.$nextTick(() => this.getColWidths() );
+    // this.$nextTick(() => this.getColWidths() );
+    setInterval(() => this.getColWidths(), 200 );
   },
-  updated() {
-    this.$nextTick(() => this.getColWidths() );
-  },
+  // updated() {
+  //   this.$nextTick(() => this.getColWidths() );
+  // },
   methods: {
     getColWidths() {
-      if ( !this.$el || !this.$refs || !this.$refs.data || !this.$refs.header )
+      if ( !this.$el || !this.$refs || !this.$refs.data || !this.$refs.header
+         || !this.$refs.data.children || !this.$refs.header.children )
         return;
       let dtr = this.$refs.data.children[0];
       let htr = this.$refs.header.children[0];
       if ( dtr.tagName === 'THEAD' )
-        dtr = dtr.children[0];
+        if ( !dtr.children )
+          return;
+          dtr = dtr.children[0];
       if ( htr.tagName === 'THEAD' )
+        if ( !htr.children )
+          return;
         htr = htr.children[0];
       Array.prottype.forEach.call( htr, ( th, i ) => {
         dtr[i].style.width = th.clientWidth + 'px';

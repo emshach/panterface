@@ -1,6 +1,6 @@
 <template lang="html">
   <div :class=classes >
-    <vue-perfect-scrollbar class="scroll">
+    <vue-perfect-scrollbar class="scroll" @ps-scroll-x="scrollHeader" ref="scroll">
       <vk-table v-if="modelObj" responsive hoverable striped
                 :divided=false :data=[]
                 class="sticky-header" ref="header">
@@ -42,21 +42,16 @@ export default {
     return {
       classes: {
         'list-model-page': true,
-        colWidths: {}
+        headStyle: {
+          left: 0
+        }
       }
     };
   },
   created() {},
   mounted() {
-    const cw = {};
-    this.fields.forEach( f => { ct[f] = 0 });
-    this.colWidths = cw;
-    // this.$nextTick(() => this.getColWidths() );
     setInterval(() => this.getColWidths(), 200 );
   },
-  // updated() {
-  //   this.$nextTick(() => this.getColWidths() );
-  // },
   methods: {
     getColWidths() {
       if ( !this.$el || !this.$refs || !this.$refs.data || !this.$refs.header
@@ -77,6 +72,10 @@ export default {
         htr.children[i].style.width = th.clientWidth + 'px';
       });
       
+    },
+    scrollHeader() {
+      if ( this.$refs && this.$refs.scroll && this.$refs.scroll.$el)
+      this.headStyle.left = - this.$refs.scroll.$el.scrollLeft + 'px'
     }
   },
   computed: {

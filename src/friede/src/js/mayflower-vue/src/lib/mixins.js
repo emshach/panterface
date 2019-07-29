@@ -171,9 +171,10 @@ export const PageMixin = {
       const model = this.model;
       this.$store.dispatch( 'getModel', this.model ).then( m => {
         this.modelObj = m;
-        if ( model == this.model && m.rest ) {
+        if ( m.rest ) {
           this.$api( m.rest, '' ).then( r => { // TODO: paginate, filter?
-            this.objects = r.data.results || [];
+            if ( model == this.model )
+              this.objects = r.data.results || [];
           });
         }
       });

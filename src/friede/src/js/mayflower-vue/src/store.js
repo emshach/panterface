@@ -105,6 +105,8 @@ export default new Vuex.Store({
         if ( !model )
           return null;
       }
+      if ( model && model.fullname )
+        return model;
       if ( state.models[ model ]) {
         return state.models[ model ];
       }

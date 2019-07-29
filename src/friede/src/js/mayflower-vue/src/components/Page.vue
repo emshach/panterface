@@ -7,7 +7,7 @@ export default {
   functional: true,
   render( h, ref ) {
     const screen = resolve( store.getters.screen );
-    const model = screen.model || store.state.model;
+    const model = screen.model || ( store.state.model && store.state.model.fullname );
     const blocks = screen.$blocks || {};
     const tag = pages[ screen.component ] || pages.HomePage;
     var options = {};

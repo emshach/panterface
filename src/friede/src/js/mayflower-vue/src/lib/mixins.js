@@ -164,9 +164,12 @@ export const PageMixin = {
   created() {
     this.getData();
   },
+  mounted() {
+    if ( !this.modelObj )
+      this.getData();
+  },
   methods: {
     getData() {
-      console.log( 'getmodel', this, this.model );
       if ( this.model )
         this.$store.dispatch( 'getModel', this.model ).then( m => {
           this.modelObj = m;

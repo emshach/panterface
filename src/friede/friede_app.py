@@ -22,7 +22,7 @@ class App( app.App ):
 
     registry_objects = '''container widget block screen shell theme slot app
                           location'''.split()
-    objects = registry_objects + 'link reference setting'.split()
+    objects = registry_objects + 'link reference setting action'.split()
 
     links = { x: dict( via='entry' ) for x in _links }
 
@@ -121,6 +121,13 @@ class App( app.App ):
             'model'  : 'Setting',
             'icon'   : 'fontawesome.cog',
             'plural' : 'settings',
+            'has'    : ''.split(),
+            'in'     : registry_objects
+        },
+        action={
+            'model'  : 'Action',
+            'icon'   : 'fontawesome.tractor',
+            'plural' : 'actions',
             'has'    : ''.split(),
             'in'     : registry_objects
         },

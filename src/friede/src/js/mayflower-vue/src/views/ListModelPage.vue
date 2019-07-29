@@ -101,6 +101,7 @@ export default {
     font-size: 98%;
     th {
       background: white;
+      box-sizing: border-box;
     }
     th, td {
       padding: 8px;

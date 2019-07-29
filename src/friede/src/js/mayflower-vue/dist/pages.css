@@ -76,6 +76,8 @@
 }
 .list-model-page .uk-table th {
       background: white;
+      -webkit-box-sizing: border-box;
+              box-sizing: border-box;
 }
 .list-model-page .uk-table th, .list-model-page .uk-table td {
       padding: 8px;

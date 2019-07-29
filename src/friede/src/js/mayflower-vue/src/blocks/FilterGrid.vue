@@ -91,9 +91,6 @@ export default  {
     }
   },
   methods: {
-    addOption( filter ) {
-      this.presets.push( filter );
-    },
     doAction( action, arg ) {
       if ( action === 'select' ) {
         switch ( arg ) {

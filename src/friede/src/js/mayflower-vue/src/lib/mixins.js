@@ -249,6 +249,9 @@ export const FilteredMixin = {
     }
   },
   methods: {
+    addOption( filter ) {
+      this.presets.push( filter );
+    },
     toggleSelect( object ) {
       var index = this.selected.indexOf( object );
       if ( index > -1 )

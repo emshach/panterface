@@ -8,7 +8,7 @@ export default {
   render( h, ref ) {
     const screen = resolve( store.getters.screen );
     const model = screen.model || ( store.state.model && store.state.model.fullname );
-    const filters = store.getters.filters;
+    const pageFilters = store.getters.filters;
     const blocks = screen.$blocks || {};
     const tag = pages[ screen.component ] || pages.HomePage;
     var options = {};
@@ -17,7 +17,7 @@ export default {
         if ( x[0] !== '$' && x !== 'model' )
           options[x] = screen[x];
       });
-    Object.assign( ref.props, { model, blocks, options, filters });
+    Object.assign( ref.props, { model, blocks, options, pageFilters });
     return h( tag, ref );
   }
 }

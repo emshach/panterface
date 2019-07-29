@@ -1,5 +1,6 @@
 <template lang="html">
   <div :class=classes >
+    <filter-input v-model=filters :filters=presets @add=addOption />
     <vue-perfect-scrollbar class="scroll" @ps-scroll-x="scrollHeader" ref="scroll">
       <vk-table v-if="modelObj" responsive hoverable striped
                 :divided=false :data=[]
@@ -11,7 +12,7 @@
       </vk-table>
       <vk-table v-if="modelObj" responsive hoverable striped
                 :divided=false
-                :data=objects ref="data" >
+                :data=filtered ref="data" >
         <vk-column v-for="field in fields" :key=field.name
                    :title=field.name :cell=field.name >
           <template #default={cell} >{{ cell || '' }}</template>
@@ -28,6 +29,7 @@ import {
   TableColumn as VkColumn,
   TableColumnSelect as VkColSelect
 } from 'vuikit/lib/table'
+import { FilterInput, ActionsInput } from '@/components'
 
 export default {
   name: "ListModelPage",
@@ -83,6 +85,11 @@ export default {
       if ( this.modelObj )
         return this.modelObj.fields.filter( x => !x.related );
       return [];
+    }
+  },
+  watch: {
+    pageFilters( val ) {
+      this.filters = val.map( x => ({ key: x, label: x }));
     }
   }
 }

@@ -250,11 +250,10 @@ def api_ls( request, path='', format=None ):
             m2 = re.match( r'{([\w.]+)(\*)?(\+)?}', g )
             if m2:
                 slot = m2.group(1)
-                name = candidate.href
                 if slot in ( 'user', 'users' ):
                     continue    # for now
-                if name not in slots\
-                   or len( slots[ name ][ 'match' ]) < len( m.group(0) ):
+                if slot not in slots\
+                   or len( slots[ slot ][ 'match' ]) < len( m.group(0) ):
                     app, model = slot.split('.')
                     try:
                         obj = ContentType.objects.get( app_label=app, model=model )
@@ -263,7 +262,7 @@ def api_ls( request, path='', format=None ):
                     obj = obj.model_class()
                     singular = obj._meta.verbose_name
                     plural = obj._meta.verbose_name_plural
-                    slots[ name ] = dict(
+                    slots[ slot ] = dict(
                         match=m.group(0),
                         app=app,
                         model=model,
@@ -277,12 +276,12 @@ def api_ls( request, path='', format=None ):
                         search=set(( app, model )))
                     if singular not in by_label:
                         by_label[ singular ] = []
-                    by_label[ singular ].append( slots[ name ])
+                    by_label[ singular ].append( slots[ slot ])
                 if m2.group(2):
-                    slots[ name ][ 'multiple' ] = True
+                    slots[ slot ][ 'multiple' ] = True
                 if m2.group(3):
-                    slots[ name ][ 'create' ] = True
-                    slots[ name ][ 'search' ].add( 'new' )
+                    slots[ slot ][ 'create' ] = True
+                    slots[ slot ][ 'search' ].add( 'new' )
             else:
                 matches.add(g)
                 if m.group(2) is not None:

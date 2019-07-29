@@ -134,7 +134,17 @@ export default new Vuex.Store({
     screen: state => {
       return state.lastLocation
          && state.lastLocation.screens
-         && state.lastLocation.screens.default
+         && state.lastLocation.screens.default;
     },
+    objects: state => {
+      return state.context
+         && state.context.length
+         && state.context[ state.context.length - 1 ].objects;
+    },
+    filters: state => {
+      return state.context
+         && state.context.length
+         && state.context[ state.context.length - 1 ].filters;
+    }
   }
 })

@@ -4,7 +4,7 @@
     <vk-title>{{ action }}<template v-if="arg">: {{ arg.title }}</template>
       <template v-else> {{ model ? model.plural : '' }}</template>
     </vk-title>
-    <label v-if="action === 'install'">
+    <label v-if="action === 'install' || action === 'reinstall'">
       <input class="uk-checkbox" type="checkbox" v-model=install_userdata >
       Install user-data
     </label>

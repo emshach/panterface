@@ -150,7 +150,7 @@ export const PageMixin = {
   components: {
     VuePerfectScrollbar,
   },
-  props: [ 'blocks', 'widgets', 'source', 'model', 'options' ],
+  props: [ 'blocks', 'widgets', 'source', 'model', 'options', 'filters' ],
   data() {
     return {
       classes: {
@@ -169,11 +169,14 @@ export const PageMixin = {
       if ( !this.model )
         return;
       const model = this.model;
+      const objects = this.store.getters.objects;
+      if ( objects && !this.filters )
+        this.objects = objects;
       this.$store.dispatch( 'getModel', this.model ).then( m => {
         this.modelObj = m;
         if ( m.rest ) {
           this.$api( m.rest, '' ).then( r => { // TODO: paginate, filter?
-            if ( model == this.model )
+            if ( model === this.model )
               this.objects = r.data.results || [];
           });
         }

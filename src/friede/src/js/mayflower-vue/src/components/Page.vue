@@ -8,15 +8,16 @@ export default {
   render( h, ref ) {
     const screen = resolve( store.getters.screen );
     const model = screen.model || ( store.state.model && store.state.model.fullname );
+    const filters = store.getters.filters;
     const blocks = screen.$blocks || {};
     const tag = pages[ screen.component ] || pages.HomePage;
     var options = {};
     if ( screen )
       Object.keys( screen ).forEach( x => {
-        if ( x[0] != '$' && x !== 'model' )
+        if ( x[0] !== '$' && x !== 'model' )
           options[x] = screen[x];
       });
-    Object.assign( ref.props,{ model, blocks, options });
+    Object.assign( ref.props, { model, blocks, options, filters });
     return h( tag, ref );
   }
 }

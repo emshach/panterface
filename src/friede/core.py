@@ -526,6 +526,9 @@ def upgradeapp( app, data, upto=None ):
                                     append = updates.pop( 'APPEND', {} )
                                     prepend = updates.pop( 'PREPEND', {} )
                                     delete = updates.pop( 'DELETE', {} )
+                                else:
+                                    updates = {}
+
                                 attached, att_new = adder( path[0], obj, updates )
                                 if attached:
                                     name = attached.name

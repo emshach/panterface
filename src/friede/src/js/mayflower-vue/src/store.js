@@ -105,7 +105,7 @@ export default new Vuex.Store({
         if ( !model )
           return null;
       }
-      if ( model in state.models ) {
+      if ( state.models[ model ]) {
         return state.models[ model ];
       }
       const have = Object.keys( state.models );

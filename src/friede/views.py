@@ -290,7 +290,7 @@ def api_ls( request, path='', format=None ):
         if len(v) > 1:
             for w in v:
                 w[ 'append' ]= " ({})".format( w[ 'app' ])
-                w[ 'label' ]= ( w['plural' if w[ 'multiple'] else 'singular' ]
+                w[ 'label' ]= ( w['plural' if w[ 'multiple' ] else 'singular' ]
                                + w[ 'append' ]).title()
                 w[ 'search' ] = list( w[ 'search' ])
         else:
@@ -481,7 +481,8 @@ def api_path( request, path=None, format=None ):
                 filter='+'.join( ndata[1:] ),
                 filters= ndata[1:],
                 href="{{{}\.{}\*?\+?}}".format( app, meta.model_name ),
-                title='TBD'
+                title=( meta.verbose_name if len( data.data ) == 1
+                        else meta.verbose_name_plural )
             )
             rx0 = r"{}/{}".format( rx0, node[ 'href' ])
             rx1 = r"(?:{}/)?{}".format( rx1, node[ 'href' ])

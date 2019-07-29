@@ -135,14 +135,37 @@ form.uk-form-stacked label {
     }
   }
 }
-.uk-table-striped > tr:nth-of-type(odd), tbody tr:nth-of-type(odd) {
-  &.uk-active {
-    background: #ffb;
+.uk-table-striped {
+  > tr, tbody tr {
+    &:nth-of-type(odd) {
+      background: rgba(0,0,0,0.1);      
+      border-top: 1px solid rgba(0,0,0,0.05);
+      border-bottom: 1px solid rgba(0,0,0,0.15);
+    }
   }
 }
-.uk-table-hover > tr:nth-of-type(odd), tbody tr:nth-of-type(odd) {
-  &:hover {
-    background: #ffb;
+.uk-table {
+  > tr, tbody tr {
+    &.active {
+      background: rgba(255, 255, 221,0.9)
+    }
+  }
+}
+.uk-table-striped {
+  > tr, tbody tr {
+    &:nth-of-type(odd).uk-active {
+      background: rgba(255, 255, 187,0.9);
+    }
+  }
+}
+.uk-table-hover {
+  > tr, tbody tr {
+    &:hover {
+      background: rgba(255, 255, 221,0.9);
+    }
+    &:nth-of-type(odd):hover {
+      background: rgba(255, 255, 187,0.9);
+    }
   }
 }
 .action-result {

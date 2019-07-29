@@ -41,7 +41,8 @@
               <input class="uk-input" type="text" v-model="phone" />
             </div>
           </div>
-          <vk-btn v-if="editUser" type="link">change password</vk-btn>
+          <vk-btn v-if="editUser" type="link" class="change-password">
+            change password</vk-btn>
           <div v-else class="password field">
             <label>password</label>
             <div class="uk-form-controls">
@@ -199,6 +200,7 @@ export default  {
 
 <style lang="scss">
 .user-menu {
+  min-width: 256px;
   .user-title {
     font-weight: bold;
     font-size: 1.2em;
@@ -218,6 +220,10 @@ export default  {
     background: rgba(220,230,255,1);
     border-bottom: 1px solid rgba(0,0,0,0.05);
     color: steelblue;
+    .change-password {
+      display: block;
+      margin: 8px 0;
+    }
     .btn-ok, .btn-cancel {
       display: inline-block;
       width: 40%;

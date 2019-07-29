@@ -205,35 +205,42 @@ a[data-v-aae30ed8] {
 }
 
 
+.user-menu {
+  min-width: 256px;
+}
 .user-menu .user-title {
-  font-weight: bold;
-  font-size: 1.2em;
+    font-weight: bold;
+    font-size: 1.2em;
 }
 .user-menu .user-title a {
-    padding-left: 10px;
+      padding-left: 10px;
 }
 .user-menu .user-subtitle {
-  font-size: 0.9em;
+    font-size: 0.9em;
 }
 .user-menu .note {
-  margin-top: 2px;
+    margin-top: 2px;
 }
 .user-menu .user-info {
-  margin-top: -4px;
-  padding: 12px;
-  background: #dce6ff;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-  color: steelblue;
+    margin-top: -4px;
+    padding: 12px;
+    background: #dce6ff;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    color: steelblue;
+}
+.user-menu .user-info .change-password {
+      display: block;
+      margin: 8px 0;
 }
 .user-menu .user-info .btn-ok, .user-menu .user-info .btn-cancel {
-    display: inline-block;
-    width: 40%;
+      display: inline-block;
+      width: 40%;
 }
 .user-menu .user-info .btn-ok {
-    width: 60%;
+      width: 60%;
 }
 .user-menu .user-info .field {
-    margin-bottom: 8px;
+      margin-bottom: 8px;
 }
 
 .json-object .json-object-content.single .json-tuple {
@@ -10982,11 +10989,24 @@ form.uk-form-stacked label {
   .actor-modal .loading .label {
     margin-left: 16px; }
 
-.uk-table-striped > tr:nth-of-type(odd).uk-active, tbody tr:nth-of-type(odd).uk-active {
-  background: #ffb; }
+.uk-table-striped > tr:nth-of-type(odd),
+.uk-table-striped tbody tr:nth-of-type(odd) {
+  background: rgba(0, 0, 0, 0.1);
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15); }
 
-.uk-table-hover > tr:nth-of-type(odd):hover, tbody tr:nth-of-type(odd):hover {
-  background: #ffb; }
+.uk-table > tr.active, .uk-table tbody tr.active {
+  background: rgba(255, 255, 221, 0.9); }
+
+.uk-table-striped > tr:nth-of-type(odd).uk-active, .uk-table-striped tbody tr:nth-of-type(odd).uk-active {
+  background: rgba(255, 255, 187, 0.9); }
+
+.uk-table-hover > tr:hover,
+.uk-table-hover tbody tr:hover {
+  background: rgba(255, 255, 221, 0.9); }
+
+.uk-table-hover > tr:nth-of-type(odd):hover, .uk-table-hover tbody tr:nth-of-type(odd):hover {
+  background: rgba(255, 255, 187, 0.9); }
 
 .action-result > h4 {
   margin-top: 12px;

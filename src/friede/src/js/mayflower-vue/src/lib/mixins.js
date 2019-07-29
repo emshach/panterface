@@ -169,7 +169,7 @@ export const PageMixin = {
       if ( !this.model )
         return;
       const model = this.model;
-      const objects = this.store.getters.objects;
+      const objects = this.$store.getters.objects;
       if ( objects && !this.filters )
         this.objects = objects;
       this.$store.dispatch( 'getModel', this.model ).then( m => {

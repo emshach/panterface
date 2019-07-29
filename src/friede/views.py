@@ -209,6 +209,7 @@ def api_ls( request, path='', format=None ):
         return Response( dict(
             location=_process_location(
                 LocationSerializer(
+                    Location.objects.get( pk=lid ),
                     context=dict(
                         request=request,
                         detail=True,

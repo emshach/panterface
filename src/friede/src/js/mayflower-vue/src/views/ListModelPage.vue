@@ -3,8 +3,7 @@
     <vue-perfect-scrollbar class="scroll">
       <vk-table v-if="modelObj" responsive hoverable striped
                 :divided=false :data=[]
-                class="sticky-header" ref="header"
-                :style="{ width: colWidths[ field.name ] + 'px' }">
+                class="sticky-header" ref="header">
         <vk-column v-for="field in fields" :key=field.name
                    :title=field.name :cell=field.name >
           <template #default={cell} >{{ cell || '' }}</template>
@@ -12,7 +11,7 @@
       </vk-table>
       <vk-table v-if="modelObj" responsive hoverable striped
                 :divided=false
-                :data=objects >
+                :data=objects ref="data" >
         <vk-column v-for="field in fields" :key=field.name
                    :title=field.name :cell=field.name >
           <template #default={cell} >{{ cell || '' }}</template>
@@ -59,13 +58,16 @@ export default {
   },
   methods: {
     getColWidths() {
-      if ( !this.$el || !this.$refs || !this.$refs.header )
+      if ( !this.$el || !this.$refs || !this.$refs.data || !this.$refs.header )
         return;
-      let tr = this.$refs.header.children[0];
-      if ( tr.tagName === 'THEAD' )
-        tr = tr.children[0];
-      Array.prottype.forEach.call( tr, ( th, i ) => {
-        this.colWidths[ this.fields[i] ] = th.clientWidth;
+      let dtr = this.$refs.data.children[0];
+      let htr = this.$refs.header.children[0];
+      if ( dtr.tagName === 'THEAD' )
+        dtr = dtr.children[0];
+      if ( htr.tagName === 'THEAD' )
+        htr = htr.children[0];
+      Array.prottype.forEach.call( htr, ( th, i ) => {
+        dtr[i].style.width = th.clientWidth + 'px';
       });
       
     }

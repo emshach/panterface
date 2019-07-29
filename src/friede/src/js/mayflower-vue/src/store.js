@@ -78,7 +78,7 @@ export default new Vuex.Store({
               });
         if ( location ) {
           context[ context.length - 1 ].location = location;
-          dispatch( 'setLocation' );
+          commit( 'setLocation' );
         }
       }
       var model = await dispatch( 'getModel' );

@@ -8,14 +8,19 @@
         v-if="focused && ( matches.length || locations.length || slots.length )"
         gutter="collapse" :class="[ 'completions', 'uk-margin', columnWidth ]"
         :style="{ minWidth: 92 * ( completionColumns / 6 ) + '%' }">
-        <vk-button-link
-          v-for="m in filteredMatches" href :key="m" size="small"
-          :class="[ 'match', m === value ? 'selected' : '' ]"
-          @click.prevent="select(m)">{{m}}</vk-button-link>
-        <vk-button-link
-          v-for="l in locations" href :key="l.href" size="small"
-          :class="[ 'location', l === value ? 'selected' : '' ]"
-          @click.prevent="select(l)">{{ l.href.replace( baseRx, '' )}}</vk-button-link>
+        <template v-for="m in filteredMatches">
+          <vk-button-link
+            v-if="m" href :key="m" size="small"
+            :class="[ 'match', m === value ? 'selected' : '' ]"
+            @click.prevent="select(m)">{{m}}</vk-button-link>
+        </template>
+        <template v-for="l in locations">
+          <vk-button-link
+            v-if="l.href.replace( baseRx, '' )" href :key="l.href" size="small"
+            :class="[ 'location', l === value ? 'selected' : '' ]"
+            @click.prevent="select(l)">{{
+            l.href.replace( baseRx, '' )}}</vk-button-link>
+        </template>
         <vk-button-link
           v-for="s in slots" href :key="s.app+'.'+s.model" size="small"
           :class="[ 'slot', s === value ? 'selected' : '' ]"

@@ -2,7 +2,8 @@
   <form id="prompt" class="mf-prompt uk-flex uk-wrap-around" ref="form"
         autocomplete="off"
         @submit.prevent="submit">
-    <switchboard :matches="matches" :locations="locations" :slots="slots"
+    <switchboard v-if="showSwitchboard" :matches="matches"
+                 :locations="locations" :slots="slots"
                  :base="base" :focused="completing"
                  v-model="selected" @input="update" />
     <div class="readline uk-flex uk-wrap-around">
@@ -125,6 +126,7 @@ export default {
       endpoint: false,
       completing: false,
       exactMatch: false,
+      showSwitchboard: true,
     }
   },
   methods: {
@@ -161,7 +163,7 @@ export default {
     },
     getCompletions() {
       const path = this.path;
-      this.$api( 'ls', this.path ).then( r => {
+      return this.$api( 'ls', this.path ).then( r => {
         if ( this.path !== path ) return;
         this.base = r.data.base;
         this.endpoint = r.data.endpoint;
@@ -411,7 +413,10 @@ export default {
       this.prospect = [];
     },
     path( val ) {
-      this.getCompletions();
+      this.getCompletions().then(() => {
+        this.showSwitchboard = false;
+        this.$nextTick(() => { this.showSwitchboard = true });
+      });
     }
   }
 }

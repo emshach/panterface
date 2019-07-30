@@ -96,9 +96,9 @@ export default {
   mounted() {
     this.myBreadcrumb = this.breadcrumb.slice();
       this.base = '/?';
-      val.forEach( x => {
+      this.breadcrumb.forEach( x => {
         if (!x || !x.href) return;
-        tihs.base = `(?:${this.base}/)?${x.href}`;
+        this.base = `(?:${this.base}/)?${x.href}`;
       });
     this.getCompletions();
     this.$nextTick(() => {
@@ -418,7 +418,7 @@ export default {
       this.base = '/?';
       val.forEach( x => {
         if (!x || !x.href) return;
-        tihs.base = `(?:${this.base}/)?${x.href}`;
+        this.base = `(?:${this.base}/)?${x.href}`;
       });
       this.getCompletions();
     }

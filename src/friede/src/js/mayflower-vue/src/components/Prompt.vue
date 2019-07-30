@@ -412,7 +412,7 @@ export default {
       this.prospect = [];
     },
     path( val ) {
-      this.$refs.input.focus();
+      this.$nextTick(() => this.$refs.input.focus());
       this.getCompletions();
     }
   }

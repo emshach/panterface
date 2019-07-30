@@ -407,7 +407,11 @@ export default {
     breadcrumb( val ) {
       this.myBreadcrumb = val.slice();
       this.prospect = [];
-      this.base = '';
+      this.base = '/?';
+      val.forEach( x => {
+        if (!x) return;
+        tihs.base = `(?:${this.base}/)?${x}`;
+      });
       this.getCompletions();
     }
   }

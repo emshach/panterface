@@ -125,7 +125,6 @@ export default {
       endpoint: false,
       completing: false,
       exactMatch: false,
-      rqid: 0,
     }
   },
   methods: {
@@ -161,9 +160,9 @@ export default {
       }
     },
     getCompletions() {
-      const id = this.rqid++
+      const path = this.path;
       this.$api( 'ls', this.path ).then( r => {
-        if ( this.rqid !== id ) return;
+        if ( this.path !== path ) return;
         this.base = r.data.base;
         this.endpoint = r.data.endpoint;
         this.pathMatches = r.data.matches;

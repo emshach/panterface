@@ -410,7 +410,9 @@ export default {
     breadcrumb( val ) {
       this.myBreadcrumb = val.slice();
       this.prospect = [];
-      this.$nextTick(() => this.getCompletions() );
+    },
+    path( val ) {
+      this.getCompletions();
     }
   }
 }

@@ -71,7 +71,7 @@ export default {
   },
   computed: {
     completionColumns() {
-      const length = this.filteredMatches.length + this.locations.length
+      const length = this.filteredMatches.length + this.filteredLocations.length
             + this.slots.length;
       if ( length < 6 )
         return length;
@@ -91,7 +91,7 @@ export default {
       return this.matches.filter( x => x && !l.find( y => x === y ));
     },
     filteredLocations() {
-      return this.locations.map( x => x.href.replace( this.baseRx, '' ));
+      return this.locations.filter( x => x.href.replace( this.baseRx, '' ));
     },
     widgets() {
       return this.locations.slice( 0, 10 ).forEach( location => {

@@ -8,19 +8,14 @@
         v-if="focused && ( matches.length || locations.length || slots.length )"
         gutter="collapse" :class="[ 'completions', 'uk-margin', columnWidth ]"
         :style="{ minWidth: 92 * ( completionColumns / 6 ) + '%' }">
-        <template v-for="m in filteredMatches">
-          <vk-button-link
-            v-if="m" href :key="m" size="small"
-            :class="[ 'match', m === value ? 'selected' : '' ]"
-            @click.prevent="select(m)">{{m}}</vk-button-link>
-        </template>
-        <template v-for="l in locations">
-          <vk-button-link
-            v-if="l.href.replace( baseRx, '' )" href :key="l.href" size="small"
-            :class="[ 'location', l === value ? 'selected' : '' ]"
-            @click.prevent="select(l)">{{
-            l.href.replace( baseRx, '' )}}</vk-button-link>
-        </template>
+        <vk-button-link
+          v-for="m in filteredMatches" href :key="m" size="small"
+          :class="[ 'match', m === value ? 'selected' : '' ]"
+          @click.prevent="select(m)">{{m}}</vk-button-link>
+        <vk-button-link
+          v-for="l in filteredLocations" href :key="l.href" size="small"
+          :class="[ 'location', l === value ? 'selected' : '' ]"
+          @click.prevent="select(l)">{{ l.href.replace( baseRx, '' )}}</vk-button-link>
         <vk-button-link
           v-for="s in slots" href :key="s.app+'.'+s.model" size="small"
           :class="[ 'slot', s === value ? 'selected' : '' ]"
@@ -78,15 +73,8 @@ export default {
     completionColumns() {
       const length = this.filteredMatches.length + this.locations.length
             + this.slots.length;
-      switch ( length ) {
-      case 0:
-      case 1:
-      case 2:
-      case 3:
-      case 4:
-      case 5:
+      if ( length < 6 )
         return length;
-      }
       return 6;
     },
     columnWidth() {
@@ -100,7 +88,10 @@ export default {
     },
     filteredMatches() {
       const l = this.locationHrefs;
-      return this.matches.filter( x => !l.find( y => x === y ));
+      return this.matches.filter( x => x && !l.find( y => x === y ));
+    },
+    filteredLocations() {
+      return this.locations.map( x => x.href.replace( this.baseRx, '' ));
     },
     widgets() {
       return this.locations.slice( 0, 10 ).forEach( location => {

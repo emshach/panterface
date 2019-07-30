@@ -95,14 +95,9 @@ export default {
   },
   mounted() {
     this.myBreadcrumb = this.breadcrumb.slice();
-      this.base = '/?';
-      this.breadcrumb.forEach( x => {
-        if (!x || !x.href) return;
-        this.base = `(?:${this.base}/)?${x.href}`;
-      });
-    this.getCompletions();
     this.$nextTick(() => {
       this.$refs.input.focus();
+      this.getCompletions();
     })
   },
   data() {
@@ -415,12 +410,7 @@ export default {
     breadcrumb( val ) {
       this.myBreadcrumb = val.slice();
       this.prospect = [];
-      this.base = '/?';
-      val.forEach( x => {
-        if (!x || !x.href) return;
-        this.base = `(?:${this.base}/)?${x.href}`;
-      });
-      this.getCompletions();
+      this.$nextTick(() => this.getCompletions() );
     }
   }
 }

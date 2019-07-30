@@ -2,9 +2,8 @@
   <form id="prompt" class="mf-prompt uk-flex uk-wrap-around" ref="form"
         autocomplete="off"
         @submit.prevent="submit">
-    <switchboard v-if="showSwitchboard" :matches="matches"
-                 :locations="locations" :slots="slots"
-                 :base="base" :focused="completing"
+    <switchboard :matches="matches" :locations="locations" :slots="slots"
+                 :base="base" :focused="completing" 
                  v-model="selected" @input="update" />
     <div class="readline uk-flex uk-wrap-around">
       <breadcrumb class="main" :items="myBreadcrumb" />
@@ -412,12 +411,7 @@ export default {
       this.myBreadcrumb = val.slice();
       this.prospect = [];
     },
-    path( val ) {
-      this.getCompletions().then(() => {
-        this.showSwitchboard = false;
-        this.$nextTick(() => { this.showSwitchboard = true });
-      });
-    }
+    path( val ) { this.getCompletions() }
   }
 }
 </script>

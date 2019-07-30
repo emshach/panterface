@@ -411,7 +411,10 @@ export default {
       this.myBreadcrumb = val.slice();
       this.prospect = [];
     },
-    path( val ) { this.getCompletions() }
+    path( val ) {
+      this.$refs.input.focus();
+      this.getCompletions();
+    }
   }
 }
 </script>

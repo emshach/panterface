@@ -232,6 +232,10 @@ export default {
     processKey( $event ) {
       if ( $event.key === '/' ) {
         $event.preventDefault();
+        if ( this.selected && this.all.find( x === this.selected )) {
+          this.submit();
+          return;
+        }
         let l = this.all.filter( x => x.path && /^locations./.test( x.path ));
         if ( l.length === 1 ) {
           this.update( l[0] );

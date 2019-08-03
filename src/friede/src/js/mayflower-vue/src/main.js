@@ -10,15 +10,17 @@ import Icons from 'uikit/dist/js/uikit-icons'
 import API from '@/lib/api'
 import security from '@/lib/security'
 import Tooltip from 'vuikit/lib/tooltip'
+import VueShortkey from 'vue-shortkey'
 import 'vue-toastr/src/vue-toastr.scss'
 
 UIkit.use( Icons );
 Vue.directive( 'vk-tooltip', Tooltip );
+Vue.use( VueShortkey );
 Vue.use( API );
 Vue.use( security );
 Vue.config.productionTip = false;
 
-class Mayflower{
+class Mayflower {
   constructor ( args ) {
     this.options = {
       router,

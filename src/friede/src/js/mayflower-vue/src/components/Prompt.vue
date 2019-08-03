@@ -32,8 +32,9 @@
           @search-change=getObjects
           @tag=addFilter
           @select=searchSelect
-          @keydown="processSlotKey( $event )"
-          >
+          @keydown=processSlotKey
+          v-shortkey="{ enter: ['enter'], esc: ['esc'], bkspc: ['backspace'] }"
+          @shortkey.native=doSlotShortcut >
           <template #noOptions>All {{ searching.plural }}</template>
         </multiselect>
         <vk-button-link class="btn btn-confirm" @click.prevent="confirmSearch">
@@ -54,7 +55,9 @@
                @input="processInput"
                @keydown="processKey( $event )"
                @focus="completing = true"
-               @blur="completing = false"/>
+               @blur="completing = false"
+               v-shortkey.focus="['/']"
+               />
         <vk-button-link v-if="canGo" class="btn btn-go">go</vk-button-link>
       </template>
     </div>
@@ -279,6 +282,10 @@ export default {
         }
         this.getCompletions();
       } else if ( $event.keyCode === 8 ) { // <BKSPC>
+        if ( this.state === 'searching') {
+          this.input = '';
+          this.selected = null;
+        }
         if ( !this.entered ) {
           if ( this.prospect.length ) {
             $event.preventDefault();
@@ -303,6 +310,15 @@ export default {
         }
       } else if ( $event.keyCode === 27 ) { // <ESC>
         $event.preventDefault();
+        this.cancelSearch();
+      }
+    },
+    doSlotShortcut( $event ) {
+      switch( $event.srcKey ) {
+      case 'enter':
+        this.confirmSearch();
+      case 'esc':
+      case 'bkspc':
         this.cancelSearch();
       }
     },

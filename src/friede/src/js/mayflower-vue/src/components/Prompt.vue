@@ -232,7 +232,7 @@ export default {
     processKey( $event ) {
       if ( $event.key === '/' ) {
         $event.preventDefault();
-        if ( this.selected && this.all.find( x === this.selected )) {
+        if ( this.selected && this.all.find( x => x === this.selected )) {
           this.submit();
           return;
         }

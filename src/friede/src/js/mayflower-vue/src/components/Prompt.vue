@@ -283,8 +283,7 @@ export default {
         this.getCompletions();
       } else if ( $event.keyCode === 8 ) { // <BKSPC>
         if ( this.state === 'searching') {
-          this.input = '';
-          this.selected = null;
+          this.selected = this.input = this.entered;
         }
         if ( !this.entered ) {
           if ( this.prospect.length ) {

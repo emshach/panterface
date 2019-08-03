@@ -250,18 +250,19 @@ export default {
         });
       } else if ( $event.key === 'Tab' )  {
         $event.preventDefault();
-        if ( this.all.length ) {
-          if ( this.all.length === 1 ) {
+        let l = this.all.length;
+        if ( l ) {
+          if ( l === 1 ) {
             this.update( this.all[0] );
           } else {
             var cr = this.all.indexOf( this.selected );
             if ( $event.shiftKey ) {
-              if ( cr != -1 )
+              if ( cr != -1 ) 
                 cr--;
             } else {
               cr++;
             }
-            this.select( this.all[ cr % this.all.length ]);
+            this.select( this.all[( cr + l ) % l ]);
           }
         }
         // TODO: else cycle completions
@@ -283,17 +284,20 @@ export default {
         this.getCompletions();
       } else if ( $event.key === 'ArrowLeft' ) {
         $event.preventDefault();
-        if ( this.all.length < 2 )
+        let l = this.all.length;
+        if ( l < 2 )
           return;
         let cr = this.all.indexOf( this.selected );
         if ( cr != -1 ) 
           cr--;
-        this.select( this.all[ cr % this.all.length ]);
+        this.select( this.all[( cr + l ) % l ]);
       } else if ( $event.key === 'ArrowRight' ) {
-        if ( this.all.length < 2 )
+        $event.preventDefault();
+        let l = this.all.length;
+        if ( l < 2 )
           return;
         let cr = this.all.indexOf( this.selected ) + 1;
-        this.select( this.all[ cr % this.all.length ]);
+        this.select( this.all[( cr + l ) % l ]);
       } else if ( $event.key === 'Backspace' ) {
         if ( this.state === 'searching' ) {
           this.selected = this.input = this.entered;

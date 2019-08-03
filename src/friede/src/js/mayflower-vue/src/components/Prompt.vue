@@ -57,7 +57,7 @@
                @focus="completing = true"
                @blur="completing = false"
                v-shortkey.focus="['/']"
-               />
+               v-shortkey.avoid />
         <vk-button-link v-if="canGo" class="btn btn-go">go</vk-button-link>
       </template>
     </div>

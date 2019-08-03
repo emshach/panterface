@@ -309,8 +309,8 @@ export default {
             this.getCompletions();
           }
         }
-      } else if ( !( $event.key === 'Shift' && $event.key === 'Control'
-                    && $event.key === 'Meta'  && $event.key === 'Command')
+      } else if ( !( $event.key === 'Shift' || $event.key === 'Control'
+                    || $event.key === 'Meta'  || $event.key === 'Command')
                   && this.selected ) {
         this.selected = this.input = this.entered;
       }

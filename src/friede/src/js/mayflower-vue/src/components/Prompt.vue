@@ -230,7 +230,6 @@ export default {
       this.submit()
     },
     processKey( $event ) {
-      console.log( 'processkey', $event );
       if ( $event.key === '/' ) {
         $event.preventDefault();
         let l = this.all.filter( x => x.path && /^locations./.test( x.path ));
@@ -249,7 +248,7 @@ export default {
           if ( this.all.length === 1 )
             this.update( this.all[0] );
         });
-      } else if ( $event.keyCode === 9 )  { // <TAB>
+      } else if ( $event.key === 'Tab' )  {
         $event.preventDefault();
         if ( this.all.length ) {
           if ( this.all.length === 1 ) {
@@ -266,10 +265,10 @@ export default {
           }
         }
         // TODO: else cycle completions
-      } else if ( $event.keyCode === 13 ) { // <ENTER>
+      } else if ( $event.key === 'Enter' ) {
         $event.preventDefault();
         this.submit();
-      } else if ( $event.keyCode === 27 ) { // <ESC>
+      } else if ( $event.key === 'Escape' ) {
         if ( this.selected ) {
           this.selected = this.input = this.entered;
         } else if ( this.input ) {
@@ -282,8 +281,21 @@ export default {
           this.$refs.input.blur();
         }
         this.getCompletions();
-      } else if ( $event.keyCode === 8 ) { // <BKSPC>
-        if ( this.state === 'searching') {
+      } else if ( $event.key === 'ArrowLeft' ) {
+        $event.preventDefault();
+        if ( this.all.length < 2 )
+          return;
+        let cr = this.all.indexOf( this.selected );
+        if ( cr != -1 ) 
+          cr--;
+        this.select( this.all[ cr % this.all.length ]);
+      } else if ( $event.key === 'ArrowRight' ) {
+        if ( this.all.length < 2 )
+          return;
+        let cr = this.all.indexOf( this.selected ) + 1;
+        this.select( this.all[ cr % this.all.length ]);
+      } else if ( $event.key === 'Backspace' ) {
+        if ( this.state === 'searching' ) {
           this.selected = this.input = this.entered;
         }
         if ( !this.entered ) {
@@ -297,18 +309,20 @@ export default {
             this.getCompletions();
           }
         }
-      } else if ( this.selected ) {
+      } else if ( !( $event.key === 'Shift' && $event.key === 'Control'
+                    && $event.key === 'Meta'  && $event.key === 'Command')
+                  && this.selected ) {
         this.selected = this.input = this.entered;
       }
     },
     processSlotKey( $event ) {
       console.log( 'processSlotKey', $event );
-      if ( $event.keyCode === 13 ) { // <ENTER>
+      if ( $event.key === 'Enter' ) {
         if ( !this.query ) {
           $event.preventDefault();
           this.confirmSearch();
         }
-      } else if ( $event.keyCode === 27 ) { // <ESC>
+      } else if ( $event.key === 'Escape' ) {
         $event.preventDefault();
         this.cancelSearch();
       }

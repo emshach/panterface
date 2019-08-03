@@ -230,6 +230,7 @@ export default {
       this.submit()
     },
     processKey( $event ) {
+      console.log( 'processkey', $event );
       if ( $event.key === '/' ) {
         $event.preventDefault();
         let l = this.all.filter( x => x.path && /^locations./.test( x.path ));

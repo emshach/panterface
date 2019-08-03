@@ -15,7 +15,9 @@ import 'vue-toastr/src/vue-toastr.scss'
 
 UIkit.use( Icons );
 Vue.directive( 'vk-tooltip', Tooltip );
-Vue.use( VueShortkey );
+Vue.use( VueShortkey, {
+  prevent: [ '.prompt .cli', '.field input', '.field textarae' ]
+});
 Vue.use( API );
 Vue.use( security );
 Vue.config.productionTip = false;

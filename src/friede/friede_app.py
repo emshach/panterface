@@ -754,15 +754,6 @@ class App( app.App ):
                             'reinstall',
                             'activate',
                             'update',
-                        )),
-                    entry=dict(
-                        data=dict(
-                            model='friede.app',
-                            layout=dict(
-                                title='title',
-                                content='description'
-                            ),
-                            search='name title description'.split()
                         ))))))),
         ),
         ( '0.2.10',

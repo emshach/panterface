@@ -9,11 +9,11 @@
         gutter="collapse" :class="[ 'completions', 'uk-margin', columnWidth ]"
         :style="{ minWidth: 92 * ( completionColumns / 6 ) + '%' }">
         <vk-button-link
-          v-for="m in filteredMatches" href :key="m" size="small"
+          v-for="m in matches" href :key="m" size="small"
           :class="[ 'match', m === value ? 'selected' : '' ]"
           @click.prevent="select(m)">{{m}}</vk-button-link>
         <vk-button-link
-          v-for="l in filteredLocations" href :key="l.href" size="small"
+          v-for="l in locations" href :key="l.href" size="small"
           :class="[ 'location', l === value ? 'selected' : '' ]"
           @click.prevent="select(l)">{{ l.href.replace( baseRx, '' )}}</vk-button-link>
         <vk-button-link
@@ -49,9 +49,9 @@ export default {
       type: [ String, Object ],
       default: null
     },
-    base: {
-      type: String,
-      default: ''
+    baseRx: {
+      type: Regexp,
+      default: /^\/?/
     },
     focused: {
       type: Boolean,
@@ -71,7 +71,7 @@ export default {
   },
   computed: {
     completionColumns() {
-      const length = this.filteredMatches.length + this.filteredLocations.length
+      const length = this.matches.length + this.locations.length
             + this.slots.length;
       if ( length < 6 )
         return length;
@@ -79,19 +79,6 @@ export default {
     },
     columnWidth() {
       return 'uk-child-width-1-' + this.completionColumns;
-    },
-    baseRx() {
-      return new RegExp( this.base, 'i' );
-    },
-    locationHrefs() {
-      return this.locations.map( x => x.href.replace( this.baseRx, '' ));
-    },
-    filteredMatches() {
-      const l = this.locationHrefs;
-      return this.matches.filter( x => x && !l.find( y => x === y ));
-    },
-    filteredLocations() {
-      return this.locations.filter( x => x.href.replace( this.baseRx, '' ));
     },
     widgets() {
       return this.locations.slice( 0, 10 ).forEach( location => {

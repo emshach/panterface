@@ -407,9 +407,11 @@ export default {
     matches() {
       if ( this.searching || this.creating )
         return [];
+      const l = this.locationHrefs;
       if ( !this.entered )
-        return this.pathMatches;
-      return this.pathMatches.filter( x => x.indexOf( this.entered ) === 0 )
+        return this.pathMatches.filter( !l.find( y => x === y ));
+      return this.pathMatches.filter(
+        x => x.indexOf( this.entered ) === 0 && !l.find( y => x === y ));
     },
     slots() {
       if ( this.searching || this.creating )
@@ -423,8 +425,12 @@ export default {
       if ( this.searching || this.creating )
         return [];
       if ( !this.entered )
-        return this.pathLocations;
-      return this.pathLocations.filter( x => x.name.indexOf( this.entered ) === 0 )
+        return this.pathLocations.filter( x => x.href.replace( this.baseRx, '' ));
+      return this.pathLocations.filter(
+        x => x.name.indexOf( this.entered ) === 0 && x.href.replace( this.baseRx, '' ));
+    },
+    locationHrefs() {
+      return this.locations.map( x => x.href.replace( this.baseRx, '' ));
     },
     path() {
       return this.myBreadcrumb.map( x => escape( x.href )).concat(

@@ -35,7 +35,7 @@ export default new Vuex.Store({
       state.location = context.length && context[ context.length - 1 ].location;
       if ( state.location ) {
         state.lastLocation = state.location;
-        document.title = state.location.title + '| apps @ sandbox0'
+        document.title = state.location.title + ', apps @ sandbox0'
       }
     },
     setLocation( state, location ) {

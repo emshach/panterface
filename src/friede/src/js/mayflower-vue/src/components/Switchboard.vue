@@ -50,7 +50,7 @@ export default {
       default: null
     },
     baseRx: {
-      type: Regexp,
+      type: RegExp,
       default: /^\/?/
     },
     focused: {

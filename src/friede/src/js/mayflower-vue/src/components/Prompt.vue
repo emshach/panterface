@@ -237,6 +237,11 @@ export default {
           this.submit();
           return;
         }
+        if ( !this.input && !this.prospect.length ) {
+          this.myBreadcrumb = [ this.myBreadcrumb[1] ];
+          this.getCompletions();
+          return;
+        }
         let l = this.all.filter( x => x.path && /^locations./.test( x.path ));
         if ( l.length === 1 ) {
           this.update( l[0] );

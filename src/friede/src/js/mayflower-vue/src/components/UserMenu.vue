@@ -73,7 +73,7 @@
             link.entry.title || link.entry.location.title
             }}</router-link>
         </li>
-        <vk-nav-item href="logout" title="logout" @click.prevent="logout" />
+        <vk-nav-item href="logout" title="Logout" @click.prevent="logout" />
       </template>
       <template v-else>
         <vk-nav-item href="login" title="login"

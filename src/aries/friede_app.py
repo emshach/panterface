@@ -238,15 +238,15 @@ class App( app.App ):
           ( '#links',
             ( 'menu.user',
               ( 'home', dict(
-                  title='User Home Page',
+                  title='My Home Page',
                   icon='fontawesome.home',
                   location='user.private' )),
               ( 'profile', dict(
-                  title='Profile Page',
+                  title='My Profile',
                   icon='fontawesome.user-cog',
                   location='user.private.profile' )),
               ( 'things', dict(
-                  title='Stuff',
+                  title='My Stuff',
                   icon='fontawesome.dolly-flatbed',
                   location='user.private.objects' )),
               ( 'settings', dict(
@@ -254,15 +254,15 @@ class App( app.App ):
                   icon='fontawesome.cog',
                   location='user.private.settings' )),
               ( 'pages', dict(
-                  title='Pages',
+                  title='My Pages',
                   icon='fontawesome.file-code',
                   location='user.private.pages' )),
               ( 'groups', dict(
-                  title='Groups',
+                  title='My Groups',
                   icon='fontawesome.users',
                   location='user.private.groups' )),
               ( 'roles', dict(
-                  title='Roles',
+                  title='My Roles',
                   icon='fontawesome.user-tie',
                   location='user.private.roles' )),
               # ( '', dict(
@@ -271,15 +271,15 @@ class App( app.App ):
               #     location='' )),
               ( '_shortcuts',
               ( 'home', dict(
-                  title='User Home Page',
+                  title='My Home Page',
                   icon='fontawesome.home',
                   location='user.private' )),
               ( 'profile', dict(
-                  title='Profile Page',
+                  title='My Profile',
                   icon='fontawesome.user-cog',
                   location='user.private.profile' )),
               ( 'things', dict(
-                  title='Stuff',
+                  title='My Stuff',
                   icon='fontawesome.dolly-flatbed',
                   location='user.private.objects' )),
               ( 'settings', dict(
@@ -287,7 +287,7 @@ class App( app.App ):
                   icon='fontawesome.cog',
                   location='user.private.settings' )),
               ( 'pages', dict(
-                  title='Pages',
+                  title='My Pages',
                   icon='fontawesome.file-code',
                   location='user.private.pages' )),
             )),

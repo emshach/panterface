@@ -136,11 +136,10 @@ export default {
     submit() {
       if ( this.selected ) {
         if ( this.selected.href ) { // TODO: go to location
-          let hash = this.selected.href.replace( this.baseRx, '' );
           this.prospect.push({
             href: this.selected.href,
-            title: hash,
-            hash,
+            title: this.selected.title,
+            hash: this.selected.href.replace( this.baseRx, '' ),
             location: this.selected
           });
           this.selected = null;
@@ -433,8 +432,10 @@ export default {
         return [];
       if ( !this.entered )
         return this.pathLocations.filter( x => x.href.replace( this.baseRx, '' ));
-      return this.pathLocations.filter(
-        x => x.name.indexOf( this.entered ) === 0 && x.href.replace( this.baseRx, '' ));
+      return this.pathLocations.filter( x => {
+        const href = x.href.replace( this.baseRx, '' );
+        return href && href.indexOf( this.entered ) === 0;
+      });
     },
     locationHrefs() {
       return this.locations.map( x => x.href.replace( this.baseRx, '' ));

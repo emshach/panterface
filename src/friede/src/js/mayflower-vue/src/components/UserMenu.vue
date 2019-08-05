@@ -2,7 +2,7 @@
   <vk-dropdown class="user-menu" animation="slide-top-small"
                :delay-hide=3000 :offset=0 >
     <vk-nav>
-      <div class="user-info">
+      <li class="user-info">
         <form v-if="editUser || loginUser || registerUser"
               class="uk-form-stacked uk-text-left"
               @submit.prevent=submitUser @reset.prevent=resetUser >
@@ -66,13 +66,13 @@
             <div>{{ user.email }}</div>
           </div>
         </template>
-      </div>
+      </li>
       <template v-if="user.id && !user.anonymous">
-        <router-link
-          v-for="( link, key ) in userLinks" :key=key
-          :to=link.entry.location.href >{{
-          link.entry.title || link.entry.location.title
-          }}</router-link>
+        <li v-for="( link, key ) in userLinks" :key=key >
+          <router-link :to=link.entry.location.href >{{
+            link.entry.title || link.entry.location.title
+            }}</router-link>
+        </li>
         <vk-nav-item href="logout" title="logout" @click.prevent="logout" />
       </template>
       <template v-else>
@@ -198,9 +198,12 @@ export default  {
     }
   },
   computed: {
+    menus() {
+      return this.$store.state.menus;
+    },
     userLinks() {
       if ( !this.menus || !this.menus.active )
-        return
+        return []
       const links = this.menus.containers.user_shortcuts.entry.links;
       const out = {};
       Object.keys( links ).forEach( l => {

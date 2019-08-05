@@ -72,7 +72,7 @@ export default {
     },
     siteLinks() {
       if ( !this.menus || !this.menus.active )
-        return
+        return []
       const links = this.menus.containers.nav.entry.links;
       const out = {};
       Object.keys( links ).forEach( l => {

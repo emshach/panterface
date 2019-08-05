@@ -136,10 +136,11 @@ export default {
     submit() {
       if ( this.selected ) {
         if ( this.selected.href ) { // TODO: go to location
+          let hash = this.selected.href.replace( this.baseRx, '' );
           this.prospect.push({
             href: this.selected.href,
-            title: this.selected.title,
-            hash: this.selected.href.replace( this.baseRx, '' ),
+            title: hash,
+            hash,
             location: this.selected
           });
           this.selected = null;

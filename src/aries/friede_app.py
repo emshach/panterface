@@ -176,8 +176,8 @@ class App( app.App ):
                   ( '#screens',
                     ( 'default', dict( path='dashboard.from_model' )))),
                 ( 'roles', dict(
-                    title='My Groups',
-                    href='/my/groups' ),
+                    title='My Roles',
+                    href='/my/roles' ),
                   ( '#screens',
                     ( 'default', dict( path='dashboard.from_model' ))))),
               ( 'public', dict(

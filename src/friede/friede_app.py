@@ -573,20 +573,7 @@ class App( app.App ):
                   extends='dashboard',
                   data=dict(
                       component='HomeDashboard',
-                  ))),
-              ( 'user', dict(
-                  icon='fontawesome.user',
-                  extends='dashboard',
-                  data=dict(
-                      component='UserDashboard',
-                  )),
-                ( 'home', dict(
-                    icon='fontawesome.bed',
-                    extends='dashboard.user',
-                    data=dict(
-                        component='UserHomeDashboard',
-                    ))),
-              ))
+                  )))),
           ),
           ( '#locations',
             ( 'home', {},
@@ -778,6 +765,13 @@ class App( app.App ):
                             search='name title description'.split()
                         ))))))),
         ),
+        ( '0.2.10',
+          ( '#screens',
+            ( 'view.collection', dict(
+                icon='fontawesome.',
+                data=dict(
+                    compnent='CollectionView'
+                )))))
     )
     @property
     def userdata( self ):

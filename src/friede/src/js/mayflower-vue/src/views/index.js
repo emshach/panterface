@@ -26,6 +26,8 @@ export const UserDashboard = () =>
    import(/* webpackChunkName: "pages" */ './UserDashboard' )
 export const UserHomeDashboard = () =>
    import(/* webpackChunkName: "pages" */ './UserHomeDashboard' )
+export const CollectionView = () =>
+   import(/* webpackChunkName: "pages" */ './CollectionView' )
 
 export default {
   BasicPage,
@@ -42,5 +44,6 @@ export default {
   SearchResultsPage,
   UserDashboard,
   UserHomeDashboard,
+  CollectionView,
 }
 

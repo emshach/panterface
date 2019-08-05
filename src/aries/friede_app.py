@@ -103,17 +103,197 @@ class App( app.App ):
                     component='Gatekeeper',
             ))),
           )),
+        ( '0.0.3',
+          ( '#screens',
+            ( 'dashboard',
+              ( 'user', dict(
+                  icon='fontawesome.user',
+                  extends='dashboard',
+                  data=dict(
+                      component='UserDashboard',
+                  )),
+                ( 'home', dict(
+                    icon='fontawesome.bed',
+                    extends='dashboard.user',
+                    data=dict(
+                        component='UserHomeDashboard',
+                    ))),
+              )),
+            ( 'page.user', dict(
+                icon='fontawesome.house',
+                data=dict(
+                    component='UserPage',
+                )),
+              ( 'home', dict(
+                  icon='fontawesome.house',
+                  data=dict(
+                      component='UserHomePage',
+                  ))),
+              ( 'profile', dict(
+                  icon='fontawesome.house',
+                  data=dict(
+                      component='UserProfilePage',
+                  )),
+              )
+            )
+          ),
+          ( '#locations',
+            ( 'from relations', self.objects, self.relations ),
+            ( 'user',
+              ( 'private', dict(
+                  title='My Page',
+                  href='/me' ),
+                ( '#screens',
+                  ( 'default', dict( path='dashboard.user.home' ))),
+                ( 'profile', dict(
+                    title='My Profile',
+                    href='/my/profile' ),
+                  ( '#screens',
+                    ( 'default', dict( path='page.user.profile' )))),
+                ( 'objects', dict(
+                    title="My Things",
+                    href="/my" ),
+                  ( '#screens',
+                    ( 'default', dict( path='dashboard.from_model' )))),
+                ( 'connections', dict(
+                    title='My Connections',
+                    href='/my/connections' ),
+                  ( '#screens',
+                    ( 'default', dict( path='dashboard.from_model' )))),
+                ( 'settings', dict(
+                    title='My Settings',
+                    href='/my/settings' ),
+                  ( '#screens',
+                    ( 'default', dict( path='dashboard.from_model' )))),
+                ( 'pages', dict(
+                    title="My Pages",
+                    href="/my/pages" ),
+                  ( '#screens',
+                    ( 'default', dict( path='view.collection' )))),
+                ( 'groups', dict(
+                    title='My Groups',
+                    href='/my/groups' ),
+                  ( '#screens',
+                    ( 'default', dict( path='dashboard.from_model' )))),
+                ( 'roles', dict(
+                    title='My Groups',
+                    href='/my/groups' ),
+                  ( '#screens',
+                    ( 'default', dict( path='dashboard.from_model' ))))),
+              ( 'public', dict(
+                  title='User Home Page',
+                  href='/{user}' ),
+                ( '#screens',
+                  ( 'default',
+                    dict( path='page.user.home' ))),
+                ( 'profile', dict(
+                    title='User Profile',
+                    href='/{user}/profile' ),
+                  ( '#screens',
+                    ( 'default', dict( path='page.user.profile' )))),
+                ( 'objects', dict(
+                    title="User Stuff",
+                    href="/{user}/stuff" ),
+                  ( '#screens',
+                    ( 'default', dict( path='dashboard.from_model' )))),
+                ( 'connections', dict(
+                    title='User Connections',
+                    href='/{user}/connections' ),
+                  ( '#screens',
+                    ( 'default', dict( path='dashboard.from_model' )))),
+                ( 'settings', dict(
+                    title='User Settings',
+                    href='/{user}y/settings' ),
+                  ( '#screens',
+                    ( 'default', dict( path='dashboard.from_model' )))),
+                ( 'pages', dict(
+                    title="User Pages",
+                    href="/{user}/pages" ),
+                  ( '#screens',
+                    ( 'default', dict( path='view.collection' )))),
+                ( 'groups', dict(
+                    title='User Groups',
+                    href='/{user}/groups' ),
+                  ( '#screens',
+                    ( 'default', dict( path='dashboard.from_model' )))),
+                ( 'roles', dict(
+                    title='User Groups',
+                    href='/{user}/groups' ),
+                  ( '#screens',
+                    ( 'default', dict( path='dashboard.from_model' )))),
+              ))),
+          ( '#settings',
+            ( 'from relations', self.objects, self.relations ),
+          ),
+          ( '#containers',
+            ( 'links.menu',
+              ( 'user', dict(
+                  title='User Menu',
+                  description='Main User Menu'
+              )),
+              ( 'user_shortcuts', dict(
+                  title='User Shortcuts Menu',
+                  description='Main user linsk'
+              )))),
+          ( '#links',
+            ( 'menu.user',
+              ( 'home', dict(
+                  title='User Home Page',
+                  icon='fontawesome.home',
+                  location='user.private' )),
+              ( 'profile', dict(
+                  title='Profile Page',
+                  icon='fontawesome.user-cog',
+                  location='user.private.profile' )),
+              ( 'things', dict(
+                  title='Stuff',
+                  icon='fontawesome.dolly-flatbed',
+                  location='user.private.objects' )),
+              ( 'settings', dict(
+                  title='Settings',
+                  icon='fontawesome.cog',
+                  location='user.private.settings' )),
+              ( 'pages', dict(
+                  title='Pages',
+                  icon='fontawesome.file-code',
+                  location='user.private.pages' )),
+              ( 'groups', dict(
+                  title='Groups',
+                  icon='fontawesome.users',
+                  location='user.private.groups' )),
+              ( 'roles', dict(
+                  title='Roles',
+                  icon='fontawesome.user-tie',
+                  location='user.private.roles' )),
+              # ( '', dict(
+              #     title='',
+              #     icon='fontawesome.',
+              #     location='' )),
+              ( '_shortcuts',
+              ( 'home', dict(
+                  title='User Home Page',
+                  icon='fontawesome.home',
+                  location='user.private' )),
+              ( 'profile', dict(
+                  title='Profile Page',
+                  icon='fontawesome.user-cog',
+                  location='user.private.profile' )),
+              ( 'things', dict(
+                  title='Stuff',
+                  icon='fontawesome.dolly-flatbed',
+                  location='user.private.objects' )),
+              ( 'settings', dict(
+                  title='Settings',
+                  icon='fontawesome.cog',
+                  location='user.private.settings' )),
+              ( 'pages', dict(
+                  title='Pages',
+                  icon='fontawesome.file-code',
+                  location='user.private.pages' )),
+            )),
+          )
+        ),
         # ( '0.1.0',
-        #   ( '#actions',
-        #     ( 'list', dict(
-        #         icon='fontawesome.list',
-        #         title='List Object Data in Table Form',
-        #         description='''''',
-        #         data=dict(
-        #             reverse='uninstall',
-        #             widget='Installer',
-        #         ))),
-        #   ),
         #   ( '#widgets',
         #     ( 'help',
         #       ( 'list', dict(
@@ -144,39 +324,6 @@ class App( app.App ):
         #             component='FormPage'
         #         ))),
         #   ),
-        #   ( '#locations',
-        #     ( 'user',
-        #       ( 'private', dict(
-        #           title='My Page',
-        #           href='/me' ),
-        #         ( '#screens',
-        #           ( 'default', dict( path='dashboard.user.home' )))),
-        #       ( 'public', dict(
-        #           title='User Profile',
-        #           href='/{user}' ),
-        #         ( '#screens',
-        #           ( 'default', dict( path='dashboard.user' ))))),
-        #     ( 'from relations', self.objects, self.relations )),
-        #   ( '#settings',
-        #     ( 'from relations', self.objects, self.relations ),
-        #   ),
-        #   ( '#containers',
-        #     ( 'links.menu',
-        #       ( 'user', dict(
-        #           title='User Menu',
-        #           description='Main User Menu'
-        #       )))),
-        #   ( '#links',
-        #     ( 'menu.user',
-        #       ( 'home', dict(
-        #           title='User Home Page',
-        #           icon='fontawesome.home',
-        #           location='home' )),
-        #       ( 'profile', dict(
-        #           title='Profile Page',
-        #           icon='fontawesome.user-cog',
-        #           location='apps' )),
-        #     )),
         # ),
     )
     @property

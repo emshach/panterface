@@ -70,7 +70,7 @@
       <template v-if="user.id && !user.anonymous">
         <vk-nav-item>
           <router-link
-            v-for="( link, key ) in siteLinks" :key=key
+            v-for="( link, key ) in userLinks" :key=key
             :to=link.entry.location.href >{{
               link.entry.title || link.entry.location.title
             }}</router-link>

@@ -409,7 +409,7 @@ export default {
         return [];
       const l = this.locationHrefs;
       if ( !this.entered )
-        return this.pathMatches.filter( !l.find( y => x === y ));
+        return this.pathMatches.filter( x => !l.find( y => x === y ));
       return this.pathMatches.filter(
         x => x.indexOf( this.entered ) === 0 && !l.find( y => x === y ));
     },

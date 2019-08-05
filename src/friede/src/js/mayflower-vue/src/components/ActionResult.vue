@@ -2,37 +2,41 @@
   <div class="action-result">
     <h4>{{ action.name }} Results</h4>
     <div v-if="!results" class="error">No response</div>
-    <div v-else-if="'error' in results" class="error" v-html="results.error" />
-    <ul v-else uk-accordion>
-      <li v-for="( result, id ) in results" :class=itemClass>
-        <a class="uk-accordion-title" href="#">{{ objects[ id ].path }}</a>
-        <div class="uk-accordion-content">
-          <h5>Outcome</h5>
-          <template v-if="result.res">
-            <div v-if="result.res.success" class="content-outcome success" >{{
-              result.res.success }}</div>
-            <div v-else-if="result.res.error" class="content-outcome error" >{{
-              result.res.error }}</div>
-            <div v-else class="content-outcome" >{{ result.res }}</div>
-          </template>
-          <div v-else class="content-outcome" >None</div>
-          <h5>Log</h5>
-          <div class="content-log">{{ result.out || 'None' }}</div>
-          <h5>Errors/Warnings</h5>
-          <div class="content-err">{{ result.err || 'None' }}</div>
-        </div>
-      </li>
-    </ul>
+    <vue-perfect-scrollbar v-else class="scroll" >
+      <div v-if="'error' in results" class="error" v-html="results.error" />
+      <ul v-else uk-accordion>
+        <li v-for="( result, id ) in results" :class=itemClass>
+          <a class="uk-accordion-title" href="#">{{ objects[ id ].path }}</a>
+          <div class="uk-accordion-content">
+            <h5>Outcome</h5>
+            <template v-if="result.res">
+              <div v-if="result.res.success" class="content-outcome success" >{{
+                result.res.success }}</div>
+              <div v-else-if="result.res.error" class="content-outcome error" >{{
+                result.res.error }}</div>
+              <div v-else class="content-outcome" >{{ result.res }}</div>
+            </template>
+            <div v-else class="content-outcome" >None</div>
+            <h5>Log</h5>
+            <div class="content-log">{{ result.out || 'None' }}</div>
+            <h5>Errors/Warnings</h5>
+            <div class="content-err">{{ result.err || 'None' }}</div>
+          </div>
+        </li>
+      </ul>
+    </vue-perfect-scrollbar>
   </div>
 </template>
 
 <script lang="js">
+import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 export default {
   name: 'ActionResult',
   components: {
+    VuePerfectScrollbar,
     FontAwesomeIcon
   },
   props: {

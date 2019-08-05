@@ -2,12 +2,12 @@
   <form id="prompt" class="mf-prompt uk-flex uk-wrap-around" ref="form"
         autocomplete="off"
         @submit.prevent="submit">
-    <switchboard :matches="matches" :locations="locations" :slots="slots"
-                 :base="base" :focused="completing" 
-                 v-model="selected" @input="update" />
+    <switchboard :matches=matches :locations=locations :slots=slots
+                 :base-rx=baseRx :focused=completing 
+                 v-model=selected @input=update />
     <div class="readline uk-flex uk-wrap-around">
-      <breadcrumb class="main" :items="myBreadcrumb" />
-      <breadcrumb v-if="prospect.length" class="tmp" :items="prospect" />
+      <breadcrumb class="main" :items=myBreadcrumb />
+      <breadcrumb v-if="prospect.length" class="tmp" :items=prospect />
       <div v-if="searching" class="object-search uk-flex uk-wrap-around">
         <span class="object">{{ searching.label }}</span>
         <multiselect
@@ -33,7 +33,7 @@
           @tag=addFilter
           @select=searchSelect
           @keydown=processSlotKey
-          v-shortkey="{ enter: ['enter'], esc: ['esc'], bkspc: ['backspace'] }"
+          v-shortkey=shortcuts
           @shortkey.native=doSlotShortcut >
           <template #noOptions>All {{ searching.plural }}</template>
         </multiselect>
@@ -52,8 +52,8 @@
       <template v-else>
         <input name="cli" class="cli uk-input uk-flex-1" v-model="input"
                ref="input" tabindex="0"
-               @input="processInput"
-               @keydown="processKey( $event )"
+               @input=processInput
+               @keydown=processKey
                @focus="completing = true"
                @blur="completing = false"
                v-shortkey.focus="['/']"
@@ -129,6 +129,7 @@ export default {
       completing: false,
       exactMatch: false,
       showSwitchboard: true,
+      shortcuts: { enter: ['enter'], esc: ['esc'], bkspc: ['backspace'] }
     }
   },
   methods: {

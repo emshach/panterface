@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="switchboard">
     <transition mode="in-out">
-      <dashboard :widgets="widgets" />
+      <dashboard :widgets=widgets />
     </transition>
     <transition mode="in-out">
       <vk-grid
@@ -9,17 +9,17 @@
         gutter="collapse" :class="[ 'completions', 'uk-margin', columnWidth ]"
         :style="{ minWidth: 92 * ( completionColumns / 6 ) + '%' }">
         <vk-button-link
-          v-for="m in matches" href :key="m" size="small"
+          v-for="m in matches" href :key=m size="small"
           :class="[ 'match', m === value ? 'selected' : '' ]"
-          @click.prevent="select(m)">{{m}}</vk-button-link>
+          @click.prevent=select(m) >{{m}}</vk-button-link>
         <vk-button-link
-          v-for="l in locations" href :key="l.href" size="small"
+          v-for="l in locations" href :key=l.href size="small"
           :class="[ 'location', l === value ? 'selected' : '' ]"
-          @click.prevent="select(l)">{{ l.href.replace( baseRx, '' )}}</vk-button-link>
+          @click.prevent=select(l) >{{ l.href.replace( baseRx, '' )}}</vk-button-link>
         <vk-button-link
-          v-for="s in slots" href :key="s.app+'.'+s.model" size="small"
+          v-for="s in slots" href :key="s.app + '.' + s.model" size="small"
           :class="[ 'slot', s === value ? 'selected' : '' ]"
-          @click.prevent="select(s)">{{ s.label }}</vk-button-link>
+          @click.prevent=select(s) >{{ s.label }}</vk-button-link>
       </vk-grid>
     </transition>
   </div>
@@ -51,7 +51,7 @@ export default {
     },
     baseRx: {
       type: RegExp,
-      default: /^\/?/
+      default: () => /^\/?/
     },
     focused: {
       type: Boolean,

@@ -238,7 +238,7 @@ export default {
           return;
         }
         if ( !this.input && !this.prospect.length ) {
-          this.myBreadcrumb = [ this.myBreadcrumb[1] ];
+          this.myBreadcrumb = [ this.myBreadcrumb[0] ];
           this.getCompletions();
           return;
         }

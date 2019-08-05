@@ -4,7 +4,7 @@
       <router-link
         v-for="( link, key ) in siteLinks" :key="key"
         :to="link.entry.location.href">{{
-        link.entry.title || link.entry.location.$title }}
+        link.entry.title || link.entry.location.title }}
       </router-link>
       <router-link to="/me">
         <font-awesome-icon :icon=" user.anonymous ? 'user-ninja': 'user'"

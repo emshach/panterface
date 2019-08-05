@@ -1,44 +1,42 @@
 <template lang="html">
-  <vk-dropdown class="user-menu"
-               animation="slide-top-small"
-               :delay-hide="3000"
-               :offset="0">
+  <vk-dropdown class="user-menu" animation="slide-top-small"
+               :delay-hide=3000 :offset=0 >
     <vk-nav>
       <div class="user-info">
         <form v-if="editUser || loginUser || registerUser"
               class="uk-form-stacked uk-text-left"
-              @submit.prevent="submitUser" @reset.prevent="resetUser">
-          <div v-if="error" class="uk-text-danger uk-text-small" v-html="error" />
+              @submit.prevent=submitUser @reset.prevent=resetUser >
+          <div v-if="error" class="uk-text-danger uk-text-small" v-html=error />
           <template v-if="!loginUser">
             <div class="first-name field">
               <label>first name (or last name required)</label>
               <div class="uk-form-controls">
-                <input class="uk-input" type="text" v-model="fname" />
+                <input class="uk-input" type="text" v-model=fname />
               </div>
             </div>
             <div class="last-name field">
               <label>last name</label>
               <div class="uk-form-controls">
-                <input class="uk-input" type="text" v-model="lname" />
+                <input class="uk-input" type="text" v-model=lname />
               </div>
             </div>
           </template>
           <div class="username field">
             <label>username (or email required)</label>
             <div class="uk-form-controls">
-              <input class="uk-input" type="text" v-model="username" />
+              <input class="uk-input" type="text" v-model=username />
             </div>
           </div>
           <div class="email field">
             <label>email address (recommended)</label>
             <div class="uk-form-controls">
-              <input class="uk-input" type="text" v-model="email" />
+              <input class="uk-input" type="text" v-model=email />
             </div>
           </div>
           <div class="phone field">
             <label>phone number</label>
             <div class="uk-form-controls">
-              <input class="uk-input" type="text" v-model="phone" />
+              <input class="uk-input" type="text" v-model=phone />
             </div>
           </div>
           <vk-btn v-if="editUser" type="link" class="change-password">
@@ -46,7 +44,7 @@
           <div v-else class="password field">
             <label>password</label>
             <div class="uk-form-controls">
-              <input class="uk-password" type="password" v-model="password" />
+              <input class="uk-input" type="password" v-model=password />
             </div>
           </div>
           <vk-btn class="btn-cancel"
@@ -70,6 +68,13 @@
         </template>
       </div>
       <template v-if="user.id && !user.anonymous">
+        <vk-nav-item>
+          <router-link
+            v-for="( link, key ) in siteLinks" :key=key
+            :to=link.entry.location.href >{{
+              link.entry.title || link.entry.location.title
+            }}</router-link>
+        </vk-nav-item>
         <vk-nav-item href="logout" title="logout" @click.prevent="logout" />
       </template>
       <template v-else>
@@ -194,7 +199,21 @@ export default  {
       });
     }
   },
-  computed: {}
+  computed: {
+    userLinks() {
+      if ( !this.menus || !this.menus.active )
+        return
+      const links = this.menus.containers.user_shortcuts.entry.links;
+      const out = {};
+      Object.keys( links ).forEach( l => {
+        if ( links[l].active && links[l].entry.active
+             && links[l].entry.location && links[l].entry.location.active
+             && links[l].entry.location.href )
+          out[l] = links[l];
+      });
+      return out;
+    },
+  }
 }
 </script>
 

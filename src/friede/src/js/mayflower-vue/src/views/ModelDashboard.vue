@@ -41,56 +41,7 @@ export default  {
   components: { ...blocks, ...actors },
   props: [],
   mounted() {
-    const actions = this.options.actions;
-    var ops = {};
-    var operands = {};
-    var show = {};
-    var now = {};
-    if ( actions && actions.length ) {
-      var reverse = [];
-      this.$api( 'friede', 'actions', '?' + actions.map(
-        action => 'path=' + action ).join('&'))
-         .then( r => {
-           var res = r.data.results;
-           if ( res.length )
-             res.forEach( a => {
-               if ( a.data.reverse )
-                 reverse.push( a.data.reverse );
-               ops[ a.name ] = a;
-               operands[ a.data.component ] = [];
-               show[ a.data.component ] = false;
-               now[ a.data.component ] = false;
-             });
-           if ( reverse.length ) {
-             this.$api( 'friede', 'actions', '?' + reverse.map(
-               action => 'path=' + action ).join('&'))
-                .then( r => {
-                  var res = r.data.results;
-                  if ( res.length )
-                    res.forEach( a => {
-                      if ( a.data.reverse )
-                        ops[ a.name ] = a;
-                      operands[ a.data.component ] = [];
-                      show[ a.data.component ] = false;
-                      now[ a.data.component ] = false;
-                    });
-                  this.actions = ops;
-                  this.operands = operands;
-                  this.showModals = show;
-                  this.now = now;
-                });
-           }
-           else {
-             this.actions = ops;
-             this.operands = operands;
-             this.showModals = show;
-             this.now = now;
-           }
-         })
-         .catch ( err => {
-           console.warn( 'couldnt get actions', actions, err );
-         });
-    }
+    this.init();
   },
   data() {
     return {
@@ -107,6 +58,58 @@ export default  {
     }
   },
   methods: {
+    init() {
+      const actions = this.options.actions;
+      var ops = {};
+      var operands = {};
+      var show = {};
+      var now = {};
+      if ( actions && actions.length ) {
+        var reverse = [];
+        this.$api( 'friede', 'actions', '?' + actions.map(
+          action => 'path=' + action ).join('&'))
+           .then( r => {
+             var res = r.data.results;
+             if ( res.length )
+               res.forEach( a => {
+                 if ( a.data.reverse )
+                   reverse.push( a.data.reverse );
+                 ops[ a.name ] = a;
+                 operands[ a.data.component ] = [];
+                 show[ a.data.component ] = false;
+                 now[ a.data.component ] = false;
+               });
+             if ( reverse.length ) {
+               this.$api( 'friede', 'actions', '?' + reverse.map(
+                 action => 'path=' + action ).join('&'))
+                  .then( r => {
+                    var res = r.data.results;
+                    if ( res.length )
+                      res.forEach( a => {
+                        if ( a.data.reverse )
+                          ops[ a.name ] = a;
+                        operands[ a.data.component ] = [];
+                        show[ a.data.component ] = false;
+                        now[ a.data.component ] = false;
+                      });
+                    this.actions = ops;
+                    this.operands = operands;
+                    this.showModals = show;
+                    this.now = now;
+                  });
+             }
+             else {
+               this.actions = ops;
+               this.operands = operands;
+               this.showModals = show;
+               this.now = now;
+             }
+           })
+           .catch ( err => {
+             console.warn( 'couldnt get actions', actions, err );
+           });
+      }
+    },
     act( action, objects, now ) {
       const tag = this.actions[ action ].data.component;
       const actor = this.actors[ tag ];
@@ -139,6 +142,11 @@ export default  {
         actors[ tag ].operands = args[ tag ];
       });
       return actors;
+    }
+  },
+  watch: {
+    $route( to, fr ) {
+      this.init();
     }
   }
 }

@@ -540,54 +540,7 @@ __webpack_require__.r(__webpack_exports__);
   components: Object(_home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_4__["default"])({}, _blocks__WEBPACK_IMPORTED_MODULE_6__["default"], _actors__WEBPACK_IMPORTED_MODULE_7__["default"]),
   props: [],
   mounted: function mounted() {
-    var _this = this;
-
-    var actions = this.options.actions;
-    var ops = {};
-    var operands = {};
-    var show = {};
-    var now = {};
-
-    if (actions && actions.length) {
-      var reverse = [];
-      this.$api('friede', 'actions', '?' + actions.map(function (action) {
-        return 'path=' + action;
-      }).join('&')).then(function (r) {
-        var res = r.data.results;
-        if (res.length) res.forEach(function (a) {
-          if (a.data.reverse) reverse.push(a.data.reverse);
-          ops[a.name] = a;
-          operands[a.data.component] = [];
-          show[a.data.component] = false;
-          now[a.data.component] = false;
-        });
-
-        if (reverse.length) {
-          _this.$api('friede', 'actions', '?' + reverse.map(function (action) {
-            return 'path=' + action;
-          }).join('&')).then(function (r) {
-            var res = r.data.results;
-            if (res.length) res.forEach(function (a) {
-              if (a.data.reverse) ops[a.name] = a;
-              operands[a.data.component] = [];
-              show[a.data.component] = false;
-              now[a.data.component] = false;
-            });
-            _this.actions = ops;
-            _this.operands = operands;
-            _this.showModals = show;
-            _this.now = now;
-          });
-        } else {
-          _this.actions = ops;
-          _this.operands = operands;
-          _this.showModals = show;
-          _this.now = now;
-        }
-      }).catch(function (err) {
-        console.warn('couldnt get actions', actions, err);
-      });
-    }
+    this.init();
   },
   data: function data() {
     return {
@@ -604,6 +557,56 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    init: function init() {
+      var _this = this;
+
+      var actions = this.options.actions;
+      var ops = {};
+      var operands = {};
+      var show = {};
+      var now = {};
+
+      if (actions && actions.length) {
+        var reverse = [];
+        this.$api('friede', 'actions', '?' + actions.map(function (action) {
+          return 'path=' + action;
+        }).join('&')).then(function (r) {
+          var res = r.data.results;
+          if (res.length) res.forEach(function (a) {
+            if (a.data.reverse) reverse.push(a.data.reverse);
+            ops[a.name] = a;
+            operands[a.data.component] = [];
+            show[a.data.component] = false;
+            now[a.data.component] = false;
+          });
+
+          if (reverse.length) {
+            _this.$api('friede', 'actions', '?' + reverse.map(function (action) {
+              return 'path=' + action;
+            }).join('&')).then(function (r) {
+              var res = r.data.results;
+              if (res.length) res.forEach(function (a) {
+                if (a.data.reverse) ops[a.name] = a;
+                operands[a.data.component] = [];
+                show[a.data.component] = false;
+                now[a.data.component] = false;
+              });
+              _this.actions = ops;
+              _this.operands = operands;
+              _this.showModals = show;
+              _this.now = now;
+            });
+          } else {
+            _this.actions = ops;
+            _this.operands = operands;
+            _this.showModals = show;
+            _this.now = now;
+          }
+        }).catch(function (err) {
+          console.warn('couldnt get actions', actions, err);
+        });
+      }
+    },
     act: function act(action, objects, now) {
       var tag = this.actions[action].data.component;
       var actor = this.actors[tag];
@@ -634,6 +637,11 @@ __webpack_require__.r(__webpack_exports__);
         actors[tag].operands = args[tag];
       });
       return actors;
+    }
+  },
+  watch: {
+    $route: function $route(to, fr) {
+      this.init();
     }
   }
 });
@@ -2297,7 +2305,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1565643883498
+      // 1565645924775
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -2315,7 +2323,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1565643883488
+      // 1565645924747
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -2333,7 +2341,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1565643882820
+      // 1565645921924
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -2351,7 +2359,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1565643882828
+      // 1565645922014
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -2369,7 +2377,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1565643882854
+      // 1565645921936
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -2387,7 +2395,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1565643882928
+      // 1565645924082
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -2405,7 +2413,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1565643882918
+      // 1565645924274
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -2423,7 +2431,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1565643882873
+      // 1565645921997
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -2441,7 +2449,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1565643882894
+      // 1565645924104
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -2459,7 +2467,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1565643882964
+      // 1565645924050
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -2477,7 +2485,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1565643882944
+      // 1565645924114
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -2495,7 +2503,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1565643882863
+      // 1565645921986
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -2513,7 +2521,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1565643882956
+      // 1565645924057
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -2531,7 +2539,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1565643882845
+      // 1565645922925
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -2549,7 +2557,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1565643882837
+      // 1565645922026
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -2567,7 +2575,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1565643882936
+      // 1565645924067
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);

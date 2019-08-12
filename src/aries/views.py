@@ -14,6 +14,14 @@ import time
 import base64
 import re
 
+def _get_model( name ):
+    app, model = name.split('.')
+    try:
+        obj = ContentType.objects.get( app_label=app, model=model )
+    except ContentType.DoesNotExist:
+        return None
+    return obj.model_class()
+
 def login( request ):
     pass
 
@@ -152,6 +160,27 @@ def api_which_can( request, format=None ):
         out[p] = user.has_perm( "{}.{}_{}".format( app, op, model )) and 'global'
         if not out[p]:
             out[p] = user.has_perm( "{}.{}_own_{}".format( app, op, model )) and 'user'
+    return Response( out )
+
+@api_view([ 'GET' ])
+@permission_classes(( permissions.AllowAny, ))
+def api_userdata( request, sub='', format=None ):
+    subs = sub.split('+');
+    user = request.user
+    owned = user.owned
+    if subs:
+        subs = filter( lambda x: x, map( _get_model, subs ))
+        if subs:
+            owned = owned.filter( content_type__in=subs )
+    out = {}
+    for o in owned:
+        mod = "{}.{}".format( o.content_type.app_label, o.content_type.model )
+        if mod not in out:
+            out[ mod ] = {}
+        od = {}
+        out[ mod ][ o.id ] = od
+        for attr in ('name', 'path', 'title', 'description' ):
+            od[ attr ] = getattr( o, attr, Nnoe )
     return Response( out )
 
 class UserViewSet( viewsets.ModelViewSet ):

@@ -60,12 +60,13 @@ class App( app.App ):
         },
     )
     api=(
-        ( r'can/(?P<perm>.+$)',  ( views.api_can,         'can', [ 'any' ])),
-        ( r'can/?$',             ( views.api_which_can,   'which_can'     )),
-        ( r'login/?$',           ( views.api_login,       'login'         )),
-        ( r'logout/?$',          ( views.api_logout,      'logout'        )),
-        ( r'register/?$',        ( views.api_register,    'register'      )),
-        ( r'auth-status/?$',     ( views.api_auth_status, 'auth-status'   )),
+        ( r'can/(?P<perm>.+$)',     ( views.api_can,         'can',        [ 'any' ] )),
+        ( r'can/?$',                ( views.api_which_can,   'which_can'             )),
+        ( r'login/?$',              ( views.api_login,       'login'                 )),
+        ( r'logout/?$',             ( views.api_logout,      'logout'                )),
+        ( r'register/?$',           ( views.api_register,    'register'              )),
+        ( r'auth-status/?$',        ( views.api_auth_status, 'auth-status'           )),
+        ( r'userdata/(?P<sub>.+$)', ( views.api_userdata,    'userdata',   [ '' ]    )),
     )
     routes=(
         ( 'users',       views.UserViewSet       ),
@@ -154,7 +155,13 @@ class App( app.App ):
                     title="My Things",
                     href="/my" ),
                   ( '#screens',
-                    ( 'default', dict( path='dashboard.from_model' )))),
+                    ( 'default', dict(
+                        path='dashboard.from_model',
+                        entry=dict(
+                            data=dict(
+                                source='userdata'
+                            )
+                        ))))),
                 ( 'connections', dict(
                     title='My Connections',
                     href='/my/connections' ),

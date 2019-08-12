@@ -517,13 +517,13 @@ export default {
       padding: 4px 10px;
       height: auto;
       font-size: 14px;
-      background: rgba(0,0,0,0.5);
+      background: rgba(0,0,0,0.1);
       font-family: monospace;
       border: 1px solid skyblue;
       border-bottom-width: 0;
       border-right-width: 0;
       border-top-left-radius: 4px;
-      box-shadow: inset 0 2px 4px rgba(0,0,0,0.25);
+      box-shadow: inset 0 1px 2px rgba(0,0,0,0.25);
       &:focus {
         background: rgba(0,0,0,0.8);
       }

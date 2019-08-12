@@ -146,7 +146,7 @@ export default  {
   },
   watch: {
     $route( to, fr ) {
-      this.init();
+      this.$nextTick(() => this.init() );
     }
   }
 }

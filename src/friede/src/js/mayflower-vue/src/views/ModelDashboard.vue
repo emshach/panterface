@@ -41,7 +41,7 @@ export default  {
   components: { ...blocks, ...actors },
   props: [],
   mounted() {
-    this.init();
+    this.initActions();
   },
   data() {
     return {
@@ -58,7 +58,7 @@ export default  {
     }
   },
   methods: {
-    init() {
+    initActions() {
       const actions = this.options.actions;
       var ops = {};
       var operands = {};
@@ -145,8 +145,8 @@ export default  {
     }
   },
   watch: {
-    $route( to, fr ) {
-      this.$nextTick(() => this.init() );
+    'options.actions' ( to, fr ) {
+      this.initActions();
     }
   }
 }

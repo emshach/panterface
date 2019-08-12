@@ -151,7 +151,7 @@ export default  {
   },
   watch: {
     options( to, fr ) {
-      this.$nextTick(() => this.initActions() );
+      setTimeout(() => this.initActions(), 250 );
     }
   }
 }

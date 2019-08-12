@@ -64,51 +64,56 @@ export default  {
       var operands = {};
       var show = {};
       var now = {};
-      if ( actions && actions.length ) {
-        var reverse = [];
-        this.$api( 'friede', 'actions', '?' + actions.map(
-          action => 'path=' + action ).join('&'))
-           .then( r => {
-             var res = r.data.results;
-             if ( res.length )
-               res.forEach( a => {
-                 if ( a.data.reverse )
-                   reverse.push( a.data.reverse );
-                 ops[ a.name ] = a;
-                 operands[ a.data.component ] = [];
-                 show[ a.data.component ] = false;
-                 now[ a.data.component ] = false;
-               });
-             if ( reverse.length ) {
-               this.$api( 'friede', 'actions', '?' + reverse.map(
-                 action => 'path=' + action ).join('&'))
-                  .then( r => {
-                    var res = r.data.results;
-                    if ( res.length )
-                      res.forEach( a => {
-                        if ( a.data.reverse )
-                          ops[ a.name ] = a;
-                        operands[ a.data.component ] = [];
-                        show[ a.data.component ] = false;
-                        now[ a.data.component ] = false;
-                      });
-                    this.actions = ops;
-                    this.operands = operands;
-                    this.showModals = show;
-                    this.now = now;
-                  });
-             }
-             else {
-               this.actions = ops;
-               this.operands = operands;
-               this.showModals = show;
-               this.now = now;
-             }
-           })
-           .catch ( err => {
-             console.warn( 'couldnt get actions', actions, err );
-           });
+      if ( !actions || !actions.length ) {
+        this.action = '';
+        this.actions = {};
+        this.operands = [];
+        this.showModals = {};
+        return;
       }
+      var reverse = [];
+      this.$api( 'friede', 'actions', '?' + actions.map(
+        action => 'path=' + action ).join('&'))
+         .then( r => {
+           var res = r.data.results;
+           if ( res.length )
+             res.forEach( a => {
+               if ( a.data.reverse )
+                 reverse.push( a.data.reverse );
+               ops[ a.name ] = a;
+               operands[ a.data.component ] = [];
+               show[ a.data.component ] = false;
+               now[ a.data.component ] = false;
+             });
+           if ( reverse.length ) {
+             this.$api( 'friede', 'actions', '?' + reverse.map(
+               action => 'path=' + action ).join('&'))
+                .then( r => {
+                  var res = r.data.results;
+                  if ( res.length )
+                    res.forEach( a => {
+                      if ( a.data.reverse )
+                        ops[ a.name ] = a;
+                      operands[ a.data.component ] = [];
+                      show[ a.data.component ] = false;
+                      now[ a.data.component ] = false;
+                    });
+                  this.actions = ops;
+                  this.operands = operands;
+                  this.showModals = show;
+                  this.now = now;
+                });
+           }
+           else {
+             this.actions = ops;
+             this.operands = operands;
+             this.showModals = show;
+             this.now = now;
+           }
+         })
+         .catch ( err => {
+           console.warn( 'couldnt get actions', actions, err );
+         });
     },
     act( action, objects, now ) {
       const tag = this.actions[ action ].data.component;

@@ -151,7 +151,7 @@ export default  {
   },
   watch: {
     options( to, fr ) {
-      this.initActions();
+      this.$nextTick(() => this.initActions() );
     }
   }
 }

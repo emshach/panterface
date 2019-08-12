@@ -150,7 +150,7 @@ export default  {
     }
   },
   watch: {
-    'options.actions' ( to, fr ) {
+    options( to, fr ) {
       this.initActions();
     }
   }

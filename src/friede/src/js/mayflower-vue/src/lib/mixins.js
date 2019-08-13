@@ -194,6 +194,9 @@ export const PageMixin = {
   watch: {
     model() {
       this.$nextTick(() => this.getData());
+    },
+    source() {
+      this.$nextTick(() => this.getData());
     }
   }
 };

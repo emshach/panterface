@@ -173,7 +173,7 @@ def api_userdata( request, sub='', format=None ):
         if subs:
             owned = owned.filter( content_type__in=subs )
     out = {}
-    for o in owned:
+    for o in owned.all():
         mod = "{}.{}".format( o.content_type.app_label, o.content_type.model )
         if mod not in out:
             out[ mod ] = {}

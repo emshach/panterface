@@ -172,7 +172,7 @@ export const PageMixin = {
       if ( this.source ) {
         const source = isArray( this.source ) ? this.source : [ this.source ];
         this.$api.get.apply( this, source ).then( r => {
-          this.object = r.data;
+          this.objects = r.data;
         });
         return;
       }

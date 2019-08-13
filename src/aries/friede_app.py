@@ -66,7 +66,7 @@ class App( app.App ):
         ( r'logout/?$',             ( views.api_logout,      'logout'                )),
         ( r'register/?$',           ( views.api_register,    'register'              )),
         ( r'auth-status/?$',        ( views.api_auth_status, 'auth-status'           )),
-        ( r'userdata/(?P<sub>.+$)', ( views.api_userdata,    'userdata',   [ '' ]    )),
+        ( r'userdata/(?P<sub>.*$)', ( views.api_userdata,    'userdata',   [ '' ]    )),
     )
     routes=(
         ( 'users',       views.UserViewSet       ),

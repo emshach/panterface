@@ -167,8 +167,15 @@ export const PageMixin = {
   },
   methods: {
     getData() {
-      if ( !this.model )
+      if ( !this.model && !this.source )
         return;
+      if ( this.source ) {
+        const source = isArray( this.source ) ? this.source : [ this.source ];
+        this.$api.get.apply( this, source ).then( r => {
+          this.object = r.data;
+        });
+        return;
+      }
       const model = this.model;
       this.$store.dispatch( 'getModel', this.model ).then( m => {
         this.modelObj = m;

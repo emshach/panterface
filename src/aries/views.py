@@ -165,7 +165,7 @@ def api_which_can( request, format=None ):
 @api_view([ 'GET' ])
 @permission_classes(( permissions.AllowAny, ))
 def api_userdata( request, sub='', format=None ):
-    subs = sub.split('+');
+    subs = sub.split('+') if sub else None;
     user = request.user
     owned = user.owned
     if subs:

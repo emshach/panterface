@@ -123,11 +123,11 @@ export default  {
       else if ( this.model ) {
         if ( typeof this.model === 'string' ) {
           if ( this.$store.state.models[ this.model ])
-            this.data = this.$store.state.models[ this.model ];
+            this.data = Model( this.$store.state.models[ this.model ]);
         } else
           this.data = Model( this.model )
       }
-      return this.data || { fields: [] };
+      return this.data || Model({ fields: [] });
     },
     location() {
       return this.$store.state.location

@@ -55,7 +55,7 @@ class IconSerializer( HyperlinkedModelSerializer ):
 
 
 class IconMixin( Serializer ):
-    icon = IconSerializer()
+    icon = IconSerializer( required=False )
 
 
 class EntrySerializer( ModelSerializer, IconMixin ):

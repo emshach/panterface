@@ -32,6 +32,7 @@
                              @ps-scroll-down="scrolled='scrolled'"
                              @ps-y-reach-start="scrolled=''">
         <form v-if="model" class="uk-form-horizontal uk-text-left">
+          <input v-for="field in readOnlyFields" type="hidden" :value=field.value />
           <field v-for="field in simpleFields" :key=field.meta.name
                  :type=field.meta.type :name=field.meta.name :data=field
                  class="uk-margin" />
@@ -132,13 +133,17 @@ export default  {
     location() {
       return this.$store.state.location
     },
+    readOnlyFields() {
+      return this.modelData.fields.filter(
+        x => !x.meta.related || x.meta.type.match( /ReadOnly/ ));
+    },
     simpleFields() {
       return this.modelData.fields.filter(
-        x => !x.meta.related || !x.meta.type.match( /Multiple|Choices/ ));
+        x => !x.meta.related || !x.meta.type.match( /Multiple|Choices|ReadOnly/ ));
     },
     complexFields() {
       return this.modelData.fields.filter(
-        x => x.meta.related && x.meta.type.match( /Multiple|Choices/ ));
+        x => x.meta.related && x.meta.type.match( /Multiple|Choices|ReadOnly/ ));
     },
   },
   watch: {

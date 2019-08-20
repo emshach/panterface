@@ -9,7 +9,7 @@ export function processArgs( args, data ) {
     ( isString(f) || isNumber(f) ? strArgs : objArgs ).push(f);
   });
   var outArgs = [ strArgs.join('/') ];
-  if ( objArgs.length > 1 ) {
+  if ( objArgs.length ) {
     if ( data ) {
       outArgs.push( Object.assign.apply( null, objArgs ));
       outArgs.push({

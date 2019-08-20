@@ -4,7 +4,7 @@ export const CharField = () =>
    import(/* webpackChunkName: "fields" */ './CharField' )
 export const TextField = () =>
    import(/* webpackChunkName: "fields" */ './TextField' )
-export const JsonField = () =>
+export const JSONField = () =>
    import(/* webpackChunkName: "fields" */ './JSONField' )
 export const ChoiceField = () =>
    import(/* webpackChunkName: "fields" */ './ChoiceField' )
@@ -70,7 +70,7 @@ export const fields = {
   BooleanField,
   CharField,
   TextField,
-  JsonField,
+  JSONField,
   ChoiceField,
   TypedChoiceField,
   DateField,
@@ -99,7 +99,6 @@ export const fields = {
   ModelChoiceField,
   ModelMultipleChoiceField,
   // shortcuts
-  IpAddressField,
   ChoicesField,
   TypedChoicesField,
   ModelField,

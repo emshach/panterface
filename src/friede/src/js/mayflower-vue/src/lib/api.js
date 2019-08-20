@@ -9,7 +9,7 @@ export function processArgs( args, data ) {
     ( isString(f) || isNumber(f) ? strArgs : objArgs ).push(f);
   });
   var outArgs = [ strArgs.join('/') ];
-  if ( objArgs.length ) {
+  if ( objArgs.length > 1 ) {
     if ( data ) {
       outArgs.push( Object.assign.apply( null, objArgs ));
       outArgs.push({
@@ -23,6 +23,12 @@ export function processArgs( args, data ) {
         params: Object.assign.apply( null, objArgs )
       });
     }
+  } else if ( data ) {
+    outArgs.push({});
+    outArgs.push({
+      xsrfCookieName: 'csrftoken',
+      xsrfHeaderName: 'X-CSRFToken'
+    });
   } else {
     outArgs.push({
       xsrfCookieName: 'csrftoken',

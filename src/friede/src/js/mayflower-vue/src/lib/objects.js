@@ -159,7 +159,7 @@ inherit( Model, Object, {
       this.data[ field.name ] = field.value;
     });
 
-    if ( !this.data.id ) {
+    if ( !this.data.id && this.meta.rest ) {
       API.post( this.meta.rest ).then( r => {
         this.fields.forEach( field => {
           if ( field.name in r.data )
@@ -174,6 +174,7 @@ inherit( Model, Object, {
     }
   },
   save( key, value ) {
+    if ( !this.meta.rest ) return null;
     const changes = this.changes;
     this.changes = null;
     return API.post( this.meta.rest, key ? {[ key ]: value } : ( changes || this.data ))

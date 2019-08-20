@@ -16,6 +16,7 @@ from importlib import import_module
 from cStringIO import StringIO
 from collections import deque
 from aries.auth import get_user
+from aries.views import OwnedViewMixin
 from aries.serializers import BaseUserSerializer
 from .objects import getregistries, getenv, Locations
 from .core import setup, setupshell, setuptheme, setupmenus
@@ -576,7 +577,9 @@ class SearchViewSet( viewsets.ModelViewSet ):
     search_fields = ( 'name', 'title', 'description' )
 
 
-class RegistryViewSet( SerializerExtensionsAPIViewMixin, SearchViewSet ):
+class RegistryViewSet( SerializerExtensionsAPIViewMixin,
+                       OwnedViewMixin,
+                       SearchViewSet ):
     queryset = Registry.objects.all()
     serializer_class = RegistrySerializer
 

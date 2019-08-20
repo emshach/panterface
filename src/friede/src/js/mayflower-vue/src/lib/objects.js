@@ -2,6 +2,7 @@ import create from 'lodash/create'
 import extend from 'lodash/extend'
 import isArray from 'lodash/isArray'
 import isFunction from 'lodash/isFunction'
+import { API } from '@/lib/api'
 function inherit( child, base, props ) {
   child.prototype = create( base.prototype, extend({
     '_super': base.prototype,
@@ -11,19 +12,19 @@ function inherit( child, base, props ) {
 }
 const objects = {}
 
-function Widget( obj, cls ) {
-  if ( !cls )
-    cls = Widget;
-  if ( obj instanceof cls ) {
+function Widget( obj, Cls ) {
+  if ( !Cls )
+    Cls = Widget;
+  if ( obj instanceof Cls ) {
     return obj;
   }
-  if ( this instanceof cls ) {
+  if ( this instanceof Cls ) {
     this.init( obj );
     return this;
   }
-  return new cls( obj || {} );
+  return new Cls( obj || {} );
 }
-inherit ( Widget, Object, {
+inherit( Widget, Object, {
   init( obj ) {
     if ( obj.extends ) {
       var e = obj.extends;
@@ -66,52 +67,120 @@ inherit ( Widget, Object, {
   }
 })
 
-function Field( obj, cls ) {
-  if ( !cls )
-    cls = Field;
-  if ( obj instanceof cls ) {
+function EventObject( obj, Cls ) {
+  if ( !Cls )
+    Cls = Field;
+  if ( obj instanceof Cls ) {
     return obj;
   }
-  if ( this instanceof cls ) {
+  if ( this instanceof Cls ) {
     this.init( obj );
     return this;
   }
-  return new cls( obj || {} );
+  return new Cls( obj || {} );
 }
-inherit( Field, Object, {
+inherit( EventObject, Object, {
   init( obj ) {
-    this.meta  = obj;
+    this.events = {};
+    // TODO: super.init()
+  },
+  fire( event ) {
+    // break out if handler returns false
+    ( this.events[ event ] || [] ).find( f => f.apply( this, arguments ) === false );
+  }
+});
+
+function Field( obj, Cls ) {
+  if ( !Cls )
+    Cls = Field;
+  if ( obj instanceof Cls ) {
+    return obj;
+  }
+  if ( this instanceof Cls ) {
+    this.init( obj );
+    return this;
+  }
+  return new Cls( obj || {} );
+}
+inherit( Field, EventObject, {
+  init( obj ) {
+    // TODO: super.init()
+    this.meta = obj;
+    this.events = {
+      commit: [],
+      revert: []
+    };
     if ( this.meta.default && isArray( this.meta.default )
          && this.meta.default[0] === 'f')
       this.meta.default = eval( this.meta.default[1] );
     var val = this.meta.value || this.meta.default;
-    this.value =  isFunction( val ) ? val() : val;
-    this.wip   = this.value;
+    this.value = isFunction( val ) ? val() : val;
+    this.wip = this.value;
   },
   commit() {
     this.value = this.wip === undefined || this.wip === null ? '' : this.wip;
+    this.fire( 'commit' );
   },
   revert() {
     this.wip = this.value;
+  },
+  oncommit(f) {
+    this.events.commit.push(f);
+    return this;
   }
 })
 
-function Model( obj, cls ) {
-  if ( !cls )
-    cls = Model;
-  if ( obj instanceof cls ) {
+function Model( obj, Cls ) {
+  if ( !Cls )
+    Cls = Model;
+  if ( obj instanceof Cls ) {
     return obj;
   }
-  if ( this instanceof cls ) {
+  if ( this instanceof Cls ) {
     this.init( obj );
     return this;
   }
-  return new cls( obj || {} );
+  return new Cls( obj || {} );
 }
 inherit( Model, Object, {
   init( obj ) {
     this.meta = obj;
-    this.fields = obj.fields.map( x => Field(x) );
+    this.data = {};
+    this.changes = {};
+    ( this.fields = obj.fields.map( x => Field(x).oncommit( field => {
+      if ( field.value === undefined || field.value === '' )
+        delete this.data[ field.name ];
+      else
+        this.data[ field.name ] = field.value;
+      if ( !this.changes ) this.changes = { id: this.data.id }
+      this.changes[ field.name ] = field.value;
+      this.save( field.name, field.value );
+    }))).forEach( field => {
+      this.data[ field.name ] = field.value;
+    });
+
+    if ( !this.data.id ) {
+      API.post( this.meta.rest ).then( r => {
+        this.fields.forEach( field => {
+          if ( field.name in r.data )
+            this.data[ field.name ]
+             = field.wip
+             = field.value
+             = r.data[ field.name ];
+        }).catch( err => {
+          console.log( 'error in model object init', err );
+        });
+      })
+    }
+  },
+  save( key, value ) {
+    const changes = this.changes;
+    this.changes = null;
+    return API.post( this.meta.rest, key ? {[ key ]: value } : ( changes || this.data ))
+       .catch( err => {
+         console.log( 'error updating model object', err );
+         this.changes = changes;
+       });
   }
 })
 

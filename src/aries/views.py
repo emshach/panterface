@@ -183,6 +183,12 @@ def api_userdata( request, sub='', format=None ):
             od[ attr ] = getattr( o, attr, Nnoe )
     return Response( out )
 
+class OwnedViewMixin( viewsets.ModelViewSet ):
+    def perform_create( self, serializer ):
+        obj = serializer.save()
+        owner = Ownership.objects.create( user=self.request.user, owned=obj )
+
+
 class UserViewSet( viewsets.ModelViewSet ):
     queryset = User.objects.all()
     serializer_class = UserSerializer

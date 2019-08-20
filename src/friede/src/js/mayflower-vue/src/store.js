@@ -30,13 +30,17 @@ export default new Vuex.Store({
     setUser( state, user ) {
       state.user = user;
     },
-    setContext( state, context, debug ) {
+    setContext( state, context, querystring, debug ) {
       state.context = context;
       state.location = context.length && context[ context.length - 1 ].location;
+      state.querystring = querystring;
       if ( state.location ) {
         state.lastLocation = state.location;
         document.title = state.location.title + ', apps @ sandbox0'
       }
+    },
+    setQuery( qs ) {
+      this.querystring = qs;
     },
     setLocation( state, location ) {
       const ctx = state.context;
@@ -91,7 +95,7 @@ export default new Vuex.Store({
     },
     async setPath({ commit, state, dispatch }, path ) {
       API( 'path', path ).then( async r => {
-        commit( 'setContext', r.data.route );
+        commit( 'setContext', r.data.route, path.replace(/.*?\?/, '?' ));
         var model = await dispatch( 'getModel' );
         commit( 'setModel', model );
       }).catch( err => {

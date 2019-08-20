@@ -160,6 +160,7 @@ export const PageMixin = {
       },
       modelObj: null,
       objects: [],
+      loading: false,
     }
   },
   created() {
@@ -167,25 +168,34 @@ export const PageMixin = {
   },
   methods: {
     getData() {
+      if ( this.loading ) return;
+      this.loading = true;
       if ( !this.model && !this.source )
         return;
       if ( this.source ) {
         const source = isArray( this.source ) ? this.source : [ this.source ];
         this.$api.get.apply( this, source ).then( r => {
+          this.loading = false;
           this.objects = r.data;
+        }).catch( err => {
+          console.warn( 'error in get from source', err );
+          this.loading = false;
         });
         return;
       }
       const model = this.model;
       this.$store.dispatch( 'getModel', this.model ).then( m => {
         this.modelObj = m;
-      const objects = this.$store.getters.objects;
+        const objects = this.$store.getters.objects;
         if ( objects && objects.length && !( this.filters && this.filters.length )) {
           this.objects = objects;
         } else if ( m.rest ) {
           this.$api( m.rest, '' ).then( r => { // TODO: paginate, filter?
             if ( model === this.model )
               this.objects = r.data.results || [];
+          }).catch( err => {
+            console.warn( 'error in get from model', err );
+            this.loading = false;
           });
         }
       });

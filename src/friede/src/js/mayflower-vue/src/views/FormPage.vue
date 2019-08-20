@@ -32,12 +32,12 @@
                              @ps-scroll-down="scrolled='scrolled'"
                              @ps-y-reach-start="scrolled=''">
         <form v-if="model" class="uk-form-horizontal uk-text-left">
-          <field v-for="field in simpleFields" :key="field.meta.name"
-                 :type="field.meta.type" :name="field.meta.name" :data="field"
+          <field v-for="field in simpleFields" :key=field.meta.name
+                 :type=field.meta.type :name=field.meta.name :data=field
                  class="uk-margin" />
-          <field v-for="field in complexFields" :key="field.meta.name"
-                 :type="field.meta.type" :name="field.meta.name" :data="field"
-                 :fieldset="true" />
+          <field v-for="field in complexFields" :key=field.meta.name
+                 :type=field.meta.type :name=field.meta.name :data=field
+                 :fieldset=true />
       </form>
       </vue-perfect-scrollbar>
     </vk-card>
@@ -120,8 +120,13 @@ export default  {
         return this.data;
       if ( this.$store.state.modelData )
         this.data = this.$store.state.modelData;
-      else if ( this.model )
-        this.data = Model( this.model );
+      else if ( this.model ) {
+        if ( typeof this.model === 'string' ) {
+          if ( this.$store.state.models[ this.model ])
+            this.data = this.$store.state.models[ this.model ];
+        } else
+          this.data = Model( this.model )
+      }
       return this.data || { fields: [] };
     },
     location() {
@@ -135,6 +140,11 @@ export default  {
       return this.modelData.fields.filter(
         x => x.meta.related && x.meta.type.match( /Multiple|Choices/ ));
     },
+  },
+  watch: {
+    'modelData.id'() {
+      this.$router.push( `?id=${this.modelData.id}` );
+    }
   }
 }
 </script>

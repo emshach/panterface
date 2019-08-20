@@ -10,9 +10,13 @@ from collections import OrderedDict
 
 from .models import *
 
+class OwnedMixin( ModelSerializer ):
+    owner   = serializers.ReadOnlyField( source='owner.user.username' )
+    creator = serializers.ReadOnlyField( source='owner.user.username' )
+
 class BaseUserSerializer( ModelSerializer ):
     class Meta:
-        model = User
+        model  = User
         fields = (
             'id',
             'last_login',
@@ -34,7 +38,7 @@ class BaseUserSerializer( ModelSerializer ):
 
 class UserSerializer( HyperlinkedModelSerializer ):
     class Meta:
-        model = User
+        model  = User
         fields = (
             'url',
             'id',
@@ -61,7 +65,7 @@ class UserSerializer( HyperlinkedModelSerializer ):
 
 class GroupSerializer( HyperlinkedModelSerializer ):
     class Meta:
-        model = Group
+        model  = Group
         fields = (
             'id',
             'name',
@@ -79,7 +83,7 @@ class GroupSerializer( HyperlinkedModelSerializer ):
 
 class RoleSerializer( HyperlinkedModelSerializer ):
     class Meta:
-        model = Role
+        model  = Role
         fields = (
             'id',
             'title',
@@ -97,7 +101,7 @@ class RoleSerializer( HyperlinkedModelSerializer ):
 
 class PolicySerializer( HyperlinkedModelSerializer ):
     class Meta:
-        model = Policy
+        model  = Policy
         fields = (
             'id',
             'title',
@@ -110,14 +114,14 @@ class PolicySerializer( HyperlinkedModelSerializer ):
             'permissions'
             'roles',
         )
-    users = UserSerializer( many=True )
+    users  = UserSerializer( many=True )
     groups = GroupSerializer( many=True )
-    roles = RoleSerializer( many=True )
+    roles  = RoleSerializer( many=True )
 
 
 class PermissionSerializer( HyperlinkedModelSerializer ):
     class Meta:
-        model = Permission
+        model  = Permission
         fields = (
             'id',
             'name',
@@ -132,10 +136,10 @@ class PermissionSerializer( HyperlinkedModelSerializer ):
             'policies',
             'roles',
         )
-    user_set = UserSerializer( many=True )
+    user_set  = UserSerializer( many=True )
     group_set = GroupSerializer( many=True )
-    policies = PolicySerializer( many=True )
-    roles = RoleSerializer( many=True )
+    policies  = PolicySerializer( many=True )
+    roles     = RoleSerializer( many=True )
 
 
 by_model = dict(

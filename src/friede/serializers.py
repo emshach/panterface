@@ -7,6 +7,7 @@ from rest_framework.serializers import (
 from rest_framework_recursive.fields import RecursiveField
 from rest_framework_serializer_extensions.serializers import SerializerExtensionsMixin
 from collections import OrderedDict
+from aries.serializers import OwnedMixin
 
 from .models import *
 
@@ -40,6 +41,7 @@ class F:
 
     entry = ( 'url', 'id', 'name', 'title', 'description', 'active', 'icon',
               'name', 'entry', 'position' )
+    owned = ( 'owner', 'creator' )
 
 
 class ExtendsMixin( Serializer ):
@@ -178,11 +180,12 @@ class ActionEntrySerializer( EntrySerializer ):
 
 class RegistrySerializer( SerializerExtensionsMixin,
                           IconMixin,
+                          OwnedMixin,
                           HyperlinkedModelSerializer ):
 
     class Meta:
         model = Registry
-        fields = F.base + F.registry # + F.entries
+        fields = F.base + F.registry + F.owned # + F.entries
         expandable_fields=OrderedDict(
             _container_entries=dict(
                 serializer=ContainerEntrySerializer,

@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from rest_framework.serializers import (
-    Serializer, ModelSerializer, HyperlinkedModelSerializer, HyperlinkedRelatedField,
-    HyperlinkedIdentityField, CharField, SerializerMethodField
+    ModelSerializer,
+    HyperlinkedModelSerializer,
+    SerializerMethodField,
+    ReadOnlyField,
 )
 from rest_framework_recursive.fields import RecursiveField
 from rest_framework_serializer_extensions.serializers import SerializerExtensionsMixin
@@ -11,8 +13,8 @@ from collections import OrderedDict
 from .models import *
 
 class OwnedMixin( ModelSerializer ):
-    owner   = serializers.ReadOnlyField( source='owner.user.username' )
-    creator = serializers.ReadOnlyField( source='owner.user.username' )
+    owner   = ReadOnlyField( source='owner.user.username' )
+    creator = ReadOnlyField( source='creator.user.username' )
 
 class BaseUserSerializer( ModelSerializer ):
     class Meta:

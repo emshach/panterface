@@ -160,7 +160,7 @@ inherit( Model, Object, {
     });
 
     if ( !this.data.id && this.meta.rest ) {
-      API.post( this.meta.rest ).then( r => {
+      API.post( this.meta.rest, '' ).then( r => {
         this.fields.forEach( field => {
           if ( field.name in r.data )
             this.data[ field.name ]

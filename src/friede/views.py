@@ -385,6 +385,9 @@ def api_models( request, models=None, format=None ):
                 name=f.name,
                 type=ftype,
                 default=dflt,
+                required=srffield.required,
+                readonly=srffield.read_only,
+                writeonly=srffield.write_only,
             )
             if ftype == 'ChoiceField' and getattr( srffield, 'choices' ):
                 field[ 'options' ] = [

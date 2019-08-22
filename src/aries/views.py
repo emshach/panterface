@@ -180,7 +180,7 @@ def api_userdata( request, sub='', format=None ):
         od = {}
         out[ mod ][ o.id ] = od
         for attr in ('name', 'path', 'title', 'description' ):
-            od[ attr ] = getattr( o, attr, Nnoe )
+            od[ attr ] = getattr( o, attr, None )
     return Response( out )
 
 class OwnedViewMixin( viewsets.ModelViewSet ):

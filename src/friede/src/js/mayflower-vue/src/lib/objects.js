@@ -162,15 +162,15 @@ inherit( Model, Object, {
     if ( !this.data.id && this.meta.rest ) {
       API.post( this.meta.rest, '' ).then( r => {
         this.fields.forEach( field => {
-          if ( field.name in r.data )
+          if ( field.meta.name in r.data )
             this.data[ field.name ]
              = field.wip
              = field.value
-             = r.data[ field.name ];
-        }).catch( err => {
-          console.log( 'error in model object init', err );
+             = r.data[ field.meta.name ];
         });
-      })
+      }).catch( err => {
+        console.log( 'error in model object init', err );
+      });
     }
   },
   save( key, value ) {

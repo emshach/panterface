@@ -60,6 +60,14 @@ class IconMixin( Serializer ):
 
 
 class PathMixin( Serializer ):
+    def validate_name( self, value ):
+        if not value:
+            return value
+
+    def validate_path( self, value ):
+        if not value:
+            return value
+
     def validate( self, data ):
         if not data.get( 'path' ):
             mod = self.Meta.model
@@ -70,7 +78,7 @@ class PathMixin( Serializer ):
                    and gettatr( self.context[ 'request' ], 'user', None )\
                    else ''
             stamp = datetime.now().srtftime( "%Y%m%d_%H%M" )
-            path = "{}{}.{}".format( r, user, data.get( 'name', stamp ))
+            path = "{}{}.{}".format( r, user, data.pop( 'name', stamp ))
             if not mod.objects.filter( path=path ).count():
                 data[ 'path' ] = path
             else:
@@ -80,7 +88,6 @@ class PathMixin( Serializer ):
                     i = i + 1
                     p0 = "{}_{}".format( path, i )
                 data[ 'path' ] = p0
-            data[ 'name' ] = None
         if not data.get( 'name' ):
             data[ 'name' ] = re.sub( r'[^\.]*\.', '', data[ 'path' ])
         return data

@@ -69,7 +69,7 @@ class PathMixin( Serializer ):
             r = registries.get( mod )
             user = ".user_%s" % self.context['request'].user.id\
                 if self.context.get( 'request' )\
-                   and gettatr( self.context[ 'request' ], 'user', None )\
+                   and getattr( self.context[ 'request' ], 'user', None )\
                    else ''
             stamp = datetime.now().strftime( "%Y%m%d_%H%M" )
             path = "{}{}.{}".format( r, user, data.pop( 'name', stamp ))

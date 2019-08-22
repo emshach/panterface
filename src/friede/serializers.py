@@ -72,7 +72,7 @@ class PathMixin( Serializer ):
         if not data.get( 'path' ):
             mod = self.Meta.model
             from friede.core import registries
-            r = registries.get( serializer.Meta.model )
+            r = registries.get( mod )
             user = ".user_%s" % self.context['request'].user.id\
                 if self.context.get( 'request' )\
                    and gettatr( self.context[ 'request' ], 'user', None )\

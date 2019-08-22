@@ -147,8 +147,17 @@ export default  {
     },
   },
   watch: {
+    modelData() {
+      if ( this.modelData.data.id )
+        this.$router.push( `?id=${this.modelData.data.id}` );
+    },
+    'modelData.data'() {
+      if ( this.modelData.data.id )
+        this.$router.push( `?id=${this.modelData.data.id}` );
+    },
     'modelData.data.id'() {
-      this.$router.push( `?id=${this.modelData.data.id}` );
+      if ( this.modelData.data.id )
+        this.$router.push( `?id=${this.modelData.data.id}` );
     }
   }
 }

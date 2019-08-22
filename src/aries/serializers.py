@@ -16,6 +16,7 @@ class OwnedMixin( ModelSerializer ):
     owner   = ReadOnlyField( source='owner.user.username' )
     creator = ReadOnlyField( source='creator.user.username' )
 
+
 class BaseUserSerializer( ModelSerializer ):
     class Meta:
         model  = User

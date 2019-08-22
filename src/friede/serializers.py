@@ -8,8 +8,9 @@ from rest_framework_recursive.fields import RecursiveField
 from rest_framework_serializer_extensions.serializers import SerializerExtensionsMixin
 from collections import OrderedDict
 from aries.serializers import OwnedMixin
-
+from datetime import datetime
 from .models import *
+import re
 
 class F:
     _base = ( 'url', 'id', 'name', 'title', 'description', 'active', 'path' )
@@ -40,7 +41,7 @@ class F:
     action = ( 'data', )
 
     entry = ( 'url', 'id', 'name', 'title', 'description', 'active', 'icon',
-              'name', 'entry', 'position' )
+              'entry', 'position' )
     owned = ( 'owner', 'creator' )
 
 
@@ -56,6 +57,34 @@ class IconSerializer( HyperlinkedModelSerializer ):
 
 class IconMixin( Serializer ):
     icon = IconSerializer( required=False )
+
+
+class PathMixin( Serializer ):
+    def validate( self, data ):
+        if not data.get( 'path' ):
+            mod = self.Meta.model
+            from friede.core import registries
+            r = registries.get( serializer.Meta.model )
+            user = ".user_%s" % self.context['request'].user.id\
+                if self.context.get( 'request' )\
+                   and gettatr( self.context[ 'request' ], 'user', None )\
+                   else ''
+            stamp = datetime.now().srtftime( "%Y%m%d_%H%M" )
+            path = "{}{}.{}".format( r, user, data.get( 'name', stamp ))
+            if not mod.objects.filter( path=path ).count():
+                data[ 'path' ] = path
+            else:
+                i = 1
+                p0 = "{}_{}".format( path, i )
+                while mod.objects.filter( path=p0 ).count():
+                    i = i + 1
+                    p0 = "{}_{}".format( path, i )
+                data[ 'path' ] = p0
+            data[ 'name' ] = None
+        if not data.get( 'name' ):
+            data[ 'name' ] = re.sub( r'[^\.]*\.', '', data[ 'path' ])
+        return data
+    # TODO: if no id (then assume making new) check for path collision
 
 
 class EntrySerializer( ModelSerializer, IconMixin ):
@@ -181,6 +210,7 @@ class ActionEntrySerializer( EntrySerializer ):
 class RegistrySerializer( SerializerExtensionsMixin,
                           IconMixin,
                           OwnedMixin,
+                          PathMixin,
                           HyperlinkedModelSerializer ):
 
     class Meta:
@@ -311,28 +341,28 @@ class LocationSerializer( RegistrySerializer ):
         expandable_fields = RegistrySerializer.Meta.expandable_fields
 
 
-class LinkSerializer( HyperlinkedModelSerializer, IconMixin ):
+class LinkSerializer( HyperlinkedModelSerializer, IconMixin, PathMixin ):
     class Meta:
         model = Link
         fields = F.base + F.link
         expandable_fields = RegistrySerializer.Meta.expandable_fields
     location = LocationSerializer()
 
-class ReferenceSerializer( HyperlinkedModelSerializer, IconMixin ):
+class ReferenceSerializer( HyperlinkedModelSerializer, IconMixin, PathMixin ):
     class Meta:
         model = Reference
         fields = F.base + F.reference
         expandable_fields = RegistrySerializer.Meta.expandable_fields
 
 
-class SettingSerializer( HyperlinkedModelSerializer, IconMixin ):
+class SettingSerializer( HyperlinkedModelSerializer, IconMixin, PathMixin ):
     class Meta:
         model = Setting
         fields = F.base + F.setting
         expandable_fields = RegistrySerializer.Meta.expandable_fields
 
 
-class ActionSerializer( HyperlinkedModelSerializer, IconMixin ):
+class ActionSerializer( HyperlinkedModelSerializer, IconMixin, PathMixin ):
     class Meta:
         model = Action
         fields = F.base + F.action

@@ -147,8 +147,8 @@ export default  {
     },
   },
   watch: {
-    'modelData.id'() {
-      this.$router.push( `?id=${this.modelData.id}` );
+    'modelData.data.id'() {
+      this.$router.push( `?id=${this.modelData.data.id}` );
     }
   }
 }

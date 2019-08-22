@@ -77,7 +77,7 @@ class PathMixin( Serializer ):
                 if self.context.get( 'request' )\
                    and gettatr( self.context[ 'request' ], 'user', None )\
                    else ''
-            stamp = datetime.now().srtftime( "%Y%m%d_%H%M" )
+            stamp = datetime.now().strftime( "%Y%m%d_%H%M" )
             path = "{}{}.{}".format( r, user, data.pop( 'name', stamp ))
             if not mod.objects.filter( path=path ).count():
                 data[ 'path' ] = path

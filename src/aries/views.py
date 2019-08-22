@@ -178,6 +178,7 @@ def api_userdata( request, sub='', format=None ):
         if mod not in out:
             out[ mod ] = {}
         od = {}
+        o = o.owned
         out[ mod ][ o.id ] = od
         for attr in ('name', 'path', 'title', 'description' ):
             od[ attr ] = getattr( o, attr, None )

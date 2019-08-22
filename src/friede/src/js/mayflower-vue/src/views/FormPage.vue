@@ -124,10 +124,20 @@ export default  {
       else if ( this.model ) {
         if ( typeof this.model === 'string' ) {
           if ( this.$store.state.models[ this.model ])
-            this.data = Model( this.$store.state.models[ this.model ]);
+            this.data = Model( this.$store.state.models[ this.model ])
+             .then( r => {
+               if ( this.data.data.id )
+                 this.$router.push( `?id=${this.data.data.id}` );
+             });
         } else
           this.data = Model( this.model )
+           .then( r => {
+             if ( this.data.data.id )
+               this.$router.push( `?id=${this.data.data.id}` );
+           });
       }
+      if ( this.data && this.data.data && this.data.data.id )
+        this.$router.push( `?id=${this.data.data.id}` );
       return this.data || Model({ fields: [] });
     },
     location() {
@@ -147,14 +157,6 @@ export default  {
     },
   },
   watch: {
-    modelData() {
-      if ( this.modelData.data.id )
-        this.$router.push( `?id=${this.modelData.data.id}` );
-    },
-    'modelData.data'() {
-      if ( this.modelData.data.id )
-        this.$router.push( `?id=${this.modelData.data.id}` );
-    },
     'modelData.data.id'() {
       if ( this.modelData.data.id )
         this.$router.push( `?id=${this.modelData.data.id}` );

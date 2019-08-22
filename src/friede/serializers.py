@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 from rest_framework.serializers import (
     Serializer, ModelSerializer, HyperlinkedModelSerializer, HyperlinkedRelatedField,
-    HyperlinkedIdentityField, CharField, SerializerMethodField
+    HyperlinkedIdentityField, CharField, SlugField, SerializerMethodField
 )
 from rest_framework_recursive.fields import RecursiveField
 from rest_framework_serializer_extensions.serializers import SerializerExtensionsMixin
@@ -61,7 +61,7 @@ class IconMixin( Serializer ):
 
 class PathMixin( Serializer ):
     name = SlugField(max_length=255, required=False )
-    path = SlugField(max_length=255, required=False )
+    path = CharField(max_length=255, required=False )
     def validate( self, data ):
         if not data.get( 'path' ):
             mod = self.Meta.model

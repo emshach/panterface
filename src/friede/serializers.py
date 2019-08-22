@@ -60,14 +60,8 @@ class IconMixin( Serializer ):
 
 
 class PathMixin( Serializer ):
-    def validate_name( self, value ):
-        if not value:
-            return value
-
-    def validate_path( self, value ):
-        if not value:
-            return value
-
+    name = SlugField(max_length=255, required=False )
+    path = SlugField(max_length=255, required=False )
     def validate( self, data ):
         if not data.get( 'path' ):
             mod = self.Meta.model

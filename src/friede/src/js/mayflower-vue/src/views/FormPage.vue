@@ -124,14 +124,14 @@ export default  {
       else if ( this.model ) {
         if ( typeof this.model === 'string' ) {
           if ( this.$store.state.models[ this.model ])
-            this.data = Model( this.$store.state.models[ this.model ])
-             .then( r => {
+            ( this.data = Model( this.$store.state.models[ this.model ]))
+             .ready.then( r => {
                if ( this.data.data.id )
                  this.$router.push( `?id=${this.data.data.id}` );
              });
         } else
-          this.data = Model( this.model )
-           .then( r => {
+          (this.data = Model( this.model ))
+           .ready.then( r => {
              if ( this.data.data.id )
                this.$router.push( `?id=${this.data.data.id}` );
            });

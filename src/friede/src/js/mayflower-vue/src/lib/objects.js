@@ -163,7 +163,7 @@ inherit( Model, Object, {
       API.post( this.meta.rest, '' ).then( r => {
         this.fields.forEach( field => {
           if ( field.meta.name in r.data )
-            this.data[ field.name ]
+            this.data[ field.meta.name ]
              = field.wip
              = field.value
              = r.data[ field.meta.name ];

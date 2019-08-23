@@ -143,8 +143,10 @@ function Model( obj, Cls ) {
   return new Cls( obj || {} );
 }
 inherit( Model, Object, {
-  init( obj, id ) {
+  init( obj ) {
     this.meta = obj;
+    const id = obj.id;
+    delete obj.id;
     this.data = { id };
     this.changes = {};
     ( this.fields = obj.fields.map( x => Field(x).oncommit( field => {

@@ -125,13 +125,14 @@ export default  {
         const id = this.objectId;
         if ( typeof this.model === 'string' ) {
           if ( this.$store.state.models[ this.model ])
-            ( this.data = Model( this.$store.state.models[ this.model ], id ))
+            ( this.data = Model( Object.assign(
+              { id }, this.$store.state.models[ this.model ] )))
              .ready.then( r => {
                if ( !id && this.data.data.id )
                  this.$router.push( `?id=${this.data.data.id}` );
              });
         } else
-          ( this.data = Model( this.model, id ))
+          ( this.data = Model( Object.assign( { id }, this.model )))
            .ready.then( r => {
              if ( !id && this.data.data.id )
                this.$router.push( `?id=${this.data.data.id}` );

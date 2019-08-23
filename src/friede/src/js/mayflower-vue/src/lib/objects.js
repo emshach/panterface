@@ -145,7 +145,7 @@ function Model( obj, Cls ) {
 inherit( Model, Object, {
   init( obj ) {
     this.meta = obj;
-    const id = obj.id || '';
+    const id = obj.id;
     delete obj.id;
     this.data = {};
     this.changes = {};
@@ -164,17 +164,18 @@ inherit( Model, Object, {
     if ( this.data.id || !this.meta.rest )
       this.ready = new Promise(( s, j ) => s() );
     if ( !this.data.id && this.meta.rest ) {
-      this.ready = API.post( this.meta.rest, id ).then( r => {
-        this.fields.forEach( field => {
-          if ( field.meta.name in r.data )
-            this.data[ field.meta.name ]
-             = field.wip
-             = field.value
-             = r.data[ field.meta.name ];
-        });
-      }).catch( err => {
-        console.log( 'error in model object init', err );
-      });
+      this.ready = ( id ? API( this.meta.rest, id ) : API.post( this.meta.rest, '' ))
+         .then( r => {
+           this.fields.forEach( field => {
+             if ( field.meta.name in r.data )
+               this.data[ field.meta.name ]
+                = field.wip
+                = field.value
+                = r.data[ field.meta.name ];
+           });
+         }).catch( err => {
+           console.log( 'error in model object init', err );
+         });
     }
   },
   save( key, value ) {

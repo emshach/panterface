@@ -143,9 +143,9 @@ function Model( obj, Cls ) {
   return new Cls( obj || {} );
 }
 inherit( Model, Object, {
-  init( obj ) {
+  init( obj, id ) {
     this.meta = obj;
-    this.data = {};
+    this.data = { id };
     this.changes = {};
     ( this.fields = obj.fields.map( x => Field(x).oncommit( field => {
       if ( field.value === undefined || field.value === '' )

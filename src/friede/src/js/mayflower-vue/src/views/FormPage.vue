@@ -122,17 +122,18 @@ export default  {
       if ( this.$store.state.modelData )
         this.data = this.$store.state.modelData;
       else if ( this.model ) {
+        const id = this.objectId;
         if ( typeof this.model === 'string' ) {
           if ( this.$store.state.models[ this.model ])
-            ( this.data = Model( this.$store.state.models[ this.model ]))
+            ( this.data = Model( this.$store.state.models[ this.model ], id ))
              .ready.then( r => {
-               if ( this.data.data.id )
+               if ( !id && this.data.data.id )
                  this.$router.push( `?id=${this.data.data.id}` );
              });
         } else
-          (this.data = Model( this.model ))
+          ( this.data = Model( this.model, id ))
            .ready.then( r => {
-             if ( this.data.data.id )
+             if ( !id && this.data.data.id )
                this.$router.push( `?id=${this.data.data.id}` );
            });
       }
@@ -140,6 +141,9 @@ export default  {
         this.$router.push( `?id=${this.data.data.id}` );
       return this.data || Model({ fields: [] });
     },
+    objectId() {
+      return this.$router.query.id;
+    }, 
     location() {
       return this.$store.state.location
     },

@@ -142,7 +142,7 @@ export default  {
       return this.data || Model({ fields: [] });
     },
     objectId() {
-      return this.$router.query.id;
+      return this.$route.query && this.$route.query.id;
     }, 
     location() {
       return this.$store.state.location

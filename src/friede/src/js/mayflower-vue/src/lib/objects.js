@@ -145,9 +145,9 @@ function Model( obj, Cls ) {
 inherit( Model, Object, {
   init( obj ) {
     this.meta = obj;
-    const id = obj.id;
+    const id = obj.id || '';
     delete obj.id;
-    this.data = { id };
+    this.data = {};
     this.changes = {};
     ( this.fields = obj.fields.map( x => Field(x).oncommit( field => {
       if ( field.value === undefined || field.value === '' )
@@ -164,7 +164,7 @@ inherit( Model, Object, {
     if ( this.data.id || !this.meta.rest )
       this.ready = new Promise(( s, j ) => s() );
     if ( !this.data.id && this.meta.rest ) {
-      this.ready = API.post( this.meta.rest, '' ).then( r => {
+      this.ready = API.post( this.meta.rest, id ).then( r => {
         this.fields.forEach( field => {
           if ( field.meta.name in r.data )
             this.data[ field.meta.name ]

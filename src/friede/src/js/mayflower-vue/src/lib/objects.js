@@ -164,7 +164,7 @@ inherit( Model, Object, {
     if ( this.data.id || !this.meta.rest )
       this.ready = new Promise(( s, j ) => s() );
     if ( !this.data.id && this.meta.rest ) {
-      this.ready = ( id ? API( this.meta.rest, id ) : API.post( this.meta.rest, '' ))
+      this.ready = ( id ? API( this.meta.rest, id, '' ) : API.post( this.meta.rest, '' ))
          .then( r => {
            this.fields.forEach( field => {
              if ( field.meta.name in r.data )

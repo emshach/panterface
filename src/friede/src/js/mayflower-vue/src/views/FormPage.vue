@@ -162,7 +162,7 @@ export default  {
   },
   watch: {
     'modelData.data.id'() {
-      if ( this.modelData.data.id )
+      if ( this.modelData && this.modelData.data && this.modelData.data.id )
         this.$router.push( `?id=${this.modelData.data.id}` );
     }
   }

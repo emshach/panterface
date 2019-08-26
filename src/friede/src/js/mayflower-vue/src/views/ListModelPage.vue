@@ -1,7 +1,7 @@
 <template lang="html">
   <div :class=classes >
     <filter-input v-model=filters :filters=presets @add=addOption />
-    <vue-perfect-scrollbar class="scroll" @ps-scroll-x="scrollHeader" ref="scroll">
+    <vue-perfect-scrollbar class="scroller" @ps-scroll-x="scrollHeader" ref="scroll">
       <vk-table v-if="modelObj" responsive hoverable striped
                 :divided=false :data=[]
                 class="sticky-header" ref="header" :style=headStyle >
@@ -104,7 +104,7 @@ export default {
   padding-top: 20px;
   padding-left: 1px;
   padding-right: 1px;
-  .scroll {
+  .scroller {
     width: 100%;
   }
   .uk-table {

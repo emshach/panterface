@@ -541,24 +541,12 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es7_object_values__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es7.object.values */ "./node_modules/core-js/modules/es7.object.values.js");
-/* harmony import */ var core_js_modules_es7_object_values__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es7_object_values__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es6_object_keys__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es6.object.keys */ "./node_modules/core-js/modules/es6.object.keys.js");
-/* harmony import */ var core_js_modules_es6_object_keys__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_object_keys__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_es6_function_name__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es6.function.name */ "./node_modules/core-js/modules/es6.function.name.js");
-/* harmony import */ var core_js_modules_es6_function_name__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_function_name__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/web.dom.iterable */ "./node_modules/core-js/modules/web.dom.iterable.js");
-/* harmony import */ var core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js");
-/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
-/* harmony import */ var _blocks__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/blocks */ "./src/blocks/index.js");
-/* harmony import */ var _actors__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/actors */ "./src/actors/index.js");
-/* harmony import */ var lodash_isArray__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! lodash/isArray */ "./node_modules/lodash/isArray.js");
-/* harmony import */ var lodash_isArray__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(lodash_isArray__WEBPACK_IMPORTED_MODULE_8__);
-
-
-
-
+/* harmony import */ var _home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js");
+/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
+/* harmony import */ var _blocks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/blocks */ "./src/blocks/index.js");
+/* harmony import */ var _actors__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/actors */ "./src/actors/index.js");
+/* harmony import */ var lodash_isArray__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! lodash/isArray */ "./node_modules/lodash/isArray.js");
+/* harmony import */ var lodash_isArray__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(lodash_isArray__WEBPACK_IMPORTED_MODULE_4__);
 
 
 
@@ -566,124 +554,21 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'ModelDashboard',
-  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_5__["PageMixin"]],
-  components: Object(_home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_4__["default"])({}, _blocks__WEBPACK_IMPORTED_MODULE_6__["default"], _actors__WEBPACK_IMPORTED_MODULE_7__["default"]),
+  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_1__["PageMixin"], _lib_mixins__WEBPACK_IMPORTED_MODULE_1__["ActionsMixin"]],
+  components: Object(_home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, _blocks__WEBPACK_IMPORTED_MODULE_2__["default"], _actors__WEBPACK_IMPORTED_MODULE_3__["default"]),
   props: [],
-  mounted: function mounted() {
-    this.initActions();
-  },
+  mounted: function mounted() {},
   data: function data() {
     return {
       classes: {
         'model-dashboard': true,
         'uk-flex-column': true
       },
-      featured: [],
-      action: '',
-      actions: {},
-      operands: [],
-      showModals: {},
-      now: {}
+      featured: []
     };
   },
-  methods: {
-    initActions: function initActions() {
-      var _this = this;
-
-      var actions = this.options.actions;
-      var ops = {};
-      var operands = {};
-      var show = {};
-      var now = {};
-
-      if (!actions || !actions.length) {
-        this.action = '';
-        this.actions = {};
-        this.operands = [];
-        this.showModals = {};
-        return;
-      }
-
-      var reverse = [];
-      this.$api('friede', 'actions', '?' + actions.map(function (action) {
-        return 'path=' + action;
-      }).join('&')).then(function (r) {
-        var res = r.data.results;
-        if (res.length) res.forEach(function (a) {
-          if (a.data.reverse) reverse.push(a.data.reverse);
-          ops[a.name] = a;
-          operands[a.data.component] = [];
-          show[a.data.component] = false;
-          now[a.data.component] = false;
-        });
-
-        if (reverse.length) {
-          _this.$api('friede', 'actions', '?' + reverse.map(function (action) {
-            return 'path=' + action;
-          }).join('&')).then(function (r) {
-            var res = r.data.results;
-            if (res.length) res.forEach(function (a) {
-              if (a.data.reverse) ops[a.name] = a;
-              operands[a.data.component] = [];
-              show[a.data.component] = false;
-              now[a.data.component] = false;
-            });
-            _this.actions = ops;
-            _this.operands = operands;
-            _this.showModals = show;
-            _this.now = now;
-          });
-        } else {
-          _this.actions = ops;
-          _this.operands = operands;
-          _this.showModals = show;
-          _this.now = now;
-        }
-      }).catch(function (err) {
-        console.warn('couldnt get actions', actions, err);
-      });
-    },
-    act: function act(action, objects, now) {
-      var tag = this.actions[action].data.component;
-      var actor = this.actors[tag];
-      this.operands[tag] = lodash_isArray__WEBPACK_IMPORTED_MODULE_8___default()(objects) ? objects : [objects];
-      this.action = action;
-      this.showModals[tag] = true;
-      this.now[tag] = now || false;
-    },
-    success: function success(results) {
-      this.getData();
-      if (this.model === 'friede.app') this.$store.dispatch('refresh');
-    }
-  },
-  computed: {
-    allActions: function allActions() {
-      return Object.keys(this.actions);
-    },
-    actors: function actors() {
-      var actions = this.actions;
-      var args = this.operands;
-      var actors = {};
-      Object.values(actions).forEach(function (a) {
-        var tag = a.data.component;
-        if (!actors[tag]) actors[tag] = {
-          actions: {}
-        };
-        actors[tag].actions[a.name] = a;
-        actors[tag].operands = args[tag];
-      });
-      return actors;
-    }
-  },
-  watch: {
-    options: function options(to, fr) {
-      var _this2 = this;
-
-      setTimeout(function () {
-        return _this2.initActions();
-      }, 250);
-    }
-  }
+  methods: {},
+  computed: {}
 });
 
 /***/ }),
@@ -780,13 +665,26 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js");
+/* harmony import */ var _lib_mixins__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/mixins */ "./src/lib/mixins.js");
+/* harmony import */ var _blocks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/blocks */ "./src/blocks/index.js");
+/* harmony import */ var _actors__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/actors */ "./src/actors/index.js");
+
+
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "SectionalDashboard",
-  mixins: [],
-  components: {},
+  mixins: [_lib_mixins__WEBPACK_IMPORTED_MODULE_1__["PageMixin"], _lib_mixins__WEBPACK_IMPORTED_MODULE_1__["ActionsMixin"]],
+  components: Object(_home_rain_projects_web_pantologic_src_friede_src_js_mayflower_vue_node_modules_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, _blocks__WEBPACK_IMPORTED_MODULE_2__["default"], _actors__WEBPACK_IMPORTED_MODULE_3__["default"]),
   props: {},
   data: function data() {
-    return {};
+    return {
+      classes: {
+        'sectional-dashboard': true,
+        'uk-flex-column': true
+      }
+    };
   },
   created: function created() {},
   mounted: function mounted() {},
@@ -2127,7 +2025,7 @@ var render = function() {
         "vue-perfect-scrollbar",
         {
           ref: "scroll",
-          staticClass: "scroll",
+          staticClass: "scroller",
           on: { "ps-scroll-x": _vm.scrollHeader }
         },
         [
@@ -2410,7 +2308,65 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "sectional-dashboard" })
+  return _c(
+    "div",
+    { class: _vm.classes },
+    [
+      _vm._l(_vm.actors, function(actor, tag) {
+        return _c(tag, {
+          key: tag,
+          tag: "component",
+          attrs: {
+            mode: "modal",
+            action: _vm.action,
+            model: _vm.modelObj,
+            actions: actor.actions,
+            operands: actor.operands,
+            show: _vm.showModals[tag],
+            now: _vm.now[tag]
+          },
+          on: {
+            "update:show": function($event) {
+              return _vm.$set(_vm.showModals, tag, $event)
+            },
+            "update:now": function($event) {
+              return _vm.$set(_vm.now, tag, $event)
+            },
+            act: _vm.act,
+            success: function($event) {
+              return _vm.success()
+            }
+          }
+        })
+      }),
+      _c(
+        "vue-perfect-scrollbar",
+        { staticClass: "scroller" },
+        [
+          _vm.blocks.primary
+            ? _c(_vm.blocks.primary.component, {
+                tag: "component",
+                attrs: { content: _vm.objects }
+              })
+            : _vm._e(),
+          _vm.blocks.secondary
+            ? _c(_vm.blocks.secondary.component, {
+                tag: "component",
+                attrs: { content: _vm.objects }
+              })
+            : _vm._e(),
+          _vm.blocks.body
+            ? _c(_vm.blocks.body.component, {
+                tag: "component",
+                attrs: { content: _vm.objects }
+              })
+            : _vm._e()
+        ],
+        1
+      )
+    ],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -2596,7 +2552,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1566803379819
+      // 1566826002388
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -2614,7 +2570,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1566803379797
+      // 1566826002398
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -2632,7 +2588,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1566803379130
+      // 1566826000847
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -2650,7 +2606,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1566803379191
+      // 1566826001754
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -2668,7 +2624,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1566803379325
+      // 1566826000883
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -2686,7 +2642,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1566803379245
+      // 1566826001938
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -2704,7 +2660,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1566803379316
+      // 1566826001968
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -2722,7 +2678,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1566803379292
+      // 1566826001945
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -2740,7 +2696,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1566803379285
+      // 1566826001921
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -2758,7 +2714,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1566803379232
+      // 1566826001872
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -2776,7 +2732,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1566803379253
+      // 1566826001931
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -2794,7 +2750,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1566803379332
+      // 1566826000856
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -2812,7 +2768,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1566803379223
+      // 1566826001883
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -2830,7 +2786,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1566803379177
+      // 1566826001731
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -2848,7 +2804,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1566803379209
+      // 1566826001890
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -2866,7 +2822,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1566803379200
+      // 1566826001864
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -2884,7 +2840,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1566803379169
+      // 1566826001740
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -2902,7 +2858,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1566803379160
+      // 1566826001722
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -2920,7 +2876,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1566803379141
+      // 1566826001714
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -2938,7 +2894,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1566803379147
+      // 1566826001707
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -2956,7 +2912,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1566803379259
+      // 1566826001901
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);

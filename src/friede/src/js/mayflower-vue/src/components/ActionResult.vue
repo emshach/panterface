@@ -2,7 +2,7 @@
   <div class="action-result">
     <h4>{{ action.name }} Results</h4>
     <div v-if="!results" class="error">No response</div>
-    <vue-perfect-scrollbar v-else class="scroll" >
+    <vue-perfect-scrollbar v-else class="scroller" >
       <div v-if="'error' in results" class="error" v-html="results.error" />
       <ul v-else uk-accordion>
         <li v-for="( result, id ) in results" :class=itemClass>

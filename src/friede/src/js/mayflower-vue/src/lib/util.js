@@ -1,21 +1,21 @@
 export function chunk( data, size ) {
-  var out=[], i, j, tmp, chunk = 10;
-  for ( i = 0, j = data.length; i<j; i+=size ) {
-    out.push( data.slice( i, i+chunk ))
+  var out = [], i, j, chunk = 10;
+  for ( i = 0, j = data.length; i < j; i += size ) {
+    out.push( data.slice( i, i + chunk ))
   }
   return out
 }
 
 export function resolve( obj, defaults ) {
-  var objects = [ defaults || {}, {}];
+  var objects = [ defaults || {}, {} ];
   while ( obj ) {
-    var o = Object.assign( {}, obj.data );
-    Object.keys( obj ).forEach( k => {
+    var o = Object.assign( {}, obj.entry ? obj.entry.data : null, obj.data );
+    Object.keys( obj.entry || obj ).forEach( k => {
       if ( k.match( /_entries/ )) {
         var k0 = '$' + k.substr(1, k.length - 9 ) + 's';
         o[ k0 ] = {};
         Object.keys( obj[k] ).forEach( k1 => {
-          o[ k0 ][ obj[k][ k1 ].name ] = resolve( obj[k][ k1 ].entry );
+          o[ k0 ][ obj[k][ k1 ].name ] = resolve( obj[k][ k1 ] );
         });
       }
     });

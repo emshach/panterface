@@ -574,12 +574,12 @@ class App( app.App ):
                   data=dict(
                       component='HomeDashboard',
                   ))),
-            ( 'sectional', dict(
-                icon='fontawesome.berder-none',
-                extends='dashboard',
-                data=dict(
-                    component='SectionalDashboard'
-                )))),
+              ( 'sectional', dict(
+                  icon='fontawesome.berder-none',
+                  extends='dashboard',
+                  data=dict(
+                      component='SectionalDashboard'
+                  )))),
           ),
           ( '#locations',
             ( 'home', {},

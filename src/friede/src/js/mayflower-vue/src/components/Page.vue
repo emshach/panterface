@@ -7,6 +7,7 @@ export default {
   functional: true,
   render( h, ref ) {
     const screen = resolve( store.getters.screen );
+    console.log( 'screen', screen );
     const model = screen.model || ( store.state.model && store.state.model.fullname );
     const source = screen.source;
     const pageFilters = store.getters.filters;
@@ -15,7 +16,7 @@ export default {
     var options = {};
     if ( screen )
       Object.keys( screen ).forEach( x => {
-        if ( x[0] !== '$' && x !== 'model'  && x !== 'source' )
+        if ( x[0] !== '$' && x !== 'model' && x !== 'source' )
           options[x] = screen[x];
       });
     Object.assign( ref.props, { model, source, blocks, options, pageFilters });

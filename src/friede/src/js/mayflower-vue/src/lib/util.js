@@ -14,13 +14,15 @@ export function resolve( obj, defaults ) {
     Object.keys( obj ).forEach( k => {
       if ( k.match( /_entries/ )) {
         var k0 = '$' + k.substr(1, k.length - 9 ) + 's';
-        o[ k0 ] = {};
+        if ( !o[ k0 ])
+          o[ k0 ] = {};
         Object.keys( obj[k] ).forEach( k1 => {
-          o[ k0 ][ obj[k][ k1 ].name ] = resolve( obj[k][ k1 ] );
+          o[ k0 ][ obj[k][ k1 ].name ] = Object.assign(
+            {}, resolve( obj[k][ k1 ] ), o[ k0 ][ obj[k][ k1 ].name ]);
         });
       }
     });
-    objects.unshift( o );
+    objects.unshift(o);
     obj = obj.extends;
   }
   objects.unshift({});

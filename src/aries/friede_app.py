@@ -110,7 +110,7 @@ class App( app.App ):
               ( 'objects', dict(
                   data=dict(
                       component='ObjectViewer'
-                  )))))
+                  ))))),
           ( '#screens',
             ( 'dashboard',
               ( 'user', dict(
@@ -135,7 +135,7 @@ class App( app.App ):
                           entry=dict(
                               data=dict(
                                   mode='featured'
-                              ))))
+                              )))),
                     ( 'secondary',
                       dict(
                           path='viewer.objects',

@@ -10,7 +10,8 @@ export function resolve( obj, defaults ) {
   var objects = [ defaults || {}, {} ];
   while ( obj ) {
     var o = Object.assign( {}, obj.entry ? obj.entry.data : null, obj.data );
-    Object.keys( obj.entry || obj ).forEach( k => {
+    obj = obj.entry || obj;
+    Object.keys( obj ).forEach( k => {
       if ( k.match( /_entries/ )) {
         var k0 = '$' + k.substr(1, k.length - 9 ) + 's';
         o[ k0 ] = {};

@@ -28,6 +28,16 @@ export const UserHomeDashboard = () =>
    import(/* webpackChunkName: "pages" */ './UserHomeDashboard' )
 export const CollectionView = () =>
    import(/* webpackChunkName: "pages" */ './CollectionView' )
+export const SectionalDashboard = () =>
+   import(/* webpackChunkName: "pages" */ './SectionalDashboard' )
+export const UserHomePage = () =>
+   import(/* webpackChunkName: "pages" */ './UserHomePage' )
+export const UserObjectsPage = () =>
+   import(/* webpackChunkName: "pages" */ './UserObjectsPage' )
+export const UserPage = () =>
+   import(/* webpackChunkName: "pages" */ './UserPage' )
+export const UserProfilePage = () =>
+   import(/* webpackChunkName: "pages" */ './UserProfilePage' )
 
 export default {
   BasicPage,
@@ -45,5 +55,10 @@ export default {
   UserDashboard,
   UserHomeDashboard,
   CollectionView,
+  SectionalDashboard,
+  UserHomePage,
+  UserObjectsPage,
+  UserPage,
+  UserProfilePage,
 }
 

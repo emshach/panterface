@@ -105,6 +105,12 @@ class App( app.App ):
             ))),
           )),
         ( '0.0.3',
+          ( '#blocks',
+            ( 'viewer',
+              ( 'objects', dict(
+                  data=dict(
+                      component='ObjectViewer'
+                  )))))
           ( '#screens',
             ( 'dashboard',
               ( 'user', dict(
@@ -119,6 +125,25 @@ class App( app.App ):
                     data=dict(
                         component='UserHomeDashboard',
                     ))),
+                ( 'objects', dict(
+                    icon='fontawesome.cube',
+                    extends='dashboard.sectional' ),
+                  ( '#blocks',
+                    ( 'primary',
+                      dict(
+                          path='viewer.objects',
+                          entry=dict(
+                              data=dict(
+                                  mode='featured'
+                              ))))
+                    ( 'secondary',
+                      dict(
+                          path='viewer.objects',
+                          entry=dict(
+                              data=dict(
+                                  mode='recent'
+                              )))),
+                    ( 'body', dict( path='viewer.objects' ))))
               )),
             ( 'page.user', dict(
                 icon='fontawesome.house',
@@ -134,8 +159,12 @@ class App( app.App ):
                   icon='fontawesome.house',
                   data=dict(
                       component='UserProfilePage',
-                  )),
-              )
+                  ))),
+              ( 'objects', dict(
+                  icon='fontawesome.cube',
+                  data=dict(
+                      componetn='UserObjectsPage'
+                  ))),
             )
           ),
           ( '#locations',
@@ -156,7 +185,7 @@ class App( app.App ):
                     href="/my" ),
                   ( '#screens',
                     ( 'default', dict(
-                        path='dashboard.from_model',
+                        path='dashboard.user.objects',
                         entry=dict(
                             data=dict(
                                 source='userdata'
@@ -202,7 +231,12 @@ class App( app.App ):
                     title="User Stuff",
                     href="/{user}/stuff" ),
                   ( '#screens',
-                    ( 'default', dict( path='dashboard.from_model' )))),
+                    ( 'default', dict(
+                        path='page.user.objects',
+                        entry=dict(
+                            data=dict(
+                                source='userdata'
+                            )))))),
                 ( 'connections', dict(
                     title='User Connections',
                     href='/{user}/connections' ),

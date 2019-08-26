@@ -14,6 +14,8 @@ export const FormGroup = () =>
    import(/* webpackChunkName: "blocks" */ './FormGroup' )
 export const FormSection = () =>
    import(/* webpackChunkName: "blocks" */ './FormSection' )
+export const ObjectViewer = () =>
+   import(/* webpackChunkName: "blocks" */ './ObjectViewer' )
 
 export default {
   Centerfold,
@@ -24,5 +26,6 @@ export default {
   FormCalendar,
   FormGroup,
   FormSection,
+  ObjectViewer,
 }
 

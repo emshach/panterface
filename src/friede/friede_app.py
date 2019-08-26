@@ -573,7 +573,13 @@ class App( app.App ):
                   extends='dashboard',
                   data=dict(
                       component='HomeDashboard',
-                  )))),
+                  ))),
+            ( 'sectional', dict(
+                icon='fontawesome.berder-none',
+                extends='dashboard',
+                data=dict(
+                    component='SectionalDashboard'
+                )))),
           ),
           ( '#locations',
             ( 'home', {},

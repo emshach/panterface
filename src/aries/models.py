@@ -230,7 +230,7 @@ class Creation( Model ):
     user         = M.ForeignKey( User, related_name='created', on_delete=M.CASCADE )
     content_type = M.ForeignKey( ContentType, on_delete=M.CASCADE )
     object_id    = M.PositiveIntegerField()
-    owned        = GenericForeignKey( 'content_type', 'object_id' )
+    created      = GenericForeignKey( 'content_type', 'object_id' )
 
 
 class AutoOwnedModel( six.with_metaclass( _AutoOwnedBase, Model )):

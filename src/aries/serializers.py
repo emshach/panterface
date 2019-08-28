@@ -8,6 +8,10 @@ from rest_framework.serializers import (
 )
 from rest_framework_recursive.fields import RecursiveField
 from rest_framework_serializer_extensions.serializers import SerializerExtensionsMixin
+from django.contrib.admin.options import get_content_type_for_model
+from django.contrib.admin.models import LogEntry, ADDITION, CHANGE
+from django.contrib.auth import get_user_model
+from django.utils.encoding import force_text
 from collections import OrderedDict
 
 from .models import *
@@ -17,12 +21,38 @@ class OwnedMixin( ModelSerializer ):
     creator = ReadOnlyField( source='creator.user.username' )
 
     def create( self, validated_data ):
-        instance = super( OwnedMixin, self ).create( validated_data )
-        return instance
+        object = super( OwnedMixin, self ).create( validated_data )
+        request = self.context.get( 'request' )
+        if request:
+            user = request.user
+        if not user:
+            user = get_user_model().objects.get( username='system' )
+        LogEntry.objects.log_action(
+            user_id=user.pk,
+            content_type_id=get_content_type_for_model( object ).pk,
+            object_id=object.pk,
+            object_repr=force_text( object ),
+            action_flag=ADDITION,
+            change_message=[{ 'added': {} }],
+        )
+        return object
 
     def update( self, instance, validated_data ):
-        ret = super( OwnedMixin, self ).update( instance, validated_data )
-        return ret
+        object = super( OwnedMixin, self ).update( instance, validated_data )
+        request = self.context.get( 'request' )
+        if request:
+            user = request.user
+        if not user:
+            user = get_user_model().objects.get( username='system' )
+        LogEntry.objects.log_action(
+            user_id=user.pk,
+            content_type_id=get_content_type_for_model( object ).pk,
+            object_id=object.pk,
+            object_repr=force_text( object ),
+            action_flag=CHANGE,
+            change_message=[{ 'changed': { 'fields': validated_data.keys() }}],
+        )
+        return object
 
 class BaseUserSerializer( ModelSerializer ):
     class Meta:

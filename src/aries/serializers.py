@@ -17,11 +17,11 @@ class OwnedMixin( ModelSerializer ):
     creator = ReadOnlyField( source='creator.user.username' )
 
     def create( self, validated_data ):
-        instance = super( self.__class__, self ).create( validated_data )
+        instance = super( OwnedMixin, self ).create( validated_data )
         return instance
 
     def update( self, instance, validated_data ):
-        ret = super( self.__class__, self ).update( instance, validated_data )
+        ret = super( OwnedMixin, self ).update( instance, validated_data )
         return ret
 
 class BaseUserSerializer( ModelSerializer ):

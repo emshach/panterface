@@ -180,7 +180,7 @@ def api_userdata( request, sub='', format=None ):
         od = {}
         o = o.owned
         out[ mod ][ o.id ] = od
-        for attr in ('name', 'path', 'title', 'description' ):
+        for attr in ( 'name', 'path', 'title', 'description' ):
             od[ attr ] = getattr( o, attr, None )
     return Response( out )
 

@@ -2,5 +2,34 @@
 from __future__ import unicode_literals
 
 from django.contrib import admin
+from .models import *
 
-# Register your models here.
+admin.site.register( Container )
+admin.site.register( Widget )
+admin.site.register( Block )
+admin.site.register( Screen )
+admin.site.register( Shell )
+admin.site.register( Theme )
+admin.site.register( Slot )
+admin.site.register( App )
+admin.site.register( Location )
+admin.site.register( Icon )
+admin.site.register( Link )
+admin.site.register( Reference )
+admin.site.register( Setting )
+admin.site.register( Action )
+admin.site.register( ContainerEntry )
+admin.site.register( WidgetEntry )
+admin.site.register( BlockEntry )
+admin.site.register( ScreenEntry )
+admin.site.register( ShellEntry )
+admin.site.register( ThemeEntry )
+admin.site.register( SlotEntry )
+admin.site.register( AppEntry )
+admin.site.register( LocationEntry )
+admin.site.register( IconEntry )
+admin.site.register( LinkEntry )
+admin.site.register( ReferenceEntry )
+admin.site.register( SettingEntry )
+admin.site.register( ActionEntry )
+admin.site.register( UserApp )

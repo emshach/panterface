@@ -9,7 +9,7 @@ import { FilterGrid } from '@/blocks'
 export default {
   name: 'ObjectViewer',
   mixins: [],
-  components: { FilterGrid },
+  components: {},
   props: {
     content: {
       type: Array,

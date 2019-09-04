@@ -30,19 +30,12 @@ export default {
   methods: {},
   computed: {
     datedContent() {
-      const out = {}
-      Object.keys( this.content ).forEach( k => {
-        const x = this.content[k];
-        const o = out[k] = {};
-        Object.keys(x).forEach( k => {
-          const y = Object.assign( {}, x[k] );
-          o[k] = y;
-          [ 'modified', 'created', 'deteled' ].forEach( k => {
-            if ( y[k] ) y[k] = new Date( y[k] );
-          });
+      return this.content.map( x => {
+        const out = Object.assign( {}, x );
+        [ 'modified', 'created', 'deteled' ].forEach( y => {
+          if ( x[y] ) x[y] = new Date( x[y] );
         });
       });
-      return out;
     }
   }
 }

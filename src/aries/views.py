@@ -174,15 +174,15 @@ def api_userdata( request, sub='', format=None ):
         subs = filter( lambda x: x, map( _get_model, subs ))
         if subs:
             owned = owned.filter( content_type__in=subs )
-    out = {}
+    out = []
     for o in owned.all():
         ct = o.content_type
         mod = "{}.{}".format( ct.app_label, ct.model )
-        if mod not in out:
-            out[ mod ] = {}
-        od = {}
+        # if mod not in out:
+        #     out[ mod ] = {}
+        od = dict( id=o.owned.id, model=mod )
         o = o.owned
-        out[ mod ][ o.id ] = od
+        out.append( od )
         for attr in ( 'name', 'path', 'title', 'description' ):
             od[ attr ] = getattr( o, attr, None )
         try:

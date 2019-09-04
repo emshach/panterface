@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="object-viewer">
-    <filter-grid :objects=datedContent :item-layout=layout />
+    <filter-grid v-if="mode==='normal'" :objects=datedContent :item-layout=layout />
   </div>
 </template>
 
@@ -14,6 +14,10 @@ export default {
     content: {
       type: Array,
       default: () => []
+    },
+    mode: {
+      type: String,
+      default: 'normal'
     }
   },
   data() {

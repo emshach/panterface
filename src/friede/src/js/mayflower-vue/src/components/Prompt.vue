@@ -520,6 +520,7 @@ export default {
       background: rgba(0,0,0,0.1);
       font-family: monospace;
       border-right-width: 0;
+      border-bottom-width: 0;
       border-top-left-radius: 4px;
       box-shadow: inset 0 1px 2px rgba(0,0,0,0.25);
       border-color: rgba(127, 255, 212,0.5);

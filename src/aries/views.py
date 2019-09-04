@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django.db.models import Max, Value
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login as authlogin, logout as authlogout
+from django.contrib.admin.models import LogEntry
 from rest_framework import status, viewsets, permissions, filters
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
@@ -174,12 +176,27 @@ def api_userdata( request, sub='', format=None ):
             owned = owned.filter( content_type__in=subs )
     out = {}
     for o in owned.all():
-        mod = "{}.{}".format( o.content_type.app_label, o.content_type.model )
+        ct = o.content_type
+        mod = "{}.{}".format( ct.app_label, ct.model )
         if mod not in out:
             out[ mod ] = {}
         od = {}
         o = o.owned
+        try:
+            log = LogEntry.objects.filter(
+                content_type=ct.pk,
+                object_id=o.pk,
+                action_time=LogEntry.objects.filter(
+                    content_type=ct.pk,
+                    object_id=o.pk )
+                .annotate( common=Value(1) ).values( 'common' )
+                .annotate( latest_action=Max( 'action_time' ))
+                .values( 'latest_action' )
+            ).first()
+        except LogEntry.DoesNotExist:
+            log = 0
         out[ mod ][ o.id ] = od
+        out[ mod ][ 'modified' ] = log
         for attr in ( 'name', 'path', 'title', 'description' ):
             od[ attr ] = getattr( o, attr, None )
     return Response( out )

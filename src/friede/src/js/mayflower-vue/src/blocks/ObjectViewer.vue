@@ -35,6 +35,7 @@ export default {
         [ 'modified', 'created', 'deteled' ].forEach( y => {
           if ( x[y] ) out[y] = new Date( x[y] );
         });
+        return out;
       });
     }
   }

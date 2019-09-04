@@ -9,7 +9,7 @@ import { FilterGrid } from '@/blocks'
 export default {
   name: 'ObjectViewer',
   mixins: [],
-  components: {},
+  components: { FilterGrid },
   props: {
     content: {
       type: Array,
@@ -38,7 +38,7 @@ export default {
           const y = Object.assign( {}, x[k] );
           o[k] = y;
           [ 'modified', 'created', 'deteled' ].forEach( k => {
-            if ( o[k] ) o[k] = new Date( o[k] );
+            if ( y[k] ) y[k] = new Date( y[k] );
           });
         });
       });

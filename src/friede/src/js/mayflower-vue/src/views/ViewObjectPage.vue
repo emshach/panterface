@@ -8,7 +8,7 @@
 import { PageMixin } from '@/lib/mixins'
 
 export default {
-  name: "ViewObjectPage",
+  name: 'ViewObjectPage',
   mixins: [ PageMixin ],
   components: {},
   props: {},

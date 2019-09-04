@@ -8,7 +8,7 @@
 import { PageMixin } from '@/lib/mixins'
 
 export default {
-  name: "UserHomeDashboard",
+  name: 'UserHomeDashboard',
   mixins: [ PageMixin ],
   components: {},
   props: {},

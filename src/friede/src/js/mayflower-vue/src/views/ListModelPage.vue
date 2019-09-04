@@ -33,7 +33,7 @@ import { FilteredMixin, ActionsMixin } from '@/lib/mixins'
 import { FilterInput, ActionsInput } from '@/components'
 
 export default {
-  name: "ListModelPage",
+  name: 'ListModelPage',
   mixins: [ PageMixin , FilteredMixin ],
   components: {
     VkTable,

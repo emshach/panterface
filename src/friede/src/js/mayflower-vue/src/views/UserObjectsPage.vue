@@ -7,7 +7,7 @@
 <script lang="js">
 
 export default {
-  name: "UserObjectsPage",
+  name: 'UserObjectsPage',
   mixins: [],
   components: {},
   props: {},

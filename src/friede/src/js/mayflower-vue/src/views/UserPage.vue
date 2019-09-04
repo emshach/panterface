@@ -7,7 +7,7 @@
 <script lang="js">
 
 export default {
-  name: "UserPage",
+  name: 'UserPage',
   mixins: [],
   components: {},
   props: {},

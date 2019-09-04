@@ -27,7 +27,7 @@ import blocks from '@/blocks'
 import actors from '@/actors'
 
 export default {
-  name: "SectionalDashboard",
+  name: 'SectionalDashboard',
   mixins: [ PageMixin, ActionsMixin ],
   components: { ...blocks, ...actors },
   props: {},

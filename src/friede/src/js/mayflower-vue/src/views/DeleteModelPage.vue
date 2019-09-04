@@ -8,7 +8,7 @@
 import { PageMixin } from '@/lib/mixins'
 
 export default {
-  name: "DeleteModelPage",
+  name: 'DeleteModelPage',
   mixins: [ PageMixin ],
   components: {},
   props: {},

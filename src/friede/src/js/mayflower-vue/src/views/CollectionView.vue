@@ -9,7 +9,7 @@ import { FilterInput, ActionsInput } from '@/components'
 import { FilteredMixin, ActionsMixin } from '@/lib/mixins'
 
 export default {
-  name: "CollectionView",
+  name: 'CollectionView',
   mixins: [ FilteredMixin, ActionsMixin ],
   components: {
     FilterInput,

@@ -8,7 +8,7 @@
 import { PageMixin } from '@/lib/mixins'
 
 export default {
-  name: "ReportModelPage",
+  name: 'ReportModelPage',
   mixins: [ PageMixin ],
   components: {},
   props: {},

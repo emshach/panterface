@@ -8,7 +8,7 @@
 import { PageMixin } from '@/lib/mixins'
 
 export default {
-  name: "SearchResultsPage",
+  name: 'SearchResultsPage',
   mixins: [ PageMixin ],
   components: {},
   props: {},

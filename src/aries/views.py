@@ -182,23 +182,16 @@ def api_userdata( request, sub='', format=None ):
             out[ mod ] = {}
         od = {}
         o = o.owned
-        try:
-            log = LogEntry.objects.filter(
-                content_type=ct.pk,
-                object_id=o.pk,
-                action_time=LogEntry.objects.filter(
-                    content_type=ct.pk,
-                    object_id=o.pk )
-                .annotate( common=Value(1) ).values( 'common' )
-                .annotate( latest_action=Max( 'action_time' ))
-                .values( 'latest_action' )
-            ).first()
-        except LogEntry.DoesNotExist:
-            log = 0
         out[ mod ][ o.id ] = od
-        out[ mod ][ 'modified' ] = log
         for attr in ( 'name', 'path', 'title', 'description' ):
             od[ attr ] = getattr( o, attr, None )
+        try:
+            logs = LogEntry.objects.filter( content_type=ct.pk, object_id=o.pk )
+            od[ 'count' ] = logs.count()
+            od[ 'modified' ] = logs.latest( 'action_time' )
+        except LogEntry.DoesNotExist:
+            od[ 'count' ] = 0
+            od[ 'modified' ] = 0
     return Response( out )
 
 class OwnedViewMixin( viewsets.ModelViewSet ):

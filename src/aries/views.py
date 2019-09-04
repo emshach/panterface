@@ -188,7 +188,7 @@ def api_userdata( request, sub='', format=None ):
         try:
             logs = LogEntry.objects.filter( content_type=ct.pk, object_id=o.pk )
             od[ 'count' ] = logs.count()
-            od[ 'modified' ] = logs.latest( 'action_time' )
+            od[ 'modified' ] = logs.latest( 'action_time' ).action_time.isoformat()
         except LogEntry.DoesNotExist:
             od[ 'count' ] = 0
             od[ 'modified' ] = 0

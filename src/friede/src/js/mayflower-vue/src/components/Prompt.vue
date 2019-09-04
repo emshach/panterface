@@ -231,6 +231,8 @@ export default {
       this.submit()
     },
     processKey( $event ) {
+      if ( $event.altKey || $event.metaKey )
+        return;
       if ( $event.key === '/' ) {
         $event.preventDefault();
         if ( this.selected && this.all.find( x => x === this.selected )) {

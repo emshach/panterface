@@ -174,6 +174,7 @@ def api_userdata( request, sub='', format=None ):
         subs = filter( lambda x: x, map( _get_model, subs ))
         if subs:
             owned = owned.filter( content_type__in=subs )
+    primary = []
     secondary = []
     body = []
     for o in owned.all():

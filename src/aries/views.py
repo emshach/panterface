@@ -174,25 +174,31 @@ def api_userdata( request, sub='', format=None ):
         subs = filter( lambda x: x, map( _get_model, subs ))
         if subs:
             owned = owned.filter( content_type__in=subs )
-    out = []
+    secondary = []
+    body = []
     for o in owned.all():
         ct = o.content_type
         mod = "{}.{}".format( ct.app_label, ct.model )
-        # if mod not in out:
-        #     out[ mod ] = {}
         od = dict( id=o.owned.id, model=mod )
         o = o.owned
-        out.append( od )
+        body.append( od )
         for attr in ( 'name', 'path', 'title', 'description' ):
             od[ attr ] = getattr( o, attr, None )
         try:
             logs = LogEntry.objects.filter( content_type=ct.pk, object_id=o.pk )
             od[ 'count' ] = logs.count()
             od[ 'modified' ] = logs.latest( 'action_time' ).action_time.isoformat()
+            secondary.append( od )
         except LogEntry.DoesNotExist:
             od[ 'count' ] = 0
             od[ 'modified' ] = 0
-    return Response( out )
+    primary = sorted( body, key=lambda x: x[ 'count' ], reverse=True )[:10]
+    secondary = sorted( secondary, key=lambda x: x[ 'modified' ], reverse=True )[:100]
+    return Response( dict(
+        primary=primary,
+        secondary=secondary,
+        body=body
+    ))
 
 class OwnedViewMixin( viewsets.ModelViewSet ):
     def perform_create( self, serializer ):

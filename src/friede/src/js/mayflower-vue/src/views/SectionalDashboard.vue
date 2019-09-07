@@ -12,11 +12,11 @@
                @success=success() />
     <vue-perfect-scrollbar class="scroller">
       <component :is=blocks.primary.component v-if=blocks.primary
-                 :content=objects :mode=blocks.secondary.mode />
+                 :content=primaryObjects :mode=blocks.secondary.mode />
       <component :is=blocks.secondary.component v-if=blocks.secondary
-                 :content=objects :mode=blocks.primary.mode />
+                 :content=secondarObjects :mode=blocks.primary.mode />
       <component :is=blocks.body.component v-if=blocks.body
-                 :content=objects :mode=blocks.body.mode />
+                 :content=bodyObjects :mode=blocks.body.mode />
     </vue-perfect-scrollbar>
   </div>
 </template>
@@ -42,7 +42,17 @@ export default {
   created() {},
   mounted() {},
   methods: {},
-  computed: {}
+  computed: {
+    primaryObjects() {
+      return this.objects && this.objects.primary || this.objects;
+    },
+    secondaryObjects() {
+      return this.objects && this.objects.secondary || this.objects;
+    },
+    bodyObjects() {
+      return this.objects && this.objects.body || this.objects;
+    }
+  }
 }
 </script>
 

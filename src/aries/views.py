@@ -188,11 +188,12 @@ def api_userdata( request, sub='', format=None ):
             logs = LogEntry.objects.filter( content_type=ct.pk, object_id=o.pk )
             od[ 'count' ] = logs.count()
             od[ 'modified' ] = logs.latest( 'action_time' ).action_time.isoformat()
+            primary.append( od )
             secondary.append( od )
         except LogEntry.DoesNotExist:
             od[ 'count' ] = 0
             od[ 'modified' ] = 0
-    primary = sorted( body, key=lambda x: x[ 'count' ], reverse=True )[:10]
+    primary = sorted( primary, key=lambda x: x[ 'count' ], reverse=True )[:10]
     secondary = sorted( secondary, key=lambda x: x[ 'modified' ], reverse=True )[:100]
     return Response( dict(
         primary=primary,

@@ -17,7 +17,7 @@
                             :class=" isSelected( object ) ? 'selected' : ''" >
             <template v-for="( field, slot ) in itemLayout"
                       v-slot:[slot]={object} >
-              {{ object[ field ]}}
+              {{ object[ layoutField( field )] || layoutDefault( field )}}
             </template>
             <template #title-actions={object} >
               <vk-btn type="light" @click.prevent="toggleSelect( object )">
@@ -108,6 +108,16 @@ export default  {
         return;
       }
       this.$emit( 'act', action, this.selected );
+    },
+    layoutField( field ) {
+      if ( typeof field === 'object' )
+        return field.key;
+      return field
+    },
+    layoutDefault( field ) {
+      if ( typeof field === 'object' )
+        return field.default || '';
+      return ''
     }
   },
   computed: {

@@ -23,7 +23,7 @@ export default {
   data() {
     return {
       layout: {
-        title: 'title',
+        title: { key: 'title', default: 'Untitled' },
         subtitle: 'path',
         content: 'description'
       }

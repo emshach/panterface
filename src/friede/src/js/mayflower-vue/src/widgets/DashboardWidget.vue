@@ -1,5 +1,5 @@
 <template lang="html">
-  <default-action-widget :object=object >
+  <default-action-widget :object=object :model=model >
     <template v-for="( _, slot ) in $scopedSlots"
               v-slot:[slot]=scope>
       <slot :name=slot v-bind=scope />

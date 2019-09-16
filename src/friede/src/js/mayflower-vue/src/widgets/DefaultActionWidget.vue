@@ -1,5 +1,5 @@
 <template lang="html">
-  <card-widget :object=object :inline=inline :context=context
+  <card-widget :object=object :inline=inline :context=context :model=model
                @click.self=defaultAction >
     <template v-for="( _, slot ) in $scopedSlots"
               v-slot:[slot]=scope >

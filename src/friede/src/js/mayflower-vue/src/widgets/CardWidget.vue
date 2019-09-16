@@ -127,7 +127,7 @@ export default {
 .card-widget {
   position: relative;
   display: flex;
-  display-direction: column;
+  flex-direction: column;
   > .uk-card-header {
     padding: 0;
     border-bottom: 0 none;

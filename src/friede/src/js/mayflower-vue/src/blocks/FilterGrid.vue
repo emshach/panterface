@@ -25,7 +25,7 @@
                                    class="selector" />
               </vk-btn>
             </template>
-            <template #content-actions={object} >
+            <template #footer-actions={object} >
               <slot name=item-actions :object=object />
             </template>
           </dashboard-widget>

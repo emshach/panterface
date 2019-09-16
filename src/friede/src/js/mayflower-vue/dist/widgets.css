@@ -29,9 +29,13 @@
           -ms-flex: 1;
               flex: 1;
 }
+.card-widget > .uk-card-footer {
+    padding: 0;
+    border-top: 0 none;
+}
 .card-widget .model-name {
     padding: 4px;
-    color: cadet-blue;
+    color: cadetblue;
 }
 
 

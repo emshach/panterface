@@ -35,14 +35,14 @@
         <slot name="content" :object=object />
       </vue-perfect-scrollbar>
     </div>
-    <div class="item-actions">
+    <div v-if=hasContentActions class="item-actions">
       <slot name="content-actions" :object=object />
     </div>
     <template #media-bottom>
       <slot name="media-bottom" :object=object />
     </template>
     <template #footer>
-      <div class="item-actions">
+      <div v-if=hasFooterActions class="item-actions">
         <slot name="footer-actions" :object=object />
       </div>
       <slot name="footer" :object=object />
@@ -112,6 +112,12 @@ export default {
       if ( this.modelObj )
         return this.modelObj.icon;
       return '';
+    },
+    hasContentActions() {
+      return !!this.$slots[ 'content-actions' ]
+    },
+    hasFooterActions() {
+      return !!this.$slots[ 'footer-actions' ]
     }
   }
 }
@@ -139,9 +145,13 @@ export default {
       flex: 1;
     }
   }
+  > .uk-card-footer {
+    padding: 0;
+    border-top: 0 none;
+  }
   .model-name {
     padding: 4px;
-    color: cadet-blue;
+    color: cadetblue;
   }
 }
 </style>

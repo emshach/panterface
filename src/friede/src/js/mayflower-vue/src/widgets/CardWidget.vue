@@ -1,10 +1,15 @@
 <template lang="html">
   <vk-card :type=type :padding=padding :hover=context.hover
            class="widget card-widget">
-      <div class="title-actions uk-align-right">
-        <slot name="title-actions" :object=object />
-        <close-button @click.prevent=close v-if=context.closeable />
-      </div>
+    <div class="card-bg">
+      <slot name="background" :object=object>
+        <mf-icon :icon=modelIcon mode="bg" />
+      </slot>
+    </div>
+    <div class="title-actions uk-align-right">
+      <slot name="title-actions" :object=object />
+      <close-button @click.prevent=close v-if=context.closeable />
+    </div>
     <slot #header name="header" :object=object />
     <slot #badge name="badge" :object=object />
     <slot #media name="media" :object=object />
@@ -79,6 +84,14 @@ export default  {
     },
     padding() {
       return this.inline ? '' : 'small'
+    },
+    modelObj() {
+      if ( this.object && this.object.model)
+        return this.$store.state.models[ this.object.model ];
+    },
+    modelIcon() {
+      if ( this.modelObj )
+        return this.modelObj.icone;
     }
   }
 }

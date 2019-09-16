@@ -14,7 +14,7 @@
       <component :is=blocks.primary.component v-if=blocks.primary
                  :content=primaryObjects :mode=blocks.secondary.mode />
       <component :is=blocks.secondary.component v-if=blocks.secondary
-                 :content=secondarObjects :mode=blocks.primary.mode />
+                 :content=secondaryObjects :mode=blocks.primary.mode />
       <component :is=blocks.body.component v-if=blocks.body
                  :content=bodyObjects :mode=blocks.body.mode />
     </vue-perfect-scrollbar>

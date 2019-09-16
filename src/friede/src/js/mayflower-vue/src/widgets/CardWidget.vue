@@ -1,9 +1,11 @@
 <template lang="html">
   <vk-card :type=type :padding=padding :hover=context.hover
            class="widget card-widget">
-    <slot #header name="header" :object=object >
-      <div v-if=object.model class="model-name">{{ object.model }}</div>
-    </slot>
+    <template #header>
+      <slot name="header" :object=object >
+        <div v-if=object.model class="model-name">{{ object.model }}</div>
+      </slot>
+    </template>
     <div class="card-bg">
       <slot name="background" :object=object>
         <mf-icon v-if=modelIcon :icon=modelIcon mode="bg" />
@@ -39,7 +41,7 @@
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 import { Card as VkCard, CardTitle as VkCardTitle } from 'vuikit/lib/card'
 import { CloseButton } from '@/components'
-export default  {
+export default {
   name: 'CardWidget',
   components: {
     VuePerfectScrollbar,
@@ -91,10 +93,12 @@ export default  {
     modelObj() {
       if ( this.object && this.object.model )
         return this.$store.state.models[ this.object.model ];
+      return null;
     },
     modelIcon() {
       if ( this.modelObj )
         return this.modelObj.icon;
+      return '';
     }
   }
 }

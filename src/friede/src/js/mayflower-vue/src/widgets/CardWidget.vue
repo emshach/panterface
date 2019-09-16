@@ -114,10 +114,10 @@ export default {
       return '';
     },
     hasContentActions() {
-      return !!this.$slots[ 'content-actions' ]
+      return !!this.$scopedSlots[ 'content-actions' ]
     },
     hasFooterActions() {
-      return !!this.$slots[ 'footer-actions' ]
+      return !!this.$scopedSlots[ 'footer-actions' ]
     }
   }
 }

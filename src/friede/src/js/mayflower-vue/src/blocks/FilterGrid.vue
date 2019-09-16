@@ -26,7 +26,7 @@
               </vk-btn>
             </template>
             <template #footer-actions={object} >
-              <slot name=item-actions :object=object />
+              <slot name="item-actions" :object=object />
             </template>
           </dashboard-widget>
         </div>

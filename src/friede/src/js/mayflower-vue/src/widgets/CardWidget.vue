@@ -113,6 +113,8 @@ export default {
         if ( this.model && this.model.fullname === this.object.model )
           return this.model;
         return this.$store.state.models[ this.object.model ];
+      } else if ( this.model ) {
+          return this.model;
       }
       return null;
     },

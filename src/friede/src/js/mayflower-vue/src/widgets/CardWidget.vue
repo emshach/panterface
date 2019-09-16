@@ -3,7 +3,7 @@
            class="widget card-widget">
     <div class="card-bg">
       <slot name="background" :object=object>
-        <mf-icon :icon=modelIcon mode="bg" />
+        <mf-icon v-if=modelIcon :icon=modelIcon mode="bg" />
       </slot>
     </div>
     <div class="title-actions uk-align-right">
@@ -68,7 +68,8 @@ export default  {
     }
   },
   mounted() {
-    
+    if ( this.object && this.object.model )
+      this.$store.dispatch( 'getModel', this.object.model );
   },
   data() {
     return {
@@ -86,7 +87,7 @@ export default  {
       return this.inline ? '' : 'small'
     },
     modelObj() {
-      if ( this.object && this.object.model)
+      if ( this.object && this.object.model )
         return this.$store.state.models[ this.object.model ];
     },
     modelIcon() {

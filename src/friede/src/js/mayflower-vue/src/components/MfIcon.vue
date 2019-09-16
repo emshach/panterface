@@ -248,10 +248,10 @@ export default {
 .mf-icon {
   &-bg {
     position: absolute;
-    top: -2px;
-    lift: -2px;
-    font-size: 72px;
-    color: rgba(0,0,0,0.05);
+    top: -12px;
+    left: -32px;
+    font-size: 144px;
+    color: rgba(0,0,0,0.03);
   } 
 }
 </style>

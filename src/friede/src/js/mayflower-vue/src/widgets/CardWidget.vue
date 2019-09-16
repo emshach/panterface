@@ -1,6 +1,9 @@
 <template lang="html">
   <vk-card :type=type :padding=padding :hover=context.hover
            class="widget card-widget">
+    <slot #header name="header" :object=object >
+      <div v-if=object.model class="model-name">{{ object.model }}</div>
+    </slot>
     <div class="card-bg">
       <slot name="background" :object=object>
         <mf-icon v-if=modelIcon :icon=modelIcon mode="bg" />
@@ -10,9 +13,6 @@
       <slot name="title-actions" :object=object />
       <close-button @click.prevent=close v-if=context.closeable />
     </div>
-    <slot #header name="header" :object=object >
-      <div v-if=object.model class="model-name">{{ object.model }}</div>
-    </slot>
     <slot #badge name="badge" :object=object />
     <slot #media name="media" :object=object />
     <slot #media-top name="media-top" :object=object />

@@ -13,7 +13,7 @@
     <vue-perfect-scrollbar class="scroller uk-flex-1">
       <vk-grid matched :class=classes >
         <div v-for="object in filtered" :key=object.id >
-          <dashboard-widget :object=object
+          <dashboard-widget :object=object :model=model
                             :class=" isSelected( object ) ? 'selected' : ''" >
             <template v-for="( field, slot ) in itemLayout"
                       v-slot:[slot]={object} >

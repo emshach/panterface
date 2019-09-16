@@ -12,11 +12,14 @@
                @success=success() />
     <vue-perfect-scrollbar class="scroller">
       <component :is=blocks.primary.component v-if=blocks.primary
-                 :content=primaryObjects :mode=blocks.secondary.mode />
+                 :content=primaryObjects :mode=blocks.secondary.mode
+                 :model=modelObj />
       <component :is=blocks.secondary.component v-if=blocks.secondary
-                 :content=secondaryObjects :mode=blocks.primary.mode />
+                 :content=secondaryObjects :mode=blocks.primary.mode
+                 :model=modelObj />
       <component :is=blocks.body.component v-if=blocks.body
-                 :content=bodyObjects :mode=blocks.body.mode />
+                 :content=bodyObjects :mode=blocks.body.mode
+                 :model=modelObj />
     </vue-perfect-scrollbar>
   </div>
 </template>

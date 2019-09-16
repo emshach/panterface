@@ -11,12 +11,13 @@
                @act=act
                @success=success() />
     <component :is=blocks.breakfront.component v-if=blocks.breakfront
-               :content=featured />
+               :content=featured :model=modelObj />
     <component :is=blocks.main.component v-if=blocks.main
                :objects=objects
                :actions=allActions
                :item-layout=options.layout
                :search-fields=options.search
+               :model=modelObj
                @act=act >
       <template #item-actions={object} >
         <component :is=tag mode="widget" :key=tag

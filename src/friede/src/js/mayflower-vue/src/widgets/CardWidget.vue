@@ -54,6 +54,8 @@
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 import { Card as VkCard, CardTitle as VkCardTitle } from 'vuikit/lib/card'
 import { CloseButton } from '@/components'
+import { Model } from '@/lib/objects'
+
 export default {
   name: 'CardWidget',
   components: {
@@ -82,6 +84,10 @@ export default {
     inline: {
       type: Boolean,
       default: true
+    },
+    model: {
+      type: Model,
+      defualt: () => new Model({})
     }
   },
   mounted() {
@@ -104,8 +110,11 @@ export default {
       return this.inline ? '' : 'small'
     },
     modelObj() {
-      if ( this.object && this.object.model )
+      if ( this.object && this.object.model ) {
+        if ( this.model && this.model.fullname === this.object.model )
+          return this.model;
         return this.$store.state.models[ this.object.model ];
+      }
       return null;
     },
     modelIcon() {

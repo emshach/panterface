@@ -103,6 +103,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_perfect_scrollbar__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_perfect_scrollbar__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vuikit_lib_card__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuikit/lib/card */ "./node_modules/vuikit/lib/card.js");
 /* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components */ "./src/components/index.js");
+/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
+
 
 
 
@@ -138,6 +140,12 @@ __webpack_require__.r(__webpack_exports__);
     inline: {
       type: Boolean,
       default: true
+    },
+    model: {
+      type: _lib_objects__WEBPACK_IMPORTED_MODULE_3__["Model"],
+      defualt: function defualt() {
+        return new _lib_objects__WEBPACK_IMPORTED_MODULE_3__["Model"]({});
+      }
     }
   },
   mounted: function mounted() {
@@ -155,7 +163,11 @@ __webpack_require__.r(__webpack_exports__);
       return this.inline ? '' : 'small';
     },
     modelObj: function modelObj() {
-      if (this.object && this.object.model) return this.$store.state.models[this.object.model];
+      if (this.object && this.object.model) {
+        if (this.model && this.model.fullname === this.object.model) return this.model;
+        return this.$store.state.models[this.object.model];
+      }
+
       return null;
     },
     modelIcon: function modelIcon() {
@@ -183,6 +195,8 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _DefaultActionWidget__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DefaultActionWidget */ "./src/widgets/DefaultActionWidget.vue");
+/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'DashboardWidget',
@@ -193,6 +207,12 @@ __webpack_require__.r(__webpack_exports__);
     object: {
       type: Object,
       required: true
+    },
+    model: {
+      type: _lib_objects__WEBPACK_IMPORTED_MODULE_1__["Model"],
+      default: function _default() {
+        return new _lib_objects__WEBPACK_IMPORTED_MODULE_1__["Model"]({});
+      }
     }
   },
   mounted: function mounted() {},
@@ -215,6 +235,8 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _CardWidget__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CardWidget */ "./src/widgets/CardWidget.vue");
+/* harmony import */ var _lib_objects__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/objects */ "./src/lib/objects.js");
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'DefaultActionWidget',
@@ -241,6 +263,12 @@ __webpack_require__.r(__webpack_exports__);
     inline: {
       type: Boolean,
       default: false
+    },
+    model: {
+      type: _lib_objects__WEBPACK_IMPORTED_MODULE_1__["Model"],
+      default: function _default() {
+        return new _lib_objects__WEBPACK_IMPORTED_MODULE_1__["Model"]({});
+      }
     }
   },
   mounted: function mounted() {},
@@ -951,7 +979,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1568615042707
+      // 1568615983022
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -969,7 +997,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1568615042576
+      // 1568615982983
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -987,7 +1015,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1568615042784
+      // 1568615983111
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1005,7 +1033,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1568615042692
+      // 1568615983698
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1023,7 +1051,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1568615042611
+      // 1568615982908
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1041,7 +1069,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1568615042714
+      // 1568615983042
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1059,7 +1087,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1568615042740
+      // 1568615983057
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1077,7 +1105,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1568615042593
+      // 1568615982971
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1095,7 +1123,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1568615042750
+      // 1568615983069
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1113,7 +1141,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1568615042764
+      // 1568615983090
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1131,7 +1159,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1568615042773
+      // 1568615983101
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -1149,7 +1177,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1568615042532
+      // 1568615983033
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);

@@ -9,7 +9,6 @@
 
 <script lang="js">
 import DefaultActionWidget from './DefaultActionWidget'
-import { Model } from '@/lib/objects'
 
 export default {
   name: 'DashboardWidget',
@@ -20,8 +19,8 @@ export default {
       required: true
     },
     model: {
-      type: Model,
-      default: () => new Model({})
+      type: Object,
+      default: () => ({})
     }
   },
   mounted() {

@@ -6,7 +6,6 @@ import { Field } from '@/lib/objects'
 import { JsonInput, FilterInput } from '@/components'
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 import isArray from 'lodash/isArray'
-import { Model } from '@/lib/objects'
 
 library.add( faPlus, faEdit )
 
@@ -497,12 +496,6 @@ export const ActorsMixin = {
 }
 
 export const ActionsMixin = {
-  props: {
-    model: {
-      type: Model,
-      default: () => new Model({})
-    }
-  },
   mounted() {
     this.initActions();
   },

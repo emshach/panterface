@@ -11,7 +11,6 @@
 
 <script lang="js">
 import CardWidget from './CardWidget'
-import { Model } from '@/lib/objects'
 
 export default {
   name: 'DefaultActionWidget',
@@ -34,8 +33,8 @@ export default {
       default: false
     },
     model: {
-      type: Model,
-      default: () => new Model({})
+      type: Object,
+      default: () => ({})
     }
   },
   mounted() {},

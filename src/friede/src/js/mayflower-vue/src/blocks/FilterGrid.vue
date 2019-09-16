@@ -73,6 +73,10 @@ export default  {
     itemLayout: {
       type: Object,
       default: () => ({})
+    },
+    model: {
+      type: Object,
+      default: () => ({})
     }
   },
   mounted() {

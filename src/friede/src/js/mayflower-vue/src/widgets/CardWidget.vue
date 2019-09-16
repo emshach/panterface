@@ -126,6 +126,8 @@ export default {
 <style lang="scss">
 .card-widget {
   position: relative;
+  display: flex;
+  display-direction: column;
   > .uk-card-header {
     padding: 0;
     border-bottom: 0 none;
@@ -134,7 +136,7 @@ export default {
     }
   }
   > .uk-card-body {
-    /* height: 100%; */
+    flex: 1;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;

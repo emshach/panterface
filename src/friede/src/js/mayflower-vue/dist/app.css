@@ -10944,15 +10944,15 @@ form.uk-form-stacked label {
   .uk-card.selected .selector {
     color: palegreen; }
 
-.uk-card .item-actions {
-  margin: 16px -10px -16px; }
-  .uk-card .item-actions > * {
-    float: right; }
-  .uk-card .item-actions .widget .uk-button, .uk-card .item-actions .widget .icon {
-    padding: 0 6px; }
-  .uk-card .item-actions .widget .icon {
-    -webkit-box-sizing: content-box;
-            box-sizing: content-box; }
+.uk-card .item-actions > * {
+  float: right; }
+
+.uk-card .item-actions .widget .uk-button, .uk-card .item-actions .widget .icon {
+  padding: 0 6px; }
+
+.uk-card .item-actions .widget .icon {
+  -webkit-box-sizing: content-box;
+          box-sizing: content-box; }
 
 .uk-card .card-bg {
   position: absolute;

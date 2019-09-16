@@ -363,6 +363,9 @@ def api_models( request, models=None, format=None ):
             rest = app_meta.get( 'rest', app_meta.get( 'plural' ))
             if rest:
                 data[ 'rest' ] = "{}/{}".format( meta.app_label, rest )
+            icon = app_meta.get( 'icon' )
+            if icon:
+                data[ 'icon' ] = icon
         for f in meta.get_fields():
             if f.name not in sr.Meta.fields and (
                     not hasattr( sr.Meta, 'expandable_fields' )

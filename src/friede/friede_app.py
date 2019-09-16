@@ -575,7 +575,7 @@ class App( app.App ):
                       component='HomeDashboard',
                   ))),
               ( 'sectional', dict(
-                  icon='fontawesome.berder-none',
+                  icon='fontawesome.border-none',
                   extends='dashboard',
                   data=dict(
                       component='SectionalDashboard'

@@ -11,6 +11,7 @@ import API from '@/lib/api'
 import security from '@/lib/security'
 import Tooltip from 'vuikit/lib/tooltip'
 import VueShortkey from 'vue-shortkey'
+import MfIcon from '@/components/MfIcon'
 import 'vue-toastr/src/vue-toastr.scss'
 
 UIkit.use( Icons );
@@ -20,6 +21,8 @@ Vue.use( VueShortkey, {
 });
 Vue.use( API );
 Vue.use( security );
+Vue.component( 'MfIcon', MfIcon );
+
 Vue.config.productionTip = false;
 
 class Mayflower {

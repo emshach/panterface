@@ -20,7 +20,7 @@ class App( app.App ):
     relations = dict(
         user={
             'model'  : 'User',
-            'icon'   : 'fontawesome.',
+            'icon'   : 'fontawesome.user',
             'plural' : 'users',
             'has'    : (),
             'in'     : (),
@@ -28,7 +28,7 @@ class App( app.App ):
         },
         group={
             'model'  : 'Group',
-            'icon'   : 'fontawesome.',
+            'icon'   : 'fontawesome.users',
             'plural' : 'groups',
             'has'    : (),
             'in'     : (),
@@ -36,7 +36,7 @@ class App( app.App ):
         },
         policy={
             'model'  : 'Policy',
-            'icon'   : 'fontawesome.',
+            'icon'   : 'fontawesome.file-signature',
             'plural' : 'policies',
             'has'    : (),
             'in'     : (),
@@ -44,7 +44,7 @@ class App( app.App ):
         },
         permission={
             'model'  : 'Permission',
-            'icon'   : 'fontawesome.',
+            'icon'   : 'fontawesome.key',
             'plural' : 'permissions',
             'has'    : (),
             'in'     : (),
@@ -52,7 +52,7 @@ class App( app.App ):
         },
         role={
             'model'  : 'Role',
-            'icon'   : 'fontawesome.',
+            'icon'   : 'fontawesome.user-md',
             'plural' : 'roles',
             'has'    : (),
             'in'     : (),
@@ -146,17 +146,17 @@ class App( app.App ):
                     ( 'body', dict( path='viewer.objects' ))))
               )),
             ( 'page.user', dict(
-                icon='fontawesome.house',
+                icon='fontawesome.home',
                 data=dict(
                     component='UserPage',
                 )),
               ( 'home', dict(
-                  icon='fontawesome.house',
+                  icon='fontawesome.home',
                   data=dict(
                       component='UserHomePage',
                   ))),
               ( 'profile', dict(
-                  icon='fontawesome.house',
+                  icon='fontawesome.home',
                   data=dict(
                       component='UserProfilePage',
                   ))),

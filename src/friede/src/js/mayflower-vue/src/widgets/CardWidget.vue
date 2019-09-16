@@ -15,9 +15,15 @@
       <slot name="title-actions" :object=object />
       <close-button @click.prevent=close v-if=context.closeable />
     </div>
-    <slot #badge name="badge" :object=object />
-    <slot #media name="media" :object=object />
-    <slot #media-top name="media-top" :object=object />
+    <template #badge>
+      <slot name="badge" :object=object />
+    </template>
+    <template #media>
+      <slot name="media" :object=object />
+    </template>
+    <template #media-top>
+      <slot name="media-top" :object=object />
+    </template>
     <vk-card-title>
       <slot name="title" :object=object />
     </vk-card-title>
@@ -32,8 +38,15 @@
     <div class="item-actions">
       <slot name="content-actions" :object=object />
     </div>
-    <slot #media-bottom name="media-bottom" :object=object />
-    <slot #footer name="footer" :object=object />
+    <template #media-bottom>
+      <slot name="media-bottom" :object=object />
+    </template>
+    <template #footer>
+      <div class="item-actions">
+        <slot name="footer-actions" :object=object />
+      </div>
+      <slot name="footer" :object=object />
+    </template>
   </vk-card>
 </template>
 
@@ -107,8 +120,15 @@ export default {
 <style lang="scss">
 .card-widget {
   position: relative;
-  .uk-card-body {
-    height: 100%;
+  > .uk-card-header {
+    padding: 0;
+    border-bottom: 0 none;
+    + .uk-card-body {
+      padding-top: 4px;
+    }
+  }
+  > .uk-card-body {
+    /* height: 100%; */
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -118,6 +138,10 @@ export default {
     .content {
       flex: 1;
     }
+  }
+  .model-name {
+    padding: 4px;
+    color: cadet-blue;
   }
 }
 </style>

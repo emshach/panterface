@@ -285,7 +285,7 @@ class ContainerSerializer( RegistrySerializer ):
 
 
 class WidgetSerializer( RegistrySerializer ):
-    extends = RecursiveField( allow_null=True, data=None )
+    extends = RecursiveField( required=False, data=None )
     class Meta:
         model = Widget
         fields = RegistrySerializer.Meta.fields + F.extends + F.size + F.data
@@ -335,7 +335,7 @@ class AppSerializer( RegistrySerializer ):
 
 
 class LocationSerializer( RegistrySerializer ):
-    redirect_to = RecursiveField( allow_null=True, data=None )
+    redirect_to = RecursiveField( required=False, data=None )
     class Meta:
         model = Location
         fields = RegistrySerializer.Meta.fields + F.data + F.location

@@ -2,8 +2,15 @@
 .card-widget {
   position: relative;
 }
-.card-widget .uk-card-body {
-    height: 100%;
+.card-widget > .uk-card-header {
+    padding: 0;
+    border-bottom: 0 none;
+}
+.card-widget > .uk-card-header + .uk-card-body {
+      padding-top: 4px;
+}
+.card-widget > .uk-card-body {
+    /* height: 100%; */
     -webkit-box-sizing: border-box;
             box-sizing: border-box;
     display: -webkit-box;
@@ -17,10 +24,14 @@
     border-left-color: rgba(255, 255, 255, 0.1);
     border-right-color: rgba(255, 255, 255, 0.15);
 }
-.card-widget .uk-card-body .content {
+.card-widget > .uk-card-body .content {
       -webkit-box-flex: 1;
           -ms-flex: 1;
               flex: 1;
+}
+.card-widget .model-name {
+    padding: 4px;
+    color: cadet-blue;
 }
 
 

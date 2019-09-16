@@ -92,7 +92,7 @@ export default  {
     },
     modelIcon() {
       if ( this.modelObj )
-        return this.modelObj.icone;
+        return this.modelObj.icon;
     }
   }
 }

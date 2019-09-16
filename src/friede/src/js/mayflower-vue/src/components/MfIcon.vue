@@ -246,6 +246,12 @@ export default {
 
 <style lang="scss">
 .mf-icon {
-  
+  &-bg {
+    position: absolute;
+    top: -2px;
+    lift: -2px;
+    font-size: 72px;
+    color: rgba(0,0,0,0.05);
+  } 
 }
 </style>

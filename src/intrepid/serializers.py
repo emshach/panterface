@@ -5,7 +5,7 @@ from .models import *
 
 class F:
     base   = ( 'url', 'id', 'name', 'title', 'description', 'active', 'valid' )
-    noted  = base + ( 'notes' )
+    noted  = base + ( 'notes', )
     res    = ( 'definition', 'uri', 'upload', 'parent', 'notes', 'attached_to' )
     date   = ( 'intended_start', 'actual_start', 'intended_end', 'actual_end',
               'progress' )

@@ -195,35 +195,31 @@ inherit( Model, Object, {
     const id = this.data.id;
     const changes = this.changes;
     this.changes = null;
-    return API.post( this.meta.rest)
-       .catch( err => {
-         console.log( 'error updating model object', err, err.response );
-         this.changes = changes;
-       });
-    ( id ? API.post( rest, id, '', key ? {[ key ]: value } : ( changes || this.data ))
-      : API.post( rest, '', key ? {[ key ]: value } : ( changes || this.data )))
-         .then( r => {
-           this.need = {};
-           this.fields.forEach( field => {
-             if ( field.meta.name in r.data )
-               this.data[ field.meta.name ]
-                = field.wip
-                = field.value
-                = r.data[ field.meta.name ];
-           });
-         }).catch( err => {
-           console.log( 'error updating model object', err, err.response );
-           this.changes = changes;
-           if ( err.response && err.response.data ) {
-             const data = err.response.data;
-             const reqd = {};
-             this.need = reqd;
-             Object.keys( data ).forEach( k => {
-               if ( /required/.test( data[k] ))
-                 reqd[k] = true;
-             });
-           }
+    return (
+      id ? API.post( rest, id, '', key ? {[ key ]: value } : ( changes || this.data ))
+         : API.post( rest, '', key ? {[ key ]: value } : ( changes || this.data )))
+       .then( r => {
+         this.need = {};
+         this.fields.forEach( field => {
+           if ( field.meta.name in r.data )
+             this.data[ field.meta.name ]
+              = field.wip
+              = field.value
+              = r.data[ field.meta.name ];
          });
+       }).catch( err => {
+         console.log( 'error updating model object', err, err.response );
+           this.changes = changes;
+         if ( err.response && err.response.data ) {
+           const data = err.response.data;
+           const reqd = {};
+           this.need = reqd;
+           Object.keys( data ).forEach( k => {
+             if ( /required/.test( data[k] ))
+               reqd[k] = true;
+           });
+         }
+       });
   }
 })
 

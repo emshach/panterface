@@ -207,6 +207,9 @@ export const PageMixin = {
     },
     source() {
       this.$nextTick(() => this.getData());
+    },
+    $route( to, from ) {
+      this.$nextTick(() => this.getData());
     }
   }
 };

@@ -166,6 +166,7 @@ inherit( Model, Object, {
     if ( !this.data.id && this.meta.rest ) {
       this.ready = ( id ? API( this.meta.rest, id, '' ) : API.post( this.meta.rest, '' ))
          .then( r => {
+           this.need = {};
            this.fields.forEach( field => {
              if ( field.meta.name in r.data )
                this.data[ field.meta.name ]
@@ -174,7 +175,15 @@ inherit( Model, Object, {
                 = r.data[ field.meta.name ];
            });
          }).catch( err => {
-           console.log( 'error in model object init', err );
+           console.log( 'error in model object init', err, err.response );
+           if ( err.response ) {
+             const reqd = {};
+             this.need = reqd;
+             Object.keys( err.response ).forEach( k => {
+               if ( /required/.test( err.response[k]) )
+                 reqd[k] = true;
+             });
+           }
          });
     }
   },
@@ -184,7 +193,7 @@ inherit( Model, Object, {
     this.changes = null;
     return API.post( this.meta.rest, key ? {[ key ]: value } : ( changes || this.data ))
        .catch( err => {
-         console.log( 'error updating model object', err );
+         console.log( 'error updating model object', err, err.response );
          this.changes = changes;
        });
   }

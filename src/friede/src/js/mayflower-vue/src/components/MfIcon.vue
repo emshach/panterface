@@ -249,7 +249,7 @@ export default {
   &-bg {
     position: absolute;
     top: -12px;
-    left: -32px;
+    left: -24px;
     font-size: 144px;
     color: rgba(0,0,0,0.03);
   } 

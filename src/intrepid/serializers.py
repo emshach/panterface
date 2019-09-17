@@ -26,6 +26,8 @@ class ProductSerializer( serializers.HyperlinkedModelSerializer ):
 
 
 class GoalSerializer( serializers.HyperlinkedModelSerializer ):
+    precedes = serializers.PrimaryKeyRelatedField(
+        Required=False, queryset=Goal.objects.all() )
     class Meta:
         model = Goal
         fields = ( 'url', 'id', 'name', 'title', 'description', 'active',

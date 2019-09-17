@@ -17,7 +17,7 @@ class App( app.App ):
             income expense asset donation service rental liability contribution
             commission employment investment receipt deposit payment budget transfer
             relocation earning purchase team position role responsibility capacity
-            user taxonomy term'''.split()
+            taxonomy term'''.split()
     relations = dict(
         note={
             'model'  : 'Note',
@@ -291,8 +291,8 @@ class App( app.App ):
             'model'  : 'Position',
             'icon'   : 'fontawesome.user-graduate',
             'plural' : 'positions',
-            'has'    : 'note role user'.split(),
-            'in'     : 'team role user'.split()
+            'has'    : 'note role'.split(),
+            'in'     : 'team role'.split()
         },
         role={
             'model'  : 'Role',
@@ -314,13 +314,6 @@ class App( app.App ):
             'plural' : 'capacities',
             'has'    : 'note role'.split(),
             'in'     : 'role'.split()
-        },
-        user={
-            'model'  : 'User',
-            'icon'   : 'fontawesome.user',
-            'plural' : 'users',
-            'has'    : 'note position'.split(),
-            'in'     : 'position'.split()
         },
         taxonomy={
             'model'  : 'Taxonomy',
@@ -381,7 +374,6 @@ class App( app.App ):
         (  'roles',            views.RoleViewSet           ),
         (  'responsibilities', views.ResponsibilityViewSet ),
         (  'capacities',       views.CapacityViewSet       ),
-        (  'users',            views.UserViewSet           ),
         (  'taxonomies',       views.TaxonomyViewSet       ),
         (  'terms',            views.TermViewSet           ),
     )
@@ -428,7 +420,6 @@ class App( app.App ):
         (  'role',            serializers.RoleSerializer           ),
         (  'responsibility',  serializers.ResponsibilitySerializer ),
         (  'capacity',        serializers.CapacitySerializer       ),
-        (  'user',            serializers.UserSerializer           ),
         (  'taxonomy',        serializers.TaxonomySerializer       ),
         (  'term',            serializers.TermSerializer           ),
     )

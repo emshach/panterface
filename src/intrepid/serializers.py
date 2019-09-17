@@ -281,12 +281,6 @@ class CapacitySerializer( serializers.HyperlinkedModelSerializer ):
         fields = F.noted + ( 'roles', )
 
 
-class UserSerializer( serializers.HyperlinkedModelSerializer ):
-    class Meta:
-        model = User
-        fields = F.noted + ( 'positions', )
-
-
 class TaxonomySerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Taxonomy
@@ -343,7 +337,6 @@ by_model = dict(
     role=           RoleSerializer,
     responsibility= ResponsibilitySerializer,
     capacity=       CapacitySerializer,
-    user=           UserSerializer,
     taxonomy=       TaxonomySerializer,
     term=           TermSerializer,
 )

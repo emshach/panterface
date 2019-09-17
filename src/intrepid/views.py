@@ -299,11 +299,6 @@ class CapacityViewSet( viewsets.ModelViewSet ):
     serializer_class = CapacitySerializer
 
 
-class UserViewSet( viewsets.ModelViewSet ):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-
-
 class TaxonomyViewSet( viewsets.ModelViewSet ):
     queryset = Taxonomy.objects.all()
     serializer_class = TaxonomySerializer

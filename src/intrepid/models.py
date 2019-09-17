@@ -432,8 +432,7 @@ class Position( Noted ):
 
 class Role( Noted ):
     # relations
-    positions = M.ManyToManyField( Position, null=True, blank=True,
-                                   related_name='roles' )
+    positions = M.ManyToManyField( Position, blank=True, related_name='roles' )
     system = M.ManyToManyField( authRole, blank=True, related_name='intrepid_roles' )
 
 

@@ -167,7 +167,7 @@ inherit( Model, Object, {
     if ( this.data.id || !this.meta.rest )
       this.ready = new Promise(( s, j ) => s() );
     if ( !this.data.id && this.meta.rest ) {
-      this.ready = ( id ? API.post( this.meta.rest, id, '' )
+      this.ready = ( id ? API( this.meta.rest, id, '' )
                      : API.post( this.meta.rest, '' ))
          .then( r => {
            this.need = {};
@@ -198,8 +198,12 @@ inherit( Model, Object, {
     const id = this.data.id;
     const changes = this.changes;
     this.changes = null;
+    if ( Object.keys( changes ).length ) {
+      changes[ key ] = value;
+      key = null;
+    }
     return (
-      id ? API.post( rest, id, '', key ? {[ key ]: value } : ( changes || this.data ))
+      id ? API.patch( rest, id, '', key ? {[ key ]: value } : ( changes || this.data ))
          : API.post( rest, '', key ? {[ key ]: value } : ( changes || this.data )))
        .then( r => {
          this.need = {};

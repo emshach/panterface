@@ -6,7 +6,7 @@ from django.db import models as M
 from django.contrib.postgres.fields import JSONField
 from datetime import date
 from django.utils.timezone import now
-from aries.models import AutoOwnedModel
+from aries.models import AutoOwnedModel, Role as authRole, Group, Permission
 
 Model = M.Model
 
@@ -16,9 +16,9 @@ Model = M.Model
 class Base( AutoOwnedModel ):
     class Meta:
         abstract = True
-    name         = M.SlugField( blank=True )
+    name         = M.SlugField( null=True, blank=True )
     title        = M.CharField( max_length=255 )
-    description  = M.TextField( blank=True )
+    description  = M.TextField( null=True,blank=True )
     active       = M.BooleanField( default=True )
     valid        = M.BooleanField( default=True )
 
@@ -36,7 +36,7 @@ class Note( Base ):
 class DatePlanMixin( Model ):
     class Meta:
         abstract   = True
-    intended_start = M.DateField()
+    intended_start = M.DateField( null=True, blank=True )
     actual_start   = M.DateField( null=True, blank=True )
     intended_end   = M.DateField( null=True, blank=True )
     actual_end     = M.DateField( null=True, blank=True )
@@ -46,7 +46,7 @@ class DatePlanMixin( Model ):
 class DateTimeMixin( Model ):
     class Meta:
         abstract   = True
-    intended_start = M.DateTimeField()
+    intended_start = M.DateTimeField( null=True, blank=True )
     actual_start   = M.DateTimeField( null=True, blank=True )
     intended_end   = M.DateTimeField( null=True, blank=True )
     actual_end     = M.DateTimeField( null=True, blank=True )
@@ -55,21 +55,20 @@ class DateTimeMixin( Model ):
 ### Input/Output
 
 class Resource( Base ):
-    definition  = M.TextField( blank=True )
-    url         = M.URLField( max_length=255, blank=True )
+    definition  = M.TextField( null=True, blank=True )
+    uri         = M.CharField( max_length=255, null=True, blank=True )
     # path        = M.FilePathField()
     upload      = M.FileField( null=True, blank=True )
     # relations
     parent      = M.ForeignKey( 'self', M.SET_NULL, null=True, blank=True,
                                 related_name='resources' )
     notes       = M.ManyToManyField( Note, blank=True, related_name='resources' )
-    attached_to = M.ManyToManyField( Note, blank=True,
-                                     related_name='attached_resources' )
+    attached_to = M.ManyToManyField( Note, blank=True, related_name='attached_resources' )
 
 
 class Product( Base ):
-    definition  = M.TextField( blank=True )
-    url         = M.URLField( max_length=255, blank=True )
+    definition  = M.TextField( null=True, blank=True )
+    uri         = M.CharField( max_length=255, null=True, blank=True )
     # path        = M.FilePathField()
     upload      = M.FileField( null=True, blank=True )
     # relations
@@ -158,25 +157,25 @@ class Strategy( Noted ):
     # relations
     objective  = M.ForeignKey( Objective, M.PROTECT, related_name='stategies' )
     notes      = M.ManyToManyField( Note, blank=True, related_name='strategies' )
-    targets    = M.ManyToManyField( Target, related_name='strategies' )
+    targets    = M.ManyToManyField( Target, blank=True, related_name='strategies' )
 
 
 class Plan( Noted, DatePlanMixin ):
     # relations
     strategy = M.ForeignKey( Strategy, M.PROTECT, related_name='plans' )
-    targets  = M.ManyToManyField( Target, related_name='plans' )
+    targets  = M.ManyToManyField( Target, blank=True, related_name='plans' )
 
 
 class Phase( Noted, DatePlanMixin ):
     # relations
     plan    = M.ForeignKey( Plan, M.CASCADE, related_name='phases' )
-    targets = M.ManyToManyField( Target, related_name='phases' )
+    targets = M.ManyToManyField( Target, blank=True, related_name='phases' )
 
 
 class Step( Noted, DatePlanMixin ):
     # relations
     phase   = M.ForeignKey( Phase, M.CASCADE, related_name='steps' )
-    targets = M.ManyToManyField( Target, related_name='steps' )
+    targets = M.ManyToManyField( Target, blank=True, related_name='steps' )
 
 
 ### Organization
@@ -186,8 +185,8 @@ class Project( Noted, DatePlanMixin ):
     objective  = M.ForeignKey( Objective, M.PROTECT, related_name='projects' )
     satisfies  = M.ManyToManyField( Objective, blank=True,
                                     related_name='contributors' )
-    strategies = M.ManyToManyField( Strategy, related_name='projects' )
-    targets    = M.ManyToManyField( Target, related_name='projects' )
+    strategies = M.ManyToManyField( Strategy, blank=True, related_name='projects' )
+    targets    = M.ManyToManyField( Target, blank=True, related_name='projects' )
     # TODO: limit_to
 
 
@@ -221,14 +220,14 @@ class Currency( Noted ):
 
 class Account( Noted ):
     amount   = M.DecimalField( max_digits=16, decimal_places=2, default=0 )
-    opened   = M.DateField( default=date.today )
+    opened   = M.DateField( default=date.today, null=True, blank=True )
     closed   = M.DateField( null=True, blank=True )
     # relations
     currency = M.ForeignKey( Currency, on_delete=M.PROTECT, related_name='accounts' )
 
 
 class Pool( Noted ):
-    size      = M.DecimalField( max_digits=16, decimal_places=2 )
+    size      = M.DecimalField( max_digits=16, decimal_places=2, default=0 )
     available = M.DecimalField( max_digits=16, decimal_places=2, default=0 )
     # relations
     parent    = M.ForeignKey( 'self', M.CASCADE, null=True, blank=True,
@@ -256,10 +255,10 @@ class Allocation( Noted ):
         ( CLEARED,   'Cleared'   ),
         ( COMMITTED, 'Committed' ),
     )
-    opened    = M.DateField()   # TODO: default=now
+    opened    = M.DateField( default=date.today )
     used      = M.DateField( null=True, blank=True )
     closed    = M.DateField( null=True, blank=True )
-    size      = M.DecimalField( max_digits=16, decimal_places=2 )
+    size      = M.DecimalField( max_digits=16, decimal_places=2, default=0 )
     available = M.DecimalField( max_digits=16, decimal_places=2, default=0 )
     end_state = M.CharField(
         max_length=4,
@@ -272,13 +271,13 @@ class Allocation( Noted ):
 
 class Income( Noted, DateTimeMixin ):
     stable = M.BooleanField( default=False )
-    amount = M.DecimalField( max_digits=16, decimal_places=2 )
+    amount = M.DecimalField( max_digits=16, decimal_places=2, default=0 )
     # relations
 
 
 class Expense( Noted, DateTimeMixin ):
     stable         = M.BooleanField( default=False )
-    amount         = M.DecimalField( max_digits=16, decimal_places=2 )
+    amount         = M.DecimalField( max_digits=16, decimal_places=2, default=0 )
     # relations
     source         = M.ForeignKey( Allocation, M.PROTECT, related_name='expenses' )
 
@@ -298,7 +297,7 @@ class Asset( Sink ):
     sink_ptr      = M.OneToOneField( Sink, M.CASCADE, parent_link=True,
                                     related_name='asset' )
     value         = M.DecimalField( max_digits=16, decimal_places=2, default=0 )
-    intended_own  = M.DateTimeField()
+    intended_own  = M.DateTimeField( null=True, blank=True )
     effective_own = M.DateTimeField( null=True, blank=True )
 
 
@@ -307,12 +306,12 @@ class Donation( Sink ):
 
 
 class Service( Sink ):
-    intended  = M.DateTimeField()
+    intended  = M.DateTimeField( null=True, blank=True )
     effective = M.DateTimeField( null=True, blank=True )
 
 
 class Rental( Sink, DateTimeMixin ):
-    period = M.DurationField()
+    period = M.DurationField( null=True, blank=True )
 
 
 class Source( External ):
@@ -333,12 +332,12 @@ class Contribution( Source ):
 class Commission( Source ):
     source_ptr      = M.OneToOneField( Source, M.CASCADE, parent_link=True,
                                        related_name='comission' )
-    intended_close  = M.DateTimeField()
+    intended_close  = M.DateTimeField( null=True, blank=True )
     effective_close = M.DateTimeField( null=True, blank=True )
 
 
 class Employment( Source, DateTimeMixin ):
-    period = M.DurationField()
+    period = M.DurationField( null=True, blank=True )
 
 
 class Investment( Asset, Commission ):
@@ -348,7 +347,7 @@ class Investment( Asset, Commission ):
 
 class Receipt( Noted ):
     amount       = M.DecimalField( max_digits=16, decimal_places=2 )
-    intended     = M.DateTimeField()
+    intended     = M.DateTimeField( null=True, blank=True )
     effective    = M.DateTimeField( null=True, blank=True )
     # relations
     income       = M.ForeignKey( Income, M.PROTECT, related_name='receipts' )
@@ -359,15 +358,15 @@ class Receipt( Noted ):
 
 
 class Deposit( Noted ):
-    amount  = M.DecimalField( max_digits=16, decimal_places=2 )
+    amount  = M.DecimalField( max_digits=16, decimal_places=2, default=0 )
     # relations
     account = M.ForeignKey( Account, M.PROTECT, related_name='deposits' )
     receipt = M.ForeignKey( Receipt, M.CASCADE, related_name='deposits' )
 
 
 class Payment( Noted ):
-    amount      = M.DecimalField( max_digits=16, decimal_places=2 )
-    intended    = M.DateTimeField()
+    amount      = M.DecimalField( max_digits=16, decimal_places=2, default=0 )
+    intended    = M.DateTimeField( null=True, blank=True )
     effective   = M.DateTimeField( null=True, blank=True )
     # relations
     expense     = M.ForeignKey( Expense, M.PROTECT, related_name='payments' )
@@ -375,16 +374,17 @@ class Payment( Noted ):
 
 
 class Budget( Noted ):
-    start   = M.DateField()
-    end     = M.DateField()
+    start   = M.DateField( null=True, blank=True )
+    end     = M.DateField( null=True, blank=True )
     # relations
     master  = M.ForeignKey( 'self', M.CASCADE, related_name='parts' )
-    follows = M.OneToOneField( 'self', M.SET_NULL, null=True, related_name='precedes' )
+    follows = M.OneToOneField( 'self', M.SET_NULL, null=True, blank=True,
+                               related_name='precedes' )
 
 
 class Line( Noted ):
-    amount    = M.DecimalField( max_digits=16, decimal_places=2 )
-    intended  = M.DateTimeField()
+    amount    = M.DecimalField( max_digits=16, decimal_places=2, default=0 )
+    intended  = M.DateTimeField( null=True, blank=True )
     effective = M.DateTimeField( null=True, blank=True )
     #relations
     budget    = M.ForeignKey( Budget, M.CASCADE, related_name='lines' )
@@ -419,16 +419,22 @@ class Purchase( Line ):
 class Team( Noted ):
     # relations
     parent  = M.ForeignKey( 'self', M.CASCADE, related_name='groups' )
+    members = M.ManyToManyField( get_user_model(), through='Position',
+                                      related_name='intrepid_teams' )
 
 
 class Position( Noted ):
     # relations
     team = M.ForeignKey( Team, M.CASCADE, related_name='positions' )
+    member = M.ForeignKey( get_user_model(), null=True, blank=True,
+                           related_name='intrepid_positions' )
 
 
 class Role( Noted ):
     # relations
-    positions = M.ManyToManyField( Position, blank=True, related_name='roles' )
+    positions = M.ManyToManyField( Position, null=True, blank=True,
+                                   related_name='roles' )
+    system = M.ManyToManyField( authRole, blank=True, related_name='intrepid_roles' )
 
 
 class Responsibility( Noted ):
@@ -444,28 +450,18 @@ class Capacity( Noted ):
     class Meta:
         verbose_name_plural = 'capacities'
     # relations
-    roles     = M.ManyToManyField( Role, blank=True, related_name='capacities' )
-    notes     = M.ManyToManyField( Note, blank=True, related_name='capacities' )
-
-
-class User( Noted ):
-    # @property
-    # def teams()
-    # TODO: this
-    positions = M.ManyToManyField( Position, blank=True, related_name='users' )
-    # TODO: add user to team => get default team position
-
-    def __str__( self ):
-        return self.name or self.title
-
+    roles       = M.ManyToManyField( Role, blank=True, related_name='capacities' )
+    permissions = M.ManyToManyField( Permission, blank=True,
+                                     related_name='intrepid_capacities' )
+    notes       = M.ManyToManyField( Note, blank=True, related_name='capacities' )
 
 ### Taxonomy
 
 class Taxonomy( Noted ):
     class Meta:
         verbose_name_plural = 'taxonomies'
-    hierarchichal = M.BooleanField()
-    exclusive     = M.BooleanField()
+    hierarchichal = M.BooleanField( default=False )
+    exclusive     = M.BooleanField( default=True )
     # relations
     parent        = M.ForeignKey( 'self', M.CASCADE, null=True, blank=True,
                                   related_name='children' )

@@ -3,26 +3,34 @@ from __future__ import unicode_literals
 from rest_framework import serializers
 from .models import *
 
+class F:
+    base   = ( 'url', 'id', 'name', 'title', 'description', 'active', 'valid' )
+    noted  = base + ( 'notes' )
+    res    = ( 'definition', 'uri', 'upload', 'parent', 'notes', 'attached_to' )
+    date   = ( 'intended_start', 'actual_start', 'intended_end', 'actual_end',
+              'progress' )
+    plan   = ( 'intended_start', 'actual_start', 'intended_end', 'actual_end' )
+    sink   = ( 'cost', 'expense' )
+    source = ( 'gain', 'destination' )
+
+
+
 class NoteSerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Note
-        fields = ( 'url', 'id', 'name', 'title', 'description', 'active',
-                   'valid', 'notes' )
+        fields = F.noted
 
 
 class ResourceSerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Resource
-        fields = ( 'name', 'title', 'description', 'active', 'valid',
-                   'definition', 'url', 'id', 'upload', 'parent', 'notes',
-                   'attached_to' )
+        fields = F.noted + F.res
 
 
 class ProductSerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Product
-        fields = ( 'name', 'title', 'description', 'active', 'valid',
-                   'definition', 'url', 'id', 'parent', 'notes', 'attached_to' )
+        fields = F.noted + F.res
 
 
 class GoalSerializer( serializers.HyperlinkedModelSerializer ):
@@ -30,325 +38,265 @@ class GoalSerializer( serializers.HyperlinkedModelSerializer ):
         required=False, queryset=Goal.objects.all() )
     class Meta:
         model = Goal
-        fields = ( 'url', 'id', 'name', 'title', 'description', 'active',
-                   'valid', 'status', 'follows', 'precedes', 'notes' )
+        fields = F.noted + F.plan + ( 'status', 'follows', 'precedes' )
 
 
 class ObjectiveSerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Objective
-        fields = ( 'url', 'id', 'name', 'title', 'description', 'active',
-                   'valid', 'status', 'precedes', 'follows', 'goal',
-                   'satisfies', 'notes' )
+        fields = F.noted + F.plan + ( 'status', 'precedes', 'follows', 'goal',
+                                      'satisfies' )
 
 
 class TargetSerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Target
-        fields = ( 'url', 'id', 'name', 'title', 'description', 'active',
-                   'valid', 'status', 'objective', 'satisfies', 'requires',
-                   'releases', 'noets' )
+        fields = F.noted + ( 'status', 'objective', 'satisfies', 'requires',
+                             'releases' )
 
 
 class StrategySerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Strategy
-        fields = ( 'url', 'id', 'name', 'title', 'description', 'active',
-                   'valid', 'objective', 'notes' )
+        fields = F.noted + ( 'objective', )
 
 
 class PlanSerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Plan
-        fields = ( 'url', 'id', 'name', 'title', 'description', 'active',
-                   'valid', 'strategy', 'notes' )
+        fields = F.noted + F.plan + ( 'strategy', )
 
 
 class PhaseSerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Phase
-        fields = ( 'url', 'id', 'name', 'title', 'description', 'active',
-                   'valid', 'plan', 'notes' )
+        fields = F.noted + F.plan + ( 'plan', )
 
 
 class StepSerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Step
-        fields = ( 'url', 'id', 'name', 'title', 'description', 'active',
-                   'valid', 'phase', 'notes' )
+        fields = F.noted + F.plan + ( 'phase', )
 
 
 class ProjectSerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Project
-        fields = ( 'url', 'id', 'name', 'title', 'description', 'active',
-                   'valid', 'objective', 'satisfies', 'strategies', 'targets',
-                   'notes' )
+        fields = F.noted + F.plan + ( 'objective', 'satisfies', 'strategies',
+                                      'targets' )
 
 
 class TaskSerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Task
-        fields = ( 'url', 'id', 'name', 'title', 'description', 'active',
-                   'valid', 'parent', 'project', 'step', 'notes' )
+        fields = F.noted + F.plan + ( 'parent', 'project', 'step' )
 
 
 class ActionSerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Action
-        fields = ( 'url', 'id', 'name', 'title', 'description', 'active',
-                   'valid', 'follows', 'precedes', 'task', 'notes' )
+        fields = F.noted + F.plan + ( 'follows', 'precedes', 'task' )
 
 
 class CurrencySerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Currency
-        fields = ( 'url', 'id', 'name', 'title', 'description', 'active',
-                   'valid', 'rate', 'notes' )
+        fields = F.noted + ( 'rate', )
 
 
 class AccountSerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Account
-        fields = ( 'url', 'id', 'name', 'title', 'description', 'active',
-                   'valid', 'amount', 'opened', 'closed', 'currency',
-                   'allotments', 'notes' )
+        fields = F.noted + ( 'amount', 'opened', 'closed', 'currency', 'allotments' )
 
 
 class PoolSerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Pool
-        fields = ( 'url', 'id', 'name', 'title', 'description', 'active',
-                   'valid', 'size', 'available', 'parent', 'accounts',
-                   'allotments', 'notes' )
+        fields = F.noted + ( 'size', 'available', 'parent', 'accounts', 'allotments' )
 
 
 class AllotmentSerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Allotment
-        fields = ( 'url', 'id', 'name', 'title', 'description', 'active',
-                   'valid', 'amount', 'account', 'pool', 'notes' )
+        fields = F.noted + ( 'amount', 'account', 'pool' )
 
 
 class AllocationSerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Allocation
-        fields = ( 'url', 'id', 'name', 'title', 'description', 'active',
-                   'valid', 'opened', 'used', 'closed', 'size', 'available',
-                   'pool', 'notes' )
+        fields = F.noted + ( 'opened', 'used', 'closed', 'size', 'available', 'pool' )
 
 
 class IncomeSerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Income
-        fields = ( 'url', 'id', 'name', 'title', 'description', 'active',
-                   'valid', 'stable', 'amount', 'sources', 'notes' )
+        fields = F.noted + F.plan + ( 'stable', 'amount', 'sources' )
 
 
 class ExpenseSerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Expense
-        fields = ( 'url', 'id', 'name', 'title', 'description', 'active',
-                   'valid', 'stable', 'amount', 'source', 'notes' )
-
-# class ExternalSerializer( serializers.HyperlinkedModelSerializer ):
-#     class Meta:
-#         model = External
-#         fields = ()
-
-# class SinkSerializer( serializers.HyperlinkedModelSerializer ):
-#     class Meta:
-#         model = Sink
-#         fields = ( 'cost', 'expense', 'notes' )
-
+        fields = F.noted + F.plan + ( 'stable', 'amount', 'source' )
 
 class AssetSerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Asset
-        fields = ( 'url', 'id', 'name', 'title', 'description', 'active',
-                   'valid', 'cost', 'expense', 'value', 'intended_own',
-                   'effective_own', 'notes' )
+        fields = F.noted + ( 'cost', 'expense', 'value', 'intended_own',
+                             'effective_own' )
 
 
 class DonationSerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Donation
-        fields = ( 'url', 'id', 'name', 'title', 'description', 'active',
-                   'valid', 'cost', 'expense', 'notes' )
+        fields = F.noted + F.sink
 
 
 class ServiceSerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Service
-        fields = ( 'url', 'id', 'name', 'title', 'description', 'active',
-                   'valid', 'cost', 'expense', 'intended', 'effective',
-                   'notes' )
+        fields = F.noted + F.sink + ( 'intended', 'effective' )
 
 
 class RentalSerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Rental
-        fields = ( 'url', 'id', 'name', 'title', 'description', 'active',
-                   'valid', 'cost', 'expense', 'period', 'notes' )
+        fields = F.noted + F.sink + ( 'period', )
 
 
 class LiabilitySerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Liability
-        fields = ( 'url', 'id', 'name', 'title', 'description', 'active',
-                   'valid', 'gain', 'destination', 'value', 'notes' )
+        fields = F.noted + F.source + ( 'value', )
 
 
 class ContributionSerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Contribution
-        fields = ( 'url', 'id', 'name', 'title', 'description', 'active',
-                   'valid', 'gain', 'destination', 'notes' )
+        fields = F.noted + F.source
 
 
 class CommissionSerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Commission
-        fields = ( 'url', 'id', 'name', 'title', 'description', 'active',
-                   'valid', 'gain', 'destination', 'intended_close',
-                   'effective_close', 'notes' )
+        fields = F.noted + F.source + ( 'intended_close', 'effective_close' )
 
 
 class EmploymentSerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Employment
-        fields = ( 'url', 'id', 'name', 'title', 'description', 'active',
-                   'valid', 'gain', 'destination', 'period', 'notes' )
+        fields = F.noted + F.date + F.source + ( 'period', )
 
 
 class InvestmentSerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Investment
-        fields = ( 'url', 'id', 'name', 'title', 'description', 'active',
-                   'valid', 'gain', 'destination', 'notes' )
+        fields = F.noted + F.source
 
 
 class ReceiptSerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Receipt
-        fields = ( 'url', 'id', 'name', 'title', 'description', 'active',
-                   'valid', 'amount', 'intended', 'effective', 'income',
-                   'source', 'destinations', 'deposits', 'notes' )
+        fields = F.noted + ( 'amount', 'intended', 'effective', 'income',
+                             'source', 'destinations', 'deposits' )
 
 
 class DepositSerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Deposit
-        fields = ( 'url', 'id', 'name', 'title', 'description', 'active',
-                   'valid', 'amount', 'account', 'receipt', 'notes' )
+        fields = F.noted + ( 'amount', 'account', 'receipt' )
 
 
 class PaymentSerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Payment
-        fields = ( 'url', 'id', 'name', 'title', 'description', 'active',
-                   'valid', 'amount', 'intended', 'effective', 'expense',
-                   'destination', 'notes' )
+        fields = F.noted + ( 'amount', 'intended', 'effective', 'expense',
+                             'destination' )
 
 
 class BudgetSerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Budget
-        fields = ( 'url', 'id', 'name', 'title', 'description', 'active',
-                   'valid', 'start', 'end', 'master', 'parts', 'follows',
-                   'precedes', 'notes' )
+        fields = F.noted + ( 'start', 'end', 'master', 'parts', 'follows',
+                             'precedes' )
 
 
 class LineSerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Line
-        fields = ( 'url', 'id', 'name', 'title', 'description', 'active',
-                   'valid', 'amount', 'intended', 'effective', 'budget',
-                   'notes' )
+        fields = F.noted + ( 'amount', 'intended', 'effective', 'budget' )
 
 
 class TransferSerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Transfer
-        fields = ( 'url', 'id', 'name', 'title', 'description', 'active',
-                   'valid', 'source', 'destination', 'notes' )
+        fields = F.noted + ( 'source', 'destination' )
 
 
 class RelocationSerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Relocation
-        fields = ( 'url', 'id', 'name', 'title', 'description', 'active',
-                   'valid', 'source', 'destination', 'notes' )
+        fields = F.noted + ( 'source', 'destination' )
 
 
 class EarningSerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Earning
-        fields = ( 'url', 'id', 'name', 'title', 'description', 'active',
-                   'valid', 'receipt', 'notes' )
+        fields = F.noted + ( 'receipt', )
 
 
 class PurchaseSerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Purchase
-        fields = ( 'url', 'id', 'name', 'title', 'description', 'active',
-                   'valid', 'payment', 'notes' )
+        fields = F.noted + ( 'payment', )
 
 
 class TeamSerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Team
-        fields = ( 'url', 'id', 'name', 'title', 'description', 'active',
-                   'valid', 'parent', 'notes' )
+        fields = F.noted + ( 'parent', )
 
 
 class PositionSerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Position
-        fields = ( 'url', 'id', 'name', 'title', 'description', 'active',
-                   'valid', 'team', 'notes' )
+        fields = F.noted + ( 'team', )
 
 
 class RoleSerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Role
-        fields = ( 'url', 'id', 'name', 'title', 'description', 'active',
-                   'valid', 'positions', 'notes' )
+        fields = F.noted + ( 'positions', )
 
 
 class ResponsibilitySerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Responsibility
-        fields = ( 'url', 'id', 'name', 'title', 'description', 'active',
-                   'valid', 'roles', 'notes' )
+        fields = F.noted + ( 'roles', )
 
 
 class CapacitySerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Capacity
-        fields = ( 'url', 'id', 'name', 'title', 'description', 'active',
-                   'valid', 'roles', 'notes' )
+        fields = F.noted + ( 'roles', )
 
 
 class UserSerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = User
-        fields = ( 'url', 'id', 'name', 'title', 'description', 'active',
-                   'valid', 'positions', 'notes' )
+        fields = F.noted + ( 'positions', )
 
 
 class TaxonomySerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Taxonomy
-        fields = ( 'url', 'id', 'name', 'title', 'description', 'active',
-                   'valid', 'hierarhichal', 'exclusive', 'parent', 'notes' )
+        fields = F.noted + ( 'hierarhichal', 'exclusive', 'parent' )
 
 
 class TermSerializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Term
-        fields = ( 'url', 'id', 'name', 'title', 'description', 'active',
-                   'valid', 'parent', 'children', 'data', 'notes' )
+        fields = F.noted + ( 'parent', 'children', 'data' )
 
 
 by_model = dict(

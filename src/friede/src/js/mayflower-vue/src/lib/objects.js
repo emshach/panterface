@@ -151,15 +151,17 @@ inherit( Model, Object, {
     this.data = {};
     this.changes = {};
     ( this.fields = obj.fields.map( x => Field(x).oncommit( field => {
-      if ( field.value === undefined || field.value === '' )
-        delete this.data[ field.name ];
+      const key = field.meta.name;
+      const value = field.value
+      if ( value === undefined || value === '' )
+        delete this.data[ key ];
       else
-        this.data[ field.name ] = field.value;
+        this.data[ key ] = value;
       if ( !this.changes ) this.changes = { id: this.data.id }
-      this.changes[ field.name ] = field.value;
-      this.save( field.name, field.value );
+      this.changes[ key ] = value;
+      this.save( key, value );
     }))).forEach( field => {
-      this.data[ field.name ] = field.value;
+      this.data[ field.meta.name ] = field.value;
     });
 
     if ( this.data.id || !this.meta.rest )

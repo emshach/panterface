@@ -51,6 +51,11 @@ export default  {
     fieldClass() {
       return kebabCase( this.type );
     }
+  },
+  watch: {
+    data() {
+      this.field = Field( this.data || { type: this.type, name: this.name });
+    }
   }
 }
 </script>

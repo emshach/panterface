@@ -86,7 +86,8 @@ inherit( EventObject, Object, {
   },
   fire( event ) {
     // break out if handler returns false
-    ( this.events[ event ] || [] ).find( f => f.apply( this, arguments ) === false );
+    ( this.events[ event ] || [] ).find(
+      f => f.apply( null, [ this ].concat( arguments )) === false );
   }
 });
 

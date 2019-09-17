@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "4c6d87f108526af4551e";
+/******/ 	var hotCurrentHash = "8df3a9c3fabaacea8541";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -5412,7 +5412,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1568761662072
+      // 1568763028542
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -5430,7 +5430,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1568761664509
+      // 1568763028894
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -5448,7 +5448,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1568761663617
+      // 1568763028840
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -5466,7 +5466,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1568761663425
+      // 1568763028674
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -5484,7 +5484,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1568761663454
+      // 1568763028698
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -5502,7 +5502,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1568761663471
+      // 1568763028717
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -5520,7 +5520,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1568761663504
+      // 1568763028772
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -5538,7 +5538,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1568761663603
+      // 1568763028863
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -5556,7 +5556,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1568761664606
+      // 1568763028997
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -5574,7 +5574,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1568761662492
+      // 1568763028641
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -5592,7 +5592,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1568761663439
+      // 1568763028660
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -5610,7 +5610,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1568761664578
+      // 1568763028974
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -5628,7 +5628,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1568761663561
+      // 1568763028760
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -5646,7 +5646,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1568761663519
+      // 1568763028806
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -5664,7 +5664,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1568761664529
+      // 1568763028914
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -5682,7 +5682,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1568761663572
+      // 1568763028816
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -5700,7 +5700,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1568761667793
+      // 1568763033819
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -5718,7 +5718,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1568761667751
+      // 1568763033590
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -5736,7 +5736,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1568761667618
+      // 1568763033716
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -5754,7 +5754,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1568761667672
+      // 1568763033681
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -5772,7 +5772,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1568761667703
+      // 1568763033669
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -5790,7 +5790,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1568761667625
+      // 1568763033726
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -5808,7 +5808,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1568761667808
+      // 1568763033622
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -5826,7 +5826,7 @@ render._withStripped = true
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1568761667963
+      // 1568763033786
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -5949,7 +5949,7 @@ __webpack_require__.r(__webpack_exports__);
 
 // extracted by mini-css-extract-plugin
     if(true) {
-      // 1568761670329
+      // 1568763036140
       var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.i, {"hmr":true,"publicPath":"../","locals":false});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
@@ -9091,24 +9091,27 @@ var PageMixin = {
     getData: function getData() {
       var _this4 = this;
 
-      if (this.loading) return;
+      if (this.loading) return new Promise(function (r) {
+        return r();
+      });
       this.loading = true;
-      if (!this.model && !this.source) return;
+      if (!this.model && !this.source) return new Promise(function (r) {
+        return r();
+      });
 
       if (this.source) {
         var source = lodash_isArray__WEBPACK_IMPORTED_MODULE_19___default()(this.source) ? this.source : [this.source];
-        this.$api.get.apply(this, source).then(function (r) {
+        return this.$api.get.apply(this, source).then(function (r) {
           _this4.loading = false;
           _this4.objects = r.data;
         }).catch(function (err) {
           console.warn('error in get from source', err);
           _this4.loading = false;
         });
-        return;
       }
 
       var model = this.model;
-      this.$store.dispatch('getModel', this.model).then(function (m) {
+      return this.$store.dispatch('getModel', this.model).then(function (m) {
         _this4.modelObj = m;
         var objects = _this4.$store.getters.objects;
 
@@ -9139,13 +9142,6 @@ var PageMixin = {
 
       this.$nextTick(function () {
         return _this6.getData();
-      });
-    },
-    $route: function $route(to, from) {
-      var _this7 = this;
-
-      this.$nextTick(function () {
-        return _this7.getData();
       });
     }
   }
@@ -9227,14 +9223,14 @@ var FilteredMixin = {
   },
   computed: {
     filterFunction: function filterFunction() {
-      var _this8 = this;
+      var _this7 = this;
 
       var filters = this.filters.map(function (f) {
         if (!f) return false;
         var match = f.match || f.key;
         if (!match) return false;
         match = new RegExp(match, 'i');
-        var search = f.search || _this8.searchFields;
+        var search = f.search || _this7.searchFields;
         if (!lodash_isArray__WEBPACK_IMPORTED_MODULE_19___default()(search)) search = [search];
         return search && search.length ? function (x) {
           return search.find(function (sf) {
@@ -9340,60 +9336,60 @@ var ActorsMixin = {
       this.$emit('update:show', false);
     },
     execute: function execute() {
-      var _this9 = this;
+      var _this8 = this;
 
       var action = this.action;
       var data = this.actions[action].data;
       var args = {};
       if (data.args) data.args.forEach(function (a) {
-        args[a] = _this9[a];
+        args[a] = _this8[a];
       });
       this.loading = true;
       return this.$api.post('do', action, this.model.fullname, this.applicable.map(function (x) {
         return x.id;
       }).join('+'), args).then(function (r) {
         var res = r.data[action];
-        _this9.loading = false;
+        _this8.loading = false;
 
         if (!res || res.error) {
-          _this9.results = res || r.data;
-          return _this9.results;
+          _this8.results = res || r.data;
+          return _this8.results;
         }
 
         if (data.next && !Object.values(res).find(function (x) {
           return x.res && x.res.error;
-        })) _this9.next = data.next;
+        })) _this8.next = data.next;
 
         if (Object.values(res).find(function (x) {
           return !x.res || !x.res.error;
         })) {
-          _this9.$emit('success', res);
+          _this8.$emit('success', res);
 
-          if (_this9.autoClose && _this9.applicable.length === 1) {
+          if (_this8.autoClose && _this8.applicable.length === 1) {
             var out = Object.values(res)[0];
 
             if (!out.out && !out.err) {
-              if (_this9.next) _this9.doNext();else _this9.hideModal();
-            } else _this9.results = res;
-          } else _this9.results = res;
-        } else _this9.results = res;
+              if (_this8.next) _this8.doNext();else _this8.hideModal();
+            } else _this8.results = res;
+          } else _this8.results = res;
+        } else _this8.results = res;
 
         return res;
       }).catch(function (err) {
-        _this9.loading = false;
+        _this8.loading = false;
         console.warn('error performing action', err, err.response);
-        _this9.results = {
+        _this8.results = {
           error: err.response
         };
       });
     },
     autoExecute: function autoExecute() {
-      var _this10 = this;
+      var _this9 = this;
 
       if (this.now) {
         this.autoClose = true;
         setTimeout(function () {
-          _this10.autoClose = false;
+          _this9.autoClose = false;
         }, 3000);
         this.execute();
       }
@@ -9403,13 +9399,13 @@ var ActorsMixin = {
       this.hideModal(); // setTimeout(() => this.$emit( 'act', this.next, this.operands, true ), 250 );
     },
     getPerms: function getPerms() {
-      var _this11 = this;
+      var _this10 = this;
 
       var model = this.model;
       var actions = Object.keys(this.actions);
       if (!model || !model.fullname || !actions || !actions.length) return;
       this.$canI(actions, model).then(function (r) {
-        _this11.permissions = r;
+        _this10.permissions = r;
       });
     },
     showApplicable: function showApplicable(x) {
@@ -9473,7 +9469,7 @@ var ActionsMixin = {
   },
   methods: {
     initActions: function initActions() {
-      var _this12 = this;
+      var _this11 = this;
 
       var actions = this.options.actions;
       var ops = {};
@@ -9503,7 +9499,7 @@ var ActionsMixin = {
         });
 
         if (reverse.length) {
-          _this12.$api('friede', 'actions', '?' + reverse.map(function (action) {
+          _this11.$api('friede', 'actions', '?' + reverse.map(function (action) {
             return 'path=' + action;
           }).join('&')).then(function (r) {
             var res = r.data.results;
@@ -9513,16 +9509,16 @@ var ActionsMixin = {
               show[a.data.component] = false;
               now[a.data.component] = false;
             });
-            _this12.actions = ops;
-            _this12.operands = operands;
-            _this12.showModals = show;
-            _this12.now = now;
+            _this11.actions = ops;
+            _this11.operands = operands;
+            _this11.showModals = show;
+            _this11.now = now;
           });
         } else {
-          _this12.actions = ops;
-          _this12.operands = operands;
-          _this12.showModals = show;
-          _this12.now = now;
+          _this11.actions = ops;
+          _this11.operands = operands;
+          _this11.showModals = show;
+          _this11.now = now;
         }
       }).catch(function (err) {
         console.warn('couldnt get actions', actions, err);
@@ -9561,10 +9557,10 @@ var ActionsMixin = {
   },
   watch: {
     options: function options(to, fr) {
-      var _this13 = this;
+      var _this12 = this;
 
       setTimeout(function () {
-        return _this13.initActions();
+        return _this12.initActions();
       }, 250);
     }
   }

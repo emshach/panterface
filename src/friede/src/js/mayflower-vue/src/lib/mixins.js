@@ -168,23 +168,23 @@ export const PageMixin = {
   },
   methods: {
     getData() {
-      if ( this.loading ) return;
+      if ( this.loading )
+        return new Promise( r => r() );
       this.loading = true;
       if ( !this.model && !this.source )
-        return;
+        return new Promise( r => r() );
       if ( this.source ) {
         const source = isArray( this.source ) ? this.source : [ this.source ];
-        this.$api.get.apply( this, source ).then( r => {
+        return this.$api.get.apply( this, source ).then( r => {
           this.loading = false;
           this.objects = r.data;
         }).catch( err => {
           console.warn( 'error in get from source', err );
           this.loading = false;
         });
-        return;
       }
       const model = this.model;
-      this.$store.dispatch( 'getModel', this.model ).then( m => {
+      return this.$store.dispatch( 'getModel', this.model ).then( m => {
         this.modelObj = m;
         const objects = this.$store.getters.objects;
         if ( objects && objects.length && !( this.filters && this.filters.length )) {
@@ -208,9 +208,6 @@ export const PageMixin = {
     source() {
       this.$nextTick(() => this.getData());
     },
-    $route( to, from ) {
-      this.$nextTick(() => this.getData());
-    }
   }
 };
 

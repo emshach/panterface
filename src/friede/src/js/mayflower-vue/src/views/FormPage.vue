@@ -166,10 +166,11 @@ export default  {
       if ( this.modelData && this.modelData.data && this.modelData.data.id )
         this.$router.replace( `?id=${this.modelData.data.id}` );
     },
-    $route( to, from ) {
-      this.data = null;
-      this.$nextTick(() => this.getData());
-    }
+    model() {
+      this.$nextTick(() => this.getData().then(() => {
+        this.data = null;
+      }));
+    },
   }
 }
 </script>

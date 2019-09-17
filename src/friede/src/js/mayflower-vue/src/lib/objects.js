@@ -176,11 +176,12 @@ inherit( Model, Object, {
            });
          }).catch( err => {
            console.log( 'error in model object init', err, err.response );
-           if ( err.response ) {
+           if ( err.response && err.response.data ) {
+             const data = err.response.data;
              const reqd = {};
              this.need = reqd;
-             Object.keys( err.response ).forEach( k => {
-               if ( /required/.test( err.response[k]) )
+             Object.keys( data ).forEach( k => {
+               if ( /required/.test( data[k] ))
                  reqd[k] = true;
              });
            }

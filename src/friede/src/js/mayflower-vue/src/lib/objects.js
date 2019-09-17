@@ -164,7 +164,8 @@ inherit( Model, Object, {
     if ( this.data.id || !this.meta.rest )
       this.ready = new Promise(( s, j ) => s() );
     if ( !this.data.id && this.meta.rest ) {
-      this.ready = ( id ? API( this.meta.rest, id, '' ) : API.post( this.meta.rest, '' ))
+      this.ready = ( id ? API.post( this.meta.rest, id, '' )
+                     : API.post( this.meta.rest, '' ))
          .then( r => {
            this.need = {};
            this.fields.forEach( field => {
@@ -199,7 +200,7 @@ inherit( Model, Object, {
          console.log( 'error updating model object', err, err.response );
          this.changes = changes;
        });
-    ( id ? API( rest, id, '', key ? {[ key ]: value } : ( changes || this.data ))
+    ( id ? API.post( rest, id, '', key ? {[ key ]: value } : ( changes || this.data ))
       : API.post( rest, '', key ? {[ key ]: value } : ( changes || this.data )))
          .then( r => {
            this.need = {};
@@ -211,7 +212,8 @@ inherit( Model, Object, {
                 = r.data[ field.meta.name ];
            });
          }).catch( err => {
-           console.log( 'error in model object init', err, err.response );
+           console.log( 'error updating model object', err, err.response );
+           this.changes = changes;
            if ( err.response && err.response.data ) {
              const data = err.response.data;
              const reqd = {};

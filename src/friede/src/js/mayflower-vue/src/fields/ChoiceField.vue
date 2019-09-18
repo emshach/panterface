@@ -1,7 +1,11 @@
 <template lang="html">
   <multiselect v-if="editMode" v-model=field.wip ref="inputV"
                :options="field.meta.options" track-by=key label="label"
-               :class=fieldClasses @input=commit @blur=revertField />
+               :class=fieldClasses @input=commit @blur=revertField >
+    <template slot="clear" slot-scope="props">
+      <div class="multiselect__clear" @mousedown.prevent.stop=revertField />
+    </template>
+  </multiselect>
   <a v-else v-html=html @click.click=editField @focus=editField
        :class=fieldClasses />
 </template>

@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     setDate( date, str ) {
-      this.fieeld.wip = str;
+      this.field.wip = str;
       this.commitField();
     }
   },

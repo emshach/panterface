@@ -13,6 +13,7 @@ import Tooltip from 'vuikit/lib/tooltip'
 import VueShortkey from 'vue-shortkey'
 import MfIcon from '@/components/MfIcon'
 import 'vue-toastr/src/vue-toastr.scss'
+import 'vue-multiselect/dist/vue-multiselect.min.css'
 
 UIkit.use( Icons );
 Vue.directive( 'vk-tooltip', Tooltip );

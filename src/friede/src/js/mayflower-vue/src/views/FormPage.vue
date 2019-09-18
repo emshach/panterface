@@ -101,6 +101,7 @@ export default  {
     submit() {
     },
     submitAndRedo() {
+      this.$router.push('');
     },
     discard() {
     },
@@ -129,17 +130,17 @@ export default  {
               { id }, this.$store.state.models[ this.model ] )))
              .ready.then( r => {
                if ( !id && this.data.data.id )
-                 this.$router.push( `?id=${this.data.data.id}` );
+                 this.$router.replace( `?id=${this.data.data.id}` );
              });
         } else
           ( this.data = Model( Object.assign( { id }, this.model )))
            .ready.then( r => {
              if ( !id && this.data.data.id )
-               this.$router.push( `?id=${this.data.data.id}` );
+               this.$router.replace( `?id=${this.data.data.id}` );
            });
       }
       if ( this.data && this.data.data && this.data.data.id )
-        this.$router.push( `?id=${this.data.data.id}` );
+        this.$router.replace( `?id=${this.data.data.id}` );
       return this.data || Model({ fields: [] });
     },
     objectId() {

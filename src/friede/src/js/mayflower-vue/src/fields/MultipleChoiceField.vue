@@ -1,10 +1,10 @@
 <template lang="html">
-  <div v-if="readonly" v-html="field.html" :class="fieldClasses" />
-  <multiselect v-else-if="editMode" v-model="field.wip"
-               :options="[]"
-               :class="fieldClasses" @blur="commitField" />
-  <a v-else v-html="field.html" @click.prevent="editField" @focus="editField"
-       :class="fieldClasses" />
+  <div v-if="readonly" v-html=field.html :class=fieldClasses />
+  <multiselect v-else-if="editMode" v-model=field.wip
+               :options=[]
+               :class=fieldClasses @blur=commitField />
+  <a v-else v-html=field.html @click.prevent=editField @focus=editField
+     :class=fieldClasses />
 </template>
 
 <script lang="js">

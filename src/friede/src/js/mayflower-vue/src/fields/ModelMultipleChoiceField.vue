@@ -28,9 +28,8 @@
                    :field=cell />
       </vk-column>
     </vk-table>
-    <div v-else v-html="html" @click="editField" @focus="editField"
-         :class="fieldClasses" />
-    <div :class="fieldClasses">
+    <div v-else v-html=html @click=editField @focus=editField :class=fieldClasses />
+    <div :class=fieldClasses>
       <template v-if="editMode">
         <label class="uk-flex">
           <span class="uk-margin-right">add</span>
@@ -41,15 +40,15 @@
                        :options=options
                        :multiple=true
                        @search-change=getObjects >
-            <template slot="clear" slot-scope="props">
+            <template #clear>
               <div class="multiselect__clear" @mousedown.prevent.stop=revertField />
             </template>
           </multiselect>
           <vk-btn-grp class="uk-align-right">
-            <vk-btn-link class="btn btn-confirm" @click.prevent="commit">
+            <vk-btn-link class="btn btn-confirm" @click.prevent=commit>
               <font-awesome-icon icon="check" /> done
             </vk-btn-link>
-            <vk-btn-link class="btn btn-cancel" @click.prevent="cancel">
+            <vk-btn-link class="btn btn-cancel" @click.prevent=cancel>
               <font-awesome-icon icon="times" /> cancel
             </vk-btn-link>
           </vk-btn-grp>

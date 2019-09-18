@@ -5,14 +5,13 @@
                @input=commit
                @blur=revertField
                @search-change=fieldGetObjects >
-    <template slot="clear" slot-scope="props">
+    <template #clear >
       <div class="multiselect__clear" @mousedown.prevent.stop=revertField />
     </template>
   </multiselect>
-  <a v-else @click.prevent="editField" @focus="editField" :class="fieldClasses">
+  <a v-else @click.prevent=edit @focus=edit :class=fieldClasses >
     <span v-html="html" />
-    <font-awesome-icon v-if="!readonly" :icon="isset ? 'edit': 'plus'"
-    @click="editField" />
+    <font-awesome-icon v-if="!readonly" :icon="isset ? 'edit': 'plus'" @click=edit />
   </a>
 </template>
 
@@ -22,18 +21,20 @@ export default {
   name: 'ModelChoiceField',
   mixins: [ ModelFieldMixin, ModelModelsFieldMixin ],
   props: [],
-  mounted() {
-    setTimeout(() => {
-      if ( !this.hasInput )
-        this.getObjects('');
-    }, 2000 );
-  },
+  mounted() {},
   data() {
     return {
       hasInput: false
     }
   },
   methods: {
+    edit() {
+      setTimeout(() => {
+        if ( !this.hasInput )
+          this.getObjects('');
+      }, 2000 );
+      this.editField();
+    },
     editField: ModelFieldMixin.methods.editField,
     commit( val ) {
       this.field.wip = val;

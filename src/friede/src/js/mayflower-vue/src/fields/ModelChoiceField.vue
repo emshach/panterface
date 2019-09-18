@@ -4,7 +4,7 @@
                label="title" track-by="path"
                @input=commit
                @blur=revertField
-               @search-change=getObjects >
+               @search-change=fieldGetObjects >
     <template slot="clear" slot-scope="props">
       <div class="multiselect__clear" @mousedown.prevent.stop=revertField />
     </template>
@@ -23,10 +23,14 @@ export default {
   mixins: [ ModelFieldMixin, ModelModelsFieldMixin ],
   props: [],
   mounted() {
+    setTimeout(() => {
+      if ( !this.hasInput )
+        this.getObjects('');
+    }, 2000 );
   },
   data() {
     return {
-      
+      hasInput: false
     }
   },
   methods: {
@@ -34,6 +38,10 @@ export default {
     commit( val ) {
       this.field.wip = val;
       this.commitField();
+    },
+    fieldGetObject( query ) {
+      this.hasInput = true;
+      this.getObjects( query );
     }
   },
   computed: {

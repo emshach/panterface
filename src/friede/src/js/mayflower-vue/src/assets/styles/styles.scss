@@ -225,3 +225,29 @@ form.uk-form-stacked label {
     }
   }
 }
+// FIXME: Don't think I should have to do this
+.multiselect__clear {
+  position: absolute;
+  right: 41px;
+  height: 40px;
+  width: 40px;
+  display: block;
+  cursor: pointer;
+  z-index: 2;
+  &:after, &:before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 3px;
+    height: 16px;
+    background: #aaa;
+    top: 12px;
+    right: 4px
+  }
+  &:before {
+    transform: rotate(45deg)
+  }
+  &:after {
+    transform: rotate(-45deg)
+  }
+}

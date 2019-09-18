@@ -11059,6 +11059,30 @@ form.uk-form-stacked label {
 .action-result .content-outcome.error {
   color: darkred; }
 
+.multiselect__clear {
+  position: absolute;
+  right: 41px;
+  height: 40px;
+  width: 40px;
+  display: block;
+  cursor: pointer;
+  z-index: 2; }
+  .multiselect__clear:after, .multiselect__clear:before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 3px;
+    height: 16px;
+    background: #aaa;
+    top: 12px;
+    right: 4px; }
+  .multiselect__clear:before {
+    -webkit-transform: rotate(45deg);
+            transform: rotate(45deg); }
+  .multiselect__clear:after {
+    -webkit-transform: rotate(-45deg);
+            transform: rotate(-45deg); }
+
 .mf-icon-bg {
   position: absolute;
   top: -12px;

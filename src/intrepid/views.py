@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render
 from rest_framework import status, viewsets, permissions, filters
+from aries.views import OwnedViewMixin
 from .serializers import *
 
 ### route views

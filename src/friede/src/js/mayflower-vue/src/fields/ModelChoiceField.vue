@@ -1,12 +1,14 @@
 <template lang="html">
-  <multiselect v-if="editMode" v-model="values" ref="inputV"
-               :options="options" :class="fieldClasses"
-               label="title"
-               track-by="path"
-               @input="commit"
-               @blur="revertField"
-               @search-change="getObjects"
-               />
+  <multiselect v-if="editMode" v-model=values ref="inputV"
+               :options=options :class=fieldClasses
+               label="title" track-by="path"
+               @input=commit
+               @blur=revertField
+               @search-change=getObjects >
+    <template slot="clear" slot-scope="props">
+      <div class="multiselect__clear" @mousedown.prevent.stop=revertField />
+    </template>
+  </multiselect>
   <a v-else @click.prevent="editField" @focus="editField" :class="fieldClasses">
     <span v-html="html" />
     <font-awesome-icon v-if="!readonly" :icon="isset ? 'edit': 'plus'"

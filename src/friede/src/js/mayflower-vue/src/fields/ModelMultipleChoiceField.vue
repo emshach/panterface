@@ -40,7 +40,11 @@
                        open-direction="bottom"
                        :options=options
                        :multiple=true
-                       @search-change=getObjects />
+                       @search-change=getObjects >
+            <template slot="clear" slot-scope="props">
+              <div class="multiselect__clear" @mousedown.prevent.stop=revertField />
+            </template>
+          </multiselect>
           <vk-btn-grp class="uk-align-right">
             <vk-btn-link class="btn btn-confirm" @click.prevent="commit">
               <font-awesome-icon icon="check" /> done

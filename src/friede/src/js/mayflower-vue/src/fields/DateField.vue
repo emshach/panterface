@@ -1,9 +1,8 @@
 <template lang="html">
-  <flat-pickr v-if="editMode" :value="field.wip" ref="inputV"
-              :config="config" :class="fieldClasses"
-              @on-change="setDate" />
-  <a v-else v-html="html" @click.prevent="editField" @focus="editField"
-       :class="fieldClasses" />
+  <flat-pickr v-if="editMode" :value=field.wip ref="inputV"
+              :config=config :class=fieldClasses
+              @on-change=commit />
+  <a v-else v-html=html @click.prevent=editField @focus=editField :class=fieldClasses />
 </template>
 
 <script lang="js">
@@ -26,7 +25,7 @@ export default {
     }
   },
   methods: {
-    setDate( date, str ) {
+    commit( date, str ) {
       this.field.wip = str;
       this.commitField();
     }

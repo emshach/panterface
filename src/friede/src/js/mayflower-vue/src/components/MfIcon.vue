@@ -251,7 +251,7 @@ export default {
     top: -12px;
     left: -24px;
     font-size: 144px;
-    color: rgba(0,0,0,0.03);
+    color: rgba(0,0,0,0.05);
   } 
 }
 </style>

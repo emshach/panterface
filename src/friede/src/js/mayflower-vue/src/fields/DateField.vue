@@ -1,8 +1,7 @@
 <template lang="html">
   <flat-pickr v-if="editMode" v-model="field.wip" ref="inputV"
               :config="config" :class="fieldClasses"
-              @on-change="commitField"
-              @on-close="revertField" />
+              @on-change="commitField" />
   <a v-else v-html="html" @click.prevent="editField" @focus="editField"
        :class="fieldClasses" />
 </template>

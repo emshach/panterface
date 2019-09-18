@@ -88,7 +88,7 @@ class PathMixin( Serializer ):
     # TODO: if no id (then assume making new) check for path collision
 
 
-class EntrySerializer( ModelSerializer, IconMixin ):
+class EntrySerializer( IconMixin, ModelSerializer ):
     url = CharField( source='name' )
     entry = SerializerMethodField()
 
@@ -292,28 +292,28 @@ class WidgetSerializer( RegistrySerializer ):
         expandable_fields = RegistrySerializer.Meta.expandable_fields
 
 
-class BlockSerializer( RegistrySerializer, ExtendsMixin ):
+class BlockSerializer( ExtendsMixin, RegistrySerializer ):
     class Meta:
         model = Block
         fields = RegistrySerializer.Meta.fields + F.extends + F.size + F.data
         expandable_fields = RegistrySerializer.Meta.expandable_fields
 
 
-class ScreenSerializer( RegistrySerializer, ExtendsMixin ):
+class ScreenSerializer( ExtendsMixin, RegistrySerializer ):
     class Meta:
         model = Screen
         fields = RegistrySerializer.Meta.fields + F.extends + F.size + F.data
         expandable_fields = RegistrySerializer.Meta.expandable_fields
 
 
-class ShellSerializer( RegistrySerializer, ExtendsMixin ):
+class ShellSerializer( ExtendsMixin, RegistrySerializer ):
     class Meta:
         model = Shell
         fields = RegistrySerializer.Meta.fields + F.extends + F.templates
         expandable_fields = RegistrySerializer.Meta.expandable_fields
 
 
-class ThemeSerializer( RegistrySerializer, ExtendsMixin ):
+class ThemeSerializer( ExtendsMixin, RegistrySerializer ):
     class Meta:
         model = Theme
         fields = RegistrySerializer.Meta.fields + F.extends + F.templates
@@ -342,28 +342,28 @@ class LocationSerializer( RegistrySerializer ):
         expandable_fields = RegistrySerializer.Meta.expandable_fields
 
 
-class LinkSerializer( HyperlinkedModelSerializer, IconMixin, PathMixin ):
+class LinkSerializer( OwnedMixin, PathMixin, IconMixin, HyperlinkedModelSerializer ):
     class Meta:
         model = Link
         fields = F.base + F.link
         expandable_fields = RegistrySerializer.Meta.expandable_fields
     location = LocationSerializer()
 
-class ReferenceSerializer( HyperlinkedModelSerializer, IconMixin, PathMixin ):
+class ReferenceSerializer( PathMixin, IconMixin, HyperlinkedModelSerializer ):
     class Meta:
         model = Reference
         fields = F.base + F.reference
         expandable_fields = RegistrySerializer.Meta.expandable_fields
 
 
-class SettingSerializer( HyperlinkedModelSerializer, IconMixin, PathMixin ):
+class SettingSerializer( OwnedMixin, PathMixin, IconMixin, HyperlinkedModelSerializer ):
     class Meta:
         model = Setting
         fields = F.base + F.setting
         expandable_fields = RegistrySerializer.Meta.expandable_fields
 
 
-class ActionSerializer( HyperlinkedModelSerializer, IconMixin, PathMixin ):
+class ActionSerializer( OwnedMixin, PathMixin, IconMixin, HyperlinkedModelSerializer ):
     class Meta:
         model = Action
         fields = F.base + F.action

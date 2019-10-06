@@ -206,7 +206,7 @@ def api_userdata( request, sub='', format=None ):
     ))
 
 @api_view([ 'POST' ])
-@permissions_classes(( permissions.AllowAny, ))
+@permission_classes(( permissions.AllowAny, ))
 def api_share( request, format=None ):
     check = ObjectPermissionChecker( request.user )
     perms = set( request.query_params.getlist( 'op' ))

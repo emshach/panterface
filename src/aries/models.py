@@ -5,6 +5,7 @@ from django.db import models as M
 from django.contrib.postgres.fields import JSONField
 from django.contrib.auth import models as auth
 from django.db.models.signals import post_save
+from django.utils.timezone import now
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 
@@ -65,8 +66,12 @@ class DataMixin( Model ):
 
 
 class Permission( AutoChildModel, auth.Permission, _Base, DataMixin ):
-    auth_ptr  = M.OneToOneField( auth.Permission, M.CASCADE, parent_link=True,
-                                 related_name='aries_data' )
+    auth_ptr = M.OneToOneField(
+        auth.Permission,
+        on_delete=M.CASCADE,
+        parent_link=True,
+        related_name='aries_data'
+    )
 
 class Policy( Base, DataMixin ):
     class Types:
@@ -91,15 +96,28 @@ class Policy( Base, DataMixin ):
             ( PERMISSION, 'Permissions' ),
             ( CUSTOM, 'Custom' ),
         )
-    type        = M.CharField( max_length=16, choices=Types.ALL, default=Types.ALLOW )
-    function    = M.CharField( max_length=16, choices=Functions.ALL,
-                               default=Functions.BASIC )
-    permissions = M.ManyToManyField( Permission, blank=True, related_name='policies' )
+    type        = M.CharField(
+        max_length=16,
+        choices=Types.ALL,
+        default=Types.ALLOW
+    )
+
+    function    = M.CharField(
+        max_length=16,
+        choices=Functions.ALL,
+        default=Functions.BASIC
+    )
+
+    permissions = M.ManyToManyField(
+        Permission,
+        blank=True,
+        related_name='policies'
+    )
 
 
 class Role( Base, DataMixin ):
     permissions = M.ManyToManyField( Permission, blank=True, related_name='roles' )
-    policies = M.ManyToManyField( Policy, blank=True, related_name='roles' )
+    policies    = M.ManyToManyField( Policy,     blank=True, related_name='roles' )
 
 
 def _normalize( Type, thing, name='name' ):
@@ -194,18 +212,103 @@ class User( auth.AbstractUser, _Base, DataMixin ):
 
 
 class Group( AutoChildModel, auth.Group, _Base, DataMixin ):
-    auth_ptr     = M.OneToOneField( auth.Group, M.CASCADE, parent_link=True,
-                                 related_name='aries_data' )
+    auth_ptr     = M.OneToOneField(
+        auth.Group,
+        on_delete=M.CASCADE,
+        parent_link=True,
+        related_name='aries_data' )
+
     is_superuser = M.BooleanField( default=False )
     is_staff     = M.BooleanField( default=False )
     title        = M.CharField( blank=True, max_length=255 )
-    roles        = M.ManyToManyField( Role, blank=True, related_name='groups' )
+    roles        = M.ManyToManyField( Role,   blank=True, related_name='groups' )
     policies     = M.ManyToManyField( Policy, blank=True, related_name='groups' )
+    manager_type = M.ForeignKey(
+        ContentType,
+        on_delete=M.CASCADE,
+        null=True,
+        blank=True
+    )
+    manager_id   = M.PositiveIntegerField( null=True, blank=True )
+    manager      = GenericForeignKey( 'manager_type', 'manager_id' )
 
 
 class Permit( Base ):
     version   = M.CharField( max_length=32, default='0.0.0' )
     available = M.CharField( max_length=32, default='0.0.0' )
+
+class UserConnectionType( Base ):
+    display = M.CharField( max_length=255, null=True, blank=True )
+    reverse = M.OneToOneField( 'self', on_delete=M.SET_NULL, null=True, blank=True )
+
+    def save( self, *args, **kwargs ):
+        if self.reverse:
+            self.reverse.reverse = self
+        super( UserConnectionType, self ).save()
+
+
+class UserConnection( Base ):
+    class Meta:
+        unique_together = ( 'first', 'second', 'type' )
+    class Status:
+        MUTUAL      = 'mutual'
+        UNCONFIRMED = 'unconfirmed'
+        DISPUTED    = 'disputed'
+        DENIED      = 'denied'
+        ALL = (
+            ( MUTUAL,      'Mutual' ),
+            ( UNCONFIRMED, 'Unconfirmed' ),
+            ( DISPUTED,    'Disputed'),
+            ( DENIED,      'Denied' ),
+        )
+    first  = M.ForeignKey( User, on_delete=M.CASCADE, related_name='knows' )
+    second = M.ForeignKey( User, on_delete=M.CASCADE, related_name='known_by' )
+    type   = M.ForeignKey(
+        UserConnectionType,
+        on_delete=M.SET_NULL,
+        null=True,
+        blank=True
+    )
+    status    = M.CharField(
+        max_length=32,
+        choices=Status.ALL,
+        default=Status.UNCONFIRMED
+    )
+    created   = M.DateTimeField( default=now )
+    initiated = M.DateTimeField( null=True, blank=True )
+    ended     = M.DateTimeField( null=True, blank=True )
+    rsvp      = M.OneToOneField( 'self', on_delete=M.PROTECT, related_name="response" )
+
+
+class Invite( Model ):
+    initiator = M.ForeignKey(
+        User,
+        on_delete=M.CASCADE,
+        related_name='invites',
+        default=lambda: User.objects.get( name='system' )
+    )
+    recipient = M.ForeignKey( User, on_delete=M.CASCADE, related_name='invitations' )
+    created   = M.DateTimeField( default=now )
+    sent      = M.DateTimeField( null=True, blank=True )
+    received  = M.DateTimeField( null=True, blank=True )
+    read      = M.DateTimeField( null=True, blank=True )
+
+
+class Token( Model ):
+    key  = M.CharField( max_length=255 )
+    hash = M.TextField()
+
+
+class View( Model ):
+    active    = M.BooleanField( default=True )
+    base_type = M.ForeignKey( ContentType, on_delete=M.CASCADE )
+    base_id   = M.PositiveIntegerField()
+    base      = GenericForeignKey( 'base_type', 'base_id' )
+    view_type = M.ForeignKey( ContentType, on_delete=M.CASCADE )
+    view_id   = M.PositiveIntegerField()
+    view      = GenericForeignKey( 'view_type', 'view_id' )
+    fields    = JSONField( default=list )
+
 
 class _AutoOwnedBase( M.base.ModelBase ):
     class Meta:
@@ -232,13 +335,65 @@ class Creation( Model ):
     object_id    = M.PositiveIntegerField()
     created      = GenericForeignKey( 'content_type', 'object_id' )
 
+class Share( Model ):
+    class Types:
+        VIEW = 'view'
+        EDIT = 'edit'
+        all  = (
+            ( VIEW, 'View' ),
+            ( EDIT, 'Edit' )
+        )
+    user         = M.ForeignKey( User, related_name='shared', on_delete=M.CASCADE )
+    content_type = M.ForeignKey( ContentType, on_delete=M.CASCADE )
+    object_id    = M.PositiveIntegerField()
+    shared       = GenericForeignKey( 'content_type', 'object_id' )
+    level        = M.CharField( max_length=32, choices=Types.ALL, default=Types.CHAR )
 
-class AutoOwnedModel( six.with_metaclass( _AutoOwnedBase, Model )):
+
+class Post( Model ):
+    class Types:
+        VIEW = 'view'
+        EDIT = 'edit'
+        all  = (
+            ( VIEW, 'View' ),
+            ( EDIT, 'Edit' )
+        )
+    group        = M.ForeignKey( Group, related_name='posted', on_delete=M.CASCADE )
+    content_type = M.ForeignKey( ContentType, on_delete=M.CASCADE )
+    object_id    = M.PositiveIntegerField()
+    shared       = GenericForeignKey( 'content_type', 'object_id' )
+    level        = M.CharField( max_length=32, choices=Types.ALL, default=Types.CHAR )
+
+
+class OwnedModel( six.with_metaclass( _AutoOwnedBase, Model )):
     class Meta:
         abstract = True
-    owner   = GenericRelation( Ownership,
-                               related_query_name="%(app_label)s_%(class)s" )
-    creator = GenericRelation( Creation,
-                               related_query_name="%(app_label)s_%(class)s_created" )
 
-
+    owner = GenericRelation(
+        Ownership,
+        related_query_name="%(app_label)s_%(class)s"
+    )
+    creator = GenericRelation(
+        Creation,
+        related_query_name="%(app_label)s_%(class)s_created"
+    )
+    shared_with = GenericRelation(
+        Share,
+        related_query_name="%(app_label)s_%(class)s_shares"
+    )
+    posted_to = GenericRelation(
+        Post,
+        related_query_name="%(app_label)s_%(class)s_posts"
+    )
+    views = GenericRelation(
+        View,
+        related_query_name="%(app_label)s_%(class)s_views",
+        content_type_field='view_type',
+        object_id_field='view_id'
+    )
+    based_on = GenericRelation(
+        View,
+        related_query_name="%(app_label)s_%(class)s_view_bases",
+        content_type_field='base_type',
+        object_id_field='base_id'
+    )

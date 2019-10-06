@@ -8,6 +8,9 @@ from django.contrib.admin.models import LogEntry
 from rest_framework import status, viewsets, permissions, filters
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
+import guardian.shortcuts as G
+from guardian.core import ObjectPermissionChecker
+from .core import owned_by, can
 from .auth import get_user
 from .models import *
 from .serializers import *
@@ -202,6 +205,95 @@ def api_userdata( request, sub='', format=None ):
         body=body
     ))
 
+@api_view([ 'POST' ])
+@permissions_classes(( permissions.AllowAny, ))
+def api_share( request, format=None ):
+    check = ObjectPermissionChecker( request.user )
+    perms = set( request.query_params.getlist( 'op' ))
+    obj = request.query_params.get( 'object' );
+    objects = request.query_params.get( 'objects' )
+    uid = request.query_params.get( 'uid' );
+    uids = set( request.query_params.getlist( 'uids' ))
+    gid = request.query_params.get( 'gid' );
+    gids = set( request.query_params.getlist( 'gids' ))
+    type = request.query_params.get( 'type' );
+    # types = set( request.query_params.getlist( 'types' ))
+
+    if obj and not objects:
+        objects = { obj[0]: ( obj[1] if isinstance( obj[1], ( list, tuple ))
+                              else ( obj[1], )) }
+    if uid and not uids:
+        uids = { uid }
+    if gid and not gids:
+        gids = { gid }
+    # if not types:
+    #     types = [ type or Share.Types.VIEW ]
+    if not type:
+        type = Share.Types.VIEW
+
+    out = []
+    err = []
+
+    for o, oids in objects:
+        app, mod = o.split('.')
+        ct = None
+        model = None
+        try:
+            ct = ContentType.objects.get( app_label=app, model=model )
+            model = ct.model_class()
+        except ContentType.DoesNotExist:
+            err.push( dict(
+                status=400,
+                message="model '%s' was not found" % o ))
+            continue
+        for oid in oids:
+            obj = None
+            try:
+                obj = model.objects.get( pk=oid )
+            except model.DoesNotExist:
+                err.push( dict(
+                    status=400,
+                    message="Object {}#{}  was not found".format( model, oid )))
+                continue
+            if not can( 'grant', request.user, mod, obj, check ):
+                err.push( dict(
+                    status=403,
+                    message="You don't have permission to share Object {}#{}"\
+                    .format( model, oid ),
+                    actions=[[' request_permission', 'grant', mod, oid  ]]))
+                continue
+            for p in perms:
+                for u in uids:
+                    try:
+                        user = User.objects.get( pk=u )
+                    except User.DoesNotExist:
+                        err.push( dict(
+                            status=404,
+                            message="User id %s not found" % u ))
+                        continue
+                    G.assign_perm( "view_%s" % mod, user, obj )
+                    out.push( dict(
+                        status=200,
+                        message="Shared Object {}#{} with @{}".format(
+                            mod, oid, user.username )
+                    ))
+                for g in gids:
+                    try:
+                        group = Group.objects.get( pk=u )
+                    except Group.DoesNotExist:
+                        err.push( dict(
+                            status=404,
+                            message="Group id %s not found" % g ))
+                        continue
+                    G.assign_perm( "view_%s" % mod, group, obj )
+                    out.push( dict(
+                        status=200,
+                        message="Posted Object {}#{} to #{}".format(
+                            mod, oid, user.username )
+                    ))
+
+    pass
+
 class OwnedViewMixin( viewsets.ModelViewSet ):
     def perform_create( self, serializer ):
         obj = serializer.save()
@@ -231,5 +323,40 @@ class PermissionViewSet( viewsets.ModelViewSet ):
 class RoleViewSet( viewsets.ModelViewSet ):
     queryset = Role.objects.all()
     serializer_class = RoleSerializer
+
+
+class PermitViewSet( viewsets.ModelViewSet ):
+    queryset = Permit.objects.all()
+    serializer_class = PermitSerializer
+
+
+class UserConnectionTypeViewSet( viewsets.ModelViewSet ):
+    queryset = UserConnectionType.objects.all()
+    serializer_class = UserConnectionTypeSerializer
+
+
+class UserConnectionViewSet( viewsets.ModelViewSet ):
+    queryset = UserConnection.objects.all()
+    serializer_class = UserConnectionSerializer
+
+
+class InviteViewSet( viewsets.ModelViewSet ):
+    queryset = Invite.objects.all()
+    serializer_class = InviteSerializer
+
+
+class ViewViewSet( viewsets.ModelViewSet ):
+    queryset = View.objects.all()
+    serializer_class = ViewSerializer
+
+
+class ShareViewSet( viewsets.ModelViewSet ):
+    queryset = Share.objects.all()
+    serializer_class = ShareSerializer
+
+
+class PostViewSet( viewsets.ModelViewSet ):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
 
 

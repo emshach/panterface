@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django_filters',
     'crispy_forms',
-    # 'guardian',
+    'guardian',
     'rest_framework',
     'friede',
     # 'allauth',
@@ -189,7 +189,7 @@ AUTHENTICATION_BACKENDS = [
     'aries.auth.AnonymousAuthBackend',
     'django.contrib.auth.backends.ModelBackend', # default
     # 'allauth.account.auth_backends.AuthenticationBackend',
-    # 'guardian.backends.ObjectPermissionBackend',
+    'guardian.backends.ObjectPermissionBackend',
 ]
 
 

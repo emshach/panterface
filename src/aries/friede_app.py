@@ -11,7 +11,8 @@ class App( app.App ):
     description = '''System-wide User and user relationship functionality including
     groups, roles, security and maintaining a single identity across apps and platforms'''
 
-    objects = 'user group policy permission role'.split()
+    objects = '''user group policy permission role permit userconnectiontype
+                  userconnection invite view share post'''.split()
 
     min_version = '0.0.1'
     required = True
@@ -58,6 +59,62 @@ class App( app.App ):
             'in'     : (),
             'links'  : (),
         },
+        permit={
+            'model'  : 'Permit',
+            'icon'   : 'fontawesome.user-md',
+            'plural' : 'permits',
+            'has'    : (),
+            'in'     : (),
+            'links'  : (),
+        },
+        userconnectiontype={
+            'model'  : 'UserConnectionType',
+            'icon'   : 'fontawesome.user-md',
+            'plural' : 'user connection types',
+            'has'    : (),
+            'in'     : (),
+            'links'  : (),
+        },
+        userconnection={
+            'model'  : 'userConnection',
+            'icon'   : 'fontawesome.user-md',
+            'plural' : 'user connections',
+            'has'    : (),
+            'in'     : (),
+            'links'  : (),
+        },
+        invite={
+            'model'  : 'Invite',
+            'icon'   : 'fontawesome.user-md',
+            'plural' : 'invites',
+            'has'    : (),
+            'in'     : (),
+            'links'  : (),
+        },
+        view={
+            'model'  : 'View',
+            'icon'   : 'fontawesome.user-md',
+            'plural' : 'views',
+            'has'    : (),
+            'in'     : (),
+            'links'  : (),
+        },
+        share={
+            'model'  : 'Share',
+            'icon'   : 'fontawesome.user-md',
+            'plural' : 'shares',
+            'has'    : (),
+            'in'     : (),
+            'links'  : (),
+        },
+        post={
+            'model'  : 'Post',
+            'icon'   : 'fontawesome.user-md',
+            'plural' : 'posts',
+            'has'    : (),
+            'in'     : (),
+            'links'  : (),
+        },
     )
     api=(
         ( r'can/(?P<perm>.+$)',     ( views.api_can,         'can',        [ 'any' ] )),
@@ -67,20 +124,35 @@ class App( app.App ):
         ( r'register/?$',           ( views.api_register,    'register'              )),
         ( r'auth-status/?$',        ( views.api_auth_status, 'auth-status'           )),
         ( r'userdata/?(?P<sub>.*$)', ( views.api_userdata,   'userdata',   [ '' ]    )),
+        ( r'share/?$'               ( views.api_share,       'share',                )),
     )
     routes=(
-        ( 'users',       views.UserViewSet       ),
-        ( 'groups',      views.GroupViewSet      ),
-        ( 'policies',    views.PolicyViewSet     ),
-        ( 'permissions', views.PermissionViewSet ),
-        ( 'roles',       views.RoleViewSet       ),
+        ( 'users',               views.UserViewSet                  ),
+        ( 'groups',              views.GroupViewSet                 ),
+        ( 'policies',            views.PolicyViewSet                ),
+        ( 'permissions',         views.PermissionViewSet            ),
+        ( 'roles',               views.RoleViewSet                  ),
+        ( 'permits',             views.PermitSerializer             ),
+        ( 'userconnectiontypes', views.UserConnectionTypeSerializer ),
+        ( 'userconnections',     views.UserConnectionSerializer     ),
+        ( 'invites',             views.InviteSerializer             ),
+        ( 'views',               views.ViewSerializer               ),
+        ( 'shares',              views.ShareSerializer              ),
+        ( 'posts',               views.PostSerializer               ),
     )
     serializers=(
-        ( 'users',       serializers.UserSerializer       ),
-        ( 'groups',      serializers.GroupSerializer      ),
-        ( 'policies',    serializers.PolicySerializer     ),
-        ( 'permissions', serializers.PermissionSerializer ),
-        ( 'roles',       serializers.RoleSerializer       ),
+        ( 'users',               serializers.UserSerializer               ),
+        ( 'groups',              serializers.GroupSerializer              ),
+        ( 'policies',            serializers.PolicySerializer             ),
+        ( 'permissions',         serializers.PermissionSerializer         ),
+        ( 'roles',               serializers.RoleSerializer               ),
+        ( 'permits',             serializers.PermitSerializer             ),
+        ( 'userconnectiontypes', serializers.UserConnectionTypeSerializer ),
+        ( 'userconnections',     serializers.UserConnectionSerializer     ),
+        ( 'invites',             serializers.InviteSerializer             ),
+        ( 'views',               serializers.ViewSerializer               ),
+        ( 'shares',              serializers.ShareSerializer              ),
+        ( 'posts',               serializers.PostSerializer               ),
     )
     @property
     def data( self ):
@@ -334,38 +406,102 @@ class App( app.App ):
             )),
           )
         ),
-        # ( '0.1.0',
-        #   ( '#widgets',
-        #     ( 'help',
-        #       ( 'list', dict(
-        #           icon='fontawesome.list',
-        #           data=dict(
-        #               component='ActionHelpWidget',
-        #               action='list'
-        #           ))),
-        #     ),
-        #     ( 'dashboard', dict (
-        #         icon='fontawesome.expand',
-        #         data=dict(
-        #             component='DashboardWidget'
-        #         ))),
-        #     ( 'from relations', self.objects, self.relations )),
-        #   ( '#blocks',
-        #     ( 'form',
-        #       ( 'group', dict(
-        #           icon='fontawesome.object-group',
-        #           data=dict(
-        #               component='FormGroup'
-        #           ))),
-        #     )),
-        #   ( '#screens',
-        #     ( 'form.single', dict(
-        #         icon='fontawesome.file-alt',
-        #         data=dict(
-        #             component='FormPage'
-        #         ))),
-        #   ),
-        # ),
+        ( '0.1.0',
+          ( '#actions',
+            ( 'connect-user', dict(
+                icon='fontawesome-icon.user-plus',
+                title='Connect',
+                description='''Connect to another user.''',
+                data=dict(
+                    reverse='disconnect-user',
+                    widget='Connector',
+                )),
+            ),
+            ( 'disconnect-user', dict(
+                icon='fontawesome-icon.user-minus',
+                title='Disconnect',
+                description='''Disconnect from a user.''',
+                data=dict(
+                    reverse='connect-user',
+                    widget='Connector',
+                )),
+            ),
+            ( 'block-user', dict(
+                icon='fontawesome-icon.user-slash',
+                title='Block User',
+                description='''Block a user.
+
+All connections between you will be de-activated. If you un-block the user later, any existing connections between you, you will be allowed to edit before the un-blocking is completed.''',
+                data=dict(
+                    reverse='unblock-user',
+                    widget='Connector',
+                )),
+            ),
+            ( 'unblock-user', dict(
+                icon='fontawesome-icon.user-slash',
+                title='Block User',
+                description='''Un-block a user.
+
+If there are any existing connections between you, you will be allowed to edit them before process is completed.''',
+                data=dict(
+                    reverse='block-user',
+                    widget='Connector',
+                )),
+            ),
+            ( 'report-user', dict(
+                icon='fontawesome-icon.user-tag',
+                title='Report User',
+                description='''Report a user to the relevant authority.''',
+                data=dict(
+                    widget='Connector',
+                )),
+            ),
+            ( 'invite-user', dict(
+                icon='fontawesome-icon.id-card',
+                title='Invite',
+                description='''Send a link to a user to sign up to the site and become a connection.''',
+                data=dict(
+                    reverse='cancel-invite',
+                    widget='Connector',
+                )),
+            ),
+            ( 'cancel-invite', dict(
+                icon='fontawesome-icon.comment-slash',
+                title='Cancel Invite',
+                description='''Cancer previously sent user invite.''',
+                data=dict(
+                    reverse='invite-user',
+                    widget='Connector',
+                )),
+            ),
+            ( 'confirm-connection', dict(
+                icon='fontawesome-icon.user-check',
+                title='Confirm',
+                description='''Respond positively to a user connection and define your connection to the user.''',
+                data=dict(
+                    reverse='deny-connection',
+                    widget='Connector',
+                )),
+            ),
+            ( 'deny-connection', dict(
+                icon='fontawesome-icon.user-times',
+                title='Deny',
+                description='''Reject a users claim to be connected to you, in the manner defined, implying no connection at all.''',
+                data=dict(
+                    reverse='confirm-connection',
+                    widget='Connector',
+                )),
+            ),
+            ( 'dispute-connection', dict(
+                icon='fontawesome-icon.user-edit',
+                title='Dispute',
+                description='''Accept that a user is connected to you, but challenge the definition given.''',
+                data=dict(
+                    widget='Connector',
+                )),
+            ),
+          )
+        )
     )
     @property
     def userdata( self ):

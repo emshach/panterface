@@ -6,14 +6,15 @@ from django.db import models as M
 from django.contrib.postgres.fields import JSONField
 from datetime import date
 from django.utils.timezone import now
-from aries.models import AutoOwnedModel, Role as authRole, Group, Permission
+from aries.models import OwnedModel, Role as authRole, Group, Permission
+from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 
 Model = M.Model
 
 ### Base
 
 @python_2_unicode_compatible
-class Base( AutoOwnedModel ):
+class Base( OwnedModel ):
     class Meta:
         abstract = True
     name         = M.SlugField( null=True, blank=True )
@@ -418,9 +419,14 @@ class Purchase( Line ):
 
 class Team( Noted ):
     # relations
-    parent  = M.ForeignKey( 'self', M.CASCADE, related_name='groups' )
-    members = M.ManyToManyField( get_user_model(), through='Position',
-                                      related_name='intrepid_teams' )
+    parent     = M.ForeignKey( 'self', M.CASCADE, related_name='groups' )
+    members    = M.ManyToManyField( get_user_model(), through='Position',
+                                    related_name='intrepid_teams' )
+    auth_group = GenericRelation( Group,
+                                  related_query_name="%(app_label)s_%(class)s",
+                                  content_type_field='manager_type',
+                                  object_id_field='manager_id' )
+
 
 
 class Position( Noted ):

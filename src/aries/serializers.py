@@ -181,6 +181,89 @@ class PermissionSerializer( HyperlinkedModelSerializer ):
     policies  = PolicySerializer( many=True )
     roles     = RoleSerializer( many=True )
 
+class PermitSerializer( HyperlinkedModelSerializer ):
+    class Meta:
+        model  = Permit
+        fields = (
+            'id',
+            'version',
+            'available',
+        )
+
+
+class UserConnectionTypeSerializer( HyperlinkedModelSerializer ):
+    class Meta:
+        model  = UserConnectionType
+        fields = (
+            'id',
+            'display',
+            'reverse',
+        )
+
+
+class UserConnectionSerializer( HyperlinkedModelSerializer ):
+    class Meta:
+        model  = UserConnection
+        fields = (
+            'id',
+            'first',
+            'second',
+            'type',
+            'status',
+            'created',
+            'initiated',
+            'ended',
+            'rsvp',
+            # 'response', # TODO: figure this out
+        )
+
+
+class InviteSerializer( HyperlinkedModelSerializer ):
+    class Meta:
+        model  = Invite
+        fields = (
+            'id',
+            'initiator',
+            'recipient',
+            'created',
+            'sent',
+            'received',
+            'read',
+        )
+
+
+class ViewSerializer( HyperlinkedModelSerializer ):
+    class Meta:
+        model  = View
+        fields = (
+            'id',
+            'active',
+            # TODO: generics
+        )
+
+
+class ShareSerializer( HyperlinkedModelSerializer ):
+    class Meta:
+        model  = Share
+        fields = (
+            'id',
+            'user',
+            # TODO: generics
+            'level',
+        )
+
+
+class PostSerializer( HyperlinkedModelSerializer ):
+    class Meta:
+        model  = Post
+
+        fields = (
+            'id',
+            'user',
+            # TODO: generics
+            'level',
+        )
+
 
 by_model = dict(
     users       = UserSerializer,
@@ -188,4 +271,11 @@ by_model = dict(
     policies    = PolicySerializer,
     permissions = PermissionSerializer,
     roles       = RoleSerializer,
+    permits     = PermitSerializer,
+    userconnectiontypes = UserConnectionTypeSerializer,
+    userconnections = UserConnectionSerializer,
+    invites     = InviteSerializer,
+    views       = ViewSerializer,
+    shares      = ShareSerializer,
+    posts       = PostSerializer,
 )

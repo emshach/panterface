@@ -7,7 +7,7 @@ from datetime import date
 from django.utils.timezone import now
 from django.contrib.auth import get_user_model
 from model_utils.managers import InheritanceManager
-from aries.models import AutoOwnedModel
+from aries.models import OwnedModel
 from .util import snake_case
 
 
@@ -103,7 +103,7 @@ class ExtendsMixin( Model ):
                             related_name="exdended_by" )
 
 
-class Registry( AutoOwnedModel, Base, PathMixin ):
+class Registry( OwnedModel, Base, PathMixin ):
     class Meta:
         verbose_name_plural = 'registries'
     app     = M.ForeignKey( 'App', M.CASCADE, related_name='app_registries',
@@ -416,7 +416,7 @@ class Icon( _Base, PathMixin ):
                                     related_name='_icons' )
 
 
-class Link( AutoOwnedModel, Base, PathMixin ):
+class Link( OwnedModel, Base, PathMixin ):
     app = M.ForeignKey( 'App', M.CASCADE, related_name='app_links',
                         null=True, blank=True )
     parent = M.ForeignKey( Registry, M.CASCADE, blank=True, null=True,
@@ -455,7 +455,7 @@ class Reference( Base, PathMixin ):
         return out
 
 
-class Setting( AutoOwnedModel, Base, PathMixin, DataMixin, ExtendsMixin ):
+class Setting( OwnedModel, Base, PathMixin, DataMixin, ExtendsMixin ):
     class Types:
         BOOLEAN             = 'BooleanField'
         CHAR                = 'CharField'
@@ -533,7 +533,7 @@ class Setting( AutoOwnedModel, Base, PathMixin, DataMixin, ExtendsMixin ):
         return out
 
 
-class Action( AutoOwnedModel, Base, PathMixin, DataMixin ):
+class Action( OwnedModel, Base, PathMixin, DataMixin ):
     app = M.ForeignKey( 'App', M.CASCADE, related_name='app_actions',
                         null=True, blank=True )
     parent = M.ForeignKey( Registry, M.CASCADE, blank=True, null=True,

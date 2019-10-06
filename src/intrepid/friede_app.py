@@ -282,7 +282,7 @@ class App( app.App ):
         },
         team={
             'model'  : 'Team',
-            'icon'   : 'fontawesome.users',
+            'icon'   : 'fontawesome.people-carry',
             'plural' : 'teams',
             'has'    : 'note team'.split(),
             'in'     : 'team position'.split()
@@ -443,5 +443,79 @@ class App( app.App ):
           ),
           # ( '', ),
         ),
+        ( '0.2.0',
+          ( '#locations',
+            ( 'user',
+              ( 'private',
+                ( 'teams', dict(
+                    title='My Teams',
+                    href='/my/teams',
+                    data=dict(
+                        model='intrepid.team'
+                    )),
+                  ( '#screens',
+                    ( 'default', dict(
+                        path='dashboard.from_model',
+                        entry=dict(
+                            data=dict(
+                                model='intrepid.team',
+                                layout=dict(
+                                    title='title',
+                                    subtitle='position',
+                                    content='description'
+                                ),
+                                search='name title description'.split()
+                            ))
+                    )))),
+              ),
+              ( 'public',
+                ( 'teams', dict(
+                    title='My Teams',
+                    href='/{user}/teams',
+                    data=dict(
+                        model='intrepid.team'
+                    )),
+                  ( '#screens',
+                    ( 'default', dict(
+                        path='dashboard.from_model',
+                        entry=dict(
+                            data=dict(
+                                model='intrepid.team',
+                                layout=dict(
+                                    title='title',
+                                    subtitle='position',
+                                    content='description'
+                                ),
+                                search='name title description'.split()
+                            ))
+                    )))),
+              ))),
+          ( '#settings',
+            ( 'from relations', self.objects, self.relations ),
+          ),
+          ( '#containers',
+            ( 'links.menu',
+              ( 'user', dict(
+                  title='User Menu',
+                  description='Main User Menu'
+              )),
+              ( 'user_shortcuts', dict(
+                  title='User Shortcuts Menu',
+                  description='Main user linsk'
+              )))),
+          ( '#links',
+            ( 'menu.user',
+              ( 'teams', dict(
+                  title='My teams',
+                  icon='fontawesome.users',
+                  location='user.teams' )),
+              ( '_shortcuts',
+                ( 'teams', dict(
+                    title='My Teams',
+                    icon='fontawesome.users',
+                    location='user.teams' )),
+              )),
+          )
+        )
     )
 

@@ -347,7 +347,7 @@ class Share( Model ):
     content_type = M.ForeignKey( ContentType, on_delete=M.CASCADE )
     object_id    = M.PositiveIntegerField()
     shared       = GenericForeignKey( 'content_type', 'object_id' )
-    level        = M.CharField( max_length=32, choices=Types.ALL, default=Types.CHAR )
+    level        = M.CharField( max_length=32, choices=Types.ALL, default=Types.EDIT )
 
 
 class Post( Model ):

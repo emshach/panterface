@@ -339,7 +339,7 @@ class Share( Model ):
     class Types:
         VIEW = 'view'
         EDIT = 'edit'
-        all  = (
+        ALL  = (
             ( VIEW, 'View' ),
             ( EDIT, 'Edit' )
         )
@@ -354,7 +354,7 @@ class Post( Model ):
     class Types:
         VIEW = 'view'
         EDIT = 'edit'
-        all  = (
+        ALL  = (
             ( VIEW, 'View' ),
             ( EDIT, 'Edit' )
         )

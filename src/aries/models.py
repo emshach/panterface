@@ -280,12 +280,15 @@ class UserConnection( Base ):
     rsvp      = M.OneToOneField( 'self', on_delete=M.PROTECT, related_name="response" )
 
 
+def _getsystemuser():
+    return User.objects.get( name='system' )
+
 class Invite( Model ):
     initiator = M.ForeignKey(
         User,
         on_delete=M.CASCADE,
         related_name='invites',
-        default=lambda: User.objects.get( name='system' )
+        default=_getsystemuser
     )
     recipient = M.ForeignKey( User, on_delete=M.CASCADE, related_name='invitations' )
     created   = M.DateTimeField( default=now )

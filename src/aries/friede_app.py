@@ -383,27 +383,27 @@ class App( app.App ):
               #     icon='fontawesome.',
               #     location='' )),
               ( '_shortcuts',
-              ( 'home', dict(
-                  title='My Home Page',
-                  icon='fontawesome.home',
-                  location='user.private' )),
-              ( 'profile', dict(
-                  title='My Profile',
-                  icon='fontawesome.user-cog',
-                  location='user.private.profile' )),
-              ( 'things', dict(
-                  title='My Stuff',
-                  icon='fontawesome.dolly-flatbed',
-                  location='user.private.objects' )),
-              ( 'settings', dict(
-                  title='Settings',
-                  icon='fontawesome.cog',
-                  location='user.private.settings' )),
-              ( 'pages', dict(
-                  title='My Pages',
-                  icon='fontawesome.file-code',
-                  location='user.private.pages' )),
-            )),
+                ( 'home', dict(
+                    title='My Home Page',
+                    icon='fontawesome.home',
+                    location='user.private' )),
+                ( 'profile', dict(
+                    title='My Profile',
+                    icon='fontawesome.user-cog',
+                    location='user.private.profile' )),
+                ( 'things', dict(
+                    title='My Stuff',
+                    icon='fontawesome.dolly-flatbed',
+                    location='user.private.objects' )),
+                ( 'settings', dict(
+                    title='Settings',
+                    icon='fontawesome.cog',
+                    location='user.private.settings' )),
+                ( 'pages', dict(
+                    title='My Pages',
+                    icon='fontawesome.file-code',
+                    location='user.private.pages' )),
+              )),
           )
         ),
         ( '0.1.0',
@@ -500,6 +500,21 @@ If there are any existing connections between you, you will be allowed to edit t
                     widget='Connector',
                 )),
             ),
+          )
+        ),
+        ( '0.1.1',
+          ( '#links',
+            ( 'menu.user',
+              ( 'connections', dict(
+                  title='My Connections',
+                  icon='fontawesome.users',
+                  location='user.private.connections' )),
+              ( '_shortcuts',
+                ( 'profile', dict(
+                    title='My Connections',
+                    icon='fontawesome.users',
+                    location='user.private.connections' )),
+            )),
           )
         )
     )

@@ -124,7 +124,7 @@ class App( app.App ):
         ( r'register/?$',           ( views.api_register,    'register'              )),
         ( r'auth-status/?$',        ( views.api_auth_status, 'auth-status'           )),
         ( r'userdata/?(?P<sub>.*$)', ( views.api_userdata,   'userdata',   [ '' ]    )),
-        ( r'share/?$'               ( views.api_share,       'share',                )),
+        ( r'share/?$',              ( views.api_share,       'share',                )),
     )
     routes=(
         ( 'users',               views.UserViewSet                  ),

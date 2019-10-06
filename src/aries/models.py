@@ -301,10 +301,18 @@ class Token( Model ):
 
 class View( Model ):
     active    = M.BooleanField( default=True )
-    base_type = M.ForeignKey( ContentType, on_delete=M.CASCADE )
+    base_type = M.ForeignKey(
+        ContentType,
+        on_delete=M.CASCADE,
+        related_name='aries_view_bases'
+    )
     base_id   = M.PositiveIntegerField()
     base      = GenericForeignKey( 'base_type', 'base_id' )
-    view_type = M.ForeignKey( ContentType, on_delete=M.CASCADE )
+    view_type = M.ForeignKey(
+        ContentType,
+        on_delete=M.CASCADE,
+        related_name='aries_views'
+    )
     view_id   = M.PositiveIntegerField()
     view      = GenericForeignKey( 'view_type', 'view_id' )
     fields    = JSONField( default=list )

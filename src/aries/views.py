@@ -205,6 +205,79 @@ def api_userdata( request, sub='', format=None ):
         body=body
     ))
 
+@api_view([ 'GET' ])
+@permission_classes(( permissions.AllowAny, ))
+def api_userconnections( request, format=None ):
+    def displayname(u):
+        ( u.display_name or (
+                "{} {}".format( u.first_name, u.last_name )
+                if u.first_name or u.last_name
+                else u.username ))
+    user = request.user
+    out = []
+
+    for o in user.knows.all():
+        s = o.second
+        od = dict(
+            id=o.id,
+            uid=u.id,
+            model='arieu.userconnection',
+            title=displayname(u),
+            subtitle=o.type.display if o.type else 'Unspecified',
+            content=u.bio,
+            username=u.username,
+            bio=u.bio,
+            type=o.type.display if o.type else 'Unspecified',
+            status=o.status,
+            created=o.created,
+            initiated=o.initiated,
+            ended=o.ended,
+            rsvp=o.rsvp.id if o.rsvp else None,
+            response=o.response.id if o.response else None,
+            invitation=o.invitation.id if o.invitation else None,
+        )
+        out.append( od )
+    for o in user.known_by.all():
+        u = o.first
+        od = dict(
+            id=o.id,
+            uid=u.id,
+            model='arieu.userconnection',
+            title=displayname(u),
+            subtitle=o.type.display if o.type else 'Unspecified',
+            content=u.bio,
+            username=u.username,
+            bio=u.bio,
+            type=o.type.display if o.type else 'Unspecified',
+            status=o.status,
+            created=o.created,
+            initiated=o.initiated,
+            ended=o.ended,
+            rsvp=o.rsvp.id if o.rsvp else None,
+            response=o.response.id if o.response else None,
+            invitation=o.invitation.id if o.invitation else None,
+        )
+        out.append( od )
+    for o in user.invites.all():
+        u = o.recipient
+        od = dict(
+            id=o.id,
+            uid=u.id,
+            model='aries.invite',
+            title=displayname(u),
+            subtitle=u.username or u.email,
+            content="Invited as {}".format(
+                o.connection.type.display if o.connection and o.connection.type
+                else 'Unspecified' ),
+            created=o.created,
+            sent=o.sent,
+            received=o.received,
+            read=o.read,
+            connection=o.connection.id if o.connection else None
+        )
+        out.append( od )
+    return Response( out )
+
 @api_view([ 'POST' ])
 @permission_classes(( permissions.AllowAny, ))
 def api_share( request, format=None ):

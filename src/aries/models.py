@@ -141,10 +141,12 @@ def _normalize_list( Type, things, name='name' ):
                    tuple( _normalize( Type, thing, name ) for thing in things ))
 
 class User( auth.AbstractUser, _Base, DataMixin ):
-    phone     = M.CharField( max_length=32, blank=True, null=True )
-    anonymous = M.BooleanField( default=False )
-    roles     = M.ManyToManyField( Role, blank=True, related_name='users' )
-    policies  = M.ManyToManyField( Policy, blank=True, related_name='users' )
+    display_name = M.CharField( max_length=128, blank=True, null=True )
+    phone        = M.CharField( max_length=32, blank=True, null=True )
+    anonymous    = M.BooleanField( default=False )
+    roles        = M.ManyToManyField( Role, blank=True, related_name='users' )
+    policies     = M.ManyToManyField( Policy, blank=True, related_name='users' )
+    bio          = M.TextField( blank=True, null=True )
 
     def addgroup( self, group ):
         x = _normalize( Group, group )
@@ -284,17 +286,22 @@ def _getsystemuser():
     return User.objects.get( name='system' )
 
 class Invite( Model ):
-    initiator = M.ForeignKey(
+    initiator  = M.ForeignKey(
         User,
         on_delete=M.CASCADE,
         related_name='invites',
         default=_getsystemuser
     )
-    recipient = M.ForeignKey( User, on_delete=M.CASCADE, related_name='invitations' )
-    created   = M.DateTimeField( default=now )
-    sent      = M.DateTimeField( null=True, blank=True )
-    received  = M.DateTimeField( null=True, blank=True )
-    read      = M.DateTimeField( null=True, blank=True )
+    recipient  = M.ForeignKey( User, on_delete=M.CASCADE, related_name='invitations' )
+    created    = M.DateTimeField( default=now )
+    sent       = M.DateTimeField( null=True, blank=True )
+    received   = M.DateTimeField( null=True, blank=True )
+    read       = M.DateTimeField( null=True, blank=True )
+    connection = M.OneToOneField(
+        UserConnection,
+        on_delete=M.CASCADE,
+        related_name='invitation'
+    )
 
 
 class Token( Model ):

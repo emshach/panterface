@@ -124,6 +124,8 @@ class App( app.App ):
         ( r'register/?$',           ( views.api_register,    'register'              )),
         ( r'auth-status/?$',        ( views.api_auth_status, 'auth-status'           )),
         ( r'userdata/?(?P<sub>.*$)', ( views.api_userdata,   'userdata',   [ '' ]    )),
+        ( r'userconnections/?$',
+          ( views.api_userconnections, 'userconnections', [ '' ] )),
         ( r'share/?$',              ( views.api_share,       'share',                )),
     )
     routes=(
@@ -516,6 +518,39 @@ If there are any existing connections between you, you will be allowed to edit t
                     location='user.private.connections' )),
             )),
           )
+        ),
+        ( '0.1.2',
+          ( '#locations',
+            ( 'user',
+              ( 'private.connections', {},
+                ( '#screens',
+                  ( 'default', dict(
+                      path='dashboard.from_model',
+                        entry=dict(
+                            data=dict(
+                                source='userconnections',
+                                layout=dict(
+                                    title='title',
+                                    subtitle='subtitle',
+                                    content='content'
+                                ),
+                                search='name title description'.split()
+                            )))))),
+              ( 'public.connections', {},
+                ( '#screens',
+                  ( 'default', dict(
+                      path='dashboard.from_model',
+                        entry=dict(
+                            data=dict(
+                                source='userconnections',
+                                layout=dict(
+                                    title='title',
+                                    subtitle='subtitle',
+                                    content='content'
+                                ),
+                                search='name title description'.split()
+                            )))))),
+            ))
         )
     )
     @property

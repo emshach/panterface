@@ -246,10 +246,17 @@ class UserConnectionType( Base ):
     def save( self, *args, **kwargs ):
         if self.reverse:
             if self.name == 'self' or self.reverse.name == 'self':
+                super( UserConnectionType, self ).save()
                 self.reverse = self
+                super( UserConnectionType, self ).save()
             elif not self.reverse.reverse:
                 self.reverse.reverse = self
-        super( UserConnectionType, self ).save()
+                super( UserConnectionType, self ).save()
+                self.reverse.save()
+            else:
+                super( UserConnectionType, self ).save()
+        else:
+            super( UserConnectionType, self ).save()
 
 
 class UserConnection( Base ):

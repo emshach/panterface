@@ -369,7 +369,7 @@ def _data_norm_val( app, data, memo ):
 
 def data_get( app, mod, data, memo={} ):
     model, _, _ = _data_norm( app, mod, data, memo )
-    return model.objects.get( **data )
+    return model.objects.get( **( data[0] ))
 
 def data_filter( app, mod, data, memo={} ):
     model, _, _ = _data_norm( app, mod, data, memo )

@@ -599,23 +599,28 @@ If there are any existing connections between you, you will be allowed to edit t
         ),
         ( '0.1.3',
           ( '#create', 'userconnectiontype',
+            ( dict( name='self' ), # LOL!
+              dict(
+                  title='Self',
+                  display='Self',
+              )),
             ( dict( name='friend' ),
               dict(
                   title='Friend',
                   display='Friend',
-                  reverse='self'
+                  reverse=( '.', dict( name='self' ))
               )),
             ( dict( name='acquantance' ),
               dict(
                   title='Acquaintance',
                   display='Acquaintance',
-                  reverse='self'
+                  reverse=( '.', dict( name='self' ))
               )),
             ( dict( name='colleague' ),
               dict(
                   title='Colleague',
                   display='Colleague',
-                  reverse='self'
+                  reverse=( '.', dict( name='self' ))
               )),
             ( dict( name='brother' ),
               dict(
@@ -626,7 +631,7 @@ If there are any existing connections between you, you will be allowed to edit t
                               dict(
                                   title='Sibling',
                                   display='Sibling',
-                                  reverse='self'
+                                  reverse=( '.', dict( name='self' ))
                               )))
               )),
             ( dict( name='sister' ),
@@ -679,7 +684,7 @@ If there are any existing connections between you, you will be allowed to edit t
                               dict(
                                   title='Partner',
                                   display='Partner',
-                                  reverse='self'
+                                  reverse=( '.', dict( name='self' ))
                               )))
               )),
             ( dict( name='girlfriend' ),
@@ -697,7 +702,7 @@ If there are any existing connections between you, you will be allowed to edit t
                               dict(
                                   title='Affianced',
                                   display='Affianced',
-                                  reverse='self'
+                                  reverse=( '.', dict( name='self' ))
                               )))
               )),
             ( dict( name='fiance' ),
@@ -715,7 +720,7 @@ If there are any existing connections between you, you will be allowed to edit t
                               dict(
                                   title='Life Partner',
                                   display='Life Partner',
-                                  reverse='self'
+                                  reverse=( '.', dict( name='self' ))
                               )))
               )),
             ( dict( name='husband' ),

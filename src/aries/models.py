@@ -31,7 +31,7 @@ class _AutoChildBase( M.base.ModelBase ):
                 m.save_base( raw=True )
                 m.refresh_from_db()
 
-        post_save.connect(on_create_cb, sender=parent, weak=False)
+        post_save.connect( on_create_cb, sender=parent, weak=False )
         return model
 
 
@@ -43,8 +43,8 @@ class AutoChildModel( six.with_metaclass( _AutoChildBase, Model )):
 class _Base( Model ):
     class Meta:
         abstract = True
-    title        = M.CharField( blank=True, max_length=255 )
-    description  = M.TextField( blank=True )
+    title        = M.CharField( blank=True, null=True, max_length=255 )
+    description  = M.TextField( blank=True, null=True )
     active       = M.BooleanField( default=True )
 
 

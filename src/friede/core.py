@@ -364,7 +364,7 @@ def _data_norm_val( app, data, memo ):
                 tag = data[0][ 1: ]
                 op = ops.get( tag )
                 if op:
-                    return op( app, data[1], data[ 2: ])
+                    return op( app, data[1], data[ 2: ], memo )
     return data
 
 def data_get( app, mod, data, memo={} ):

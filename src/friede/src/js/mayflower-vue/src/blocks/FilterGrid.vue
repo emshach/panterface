@@ -39,7 +39,7 @@
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 import { ButtonLink as VkBtn } from 'vuikit/lib/button'
 import { Grid as VkGrid } from 'vuikit/lib/grid'
-import { FilteredMixin, ActionsMixin } from '@/lib/mixins'
+import { FilteredMixin } from '@/lib/mixins'
 import { FilterInput, ActionsInput } from '@/components'
 import { DashboardWidget } from '@/widgets'
 import { faPlus, faCheck } from '@fortawesome/free-solid-svg-icons'
@@ -52,7 +52,7 @@ VkBtn.props.type.validator = val =>
 
 export default  {
   name: 'FilterGrid',
-  mixins: [ FilteredMixin, ActionsMixin ],
+  mixins: [ FilteredMixin ],
   components: {
     VuePerfectScrollbar,
     VkBtn,

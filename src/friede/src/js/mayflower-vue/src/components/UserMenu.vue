@@ -1,6 +1,6 @@
 <template lang="html">
   <vk-dropdown class="user-menu" animation="slide-top-small"
-               :delay-hide=3000 :offset=0 >
+               :delay-hide=3000 :offset=0 @show=focusFirst >
     <vk-nav>
       <li class="user-info">
         <form v-if="editUser || loginUser || registerUser"
@@ -8,7 +8,7 @@
               @submit.prevent=submitUser @reset.prevent=resetUser >
           <div v-if="error" class="uk-text-danger uk-text-small" v-html=error />
           <template v-if="!loginUser">
-            <div class="first-name field">
+            <div class="first-name field" ref="formFirst" >
               <label>first name (or last name required)</label>
               <div class="uk-form-controls">
                 <input class="uk-input" type="text" v-model=fname />
@@ -20,8 +20,14 @@
                 <input class="uk-input" type="text" v-model=lname />
               </div>
             </div>
+            <div class="username field">
+              <label>username (or email required)</label>
+              <div class="uk-form-controls">
+                <input class="uk-input" type="text" v-model=username />
+              </div>
+            </div>
           </template>
-          <div class="username field">
+          <div v-else class="username field" ref="formFirst" >
             <label>username (or email required)</label>
             <div class="uk-form-controls">
               <input class="uk-input" type="text" v-model=username />
@@ -194,6 +200,13 @@ export default  {
       }).catch( e => {
         if ( e.response )
           this.error = e.response.data.error;
+      });
+    },
+    focusFirst() {
+      this.$nextTick(() => {
+        const first = this.$refs.formFirst;
+        if ( first )
+          first.focus();
       });
     }
   },

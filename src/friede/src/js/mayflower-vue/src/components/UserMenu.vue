@@ -207,7 +207,7 @@ export default  {
       this.focusFirst();
     },
     focusFirst() {
-      if ( editUser || loginUser || registerUser )
+      if ( this.editUser || this.loginUser || this.registerUser )
         this.$nextTick(() => {
           const first = this.$refs.formFirst;
           if ( first )

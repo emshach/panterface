@@ -419,7 +419,10 @@ export const ActorsMixin = {
          }).catch( err => {
            this.loading = false;
            console.warn( 'error performing action', err, err.response );
-           this.results = { error: err.response };
+           this.results = {
+             error: err.response.status === 500
+                ? err.response.statusText + "\nPlease contact you system administrator"
+                : err.response };
          });
     },
     autoExecute() {

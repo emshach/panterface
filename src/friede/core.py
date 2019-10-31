@@ -6,6 +6,7 @@ from .util import split_dict
 from django.db import transaction
 from django.core.exceptions import FieldDoesNotExist
 from django.db import IntegrityError
+from django.contrib.contenttypes.models import ContentType
 from importlib import import_module
 from collections import deque
 from packaging.version import parse as version_parse
@@ -29,8 +30,17 @@ types = dict(
     icons=Icon,
     actions=Action,
 )
+ops = {}
 registries = { v: k for k, v in types.items() }
 auto_create = ( Icon, )
+
+def _get_model( name, app=None ):
+    app, model = app, name if app else name.split('.')
+    try:
+        obj = ContentType.objects.get( app_label=app, model=model )
+    except ContentType.DoesNotExist:
+        return None
+    return obj.model_class()
 
 def setup():
     "make new settings"
@@ -334,6 +344,148 @@ shortcuts = dict(
     settings=mksettings,
 )
 
+def _data_norm( mod, data, memo ):
+    if not isinstance( data, ( tuple, list )):
+        data = () if data is None else data,
+    if isinstance( mod, basestring ):
+        if mod == '.':
+            mod = memo[ 'model' ]
+        else:
+            mod = _get_model( mod ) if '.' in mod \
+                else _get_model( mod, app )
+    return mod, data, dict( memo, model=mod )
+
+def _data_norm_val( app, data, memo ):
+    if isinstance( data, tuple ):
+        if isinstance( data[0], basestring ):
+            if data[0] == '.':
+                data = ( '#get' )
+            if data[0].startswith('#'):
+                tag = data[0][ 1: ]
+                op = ops.get( tag )
+                if op:
+                    return op( app, data[1], data[ 2: ])
+
+def data_get( app, mod, data, memo={} ):
+    model, _, _ = _data_norm( mod, data, memo )
+    return model.objects.get( **data )
+
+def data_filter( app, mod, data, memo={} ):
+    model, _, _ = _data_norm( mod, data, memo )
+    return model.objects.filter( **data ).all()
+
+def data_create( app, mod, data, memo={} ):
+    model, data, memo = _data_norm( mod, data, memo )
+    obj = None
+    for search in data:
+        d = {}
+        if isinstance( search, tuple ):
+            search, d = search
+            d = { k : _data_norm_val( app, v, memo )
+                  for k, v in d.items() }
+        search = { k : _data_norm_val( app, v, memo )
+                   for k, v in search.items() }
+        try:
+            obj = model.objects.get( **search )
+        except model.DoesNotExist:
+            obj = model.objects.create( **dict( search, **d ))
+            print "Created %s" % obj
+    return obj
+
+def data_update( app, mod, data, memo={} ):
+    model, data, memo = _data_norm( mod, data, memo )
+    obj = []
+    for search in data:
+        d = {}
+        if not isinstance( search, tuple ):
+            continue
+        search, d = search
+        d = { k : _data_norm_val( app, v, memo )
+              for k, v in d.items() }
+        search = { k : _data_norm_val( app, v, memo )
+                   for k, v in search.items() }
+        obj = model.objects.filter( **search )
+        if len( obj ):
+            obj.update( **d )
+            for o in obj:
+                o.save()
+    return obj[0] if len( obj ) == 1 else obj
+
+def data_ensure( app, mod, data, memo={} ):
+    model, data, memo = _data_norm( mod, data, memo )
+    obj = None
+    for search in data:
+        d = {}
+        if isinstance( search, tuple ):
+            search, d = search
+            d = { k : _data_norm_val( app, v, memo )
+                  for k, v in d.items() }
+        search = { k : _data_norm_val( app, v, memo )
+                   for k, v in search.items() }
+        if d:
+            search[ 'defaults' ] = d
+        obj, new = model.objects.update_or_create( **search )
+        print "{}, {}".format( 'Created' if new else 'Updated', obj )
+    return obj
+
+def data_default( app, mod, data, memo={} ):
+    model, data, memo = _data_norm( mod, data, memo )
+    obj = []
+    for search in data:
+        d = {}
+        if not isinstance( search, tuple ):
+            continue
+        search, d = search
+        d = { k : _data_norm_val( app, v, memo )
+              for k, v in d.items() }
+        search = { k : _data_norm_val( app, v, memo )
+                   for k, v in search.items() }
+        obj = model.objects.filter( **search )
+        if d and len( obj ):
+            for o in obj:
+                updated = False
+                for k, v in d.items():
+                    if getattr( o, k ) is None:
+                        updated = True
+                        setattr( o, k, v )
+                if updated:
+                    print "Updated %s" % o
+                    o.save()
+    return obj[0] if len( obj ) == 1 else obj
+
+def data_delete( app, mod, data, memo={} ):
+    model, data, memo = _data_norm( mod, data, memo )
+    obj = []
+    for search in data:
+        search = { k : _data_norm_val( app, v, memo )
+                   for k, v in search.items() }
+        obj = model.objects.filter( **search )
+        if len( obj ):
+            obj.remove()
+            for o in obj:
+                print "Removed %s" % o
+    return obj[0] if len( obj ) == 1 else obj
+
+def data_link( app, mod, data, memo={} ):
+    model, data, memo = _data_norm( mod, data, memo )
+
+def data_unlink( app, mod, data, memo={} ):
+    model, data, memo = _data_norm( mod, data, memo )
+
+ops.update(
+    get=data_get,
+    filter=data_filter,
+    data=lambda app, mod, data, memo={} : data,
+    create=data_create,
+    update=data_update,
+    ensure=data_ensure,
+    default=data_default,
+    delete=data_delete,
+    link=data_link,
+    unlink=data_unlink,
+)
+
+
 def upgradeapp( app, data, upto=None ):
     app_version = version_parse( app.version )
     max_version = None
@@ -425,6 +577,8 @@ def upgradeapp( app, data, upto=None ):
                                     cr.appendleft( obj )
                                     path.appendleft( tag )
                                 stack.extend( top[1:][ ::-1 ])
+                            elif inst and tag in ops:
+                                "do operations"
                             else:
                                 if tag.startswith('.'):
                                     tag = tag[1:]

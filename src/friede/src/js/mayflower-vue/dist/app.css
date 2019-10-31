@@ -11083,6 +11083,9 @@ form.uk-form-stacked label {
     -webkit-transform: rotate(-45deg);
             transform: rotate(-45deg); }
 
+.toast {
+  font-size: 14px; }
+
 .mf-icon-bg {
   position: absolute;
   top: -12px;

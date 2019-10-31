@@ -551,6 +551,180 @@ If there are any existing connections between you, you will be allowed to edit t
                                 search='name title description'.split()
                             )))))),
             ))
+        ),
+        ( '0.1.2',
+          ( '#locations',
+            ( 'user',
+              ( 'private.connections', {},
+                ( '#screens',
+                  ( 'default', dict(
+                      path='dashboard.from_model',
+                        entry=dict(
+                            data=dict(
+                                source='userconnections',
+                                layout=dict(
+                                    title='title',
+                                    subtitle='subtitle',
+                                    content='content'
+                                ),
+                                actions=(
+                                    'connect-user',
+                                    'disconnect-user',
+                                    'block-user',
+                                    'unblock-user',
+                                    'report-user',
+                                    'invite-user',
+                                    'cancel-invite',
+                                    'confirm-connection',
+                                    'deny-connection',
+                                    'dispute-connection',
+                                ),
+                                search='title subtitle content'.split()
+                            )))))),
+              ( 'public.connections', {},
+                ( '#screens',
+                  ( 'default', dict(
+                      path='dashboard.from_model',
+                        entry=dict(
+                            data=dict(
+                                source='userconnections',
+                                layout=dict(
+                                    title='title',
+                                    subtitle='subtitle',
+                                    content='content'
+                                ),
+                                search='title subtitle content'.split()
+                            )))))),
+            ))
+        ),
+        ( '0.1.3',
+          ( '#create', 'userconnectiontype',
+            ( dict( name='friend' ),
+              dict(
+                  title='Friend',
+                  display='Friend',
+                  reverse='self'
+              )),
+            ( dict( name='acquantance' ),
+              dict(
+                  title='Acquaintance',
+                  display='Acquaintance',
+                  reverse='self'
+              )),
+            ( dict( name='colleague' ),
+              dict(
+                  title='Colleague',
+                  display='Colleague',
+                  reverse='self'
+              )),
+            ( dict( name='brother' ),
+              dict(
+                  title='Brother',
+                  display='Brother',
+                  reverse=( '#create', '.',
+                            ( dict( name='sibling' ),
+                              dict(
+                                  title='Sibling',
+                                  display='Sibling',
+                                  reverse='self'
+                              )))
+              )),
+            ( dict( name='sister' ),
+              dict(
+                  title='Sister',
+                  display='Sister',
+                  reverse=( '.', dict( name='sibling' ))
+              )),
+            ( dict( name='mother' ),
+              dict(
+                  title='Mother',
+                  display='Mother',
+                  reverse=( '#create', '.',
+                            ( dict( name='child' ),
+                              dict(
+                                  title='Child',
+                                  display='Child',
+                                  reverse=( '#create', '.',
+                                            ( dict( name='parent' ),
+                                              dict(
+                                                  title='Parent',
+                                                  display='Parent',
+                                              )))
+                              )))
+              )),
+            ( dict( name='father' ),
+              dict(
+                  title='Father',
+                  display='Father',
+                  reverse=( '.', dict( name='child' ))
+              )),
+            ( dict( name='son' ),
+              dict(
+                  title='Son',
+                  display='Son',
+                  reverse=( '.', dict( name='parent' ))
+              )),
+            ( dict( name='daughter' ),
+              dict(
+                  title='Daughter',
+                  display='Daughter',
+                  reverse=( '.', dict( name='parent' ))
+              )),
+            ( dict( name='boyfriend' ),
+              dict(
+                  title='Boyfriend',
+                  display='Boyfriend',
+                  reverse=( '#create', '.',
+                            ( dict( name='partner' ),
+                              dict(
+                                  title='Partner',
+                                  display='Partner',
+                                  reverse='self'
+                              )))
+              )),
+            ( dict( name='girlfriend' ),
+              dict(
+                  title='Girlfriend',
+                  display='Girlfriend',
+                  reverse=( '.', dict( name='partner' ))
+              )),
+            ( dict( name='fiancee' ),
+              dict(
+                  title='Fiancee',
+                  display='Fiancee',
+                  reverse=( '#create', '.',
+                            ( dict( name='afffianced' ),
+                              dict(
+                                  title='Affianced',
+                                  display='Affianced',
+                                  reverse='self'
+                              )))
+              )),
+            ( dict( name='fiance' ),
+              dict(
+                  title='Fiance',
+                  display='Fiance',
+                  reverse=( '.', dict( name='affianced' ))
+              )),
+            ( dict( name='husband' ),
+              dict(
+                  title='Husband',
+                  display='Husband',
+                  reverse=( '#create', '.',
+                            ( dict( name='life-partner' ),
+                              dict(
+                                  title='Life Partner',
+                                  display='Life Partner',
+                                  reverse='self'
+                              )))
+              )),
+            ( dict( name='husband' ),
+              dict(
+                  title='Husband',
+                  display='Husband',
+                  reverse=( '.', dict( name='life-partner' ))
+              )),
+          )
         )
     )
     @property

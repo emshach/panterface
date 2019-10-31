@@ -344,7 +344,7 @@ shortcuts = dict(
     settings=mksettings,
 )
 
-def _data_norm( mod, data, memo ):
+def _data_norm( app, mod, data, memo ):
     if not isinstance( data, ( tuple, list )):
         data = () if data is None else data,
     if isinstance( mod, basestring ):
@@ -367,15 +367,15 @@ def _data_norm_val( app, data, memo ):
                     return op( app, data[1], data[ 2: ])
 
 def data_get( app, mod, data, memo={} ):
-    model, _, _ = _data_norm( mod, data, memo )
+    model, _, _ = _data_norm( app, mod, data, memo )
     return model.objects.get( **data )
 
 def data_filter( app, mod, data, memo={} ):
-    model, _, _ = _data_norm( mod, data, memo )
+    model, _, _ = _data_norm( app, mod, data, memo )
     return model.objects.filter( **data ).all()
 
 def data_create( app, mod, data, memo={} ):
-    model, data, memo = _data_norm( mod, data, memo )
+    model, data, memo = _data_norm( app, mod, data, memo )
     obj = None
     for search in data:
         d = {}
@@ -393,7 +393,7 @@ def data_create( app, mod, data, memo={} ):
     return obj
 
 def data_update( app, mod, data, memo={} ):
-    model, data, memo = _data_norm( mod, data, memo )
+    model, data, memo = _data_norm( app, mod, data, memo )
     obj = []
     for search in data:
         d = {}
@@ -412,7 +412,7 @@ def data_update( app, mod, data, memo={} ):
     return obj[0] if len( obj ) == 1 else obj
 
 def data_ensure( app, mod, data, memo={} ):
-    model, data, memo = _data_norm( mod, data, memo )
+    model, data, memo = _data_norm( app, mod, data, memo )
     obj = None
     for search in data:
         d = {}
@@ -429,7 +429,7 @@ def data_ensure( app, mod, data, memo={} ):
     return obj
 
 def data_default( app, mod, data, memo={} ):
-    model, data, memo = _data_norm( mod, data, memo )
+    model, data, memo = _data_norm( app, mod, data, memo )
     obj = []
     for search in data:
         d = {}
@@ -454,7 +454,7 @@ def data_default( app, mod, data, memo={} ):
     return obj[0] if len( obj ) == 1 else obj
 
 def data_delete( app, mod, data, memo={} ):
-    model, data, memo = _data_norm( mod, data, memo )
+    model, data, memo = _data_norm( app, mod, data, memo )
     obj = []
     for search in data:
         search = { k : _data_norm_val( app, v, memo )
@@ -467,10 +467,10 @@ def data_delete( app, mod, data, memo={} ):
     return obj[0] if len( obj ) == 1 else obj
 
 def data_link( app, mod, data, memo={} ):
-    model, data, memo = _data_norm( mod, data, memo )
+    model, data, memo = _data_norm( app, mod, data, memo )
 
 def data_unlink( app, mod, data, memo={} ):
-    model, data, memo = _data_norm( mod, data, memo )
+    model, data, memo = _data_norm( app, mod, data, memo )
 
 ops.update(
     get=data_get,

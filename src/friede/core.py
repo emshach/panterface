@@ -359,7 +359,7 @@ def _data_norm_val( app, data, memo ):
     if isinstance( data, tuple ):
         if isinstance( data[0], basestring ):
             if data[0] == '.':
-                data = ( '#get' )
+                data = ( '#get' ) + data
             if data[0].startswith('#'):
                 tag = data[0][ 1: ]
                 op = ops.get( tag )
@@ -578,7 +578,8 @@ def upgradeapp( app, data, upto=None ):
                                     path.appendleft( tag )
                                 stack.extend( top[1:][ ::-1 ])
                             elif inst and tag in ops:
-                                "do operations"
+                                op = ops[ tag ]
+                                op( app, top[1], top[ 2: ])
                             else:
                                 if tag.startswith('.'):
                                     tag = tag[1:]

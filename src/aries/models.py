@@ -241,7 +241,8 @@ class Permit( Base ):
 
 class UserConnectionType( Base ):
     display = M.CharField( max_length=255, null=True, blank=True )
-    reverse = M.OneToOneField( 'self', on_delete=M.SET_NULL, null=True, blank=True )
+    reverse = M.ForeignKey( 'self', on_delete=M.SET_NULL, null=True, blank=True,
+                            related_name='reverses' )
 
     def save( self, *args, **kwargs ):
         if self.reverse:

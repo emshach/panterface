@@ -365,6 +365,7 @@ def _data_norm_val( app, data, memo ):
                 op = ops.get( tag )
                 if op:
                     return op( app, data[1], data[ 2: ])
+    return data
 
 def data_get( app, mod, data, memo={} ):
     model, _, _ = _data_norm( app, mod, data, memo )

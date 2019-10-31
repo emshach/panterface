@@ -359,7 +359,7 @@ def _data_norm_val( app, data, memo ):
     if isinstance( data, tuple ):
         if isinstance( data[0], basestring ):
             if data[0] == '.':
-                data = ( '#get' ) + data
+                data = ( '#get', ) + data
             if data[0].startswith('#'):
                 tag = data[0][ 1: ]
                 op = ops.get( tag )

@@ -729,6 +729,12 @@ If there are any existing connections between you, you will be allowed to edit t
                   display='Husband',
                   reverse=( '.', dict( name='life-partner' ))
               )),
+            ( dict( name='wife' ),
+              dict(
+                  title='Wife',
+                  display='Wife',
+                  reverse=( '.', dict( name='life-partner' ))
+              )),
           )
         )
     )

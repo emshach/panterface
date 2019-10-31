@@ -385,6 +385,7 @@ def data_create( app, mod, data, memo={} ):
                   for k, v in d.items() }
         search = { k : _data_norm_val( app, v, memo )
                    for k, v in search.items() }
+        print 'creating ', search, d
         try:
             obj = model.objects.get( **search )
         except model.DoesNotExist:

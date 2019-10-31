@@ -210,8 +210,10 @@ export default  {
       if ( this.editUser || this.loginUser || this.registerUser )
         this.$nextTick(() => {
           const first = this.$refs.formFirst;
-          if ( first )
+          if ( first ){
             first.focus();
+            first.select();
+          } 
         });
     }
   },

@@ -369,7 +369,6 @@ def _data_norm_val( app, data, memo ):
 
 def data_get( app, mod, data, memo={} ):
     model, _, _ = _data_norm( app, mod, data, memo )
-    print 'getting', data[0]
     return model.objects.get( **( data[0] ))
 
 def data_filter( app, mod, data, memo={} ):
@@ -387,12 +386,11 @@ def data_create( app, mod, data, memo={} ):
                   for k, v in d.items() }
         search = { k : _data_norm_val( app, v, memo )
                    for k, v in search.items() }
-        print 'creating ', search, d
         try:
             obj = model.objects.get( **search )
         except model.DoesNotExist:
             obj = model.objects.create( **dict( search, **d ))
-            print "Created %s" % obj
+            print "Created {}: {}".format( model._meta.verbose_name, obj )
     return obj
 
 def data_update( app, mod, data, memo={} ):
@@ -428,7 +426,8 @@ def data_ensure( app, mod, data, memo={} ):
         if d:
             search[ 'defaults' ] = d
         obj, new = model.objects.update_or_create( **search )
-        print "{}, {}".format( 'Created' if new else 'Updated', obj )
+        print "{} {}: {}".format( 'Created' if new else 'Updated',
+                               model._meta.verbose_name, obj )
     return obj
 
 def data_default( app, mod, data, memo={} ):

@@ -698,7 +698,7 @@ If there are any existing connections between you, you will be allowed to edit t
                   title='Fiancee',
                   display='Fiancee',
                   reverse=( '#create', '.',
-                            ( dict( name='afffianced' ),
+                            ( dict( name='affianced' ),
                               dict(
                                   title='Affianced',
                                   display='Affianced',

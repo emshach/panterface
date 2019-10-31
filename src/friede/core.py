@@ -579,7 +579,7 @@ def upgradeapp( app, data, upto=None ):
                                 stack.extend( top[1:][ ::-1 ])
                             elif inst and tag in ops:
                                 op = ops[ tag ]
-                                op( app, top[1], top[ 2: ])
+                                op( app.name, top[1], top[ 2: ])
                             else:
                                 if tag.startswith('.'):
                                     tag = tag[1:]

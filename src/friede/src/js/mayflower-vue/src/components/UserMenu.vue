@@ -1,6 +1,6 @@
 <template lang="html">
   <vk-dropdown class="user-menu" animation="slide-top-small"
-               :delay-hide=3000 :offset=0 @show=focusFirst >
+               :delay-hide=3000 :offset=0 >
     <vk-nav>
       <li class="user-info">
         <form v-if="editUser || loginUser || registerUser"
@@ -83,9 +83,9 @@
       </template>
       <template v-else>
         <vk-nav-item href="login" title="login"
-                     @click.prevent="loginUser = true" />
+                     @click.prevent="userForm( 'loginUser' )" />
         <vk-nav-item href="sign up" title="sign up"
-                     @click.prevent="registerUser = true" />
+                     @click.prevent="userForm( 'registerUser' )" />
       </template>
     </vk-nav>
   </vk-dropdown>
@@ -201,6 +201,10 @@ export default  {
         if ( e.response )
           this.error = e.response.data.error;
       });
+    },
+    userForm( key ) {
+      this[key] = true;
+      this.focusFirst();
     },
     focusFirst() {
       this.$nextTick(() => {

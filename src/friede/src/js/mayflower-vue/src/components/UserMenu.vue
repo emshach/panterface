@@ -1,6 +1,6 @@
 <template lang="html">
   <vk-dropdown class="user-menu" animation="slide-top-small"
-               :delay-hide=3000 :offset=0 >
+               :delay-hide=3000 :offset=0 @show=focusFirst >
     <vk-nav>
       <li class="user-info">
         <form v-if="editUser || loginUser || registerUser"
@@ -8,10 +8,10 @@
               @submit.prevent=submitUser @reset.prevent=resetUser >
           <div v-if="error" class="uk-text-danger uk-text-small" v-html=error />
           <template v-if="!loginUser">
-            <div class="first-name field" ref="formFirst" >
+            <div class="first-name field">
               <label>first name (or last name required)</label>
               <div class="uk-form-controls">
-                <input class="uk-input" type="text" v-model=fname />
+                <input class="uk-input" type="text" v-model=fname ref="formFirst" />
               </div>
             </div>
             <div class="last-name field">
@@ -27,10 +27,10 @@
               </div>
             </div>
           </template>
-          <div v-else class="username field" ref="formFirst" >
+          <div v-else class="username field">
             <label>username (or email required)</label>
             <div class="uk-form-controls">
-              <input class="uk-input" type="text" v-model=username />
+              <input class="uk-input" type="text" v-model=username ref="formFirst" />
             </div>
           </div>
           <div class="email field">
@@ -63,7 +63,7 @@
         <template v-else>
           <div class="user-title">{{ user.first_name}} {{ user.last_name }}
             <a href="#" title="edit info"
-               @click.prevent="editUser = true">
+               @click.prevent="userForm( 'editUser' )">
               <font-awesome-icon icon="user-edit" />
             </a>
           </div>
@@ -207,11 +207,12 @@ export default  {
       this.focusFirst();
     },
     focusFirst() {
-      this.$nextTick(() => {
-        const first = this.$refs.formFirst;
-        if ( first )
-          first.focus();
-      });
+      if ( editUser || loginUser || registerUser )
+        this.$nextTick(() => {
+          const first = this.$refs.formFirst;
+          if ( first )
+            first.focus();
+        });
     }
   },
   computed: {

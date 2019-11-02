@@ -534,39 +534,6 @@ If there are any existing connections between you, you will be allowed to edit t
                                     subtitle='subtitle',
                                     content='content'
                                 ),
-                                search='name title description'.split()
-                            )))))),
-              ( 'public.connections', {},
-                ( '#screens',
-                  ( 'default', dict(
-                      path='dashboard.from_model',
-                        entry=dict(
-                            data=dict(
-                                source='userconnections',
-                                layout=dict(
-                                    title='title',
-                                    subtitle='subtitle',
-                                    content='content'
-                                ),
-                                search='name title description'.split()
-                            )))))),
-            ))
-        ),
-        ( '0.1.2',
-          ( '#locations',
-            ( 'user',
-              ( 'private.connections', {},
-                ( '#screens',
-                  ( 'default', dict(
-                      path='dashboard.from_model',
-                        entry=dict(
-                            data=dict(
-                                source='userconnections',
-                                layout=dict(
-                                    title='title',
-                                    subtitle='subtitle',
-                                    content='content'
-                                ),
                                 actions=(
                                     'connect-user',
                                     'disconnect-user',
@@ -592,6 +559,18 @@ If there are any existing connections between you, you will be allowed to edit t
                                     title='title',
                                     subtitle='subtitle',
                                     content='content'
+                                ),
+                                actions=(
+                                    'connect-user',
+                                    'disconnect-user',
+                                    'block-user',
+                                    'unblock-user',
+                                    'report-user',
+                                    'invite-user',
+                                    'cancel-invite',
+                                    'confirm-connection',
+                                    'deny-connection',
+                                    'dispute-connection',
                                 ),
                                 search='title subtitle content'.split()
                             )))))),

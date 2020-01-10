@@ -241,8 +241,13 @@ class Permit( Base ):
 
 class UserConnectionType( Base ):
     display = M.CharField( max_length=255, null=True, blank=True )
-    reverse = M.ForeignKey( 'self', on_delete=M.SET_NULL, null=True, blank=True,
-                            related_name='reverses' )
+    reverse = M.ForeignKey(
+        'self',
+        on_delete=M.SET_NULL,
+        related_name='reverses',
+        null=True,
+        blank=True
+    )
 
     def save( self, *args, **kwargs ):
         if self.reverse:
@@ -359,14 +364,14 @@ class Ownership( Model ):
     user         = M.ForeignKey( User, related_name='owned', on_delete=M.CASCADE )
     content_type = M.ForeignKey( ContentType, on_delete=M.CASCADE )
     object_id    = M.PositiveIntegerField()
-    owned        = GenericForeignKey( 'content_type', 'object_id' )
+    owned        = GenericForeignKey()
 
 
 class Creation( Model ):
     user         = M.ForeignKey( User, related_name='created', on_delete=M.CASCADE )
     content_type = M.ForeignKey( ContentType, on_delete=M.CASCADE )
     object_id    = M.PositiveIntegerField()
-    created      = GenericForeignKey( 'content_type', 'object_id' )
+    created      = GenericForeignKey()
 
 class Share( Model ):
     class Types:
@@ -379,8 +384,12 @@ class Share( Model ):
     user         = M.ForeignKey( User, related_name='shared', on_delete=M.CASCADE )
     content_type = M.ForeignKey( ContentType, on_delete=M.CASCADE )
     object_id    = M.PositiveIntegerField()
-    shared       = GenericForeignKey( 'content_type', 'object_id' )
-    level        = M.CharField( max_length=32, choices=Types.ALL, default=Types.EDIT )
+    shared       = GenericForeignKey()
+    level        = M.CharField(
+        max_length=32,
+        choices=Types.ALL,
+        default=Types.EDIT
+    )
 
 
 class Post( Model ):
@@ -394,7 +403,7 @@ class Post( Model ):
     group        = M.ForeignKey( Group, related_name='posted', on_delete=M.CASCADE )
     content_type = M.ForeignKey( ContentType, on_delete=M.CASCADE )
     object_id    = M.PositiveIntegerField()
-    shared       = GenericForeignKey( 'content_type', 'object_id' )
+    shared       = GenericForeignKey()
     level        = M.CharField( max_length=32, choices=Types.ALL, default=Types.EDIT )
 
 

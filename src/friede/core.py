@@ -7,6 +7,7 @@ from django.db import transaction
 from django.core.exceptions import FieldDoesNotExist
 from django.db import IntegrityError
 from django.contrib.contenttypes.models import ContentType
+from django.conf import settings
 from importlib import import_module
 from collections import deque
 from packaging.version import parse as version_parse
@@ -31,6 +32,7 @@ types = dict(
     actions=Action,
 )
 ops = {}
+deps = {}
 registries = { v: k for k, v in types.items() }
 auto_create = ( Icon, )
 
@@ -198,16 +200,18 @@ def updateapp( name, data=None, obj=None ):
         if not path.startswith( 'apps.' ):
             path = 'apps.' + path
 
+        app = obj.model if obj and obj.model else App.objects.get( path=path )
         if data:
             available = version_parse( '0.0.0' )
             for d in data:
                 v = version_parse( d[0] )
                 if v > available:
                     available = v
+                if ( len(d) > 1 and isinstance( d[1], dict )):
+                    addversionmeta( v, d[1], app, obj, urlpatterns )
 
         print path, v, 'available'
 
-        app = obj.model if obj and obj.model else App.objects.get( path=path )
         app.available = str( available )
         if obj:
             app.min_version = obj.min_version
@@ -223,6 +227,22 @@ def updateapp( name, data=None, obj=None ):
         print >> sys.stderr, "got exception", type(e), e, 'in updateapp'
         traceback.print_exc()
         return None
+
+def addversionmeta( app, version, meta, obj=None ):
+    from .app import load
+    appname = app.name
+    appdeps = deps.get( appname )
+    if not appdeps:
+        appdeps = deps[ appname ] = {}
+    versiondeps = appdeps.get( version )
+    if versiondeps:
+        if obj:
+            obj.setversionmeta( version, 'depends', versiondeps )
+        return versiondeps
+    versiondeps = dict( meta.get( 'depends', {} ))
+    if obj:
+        obj.setversionmeta( version, 'depends', versiondeps )
+    return versiondeps
 
 
 def mkwidgets( app, objects, relations, actions=None ):
@@ -492,7 +512,7 @@ def upgradeapp( app, data, upto=None ):
     app_version = version_parse( app.version )
     max_version = None
     min_version = version_parse( app.min_version )
-    upgraded = dict(val=False)
+    upgraded = dict( val=False )
     if upto:
         upto = version_parse( upto )
 
@@ -516,7 +536,9 @@ def upgradeapp( app, data, upto=None ):
             break
         with transaction.atomic():
             transaction.on_commit( update_version )
-            stack = deque([ tree[1:] ])
+            stack = deque([ tree[2:]
+                            if len (tree) > 1 and isinstance( tree[1], dict )
+                            else tree[1:] ])
             path = deque([''])
             model = deque([ Container ])
             registry = deque([ 'containers' ])

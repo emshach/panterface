@@ -45,7 +45,7 @@
               :disabled=loading @click.prevent=execute >{{ action }}</vk-btn>
     </div>
   </vk-modal>
-  <div v-else class="activator widget">
+  <div v-else-if="mode === 'widget'" class="activator widget">
     <template v-if=object.installed >
       <template v-if=object.required >
         <font-awesome-icon v-if=object.active
@@ -83,6 +83,7 @@
       </template>
     </template>
   </div>
+  <div v-else />
 </template>
 
 <script lang="js">

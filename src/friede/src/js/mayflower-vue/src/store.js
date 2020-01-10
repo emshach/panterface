@@ -24,7 +24,9 @@ export default new Vuex.Store({
     modelsRequested: {},
     model: null,
     modelData: null,
-    error: ''
+    error: '',
+    selected: [],
+    caret: null,
   },
   mutations: {
     setUser( state, user ) {
@@ -60,10 +62,25 @@ export default new Vuex.Store({
     },
     setMenus( state, menus ) {
       state.menus = menus;
+    },
+    setSelected( state, selected ) {
+      state.selected = selected;
+    },
+    addToSelected( state, selected ) {
+      state.selected = state.selected.concat( selected );
+    },
+    clearSelected( state ) {
+      state.selected = []
+    },
+    setCaret( state, object ) {
+      state.caret = object;
+    },
+    clearCaret( state ) {
+      state.caret = null;
     }
   },
   actions: {
-    refresh({ comit, state, dispatch }) {
+    refresh({ commit, state, dispatch }) {
       dispatch( 'getMenus' );
     },
     getMenus({ commit, state }) {

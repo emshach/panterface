@@ -314,6 +314,11 @@ export const FilteredMixin = {
     filtered() {
       return this.objects.filter( this.filterFunction );
     }
+  },
+  watch: {
+    selected() {
+      this.$store.commit( 'setSelected', this.selected );
+    }
   }
 }
 

@@ -8,6 +8,7 @@ from django.conf import settings
 from .core import installappheader, installapp, updateapp, upgradeapp
 from .models import App, Setting
 from .views import lookup
+from .action import action, actions
 from . import views
 import traceback
 import sys
@@ -24,17 +25,39 @@ relations.reverse = hack_reverse
 router = routers.DefaultRouter()
 routes = OrderedDict()
 apps = OrderedDict()
-actions = OrderedDict()
-user_actions = OrderedDict()
 
 def namespace( thing, name ):
     if name not in thing:
         thing[ name ] = OrderedDict()
     return thing[ name ]
 
+def load( name, urlpatterns ):
+    module = name
+    if not name: return
+    app = apps.get( name )
+    if app: return app
+    try:
+        apps[ app.name ] = 'loading'
+        app = import_module( "%s.friede_app" % module )
+        app = app.App()
+        apps[ app.name ] = app
+        if not name == app.name:
+            apps[ name ] = app
+        if app.installed:
+            myroutes = namespace( routes, app.name )
+            mylookup = namespace( lookup, app.name )
+            return app.init( myroutes, mylookup, router, urlpatterns )
+    except ( ImportError, AttributeError ) as e:
+        msg = str(e)
+        if 'No module named friede_app' not in msg:
+            apps[ app.name ] = 'error'
+            print >> sys.stderr, 'got exception', type(e), e,\
+                "in friede.urls/%s" % module
+
 def setup( urlpatterns ):
     from . import friede_app
     try:
+        apps[ 'friede' ] = 'loading'
         friede = friede_app.App()
         apps[ 'friede' ] = friede
         friede.install()
@@ -42,43 +65,17 @@ def setup( urlpatterns ):
         mylookup = namespace( lookup, 'friede' )
         friede.init( myroutes, mylookup, router, urlpatterns )
         for app_name in settings.INSTALLED_APPS:
-            if app_name == 'friede': continue
-            name = app_name
-            module = app_name
-            if module:
-                try:
-                    app = import_module( "%s.friede_app" % module )
-                    app = app.App()
-                    apps[ app.name ] = app
-                    if app.installed:
-                        myroutes = namespace( routes, app.name )
-                        mylookup = namespace( lookup, app.name )
-                        app.init( myroutes, mylookup, router, urlpatterns )
-                except ( ImportError, AttributeError ) as e:
-                    msg = str(e)
-                    if 'No module named friede_app' not in msg:
-                        print >> sys.stderr, 'got exception', type(e), e,\
-                            "in friede.urls/%s" % module
-                        traceback.print_exc()
-                    continue        # TODO: maybe warn
+            if not app_name == 'friede':
+                load( app_name, urlpatterns )
     except Exception:
         # pass                        # TODO: handle
         raise
-
-def action(f):
-    "decorator defining a class method as a site action"
-    name = f.__name__
-    r = actions
-    if name.startswith( 'user_' ):
-        r = user_actions
-        name = name[5:]
-    r[ name ] = f
-    return f
 
 class NamedDefaultRouter( routers.DefaultRouter ):
     def __init__( self, name, *args, **kwargs ):
         # self.root_view_name = "api-root-%s" % name
         super( NamedDefaultRouter, self ).__init__( *args, **kwargs )
+
 
 class App( object ) :
     name = ''
@@ -94,7 +91,7 @@ class App( object ) :
     router = None
     serializers = ()
     model=None
-    versions=dict()
+    versions=OrderedDict()
     required = False
     user_required = False
     user_installable = True
@@ -192,6 +189,8 @@ class App( object ) :
         for k, v in self.routes:
             self.router.register( k, v )
 
+        return self
+
     def preupdate( self ):
         pass
 
@@ -253,6 +252,11 @@ class App( object ) :
 
     def clearuserdata( self, user ):
         pass
+
+    def setversionmeta( version, field, value ):
+        if version not in self.versions:
+            self.versions[ version ] = {}
+        self.versions[ version ][ field ] = value
 
     @property
     def available( self ):

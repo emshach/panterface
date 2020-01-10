@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from . import views, serializers, app
-from .app import action
+from .app import action, Action
 from .models import Setting, App as AppModel, UserApp
 from packaging.version import parse as version_parse
 
@@ -775,33 +775,105 @@ class App( app.App ):
         return ()
 
 @action
-def install( user, thing, userdata=True, **kw ):
-    if not isinstance( thing, AppModel ):
-        return                  # TODO: raise TypeError
-    app = App.get_for_object( thing )
-    app.install()
-    if userdata:
-        user_install( user, thing )
-    return dict( status='installed', success="App {} installed!".format( app.name ))\
-        if app.installed else dict( status='failed', error='Install failed' )
+class InstallAction( Action ):
+    name = 'install'
+
+    def __init__( self, op=Nonex, object=None, **kw ):
+        super( Action, self ).__init__()
+        self.object = object
+        self.op = op
+        self.app = App.get_for_object( self.object )
+
+    def getuser( self ):
+        return isinstance( self.object, UserApp ) and self.object.user
+
+    # @Action.formodels( AppModel ) # TODO: this
+    def runsystem( self, version='default', **kw ):
+        app = self.app
+        app.install()
+        return ActionStatus.get( 'app_installed' if app.installed
+                                 else 'app_install_failed' ), app
+
+    # @Action.formodels( AppModel ) # TODO: this
+    def dryrunsystem( self, version='default', **kw ):
+        app = self.app
+        return ActionStatus.get( 'app_installed' if app.getversion( version )
+                                 else 'app_install_failed' ), app
+
+    # @Action.formodels( AppModel ) # TODO: this
+    def runuser( self, user, **kw ):
+        app = self.app
+        app.install_for( user )
+        return ActionStatus.get( 'app_userdata_installed'
+                                 if app.installed_for( user )
+                                 else 'app_userdata_install_failed' ), app
+
+    # @Action.formodels( AppModel ) # TODO: this
+    def dryrunuser( self, user, **kw ):
+        return ActionStatus.get( 'app_userdata_installed' ), app
+
+    def systemreqs( self ):
+        reqs = super( InstallAction, self ).systemreqs()
+        return reqs
+
+    def userreqs( self ):
+        reqs = super( InstallAction, self ).systemreqs()
+        return reqs + ( dict( action='install',
+                              object=self.app.model ))
+
+# @action
+# def reinstall( user, thing, userdata=True, **kw ):
+#     if not isinstance( thing, AppModel ):
+#         return                  # TODO: raise TypeError
+#     app = App.get_for_object( thing )
+#     version = app.version
+#     app.version = '0.0.0'
+#     app.update()
+#     if app.installed:
+#         app.upgrade( to=version )
+#     else:
+#         app.install()
+#     # if userdata:
+#     #     user_reinstall( user, thing )
+#     # TODO: ^^^ this
+#     return dict( status='reinstalled', success="App {} reinstalled!".format( app.name ))\
+#         if app.version == version else dict( status='failed', error='reinstall failed' )
 
 @action
-def reinstall( user, thing, userdata=True, **kw ):
-    if not isinstance( thing, AppModel ):
-        return                  # TODO: raise TypeError
-    app = App.get_for_object( thing )
-    version = app.version
-    app.version = '0.0.0'
-    app.update()
-    if app.installed:
-        app.upgrade( to=version )
-    else:
+class ReInstallAction( Action ):
+    name = 'reinstall'
+
+    # @Action.formodels( AppModel ) # TODO: this
+    def runsystem( self, version=None, **kw ):
+        app = App.get_for_object( self.object )
+        if app.installed:
+            return ActionStatus.get( 'nothing_to_do' ), app
         app.install()
-    # if userdata:
-    #     user_reinstall( user, thing )
-    # TODO: ^^^ this
-    return dict( status='reinstalled', success="App {} reinstalled!".format( app.name ))\
-        if app.version == version else dict( status='failed', error='reinstall failed' )
+        return ActionStatus.get( 'app_installed' if app.installed
+                                 else 'app_install_failed' ), app
+
+    # @Action.formodels( AppModel ) # TODO: this
+    def dryrunsystem( self, version=None, **kw ):
+        return ActionStatus.get( 'not_implemented' ), ()
+
+    # @Action.formodels( AppModel ) # TODO: this
+    def runuser( self, **kw ):
+        o = self.object
+        user = self.op.user
+        if isinstance( o, UserApp ):
+            user = o.user
+            o = o.app
+        app = App.get_for_object( self.object )
+        if app.installed_for( user ):
+            return ActionStatus.get( 'nothing_to_do' ), app
+        app.install_for( user )
+        return ActionStatus.get( 'app_userdata_installed'
+                                 if app.installed_for( user )
+                                 else 'app_userdata_install_failed' ), app
+
+    # @Action.formodels( AppModel ) # TODO: this
+    def dryrunuser( self, **kw ):
+        return ActionStatus.get( 'not_implemented' ), ()
 
 @action
 def user_install( user, thing, **kw ):

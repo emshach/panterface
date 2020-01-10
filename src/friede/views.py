@@ -566,13 +566,13 @@ def api_do( request, action, model, ids, format=None ):
     stderr = sys.stderr
     sys.stdout = StringIO()
     sys.stderr = StringIO()
-
-    for o in m.objects.filter( pk__in=ids ):
+    objects = m.objects.filter( pk__in=ids ).all()
+    for o in objects:
         sys.stdout.reset()
         sys.stdout.truncate()
         sys.stderr.reset()
         sys.stdout.truncate()
-        out[ o.pk ] = dict( res=f( user, o, **request.data ))
+        out[ o.pk ] = dict( res=f( user, o, objects=objects, **request.data ))
         out[ o.pk ].update(
             out=sys.stdout.getvalue(),
             err=sys.stderr.getvalue()

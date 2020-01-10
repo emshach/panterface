@@ -16,16 +16,16 @@
           <dashboard-widget :object=object :model=model
                             :class=" isSelected( object ) ? 'selected' : ''" >
             <template v-for="( field, slot ) in itemLayout"
-                      v-slot:[slot]={object} >
+                      v-slot:[slot]="{ object }" >
               {{ object[ layoutField( field )] || layoutDefault( field )}}
             </template>
-            <template #title-actions={object} >
+            <template #title-actions="{ object }" >
               <vk-btn type="light" @click.prevent="toggleSelect( object )">
                 <font-awesome-icon :icon="isSelected( object ) ? 'check' : 'plus'"
                                    class="selector" />
               </vk-btn>
             </template>
-            <template #footer-actions={object} >
+            <template #footer-actions="{ object }" >
               <slot name="item-actions" :object=object />
             </template>
           </dashboard-widget>

@@ -237,7 +237,7 @@ class App( app.App ):
               ( 'objects', dict(
                   icon='fontawesome.cube',
                   data=dict(
-                      componetn='UserObjectsPage'
+                      component='UserObjectsPage'
                   ))),
             )
           ),
@@ -520,12 +520,58 @@ If there are any existing connections between you, you will be allowed to edit t
           )
         ),
         ( '0.1.2',
+          ( '#blocks',
+            ( 'header.user.connections', dict(
+                data=dict(
+                    component='UserConnectionsHeader'
+                ))),
+          ),
+          ( '#screens',
+            ( 'dashboard',
+              ( 'user', dict(
+                  icon='fontawesome.user',
+                  extends='dashboard',
+                  data=dict(
+                      component='UserDashboard',
+                  )),
+                ( 'connections', dict(
+                    icon='fontawesome.cube',
+                    extends='dashboard.sectional' ),
+                  ( '#blocks',
+                    ( 'primary',
+                      dict(
+                          path='viewer.objects',
+                          entry=dict(
+                              data=dict(
+                                  mode='featured'
+                              )))),
+                    ( 'secondary',
+                      dict(
+                          path='viewer.objects',
+                          entry=dict(
+                              data=dict(
+                                  mode='recent'
+                              )))),
+                    ( 'body', dict( path='viewer.objects' ))))
+              )),
+            ( 'page.user', dict(
+                icon='fontawesome.home',
+                data=dict(
+                    component='UserPage',
+                )),
+              ( 'connections', dict(
+                  icon='fontawesome.cube',
+                  data=dict(
+                      component='UserObjectsPage'
+                  ))),
+            )
+          ),
           ( '#locations',
             ( 'user',
               ( 'private.connections', {},
                 ( '#screens',
                   ( 'default', dict(
-                      path='dashboard.from_model',
+                      path='dashboard.user.connections',
                         entry=dict(
                             data=dict(
                                 source='userconnections',
@@ -547,7 +593,10 @@ If there are any existing connections between you, you will be allowed to edit t
                                     'dispute-connection',
                                 ),
                                 search='title subtitle content'.split()
-                            )))))),
+                            ))),
+                    ( '#blocks',
+                      ( 'breakfront', dict( path='featured' )),
+                      ( 'main', dict( path='grid.filtered' )))))),
               ( 'public.connections', {},
                 ( '#screens',
                   ( 'default', dict(
@@ -573,7 +622,10 @@ If there are any existing connections between you, you will be allowed to edit t
                                     'dispute-connection',
                                 ),
                                 search='title subtitle content'.split()
-                            )))))),
+                            ))),
+                    ( '#blocks',
+                      ( 'breakfront', dict( path='featured' )),
+                      ( 'main', dict( path='grid.filtered' )))))),
             ))
         ),
         ( '0.1.3',

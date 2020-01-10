@@ -2,10 +2,11 @@
 from __future__ import unicode_literals
 from django.utils.encoding import python_2_unicode_compatible
 from django.db import models as M
-from django.contrib.postgres.fields import JSONField
+from django.contrib.postgres.fields import JSONField, ArrayField
 from datetime import date
 from django.utils.timezone import now
 from django.contrib.auth import get_user_model
+from django.contrib.contenttypes.models import ContentType
 from model_utils.managers import InheritanceManager
 from aries.models import OwnedModel
 from .util import snake_case
@@ -38,10 +39,12 @@ class _Base( Model ):
             out[ '$path' ] = self.path
         return out
 
+
 class Base( _Base ):
     class Meta:
         abstract = True
     icon         = M.ForeignKey( 'Icon', blank=True, null=True )
+
 
 class PathMixin( Model ):
     class Meta:
@@ -106,12 +109,22 @@ class ExtendsMixin( Model ):
 class Registry( OwnedModel, Base, PathMixin ):
     class Meta:
         verbose_name_plural = 'registries'
-    app     = M.ForeignKey( 'App', M.CASCADE, related_name='app_registries',
-                            null=True, blank=True )
+    app     = M.ForeignKey(
+        'App',
+        on_delete=M.CASCADE,
+        related_name='app_registries',
+        null=True,
+        blank=True
+    )
     format  = JSONField( default=dict )
     default = JSONField( default=dict )
-    parent  = M.ForeignKey( 'self', M.CASCADE, blank=True, null=True,
-                           related_name='_elements' )
+    parent  = M.ForeignKey(
+        'self',
+        on_delete=M.CASCADE,
+        related_name='_elements',
+        blank=True,
+        null=True
+    )
 
     objects = InheritanceManager()
 
@@ -277,40 +290,80 @@ class Registry( OwnedModel, Base, PathMixin ):
         return out
 
 class Container( Registry ):
-    registry_ptr  = M.OneToOneField( Registry, M.CASCADE, parent_link=True,
-                                     related_name='_container' )
-    registries = M.ManyToManyField( Registry, blank=True, through='ContainerEntry',
-                                  related_name='_containers' )
+    registry_ptr = M.OneToOneField(
+        Registry,
+        on_delete=M.CASCADE,
+        parent_link=True,
+        related_name='_container'
+    )
+    registries   = M.ManyToManyField(
+        Registry,
+        blank=True,
+        through='ContainerEntry',
+        related_name='_containers'
+    )
 
 
 class Widget( Registry, ExtendsMixin, SizeMixin, DataMixin ):
-    registry_ptr  = M.OneToOneField( Registry, M.CASCADE, parent_link=True,
-                                     related_name='_widget' )
-    registries = M.ManyToManyField( Registry, blank=True, through='WidgetEntry',
-                                    related_name='_widgets' )
+    registry_ptr = M.OneToOneField(
+        Registry,
+        M.CASCADE,
+        parent_link=True,
+        related_name='_widget'
+    )
+    registries   = M.ManyToManyField(
+        Registry,
+        blank=True,
+        through='WidgetEntry',
+        related_name='_widgets'
+    )
 
 
 class Block( Registry, ExtendsMixin, SizeMixin, DataMixin ):
-    registry_ptr  = M.OneToOneField( Registry, M.CASCADE, parent_link=True,
-                                     related_name='_block' )
-    registries = M.ManyToManyField( Registry, blank=True, through='BlockEntry',
-                                    related_name='_blocks' )
+    registry_ptr = M.OneToOneField(
+        Registry,
+        on_delete=M.CASCADE,
+        parent_link=True,
+        related_name='_block'
+    )
+    registries   = M.ManyToManyField(
+        Registry,
+        blank=True,
+        through='BlockEntry',
+        related_name='_blocks'
+    )
 
 
 class Screen( Registry, ExtendsMixin, SizeMixin, DataMixin ):
-    registry_ptr  = M.OneToOneField( Registry, M.CASCADE, parent_link=True,
-                                     related_name='_screen' )
-    registries = M.ManyToManyField( Registry, blank=True, through='ScreenEntry',
-                                    related_name='_screens' )
+    registry_ptr = M.OneToOneField(
+        Registry,
+        on_delete=M.CASCADE,
+        parent_link=True,
+        related_name='_screen'
+    )
+    registries   = M.ManyToManyField(
+        Registry,
+        blank=True,
+        through='ScreenEntry',
+        related_name='_screens'
+    )
 
 
 class Shell( Registry, ExtendsMixin ):
-    registry_ptr  = M.OneToOneField( Registry, M.CASCADE, parent_link=True,
-                                     related_name='_shell' )
-    registries = M.ManyToManyField( Registry, blank=True, through='ShellEntry',
-                                    related_name='_shells' )
-    templates = M.CharField( max_length=255 ) # TODO: default
-    template = M.CharField( max_length=255, default='index.html' )
+    registry_ptr = M.OneToOneField(
+        Registry,
+        on_delete=M.CASCADE,
+        parent_link=True,
+        related_name='_shell'
+    )
+    registries   = M.ManyToManyField(
+        Registry,
+        blank=True,
+        through='ShellEntry',
+        related_name='_shells'
+    )
+    templates    = M.CharField( max_length=255 ) # TODO: default
+    template     = M.CharField( max_length=255, default='index.html' )
 
     @property
     def home( self ):
@@ -326,12 +379,20 @@ class Shell( Registry, ExtendsMixin ):
 
 
 class Theme( Registry, ExtendsMixin ):
-    registry_ptr  = M.OneToOneField( Registry, M.CASCADE, parent_link=True,
-                                     related_name='_theme' )
-    registries = M.ManyToManyField( Registry, blank=True, through='ThemeEntry',
-                                    related_name='_themes' )
-    templates = M.CharField( max_length=255 ) # TODO: default
-    template = M.CharField( max_length=255, default='index.html' )
+    registry_ptr = M.OneToOneField(
+        Registry,
+        on_delete=M.CASCADE,
+        parent_link=True,
+        related_name='_theme'
+    )
+    registries   = M.ManyToManyField(
+        Registry,
+        blank=True,
+        through='ThemeEntry',
+        related_name='_themes'
+    )
+    templates    = M.CharField( max_length=255 ) # TODO: default
+    template     = M.CharField( max_length=255, default='index.html' )
 
     @property
     def home( self ):
@@ -347,30 +408,50 @@ class Theme( Registry, ExtendsMixin ):
 
 
 class Slot( Registry ):
-    registry_ptr  = M.OneToOneField( Registry, M.CASCADE, parent_link=True,
-                                     related_name='_slot' )
-    registries = M.ManyToManyField( Registry, blank=True, through='SlotEntry',
-                                    related_name='_slots' )
+    registry_ptr = M.OneToOneField(
+        Registry,
+        on_delete=M.CASCADE,
+        parent_link=True,
+        related_name='_slot'
+    )
+    registries   = M.ManyToManyField(
+        Registry,
+        blank=True,
+        through='SlotEntry',
+        related_name='_slots'
+    )
 
 
 class App( Registry, DataMixin ):
-    registry_ptr  = M.OneToOneField( Registry, M.CASCADE, parent_link=True,
-                                     related_name='_app' )
-    registries    = M.ManyToManyField( Registry, blank=True, through='AppEntry',
-                                       related_name='_apps' )
-    module        = M.CharField( max_length=128 )
-    rest          = M.CharField( max_length=32 ) # TODO: default to name
-    installed     = M.BooleanField( default=False )
-    version       = M.CharField( max_length=32, default='0.0.0' )
-    min_version   = M.CharField( max_length=32, default='0.0.0' )
-    available     = M.CharField( max_length=32, default='0.0.0' )
-    required      = M.BooleanField( default=False )
-    user_required = M.BooleanField( default=False )
-    user_installable = M.BooleanField( default=True )
-    auto_install  = M.BooleanField( default=False )
+    registry_ptr      = M.OneToOneField(
+        Registry,
+        on_delete=M.CASCADE,
+        parent_link=True,
+        related_name='_app'
+    )
+    registries        = M.ManyToManyField(
+        Registry,
+        blank=True,
+        through='AppEntry',
+        related_name='_apps'
+    )
+    module            = M.CharField( max_length=128 )
+    rest              = M.CharField( max_length=32 ) # TODO: default to name
+    installed         = M.BooleanField( default=False )
+    version           = M.CharField( max_length=32, default='0.0.0' )
+    min_version       = M.CharField( max_length=32, default='0.0.0' )
+    available         = M.CharField( max_length=32, default='0.0.0' )
+    required          = M.BooleanField( default=False )
+    user_required     = M.BooleanField( default=False )
+    user_installable  = M.BooleanField( default=True )
+    auto_install      = M.BooleanField( default=False )
     auto_user_install = M.BooleanField( default=False )
-    users        = M.ManyToManyField( get_user_model(), blank=True, through='UserApp',
-                                      related_name='friede_apps' )
+    users             = M.ManyToManyField(
+        get_user_model(),
+        blank=True,
+        through='UserApp',
+        related_name='friede_apps'
+    )
 
     def to_dict( self ):
         out = super( App, self).to_dict()
@@ -390,13 +471,25 @@ class App( Registry, DataMixin ):
 
 
 class Location( Registry, DataMixin ):
-    registry_ptr  = M.OneToOneField( Registry, M.CASCADE, parent_link=True,
-                                     related_name='_location' )
-    registries = M.ManyToManyField( Registry, blank=True, through='LocationEntry',
-                                    related_name='_locations' )
-    href = M.CharField( max_length=255, default='#' )
-    redirect_to = M.ForeignKey( 'self', blank=True, null=True,
-                                related_name='redirect_from' )
+    registry_ptr = M.OneToOneField(
+        Registry,
+        on_delete=M.CASCADE,
+        parent_link=True,
+        related_name='_location'
+    )
+    registries   = M.ManyToManyField(
+        Registry,
+        blank=True,
+        through='LocationEntry',
+        related_name='_locations'
+    )
+    href         = M.CharField( max_length=255, default='#' )
+    redirect_to  = M.ForeignKey(
+        'self',
+        related_name='redirect_from',
+        blank=True,
+        null=True
+    )
 
     def to_dict( self ):
         out = super( Location, self).to_dict()
@@ -408,23 +501,56 @@ class Location( Registry, DataMixin ):
 
 
 class Icon( _Base, PathMixin ):
-    app = M.ForeignKey( 'App', M.CASCADE, related_name='app_icons',
-                        null=True, blank=True )
-    parent = M.ForeignKey( Registry, M.CASCADE, blank=True, null=True,
-                           related_name='_icon_elements' )
-    registries = M.ManyToManyField( Registry, blank=True, through='LocationEntry',
-                                    related_name='_icons' )
+    app        = M.ForeignKey(
+        'App',
+        on_delete=M.CASCADE,
+        related_name='app_icons',
+        null=True,
+        blank=True
+    )
+    parent     = M.ForeignKey(
+        Registry,
+        M.CASCADE,
+        related_name='_icon_elements',
+        blank=True,
+        null=True,
+    )
+    registries = M.ManyToManyField(
+        Registry,
+        blank=True,
+        through='LocationEntry',
+        related_name='_icons'
+    )
 
 
 class Link( OwnedModel, Base, PathMixin ):
-    app = M.ForeignKey( 'App', M.CASCADE, related_name='app_links',
-                        null=True, blank=True )
-    parent = M.ForeignKey( Registry, M.CASCADE, blank=True, null=True,
-                           related_name='_link_elements' )
-    registries = M.ManyToManyField( Registry, blank=True, through='LinkEntry',
-                                    related_name='links' )
-    location = M.ForeignKey( Location, M.SET_NULL, blank=True, null=True,
-                             related_name='_links' )
+    app        = M.ForeignKey(
+        App,
+        on_delete=M.CASCADE,
+        related_name='app_links',
+        null=True,
+        blank=True
+    )
+    parent     = M.ForeignKey(
+        Registry,
+        on_delete=M.CASCADE,
+        related_name='_link_elements',
+        blank=True,
+        null=True,
+    )
+    registries = M.ManyToManyField(
+        Registry,
+        blank=True,
+        through='LinkEntry',
+        related_name='links'
+    )
+    location   = M.ForeignKey(
+        Location,
+        on_delete=M.SET_NULL,
+        related_name='_links',
+        blank=True,
+        null=True
+    )
 
     def to_dict( self ):
         out = super( Link, self).to_dict()
@@ -435,13 +561,27 @@ class Link( OwnedModel, Base, PathMixin ):
 
 
 class Reference( Base, PathMixin ):
-    app = M.ForeignKey( 'App', M.CASCADE, related_name='app_references',
-                        null=True, blank=True )
-    parent = M.ForeignKey( Registry, M.CASCADE, blank=True, null=True,
-                           related_name='_registry_elements' )
-    registries = M.ManyToManyField( Registry, blank=True, through='ReferenceEntry',
-                                    related_name='_references' )
-    target = M.CharField( max_length=255 )
+    app        = M.ForeignKey(
+        App,
+        on_delete=M.CASCADE,
+        related_name='app_references',
+        null=True,
+        blank=True
+    )
+    parent     = M.ForeignKey(
+        Registry,
+        on_delete=M.CASCADE,
+        related_name='_registry_elements',
+        blank=True,
+        null=True
+    )
+    registries = M.ManyToManyField(
+        Registry,
+        blank=True,
+        through='ReferenceEntry',
+        related_name='_references'
+    )
+    target     = M.CharField( max_length=255 )
 
     def resolve( self ):
         return Registry.objects.get( name=self.target )
@@ -515,14 +655,28 @@ class Setting( OwnedModel, Base, PathMixin, DataMixin, ExtendsMixin ):
             ( MODEL,               'Model Choice' ),
             ( MODELS,              'Multiple Model Choice' ),
         )
-    app = M.ForeignKey( 'App', M.CASCADE, related_name='app_settings',
-                        null=True, blank=True )
-    parent = M.ForeignKey( Registry, M.CASCADE, blank=True, null=True,
-                           related_name='_setting_elements' )
-    registries = M.ManyToManyField( Registry, blank=True, through='SettingEntry',
-                                    related_name='_settings' )
-    type     = M.CharField( max_length=32, choices=Types.ALL, default=Types.CHAR )
-    default  = JSONField( default=dict )
+    app        = M.ForeignKey(
+        App,
+        on_delete=M.CASCADE,
+        related_name='app_settings',
+        null=True,
+        blank=True
+    )
+    parent     = M.ForeignKey(
+        Registry,
+        on_delete=M.CASCADE,
+        related_name='_setting_elements',
+        blank=True,
+        null=True
+    )
+    registries = M.ManyToManyField(
+        Registry,
+        blank=True,
+        through='SettingEntry',
+        related_name='_settings'
+    )
+    type       = M.CharField( max_length=32, choices=Types.ALL, default=Types.CHAR )
+    default    = JSONField( default=dict )
 
     def to_dict( self ):
         out = super( Setting, self).to_dict()
@@ -534,13 +688,26 @@ class Setting( OwnedModel, Base, PathMixin, DataMixin, ExtendsMixin ):
 
 
 class Action( OwnedModel, Base, PathMixin, DataMixin ):
-    app = M.ForeignKey( 'App', M.CASCADE, related_name='app_actions',
-                        null=True, blank=True )
-    parent = M.ForeignKey( Registry, M.CASCADE, blank=True, null=True,
-                           related_name='_action_elements' )
-    registries = M.ManyToManyField( Registry, blank=True, through='ActionEntry',
-                                    related_name='_actions' )
-
+    app        = M.ForeignKey(
+        App,
+        on_delete=M.CASCADE,
+        related_name='app_actions',
+        null=True,
+        blank=True
+    )
+    parent     = M.ForeignKey(
+        Registry,
+        on_delete=M.CASCADE,
+        related_name='_action_elements',
+        blank=True,
+        null=True
+    )
+    registries = M.ManyToManyField(
+        Registry,
+        blank=True,
+        through='ActionEntry',
+        related_name='_actions'
+    )
 
 
 def _get_entry_position():
@@ -558,7 +725,7 @@ class ContainerEntry( Entry ):
         unique_together = Entry.Meta.unique_together
         verbose_name_plural = 'container entries'
     registry = M.ForeignKey( Registry, M.CASCADE, related_name='_container_entries' )
-    entry = M.ForeignKey( Container, M.CASCADE, related_name='_entries' )
+    entry    = M.ForeignKey( Container, M.CASCADE, related_name='_entries' )
 
 
 class WidgetEntry( Entry, DataMixin ):
@@ -566,7 +733,7 @@ class WidgetEntry( Entry, DataMixin ):
         unique_together = Entry.Meta.unique_together
         verbose_name_plural = 'widget entries'
     registry = M.ForeignKey( Registry, M.CASCADE, related_name='_widget_entries' )
-    entry = M.ForeignKey( Widget, M.CASCADE, related_name='_entries' )
+    entry    = M.ForeignKey( Widget, M.CASCADE, related_name='_entries' )
 
 
 class BlockEntry( Entry, DataMixin ):
@@ -574,7 +741,7 @@ class BlockEntry( Entry, DataMixin ):
         unique_together = Entry.Meta.unique_together
         verbose_name_plural = 'block entries'
     registry = M.ForeignKey( Registry, M.CASCADE, related_name='_block_entries' )
-    entry = M.ForeignKey( Block, M.CASCADE, related_name='_entries' )
+    entry    = M.ForeignKey( Block, M.CASCADE, related_name='_entries' )
 
 
 class ScreenEntry( Entry, DataMixin ):
@@ -582,7 +749,7 @@ class ScreenEntry( Entry, DataMixin ):
         unique_together = Entry.Meta.unique_together
         verbose_name_plural = 'screen entries'
     registry = M.ForeignKey( Registry, M.CASCADE, related_name='_screen_entries' )
-    entry = M.ForeignKey( Screen, M.CASCADE, related_name='_entries' )
+    entry    = M.ForeignKey( Screen, M.CASCADE, related_name='_entries' )
 
 
 class ShellEntry( Entry ):
@@ -590,7 +757,7 @@ class ShellEntry( Entry ):
         unique_together = Entry.Meta.unique_together
         verbose_name_plural = 'shell entries'
     registry = M.ForeignKey( Registry, M.CASCADE, related_name='_shell_entries' )
-    entry = M.ForeignKey( Shell, M.CASCADE, related_name='_entries' )
+    entry    = M.ForeignKey( Shell, M.CASCADE, related_name='_entries' )
 
 
 class ThemeEntry( Entry ):
@@ -598,7 +765,7 @@ class ThemeEntry( Entry ):
         unique_together = Entry.Meta.unique_together
         verbose_name_plural = 'theme entries'
     registry = M.ForeignKey( Registry, M.CASCADE, related_name='_theme_entries' )
-    entry = M.ForeignKey( Theme, M.CASCADE, related_name='_entries' )
+    entry    = M.ForeignKey( Theme, M.CASCADE, related_name='_entries' )
 
 
 class SlotEntry( Entry ):
@@ -606,7 +773,7 @@ class SlotEntry( Entry ):
         unique_together = Entry.Meta.unique_together
         verbose_name_plural = 'slot entries'
     registry = M.ForeignKey( Registry, M.CASCADE, related_name='_slot_entries' )
-    entry = M.ForeignKey( Slot, M.CASCADE, related_name='_entries' )
+    entry    = M.ForeignKey( Slot, M.CASCADE, related_name='_entries' )
 
 
 class AppEntry( Entry ):
@@ -614,7 +781,7 @@ class AppEntry( Entry ):
         unique_together = Entry.Meta.unique_together
         verbose_name_plural = 'app entries'
     registry = M.ForeignKey( Registry, M.CASCADE, related_name='_app_entries' )
-    entry = M.ForeignKey( App, M.CASCADE, related_name='_entries' )
+    entry    = M.ForeignKey( App, M.CASCADE, related_name='_entries' )
 
 
 class LocationEntry( Entry ):
@@ -622,7 +789,7 @@ class LocationEntry( Entry ):
         unique_together = Entry.Meta.unique_together
         verbose_name_plural = 'location entries'
     registry = M.ForeignKey( Registry, M.CASCADE, related_name='_location_entries' )
-    entry = M.ForeignKey( Location, M.CASCADE, related_name='_entries' )
+    entry    = M.ForeignKey( Location, M.CASCADE, related_name='_entries' )
 
 
 class IconEntry( Entry ):
@@ -630,7 +797,7 @@ class IconEntry( Entry ):
         unique_together = Entry.Meta.unique_together
         verbose_name_plural = 'icon entries'
     registry = M.ForeignKey( Registry, M.CASCADE, related_name='_icon_entries' )
-    entry = M.ForeignKey( Icon, M.CASCADE, related_name='_entries' )
+    entry    = M.ForeignKey( Icon, M.CASCADE, related_name='_entries' )
 
 
 class LinkEntry( Entry ):
@@ -638,7 +805,7 @@ class LinkEntry( Entry ):
         unique_together = Entry.Meta.unique_together
         verbose_name_plural = 'link entries'
     registry = M.ForeignKey( Registry, M.CASCADE, related_name='_link_entries' )
-    entry = M.ForeignKey( Link, M.CASCADE, related_name='_entries' )
+    entry    = M.ForeignKey( Link, M.CASCADE, related_name='_entries' )
 
 
 class ReferenceEntry( Entry ):
@@ -646,7 +813,7 @@ class ReferenceEntry( Entry ):
         unique_together = Entry.Meta.unique_together
         verbose_name_plural = 'reference entries'
     registry = M.ForeignKey( Registry, M.CASCADE, related_name='_reference_entries' )
-    entry = M.ForeignKey( Reference, M.CASCADE, related_name='_entries' )
+    entry    = M.ForeignKey( Reference, M.CASCADE, related_name='_entries' )
 
 
 class SettingEntry( Entry ):
@@ -654,7 +821,7 @@ class SettingEntry( Entry ):
         unique_together = Entry.Meta.unique_together
         verbose_name_plural = 'setting entries'
     registry = M.ForeignKey( Registry, M.CASCADE, related_name='_setting_entries' )
-    entry = M.ForeignKey( Setting, M.CASCADE, related_name='_entries' )
+    entry    = M.ForeignKey( Setting, M.CASCADE, related_name='_entries' )
 
 
 class ActionEntry( Entry ):
@@ -662,19 +829,145 @@ class ActionEntry( Entry ):
         unique_together = Entry.Meta.unique_together
         verbose_name_plural = 'action entries'
     registry = M.ForeignKey( Registry, M.CASCADE, related_name='_action_entries' )
-    entry = M.ForeignKey( Action, M.CASCADE, related_name='_entries' )
+    entry    = M.ForeignKey( Action, M.CASCADE, related_name='_entries' )
+
+
+# operatiosn
+
+class _Base( Model ):
+    class Meta:
+        abstract = True
+    name         = M.SlugField( max_length=255 )
+    title        = M.CharField( blank=True, max_length=255 )
+    description  = M.TextField( blank=True )
+    active       = M.BooleanField( default=True )
+
+    def __str__( self ):
+        return getattr( self, 'path', None ) or self.name or self.title
+
+    def getcontext( self ):
+        return self
+
+    def to_dict( self ):
+        out = {
+            '$name'        : self.name,
+            '$title'       : self.title,
+            '$description' : self.description,
+        }
+        if hasattr( self, 'path' ):
+            out[ '$path' ] = self.path
+        return out
+
+
+@python_2_unicode_compatible
+class ActionStatus( Model ):
+    name     = M.SlugField( max_length=255 )
+    message  = M.CharField( max_length=255, blank=True, null=True )
+    template = M.TextField( blank=True, null=True )
+    parent   = M.ForeignKey(
+        'self',
+        on_delete=M.PROTECT,
+        related_name='children',
+        blank=True,
+        null=True
+    )
+    goodness = M.FloatField( blank=True, null=True )
+
+    @property
+    def value( self ):
+        return this.parent.value if this.goodness is None else this.goodness
+
+    def __int__( self ):
+        return int( self.value )
+
+    def __float__( self ):
+        return self.value
+
+    def __nonzero__( self ):
+        return self.value >= 0
+
+
+@python_2_unicode_compatible
+class OpStatus( Model ):
+    status    = M.ForeignKey( ActionStatus, M.PROTECT, related_name='statuses' )
+    parent    = M.ForeignKey( 'self', M.PROTECT, related_name='children' )
+    message   = M.CharField( max_length=255, blank=True, null=True )
+    data      = JSONField( default=dict )
+    dryrun    = M.BooleanField( default=False )
+    operation = M.ForeignKey( 'Operation', M.CASCADE, related_name='statuses' )
+    time      = M.DateTimeField( default=now )
+
+    def save( self, *args, **kwargs ):
+        if not self.operation.dryrun_ok:
+            self.dryrun = True
+        super( OpStatus, self ).save( *args, **kwargs )
+        self.operation.status = self
+        self.operation.save()
+
+
+@python_2_unicode_compatible
+class Endorsement( Model ):
+    def __str__( self ):
+        return "%d" % self.id
+    content_type = M.ForeignKey( ContentType, on_delete=M.CASCADE )
+    object_id    = M.PositiveIntegerField()
+    endorsed     = GenericForeignKey()
+    by           = M.CharField( max_length=255 )
+
+
+@python_2_unicode_compatible
+class Operation( Model ):
+    def __str__( self ):
+        return self.action.path
+
+    user       = M.ForeignKey(
+        get_user_model(),
+        on_delete=M.CASCADE,
+        related_name='friede_operations'
+    )
+    parent     = M.ForeignKey(
+        'self',
+        M.PROTECT,
+        related_name='children',
+        blank=True,
+        null=True
+    )
+    action     = M.ForeignKey(
+        Action,
+        on_delete=M.SET_NULL,
+        related_name='operations',
+        blank=True,
+        null=True
+    )
+    model      = M.ForeignKey( ContentType, M.PROTECT, blank=True, null=True )
+    context    = JSONField( default=dict )
+    status     = M.ForeignKey(
+        OpStatus,
+        on_delete=M.PROTECT,
+        related_name='+',
+        blank=True,
+        null=True
+    )
+    object_id  = M.PositiveIntegerField( blank=True, null=True )
+    object_ids = ArrayField( PositiveIntegerField(), default=list )
+    ops        = ArrayField( JSONField(), default=list )
+    dryrun_ok  = M.DateTimeField( blank=True, null=True )
+    done       = M.DateTimeField( blank=True, null=True )
 
 
 # user stuff
 
 @python_2_unicode_compatible
 class UserApp( DataMixin ):
-    owner     = M.ForeignKey( get_user_model(), M.CASCADE,
-                              related_name='friede_apps_use' )
+    owner     = M.ForeignKey(
+        get_user_model(),
+        on_delete=M.CASCADE,
+        related_name='friede_apps_use'
+    )
     app       = M.ForeignKey( App, M.CASCADE, related_name='use' )
     installed = M.BooleanField( default=False )
     active    = M.BooleanField( default=False )
     version   = M.CharField( max_length=32, default='0.0.0' )
 
     def __str__( self ):
-        return self.app
+        return "{}@{}".format( str( self.app ), str( self.owner ))

@@ -10,6 +10,33 @@
                :now.sync=now[tag]
                @act=act
                @success=success() />
+    <component :is=blocks.header.component v-if=blocks.header >
+      <template #actions="data" >
+        <component :is=tag mode="header" :key=tag
+                   v-for="( actor, tag ) in actors"
+                   :actions=actor.actions
+                   :model=modelObj
+                   @act=act />
+      </template>
+    </component>
+    <component :is=blocks.left_sidebar.component v-if=blocks.left_sidebar >
+      <template #actions="data" >
+        <component :is=tag mode="left-sidebar" :key=tag
+                   v-for="( actor, tag ) in actors"
+                   :actions=actor.actions
+                   :model=modelObj
+                   @act=act />
+      </template>
+    </component>
+    <component :is=blocks.right_sidebar.component v-if=blocks.right_sidebar >
+      <template #actions="data" >
+        <component :is=tag mode="right-sidebar" :key=tag
+                   v-for="( actor, tag ) in actors"
+                   :actions=actor.actions
+                   :model=modelObj
+                   @act=act />
+      </template>
+    </component>
     <component :is=blocks.breakfront.component v-if=blocks.breakfront
                :content=featured :model=modelObj />
     <component :is=blocks.main.component v-if=blocks.main
@@ -19,10 +46,33 @@
                :search-fields=options.search
                :model=modelObj
                @act=act >
-      <template #item-actions={object} >
+      <template #header-actions="data" >
+        <component :is=tag mode="content-header" :key=tag
+                   v-for="( actor, tag ) in actors"
+                   :actions=actor.actions
+                   :model=modelObj
+                   @act=act />
+      </template>
+      <template #item-actions="{ object }" >
         <component :is=tag mode="widget" :key=tag
                    v-for="( actor, tag ) in actors"
                    :object=object
+                   :actions=actor.actions
+                   :model=modelObj
+                   @act=act />
+      </template>
+      <template #footer-actions="data" >
+        <component :is=tag mode="content-footer" :key=tag
+                   v-for="( actor, tag ) in actors"
+                   :actions=actor.actions
+                   :model=modelObj
+                   @act=act />
+      </template>
+    </component>
+    <component :is=blocks.footer.component v-if=blocks.footer >
+      <template #actions="data" >
+        <component :is=tag mode="footer" :key=tag
+                   v-for="( actor, tag ) in actors"
                    :actions=actor.actions
                    :model=modelObj
                    @act=act />
@@ -56,7 +106,7 @@ export default  {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .model-dashboard {
   
 }

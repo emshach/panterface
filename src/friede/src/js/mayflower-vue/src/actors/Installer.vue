@@ -49,7 +49,7 @@
               :disabled=loading @click.prevent=execute >{{ action }}</vk-btn>
     </div>
   </vk-modal>
-  <div v-else class="installer widget">
+  <div v-else-if="mode === 'widget'" class="installer widget">
     <template v-if=object.installed >
       <vk-btn-link v-if="object.version !== object.available && can.update"
                    v-vk-tooltip.bottom="'update'"
@@ -70,6 +70,7 @@
       <font-awesome-icon icon="download" />
     </vk-btn-link>
   </div>
+  <div v-else />
 </template>
 
 <script lang="js">

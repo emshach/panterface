@@ -1,55 +1,57 @@
 <template lang="html">
-  <vk-modal :class=classes v-if="mode === 'modal'" :show=show @shown=autoExecute >
-    <vk-close @click=hideModal />
-    <vk-title>{{ action }}<template v-if="arg">: {{ arg.title }}</template>
-      <template v-else> {{ model ? model.plural : '' }}</template>
-    </vk-title>
-    <label v-if="action === 'install' || action === 'reinstall'">
-      <input class="uk-checkbox" type="checkbox" v-model=install_userdata >
-      Install user-data
-    </label>
-    <template v-if="arg">
-      <div class="description uk-margin">{{ arg.description }}</div>
-      <div class="info"><strong>version: </strong>{{ arg.available }}</div>
-      <div v-if="arg.installed" class="info">
-        <strong>current: </strong>{{ arg.version }}</div>
-    </template>
-    <template v-else>
-      <vk-table responsive hoverable striped
-                :row-class=showApplicable
-                :divided=false
-                :data=operands >
-        <vk-column :title="model ? model.singular : 'object'" cell="title" />
-        <vk-column title="installed" cell="version" >
-          <template #default="{ cell, row }">
-            {{ row.installed ? cell : 'no' }}
-          </template>
-        </vk-column>
-        <vk-column title="available" cell="available" />
-      </vk-table>
-    </template>
-    <action-result v-if="results" :action="actions[ action ]"
-                   :objects=objects :results=results />
-    <div :class="[ 'loading', loading ? 'active' : '' ]">
-      <div class="label">{{ action.replace( /e$/,'' ) + 'ing' }}</div>
-      <bar-loader :width=100 widthUnit="%" :height=1 :size=50 sizeUnit="%"
-                  :loading=loading color="#39f" class="spinner" />
-    </div>
-    <div class="modal-actions">
-      <vk-btn v-if="!results || next" class="btn-cancel" type="link"
-              size="small" :disabled=loading
-              @click.prevent=hideModal >cancel</vk-btn>
-      <template v-if="results">
-        <vk-btn v-if="next" class="btn-ok" type="primary" size="small"
-                :disabled=loading @click.prevent=doNext >{{ next }}</vk-btn>
-        <vk-btn v-else class="btn-ok" type="primary" size="small"
-                :disabled=loading @click.prevent=hideModal >Done</vk-btn>
+  <div v-if="mode === 'modal'">
+    <vk-modal :class=classes :show=show @shown=autoExecute >
+      <vk-close @click=hideModal />
+      <vk-title>{{ action }}<template v-if="arg">: {{ arg.title }}</template>
+        <template v-else> {{ model ? model.plural : '' }}</template>
+      </vk-title>
+      <label v-if="action === 'install' || action === 'reinstall'">
+        <input class="uk-checkbox" type="checkbox" v-model=install_userdata >
+        Install user-data
+      </label>
+      <template v-if="arg">
+        <div class="description uk-margin">{{ arg.description }}</div>
+        <div class="info"><strong>version: </strong>{{ arg.available }}</div>
+        <div v-if="arg.installed" class="info">
+          <strong>current: </strong>{{ arg.version }}</div>
       </template>
-      <vk-btn v-else class="btn-ok" type="primary" size="small"
-              :disabled=loading @click.prevent=execute >{{ action }}</vk-btn>
-    </div>
-  </vk-modal>
-  <div v-else class="connector widget">
+      <template v-else>
+        <vk-table responsive hoverable striped
+                  :row-class=showApplicable
+                  :divided=false
+                  :data=operands >
+          <vk-column :title="model ? model.singular : 'object'" cell="title" />
+          <vk-column title="installed" cell="version" >
+            <template #default="{ cell, row }">
+              {{ row.installed ? cell : 'no' }}
+            </template>
+          </vk-column>
+          <vk-column title="available" cell="available" />
+        </vk-table>
+      </template>
+      <action-result v-if="results" :action="actions[ action ]"
+                     :objects=objects :results=results />
+      <div :class="[ 'loading', loading ? 'active' : '' ]">
+        <div class="label">{{ action.replace( /e$/,'' ) + 'ing' }}</div>
+        <bar-loader :width=100 widthUnit="%" :height=1 :size=50 sizeUnit="%"
+                    :loading=loading color="#39f" class="spinner" />
+      </div>
+      <div class="modal-actions">
+        <vk-btn v-if="!results || next" class="btn-cancel" type="link"
+                size="small" :disabled=loading
+                @click.prevent=hideModal >cancel</vk-btn>
+        <template v-if="results">
+          <vk-btn v-if="next" class="btn-ok" type="primary" size="small"
+                  :disabled=loading @click.prevent=doNext >{{ next }}</vk-btn>
+          <vk-btn v-else class="btn-ok" type="primary" size="small"
+                  :disabled=loading @click.prevent=hideModal >Done</vk-btn>
+        </template>
+        <vk-btn v-else class="btn-ok" type="primary" size="small"
+                :disabled=loading @click.prevent=execute >{{ action }}</vk-btn>
+      </div>
+    </vk-modal>
+  </div>
+  <div v-else-if="mode === 'widget'" class="connector widget">
     <template v-if=object.installed >
       <vk-btn-link v-if="object.version !== object.available && can.update"
                    v-vk-tooltip.bottom="'update'"
@@ -70,6 +72,7 @@
       <font-awesome-icon icon="download" />
     </vk-btn-link>
   </div>
+  <div v-else />
 </template>
 
 <script lang="js">

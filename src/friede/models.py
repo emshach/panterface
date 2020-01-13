@@ -3,13 +3,13 @@ from __future__ import unicode_literals
 from django.utils.encoding import python_2_unicode_compatible
 from django.db import models as M
 from django.contrib.postgres.fields import JSONField, ArrayField
-from datetime import date
+# from datetime import date
 from django.utils.timezone import now
 from django.contrib.auth import get_user_model
-from django.contrib.contenttypes.models import ContentType
+from django.contrib.contenttypes.models import ContentType, GenericForeignKey
 from model_utils.managers import InheritanceManager
 from aries.models import OwnedModel
-from .util import snake_case
+# from .util import snake_case
 
 
 Model = M.Model
@@ -54,7 +54,6 @@ class PathMixin( Model ):
     # override save
     def save( self, *args, **kwargs ):
         created = False
-        container = None
         if not self.path and self.name and '.' in self.name:
             self.path = self.name
         if self.path:
@@ -289,6 +288,7 @@ class Registry( OwnedModel, Base, PathMixin ):
                 out[ "$%ss" % f ] = data
         return out
 
+
 class Container( Registry ):
     registry_ptr = M.OneToOneField(
         Registry,
@@ -495,7 +495,9 @@ class Location( Registry, DataMixin ):
         out = super( Location, self).to_dict()
         out.update({
             '$href'        : self.href,
-            '$redirect_to' : self.redirect_to.href if self.redirect_to else None
+            '$redirect_to' : ( self.redirect_to.href
+                               if self.redirect_to
+                               else None )
         })
         return out
 
@@ -675,7 +677,11 @@ class Setting( OwnedModel, Base, PathMixin, DataMixin, ExtendsMixin ):
         through='SettingEntry',
         related_name='_settings'
     )
-    type       = M.CharField( max_length=32, choices=Types.ALL, default=Types.CHAR )
+    type       = M.CharField(
+        max_length=32,
+        choices=Types.ALL,
+        default=Types.CHAR
+    )
     default    = JSONField( default=dict )
 
     def to_dict( self ):
@@ -713,6 +719,7 @@ class Action( OwnedModel, Base, PathMixin, DataMixin ):
 def _get_entry_position():
     return 0
 
+
 class Entry( Base ):
     class Meta:
         unique_together = ( 'registry', 'name' )
@@ -720,11 +727,15 @@ class Entry( Base ):
         verbose_name_plural = 'entries'
     position = M.PositiveSmallIntegerField( default=_get_entry_position )
 
+
 class ContainerEntry( Entry ):
     class Meta:
         unique_together = Entry.Meta.unique_together
         verbose_name_plural = 'container entries'
-    registry = M.ForeignKey( Registry, M.CASCADE, related_name='_container_entries' )
+    registry = M.ForeignKey(
+        Registry, M.CASCADE,
+        related_name='_container_entries'
+    )
     entry    = M.ForeignKey( Container, M.CASCADE, related_name='_entries' )
 
 
@@ -732,7 +743,11 @@ class WidgetEntry( Entry, DataMixin ):
     class Meta:
         unique_together = Entry.Meta.unique_together
         verbose_name_plural = 'widget entries'
-    registry = M.ForeignKey( Registry, M.CASCADE, related_name='_widget_entries' )
+    registry = M.ForeignKey(
+        Registry,
+        M.CASCADE,
+        related_name='_widget_entries'
+    )
     entry    = M.ForeignKey( Widget, M.CASCADE, related_name='_entries' )
 
 
@@ -740,7 +755,11 @@ class BlockEntry( Entry, DataMixin ):
     class Meta:
         unique_together = Entry.Meta.unique_together
         verbose_name_plural = 'block entries'
-    registry = M.ForeignKey( Registry, M.CASCADE, related_name='_block_entries' )
+    registry = M.ForeignKey(
+        Registry,
+        M.CASCADE,
+        related_name='_block_entries'
+    )
     entry    = M.ForeignKey( Block, M.CASCADE, related_name='_entries' )
 
 
@@ -748,7 +767,11 @@ class ScreenEntry( Entry, DataMixin ):
     class Meta:
         unique_together = Entry.Meta.unique_together
         verbose_name_plural = 'screen entries'
-    registry = M.ForeignKey( Registry, M.CASCADE, related_name='_screen_entries' )
+    registry = M.ForeignKey(
+        Registry,
+        M.CASCADE,
+        related_name='_screen_entries'
+    )
     entry    = M.ForeignKey( Screen, M.CASCADE, related_name='_entries' )
 
 
@@ -756,7 +779,11 @@ class ShellEntry( Entry ):
     class Meta:
         unique_together = Entry.Meta.unique_together
         verbose_name_plural = 'shell entries'
-    registry = M.ForeignKey( Registry, M.CASCADE, related_name='_shell_entries' )
+    registry = M.ForeignKey(
+        Registry,
+        M.CASCADE,
+        related_name='_shell_entries'
+    )
     entry    = M.ForeignKey( Shell, M.CASCADE, related_name='_entries' )
 
 
@@ -764,7 +791,11 @@ class ThemeEntry( Entry ):
     class Meta:
         unique_together = Entry.Meta.unique_together
         verbose_name_plural = 'theme entries'
-    registry = M.ForeignKey( Registry, M.CASCADE, related_name='_theme_entries' )
+    registry = M.ForeignKey(
+        Registry,
+        M.CASCADE,
+        related_name='_theme_entries'
+    )
     entry    = M.ForeignKey( Theme, M.CASCADE, related_name='_entries' )
 
 
@@ -772,7 +803,11 @@ class SlotEntry( Entry ):
     class Meta:
         unique_together = Entry.Meta.unique_together
         verbose_name_plural = 'slot entries'
-    registry = M.ForeignKey( Registry, M.CASCADE, related_name='_slot_entries' )
+    registry = M.ForeignKey(
+        Registry,
+        M.CASCADE,
+        related_name='_slot_entries'
+    )
     entry    = M.ForeignKey( Slot, M.CASCADE, related_name='_entries' )
 
 
@@ -788,7 +823,11 @@ class LocationEntry( Entry ):
     class Meta:
         unique_together = Entry.Meta.unique_together
         verbose_name_plural = 'location entries'
-    registry = M.ForeignKey( Registry, M.CASCADE, related_name='_location_entries' )
+    registry = M.ForeignKey(
+        Registry,
+        M.CASCADE,
+        related_name='_location_entries'
+    )
     entry    = M.ForeignKey( Location, M.CASCADE, related_name='_entries' )
 
 
@@ -796,7 +835,11 @@ class IconEntry( Entry ):
     class Meta:
         unique_together = Entry.Meta.unique_together
         verbose_name_plural = 'icon entries'
-    registry = M.ForeignKey( Registry, M.CASCADE, related_name='_icon_entries' )
+    registry = M.ForeignKey(
+        Registry,
+        M.CASCADE,
+        related_name='_icon_entries'
+    )
     entry    = M.ForeignKey( Icon, M.CASCADE, related_name='_entries' )
 
 
@@ -804,7 +847,11 @@ class LinkEntry( Entry ):
     class Meta:
         unique_together = Entry.Meta.unique_together
         verbose_name_plural = 'link entries'
-    registry = M.ForeignKey( Registry, M.CASCADE, related_name='_link_entries' )
+    registry = M.ForeignKey(
+        Registry,
+        M.CASCADE,
+        related_name='_link_entries'
+    )
     entry    = M.ForeignKey( Link, M.CASCADE, related_name='_entries' )
 
 
@@ -812,7 +859,11 @@ class ReferenceEntry( Entry ):
     class Meta:
         unique_together = Entry.Meta.unique_together
         verbose_name_plural = 'reference entries'
-    registry = M.ForeignKey( Registry, M.CASCADE, related_name='_reference_entries' )
+    registry = M.ForeignKey(
+        Registry,
+        M.CASCADE,
+        related_name='_reference_entries'
+    )
     entry    = M.ForeignKey( Reference, M.CASCADE, related_name='_entries' )
 
 
@@ -820,7 +871,11 @@ class SettingEntry( Entry ):
     class Meta:
         unique_together = Entry.Meta.unique_together
         verbose_name_plural = 'setting entries'
-    registry = M.ForeignKey( Registry, M.CASCADE, related_name='_setting_entries' )
+    registry = M.ForeignKey(
+        Registry,
+        M.CASCADE,
+        related_name='_setting_entries'
+    )
     entry    = M.ForeignKey( Setting, M.CASCADE, related_name='_entries' )
 
 
@@ -828,7 +883,11 @@ class ActionEntry( Entry ):
     class Meta:
         unique_together = Entry.Meta.unique_together
         verbose_name_plural = 'action entries'
-    registry = M.ForeignKey( Registry, M.CASCADE, related_name='_action_entries' )
+    registry = M.ForeignKey(
+        Registry,
+        M.CASCADE,
+        related_name='_action_entries'
+    )
     entry    = M.ForeignKey( Action, M.CASCADE, related_name='_entries' )
 
 
@@ -875,7 +934,7 @@ class ActionStatus( Model ):
 
     @property
     def value( self ):
-        return this.parent.value if this.goodness is None else this.goodness
+        return self.parent.value if self.goodness is None else self.goodness
 
     def __int__( self ):
         return int( self.value )
@@ -908,7 +967,7 @@ class OpStatus( Model ):
 @python_2_unicode_compatible
 class Endorsement( Model ):
     def __str__( self ):
-        return "%d" % self.id
+        return "{}".format( self.pk )
     content_type = M.ForeignKey( ContentType, on_delete=M.CASCADE )
     object_id    = M.PositiveIntegerField()
     endorsed     = GenericForeignKey()
@@ -949,7 +1008,7 @@ class Operation( Model ):
         null=True
     )
     object_id  = M.PositiveIntegerField( blank=True, null=True )
-    object_ids = ArrayField( PositiveIntegerField(), default=list )
+    object_ids = ArrayField( M.PositiveIntegerField(), default=list )
     ops        = ArrayField( JSONField(), default=list )
     dryrun_ok  = M.DateTimeField( blank=True, null=True )
     done       = M.DateTimeField( blank=True, null=True )

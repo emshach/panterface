@@ -1,0 +1,2 @@
+class OperationRuntimeError( Exception ):
+    pass

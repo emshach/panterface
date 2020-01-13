@@ -1,9 +1,16 @@
 from collections import OrderedDict, deque
 from django.utils.timezone import now
-from .models import Operation as OpModel, Action as ActModel, ActionStatus, OpStatus
+from .exception import OperationRuntimeError, InvalidOperationError
+from .models import (
+    Operation as OpModel,
+    Action as ActModel,
+    ActionStatus,
+    OpStatus
+)
 
 actions = OrderedDict()
 user_actions = OrderedDict()
+
 
 def action(f):
     "decorator defining a class or function as a site action"
@@ -18,10 +25,12 @@ def action(f):
     r[ name ] = f
     return f
 
+
 def dispatch( user, context={}, *ops ):
     op = Operation( user=user, context=context, ops=ops ) if len( ops ) > 1 \
         else Operation( user=user, **ops[0] )
     return op.run()             # friede.Response
+
 
 def resume( user, op_id, context ):
     op = Operation( user, op_id )
@@ -32,19 +41,19 @@ class Action( object ):
     name = None
     permname = None
 
-    def __init__( self, op=Nonex, object=None, **kw ):
+    def __init__( self, op=None, object=None, **kw ):
         super( Action, self ).__init__()
         self.object = object
         self.op = op
 
     def run( self, system=None, **kw ):
-        if system == True:
+        if system is True:
             reqs = self.systemreqs()
             if self.op.met( reqs ):
                 return self.runsystem( **kw )
             else:
                 return ActionStatus.get( 'unmet_requirements' ), reqs
-        elif system == False:
+        elif system is False:
             reqs = self.userreqs()
             if self.op.met( reqs ):
                 return self.runuser( **kw )
@@ -60,36 +69,36 @@ class Action( object ):
             else:
                 return ActionStatus.get( 'unmet_requirements' ), dict(
                     user=userreqs,
-                    system=systemreqs,
+                    system=sysreqs,
                 )
 
-    def dryrun( self, system=None, **kw ):
-        if system == True:
-            reqs = self.systemreqs()
-            if self.op.met( reqs ):
-                return self.dryrunsystem( **kw )
-            else:
-                return ActionStatus.get( 'unmet_requirements' ), reqs
-        elif system == False:
-            reqs = self.userreqs()
-            user = self.getuser or self.op.user
-            if self.op.met( reqs ):
-                return self.dryrunuser( user=user, **kw )
-            else:
-                return ActionStatus.get( 'unmet_requirements' ), reqs
-        else:
-            sysreqs = self.sysreqs()
-            userreqs = self.userreqs()
-            if self.op.met( sysreqs ):
-                return self.dryrunsystem( **kw )
-            elif self.op.met( userreqs ):
-                user = self.getuser or self.op.user
-                return self.dryrunuser( user=user, **kw )
-            else:
-                return ActionStatus.get( 'unmet_requirements' ), dict(
-                    user=userreqs,
-                    system=systemreqs,
-                )
+    # def dryrun( self, system=None, **kw ):
+    #     if system is True:
+    #         reqs = self.systemreqs()
+    #         if self.op.met( reqs ):
+    #             return self.dryrunsystem( **kw )
+    #         else:
+    #             return ActionStatus.get( 'unmet_requirements' ), reqs
+    #     elif system is False:
+    #         reqs = self.userreqs()
+    #         user = self.getuser or self.op.user
+    #         if self.op.met( reqs ):
+    #             return self.dryrunuser( user=user, **kw )
+    #         else:
+    #             return ActionStatus.get( 'unmet_requirements' ), reqs
+    #     else:
+    #         sysreqs = self.sysreqs()
+    #         userreqs = self.userreqs()
+    #         if self.op.met( sysreqs ):
+    #             return self.dryrunsystem( **kw )
+    #         elif self.op.met( userreqs ):
+    #             user = self.getuser or self.op.user
+    #             return self.dryrunuser( user=user, **kw )
+    #         else:
+    #             return ActionStatus.get( 'unmet_requirements' ), dict(
+    #                 user=userreqs,
+    #                 system=sysreqs,
+    #             )
 
     def runsystem( self, **kw ):
         return ActionStatus.get( 'not_implemented' ), ()
@@ -103,10 +112,11 @@ class Action( object ):
     def dryrunuser( self, **kw ):
         return ActionStatus.get( 'not_implemented' ), ()
 
-    def getuser( self ): pass
+    def getuser( self ):
+        pass
 
     def requirements( self ):
-        perm = permname if permname else name
+        # perm = permname if permname else name
         return ()
 
     def systemreqs( self ):
@@ -125,32 +135,208 @@ class Action( object ):
     def get_for_object( obj ):
         pass
 
+    @staticmethod
+    def getaction( action ):
+        actionclass = None
+        actionobj = None
+        if not action:
+            return None, None, None
+        if isinstance( action, basestring ):
+            try:
+                action = ActModel.objects.get( name=action )
+                actionobj = None
+            except ActModel.DoesNotExist:
+                return None, None, None
+        elif isinstance( action, int ):
+            try:
+                action = ActModel.objects.get( pk=action )
+                actionobj = None
+            except ActModel.DoesNotExist:
+                return None, None, None
+        elif isinstance( action, Action ):
+            return actionobj.model, action.__class__, action
+        elif issubclass( action, Action ):
+            actionclass = action
+            action = None
+        else:
+            return None, None, None
+        if not issubclass( actionclass, Action ):
+            if not action:
+                return None, None, None
+            return action, Action.get_for_object( action ), None
+
+
+class MemoEntry( object ):
+    def __init__( self, needs=None, requests=[] ):
+        self.needs = needs or []
+        self.requests = requests or []
+
+
+class DependencyMemo( OrderedDict ):
+    def entry( self, key ):
+        if key not in self:
+            self[ key ] = MemoEntry()
+        return self[ key ]
+
+
+class MatchType:
+    CEDE     = 'Cedes'
+    EQUAL    = 'Equals'
+    SATISFY  = 'Satisfies'
+    CONFLICT = 'Conflicts'
+
 
 class DependencyManager( object ):
-    def __init__( self ):
-        super( self, DependencyManager ).__init__()
-        self.primary = OrderedDict()
-        self.all = OrderedDict()
-        self.unmet = OrderedDict()
 
-    def __nonzero__( self ): return True
+    def __init__( self, root, requests=[] ):
+        super( self, DependencyManager ).__init__()
+        self.root = root
+        self.needs = root.needs
+        # self.unmet = unmet
+        self.new = deque([])
+        self.memo = DependencyMemo
+        self._requests = requests
+        if self.needs:
+            self.memo.entry( root.pk ).needs.extend( self.needs )
+
+    def __nonzero__( self ):
+        return True
+
+    def __hash__( self ):
+        return id( self )
+
+    def addneed( self, action, obj ):
+        op = action.op
+        need = None
+        for n in self.needs:
+            val = n.compare( obj )
+            if val:
+                if val == MatchType.CONFLICT:
+                    raise InvalidOperationError(
+                        'Conflicting dependencies', n, obj )
+                elif val == MatchType.EQUAL:
+                    return n
+                elif val == MatchType.SATISFY:
+                    need = Operation( **obj )
+                    n.covers( need )
+                    break
+                elif val == MatchType.CEDE:
+                    need = Operation( **obj )
+                    need.covers(n)
+                    break
+        else:
+            need = Operation( **obj )
+        self.memo.entry( op.pk ).needs.push( need )
+        return need
+
+    def addrequest( self, action, obj ):
+        op = action.op
+        for i, q in enumerate( self.requests ):
+            val = self.comparerequests( q, obj )
+            if val:
+                if val in ( MatchType.EQUAL,
+                            MatchType.CEDE ):
+                    return q
+                elif val == MatchType.SATISFY:
+                    request = Question( **obj )
+                    self._requests.pop(i)
+                    self._requests.insert( i, request )
+                    self.memo[ request ] = action.op
+                    self.memo.entry( op.pk ).requests.push( request )
+                    self.memo.pop( q, None )
+                    return request
+        request = Question( **obj )
+        self._requests.push( request )
+        self.memo[ request ] = action.op
+        self.memo.entry( op.pk ).requests.push( request )
+        return request
+
+    @staticmethod
+    def compareneeds( need, data ):
+        return need.compare( data )
+        action, cls, obj = Action.getaction( data.get( 'action' ))
+        if action is None:
+            return None
+        # if action.path != need.action.path:
+        #     return None
+        f = getattr( cls, 'compareops', None  )
+        if f:
+            return f( need, data )
+        return None
+
+    @staticmethod
+    def comparerequests( action, request, data ):
+        if hasattr( request, 'sameas' ):
+            return request.sameas( data )
+        f = getattr( action.__class__, 'comparerequests', None )
+        if f:
+            return f( request, data )
+        return None
+
+    @property
+    def unmet( self ):
+        return filter( lambda x: x.unmet and not x.satisfied_by, self.needs )
+
+    @property
+    def primary( self ):
+        return filter( lambda x: not x.blocked, self.needs )
+
+    @property
+    def requests( self ):
+        stack = deque([ self.root ])
+        requests = []
+        memo = {}
+        while stack:
+            op = stack.popleft()
+            if op.pk in memo:
+                continue
+            memo[ op.pk ] = op
+            if not op.done:
+                if self.memo.get( op.pk ) and self.memo[ op.pk ].requests:
+                    requests.extend( self.memo[ op.pk ].requests )
+                unmet = op.unmet
+                if unmet:
+                    stack.extend( unmet )
+                if op.children:
+                    stack.extend( op.children )
+        return requests
+
 
 class OperationContext( dict ):
+    def __init__( self, op, *arg, **kw ):
+        super( self, OperationContext ).__init__( *arg, **kw )
+        self.needs = DependencyManager( root=op )
+
+    def __nonzero__( self ):
+        return True
+
+    def addneed( self, action, obj ):
+        return self.deps.addneed( action, obj )
+
+    def addrequest( self, action, obj ):
+        return self.deps.addrequest( action, obj )
+
+    def processnewneeds( self, **kw ):
+        while self.needs.new:
+            op = self.needs.new.popleft()
+            op.getneeds( self, **kw )
+
+
+class Question( dict ):
     def __init__( self, *arg, **kw ):
-        super( self, OpMemo ).__init__( *arg, **kw )
-        self.needs = None
+        super( self, Question ).__init__( *arg, **kw )
 
-    def __nonzero__( self ): return True
-
-    def initneeds( self ):
-        self.needs = DependencyManager()
+    def sameas( self, data ):
+        pass
 
 
 class Operation( object ):
-    def __nonzero__( self ): return True
+    def __nonzero__( self ):
+        return True
 
     def __init__( self, user, parent=None, child=None, action=None,
-              model=None, id=None, ids=(), object=None, ops=None, store=None ):
+                  model=None, id=None, ids=(), object=None, ops=None,
+                  store=None ):
         super( Operation, self ).__init__()
         if store:
             if isinstance( store, int ):
@@ -193,31 +379,17 @@ class Operation( object ):
         try:
             # action
             if action:
-                if isinstance( action, basestring ):
-                    try:
-                        action = ActModel.objects.get( name=action )
-                        actionobj = None
-                    except ActModel.DoesNotExist:
-                        raise InvalidOperationError( 'Action not found', action )
-                elif isinstance( action, int ):
-                    try:
-                        action = ActModel.objects.get( pk=action )
-                        actionobj = None
-                    except ActModel.DoesNotExist:
-                        raise InvalidOperationError( 'Action not found', action )
-                elif isinstance( action, Action ):
-                    actionclass = action.__class__
-                    actionobj = action
-                    action = actionobj.model
-                elif issubclass( action, Action ):
-                    actionclass = action
-                    action = None
-                else:
-                    raise InvalidOperationError( 'Action wrong type', type( action ))
-                if not issubclass( actionclass, Action ):
-                    if not action:
-                        raise InvalidOperationError( 'Invalid action', action )
-                    actionclass = Action.get_for_object( action )
+                a = action
+                action, actionclass, actionobj = Action.getaction(a)
+                if action is None:
+                    if not isinstance( a, ( Action, basestring, int )):
+                        if not issubclass( a, Action ):
+                            raise InvalidOperationError( 'Invalid action', a )
+                        raise InvalidOperationError(
+                            'Action wrong type', type(a))
+                    if not issubclass( actionclass, Action ):
+                        raise InvalidOperationError( 'Invalid action', a )
+                    raise InvalidOperationError( 'Action not found', a )
             # object
             model = self.getmodel()
             if not object and model:
@@ -237,7 +409,7 @@ class Operation( object ):
 
             self.actionclass = actionclass
             actionclass = self.getactionclass()
-            if not action and actionclass and self.object :
+            if not action and actionclass and self.object:
                 action = actionclass( op=self, object=self.getobject() )
         except InvalidOperationError as e:
             status = dict(
@@ -273,73 +445,55 @@ class Operation( object ):
             tuple(
                 Operation( user, parent=self, object=o )
                 for o in objects
-            ) if objects and actionclass\
-              else () )
+            ) if objects and actionclass
+            else () )
         + ( tuple(
             Operation( user, parent=self, **o )
             for o in ops
         ) if ops else () )
 
-    def dryrun( self, context, **kw ):
-        if self.dryrun_ok:
-            if pushed:
-                self.popcontext()
-                pushed = False
-            return self.status
-        status = None
-        statuses = []
-        if self.children:
-            for o in self.children:
-                _status = o.dryrun( context=context, **kw )
-                statuses.push( _status )
-            if self.actionobj:
-                status = a.dryrun( **kw )
-        elif self.actionobj:
-            status = a.dryrun( **kw )
-        else:
-            raise OperationRuntimeError( "action and/or children" )
-            # TODO: incorporate into op flow
-
-        if Operation.ok( status, statuses ):
-            if not status:
-                success = ActionStatus.get( 'success' )
-                status = OpStatus.objects.create(
-                    status=success,
-                    message='Operation completed successfully',
-                    operation=self.store
-                )
-            self.dryrun_ok = now()
-        elif not status:
-            failed = ActionStatus.get( 'failed' )
-            status = OpStatus.objects.create(
-                status=failed,
-                message='Operation failed',
-                operation=self.store
-            )
-        if pushed:
-            self.popcontext()
-            pushed = False
-        return status
-
-    def run( self, context, **kw ):
+    def run( self, context=None, **kw ):
         if self.done:
             return self.status  # TODO: maybe warn
-        toplevel = not context.needs
-        if toplevel:
-            context.initneeds()
-            needs, unmet = self.getneeds( context )
-        status = None
-        if not self.dryrun_ok:
-            status = self.dryrun( context, **kw )
-            if not Operation.ok( status ):
+        if context is None:
+            context = OperationContext( self )
+        elif isinstance( context, dict ):
+            context = OperationContext( self, **context )
+        needs, requests = self.getneeds( context, **kw )
+        if requests:
+            return requests
+        stack = deque( context.deps.primary )
+        while stack:
+            op = stack.popleft()
+            status = op.runwith( context, **kw )
+            if isinstance( status, Question ):
                 return status
-            status = None
+            if not Operation.ok( status ):
+                return OpStatus.objects.create(
+                    status=ActionStatus.get( 'failed' ),
+                    message='Failed to meet operation prerequisites',
+                    operation=self.store
+                )
+            push = []
+            for n in op.dependents:
+                n.unmet.remove( op )
+                if not len( n.unmet ):
+                    push.push(n)
+            stack.extendleft( push[ ::-1 ])
+        return self.runwith( context )
+
+    def runwith( self, context, **kw ):
+        if self.done:
+            return self.status  # TODO: maybe warn
+        status = None
         if self.children:
             aborted = ActionStatus.get( 'parent_aborted' )
             i = 0
             for o in self.children:
                 _status = o.status if o.done and Operation.ok( o.status )\
-                    else o.run( context, **kw )
+                    else o.runwith( context, **kw )
+                if isinstance( _status, Question ):
+                    return _status
                 if not Operation.ok( _status ):
                     for c in self.children[( i + 1 ): ]:
                         _status = OpStatus.objects.create(
@@ -356,9 +510,9 @@ class Operation( object ):
                     return status
                 i += 1
             if self.actionobj:
-                status = a.run( **kw )
+                status = self.actionobj.run( context, **kw )
         elif self.actionobj:
-            status = a.run( **kw )
+            status = self.actionobj.run( context, **kw )
         else:
             raise OperationRuntimeError( "action and/or children" )
             # TODO: incorporate into op flow
@@ -375,7 +529,7 @@ class Operation( object ):
             self.done = now()
         return status
 
-    def resume( self, context, **kw ):
+    def resume( self, context=None, **kw ):
         return self.run( context, **kw )
 
     # def pushcontext( context ):
@@ -391,8 +545,24 @@ class Operation( object ):
     #     return dict( self.parent and self.parent.getcontext() or {},
     #                  **( self.context or {} ))
 
+    def getneeds( self, context, **kw ):
+        if self.action:
+            needs, unmet, requests = self.action.getneeds( context, **kw )
+            self.needs = needs
+            self.unmet = unmet
+            # if not unmet:
+            #     context.deps.addprimary( self )
+        elif self.children:
+            for c in self.children:
+                c.getneeds( context, **kw )
+        # else:
+        #     context.deps.addprimary( self )  # noop
+        # context.processnewneeds( **kw )
+        return context.deps.needs, context.deps.requests
+
     def getactionclass( self ):
-        return self.actionclass or ( self.parent and self.parent.getactionclass() )
+        return self.actionclass \
+            or ( self.parent and self.parent.getactionclass() )
 
     def getactionobj( self ):
         return self.actionobj or ( self.parent and self.parent.getactionobj() )
@@ -405,6 +575,18 @@ class Operation( object ):
 
     def getobjects( self ):
         return self.objects or ( self.parent and self.parent.getobjects() )
+
+    def covers( self, op ):
+        self.store.satisfies.add( op )
+
+    def addneeds( self, *ops ):
+        self.store.needss.add( *ops )
+
+    def addunmet( self, *ops ):
+        self.store.needss.add( *ops )
+
+    def meet( self, *ops ):
+        self.store.unmet.remove( *ops )
 
     @staticmethod
     def ok( self, status, statuses=() ):
@@ -488,14 +670,14 @@ class Operation( object ):
         self.store.ops = ops
         self.store.save()
 
-    @property
-    def dryrun_ok( self, dryrun_ok ):
-        return self.store.dryrun_ok
+    # @property
+    # def dryrun_ok( self, dryrun_ok ):
+    #     return self.store.dryrun_ok
 
-    @dryrun_ok.setter
-    def dryrun_ok( self, dryrun_ok ):
-        self.store.dryrun_ok = dryrun_ok
-        self.store.save()
+    # @dryrun_ok.setter
+    # def dryrun_ok( self, dryrun_ok ):
+    #     self.store.dryrun_ok = dryrun_ok
+    #     self.store.save()
 
     @property
     def done( self, done ):
@@ -506,3 +688,47 @@ class Operation( object ):
         self.store.done = done
         self.store.save()
 
+    @property
+    def needs( self, needs ):
+        return self.store.needs.all()
+
+    @needs.setter
+    def needs( self, needs ):
+        self.store.needs.clear()
+        self.store.needs.add( *needs )
+        self.store.save()
+
+    @property
+    def unmet( self, unmet ):
+        return self.store.unmet.all()
+
+    @unmet.setter
+    def unmet( self, unmet ):
+        self.store.unmet.clear()
+        self.store.unmet.add( *unmet )
+        self.store.save()
+
+    @property
+    def satisfies( self, satisfies ):
+        return self.store.satisfies.all()
+
+    @satisfies.setter
+    def satisfies( self, satisfies ):
+        self.store.satisfies.clear()
+        self.store.satisfies.add( *satisfies )
+        self.store.save()
+
+    @property
+    def satisfied_by( self, satisfied_by ):
+        return self.store.satisfied_by.all()
+
+    @satisfied_by.setter
+    def satisfied_by( self, satisfied_by ):
+        self.store.satisfied_by.clear()
+        self.store.satisfied_by.add( *satisfied_by )
+        self.store.save()
+
+    # calculated attributes
+    @property
+    def blocked( self ):
+        return not self.store.unmet.count() and not self.satisfied_by

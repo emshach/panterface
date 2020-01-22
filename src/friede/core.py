@@ -209,7 +209,7 @@ def updateapp( name, data=None, obj=None ):
                     available = v
                 if len(d) > 1:
                     addversionmeta( v, d[1] if isinstance( d[1], dict )
-                                    else {}, app, obj, urlpatterns )
+                                    else {}, app, obj )
 
         print path, v, 'available'
 

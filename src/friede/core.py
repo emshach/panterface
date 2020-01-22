@@ -208,7 +208,7 @@ def updateapp( name, data=None, obj=None ):
                 if v > available:
                     available = v
                 if len(d) > 1:
-                    addversionmeta( v, d[1] if isinstance( d[1], dict )
+                    addversionmeta( app, v, d[1] if isinstance( d[1], dict )
                                     else {}, app, obj )
 
         print path, v, 'available'

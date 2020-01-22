@@ -8,7 +8,7 @@ from django.conf import settings
 from .core import installappheader, installapp, updateapp, upgradeapp
 from .models import App, Setting
 from .views import lookup
-from .action import action, actions
+from .action import action, actions, Action
 from . import views
 import traceback
 import sys

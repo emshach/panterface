@@ -1,2 +1,6 @@
-class OperationRuntimeError( Exception ):
+class InvalidOperationError( StandardError ):
+    pass
+
+
+class OperationRuntimeError( RuntimeError ):
     pass

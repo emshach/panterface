@@ -921,6 +921,9 @@ class _Base( Model ):
 
 @python_2_unicode_compatible
 class ActionStatus( Model ):
+    def __str__( self ):
+        return "{}".format( self.name )
+
     name     = M.SlugField( max_length=255 )
     message  = M.CharField( max_length=255, blank=True, null=True )
     template = M.TextField( blank=True, null=True )
@@ -949,7 +952,13 @@ class ActionStatus( Model ):
 
 @python_2_unicode_compatible
 class OpStatus( Model ):
-    status    = M.ForeignKey( ActionStatus, M.PROTECT, related_name='statuses' )
+    def __str__( self ):
+        return "{}".format( self.status.name )
+    status    = M.ForeignKey(
+        ActionStatus,
+        on_delete=M.PROTECT,
+        related_name='statuses'
+    )
     parent    = M.ForeignKey( 'self', M.PROTECT, related_name='children' )
     message   = M.CharField( max_length=255, blank=True, null=True )
     data      = JSONField( default=dict )
@@ -969,6 +978,7 @@ class OpStatus( Model ):
 class Endorsement( Model ):
     def __str__( self ):
         return "{}".format( self.pk )
+
     content_type = M.ForeignKey( ContentType, on_delete=M.CASCADE )
     object_id    = M.PositiveIntegerField()
     endorsed     = GenericForeignKey()

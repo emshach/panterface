@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 from importlib import import_module
 from rest_framework import routers, relations
 from collections import OrderedDict
-from packaging.version import parse as version_parse
+from packaging.version import parse as version_parse, _BaseVersion
 from django.conf import settings
 from .core import installappheader, installapp, updateapp, upgradeapp
 from .models import App, Setting
@@ -141,7 +141,8 @@ class App( object ) :
         )
 
     def postinstallheader( self ):
-        pass
+        if self.min_version:
+            self.versions[ 'default' ] = version_parse( self.min_version )
 
     def preinstall( self ):
         pass
@@ -254,9 +255,54 @@ class App( object ) :
         pass
 
     def setversionmeta( version, field, value ):
-        if version not in self.versions:
-            self.versions[ version ] = {}
-        self.versions[ version ][ field ] = value
+        v = self.versions
+        if version not in v:
+            v[ version ] = {}
+            if 'latest' not in v or version > v[ 'latest' ]:
+                v[ 'latest' ] = version
+        v[ version ][ field ] = value
+
+    def getversions( match ):
+        # m = match
+        op = '>='
+        meta = None
+        seen = set()
+        if ' ' in match:
+            op, match = match.split()
+        if op in ( '=', '==' ):
+            def op(x):
+                return isinstance( x, _BaseVersion ) and x == match
+        elif op == '!=':
+            def op(x):
+                return isinstance( x, _BaseVersion ) and x != match
+        elif op == '>':
+            def op(x):
+                return isinstance( x, _BaseVersion ) and x > match
+        elif op == '>=':
+            def op(x):
+                return isinstance( x, _BaseVersion ) and x >= match
+        elif op == '<':
+            def op(x):
+                return isinstance( x, _BaseVersion ) and x < match
+        elif op == '<=':
+            def op(x):
+                return isinstance( x, _BaseVersion ) and x <= match
+        else:
+            return None         # maybe rayse invalid op
+        if match not in self.versions:
+            return None         # Maybe raise
+        while not isinstance( self.versions[ match ], dict ):
+            if self.versions[ match ] not in self.versions:
+                return None     # Maybe raise
+            if match in seen:
+                return None     # cyclic def, maybe definitely raise
+            seen.add( match )
+            match = self.versions[ match ]
+        if not isinstance( self.versions[ match ], dict ):
+            return None
+        meta = self.versions[ match ]
+
+        return filter( op, self.versions )
 
     @property
     def available( self ):

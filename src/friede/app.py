@@ -37,7 +37,7 @@ def load( name, urlpatterns ):
     app = apps.get( name )
     if app: return app
     try:
-        apps[ app.name ] = 'loading'
+        apps[ name ] = 'loading'
         app = import_module( "%s.friede_app" % module )
         app = app.App()
         apps[ app.name ] = app
@@ -50,7 +50,7 @@ def load( name, urlpatterns ):
     except ( ImportError, AttributeError ) as e:
         msg = str(e)
         if 'No module named friede_app' not in msg:
-            apps[ app.name ] = 'error'
+            apps[ name ] = 'error'
             print >> sys.stderr, 'got exception', type(e), e,\
                 "in friede.urls/%s" % module
 
@@ -143,6 +143,10 @@ class App( object ) :
     def postinstallheader( self ):
         if self.min_version:
             self.versions[ 'default' ] = version_parse( self.min_version )
+        if self.model.installed:
+            self.versions[ 'current' ] = version_parse( self.model.version )
+        else:
+            self.versions.pop( 'current', None )
 
     def preinstall( self ):
         pass
@@ -163,7 +167,10 @@ class App( object ) :
         return ret
 
     def postinstall( self ):
-        pass
+        if self.model.installed:
+            self.versions[ 'current' ] = version_parse( self.model.version )
+        else:
+            self.versions.pop( 'current', None )
 
     def activate( self ):
         if self.model:
@@ -213,6 +220,10 @@ class App( object ) :
 
     def postupgrade( self ):
         self.version = self.model.version
+        if self.model.installed:
+            self.versions[ 'current' ] = version_parse( self.model.version )
+        else:
+            self.versions.pop( 'current', None )
         pass
 
     def predowngrade( self ):

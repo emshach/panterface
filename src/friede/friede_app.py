@@ -2,7 +2,8 @@
 from __future__ import unicode_literals
 from . import views, serializers, app
 from .app import action, Action
-from .models import Setting, App as AppModel, UserApp
+from .action import MatchType
+from .models import Setting, App as AppModel, UserApp, ActionStatus
 from packaging.version import parse as version_parse
 
 
@@ -10,6 +11,7 @@ _links = '''_container_entries _widget_entries _block_entries _screen_entries
                _shell_entries _theme_entries _slot_entries _app_entries
                _location_entries _icon_entries _link_entries _reference_entries
                _setting_entries _action_entries'''.split()
+
 
 class App( app.App ):
     name        = 'friede'
@@ -132,15 +134,15 @@ class App( app.App ):
             'in'     : registry_objects
         },
     )
-    api=(
+    api = (
         ( r'ls/(?P<path>.*$)',       ( views.api_ls,     'ls',     [''] )),
         ( r'models/(?P<models>.*$)', ( views.api_models, 'models', [''] )),
-        ( r'menus/?$',              ( views.api_menus,  'menus',       )),
+        ( r'menus/?$',              ( views.api_menus,  'menus',        )),
         ( r'path/(?P<path>.*$)',     ( views.api_path,   'path',   [''] )),
         ( r'do/(?P<action>.+)/(?P<model>.+)/(?P<ids>.*)$',
                    ( views.api_do, 'do', [ 'list', 'friede.action', '' ])),
     )
-    routes=(
+    routes = (
         ( 'registries',       views.RegistryViewSet       ),
         ( 'containers',       views.ContainerViewSet      ),
         ( 'widgets',          views.WidgetViewSet         ),
@@ -170,7 +172,7 @@ class App( app.App ):
         ( 'referenceentries', views.ReferenceEntryViewSet ),
         ( 'settingentries',   views.SettingEntryViewSet   ),
     )
-    serializers=(
+    serializers = (
         ( 'registry',       serializers.RegistrySerializer       ),
         ( 'container',      serializers.ContainerSerializer      ),
         ( 'widget',         serializers.WidgetSerializer         ),
@@ -201,6 +203,7 @@ class App( app.App ):
         ( 'settingentry',   serializers.SettingEntrySerializer   ),
         ( 'actionentry',    serializers.ActionEntrySerializer    ),
     )
+
     @property
     def data( self ):
         return (
@@ -289,7 +292,7 @@ class App( app.App ):
                       component='ActionHelpWidget',
                       action='remove'
                   )))),
-            ( 'dashboard', dict (
+            ( 'dashboard', dict(
                 icon='fontawesome.expand',
                 data=dict(
                     component='DashboardWidget'
@@ -464,7 +467,8 @@ class App( app.App ):
             ( 'install', dict(
                 icon='fontawesome.sign-in-alt',
                 title='Install',
-                description='''Incorporate the object into the system in some way''',
+                description='Incorporate the object into the system in some'
+                ' way',
                 data=dict(
                     reverse='uninstall',
                     widget='Installer',
@@ -497,7 +501,7 @@ class App( app.App ):
             ( 'update', dict(
                 icon='fontawesome.sync-alt',
                 title='Update',
-                description='''Change the version of the object, if possible''',
+                description='Change the version of the object, if possible',
                 data=dict(
                     implies='upgrade',
                     widget='Installer',
@@ -741,7 +745,7 @@ class App( app.App ):
           )
         ),
         ( '0.2.8',
-         ( '#actions',
+          ( '#actions',
             ( 'reinstall', dict(
                 data=dict(
                     component='Installer',
@@ -774,11 +778,12 @@ class App( app.App ):
     def userdata( self ):
         return ()
 
+
 @action
 class InstallAction( Action ):
     name = 'install'
 
-    def __init__( self, op=Nonex, object=None, **kw ):
+    def __init__( self, op=None, object=None, **kw ):
         super( Action, self ).__init__()
         self.object = object
         self.op = op
@@ -787,57 +792,19 @@ class InstallAction( Action ):
     def getuser( self ):
         return isinstance( self.object, UserApp ) and self.object.user
 
+    def getneeds( self, context, version='default', **kw ):
+        pass
+
+    def compare( self, data ):
+        pass
+
     # @Action.formodels( AppModel ) # TODO: this
-    def runsystem( self, version='default', **kw ):
+    def run( self, context, version='default', **kw ):
         app = self.app
         app.install()
         return ActionStatus.get( 'app_installed' if app.installed
                                  else 'app_install_failed' ), app
 
-    # @Action.formodels( AppModel ) # TODO: this
-    def dryrunsystem( self, version='default', **kw ):
-        app = self.app
-        return ActionStatus.get( 'app_installed' if app.getversion( version )
-                                 else 'app_install_failed' ), app
-
-    # @Action.formodels( AppModel ) # TODO: this
-    def runuser( self, user, **kw ):
-        app = self.app
-        app.install_for( user )
-        return ActionStatus.get( 'app_userdata_installed'
-                                 if app.installed_for( user )
-                                 else 'app_userdata_install_failed' ), app
-
-    # @Action.formodels( AppModel ) # TODO: this
-    def dryrunuser( self, user, **kw ):
-        return ActionStatus.get( 'app_userdata_installed' ), app
-
-    def systemreqs( self ):
-        reqs = super( InstallAction, self ).systemreqs()
-        return reqs
-
-    def userreqs( self ):
-        reqs = super( InstallAction, self ).systemreqs()
-        return reqs + ( dict( action='install',
-                              object=self.app.model ))
-
-# @action
-# def reinstall( user, thing, userdata=True, **kw ):
-#     if not isinstance( thing, AppModel ):
-#         return                  # TODO: raise TypeError
-#     app = App.get_for_object( thing )
-#     version = app.version
-#     app.version = '0.0.0'
-#     app.update()
-#     if app.installed:
-#         app.upgrade( to=version )
-#     else:
-#         app.install()
-#     # if userdata:
-#     #     user_reinstall( user, thing )
-#     # TODO: ^^^ this
-#     return dict( status='reinstalled', success="App {} reinstalled!".format( app.name ))\
-#         if app.version == version else dict( status='failed', error='reinstall failed' )
 
 @action
 class ReInstallAction( Action ):
@@ -875,6 +842,7 @@ class ReInstallAction( Action ):
     def dryrunuser( self, **kw ):
         return ActionStatus.get( 'not_implemented' ), ()
 
+
 @action
 def user_install( user, thing, **kw ):
     if isinstance( thing, UserApp ):
@@ -886,13 +854,16 @@ def user_install( user, thing, **kw ):
         return                  # TODO: raise TypeError
     app.installuserdata( user )
 
+
 @action
 def uninstall( user, thing, **kw ):
     pass
 
+
 @action
 def user_uninstall( user, thing, **kw ):
     pass
+
 
 @action
 def update( user, thing, to='latest', **kw ):
@@ -906,17 +877,22 @@ def update( user, thing, to='latest', **kw ):
     target = app.available if to == 'latest' else to if v.release\
                  else app.versions.get( to )
     app.upgrade( to=target )
-    return dict( status='updated', success="App {} updated!".format( app.name ))\
-        if app.version == target else dict( status='failed', error='update failed' )
+    return dict(
+        status='updated',
+        success=( "App {} updated!".format( app.name ))
+        if app.version == target
+        else dict( status='failed', error='update failed' ))
 
 
 @action
 def upgrade( user, thing, **kw ):
     pass
 
+
 @action
 def downgrade( user, thing, **kw ):
     pass
+
 
 @action
 def activate( user, thing, **kw ):
@@ -924,12 +900,17 @@ def activate( user, thing, **kw ):
         return                  # TODO: raise TypeError
     app = App.get_for_object( thing )
     app.activate()
-    return dict( status='active', success="App {} activated!".format( app.name ))\
-        if app.active else dict( 'failed', error='Activation failed' )
+    return dict(
+        status='active',
+        success=( "App {} activated!".format( app.name ))
+        if app.active
+        else dict( 'failed', error='Activation failed' ))
+
 
 @action
 def user_activate( user, thing, **kw ):
     pass
+
 
 @action
 def deactivate( user, thing, **kw ):
@@ -937,10 +918,13 @@ def deactivate( user, thing, **kw ):
         return                  # TODO: raise TypeError
     app = App.get_for_object( thing )
     app.deactivate()
-    return dict( status='disabled', success="App {} disabled".format( app.name ))\
-        if not app.active else dict( status='failed', error='deactivation failed' )
+    return dict(
+        status='disabled',
+        success=( "App {} disabled".format( app.name ))
+        if not app.active
+        else dict( status='failed', error='deactivation failed' ))
+
 
 @action
 def user_deactivate( user, thing, **kw ):
     pass
-

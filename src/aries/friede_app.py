@@ -179,9 +179,9 @@ class App( app.App ):
             ))),
           )),
         ( '0.0.3',
-          {
-              depends: { 'friede': '0.2.10' }
-          },
+          dict(
+              depends={ 'friede': '0.2.10' }
+          ),
           ( '#blocks',
             ( 'viewer',
               ( 'objects', dict(

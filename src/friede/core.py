@@ -207,8 +207,9 @@ def updateapp( name, data=None, obj=None ):
                 v = version_parse( d[0] )
                 if v > available:
                     available = v
-                if ( len(d) > 1 and isinstance( d[1], dict )):
-                    addversionmeta( v, d[1], app, obj, urlpatterns )
+                if len(d) > 1:
+                    addversionmeta( v, d[1] if isinstance( d[1], dict )
+                                    else {}, app, obj, urlpatterns )
 
         print path, v, 'available'
 

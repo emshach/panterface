@@ -254,7 +254,7 @@ class App( object ) :
     def clearuserdata( self, user ):
         pass
 
-    def setversionmeta( version, field, value ):
+    def setversionmeta( self, version, field, value ):
         v = self.versions
         if version not in v:
             v[ version ] = {}
@@ -262,7 +262,7 @@ class App( object ) :
                 v[ 'latest' ] = version
         v[ version ][ field ] = value
 
-    def getversions( match ):
+    def getversions( self, match ):
         # m = match
         op = '>='
         meta = None

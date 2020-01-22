@@ -91,7 +91,6 @@ class App( object ) :
     router = None
     serializers = ()
     model=None
-    versions=OrderedDict()
     required = False
     user_required = False
     user_installable = True
@@ -102,6 +101,7 @@ class App( object ) :
         super( App, self ).__init__()
         self.preinstallheader()
         self.model, _ = self.installheader()
+        self.versions=OrderedDict()
         self.version = self.model.version
         if self.model:
             self.postinstallheader()

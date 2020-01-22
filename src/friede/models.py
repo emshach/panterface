@@ -6,7 +6,8 @@ from django.contrib.postgres.fields import JSONField, ArrayField
 # from datetime import date
 from django.utils.timezone import now
 from django.contrib.auth import get_user_model
-from django.contrib.contenttypes.models import ContentType, GenericForeignKey
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.contenttypes.fields import GenericForeignKey
 from model_utils.managers import InheritanceManager
 from aries.models import OwnedModel
 # from .util import snake_case
@@ -952,13 +953,13 @@ class OpStatus( Model ):
     parent    = M.ForeignKey( 'self', M.PROTECT, related_name='children' )
     message   = M.CharField( max_length=255, blank=True, null=True )
     data      = JSONField( default=dict )
-    dryrun    = M.BooleanField( default=False )
+    # dryrun    = M.BooleanField( default=False )
     operation = M.ForeignKey( 'Operation', M.CASCADE, related_name='statuses' )
     time      = M.DateTimeField( default=now )
 
     def save( self, *args, **kwargs ):
-        if not self.operation.dryrun_ok:
-            self.dryrun = True
+        # if not self.operation.dryrun_ok:
+        #     self.dryrun = True
         super( OpStatus, self ).save( *args, **kwargs )
         self.operation.status = self
         self.operation.save()
@@ -979,39 +980,52 @@ class Operation( Model ):
     def __str__( self ):
         return self.action.path
 
-    user       = M.ForeignKey(
+    user         = M.ForeignKey(
         get_user_model(),
         on_delete=M.CASCADE,
         related_name='friede_operations'
     )
-    parent     = M.ForeignKey(
+    parent       = M.ForeignKey(
         'self',
         M.PROTECT,
         related_name='children',
         blank=True,
         null=True
     )
-    action     = M.ForeignKey(
+    action       = M.ForeignKey(
         Action,
         on_delete=M.SET_NULL,
         related_name='operations',
         blank=True,
         null=True
     )
-    model      = M.ForeignKey( ContentType, M.PROTECT, blank=True, null=True )
-    context    = JSONField( default=dict )
-    status     = M.ForeignKey(
+    hypothetical = M.BooleanField( default=True )
+    conflicts    = M.ManyToManyField( 'self' )
+    model        = M.ForeignKey( ContentType, M.PROTECT, blank=True, null=True )
+    context      = JSONField( default=dict )
+    status       = M.ForeignKey(
         OpStatus,
         on_delete=M.PROTECT,
         related_name='+',
         blank=True,
         null=True
     )
-    object_id  = M.PositiveIntegerField( blank=True, null=True )
-    object_ids = ArrayField( M.PositiveIntegerField(), default=list )
-    ops        = ArrayField( JSONField(), default=list )
-    dryrun_ok  = M.DateTimeField( blank=True, null=True )
-    done       = M.DateTimeField( blank=True, null=True )
+    object_id    = M.PositiveIntegerField( blank=True, null=True )
+    object_ids   = ArrayField( M.PositiveIntegerField(), default=list )
+    ops          = ArrayField( JSONField(), default=list )
+    # dryrun_ok    = M.DateTimeField( blank=True, null=True )
+    done         = M.DateTimeField( blank=True, null=True )
+
+
+@python_2_unicode_compatible
+class Question( Model ):
+    def __str__( self ):
+        return "{}".format( self.name )
+
+    name      = M.SlugField( max_length=255 )
+    type      = M.SlugField( max_length=255 )
+    data      = JSONField( default=dict )
+    operation = M.ForeignKey( Operation, M.CASCADE, related_name='questions' )
 
 
 # user stuff

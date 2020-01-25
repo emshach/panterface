@@ -308,7 +308,7 @@ class App( object ) :
             seen.add( match )
             match = self.versions[ match ]
         if not isinstance( match, Version ):
-            match = Version( match )
+            match = version_parse( match )
         return filter( op, self.versions )
 
     @property

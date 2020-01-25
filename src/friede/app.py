@@ -307,7 +307,7 @@ class App( object ) :
                 return None     # cyclic def, maybe definitely raise
             seen.add( match )
             match = self.versions[ match ]
-        if not isinstance( match, Version ):
+        if not isinstance( match, _BaseVersion ):
             match = version_parse( match )
         return filter( op, self.versions )
 

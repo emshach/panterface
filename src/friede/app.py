@@ -293,7 +293,6 @@ class App( object ) :
                 return isinstance( x, _BaseVersion ) and x > match
         elif op == '>=':
             def op(x):
-                print dict( x=x, t=type(x), m=match )
                 return isinstance( x, _BaseVersion ) and x >= match
         elif op == '<':
             def op(x):
@@ -308,7 +307,8 @@ class App( object ) :
                 return None     # cyclic def, maybe definitely raise
             seen.add( match )
             match = self.versions[ match ]
-
+        if not isinstance( match, Version ):
+            match = Version( match )
         return filter( op, self.versions )
 
     @property

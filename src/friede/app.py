@@ -280,6 +280,8 @@ class App( object ) :
         seen = set()
         if ' ' in match:
             op, match = match.split()
+        if not match:
+            return None
         if op in ( '=', '==' ):
             def op(x):
                 return isinstance( x, _BaseVersion ) and x == match
@@ -300,18 +302,11 @@ class App( object ) :
                 return isinstance( x, _BaseVersion ) and x <= match
         else:
             return None         # maybe rayse invalid op
-        if match not in self.versions:
-            return None         # Maybe raise
-        while not isinstance( self.versions[ match ], dict ):
-            if self.versions[ match ] not in self.versions:
-                return None     # Maybe raise
+        while isinstance( match, basestring ) and match in self.versions:
             if match in seen:
                 return None     # cyclic def, maybe definitely raise
             seen.add( match )
             match = self.versions[ match ]
-        if not isinstance( self.versions[ match ], dict ):
-            return None
-        meta = self.versions[ match ]
 
         return filter( op, self.versions )
 

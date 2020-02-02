@@ -37,6 +37,20 @@ def resume( user, op_id, context ):
     return op.resume( context )
 
 
+class Ops( object ):
+    class any( list ):
+        pass
+
+    class all( list ):
+        pass
+
+    class none( list ):
+        pass
+
+    class nall( list ):
+        pass
+
+
 class Action( object ):
     name = None
     permname = None
@@ -46,94 +60,21 @@ class Action( object ):
         self.object = object
         self.op = op
 
-    def run( self, system=None, **kw ):
-        if system is True:
-            reqs = self.systemreqs()
-            if self.op.met( reqs ):
-                return self.runsystem( **kw )
-            else:
-                return ActionStatus.get( 'unmet_requirements' ), reqs
-        elif system is False:
-            reqs = self.userreqs()
-            if self.op.met( reqs ):
-                return self.runuser( **kw )
-            else:
-                return ActionStatus.get( 'unmet_requirements' ), reqs
-        else:
-            sysreqs = self.sysreqs()
-            userreqs = self.userreqs()
-            if self.op.met( sysreqs ):
-                return self.runsystem( **kw )
-            elif self.op.met( userreqs ):
-                return self.runuser( **kw )
-            else:
-                return ActionStatus.get( 'unmet_requirements' ), dict(
-                    user=userreqs,
-                    system=sysreqs,
-                )
-
-    # def dryrun( self, system=None, **kw ):
-    #     if system is True:
-    #         reqs = self.systemreqs()
-    #         if self.op.met( reqs ):
-    #             return self.dryrunsystem( **kw )
-    #         else:
-    #             return ActionStatus.get( 'unmet_requirements' ), reqs
-    #     elif system is False:
-    #         reqs = self.userreqs()
-    #         user = self.getuser or self.op.user
-    #         if self.op.met( reqs ):
-    #             return self.dryrunuser( user=user, **kw )
-    #         else:
-    #             return ActionStatus.get( 'unmet_requirements' ), reqs
-    #     else:
-    #         sysreqs = self.sysreqs()
-    #         userreqs = self.userreqs()
-    #         if self.op.met( sysreqs ):
-    #             return self.dryrunsystem( **kw )
-    #         elif self.op.met( userreqs ):
-    #             user = self.getuser or self.op.user
-    #             return self.dryrunuser( user=user, **kw )
-    #         else:
-    #             return ActionStatus.get( 'unmet_requirements' ), dict(
-    #                 user=userreqs,
-    #                 system=sysreqs,
-    #             )
-
-    def runsystem( self, **kw ):
-        return ActionStatus.get( 'not_implemented' ), ()
-
-    def dryrunsystem( self, **kw ):
-        return ActionStatus.get( 'not_implemented' ), ()
-
-    def runuser( self, **kw ):
-        return ActionStatus.get( 'not_implemented' ), ()
-
-    def dryrunuser( self, **kw ):
-        return ActionStatus.get( 'not_implemented' ), ()
+    def run( self, **kw ):
+        pass
 
     def getuser( self ):
         pass
 
-    def requirements( self ):
-        # perm = permname if permname else name
+    def getneeds( self, context, **kw ):
         return ()
-
-    def systemreqs( self ):
-        return self.requirements()
-
-    def systemreqset( self ):
-        return self.systemreqs()
-
-    def userreqs( self ):
-        return self.requirements()
-
-    def userreqset( self ):
-        return self.userreqs()
 
     @staticmethod
     def get_for_object( obj ):
-        pass
+        name = object.path
+        if name.startswith( 'actions.' ):
+            name = name[ 5: ]
+        return actions[ name ]
 
     @staticmethod
     def getaction( action ):
@@ -184,6 +125,8 @@ class MatchType:
     EQUAL    = 'Equals'
     SATISFY  = 'Satisfies'
     CONFLICT = 'Conflicts'
+    DEPEND   = 'Depends'
+    SUPPORT  = 'Supports'
 
 
 class DependencyManager( object ):
@@ -204,6 +147,12 @@ class DependencyManager( object ):
 
     def __hash__( self ):
         return id( self )
+
+    def addcond( self, action, obj ):
+        pass
+
+    def addconds( self, action, objs ):
+        pass
 
     def addneed( self, action, obj ):
         op = action.op
@@ -229,15 +178,18 @@ class DependencyManager( object ):
         self.memo.entry( op.pk ).needs.push( need )
         return need
 
+    def addneeds( self, action, objs ):
+        # account for list type (any, all etc)
+        pass
+
     def addrequest( self, action, obj ):
         op = action.op
         for i, q in enumerate( self.requests ):
-            val = self.comparerequests( q, obj )
+            val = q.compare( obj )
             if val:
-                if val in ( MatchType.EQUAL,
-                            MatchType.CEDE ):
+                if val in ( MatchType.EQUAL, MatchType.SATISFY ):
                     return q
-                elif val == MatchType.SATISFY:
+                elif val == MatchType.CEDE:
                     request = Question( **obj )
                     self._requests.pop(i)
                     self._requests.insert( i, request )
@@ -250,28 +202,6 @@ class DependencyManager( object ):
         self.memo[ request ] = action.op
         self.memo.entry( op.pk ).requests.push( request )
         return request
-
-    @staticmethod
-    def compareneeds( need, data ):
-        return need.compare( data )
-        action, cls, obj = Action.getaction( data.get( 'action' ))
-        if action is None:
-            return None
-        # if action.path != need.action.path:
-        #     return None
-        f = getattr( cls, 'compareops', None  )
-        if f:
-            return f( need, data )
-        return None
-
-    @staticmethod
-    def comparerequests( action, request, data ):
-        if hasattr( request, 'sameas' ):
-            return request.sameas( data )
-        f = getattr( action.__class__, 'comparerequests', None )
-        if f:
-            return f( request, data )
-        return None
 
     @property
     def unmet( self ):
@@ -310,8 +240,17 @@ class OperationContext( dict ):
     def __nonzero__( self ):
         return True
 
+    def addcond( self, action, obj ):
+        return self.deps.addcond( action, obj )
+
+    def addconds( self, action, objs ):
+        return self.deps.addconds( action, objs )
+
     def addneed( self, action, obj ):
         return self.deps.addneed( action, obj )
+
+    def addneeds( self, action, objs ):
+        return self.deps.addneeds( action, objs )
 
     def addrequest( self, action, obj ):
         return self.deps.addrequest( action, obj )
@@ -587,6 +526,11 @@ class Operation( object ):
 
     def meet( self, *ops ):
         self.store.unmet.remove( *ops )
+
+    def compare( self, data ):
+        if self.actionobj:
+            return self.actionobj.compare( data )
+        # TODO: and more complex ops?
 
     @staticmethod
     def ok( self, status, statuses=() ):

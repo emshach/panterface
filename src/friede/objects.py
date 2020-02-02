@@ -6,6 +6,7 @@ from .models import ( Registry, Container, Widget, Block, Screen, Shell, Theme,
 from .util import snake_case
 from django.core.exceptions import ObjectDoesNotExist
 
+
 class Selector( object ):
     def __init__( self, root, type=Container, field=None, entries=None ):
         super( Selector, self ).__init__()
@@ -65,7 +66,8 @@ class Selector( object ):
                     new.append( node )
                 except ObjectDoesNotExist:
                     pass
-        return Selector( new, type=self.type, field=self.field, entries=self.entries )
+        return Selector( new, type=self.type, field=self.field,
+                         entries=self.entries )
 
     def __call__( self, *args ):
         if not len( args ):
@@ -153,9 +155,12 @@ class Actions( CreatingSelector ):
 def getregistries():
     return Container.objects.filter( parent__isnull=True ).all()
 
+
 def getshell( *args ):
     return Shell().get( *args )
 
+
 def getenv():
-    env, created = Container.objects.get_or_create( name='env', parent__isnull=True )
+    env, created = Container.objects.get_or_create(
+        name='env', parent__isnull=True )
     return env

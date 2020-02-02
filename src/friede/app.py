@@ -3,12 +3,13 @@ from __future__ import unicode_literals
 from importlib import import_module
 from rest_framework import routers, relations
 from collections import OrderedDict
-from packaging.version import parse as version_parse, _BaseVersion
+from packaging.version import _BaseVersion
 from django.conf import settings
 from .core import installappheader, installapp, updateapp, upgradeapp
-from .models import App, Setting
+from .models import App, UserApp, Setting
 from .views import lookup
 from .action import action, actions, Action
+from .util import toversion
 from . import views
 import traceback
 import sys
@@ -116,13 +117,6 @@ class App( object ) :
 
     def __nonzero__( self ): return True
 
-    @staticmethod
-    def get_for_object( obj ):
-        try:
-            return apps[ obj.name ]
-        except KeyError:
-            return null
-
     def preinstallheader( self ):
         pass
 
@@ -142,9 +136,9 @@ class App( object ) :
 
     def postinstallheader( self ):
         if self.min_version:
-            self.versions[ 'default' ] = version_parse( self.min_version )
+            self.versions[ 'default' ] = toversion( self.min_version )
         if self.model.installed:
-            self.versions[ 'current' ] = version_parse( self.model.version )
+            self.versions[ 'current' ] = toversion( self.model.version )
         else:
             self.versions.pop( 'current', None )
 
@@ -168,7 +162,7 @@ class App( object ) :
 
     def postinstall( self ):
         if self.model.installed:
-            self.versions[ 'current' ] = version_parse( self.model.version )
+            self.versions[ 'current' ] = toversion( self.model.version )
         else:
             self.versions.pop( 'current', None )
 
@@ -206,7 +200,7 @@ class App( object ) :
         return updateapp( self.name, self.data, self )
 
     def postupdate( self ):
-        if version_parse( self.version ) < version_parse( self.min_version )\
+        if toversion( self.version ) < toversion( self.min_version )\
            and self.auto_install:
             self.preupgrade()
             self.upgrade( to=self.min_version )
@@ -221,7 +215,7 @@ class App( object ) :
     def postupgrade( self ):
         self.version = self.model.version
         if self.model.installed:
-            self.versions[ 'current' ] = version_parse( self.model.version )
+            self.versions[ 'current' ] = toversion( self.model.version )
         else:
             self.versions.pop( 'current', None )
         pass
@@ -256,13 +250,19 @@ class App( object ) :
     def postremove( self ):
         pass
 
-    def installuserdata( self, user ):
+    def install_for_user( self, user=None, userapp=None ):
         pass
 
-    def updateuserdata( self, user ):
+    def update_for_user( self, user=None, userapp=None ):
         pass
 
-    def clearuserdata( self, user ):
+    def uninstall_for_user( self, user=None, userapp=None ):
+        pass
+
+    def activate_for_user( self, user=None, userapp=None ):
+        pass
+
+    def deactivate_for_user( self, user=None, userapp=None ):
         pass
 
     def setversionmeta( self, version, field, value ):
@@ -273,13 +273,16 @@ class App( object ) :
                 v[ 'latest' ] = version
         v[ version ][ field ] = value
 
-    def getversions( self, match ):
+    def getversions( self, match=None, op=None ):
+        if match is None:
+            return filter( lambda x: isinstance( x, _BaseVersion ), self.versions )
         # m = match
-        op = '>='
         meta = None
         seen = set()
         if ' ' in match:
-            op, match = match.split()
+            op1, match = match.split()
+            if not op:
+                op = op1 or '>='
         if not match:
             return None
         if op in ( '=', '==' ):
@@ -308,12 +311,12 @@ class App( object ) :
             seen.add( match )
             match = self.versions[ match ]
         if not isinstance( match, _BaseVersion ):
-            match = version_parse( match )
+            match = toversion( match )
         return filter( op, self.versions )
 
     @property
     def available( self ):
-        return self.model.available
+        return toversion( self.model.available ) if self.model else None
 
     @property
     def installed( self ):
@@ -329,21 +332,38 @@ class App( object ) :
 
     @property
     def version( self ):
-        return self.model.version if self.model else '0.0.0'
+        return toversion( self.model.version if self.model else '0.0.0' )
 
     @version.setter
     def version( self, version ):
         if self.model:
-            self.model.version = version
+            self.model.version = str( version )
             self.model.save()
 
     @property
     def min_version( self ):
-        return self.model.min_version if self.model else '0.0.0'
+        return toversion( self.model.min_version if self.model else '0.0.0' )
 
     @version.setter
     def min_version( self, min_version ):
         if self.model:
-            self.model.min_version = min_version
+            self.model.min_version = str( min_version )
             self.model.save()
 
+    @staticmethod
+    def get_for_object( object ):
+        if isinstance( object, UserApp ):
+            object = object.app
+        name = object.path
+        if name.startswith( 'apps.' ):
+            name = name[ 5: ]
+        return apps[ name ]
+
+    @staticmethod
+    def get_for_user( object, user ):
+        if isinstance( object, UserApp ):
+            if ( object.user is user ):
+                return object
+            object = object.app
+        userapp, new = UserApp.get_or_create( app=object, user=user )
+        return userapp

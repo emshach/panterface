@@ -2,9 +2,10 @@
 from __future__ import unicode_literals
 from . import views, serializers, app
 from .app import action, Action
-from .action import MatchType
+from .core import getdatum
+from .action import Ops
 from .models import Setting, App as AppModel, UserApp, ActionStatus
-from packaging.version import parse as version_parse
+from .util import toversion
 
 
 _links = '''_container_entries _widget_entries _block_entries _screen_entries
@@ -779,152 +780,306 @@ class App( app.App ):
         return ()
 
 
-@action
-class InstallAction( Action ):
-    name = 'install'
+# TODO: for all actions
+# dict(
+#     action='grant',
+#     user=self.getuser() or self.op.user,
+#     proc=self.__class__,
+#     object=self.object
+# ),
+# dict(
+#     action='endorse',
+#     proc=self.__class__,
+#     object=self.object
+# ))
 
+class AppAction( Action ):
     def __init__( self, op=None, object=None, **kw ):
-        super( Action, self ).__init__()
-        self.object = object
-        self.op = op
+        super( AppAction, self ).__init__( op=op, object=object )
         self.app = App.get_for_object( self.object )
+
+    def getobject( self ):
+        return self.app.model
 
     def getuser( self ):
         return isinstance( self.object, UserApp ) and self.object.user
 
-    def getneeds( self, context, version='default', **kw ):
-        pass
-
     def compare( self, data ):
         pass
+
+
+@action
+class InstallAction( AppAction ):
+    name = 'install'
+
+    def getneeds( self, context, version='default', **kw ):
+        app = self.app
+        versions = app.getversions( version )
+        if len( versions ) == 1:
+            version = versions[0]
+            context.addneeds(
+                self, Ops.all(
+                    tuple(
+                        dict(
+                            action=self.__class__,
+                            object=getdatum( 'fride.app', name=dep ),
+                            version=version
+                        )
+                        for dep, version
+                        in app.versions[ version ].get( 'depends', {} ).items()
+                    )))
+        elif len( version ):
+            context.addneed(
+                self, Ops.any(
+                    map( lambda x: dict( action=self.__class__, version=x ),
+                         versions )))
+        else:
+            context.status( 'unresolvable', self )
 
     # @Action.formodels( AppModel ) # TODO: this
     def run( self, context, version='default', **kw ):
         app = self.app
-        app.install()
-        return ActionStatus.get( 'app_installed' if app.installed
+        app.install( to=version )
+        return ActionStatus.get( 'app_installed'
+                                 if app.installed
                                  else 'app_install_failed' ), app
 
 
 @action
-class ReInstallAction( Action ):
+class ReinstallAction( AppAction ):
     name = 'reinstall'
 
-    # @Action.formodels( AppModel ) # TODO: this
-    def runsystem( self, version=None, **kw ):
-        app = App.get_for_object( self.object )
-        if app.installed:
-            return ActionStatus.get( 'nothing_to_do' ), app
-        app.install()
-        return ActionStatus.get( 'app_installed' if app.installed
-                                 else 'app_install_failed' ), app
+    def getneeds( self, context, **kw ):
+        context.addcond( self, dict(
+            action='install',
+            object=self.getobject(),
+        ))
 
     # @Action.formodels( AppModel ) # TODO: this
-    def dryrunsystem( self, version=None, **kw ):
-        return ActionStatus.get( 'not_implemented' ), ()
+    def run( self, context, **kw ):
+        app = self.app
+        version = app.version
+        app.version = '0.0.0'
+        app.update()
+        app.upgrade( to=version )
+        return ActionStatus.get( 'app_reinstalled'
+                                 if app.installed
+                                 else 'app_reinstall_failed' ), app
+
+
+@action
+class UninstallAction( AppAction ):
+    name = 'uninstall'
+
+    def getneeds( self, context, **kw ): # TODO
+        pass
+        # context.addneed( self, dict(
+        #     action='install',
+        #     object=self.getobject(),
+        # ))
 
     # @Action.formodels( AppModel ) # TODO: this
-    def runuser( self, **kw ):
-        o = self.object
-        user = self.op.user
-        if isinstance( o, UserApp ):
-            user = o.user
-            o = o.app
-        app = App.get_for_object( self.object )
-        if app.installed_for( user ):
-            return ActionStatus.get( 'nothing_to_do' ), app
-        app.install_for( user )
-        return ActionStatus.get( 'app_userdata_installed'
-                                 if app.installed_for( user )
-                                 else 'app_userdata_install_failed' ), app
+    def run( self, context, **kw ):
+        app = self.app
+        app.uninstall()
+        return ActionStatus.get( 'app_uninstalled'
+                                 if not app.installed
+                                 else 'app_uninstall_failed' ), app
+
+
+@action
+class UpdateAction( AppAction ):
+    name = 'update'
+
+    def getversions( self, to ):
+        return self.app.getversions( to,  op='>' ) # TODO: getversions(op)
+
+    def getneeds( self, context, to='latest', **kw ):
+        app = self.app
+        allv = app.getversions()
+        versions = self.getversions( to )
+        context.addconds( self, Ops.any(
+            tuple( dict(
+                action='install',
+                object=self.object,
+                version=v
+            ) for v in set( allv ).difference( set( versions )))))
+        if len( versions ) == 1:
+            version = versions[0]
+            context.addneeds(
+                self, Ops.all(
+                    tuple(
+                        dict(
+                            action=self.__class__,
+                            object=getdatum( 'fride.app', name=dep ),
+                            version=version
+                        )
+                        for dep, version
+                        in app.versions[ version ].get( 'depends', {} )
+                        .items()
+                    )))
+        elif len( version ):
+            context.addneed(
+                self, Ops.any(
+                    map( lambda x: dict( action=self.__class__, version=x ),
+                         versions )))
+        else:
+            context.status( 'unresolvable', self )
 
     # @Action.formodels( AppModel ) # TODO: this
-    def dryrunuser( self, **kw ):
-        return ActionStatus.get( 'not_implemented' ), ()
+    def run( self, context, to='latest', **kw ):
+        targets = self.app.getversions( to )
+        app = self.app
+        app.upgrade( to=to )
+        return ActionStatus.get( 'app_updated'
+                                 if app.version in targets
+                                 else 'app_update_failed' ), app
 
 
 @action
-def user_install( user, thing, **kw ):
-    if isinstance( thing, UserApp ):
-        thing = UserApp.app
-    if not isinstance( thing, AppModel ):
-        return                  # TODO: raise TypeError
-    app = App.get_for_object( thing )
-    if not app.installed:
-        return                  # TODO: raise TypeError
-    app.installuserdata( user )
+class UpgradeAction( UpdateAction ):
+    name = 'upgrade'
 
 
 @action
-def uninstall( user, thing, **kw ):
-    pass
+class DowngradeAction( UpdateAction ):
+    name = 'downgrade'
+
+    def getversions( self, to ):
+        return self.app.getversions( to,  op='<' )
+
+    def getneeds( self, context, to, **kw ):
+        return super( DowngradeAction, self ).getneeds( context, to, **kw )
+
+    def run( self, context, to, **kw ):
+        return super( DowngradeAction, self ).run( context, to, **kw )
 
 
 @action
-def user_uninstall( user, thing, **kw ):
-    pass
+class ActivateAction( AppAction ):
+    name = 'activate'
+
+    def getneeds( self, context, **kw ):
+        context.addcond( self, dict(
+            action='install',
+            object=self.object,
+        ))
+
+    def run( self, context, **kw ):
+        app = self.app
+        app.activate()
+        return ActionStatus.get( 'app_activated'
+                                 if app.active
+                                 else 'app_activation_failed' ), app
 
 
 @action
-def update( user, thing, to='latest', **kw ):
-    if not isinstance( thing, AppModel ):
-        return                  # TODO: raise TypeError
-    app = App.get_for_object( thing )
-    if not app.installed:
-        return                  # todo raise TypeError
-    app.update()
-    v = version_parse( to )
-    target = app.available if to == 'latest' else to if v.release\
-                 else app.versions.get( to )
-    app.upgrade( to=target )
-    return dict(
-        status='updated',
-        success=( "App {} updated!".format( app.name ))
-        if app.version == target
-        else dict( status='failed', error='update failed' ))
+class DeactivateAction( AppAction ):
+    name = 'deactivate'
+
+    def getneeds( self, context, **kw ):
+        context.addcond( self, dict(
+            action='install',
+            object=self.object,
+        ))
+
+    def run( self, context, **kw ):
+        app = self.app
+        app.deactivate()
+        return ActionStatus.get( 'app_deactivated'
+                                 if not app.active
+                                 else 'app_deactivation_failed' ), app
+
+
+class UserAppAction( AppAction ):
+    def __init__( self, op=None, object=None, **kw ):
+        super( UserAppAction, self ).__init__( op=op, object=object )
+        self.userapp = App.get_for_user(
+            self.object, self.getuser() or self.op.user )
+
+    def getobject( self ):
+        return self.userapp
 
 
 @action
-def upgrade( user, thing, **kw ):
-    pass
+class UserInstallAction( UserAppAction ):
+    name = 'user_install'
+
+    def getneeds( self, context, **kw ):
+        context.addneed( self, dict(
+            action='activate',
+            object=self.app.model,
+        ))
+
+    # @Action.formodels( AppModel ) # TODO: this
+    def run( self, context, **kw ):
+        app = self.app
+        userapp = self.userapp
+        app.install_for_user( userapp=userapp )
+        return ( ActionStatus.get( 'app_installed_for_user'
+                                   if userapp.installed
+                                   else 'app_install_for_user_failed' ),
+                 userapp )
 
 
 @action
-def downgrade( user, thing, **kw ):
-    pass
+class UserUninstallAction( UserAppAction ):
+    name = 'user_uninstall'
+
+    def getneeds( self, context, **kw ):
+        context.addcond( self, dict(
+            action='user_install',
+            object=self.userapp,
+        ))
+
+    # @Action.formodels( AppModel ) # TODO: this
+    def run( self, context, **kw ):
+        app = self.app
+        userapp = self.userapp
+        app.uninstall_for_user( userapp=userapp )
+        return ( ActionStatus.get( 'app_uninstalled_for_user'
+                                   if not userapp.installed
+                                   else 'app_uninstall_for_user_failed' ),
+                 userapp )
 
 
 @action
-def activate( user, thing, **kw ):
-    if not isinstance( thing, AppModel ):
-        return                  # TODO: raise TypeError
-    app = App.get_for_object( thing )
-    app.activate()
-    return dict(
-        status='active',
-        success=( "App {} activated!".format( app.name ))
-        if app.active
-        else dict( 'failed', error='Activation failed' ))
+class UserActivateAction( UserAppAction ):
+    name = 'user_activate'
+
+    def getneeds( self, context, **kw ):
+        context.addneed( self, dict(
+            action='user_install',
+            object=self.userapp,
+        ))
+
+    # @Action.formodels( AppModel ) # TODO: this
+    def run( self, context, **kw ):
+        app = self.app
+        userapp = self.userapp
+        app.activate_for_user( userapp=userapp )
+        return ( ActionStatus.get( 'app_activated_for_user'
+                                   if userapp.active
+                                   else 'app_activate_for_user_failed' ),
+                 userapp )
 
 
 @action
-def user_activate( user, thing, **kw ):
-    pass
+class UserDeactivateAction( UserAppAction ):
+    name = 'user_deactivate'
 
+    def getneeds( self, context, **kw ):
+        context.addneed( self, dict(
+            action='user_activate',
+            object=self.userapp,
+        ))
 
-@action
-def deactivate( user, thing, **kw ):
-    if not isinstance( thing, AppModel ):
-        return                  # TODO: raise TypeError
-    app = App.get_for_object( thing )
-    app.deactivate()
-    return dict(
-        status='disabled',
-        success=( "App {} disabled".format( app.name ))
-        if not app.active
-        else dict( status='failed', error='deactivation failed' ))
-
-
-@action
-def user_deactivate( user, thing, **kw ):
-    pass
+    # @Action.formodels( AppModel ) # TODO: this
+    def run( self, context, **kw ):
+        app = self.app
+        userapp = self.userapp
+        app.deactivate_for_user( userapp=userapp )
+        return ( ActionStatus.get( 'app_deactivated_for_user'
+                                   if not userapp.active
+                                   else 'app_deactivate_for_user_failed' ),
+                 userapp )

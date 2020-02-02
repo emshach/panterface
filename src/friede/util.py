@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+from packaging.version import parse as version_parse, _BaseVersion
 import re
+
 
 def snake_case( str ):
     return re.sub(r'(((?<=[a-z])[A-Z])|([A-Z](?![A-Z]|$)))', r'_\1', str )\
              .lower().strip('_')
+
 
 def split_dict( obj, *keys ):
     d1 = {}
@@ -12,6 +15,7 @@ def split_dict( obj, *keys ):
     for key, value in obj.items():
         ( d1 if key in keys else d2 )[ key ] = value
     return d1, d2
+
 
 def as_tree( col, field='path', sep='.' ):
     tree = {}
@@ -21,12 +25,20 @@ def as_tree( col, field='path', sep='.' ):
         while path and not path[-1]:
             path.pop()
         for x in path:
-            if not x: continue
+            if not x:
+                continue
             if x not in node:
                 node[x] = {}
             node = node[x]
         node['$'] = item.to_dict()
     return tree
+
+
+def toversion( version ):
+    if isinstance( version, _BaseVersion ):
+        return version
+    return version_parse( version )
+
 
 form_field_mappings = dict(
     AutoField=None,

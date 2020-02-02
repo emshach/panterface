@@ -949,6 +949,10 @@ class ActionStatus( Model ):
     def __nonzero__( self ):
         return self.value >= 0
 
+    @staticmethod
+    def get( name ):
+        return ActionStatus.objects.get( name=name )
+
 
 @python_2_unicode_compatible
 class OpStatus( Model ):
@@ -1011,7 +1015,12 @@ class Operation( Model ):
     )
     hypothetical = M.BooleanField( default=True )
     conflicts    = M.ManyToManyField( 'self' )
-    model        = M.ForeignKey( ContentType, M.PROTECT, blank=True, null=True )
+    model        = M.ForeignKey(
+        ContentType,
+        on_delete=M.PROTECT,
+        blank=True,
+        null=True
+    )
     context      = JSONField( default=dict )
     status       = M.ForeignKey(
         OpStatus,
@@ -1042,7 +1051,7 @@ class Question( Model ):
 
 @python_2_unicode_compatible
 class UserApp( DataMixin ):
-    owner     = M.ForeignKey(
+    user      = M.ForeignKey(
         get_user_model(),
         on_delete=M.CASCADE,
         related_name='friede_apps_use'

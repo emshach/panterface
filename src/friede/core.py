@@ -1,19 +1,19 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+import sys
+import pprint
+import traceback
+from collections import deque
+from importlib import import_module
+from .util import toversion
+from django.core.exceptions import FieldDoesNotExist
+from django.db import transaction, IntegrityError
+from django.db.models.base import Model as BaseModel
+from django.contrib.contenttypes.models import ContentType
+from django.conf import settings
 from .objects import Settings, Shells, getenv
 from .models import *
 from .util import split_dict
-from django.db import transaction
-from django.core.exceptions import FieldDoesNotExist
-from django.db import IntegrityError
-from django.contrib.contenttypes.models import ContentType
-from django.conf import settings
-from importlib import import_module
-from collections import deque
-from packaging.version import parse as version_parse
-import sys
-import traceback
-import pprint
 
 types = dict(
     containers=Container,
@@ -43,6 +43,16 @@ def _get_model( name, app=None ):
     except ContentType.DoesNotExist:
         return None
     return obj.model_class()
+
+
+
+def getdatum( model, **kw ):
+    m = model
+    if isinstance( model, basestring ):
+        model = _get_model( model )
+    if not isinstance( model, BaseModel ):
+        raise Exception( "model '{}' not found".format(m) )
+    return model.objects.get( **kw )
 
 def setup():
     "make new settings"
@@ -202,9 +212,9 @@ def updateapp( name, data=None, obj=None ):
 
         app = obj.model if obj and obj.model else App.objects.get( path=path )
         if data:
-            available = version_parse( '0.0.0' )
+            available = toversion( '0.0.0' )
             for d in data:
-                v = version_parse( d[0] )
+                v = toversion( d[0] )
                 if v > available:
                     available = v
                 if len(d) > 1:
@@ -510,12 +520,12 @@ ops.update(
 
 
 def upgradeapp( app, data, upto=None ):
-    app_version = version_parse( app.version )
+    app_version = toversion( app.version )
     max_version = None
-    min_version = version_parse( app.min_version )
+    min_version = toversion( app.min_version )
     upgraded = dict( val=False )
     if upto:
-        upto = version_parse( upto )
+        upto = toversion( upto )
 
     def update_version():
         if max_version :
@@ -527,7 +537,7 @@ def upgradeapp( app, data, upto=None ):
     for tree in data:
         v = tree[0]
         max_version = v
-        version = version_parse(v)
+        version = toversion(v)
         if app_version >= version :
             continue
         if upto:

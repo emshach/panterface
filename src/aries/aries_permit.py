@@ -4,7 +4,7 @@ def _perm_name( name, data={} ):
     return "Can {} {}".format(*( name[:2] ))
 
 def _aries_model( ct, data={} ):
-    return 'aries.'+ct
+    return 'aries.' + ct[-1]
 
 def _perm_name_trans_1( name, data={} ):
     op, arg1, arg2 = name

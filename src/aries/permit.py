@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
+# from __future__ import unicode_literals
 from importlib import import_module
 from packaging.version import parse as version_parse
 from django.conf import settings

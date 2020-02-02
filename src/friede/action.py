@@ -1,6 +1,7 @@
 from collections import OrderedDict, deque
 from django.utils.timezone import now
 from .exception import OperationRuntimeError, InvalidOperationError
+from .inspect import isclass
 from .models import (
     Operation as OpModel,
     Action as ActModel,
@@ -96,12 +97,12 @@ class Action( object ):
                 return None, None, None
         elif isinstance( action, Action ):
             return actionobj.model, action.__class__, action
-        elif issubclass( action, Action ):
+        elif isclass( action ) and issubclass( action, Action ):
             actionclass = action
             action = None
         else:
             return None, None, None
-        if not issubclass( actionclass, Action ):
+        if not isclass( actionclass ) or not issubclass( actionclass, Action ):
             if not action:
                 return None, None, None
             return action, Action.get_for_object( action ), None
@@ -322,11 +323,12 @@ class Operation( object ):
                 action, actionclass, actionobj = Action.getaction(a)
                 if action is None:
                     if not isinstance( a, ( Action, basestring, int )):
-                        if not issubclass( a, Action ):
+                        if not isclass(a) or not issubclass( a, Action ):
                             raise InvalidOperationError( 'Invalid action', a )
                         raise InvalidOperationError(
                             'Action wrong type', type(a))
-                    if not issubclass( actionclass, Action ):
+                    if not isclass( actionclass )\
+                       or issubclass( actionclass, Action ):
                         raise InvalidOperationError( 'Invalid action', a )
                     raise InvalidOperationError( 'Action not found', a )
             # object

@@ -73,7 +73,7 @@ class Action( object ):
     def get_for_object( object ):
         name = object.path
         if name.startswith( 'actions.' ):
-            name = name[ 5: ]
+            name = name[ 8: ]
         return actions[ name ]
 
     @staticmethod

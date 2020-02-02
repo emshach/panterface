@@ -1,7 +1,7 @@
 from collections import OrderedDict, deque
 from django.utils.timezone import now
 from .exception import OperationRuntimeError, InvalidOperationError
-from .inspect import isclass
+from inspect import isclass
 from .models import (
     Operation as OpModel,
     Action as ActModel,

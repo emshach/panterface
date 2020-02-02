@@ -70,7 +70,7 @@ class Action( object ):
         return ()
 
     @staticmethod
-    def get_for_object( obj ):
+    def get_for_object( object ):
         name = object.path
         if name.startswith( 'actions.' ):
             name = name[ 5: ]

@@ -7,6 +7,7 @@ from collections import OrderedDict, deque
 from django.db import transaction
 from django.db.models import Model
 from django.contrib.contenttypes.models import ContentType
+from django.contrib.auth import models as auth
 from . import models as M
 import traceback
 import sys
@@ -61,6 +62,10 @@ class Permit( object ):
             roles=M.Role,
             permissions=M.Permission,
             policies=M.Policy,
+        )
+        extends = dict(
+            groups=auth.Group,
+            permissions=auth.Permission
         )
         names = dict(
             users=lambda x: '_'.join(x),
@@ -133,12 +138,21 @@ class Permit( object ):
                                     ContentType.objects.get_for_model( ct ).id
                         else:
                             raise ValueError( "bad content-type: %s" % ct )
-                    print 'uoc permission', data, search
+                    print 'uoc permission', Type, data, search
                     try:
                         obj = Type.objects.get( **search )
+                        obj.update( data )
                     except Type.DoesNotExist:
-                        new = True
-                        obj = Type.objects.create( **dict( data, **search ))
+                        ParentType = extends.get( tag )
+                        if ParentType is not None:
+                            try:
+                                obj = extends[ tag ].objects.get( **search )
+                            except ParentType.DoesNotExist:
+                                new = True
+                                obj = Type.objects.create( **dict( data, **search ))
+                        else:
+                            new = True
+                            obj = Type.objects.create( **dict( data, **search ))
                     print 'created' if new else 'updated', Type._meta.model_name,\
                         name
                     return obj

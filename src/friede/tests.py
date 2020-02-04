@@ -12,6 +12,7 @@ class ActionsTestCase( TestCase ):
         setup([])
 
     def test_can_get_action_object( self ):
+        """action retrieval from db and memory works as intended"""
         actionobj = actions.get( 'install' )
         actionstore = M.Action.objects.get( name='install' )
         self.assertIsNotNone( actionobj )

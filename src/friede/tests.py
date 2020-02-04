@@ -3,15 +3,12 @@ from __future__ import unicode_literals
 
 from django.test import TestCase
 from .action import Action, actions
-from .app import setup, apps
-import friede.models as M
+from .app import apps
+from . import models as M
+from . import urls
 
 
 class ActionsTestCase( TestCase ):
-    @classmethod
-    def setUpTestData( cls ):
-        setup([])
-
     def test_Can_retrieve_action_object_by_name( self ):
         actionobj = actions.get( 'install' )
         self.assertIsNotNone( actionobj, "Install action exists" )
@@ -31,10 +28,6 @@ class ActionsTestCase( TestCase ):
 
 
 class AppsTestCase( TestCase ):
-    @classmethod
-    def setUpTestData( cls ):
-        setup([])
-
     def test_Core_apps_automatically_installed( self ):
         required = M.App.objects.filter( required=True )
         notinstalled = required.filter( installed=False )

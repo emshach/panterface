@@ -150,11 +150,12 @@ class Permit( object ):
                             obj = Type.objects.create( **dict( data, **search ))
                         else:
                             try:
-                                parent = extends[ tag ].objects.get( **search )
+                                parent = ParentType.objects.get( **search )
                                 data.pop( 'name', None )
-                                obj = Type.objects.create(
+                                Type.objects.create(
                                     **dict( data, auth_ptr=parent, **search )
                                 ).save_base( raw=True )
+                                obj = Type.objects.get( **search )
                             except ParentType.DoesNotExist:
                                 new = True
                                 obj = Type.objects.create( **dict( data, **search ))

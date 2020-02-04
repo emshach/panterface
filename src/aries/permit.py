@@ -145,15 +145,19 @@ class Permit( object ):
                         obj.update( data )
                     except Type.DoesNotExist:
                         ParentType = extends.get( tag )
-                        if ParentType is not None:
+                        if ParentType is None:
+                            new = True
+                            obj = Type.objects.create( **dict( data, **search ))
+                        else:
                             try:
-                                obj = extends[ tag ].objects.get( **search )
+                                parent = extends[ tag ].objects.get( **search )
+                                data.pop( 'name', None )
+                                obj = Type.objects.create(
+                                    **dict( data, auth_ptr=parent, **search )
+                                ).save_base( raw=True )
                             except ParentType.DoesNotExist:
                                 new = True
                                 obj = Type.objects.create( **dict( data, **search ))
-                        else:
-                            new = True
-                            obj = Type.objects.create( **dict( data, **search ))
                     print 'created' if new else 'updated', Type._meta.model_name,\
                         name
                     return obj

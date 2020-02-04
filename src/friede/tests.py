@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from django.test import TestCase
 from .action import Action, actions
 from .app import apps
+from .util import toversion
 from . import models as M
 from . import urls
 
@@ -46,5 +47,19 @@ class AppsTestCase( TestCase ):
         print 'friede versions'
         print friede.versions
         print friede.getversions()
-        self.assertGreater( len( friede.getversions()), 0,
+        self.assertGreater( len( ), 0,
                             "App version information loaded" )
+        self.assertListEqual(
+            friede.getversions( '0.2.19', op='<' ),
+            [
+                toversion('0.1.0'),
+                toversion('0.2.0'),
+                toversion('0.2.1'),
+                toversion('0.2.3'),
+                toversion('0.2.4'),
+                toversion('0.2.5'),
+                toversion('0.2.6'),
+                toversion('0.2.7'),
+                toversion('0.2.8'),
+            ],
+            "App versions retrieved properly" )

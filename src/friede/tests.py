@@ -46,9 +46,8 @@ class AppsTestCase( TestCase ):
         friede = apps.get( 'friede' )
         print 'friede versions'
         print friede.versions
-        print friede.getversions()
         self.assertListEqual(
-            friede.getversions( '0.2.19', op='<' ),
+            friede.getversions( '0.2.9', op='<' ),
             [
                 toversion('0.1.0'),
                 toversion('0.2.0'),

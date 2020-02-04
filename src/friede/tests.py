@@ -47,8 +47,6 @@ class AppsTestCase( TestCase ):
         print 'friede versions'
         print friede.versions
         print friede.getversions()
-        self.assertGreater( len( ), 0,
-                            "App version information loaded" )
         self.assertListEqual(
             friede.getversions( '0.2.19', op='<' ),
             [

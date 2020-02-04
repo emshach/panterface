@@ -11,8 +11,17 @@ class ActionsTestCase( TestCase ):
     def setUp( self ):
         setup([])
 
-    def test_can_get_action_object( self ):
-        """action retrieval from db and memory works as intended"""
+    def test_can_retrieve_action_object_by_name( self ):
+        """Actions objects can be retrieved by name """
+        actionobj = actions.get( 'install' )
+        self.assertIsNotNone( actionobj )
+
+    def test_can_retrieve_action_store_by_name( self ):
+        actionstore = M.Action.objects.get( name='install' )
+        self.assertIsNotNone( actionstore )
+
+    def test_can_retrieve_action_object_by_store( self ):
+        """Action retrieval from db and memory works as intended"""
         actionobj = actions.get( 'install' )
         actionstore = M.Action.objects.get( name='install' )
         self.assertIsNotNone( actionobj )

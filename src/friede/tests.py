@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from django.test import TestCase
 from .action import Action, actions
-from .app import setup
+from .app import setup, apps
 import friede.models as M
 
 
@@ -37,3 +37,13 @@ class ActionsTestCase( TestCase ):
                             "Required applications exist" )
         self.assertFalse( notinstalled.count(),
                           "All required applications are installed" )
+
+    def test_Can_get_app_by_name( self ):
+        friede = apps.get( 'friede' )
+        self.assertIsNotNone( friede, "Got main app from apps registry" )
+
+    def test_Can_get_app_versions( self ):
+        friede = apps.get( 'friede' )
+        print 'friede versions', friede.getversions()
+        self.assertGreater( len( friede.getversions()), 0,
+                            "App version information loaded" )

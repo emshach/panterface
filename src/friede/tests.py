@@ -8,7 +8,8 @@ import friede.models as M
 
 
 class ActionsTestCase( TestCase ):
-    def setUp( self ):
+    @classmethod
+    def setUpTestData( cls ):
         setup([])
 
     def test_Can_retrieve_action_object_by_name( self ):

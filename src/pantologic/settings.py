@@ -228,4 +228,4 @@ AUTH_USER_MODEL = 'aries.User'
 
 # fancy testing
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
-NOSE_ARGS = [ '--with-spec', '--spec-color' ]
+NOSE_ARGS = [ '--with-spec', '--spec-color', '--nocapture' ]

@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.test import TestCase
-from actions import Action, actions
+from .actions import Action, actions
 from .app import setup
 import friede.models as M
 

@@ -119,16 +119,18 @@ class Permit( object ):
                         if isinstance( ct, basestring ):
                             if '.' in ct:
                                 app, mod = ct.split('.')
-                                search[ 'content_type' ] = \
-                                    ContentType.objects.get( app_label=app, model=mod )
+                                search[ 'content_type_id' ] = \
+                                    ContentType.objects.get(
+                                        app_label=app, model=mod ).id
                             elif ct in types:
-                                search[ 'content_type' ] = \
-                                    ContentType.objects.get_for_model( types[ ct ])
+                                search[ 'content_type_id' ] = \
+                                    ContentType.objects.get_for_model(
+                                        types[ ct ]).id
                             else:
                                 raise KeyError( "no content type for '%s'" % ct )
                         elif hasattr( ct, '__class__' ) and issubclass( ct, Model ):
-                            search[ 'content_type' ] = \
-                                    ContentType.objects.get_for_model( ct )
+                            search[ 'content_type_id' ] = \
+                                    ContentType.objects.get_for_model( ct ).id
                         else:
                             raise ValueError( "bad content-type: %s" % ct )
                     print 'uoc permission', data, search

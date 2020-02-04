@@ -139,6 +139,7 @@ class Permit( object ):
                         else:
                             raise ValueError( "bad content-type: %s" % ct )
                     print 'uoc permission', Type, data, search
+                    obj, new = None, None
                     try:
                         obj = Type.objects.get( **search )
                         obj.update( data )

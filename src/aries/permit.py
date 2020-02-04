@@ -134,7 +134,11 @@ class Permit( object ):
                         else:
                             raise ValueError( "bad content-type: %s" % ct )
                     print 'uoc permission', data, search
-                    obj, new = Type.objects.update_or_create( defaults=data, **search )
+                    try:
+                        obj = Type.objects.get( **search )
+                    except Type.DoesNotExist:
+                        new = True
+                        obj = Type.objects.create( **dict( data, **search ))
                     print 'created' if new else 'updated', Type._meta.model_name,\
                         name
                     return obj

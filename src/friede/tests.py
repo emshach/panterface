@@ -29,10 +29,10 @@ class ActionsTestCase( TestCase ):
                        "object retrieved by store" )
 
     def test_Core_apps_automatically_installed( self ):
-        required = M.Action.objects.filter( required=True )
+        required = M.App.objects.filter( required=True )
         notinstalled = required.filter( installed=False )
         print 'required apps', required.all()
         self.assertGreater( required.count(), 0,
                             "Required applications exist" )
         self.assertFalse( notinstalled.count(),
-                          "All required appliactions are installed" )
+                          "All required applications are installed" )

@@ -29,6 +29,12 @@ class ActionsTestCase( TestCase ):
                        "Action object retrieved directly is same as action "
                        "object retrieved by store" )
 
+
+class AppsTestCase( TestCase ):
+    @classmethod
+    def setUpTestData( cls ):
+        setup([])
+
     def test_Core_apps_automatically_installed( self ):
         required = M.App.objects.filter( required=True )
         notinstalled = required.filter( installed=False )
@@ -44,6 +50,8 @@ class ActionsTestCase( TestCase ):
 
     def test_Can_get_app_versions( self ):
         friede = apps.get( 'friede' )
-        print 'friede versions', friede.getversions()
+        print 'friede versions'
+        print friede.versions
+        print friede.getversions()
         self.assertGreater( len( friede.getversions()), 0,
                             "App version information loaded" )

@@ -142,7 +142,10 @@ class Permit( object ):
                     obj, new = None, None
                     try:
                         obj = Type.objects.get( **search )
-                        obj.update( data )
+                        for k, v in data.items():
+                            setattr( obj, k, v )
+                        if data:
+                            obj.save()
                     except Type.DoesNotExist:
                         ParentType = extends.get( tag )
                         if ParentType is None:

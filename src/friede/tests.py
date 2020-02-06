@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.test import TestCase
-from .action import Action, actions
+from .action import Action, actions, Operation
 from .app import apps
 from .util import toversion
 from . import models as M
@@ -29,7 +29,7 @@ class ActionsTestCase( TestCase ):
 
 
 class AppsTestCase( TestCase ):
-    def test_Core_apps_automatically_installed( self ):
+    def test_All_core_apps_automatically_installed( self ):
         required = M.App.objects.filter( required=True )
         notinstalled = required.filter( installed=False )
         print 'required apps', required.all()
@@ -49,14 +49,22 @@ class AppsTestCase( TestCase ):
         self.assertListEqual(
             friede.getversions( '0.2.9', op='<' ),
             [
-                toversion('0.1.0'),
-                toversion('0.2.0'),
-                toversion('0.2.1'),
-                toversion('0.2.3'),
-                toversion('0.2.4'),
-                toversion('0.2.5'),
-                toversion('0.2.6'),
-                toversion('0.2.7'),
-                toversion('0.2.8'),
+                toversion( '0.1.0' ),
+                toversion( '0.2.0' ),
+                toversion( '0.2.1' ),
+                toversion( '0.2.3' ),
+                toversion( '0.2.4' ),
+                toversion( '0.2.5' ),
+                toversion( '0.2.6' ),
+                toversion( '0.2.7' ),
+                toversion( '0.2.8' ),
             ],
             "App versions retrieved properly" )
+
+
+class OpsTestCase( TestCase ):
+    def test_Can_create_operation_object( self ):
+        op = Operation( action='install', model='friede.app', id=4,
+                        kw={ 'version': '0.2.9' })
+        print 'op'
+        print op.__dict__

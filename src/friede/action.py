@@ -276,8 +276,10 @@ class Operation( object ):
 
     def __init__( self, user, parent=None, child=None, action=None,
                   model=None, id=None, ids=(), object=None, ops=None,
-                  store=None ):
+                  store=None, arg=(), kw={} ):
         super( Operation, self ).__init__()
+        self.arg = arg
+        self.kw = kw
         if store:
             if isinstance( store, int ):
                 store = OpModel.objects.get( pk=store )
@@ -293,6 +295,11 @@ class Operation( object ):
                     object=self.action.object
                 )
             self.status = store.status
+            if store.context:
+                if 'arg' in store.context:
+                    self.arg = store.context[ 'arg' ]
+                if 'kw' in store.context:
+                    self.kw = store.context[ 'kw' ]
             if parent:
                 self.parent = parent
             elif store.parent:
@@ -370,7 +377,11 @@ class Operation( object ):
             model=model,
             object_id=id,
             object_ids=ids,
-            ops=ops
+            ops=ops,
+            context=dict(
+                arg=self.arg,
+                kw=self.kw
+            )
         )
         OpStatus.objects.create(
             status=ActionStatus.get( status[ 'type' ]),

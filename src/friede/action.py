@@ -378,10 +378,10 @@ class Operation( object ):
             )
         self.store = OpModel.objects.create(
             user=user,
-            parent=parent,
+            parent=parent.store if parent else None,
             action=action,
             model=( ContentType.objects.get_for_model( model ) if model
-                    else model ),
+                    else None ),
             object_id=id,
             object_ids=ids,
             ops=ops,

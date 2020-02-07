@@ -179,3 +179,17 @@ class OpsTestCase( TestCase ):
         )
         print 'op'
         print op.__dict__
+        self.assertIsInstance( op, Operation, "Operation object created" )
+
+    def test_Can_retrieve_operation_object_by_store( self ):
+        op = Operation(
+            self.user,
+            action='install',
+            model='friede.app',
+            id=4,
+            kw={ 'version': '0.2.9' }
+        )
+        op2 = Operation( self.user, store=op.store )
+        print 'op2'
+        print op2.__dict__
+        self.assertIsInstance( op2, Operation, "Operation retrieved by store" )

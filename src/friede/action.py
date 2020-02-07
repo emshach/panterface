@@ -1,5 +1,6 @@
 from collections import OrderedDict, deque
 from django.utils.timezone import now
+from django.contrib.contenttypes.models import ContentType
 from .exception import OperationRuntimeError, InvalidOperationError
 from inspect import isclass
 from .models import (
@@ -379,7 +380,8 @@ class Operation( object ):
             user=user,
             parent=parent,
             action=action,
-            model=model,
+            model=( ContentType.objects.get_for_model( model ) if model
+                    else model ),
             object_id=id,
             object_ids=ids,
             ops=ops,

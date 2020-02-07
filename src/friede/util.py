@@ -77,7 +77,7 @@ def getmodel( name, app=None ):
             return name
     except TypeError:
         pass
-    app, model = app, name if app else name.split('.')
+    app, model = ( app, name ) if app else name.split('.')
     try:
         obj = ContentType.objects.get( app_label=app, model=model )
     except ContentType.DoesNotExist:

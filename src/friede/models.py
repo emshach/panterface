@@ -1031,7 +1031,12 @@ class Operation( Model ):
     )
     object_id    = M.PositiveIntegerField( blank=True, null=True )
     object_ids   = ArrayField( M.PositiveIntegerField(), default=list )
-    ops          = ArrayField( JSONField(), default=list )
+    ops          = ArrayField(
+        JSONField( default=dict ),
+        blank=True,
+        null=True,
+        default=list
+    )
     # dryrun_ok    = M.DateTimeField( blank=True, null=True )
     done         = M.DateTimeField( blank=True, null=True )
 

@@ -368,7 +368,8 @@ class Operation( object ):
             self.actionclass = actionclass
             actionclass = self.getactionclass()
             if not action and actionclass and self.object:
-                action = actionclass( op=self, object=self.getobject() )
+                actionobj = actionclass( op=self, object=self.getobject() )
+                action = actionobj.model
         except InvalidOperationError as e:
             status = dict(
                 type='invalid_operation',

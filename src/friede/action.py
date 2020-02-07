@@ -556,7 +556,7 @@ class Operation( object ):
     # store proxy getter/setters
 
     @property
-    def user( self, user ):
+    def user( self ):
         return self.store.user
 
     @user.setter
@@ -565,7 +565,7 @@ class Operation( object ):
         self.store.save()
 
     @property
-    def action( self, action ):
+    def action( self ):
         return self.store.action
 
     @action.setter
@@ -574,7 +574,7 @@ class Operation( object ):
         self.store.save()
 
     @property
-    def model( self, model ):
+    def model( self ):
         return self.store.model
 
     @model.setter
@@ -583,7 +583,7 @@ class Operation( object ):
         self.store.save()
 
     # @property
-    # def context( self, context ):
+    # def context( self ):
     #     return self.store.context
 
     # @context.setter
@@ -592,7 +592,7 @@ class Operation( object ):
     #     self.store.save()
 
     @property
-    def status( self, status ):
+    def status( self ):
         return self.store.status
 
     @status.setter
@@ -601,7 +601,7 @@ class Operation( object ):
         self.store.save()
 
     @property
-    def object_id( self, object_id ):
+    def object_id( self ):
         return self.store.object_id
 
     @object_id.setter
@@ -610,7 +610,7 @@ class Operation( object ):
         self.store.save()
 
     @property
-    def object_ids( self, object_ids ):
+    def object_ids( self ):
         return self.store.object_ids
 
     @object_ids.setter
@@ -619,7 +619,7 @@ class Operation( object ):
         self.store.save()
 
     @property
-    def ops( self, ops ):
+    def ops( self ):
         return self.store.ops
 
     @ops.setter
@@ -628,7 +628,7 @@ class Operation( object ):
         self.store.save()
 
     # @property
-    # def dryrun_ok( self, dryrun_ok ):
+    # def dryrun_ok( self ):
     #     return self.store.dryrun_ok
 
     # @dryrun_ok.setter
@@ -637,7 +637,7 @@ class Operation( object ):
     #     self.store.save()
 
     @property
-    def done( self, done ):
+    def done( self ):
         return self.store.done
 
     @done.setter
@@ -646,7 +646,7 @@ class Operation( object ):
         self.store.save()
 
     @property
-    def needs( self, needs ):
+    def needs( self ):
         return self.store.needs.all()
 
     @needs.setter
@@ -656,7 +656,7 @@ class Operation( object ):
         self.store.save()
 
     @property
-    def unmet( self, unmet ):
+    def unmet( self ):
         return self.store.unmet.all()
 
     @unmet.setter
@@ -666,7 +666,7 @@ class Operation( object ):
         self.store.save()
 
     @property
-    def satisfies( self, satisfies ):
+    def satisfies( self ):
         return self.store.satisfies.all()
 
     @satisfies.setter
@@ -676,7 +676,7 @@ class Operation( object ):
         self.store.save()
 
     @property
-    def satisfied_by( self, satisfied_by ):
+    def satisfied_by( self ):
         return self.store.satisfied_by.all()
 
     @satisfied_by.setter

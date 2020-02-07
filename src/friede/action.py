@@ -296,6 +296,7 @@ class Operation( object ):
                     store, user )
             self.store = store
             self.object = store.object
+            self.objects = store.objects
             if self.action:
                 self.actionclass = Action.get_for_object( self.action )
                 self.actionobj = self.actionclass(
@@ -370,7 +371,7 @@ class Operation( object ):
 
             self.actionclass = actionclass
             actionclass = self.getactionclass()
-            if not action and actionclass and self.object:
+            if not actionobj and actionclass and self.object:
                 actionobj = actionclass( op=self, object=self.getobject() )
                 action = actionobj.model
             self.actionobj = actionobj

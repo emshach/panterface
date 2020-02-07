@@ -963,7 +963,13 @@ class OpStatus( Model ):
         on_delete=M.PROTECT,
         related_name='statuses'
     )
-    parent    = M.ForeignKey( 'self', M.PROTECT, related_name='children' )
+    parent    = M.ForeignKey(
+        'self',
+        on_delete=M.PROTECT,
+        related_name='children',
+        blank=True,
+        null=True
+    )
     message   = M.CharField( max_length=255, blank=True, null=True )
     data      = JSONField( default=dict )
     # dryrun    = M.BooleanField( default=False )

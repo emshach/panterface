@@ -295,11 +295,12 @@ class Operation( object ):
                     'Trying to resume operation with different user',
                     store, user )
             self.store = store
+            self.object = store.object
             if self.action:
                 self.actionclass = Action.get_for_object( self.action )
                 self.actionobj = self.actionclass(
                     op=self,
-                    object=self.store.object
+                    object=self.object
                 )
             self.status = store.status
             if store.context:
@@ -311,6 +312,8 @@ class Operation( object ):
                 self.parent = parent
             elif store.parent:
                 self.parent = Operation( user, store=store.parent, child=self )
+            else:
+                self.parent = None
             if store.children:
                 self.children = tuple(
                     o if child.store is o
@@ -370,6 +373,7 @@ class Operation( object ):
             if not action and actionclass and self.object:
                 actionobj = actionclass( op=self, object=self.getobject() )
                 action = actionobj.model
+            self.actionobj = actionobj
         except InvalidOperationError as e:
             status = dict(
                 type='invalid_operation',

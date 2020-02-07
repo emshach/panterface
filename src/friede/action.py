@@ -348,7 +348,7 @@ class Operation( object ):
             if not object and model:
                 if id:
                     try:
-                        self.object = model.get( pk=id )
+                        self.object = model.objects.get( pk=id )
                         self.objects = ( self.object, )
                     except model.DoesNotExist:
                         raise InvalidOperationError(

@@ -64,6 +64,7 @@ class AppsTestCase( TestCase ):
 
 
 class OpsTestCase( TestCase ):
+    @classmethod
     def setUpTestData( cls ):
         cls.user = get_user_model().objects.get( username='system' )
 

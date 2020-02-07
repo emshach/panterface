@@ -67,11 +67,11 @@ class OpsTestCase( TestCase ):
     @classmethod
     def setUpTestData( cls ):
         cls.user = get_user_model().objects.get( username='system' )
-        success = M.ActionStatus.objects.get_or_create(
+        success, _ = M.ActionStatus.objects.get_or_create(
             name='success',
             defaults=dict( goodness=1.0 )
         )
-        failed = M.ActionStatus.objects.get_or_create(
+        failed, _ = M.ActionStatus.objects.get_or_create(
             name='failed',
             defaults=dict( goodness=-1.0 )
         )

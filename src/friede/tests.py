@@ -182,6 +182,7 @@ class OpsTestCase( TestCase ):
         self.assertIsInstance( op, Operation, "Operation object created" )
 
     def test_Can_retrieve_operation_object_by_store( self ):
+        from datadiff import diff
         op = Operation(
             self.user,
             action='install',
@@ -192,6 +193,7 @@ class OpsTestCase( TestCase ):
         op2 = Operation( self.user, store=op.store )
         print 'op2'
         print dict( op2.__dict__, **op2.store.__dict__ )
+        print diff( op.__dict__, op2.__dict__ )
         self.assertDictEqual(
             op.__dict__, op2.__dict__,
             "Operation retrieved by store is same as original" )

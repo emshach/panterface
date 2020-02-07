@@ -9,6 +9,99 @@ from .util import toversion
 from . import models as M
 from . import urls
 
+success, _ = M.ActionStatus.objects.get_or_create(
+    name='success',
+    defaults=dict( goodness=1.0 )
+)
+failed, _ = M.ActionStatus.objects.get_or_create(
+    name='failed',
+    defaults=dict( goodness=-1.0 )
+)
+M.ActionStatus.objects.get_or_create(
+    name='parent_aborted',
+    defaults=dict( goodness=-0.5 )
+)
+M.ActionStatus.objects.get_or_create(
+    name='app_installed',
+    defaults=dict( parent=success )
+)
+M.ActionStatus.objects.get_or_create(
+    name='app_install_failed',
+    defaults=dict( parent=failed )
+)
+M.ActionStatus.objects.get_or_create(
+    name='app_reinstalled',
+    defaults=dict( parent=success )
+)
+M.ActionStatus.objects.get_or_create(
+    name='app_reinstall_failed',
+    defaults=dict( parent=failed )
+)
+M.ActionStatus.objects.get_or_create(
+    name='app_uninstalled',
+    defaults=dict( parent=success )
+)
+M.ActionStatus.objects.get_or_create(
+    name='app_uninstall_failed',
+    defaults=dict( parent=failed )
+)
+M.ActionStatus.objects.get_or_create(
+    name='app_updated',
+    defaults=dict( parent=success )
+)
+M.ActionStatus.objects.get_or_create(
+    name='app_update_failed',
+    defaults=dict( parent=failed )
+)
+M.ActionStatus.objects.get_or_create(
+    name='app_activated',
+    defaults=dict( parent=success )
+)
+M.ActionStatus.objects.get_or_create(
+    name='app_activation_failed',
+    defaults=dict( parent=failed )
+)
+M.ActionStatus.objects.get_or_create(
+    name='app_deactivated',
+    defaults=dict( parent=success )
+)
+M.ActionStatus.objects.get_or_create(
+    name='app_deactivation_failed',
+    defaults=dict( parent=failed )
+)
+M.ActionStatus.objects.get_or_create(
+    name='app_installed_for_user',
+    defaults=dict( parent=success )
+)
+M.ActionStatus.objects.get_or_create(
+    name='app_install_for_user_failed',
+    defaults=dict( parent=failed )
+)
+M.ActionStatus.objects.get_or_create(
+    name='app_uninstalled_for_user',
+    defaults=dict( parent=success )
+)
+M.ActionStatus.objects.get_or_create(
+    name='app_uninstall_for_user_failed',
+    defaults=dict( parent=failed )
+)
+M.ActionStatus.objects.get_or_create(
+    name='app_activated_for_user',
+    defaults=dict( parent=success )
+)
+M.ActionStatus.objects.get_or_create(
+    name='app_activate_for_user_failed',
+    defaults=dict( parent=failed )
+)
+M.ActionStatus.objects.get_or_create(
+    name='app_deactivated_for_user',
+    defaults=dict( parent=success )
+)
+M.ActionStatus.objects.get_or_create(
+    name='app_deactivate_for_user_failed',
+    defaults=dict( parent=failed )
+)
+
 
 class ActionsTestCase( TestCase ):
     def test_Can_retrieve_action_object_by_name( self ):
@@ -67,98 +160,6 @@ class OpsTestCase( TestCase ):
     @classmethod
     def setUpTestData( cls ):
         cls.user = get_user_model().objects.get( username='system' )
-        success, _ = M.ActionStatus.objects.get_or_create(
-            name='success',
-            defaults=dict( goodness=1.0 )
-        )
-        failed, _ = M.ActionStatus.objects.get_or_create(
-            name='failed',
-            defaults=dict( goodness=-1.0 )
-        )
-        M.ActionStatus.objects.get_or_create(
-            name='parent_aborted',
-            defaults=dict( goodness=-0.5 )
-        )
-        M.ActionStatus.objects.get_or_create(
-            name='app_installed',
-            defaults=dict( parent=success )
-        )
-        M.ActionStatus.objects.get_or_create(
-            name='app_install_failed',
-            defaults=dict( parent=failed )
-        )
-        M.ActionStatus.objects.get_or_create(
-            name='app_reinstalled',
-            defaults=dict( parent=success )
-        )
-        M.ActionStatus.objects.get_or_create(
-            name='app_reinstall_failed',
-            defaults=dict( parent=failed )
-        )
-        M.ActionStatus.objects.get_or_create(
-            name='app_uninstalled',
-            defaults=dict( parent=success )
-        )
-        M.ActionStatus.objects.get_or_create(
-            name='app_uninstall_failed',
-            defaults=dict( parent=failed )
-        )
-        M.ActionStatus.objects.get_or_create(
-            name='app_updated',
-            defaults=dict( parent=success )
-        )
-        M.ActionStatus.objects.get_or_create(
-            name='app_update_failed',
-            defaults=dict( parent=failed )
-        )
-        M.ActionStatus.objects.get_or_create(
-            name='app_activated',
-            defaults=dict( parent=success )
-        )
-        M.ActionStatus.objects.get_or_create(
-            name='app_activation_failed',
-            defaults=dict( parent=failed )
-        )
-        M.ActionStatus.objects.get_or_create(
-            name='app_deactivated',
-            defaults=dict( parent=success )
-        )
-        M.ActionStatus.objects.get_or_create(
-            name='app_deactivation_failed',
-            defaults=dict( parent=failed )
-        )
-        M.ActionStatus.objects.get_or_create(
-            name='app_installed_for_user',
-            defaults=dict( parent=success )
-        )
-        M.ActionStatus.objects.get_or_create(
-            name='app_install_for_user_failed',
-            defaults=dict( parent=failed )
-        )
-        M.ActionStatus.objects.get_or_create(
-            name='app_uninstalled_for_user',
-            defaults=dict( parent=success )
-        )
-        M.ActionStatus.objects.get_or_create(
-            name='app_uninstall_for_user_failed',
-            defaults=dict( parent=failed )
-        )
-        M.ActionStatus.objects.get_or_create(
-            name='app_activated_for_user',
-            defaults=dict( parent=success )
-        )
-        M.ActionStatus.objects.get_or_create(
-            name='app_activate_for_user_failed',
-            defaults=dict( parent=failed )
-        )
-        M.ActionStatus.objects.get_or_create(
-            name='app_deactivated_for_user',
-            defaults=dict( parent=success )
-        )
-        M.ActionStatus.objects.get_or_create(
-            name='app_deactivate_for_user_failed',
-            defaults=dict( parent=failed )
-        )
 
     def test_Can_create_operation_object( self ):
         op = Operation(

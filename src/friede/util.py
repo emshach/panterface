@@ -60,3 +60,8 @@ form_field_mappings = dict(
     URLField='UrlField',
     UUIDField='UuidField',
 )
+
+
+class Noop( object ):
+    def __getattribute__( self, name ):
+        return None

@@ -8,6 +8,7 @@ from .models import (
     ActionStatus,
     OpStatus
 )
+from .util import Noop
 
 actions = OrderedDict()
 user_actions = OrderedDict()
@@ -280,6 +281,7 @@ class Operation( object ):
         super( Operation, self ).__init__()
         self.arg = arg
         self.kw = kw
+        self.store = Noop()
         if store:
             if isinstance( store, int ):
                 store = OpModel.objects.get( pk=store )

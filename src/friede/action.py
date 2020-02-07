@@ -294,9 +294,14 @@ class Operation( object ):
                 raise InvalidOperationError(
                     'Trying to resume operation with different user',
                     store, user )
+            model = getmodel( store.model )
             self.store = store
             self.object = store.object
-            self.objects = store.objects
+            self.objects = ()
+            if model and store.object_ids:
+                self.objects = tuple( model.filter( pk__in=store.object_ids ))
+            elif self.object:
+                self.objects = ( self.object, )
             if self.action:
                 self.actionclass = Action.get_for_object( self.action )
                 self.actionobj = self.actionclass(

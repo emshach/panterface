@@ -315,10 +315,10 @@ class Operation( object ):
                 self.children = tuple(
                     o if child.store is o
                     else Operation( user, parent=self, store=o )
-                    for o in store.children
+                    for o in store.children.all()
                 ) if child else tuple(
                     Operation( user, parent=self, store=o )
-                    for o in store.children
+                    for o in store.children.all()
                 )
             return
 

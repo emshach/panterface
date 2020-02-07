@@ -18,8 +18,16 @@ failed, _ = M.ActionStatus.objects.get_or_create(
     defaults=dict( goodness=-1.0 )
 )
 M.ActionStatus.objects.get_or_create(
+    name='init',
+    defaults=dict( goodness=0.0 )
+)
+M.ActionStatus.objects.get_or_create(
     name='parent_aborted',
     defaults=dict( goodness=-0.5 )
+)
+M.ActionStatus.objects.get_or_create(
+    name='invalid_operation',
+    defaults=dict( goodness=-10.0 )
 )
 M.ActionStatus.objects.get_or_create(
     name='app_installed',

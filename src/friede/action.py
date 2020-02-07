@@ -409,7 +409,7 @@ class Operation( object ):
             tuple(
                 Operation( user, parent=self, object=o )
                 for o in objects
-            ) if objects and actionclass
+            ) if len( objects ) > 1 and actionclass
             else () ) + ( tuple(
                 Operation( user, parent=self, **o ) for o in ops
             ) if ops else () )

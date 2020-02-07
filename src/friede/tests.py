@@ -192,4 +192,6 @@ class OpsTestCase( TestCase ):
         op2 = Operation( self.user, store=op.store )
         print 'op2'
         print dict( op2.__dict__, **op2.store.__dict__ )
-        self.assertIsInstance( op2, Operation, "Operation retrieved by store" )
+        self.assertDictEqual(
+            op.__dict__, op2.__dict__,
+            "Operation retrieved by store is same as original" )

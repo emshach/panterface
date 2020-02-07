@@ -178,7 +178,7 @@ class OpsTestCase( TestCase ):
             kw={ 'version': '0.2.9' }
         )
         print 'op'
-        print op.__dict__
+        print dict( op.__dict__, **op.store.__dict__ )
         self.assertIsInstance( op, Operation, "Operation object created" )
 
     def test_Can_retrieve_operation_object_by_store( self ):
@@ -191,5 +191,5 @@ class OpsTestCase( TestCase ):
         )
         op2 = Operation( self.user, store=op.store )
         print 'op2'
-        print op2.__dict__
+        print dict( op2.__dict__, **op2.store.__dict__ )
         self.assertIsInstance( op2, Operation, "Operation retrieved by store" )

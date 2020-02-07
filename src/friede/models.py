@@ -1043,7 +1043,7 @@ class Operation( Model ):
         null=True,
         default=list
     )
-    # dryrun_ok    = M.DateTimeField( blank=True, null=True )
+    object       = GenericForeignKey( 'model' )
     done         = M.DateTimeField( blank=True, null=True )
 
 

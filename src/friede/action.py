@@ -294,7 +294,7 @@ class Operation( object ):
                 self.actionclass = Action.get_for_object( self.action )
                 self.actionobj = self.actionclass(
                     op=self,
-                    object=self.action.object
+                    object=self.store.object
                 )
             self.status = store.status
             if store.context:
@@ -498,8 +498,8 @@ class Operation( object ):
     #                  **( self.context or {} ))
 
     def getneeds( self, context, **kw ):
-        if self.action:
-            needs, unmet, requests = self.action.getneeds( context, **kw )
+        if self.actionobj:
+            needs, unmet, requests = self.actionobj.getneeds( context, **kw )
             self.needs = needs
             self.unmet = unmet
             # if not unmet:

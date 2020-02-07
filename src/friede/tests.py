@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.test import TestCase
+from django.contrib.auth import get_user_model
 from .action import Action, actions, Operation
 from .app import apps
 from .util import toversion
@@ -63,8 +64,16 @@ class AppsTestCase( TestCase ):
 
 
 class OpsTestCase( TestCase ):
+    def setUpTestData( cls ):
+        cls.user = get_user_model().objects.get( username='system' )
+
     def test_Can_create_operation_object( self ):
-        op = Operation( action='install', model='friede.app', id=4,
-                        kw={ 'version': '0.2.9' })
+        op = Operation(
+            self.user,
+            action='install',
+            model='friede.app',
+            id=4,
+            kw={ 'version': '0.2.9' }
+        )
         print 'op'
         print op.__dict__

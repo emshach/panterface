@@ -400,11 +400,9 @@ class Operation( object ):
                 Operation( user, parent=self, object=o )
                 for o in objects
             ) if objects and actionclass
-            else () )
-        + ( tuple(
-            Operation( user, parent=self, **o )
-            for o in ops
-        ) if ops else () )
+            else () ) + ( tuple(
+                Operation( user, parent=self, **o ) for o in ops
+            ) if ops else () )
 
     def run( self, context=None, **kw ):
         if self.done:

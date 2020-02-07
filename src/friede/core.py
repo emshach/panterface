@@ -9,11 +9,10 @@ from .util import toversion
 from django.core.exceptions import FieldDoesNotExist
 from django.db import transaction, IntegrityError
 from django.db.models.base import Model as BaseModel
-from django.contrib.contenttypes.models import ContentType
 from django.conf import settings
 from .objects import Settings, Shells, getenv
 from .models import *
-from .util import split_dict
+from .util import split_dict, getmodel
 
 types = dict(
     containers=Container,
@@ -36,20 +35,10 @@ deps = {}
 registries = { v: k for k, v in types.items() }
 auto_create = ( Icon, )
 
-def _get_model( name, app=None ):
-    app, model = app, name if app else name.split('.')
-    try:
-        obj = ContentType.objects.get( app_label=app, model=model )
-    except ContentType.DoesNotExist:
-        return None
-    return obj.model_class()
-
-
-
 def getdatum( model, **kw ):
     m = model
     if isinstance( model, basestring ):
-        model = _get_model( model )
+        model = getmodel( model )
     if not isinstance( model, BaseModel ):
         raise Exception( "model '{}' not found".format(m) )
     return model.objects.get( **kw )
@@ -382,8 +371,8 @@ def _data_norm( app, mod, data, memo ):
         if mod == '.':
             mod = memo[ 'model' ]
         else:
-            mod = _get_model( mod ) if '.' in mod \
-                else _get_model( mod, app )
+            mod = getmodel( mod ) if '.' in mod \
+                else getmodel( mod, app )
     return mod, data, dict( memo, model=mod )
 
 def _data_norm_val( app, data, memo ):

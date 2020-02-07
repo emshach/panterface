@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from packaging.version import parse as version_parse, _BaseVersion
+from django.contrib.contenttypes.models import ContentType
+from django.db.models.base import Model as BaseModel
 import re
 
 
@@ -65,3 +67,19 @@ form_field_mappings = dict(
 class Noop( object ):
     def __getattribute__( self, name ):
         return None
+
+
+def getmodel( name, app=None ):
+    if isinstance( name, BaseModel ):
+        return name.__class__
+    try:
+        if issubclass( name, BaseModel ):
+            return name
+    except TypeError:
+        pass
+    app, model = app, name if app else name.split('.')
+    try:
+        obj = ContentType.objects.get( app_label=app, model=model )
+    except ContentType.DoesNotExist:
+        return None
+    return obj.model_class()

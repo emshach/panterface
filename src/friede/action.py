@@ -8,7 +8,7 @@ from .models import (
     ActionStatus,
     OpStatus
 )
-from .util import Noop
+from .util import Noop, getmodel
 
 actions = OrderedDict()
 user_actions = OrderedDict()
@@ -341,7 +341,10 @@ class Operation( object ):
                         raise InvalidOperationError( 'Invalid action', a )
                     raise InvalidOperationError( 'Action not found', a )
             # object
-            model = self.getmodel()
+            if model:
+                model = getmodel( model )
+            else:
+                model = self.getmodel()
             if not object and model:
                 if id:
                     try:

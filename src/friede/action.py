@@ -72,6 +72,10 @@ class Action( object ):
     def getneeds( self, context, **kw ):
         return ()
 
+    @property
+    def model( self ):
+        return ActModel.objects.get( path="actions.{}".format( self.name ))
+
     @staticmethod
     def get_for_object( object ):
         name = object.path
@@ -379,7 +383,7 @@ class Operation( object ):
         self.store = OpModel.objects.create(
             user=user,
             parent=parent.store if parent else None,
-            action=action,
+            action=action.model if action else None,
             model=( ContentType.objects.get_for_model( model ) if model
                     else None ),
             object_id=id,

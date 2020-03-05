@@ -10,6 +10,7 @@ from .models import (
     OpStatus
 )
 from .util import Noop, getmodel
+from .io import Request
 
 actions = OrderedDict()
 user_actions = OrderedDict()
@@ -713,3 +714,29 @@ class Operation( object ):
     @property
     def blocked( self ):
         return not self.store.unmet.count() and not self.satisfied_by
+
+
+class ActionRequest( Request ):
+    """AcitonRequest differs from Request in that it maintains a relatively flat
+    structure, and does the resolution of conflicts invisibly based on user
+    selecions.
+    """
+    def __init__( self, id, body=[], context={} ):
+        super( ActionRequest, self ).init( id=id, body=body, context=context )
+
+    def answer( self, response=None, affirmative=None, context=None ):
+        if context is not None:
+            self.context.update( context )
+        self.answered = True
+        self.response = response if response is not None \
+            else self.context.get( 'response', {}).get( self.id )
+        self.affirmative = True if affirmative is None else affirmative
+
+    def add( self, request ):
+        return Request( self.body + request.body )
+
+    def branch( self, request ):
+        pass
+
+    def repr( self ):
+        pass

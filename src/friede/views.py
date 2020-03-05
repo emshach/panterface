@@ -22,6 +22,7 @@ from .objects import getregistries, getenv, Locations
 from .core import setup, setupshell, setuptheme, setupmenus
 from .models import *
 from .serializers import *
+from .action import dispatch
 from .util import as_tree, form_field_mappings
 import json
 import sys
@@ -544,39 +545,23 @@ def api_path( request, path=None, format=None ):
 @permission_classes(( permissions.AllowAny, ))
 def api_do( request, action, model, ids, format=None ):
     "Execute action requested by client"
-    from friede.app import actions, user_actions
-    ids = ids.split('+');       # TODO: if no ids?
-    app, mod = model.split('.')
-    m = _get_model( model )
-    perm = "{}.{}_{}".format( app, action, mod )
-    userperm = "{}.{}_own_{}".format( app, action, mod )
+    ids = ids.split('+')       # TODO: if no ids?
     user = request.user
-    f = None
-    if user.has_perm( perm ):
-        "then do possibly system-wide action"
-        f = actions.get( action )
-    elif user.has_perm( userperm ):
-        "then do user-version of action"
-        f = user_actions.get( action )
-    else:
-        return Response(dict( error='Access denied' ))
-
     out = {}
     stdout = sys.stdout
     stderr = sys.stderr
     sys.stdout = StringIO()
     sys.stderr = StringIO()
-    objects = m.objects.filter( pk__in=ids ).all()
-    for o in objects:
-        sys.stdout.reset()
-        sys.stdout.truncate()
-        sys.stderr.reset()
-        sys.stdout.truncate()
-        out[ o.pk ] = dict( res=f( user, o, objects=objects, **request.data ))
-        out[ o.pk ].update(
-            out=sys.stdout.getvalue(),
-            err=sys.stderr.getvalue()
-        )
+    out = dict(
+        res=dispatch( user, dict( request.data, user=user ), dict(
+            action=action,
+            model=model,
+            ids=ids
+        )))
+    out.update(
+        out=sys.stdout.getvalue(),
+        err=sys.stderr.getvalue()
+    )
     sys.stderr = stderr
     sys.stdout = stdout
     return Response({ action : out })

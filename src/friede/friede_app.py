@@ -1,17 +1,47 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from . import views, serializers, app
+from .io import Request
 from .app import action, Action
 from .core import getdatum
 from .action import Ops
 from .models import Setting, App as AppModel, UserApp, ActionStatus
 from .util import toversion
+from .endorsement import EndorsementProvider, EndorsementRequest
 
 
 _links = '''_container_entries _widget_entries _block_entries _screen_entries
                _shell_entries _theme_entries _slot_entries _app_entries
                _location_entries _icon_entries _link_entries _reference_entries
                _setting_entries _action_entries'''.split()
+
+
+class SettingsEndorser( EndorsementProvider ):
+    name = 'settings'
+
+    def endorse( self, endorsed, hash, context=None ):
+        pass
+
+
+class InteractiveEndorser( EndorsementProvider ):
+    name = 'interactive'
+
+    def endorse( self, endorsed, hash, context ):
+        r = EndorsementRequest( endorsed, hash, context=context )
+        if not r.answered:
+            return r
+            return action if r.affirmative else False
+
+
+class ThirdPartyEndorser( InteractiveEndorser ):
+    name = 'thirdparty'
+
+    def endorse( self, endorsed, hash, context=None ):
+        pass
+
+
+class InitiatorEndorser( EndorsementProvider ):
+    name = 'initiator'
 
 
 class App( app.App ):
@@ -203,6 +233,11 @@ class App( app.App ):
         ( 'referenceentry', serializers.ReferenceEntrySerializer ),
         ( 'settingentry',   serializers.SettingEntrySerializer   ),
         ( 'actionentry',    serializers.ActionEntrySerializer    ),
+    )
+    endorsers = (
+        ( SettingsEndorser(), 0 ),
+        ( ThirdPartyEndorser(), 100 ),
+        ( InitiatorEndorser(), 200 ),
     )
 
     @property
@@ -773,7 +808,13 @@ class App( app.App ):
                 icon='fontawesome.',
                 data=dict(
                     compnent='CollectionView'
-                )))))
+                ))))),
+        ( '0.2.11',
+          ( '#actions',
+            ( 'endorse', dict(
+                data=dict(
+                    component='Endorser',
+                ))))),
     )
     @property
     def userdata( self ):
@@ -792,6 +833,10 @@ class App( app.App ):
 #     proc=self.__class__,
 #     object=self.object
 # ))
+
+class EndorseInstallRequest( EndorsementRequest ):
+    pass
+
 
 class AppAction( Action ):
     def __init__( self, op=None, object=None, **kw ):
@@ -1083,3 +1128,23 @@ class UserDeactivateAction( UserAppAction ):
                                    if not userapp.active
                                    else 'app_deactivate_for_user_failed' ),
                  userapp )
+
+
+@action
+class EndorseAction( Action ):
+    name = 'endorse'
+
+    def getneeds( self, context, **kw ):
+        from .endorsement import manager
+        e = manager.endorse( self.object, hash( self.oobject ))
+        if isinstance( e, Request ):
+            context.addrequest( self, e )
+        # if e is False: abort action
+
+    def run( self, context, **kw ):
+        from .endorsement import manager
+        e = manager.endorse( self, context )
+        if isinstance( e, Request ):
+            r = context.getresponse(e)
+            if not r:
+                pass            # TODO: raise aborterror I think

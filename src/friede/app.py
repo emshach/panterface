@@ -10,7 +10,7 @@ from .models import App, UserApp, Setting
 from .views import lookup
 from .action import action, actions, Action
 from .util import toversion
-from . import views
+from . import views, endorsement
 import traceback
 import sys
 
@@ -87,11 +87,12 @@ class App( object ) :
     objects = ()
     relations = ()
     actions = ()
+    endorsers = ()
     api = ()
     routes = ()
     router = None
     serializers = ()
-    model=None
+    model = None
     required = False
     user_required = False
     user_installable = True
@@ -190,6 +191,9 @@ class App( object ) :
 
         for k, v in self.routes:
             self.router.register( k, v )
+
+        for e in self.endorsers:
+            endorsement.manager.add( *e )
 
         return self
 
@@ -344,7 +348,7 @@ class App( object ) :
     def min_version( self ):
         return toversion( self.model.min_version if self.model else '0.0.0' )
 
-    @version.setter
+    @min_version.setter
     def min_version( self, min_version ):
         if self.model:
             self.model.min_version = str( min_version )

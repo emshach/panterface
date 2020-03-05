@@ -992,7 +992,23 @@ class Endorsement( Model ):
     content_type = M.ForeignKey( ContentType, on_delete=M.CASCADE )
     object_id    = M.PositiveIntegerField()
     endorsed     = GenericForeignKey()
-    by           = M.CharField( max_length=255 )
+    by_type      = M.ForeignKey( ContentType, on_delete=M.CASCADE )
+    by_id        = M.PositiveIntegerField()
+    by           = GenericForeignKey( 'by_type', 'by_id' )
+    committed    = M.DateTimeField( null=True, blank=True )
+    approved     = M.NullBooleanField()
+    hash         = M.CharField( max_length=255, unique=True )
+
+    @property
+    def denied( self ):
+        return None if self.committed is None else not self.committed
+
+    @denied.setter
+    def denied( self, val ):
+        if val is None:
+            self.committed = None
+        else:
+            self.committed = not val
 
 
 @python_2_unicode_compatible

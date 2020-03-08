@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.test import TestCase, RequestFactory
+from django.test import TestCase, RequestFactory, Client
 from django.contrib.auth import get_user_model
 from .action import Action, actions, Operation
 from .app import apps
@@ -176,6 +176,7 @@ class OpsTestCase( TestCase ):
     def setUpTestData( cls ):
         cls.user = get_user_model().objects.get( username='system' )
         cls.mkrequests = RequestFactory()
+        cls.client = Client()
 
     def test_000_create_op_object( self ):
         "Can create operation object"
@@ -210,8 +211,7 @@ class OpsTestCase( TestCase ):
 
     def test_002_actions_processed( self ):
         "Actions processed with endorsements, permissions, and dependencies"
-        view = V.api_do
-        res = self.mkrequests.post( '/do/install/friede.app/335',
-                                    dict( version='0.1.0' ))
+        res = self.client.post( '/do/install/friede.app/335',
+                                dict( version='0.1.0' ))
         print 'response'
         print res.__dict__

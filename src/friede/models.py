@@ -989,10 +989,18 @@ class Endorsement( Model ):
     def __str__( self ):
         return "{}".format( self.pk )
 
-    content_type = M.ForeignKey( ContentType, on_delete=M.CASCADE )
+    content_type = M.ForeignKey(
+        ContentType,
+        on_delete=M.CASCADE,
+        related_name='endorsed_by'
+    )
     object_id    = M.PositiveIntegerField()
     endorsed     = GenericForeignKey()
-    by_type      = M.ForeignKey( ContentType, on_delete=M.CASCADE )
+    by_type      = M.ForeignKey(
+        ContentType,
+        on_delete=M.CASCADE,
+        related_name='endorses'
+    )
     by_id        = M.PositiveIntegerField()
     by           = GenericForeignKey( 'by_type', 'by_id' )
     committed    = M.DateTimeField( null=True, blank=True )

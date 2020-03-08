@@ -9,6 +9,7 @@ from .util import toversion
 from . import models as M
 from . import views as V
 from . import urls
+import pprint
 
 success, _ = M.ActionStatus.objects.get_or_create(
     name='success',
@@ -214,4 +215,4 @@ class OpsTestCase( TestCase ):
         res = self.client.post( '/do/install/friede.app/335',
                                 dict( version='0.1.0' ))
         print 'response'
-        print res.__dict__
+        pprint.pprint( res.__dict__ )

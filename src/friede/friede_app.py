@@ -59,7 +59,7 @@ class App( app.App ):
 
     links = { x: dict( via='entry' ) for x in _links }
 
-    min_version = '0.2.5'
+    min_version = '0.2.11'
     required = True
     user_required = True
 

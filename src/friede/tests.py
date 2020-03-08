@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.test import TestCase
+from django.test import TestCase, RequestFactory
 from django.contrib.auth import get_user_model
 from .action import Action, actions, Operation
 from .app import apps
 from .util import toversion
 from . import models as M
+from . import views as V
 from . import urls
 
 success, _ = M.ActionStatus.objects.get_or_create(
@@ -168,6 +169,7 @@ class OpsTestCase( TestCase ):
     @classmethod
     def setUpTestData( cls ):
         cls.user = get_user_model().objects.get( username='system' )
+        cls.mkrequests = RequestFactory()
 
     def test_Can_create_operation_object( self ):
         op = Operation(
@@ -197,3 +199,11 @@ class OpsTestCase( TestCase ):
         self.assertDictEqual(
             op.__dict__, op2.__dict__,
             "Operation retrieved by store is same as original" )
+
+    def test_actions_processed( self ):
+        "Actions processed with endorsements, permissions, and dependencies"
+        view = V.api_do
+        res = self.mkrequests.get( '/do/install/friede.app/335',
+                                   dict( version='0.1.0' ))
+        print 'response'
+        print res.__dict__

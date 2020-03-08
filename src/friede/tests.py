@@ -113,15 +113,18 @@ M.ActionStatus.objects.get_or_create(
 
 
 class ActionsTestCase( TestCase ):
-    def test_Can_retrieve_action_object_by_name( self ):
+    def test_000_action_by_name( self ):
+        "Can retrieve action object by name"
         actionobj = actions.get( 'install' )
         self.assertIsNotNone( actionobj, "Install action exists" )
 
-    def test_Can_retrieve_action_store_by_name( self ):
+    def test_001_store_by_name( self ):
+        "Can retrieve action store by name"
         actionstore = M.Action.objects.get( name='install' )
         self.assertIsNotNone( actionstore, "Install action object exists" )
 
-    def test_Can_retrieve_action_object_by_store( self ):
+    def test_002_action_by_store( self ):
+        "Can retrieve action object by store"
         actionobj = actions.get( 'install' )
         actionstore = M.Action.objects.get( name='install' )
         self.assertIsNotNone( actionobj, "Install action exists" )
@@ -132,7 +135,8 @@ class ActionsTestCase( TestCase ):
 
 
 class AppsTestCase( TestCase ):
-    def test_All_core_apps_automatically_installed( self ):
+    def test_000_core_apps_installed( self ):
+        "All core apps automatically installed"
         required = M.App.objects.filter( required=True )
         notinstalled = required.filter( installed=False )
         print 'required apps', required.all()
@@ -141,11 +145,13 @@ class AppsTestCase( TestCase ):
         self.assertFalse( notinstalled.count(),
                           "All required applications are installed" )
 
-    def test_Can_get_app_by_name( self ):
+    def test_001_app_by_name( self ):
+        "Can get app by name"
         friede = apps.get( 'friede' )
         self.assertIsNotNone( friede, "Got main app from apps registry" )
 
-    def test_Can_get_app_versions( self ):
+    def test_002_app_versions( self ):
+        "Can get app versions"
         friede = apps.get( 'friede' )
         print 'friede versions'
         print friede.versions
@@ -171,7 +177,8 @@ class OpsTestCase( TestCase ):
         cls.user = get_user_model().objects.get( username='system' )
         cls.mkrequests = RequestFactory()
 
-    def test_Can_create_operation_object( self ):
+    def test_000_create_op_object( self ):
+        "Can create operation object"
         op = Operation(
             self.user,
             action='install',
@@ -183,7 +190,8 @@ class OpsTestCase( TestCase ):
         print dict( op.__dict__, **op.store.__dict__ )
         self.assertIsInstance( op, Operation, "Operation object created" )
 
-    def test_Can_retrieve_operation_object_by_store( self ):
+    def test_001_op_by_store( self ):
+        "Can retrieve operation object by store"
         from datadiff import diff
         op = Operation(
             self.user,
@@ -200,10 +208,10 @@ class OpsTestCase( TestCase ):
             op.__dict__, op2.__dict__,
             "Operation retrieved by store is same as original" )
 
-    def test_actions_processed( self ):
+    def test_002_actions_processed( self ):
         "Actions processed with endorsements, permissions, and dependencies"
         view = V.api_do
-        res = self.mkrequests.get( '/do/install/friede.app/335',
-                                   dict( version='0.1.0' ))
+        res = self.mkrequests.post( '/do/install/friede.app/335',
+                                    dict( version='0.1.0' ))
         print 'response'
         print res.__dict__

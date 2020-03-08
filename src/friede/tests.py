@@ -212,7 +212,7 @@ class OpsTestCase( TestCase ):
 
     def test_002_actions_processed( self ):
         "Actions processed with endorsements, permissions, and dependencies"
-        res = self.client.post( '/do/install/friede.app/335',
+        res = self.client.post( '/api/do/install/friede.app/335',
                                 dict( version='0.1.0' ))
         print 'response'
         pprint.pprint( res.__dict__ )

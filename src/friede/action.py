@@ -526,8 +526,6 @@ class Operation( object ):
     def getneeds( self, context, **kw ):
         if self.actionobj:
             needs, unmet, requests = self.actionobj.getneeds( context, **kw )
-            self.needs = needs
-            self.unmet = unmet
             # if not unmet:
             #     context.deps.addprimary( self )
         elif self.children:
@@ -556,15 +554,6 @@ class Operation( object ):
 
     def covers( self, op ):
         self.store.satisfies.add( op )
-
-    def addneeds( self, *ops ):
-        self.store.needss.add( *ops )
-
-    def addunmet( self, *ops ):
-        self.store.needss.add( *ops )
-
-    def meet( self, *ops ):
-        self.store.unmet.remove( *ops )
 
     def compare( self, data ):
         if self.actionobj:
@@ -669,26 +658,6 @@ class Operation( object ):
     @done.setter
     def done( self, done ):
         self.store.done = done
-        self.store.save()
-
-    @property
-    def needs( self ):
-        return self.store.needs.all()
-
-    @needs.setter
-    def needs( self, needs ):
-        self.store.needs.clear()
-        self.store.needs.add( *needs )
-        self.store.save()
-
-    @property
-    def unmet( self ):
-        return self.store.unmet.all()
-
-    @unmet.setter
-    def unmet( self, unmet ):
-        self.store.unmet.clear()
-        self.store.unmet.add( *unmet )
         self.store.save()
 
     @property

@@ -144,7 +144,7 @@ class MatchType:
 class DependencyManager( object ):
 
     def __init__( self, root, requests=[] ):
-        super( self, DependencyManager ).__init__()
+        super( DependencyManager, self ).__init__()
         self.root = root
         self.needs = root.needs
         # self.unmet = unmet
@@ -246,7 +246,7 @@ class DependencyManager( object ):
 
 class OperationContext( dict ):
     def __init__( self, op, *arg, **kw ):
-        super( self, OperationContext ).__init__( *arg, **kw )
+        super( OperationContext, self ).__init__( *arg, **kw )
         self.needs = DependencyManager( root=op )
 
     def __nonzero__( self ):
@@ -275,7 +275,7 @@ class OperationContext( dict ):
 
 class Question( dict ):
     def __init__( self, *arg, **kw ):
-        super( self, Question ).__init__( *arg, **kw )
+        super( Question, self ).__init__( *arg, **kw )
 
     def sameas( self, data ):
         pass

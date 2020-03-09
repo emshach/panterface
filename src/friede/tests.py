@@ -178,7 +178,7 @@ class OpsTestCase( TestCase ):
         cls.user = get_user_model().objects.get( username='system' )
         cls.mkrequests = RequestFactory()
         cls.client = Client()
-        cls.client.force_login( cls.user )
+        cls.client.login( username='admin', password='admintestpass' )
 
     def test_000_create_op_object( self ):
         "Can create operation object"

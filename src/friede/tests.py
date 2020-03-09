@@ -178,7 +178,6 @@ class OpsTestCase( TestCase ):
         cls.user = get_user_model().objects.get( username='system' )
         cls.mkrequests = RequestFactory()
         cls.client = Client()
-        cls.client.login( username='admin', password='admintestpass' )
 
     def test_000_create_op_object( self ):
         "Can create operation object"
@@ -213,6 +212,7 @@ class OpsTestCase( TestCase ):
 
     def test_002_actions_processed( self ):
         "Actions processed with endorsements, permissions, and dependencies"
+        self.client.login( username='admin', password='admintestpass' )
         print 'client'
         pprint.pprint( self.client.__dict__ )
         res = self.client.post( '/api/do/install/friede.app/335',

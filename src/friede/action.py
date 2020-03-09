@@ -304,7 +304,8 @@ class Operation( object ):
             self.object = store.object
             self.objects = ()
             if model and store.object_ids:
-                self.objects = tuple( model.filter( pk__in=store.object_ids ))
+                self.objects = tuple( model.objects.filter(
+                    pk__in=store.object_ids ))
             elif self.object:
                 self.objects = ( self.object, )
             if self.action:
@@ -373,7 +374,7 @@ class Operation( object ):
                         raise InvalidOperationError(
                             'Object not found', model, id )
                 elif ids:
-                    objects = tuple( model.filter( pk__in=ids ))
+                    objects = tuple( model.objects.filter( pk__in=ids ))
                     if len( objects ) < len( set( ids )):
                         raise InvalidOperationError(
                             'Some objects not found', model, ids )

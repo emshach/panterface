@@ -146,8 +146,7 @@ class DependencyManager( object ):
     def __init__( self, root, requests=[] ):
         super( DependencyManager, self ).__init__()
         self.root = root
-        self.needs = root.needs
-        # self.unmet = unmet
+        self.needs = []
         self.new = deque([])
         self.memo = DependencyMemo
         self._requests = requests

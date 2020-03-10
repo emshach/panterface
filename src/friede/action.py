@@ -235,6 +235,7 @@ class DependencyManager( object ):
                 continue
             memo[ op.pk ] = op
             if not op.done:
+                print 'memo', self.memo
                 if self.memo.get( op.pk ) and self.memo[ op.pk ].requests:
                     requests.extend( self.memo[ op.pk ].requests )
                 unmet = op.unmet

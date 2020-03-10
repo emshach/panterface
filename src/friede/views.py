@@ -552,12 +552,17 @@ def api_do( request, action, model, ids, format=None ):
     stderr = sys.stderr
     sys.stdout = StringIO()
     sys.stderr = StringIO()
-    out = dict(
-        res=dispatch( user, dict( request.data, user=user ), dict(
+    res = None
+    try:
+        res = dispatch( user, dict( request.data, user=user ), dict(
             action=action,
             model=model,
             ids=ids
-        )))
+        ))
+    except Exception:
+        pass
+
+    out = dict( res=res )
     out.update(
         out=sys.stdout.getvalue(),
         err=sys.stderr.getvalue()
@@ -565,6 +570,7 @@ def api_do( request, action, model, ids, format=None ):
     sys.stderr = stderr
     sys.stdout = stdout
     return Response({ action : out })
+
 
 class SearchViewSet( viewsets.ModelViewSet ):
     filter_backends = ( IdsFilter, PathFilter, filters.SearchFilter, )

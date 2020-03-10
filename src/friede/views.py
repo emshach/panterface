@@ -559,8 +559,10 @@ def api_do( request, action, model, ids, format=None ):
             model=model,
             ids=ids
         ))
-    except Exception:
-        pass
+    except Exception as e:
+        import traceback
+        print >> sys.stderr, "got exception", type(e), e, 'in api_do'
+        traceback.print_exc()
 
     out = dict( res=res )
     out.update(

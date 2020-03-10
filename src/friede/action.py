@@ -150,7 +150,7 @@ class DependencyManager( object ):
         self.cond = []
         self.needs = []
         self.new = deque([])
-        self.memo = DependencyMemo
+        self.memo = DependencyMemo()
         self._requests = requests
         if self.needs:
             self.memo.entry( root.pk ).needs.extend( self.needs )

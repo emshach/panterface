@@ -552,6 +552,10 @@ class Operation( object ):
     # store proxy getter/setters
 
     @property
+    def pk( self ):
+        return self.store.pk
+
+    @property
     def user( self ):
         return self.store.user
 

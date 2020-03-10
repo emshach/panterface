@@ -120,8 +120,9 @@ class Action( object ):
 
 
 class MemoEntry( object ):
-    def __init__( self, needs=None, requests=[] ):
+    def __init__( self, needs=None, cond=None, requests=None ):
         self.needs = needs or []
+        self.cond = cond or []
         self.requests = requests or []
 
 
@@ -146,6 +147,7 @@ class DependencyManager( object ):
     def __init__( self, root, requests=[] ):
         super( DependencyManager, self ).__init__()
         self.root = root
+        self.cond = []
         self.needs = []
         self.new = deque([])
         self.memo = DependencyMemo
@@ -246,7 +248,7 @@ class DependencyManager( object ):
 class OperationContext( dict ):
     def __init__( self, op, *arg, **kw ):
         super( OperationContext, self ).__init__( *arg, **kw )
-        self.needs = DependencyManager( root=op )
+        self.deps = DependencyManager( root=op )
 
     def __nonzero__( self ):
         return True
@@ -265,11 +267,6 @@ class OperationContext( dict ):
 
     def addrequest( self, action, obj ):
         return self.deps.addrequest( action, obj )
-
-    def processnewneeds( self, **kw ):
-        while self.needs.new:
-            op = self.needs.new.popleft()
-            op.getneeds( self, **kw )
 
 
 class Question( dict ):
@@ -509,30 +506,15 @@ class Operation( object ):
     def resume( self, context=None, **kw ):
         return self.run( context, **kw )
 
-    # def pushcontext( context ):
-    #     if not context:
-    #         return False
-    #     self.contextstack.push( dict( self.getcontext(), **context ))
-    #     return True
-
     def save( self ):
         return self.store.save()
-
-    # def getcontext( self ):
-    #     return dict( self.parent and self.parent.getcontext() or {},
-    #                  **( self.context or {} ))
 
     def getneeds( self, context, **kw ):
         if self.actionobj:
             needs, unmet, requests = self.actionobj.getneeds( context, **kw )
-            # if not unmet:
-            #     context.deps.addprimary( self )
         elif self.children:
             for c in self.children:
                 c.getneeds( context, **kw )
-        # else:
-        #     context.deps.addprimary( self )  # noop
-        # context.processnewneeds( **kw )
         return context.deps.needs, context.deps.requests
 
     def getactionclass( self ):

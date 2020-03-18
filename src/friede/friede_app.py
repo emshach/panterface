@@ -4,7 +4,7 @@ from . import views, serializers, app
 from .io import Request
 from .app import action, Action
 from .core import getdatum
-from .action import Ops
+from .action import AnyOf, SomeOf, AllOf, NoneOf
 from .models import Setting, App as AppModel, UserApp, ActionStatus
 from .util import toversion
 from .endorsement import EndorsementProvider, EndorsementRequest
@@ -863,19 +863,18 @@ class InstallAction( AppAction ):
         if len( versions ) == 1:
             version = versions[0]
             context.addneeds(
-                self, Ops.all(
-                    tuple(
-                        dict(
-                            action=self.__class__,
-                            object=getdatum( 'fride.app', name=dep ),
-                            version=version
-                        )
-                        for dep, version
-                        in app.versions[ version ].get( 'depends', {} ).items()
-                    )))
+                self, AllOf(
+                    dict(
+                        action=self.__class__,
+                        object=getdatum( 'fride.app', name=dep ),
+                        version=version
+                    )
+                    for dep, version
+                    in app.versions[ version ].get( 'depends', {} ).items()
+                ))
         elif len( version ):
-            context.addneed(
-                self, Ops.any(
+            context.addneeds(
+                self, AnyOf(
                     map( lambda x: dict( action=self.__class__, version=x ),
                          versions )))
         else:
@@ -943,16 +942,16 @@ class UpdateAction( AppAction ):
         app = self.app
         allv = app.getversions()
         versions = self.getversions( to )
-        context.addconds( self, Ops.any(
-            tuple( dict(
+        context.addconds( self, AnyOf(
+            dict(
                 action='install',
                 object=self.object,
                 version=v
-            ) for v in set( allv ).difference( set( versions )))))
+            ) for v in set( allv ).difference( set( versions ))))
         if len( versions ) == 1:
             version = versions[0]
             context.addneeds(
-                self, Ops.all(
+                self, AllOf(
                     tuple(
                         dict(
                             action=self.__class__,
@@ -965,7 +964,7 @@ class UpdateAction( AppAction ):
                     )))
         elif len( version ):
             context.addneed(
-                self, Ops.any(
+                self, AnyOf(
                     map( lambda x: dict( action=self.__class__, version=x ),
                          versions )))
         else:

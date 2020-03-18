@@ -41,18 +41,32 @@ def resume( user, op_id, context ):
     return op.resume( context )
 
 
-class Ops( object ):
-    class any( list ):
-        pass
+class OpList( list ):
+    def __repr__( self ):
+        return "{}({})".format(
+            self.__class__.__name__,
+            super( OpList, self ).__repr__()
+        )
 
-    class all( list ):
-        pass
 
-    class none( list ):
-        pass
+class AnyOf( OpList ):
+    pass
 
-    class nall( list ):
-        pass
+
+class SomeOf( OpList ):
+    pass
+
+
+class AllOf( OpList ):
+    pass
+
+
+class NoneOf( OpList ):
+    pass
+
+
+class NotAllOf( OpList ):
+    pass
 
 
 class Action( object ):

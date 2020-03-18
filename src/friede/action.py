@@ -349,6 +349,9 @@ class Operation( object ):
                 )
             return
 
+        if ids and len( ids ) == 1:
+            ( id, ) = ids
+            ids = ()
         status = None
         actionclass = None
         actionobj = None

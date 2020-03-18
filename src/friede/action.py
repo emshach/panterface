@@ -443,6 +443,9 @@ class Operation( object ):
             ) if ops else () )
 
     def run( self, context=None, **kw ):
+        import pprint
+        print 'running op'
+        pprint.pprint(  self.__dict__ )
         if self.done:
             return self.status  # TODO: maybe warn
         if context is None:

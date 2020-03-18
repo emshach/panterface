@@ -232,7 +232,8 @@ class DependencyManager( object ):
 
     @property
     def unmet( self ):
-        return filter( lambda x: x.unmet and not x.satisfied_by, self.needs )
+        return ()
+        # return filter( lambda x: x.unmet and not x.satisfied_by, self.needs )
 
     @property
     def primary( self ):
@@ -252,9 +253,9 @@ class DependencyManager( object ):
                 print 'memo', self.memo
                 if self.memo.get( op.pk ) and self.memo[ op.pk ].requests:
                     requests.extend( self.memo[ op.pk ].requests )
-                unmet = op.unmet
-                if unmet:
-                    stack.extend( unmet )
+                # unmet = op.unmet
+                # if unmet:
+                #     stack.extend( unmet )
                 if op.children:
                     stack.extend( op.children )
         return requests
@@ -464,10 +465,10 @@ class Operation( object ):
                     operation=self.store
                 )
             push = []
-            for n in op.dependents:
-                n.unmet.remove( op )
-                if not len( n.unmet ):
-                    push.push(n)
+            # for n in op.dependents:
+            #     n.unmet.remove( op )
+            #     if not len( n.unmet ):
+            #         push.push(n)
             stack.extendleft( push[ ::-1 ])
         return self.runwith( context )
 
